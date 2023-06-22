@@ -1,5 +1,5 @@
 ---
-title: "Berechnung und Interpretation von Verteilungen"
+title: "Verteilungen"
 author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
 toc: true
 number-sections: true
@@ -27,4 +27,3 @@ Berechnung und Interpretation von Verteilungen
 ## Visualisierung
 
 ## Interpretation
-

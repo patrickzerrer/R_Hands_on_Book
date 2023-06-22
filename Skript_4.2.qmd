@@ -1,5 +1,5 @@
 ---
-title: "Berechnung und Interpretation von Lageparametern"
+title: "Lageparameter"
 author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
 toc: true
 number-sections: true
@@ -14,7 +14,7 @@ Berechnung von Lageparametern
 
 # Der Modus
 
-## Berechnung 
+## Berechnung
 
 ## Visualisierung
 
@@ -22,7 +22,7 @@ Berechnung von Lageparametern
 
 # Der Median
 
-## Berechnung 
+## Berechnung
 
 ## Visualisierung
 
@@ -30,9 +30,8 @@ Berechnung von Lageparametern
 
 # Der Mittelwert
 
-## Berechnung 
+## Berechnung
 
 ## Visualisierung
 
 ## Interpretation
-

@@ -1,5 +1,5 @@
 ---
-title: "Klassische Formen von Datensätzen in der Kommunikationswissenschaft"
+title: "klassische Formen von Datensätzen"
 author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
 toc: true
 number-sections: true

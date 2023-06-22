@@ -1,5 +1,5 @@
 ---
-title: "Datentypen und -strukturen in R"
+title: "Datentypen und -strukturen"
 author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
 toc: true
 number-sections: true
@@ -13,5 +13,3 @@ format:
 # Datentypen und -strukturen in R
 
 Grundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr
-
-

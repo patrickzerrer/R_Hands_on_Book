@@ -1,8 +1,9 @@
 project:
   type: website
+  output-dir: docs
 
 website:
-  title: "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse"
+  title: "Inhalt"
   sidebar: 
     style: "docked"
     search: true
@@ -13,13 +14,13 @@ website:
       - Skript_1.2.qmd
       - Skript_1.3.qmd
 
-    - section: "Was ist ein Datensatz und wie ist dieser aufgebaut?"
+    - section: "Datensätze"
       contents:
       - Skript_2.1.qmd
       - Skript_2.2.qmd
       - Skript_2.3.qmd
 
-    - section: "Wie gehe ich mit Daten um?"
+    - section: "Der Umgang mit Daten"
       contents:
       - Skript_3.1.qmd
       - Skript_3.2.qmd

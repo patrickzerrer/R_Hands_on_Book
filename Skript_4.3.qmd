@@ -1,5 +1,5 @@
 ---
-title: "Berechnung und Interpretation von Streuungsmaßen"
+title: "Streuungsmaße"
 author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
 toc: true
 number-sections: true
@@ -14,7 +14,7 @@ Berechnung und Interpretation von Streuungsmaßen
 
 # Die Spannweite
 
-## Berechnung 
+## Berechnung
 
 ## Visualisierung
 
@@ -22,7 +22,7 @@ Berechnung und Interpretation von Streuungsmaßen
 
 # Die Standartabweichung
 
-## Berechnung 
+## Berechnung
 
 ## Visualisierung
 
@@ -30,7 +30,7 @@ Berechnung und Interpretation von Streuungsmaßen
 
 # Die Varianz
 
-## Berechnung 
+## Berechnung
 
 ## Visualisierung
 

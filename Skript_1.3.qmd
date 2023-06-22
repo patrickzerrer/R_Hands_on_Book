@@ -1,0 +1,13 @@
+---
+title: "Relevante Begriffe"
+author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+---
+
+# Was ist die Konsole und was ein Skript?

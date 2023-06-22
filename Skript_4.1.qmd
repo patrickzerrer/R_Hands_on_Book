@@ -1,5 +1,5 @@
 ---
-title: "Berechnung und Interpretation von einfachen Häufigkeiten"
+title: "Häufigkeiten"
 author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
 toc: true
 number-sections: true
@@ -12,8 +12,6 @@ format:
 
 # Berechnung von einfachen Häufigkeiten
 
-
 # Visuelle Darstellung von einfachen Häufigkeiten
-
 
 # Interpretation von einfachen Häufigkeiten
