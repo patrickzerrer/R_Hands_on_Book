@@ -1,0 +1,19 @@
+---
+title: "Berechnung und Interpretation der Reliabilität von Skalen"
+author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+---
+
+Berechnung und Interpretation der Reliabilität von Skalen 
+
+# Ab wann sprechen wir von einer zuverlässigen Messung?
+
+# Berechnung von Reliabilitätskoeffizienten in R
+
+# Interpretation von Reliabilitätskoeffizienten in R

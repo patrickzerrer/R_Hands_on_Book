@@ -1,0 +1,17 @@
+---
+title: "Selektion, Manipulation und Transformation von Daten"
+author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+---
+
+# Selektion, Manipulation und Transformation von Daten
+
+Das tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)
+
+Umgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; "weiß nicht"; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)

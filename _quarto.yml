@@ -2,47 +2,56 @@ project:
   type: website
 
 website:
-  title: "RHandsOnBook"
+  title: "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse"
   sidebar: 
     style: "docked"
     search: true
     contents:
     - section: "Einführung in R"
       contents:
-      - Skript_1.qmd
-      - Skript_2.qmd
-      - Skript_3.qmd
-      
+      - Skript_1.1.qmd
+      - Skript_1.2.qmd
+      - Skript_1.3.qmd
+
+    - section: "Was ist ein Datensatz und wie ist dieser aufgebaut?"
+      contents:
+      - Skript_2.1.qmd
+      - Skript_2.2.qmd
+      - Skript_2.3.qmd
+
+    - section: "Wie gehe ich mit Daten um?"
+      contents:
+      - Skript_3.1.qmd
+      - Skript_3.2.qmd
+      - Skript_3.3.qmd
+      - Skript_3.4.qmd
+
     - section: "Die ersten Schritte bei der Datenanalyse"
       contents:
-      - Skript_4.qmd
-      - Skript_5.qmd
-      - Skript_6.qmd
+      - Skript_4.1.qmd
+      - Skript_4.2.qmd
+      - Skript_4.3.qmd
+      - Skript_4.4.qmd
 
-    - section: "Das Erstellen von Tabellen und Grafiken in R"
+    - section: "Von einzelnen Antworten zum Index"
       contents:
-      - Skript_7.qmd
-      - Skript_8.qmd
-      - Skript_9.qmd
-      
-    - section: "Das Berechnen von Indizes"
-      contents:
-      - Skript_10.qmd
-      - Skript_11.qmd
-      - Skript_12.qmd    
+      - Skript_5.1.qmd
+      - Skript_5.2.qmd
+      - Skript_5.3.qmd    
 
     - section: "Das Überprüfen von Unterschieden"
       contents:
-      - Skript_13.qmd
-      - Skript_14.qmd
-      - Skript_15.qmd
+      - Skript_6.1.qmd
+      - Skript_6.2.qmd
+      - Skript_6.3.qmd
+      - Skript_6.4.qmd
 
     - section: "Das Überprüfen von Zusammenhängen"
       contents:
-      - Skript_16.qmd
-      - Skript_17.qmd
-      - Skript_18.qmd
-      
+      - Skript_7.1.qmd
+      - Skript_7.2.qmd
+      - Skript_7.3.qmd
+
 format:
   html:
     theme: cosmo

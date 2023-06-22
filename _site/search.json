@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "RHandsOnBook",
@@ -7,10 +14,528 @@
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "objectID": "Skript_1.html#was-ist-r",
+    "href": "Skript_1.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_1.html#wie-funktioniert-r-studio",
+    "href": "Skript_1.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_1.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_1.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_1.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_1.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_1.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_1.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_10.html#was-ist-r",
+    "href": "Skript_10.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_10.html#wie-funktioniert-r-studio",
+    "href": "Skript_10.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_10.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_10.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_10.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_10.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_10.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_10.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_11.html#was-ist-r",
+    "href": "Skript_11.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_11.html#wie-funktioniert-r-studio",
+    "href": "Skript_11.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_11.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_11.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_11.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_11.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_11.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_11.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_12.html#was-ist-r",
+    "href": "Skript_12.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_12.html#wie-funktioniert-r-studio",
+    "href": "Skript_12.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_12.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_12.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_12.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_12.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_12.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_12.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_13.html#was-ist-r",
+    "href": "Skript_13.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_13.html#wie-funktioniert-r-studio",
+    "href": "Skript_13.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_13.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_13.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_13.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_13.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_13.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_13.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_14.html#was-ist-r",
+    "href": "Skript_14.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_14.html#wie-funktioniert-r-studio",
+    "href": "Skript_14.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_14.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_14.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_14.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_14.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_14.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_14.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_15.html#was-ist-r",
+    "href": "Skript_15.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_15.html#wie-funktioniert-r-studio",
+    "href": "Skript_15.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_15.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_15.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_15.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_15.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_15.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_15.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_2.html#was-ist-r",
+    "href": "Skript_2.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_2.html#wie-funktioniert-r-studio",
+    "href": "Skript_2.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_2.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_2.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_2.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_2.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_2.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_2.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_3.html#was-ist-r",
+    "href": "Skript_3.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_3.html#wie-funktioniert-r-studio",
+    "href": "Skript_3.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_3.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_3.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_3.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_3.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_3.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_3.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_4.html#was-ist-r",
+    "href": "Skript_4.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_4.html#wie-funktioniert-r-studio",
+    "href": "Skript_4.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_4.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_4.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_4.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_4.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_4.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_4.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_5.html#was-ist-r",
+    "href": "Skript_5.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_5.html#wie-funktioniert-r-studio",
+    "href": "Skript_5.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_5.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_5.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_5.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_5.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_5.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_5.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_6.html#was-ist-r",
+    "href": "Skript_6.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_6.html#wie-funktioniert-r-studio",
+    "href": "Skript_6.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_6.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_6.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_6.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_6.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_6.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_6.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_7.html#was-ist-r",
+    "href": "Skript_7.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_7.html#wie-funktioniert-r-studio",
+    "href": "Skript_7.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_7.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_7.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_7.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_7.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_7.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_7.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_8.html#was-ist-r",
+    "href": "Skript_8.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_8.html#wie-funktioniert-r-studio",
+    "href": "Skript_8.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_8.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_8.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_8.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_8.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_8.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_8.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
+  },
+  {
+    "objectID": "Skript_9.html#was-ist-r",
+    "href": "Skript_9.html#was-ist-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.1 Was ist R?",
+    "text": "2.1 Was ist R?"
+  },
+  {
+    "objectID": "Skript_9.html#wie-funktioniert-r-studio",
+    "href": "Skript_9.html#wie-funktioniert-r-studio",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.2 Wie funktioniert R-Studio?",
+    "text": "2.2 Wie funktioniert R-Studio?"
+  },
+  {
+    "objectID": "Skript_9.html#was-ist-die-konsole-und-was-ein-skript",
+    "href": "Skript_9.html#was-ist-die-konsole-und-was-ein-skript",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "2.3 Was ist die Konsole und was ein Skript?",
+    "text": "2.3 Was ist die Konsole und was ein Skript?"
+  },
+  {
+    "objectID": "Skript_9.html#datentypen-und--strukturen-in-r",
+    "href": "Skript_9.html#datentypen-und--strukturen-in-r",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.1 Datentypen und -strukturen in R",
+    "text": "4.1 Datentypen und -strukturen in R\nGrundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr"
+  },
+  {
+    "objectID": "Skript_9.html#selektion-manipulation-und-transformation-von-daten",
+    "href": "Skript_9.html#selektion-manipulation-und-transformation-von-daten",
+    "title": "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse",
+    "section": "4.2 Selektion, Manipulation und Transformation von Daten",
+    "text": "4.2 Selektion, Manipulation und Transformation von Daten\nDas tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)\nUmgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)"
   }
 ]

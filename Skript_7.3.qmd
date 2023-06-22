@@ -1,0 +1,23 @@
+---
+title: "Das Überprüfen von Zusammenhängen bei mehr als zwei Variablen"
+author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+---
+
+Das Überprüfen von Zusammenhängen bei mehr als zwei Variablen
+
+# Das Überprüfen von Zusammenhängen bei mehr als zwei intervalskalierten Variablen
+
+## Analyselogik, Ziel und Einsatzgebiete einer multiplen Regressionsanalyse
+
+## Grafische Darstellung und Interpretation einer multiplen Regressionsgeraden
+
+## Prüfung der Voraussetzungen
+
+## Berechnung und Interpretation einer multiplen Regression

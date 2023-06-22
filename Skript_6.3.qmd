@@ -1,0 +1,33 @@
+---
+title: "Bestimmen von Unterschieden in der zentralen Tendenz"
+author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+---
+
+Bestimmen von Unterschieden in der zentralen Tendenz
+
+# Was sind unabhängige und verbundene Stichproben?
+
+## Das Testen von Unterschieden bei unabhängigen Stichproben
+
+### t-Test für unabhängige Stichproben
+
+### Mann-Whitney
+
+### einfaktorielle Varianzanalyse
+
+### Kruskal Wallis
+
+### mehrfaktorielle Varianzanalyse
+
+## Das Testen von Unterschieden bei verbundenen Stichproben
+
+### t-Test für verbundene Stichproben
+
+### Wilcoxon

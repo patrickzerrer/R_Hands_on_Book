@@ -1,0 +1,30 @@
+---
+title: "Berechnung und Interpretation von Verteilungen"
+author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+---
+
+Berechnung und Interpretation von Verteilungen
+
+# Die Normalverteilung
+
+## Berechnung
+
+## Visualisierung
+
+## Interpretation
+
+# Was ist schon "normal" - Abweichungen von der Normalverteilung
+
+## Berechnung
+
+## Visualisierung
+
+## Interpretation
+
