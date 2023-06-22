@@ -1,0 +1,38 @@
+---
+title: "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse"
+author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+---
+
+# Einführung
+
+# Einführung in R und R-Studio
+
+Einführung in die Logik von R, R Studio Server und das R Environment Einführung in Markdown (Quarto?) Basics der Befehlssyntax in Base R und Tidyverse (im Vergleich), ab dann aber alles in dplyr Laden von Daten und Importieren von anderen Datenformaten Einführung in das Datenmanagement: Projekte und Ordnerstrukturen auf dem PC Öffnen von Datensätzen, Laden von Daten, Importieren von anderen Datensätzen Speichern von Daten aus R in verschiedenen Formaten (Rda, csv etc.) Installieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika
+
+## Was ist R?
+
+## Wie funktioniert R-Studio?
+
+## Was ist die Konsole und was ein Skript?
+
+# Was ist ein Datensatz und wie ist dieser aufgebaut?
+
+# Wie gehe ich mit Daten um?
+
+## Datentypen und -strukturen in R
+
+Grundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr
+
+## Selektion, Manipulation und Transformation von Daten
+
+Das tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)
+
+Umgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; "weiß nicht"; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)
+

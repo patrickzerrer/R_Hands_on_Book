@@ -1,0 +1,53 @@
+project:
+  type: website
+
+website:
+  title: "RHandsOnBook"
+  sidebar: 
+    style: "docked"
+    search: true
+    contents:
+    - section: "Einführung in R"
+      contents:
+      - Skript_1.qmd
+      - Skript_2.qmd
+      - Skript_3.qmd
+      
+    - section: "Die ersten Schritte bei der Datenanalyse"
+      contents:
+      - Skript_4.qmd
+      - Skript_5.qmd
+      - Skript_6.qmd
+
+    - section: "Das Erstellen von Tabellen und Grafiken in R"
+      contents:
+      - Skript_7.qmd
+      - Skript_8.qmd
+      - Skript_9.qmd
+      
+    - section: "Das Berechnen von Indizes"
+      contents:
+      - Skript_10.qmd
+      - Skript_11.qmd
+      - Skript_12.qmd    
+
+    - section: "Das Überprüfen von Unterschieden"
+      contents:
+      - Skript_13.qmd
+      - Skript_14.qmd
+      - Skript_15.qmd
+
+    - section: "Das Überprüfen von Zusammenhängen"
+      contents:
+      - Skript_16.qmd
+      - Skript_17.qmd
+      - Skript_18.qmd
+      
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+

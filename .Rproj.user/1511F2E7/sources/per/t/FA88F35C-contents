@@ -1,0 +1,15 @@
+---
+title: "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse"
+author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+---
+
+# Was ist eine Skala und wie erstelle ich ein Indize? - Skalenreliabilität und Faktorenanalyse zur Dimensionsreduktion
+
+Zusammenfassen von Einzel-Items zu Indizes / Skalen Berechnung und Interpretation der Reliabilität von Skalen Analyselogik, Ziel und Einsatzgebiete einer Faktorenanalyse Berechnung und Interpretation einer Faktorenanalyse

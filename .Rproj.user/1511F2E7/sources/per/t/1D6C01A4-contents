@@ -1,0 +1,16 @@
+---
+title: "Hands on Handbuch - Einführung in quantitative Forschungsdesigns und Datenanalyse"
+author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+---
+
+# Was sind die ersten Schritte zur Analyse der Daten? - Univariate und deskriptive Statistik
+
+Berechnung und Interpretation von einfachen Häufigkeiten Berechnung und Interpretation von Lageparametern: Modus, Median, Mittelwert Berechnung und Interpretation von Streuungsmaßen: Spannweite, Standardabweichung, Varianz Berechnung und Interpretation von Verteilungen: Normalverteilung, Abweichungen von der Normalverteilung
+
