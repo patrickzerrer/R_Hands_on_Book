@@ -1,12 +1,12 @@
 ---
-title: "Zentrale Tendenz"
-author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+title: "Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse"
+author: "Katharina Maubach"
 toc: true
 number-sections: true
 highlight-style: pygments
 format:
   html:
-    code-fold: true
+    code-fold: false
     code-line-numbers: true
 ---
 
@@ -159,7 +159,6 @@ Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur
 ## Kruskal Wallis
 
 ## Mehrfaktorielle Varianzanalyse
-
 
 In der mehrfaktoriellen Varianzanalyse können wir unser Modell aus der einfachen Varianzananlyse erweitern. In diesem Beispiel nutzen wir neben der Ländervariablen (`cntry`) zusätzlich die Variable Geschlecht (`gndr`) um die Lebenszufriedenheit (`happy`) vorherzusagen.
 

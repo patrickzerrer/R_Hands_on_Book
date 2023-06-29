@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, &amp; Patrick Zerrer">
+<meta name="author" content="tba">
 
-<title>Inhalt - Varianz</title>
+<title>Inhalt - Bestimmen von Unterschieden in der Varianz mit Kreuztabellen und dem Chi-Quadrat Test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_6.1.html">Das Überprüfen von Unterschieden</a></li><li class="breadcrumb-item"><a href="./Skript_6.2.html">Varianz</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_6.1.html">Das Überprüfen von Unterschieden</a></li><li class="breadcrumb-item"><a href="./Skript_6.2.html">Bestimmen von Unterschieden in der Varianz mit Kreuztabellen und dem Chi-Quadrat Test</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -204,25 +204,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Häufigkeiten</span></a>
+ <span class="menu-text">Häufigkeiten und deren Visualisierung</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lageparameter</span></a>
+ <span class="menu-text">Lageparameter: Modus, Median, Mittelwert</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Streuungsmaße</span></a>
+ <span class="menu-text">Streuungsmaße: Spannweite, Standartabweichung, Varianz</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Verteilungen</span></a>
+ <span class="menu-text">Verteilungen und deren Visualisierung</span></a>
   </div>
 </li>
       </ul>
@@ -274,19 +274,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Varianz</span></a>
+ <span class="menu-text">Bestimmen von Unterschieden in der Varianz mit Kreuztabellen und dem Chi-Quadrat Test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zentrale Tendenz</span></a>
+ <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Proportionen Häufigkeiten</span></a>
+ <span class="menu-text">Proportionen Häufigkeiten mit dem Binomial Test und Pearson Chi-Quadrat</span></a>
   </div>
 </li>
       </ul>
@@ -309,13 +309,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei zwei Variablen</span></a>
+ <span class="menu-text">Zusammenhänge bei zwei Variablen mittels Korrelation und Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen</span></a>
+ <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
   </div>
 </li>
       </ul>
@@ -339,7 +339,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Varianz</h1>
+<h1 class="title">Bestimmen von Unterschieden in der Varianz mit Kreuztabellen und dem Chi-Quadrat Test</h1>
 </div>
 
 
@@ -349,7 +349,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, &amp; Patrick Zerrer </p>
+             <p>tba </p>
           </div>
   </div>
     

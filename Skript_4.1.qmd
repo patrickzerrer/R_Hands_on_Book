@@ -1,12 +1,12 @@
 ---
-title: "Häufigkeiten"
-author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+title: "Häufigkeiten und deren Visualisierung"
+author: "tba"
 toc: true
 number-sections: true
 highlight-style: pygments
 format:
   html:
-    code-fold: true
+    code-fold: false
     code-line-numbers: true
 ---
 

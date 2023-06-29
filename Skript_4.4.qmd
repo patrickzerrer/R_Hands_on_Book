@@ -1,12 +1,12 @@
 ---
-title: "Verteilungen"
-author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+title: "Verteilungen und deren Visualisierung"
+author: "Cornelius Puschmann"
 toc: true
 number-sections: true
 highlight-style: pygments
 format:
   html:
-    code-fold: true
+    code-fold: false
     code-line-numbers: true
 ---
 

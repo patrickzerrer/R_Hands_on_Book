@@ -1,13 +1,21 @@
 ---
 title: "Einführung"
-author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+author: "tba"
 toc: true
 number-sections: true
 highlight-style: pygments
 format:
   html:
-    code-fold: true
+    code-fold: false
     code-line-numbers: true
 ---
 
 # Einführung in das Überprüfen von Zusammenhängen
+
+Willkommen zu unserem Kapitel über die statistische Überprüfung von Zusammenhängen mit Hilfe von R. In der datengetriebenen Welt von heute ist es von großer Bedeutung, statistische Zusammenhänge zu verstehen und zu validieren. In diesem Kapitel werden wir Ihnen zeigen, wie Sie mithilfe von R verschiedene statistische Tests durchführen können, um Zusammenhänge zwischen Variablen zu untersuchen.
+
+Der erste Schritt besteht darin, die Daten in R zu importieren und zu explorieren. Wir werden Ihnen zeigen, wie Sie die Daten visualisieren und grundlegende statistische Kennzahlen berechnen können, um einen ersten Eindruck von den vorliegenden Zusammenhängen zu bekommen. Anschließend werden wir auf verschiedene statistische Tests eingehen, darunter den Korrelationstest, den Chi-Quadrat-Test und verschiedene Formen der Regression. Sie lernen, wie Sie diese Tests in R implementieren, die Ergebnisse interpretieren und fundierte Schlussfolgerungen ziehen können.
+
+Darüber hinaus werden wir auf wichtige Konzepte wie Signifikanzniveau, p-Wert und Konfidenzintervalle eingehen, um Ihnen ein solides Verständnis dafür zu vermitteln, wie statistische Zusammenhänge bewertet werden können. Durch die Anwendung dieser Methoden werden Sie in der Lage sein, Ihre Daten genau zu analysieren, potenzielle Zusammenhänge zu identifizieren und deren Bedeutung zu bewerten. Tauchen Sie ein in die spannende Welt der statistischen Überprüfung von Zusammenhängen mit R und erweitern Sie Ihr analytisches Toolkit!
+
+(Es handelt sich bei dem Text um einen Platzhalter, erstellt von chatGDP)

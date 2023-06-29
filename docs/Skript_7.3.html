@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, &amp; Patrick Zerrer">
+<meta name="author" content="Stephanie Geise">
 
-<title>Inhalt - Zusammenhänge bei mehr als zwei Variablen</title>
+<title>Inhalt - Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -74,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_7.1.html">Das Überprüfen von Zusammenhängen</a></li><li class="breadcrumb-item"><a href="./Skript_7.3.html">Zusammenhänge bei mehr als zwei Variablen</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_7.1.html">Das Überprüfen von Zusammenhängen</a></li><li class="breadcrumb-item"><a href="./Skript_7.3.html">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -204,25 +238,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Häufigkeiten</span></a>
+ <span class="menu-text">Häufigkeiten und deren Visualisierung</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lageparameter</span></a>
+ <span class="menu-text">Lageparameter: Modus, Median, Mittelwert</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Streuungsmaße</span></a>
+ <span class="menu-text">Streuungsmaße: Spannweite, Standartabweichung, Varianz</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Verteilungen</span></a>
+ <span class="menu-text">Verteilungen und deren Visualisierung</span></a>
   </div>
 </li>
       </ul>
@@ -274,19 +308,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Varianz</span></a>
+ <span class="menu-text">Bestimmen von Unterschieden in der Varianz mit Kreuztabellen und dem Chi-Quadrat Test</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zentrale Tendenz</span></a>
+ <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Proportionen Häufigkeiten</span></a>
+ <span class="menu-text">Proportionen Häufigkeiten mit dem Binomial Test und Pearson Chi-Quadrat</span></a>
   </div>
 </li>
       </ul>
@@ -309,13 +343,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei zwei Variablen</span></a>
+ <span class="menu-text">Zusammenhänge bei zwei Variablen mittels Korrelation und Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen</span></a>
+ <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
   </div>
 </li>
       </ul>
@@ -332,10 +366,27 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#das-überprüfen-von-zusammenhängen-bei-mehr-als-zwei-intervalskalierten-variablen" id="toc-das-überprüfen-von-zusammenhängen-bei-mehr-als-zwei-intervalskalierten-variablen" class="nav-link active" data-scroll-target="#das-überprüfen-von-zusammenhängen-bei-mehr-als-zwei-intervalskalierten-variablen"><span class="header-section-number">1</span> Das Überprüfen von Zusammenhängen bei mehr als zwei intervalskalierten Variablen</a>
   <ul class="collapse">
-  <li><a href="#analyselogik-ziel-und-einsatzgebiete-einer-multiplen-regressionsanalyse" id="toc-analyselogik-ziel-und-einsatzgebiete-einer-multiplen-regressionsanalyse" class="nav-link" data-scroll-target="#analyselogik-ziel-und-einsatzgebiete-einer-multiplen-regressionsanalyse"><span class="header-section-number">1.1</span> Analyselogik, Ziel und Einsatzgebiete einer multiplen Regressionsanalyse</a></li>
-  <li><a href="#grafische-darstellung-und-interpretation-einer-multiplen-regressionsgeraden" id="toc-grafische-darstellung-und-interpretation-einer-multiplen-regressionsgeraden" class="nav-link" data-scroll-target="#grafische-darstellung-und-interpretation-einer-multiplen-regressionsgeraden"><span class="header-section-number">1.2</span> Grafische Darstellung und Interpretation einer multiplen Regressionsgeraden</a></li>
-  <li><a href="#prüfung-der-voraussetzungen" id="toc-prüfung-der-voraussetzungen" class="nav-link" data-scroll-target="#prüfung-der-voraussetzungen"><span class="header-section-number">1.3</span> Prüfung der Voraussetzungen</a></li>
-  <li><a href="#berechnung-und-interpretation-einer-multiplen-regression" id="toc-berechnung-und-interpretation-einer-multiplen-regression" class="nav-link" data-scroll-target="#berechnung-und-interpretation-einer-multiplen-regression"><span class="header-section-number">1.4</span> Berechnung und Interpretation einer multiplen Regression</a></li>
+  <li><a href="#analyselogik-ziel-und-einsatzgebiete-einer-multiplen-regressionsanalyse" id="toc-analyselogik-ziel-und-einsatzgebiete-einer-multiplen-regressionsanalyse" class="nav-link" data-scroll-target="#analyselogik-ziel-und-einsatzgebiete-einer-multiplen-regressionsanalyse"><span class="header-section-number">1.1</span> Analyselogik, Ziel und Einsatzgebiete einer multiplen Regressionsanalyse</a>
+  <ul class="collapse">
+  <li><a href="#vorbereitung-und-laden-der-daten" id="toc-vorbereitung-und-laden-der-daten" class="nav-link" data-scroll-target="#vorbereitung-und-laden-der-daten"><span class="header-section-number">1.1.1</span> Vorbereitung und Laden der Daten</a></li>
+  <li><a href="#data-management" id="toc-data-management" class="nav-link" data-scroll-target="#data-management"><span class="header-section-number">1.1.2</span> Data Management</a></li>
+  <li><a href="#erinnerung-einfache-lineare-regression-mit-alter-als-uv-und-internetnutzung-als-av-mit-lm-linear-models" id="toc-erinnerung-einfache-lineare-regression-mit-alter-als-uv-und-internetnutzung-als-av-mit-lm-linear-models" class="nav-link" data-scroll-target="#erinnerung-einfache-lineare-regression-mit-alter-als-uv-und-internetnutzung-als-av-mit-lm-linear-models"><span class="header-section-number">1.1.3</span> Erinnerung: Einfache lineare Regression mit Alter als UV und Internetnutzung als AV mit lm (=linear models)</a></li>
+  <li><a href="#erinnerung-voraussetzungen-der-einfachen-linearen-regression" id="toc-erinnerung-voraussetzungen-der-einfachen-linearen-regression" class="nav-link" data-scroll-target="#erinnerung-voraussetzungen-der-einfachen-linearen-regression"><span class="header-section-number">1.1.4</span> Erinnerung: Voraussetzungen der einfachen linearen Regression:</a></li>
+  <li><a href="#teil-a-prüfung-der-voraussetzungen-einer-regressionsanalyse" id="toc-teil-a-prüfung-der-voraussetzungen-einer-regressionsanalyse" class="nav-link" data-scroll-target="#teil-a-prüfung-der-voraussetzungen-einer-regressionsanalyse"><span class="header-section-number">1.1.5</span> TEIL A: Prüfung der Voraussetzungen einer Regressionsanalyse</a></li>
+  <li><a href="#teil-b-die-multiple-lineare-regression" id="toc-teil-b-die-multiple-lineare-regression" class="nav-link" data-scroll-target="#teil-b-die-multiple-lineare-regression"><span class="header-section-number">1.1.6</span> TEIL B: Die multiple lineare Regression</a></li>
+  </ul></li>
+  <li><a href="#multiple-regression-mit-dummy-codierung" id="toc-multiple-regression-mit-dummy-codierung" class="nav-link" data-scroll-target="#multiple-regression-mit-dummy-codierung"><span class="header-section-number">1.2</span> Multiple Regression mit Dummy-Codierung</a>
+  <ul class="collapse">
+  <li><a href="#vorbereitung-der-daten-zum-zusammenhang-von-alter-bildung-geschlecht-und-internetnutzung" id="toc-vorbereitung-der-daten-zum-zusammenhang-von-alter-bildung-geschlecht-und-internetnutzung" class="nav-link" data-scroll-target="#vorbereitung-der-daten-zum-zusammenhang-von-alter-bildung-geschlecht-und-internetnutzung"><span class="header-section-number">1.2.1</span> Vorbereitung der Daten zum Zusammenhang von Alter, Bildung, Geschlecht und Internetnutzung</a></li>
+  <li><a href="#dummy-codierung-der-variable-gender" id="toc-dummy-codierung-der-variable-gender" class="nav-link" data-scroll-target="#dummy-codierung-der-variable-gender"><span class="header-section-number">1.2.2</span> Dummy Codierung der Variable Gender</a></li>
+  <li><a href="#regressionsmodell-zum-zusammenhang-von-alter-nachrichtenrezeptiion-geschlecht-und-internetnutzung-spezifizieren-und-anzeigen-lassen" id="toc-regressionsmodell-zum-zusammenhang-von-alter-nachrichtenrezeptiion-geschlecht-und-internetnutzung-spezifizieren-und-anzeigen-lassen" class="nav-link" data-scroll-target="#regressionsmodell-zum-zusammenhang-von-alter-nachrichtenrezeptiion-geschlecht-und-internetnutzung-spezifizieren-und-anzeigen-lassen"><span class="header-section-number">1.2.3</span> Regressionsmodell zum Zusammenhang von Alter, Nachrichtenrezeptiion, Geschlecht und Internetnutzung spezifizieren und anzeigen lassen</a></li>
+  <li><a href="#inhaltliche-interpretation" id="toc-inhaltliche-interpretation" class="nav-link" data-scroll-target="#inhaltliche-interpretation"><span class="header-section-number">1.2.4</span> Inhaltliche Interpretation</a></li>
+  <li><a href="#vorhersage-des-multivariaten-modells-für-die-tägliche-internetnutzung-durch-alter-nachrichtenrezeption-und-geschlecht" id="toc-vorhersage-des-multivariaten-modells-für-die-tägliche-internetnutzung-durch-alter-nachrichtenrezeption-und-geschlecht" class="nav-link" data-scroll-target="#vorhersage-des-multivariaten-modells-für-die-tägliche-internetnutzung-durch-alter-nachrichtenrezeption-und-geschlecht"><span class="header-section-number">1.2.5</span> Vorhersage des multivariaten Modells für die tägliche Internetnutzung durch Alter, Nachrichtenrezeption und Geschlecht</a></li>
+  <li><a href="#inhaltliche-interpretation-1" id="toc-inhaltliche-interpretation-1" class="nav-link" data-scroll-target="#inhaltliche-interpretation-1"><span class="header-section-number">1.2.6</span> Inhaltliche Interpretation</a></li>
+  <li><a href="#zusätzliche-voraussetzungsprüfung-bei-der-multiplen-linearen-regression-liegt-multikollinearität-vor" id="toc-zusätzliche-voraussetzungsprüfung-bei-der-multiplen-linearen-regression-liegt-multikollinearität-vor" class="nav-link" data-scroll-target="#zusätzliche-voraussetzungsprüfung-bei-der-multiplen-linearen-regression-liegt-multikollinearität-vor"><span class="header-section-number">1.2.7</span> Zusätzliche Voraussetzungsprüfung bei der multiplen linearen Regression: Liegt Multikollinearität vor?</a></li>
+  <li><a href="#inhaltliche-interpretation-2" id="toc-inhaltliche-interpretation-2" class="nav-link" data-scroll-target="#inhaltliche-interpretation-2"><span class="header-section-number">1.2.8</span> Inhaltliche Interpretation</a></li>
+  </ul></li>
+  <li><a href="#add-on-weitere-plots-zur-vergleichenden-regressionsanalyse" id="toc-add-on-weitere-plots-zur-vergleichenden-regressionsanalyse" class="nav-link" data-scroll-target="#add-on-weitere-plots-zur-vergleichenden-regressionsanalyse"><span class="header-section-number">1.3</span> Add-On: Weitere Plots zur (vergleichenden) Regressionsanalyse</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -345,7 +396,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Zusammenhänge bei mehr als zwei Variablen</h1>
+<h1 class="title">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</h1>
 </div>
 
 
@@ -355,7 +406,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, &amp; Patrick Zerrer </p>
+             <p>Stephanie Geise </p>
           </div>
   </div>
     
@@ -371,15 +422,651 @@ ul.task-list li input[type="checkbox"] {
 <h1 data-number="1"><span class="header-section-number">1</span> Das Überprüfen von Zusammenhängen bei mehr als zwei intervalskalierten Variablen</h1>
 <section id="analyselogik-ziel-und-einsatzgebiete-einer-multiplen-regressionsanalyse" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="analyselogik-ziel-und-einsatzgebiete-einer-multiplen-regressionsanalyse"><span class="header-section-number">1.1</span> Analyselogik, Ziel und Einsatzgebiete einer multiplen Regressionsanalyse</h2>
+<p>In diesem Notebook gehen wir (wie angekündigt) zunächst näher auf die Prüfung der <strong>Voraussetzungen einer Regressionsanalyse</strong> ein. Dann lernen wir die <strong>multiple lineare Regression</strong> kennen, die es erlaubt, Zusammenhänge zwischen mehreren x-Variablen und einer y-Variablen zu analysieren.</p>
+<section id="vorbereitung-und-laden-der-daten" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="vorbereitung-und-laden-der-daten"><span class="header-section-number">1.1.1</span> Vorbereitung und Laden der Daten</h3>
+<p>Zunächst laden wir wieder die Pakete des tidyverse und das Pakete broom um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket performance, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete lmtest und sandwich, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten). Die Regression rechnen wir wieder auf Basis des ESS8_vier_laender-Datensatzes, den wir entsprechend einlesen:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#Laden der notwendigen Pakete</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">#install.packages("lm.beta")</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#install.packages("lmtest")</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#install.packages("broom") </span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#install.packages("performance")</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#install.packages("see")</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#install.packages("sandwich")</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(lm.beta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'lm.beta' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(broom) <span class="co"># hier stecken einige Befehle zur Bereinigung der Daten und der Modelloutputs drin</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'broom' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'performance' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(see)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'see' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(lmtest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'lmtest' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Lade nötiges Paket: zoo</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'zoo' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attache Paket: 'zoo'
+
+Die folgenden Objekte sind maskiert von 'package:base':
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">library</span>(sandwich)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'sandwich' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">#Daten laden und zum Datenobjekt "daten" zuweisen</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>daten <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ESS8_vier_laender.rds"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co">#Visualisierungshintergrund der Grafiken in ggplot festlegen</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span>
+<span id="cb18-6"><a href="#cb18-6"></a></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="co"># Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
-<section id="grafische-darstellung-und-interpretation-einer-multiplen-regressionsgeraden" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="grafische-darstellung-und-interpretation-einer-multiplen-regressionsgeraden"><span class="header-section-number">1.2</span> Grafische Darstellung und Interpretation einer multiplen Regressionsgeraden</h2>
+<section id="data-management" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="data-management"><span class="header-section-number">1.1.2</span> Data Management</h3>
+<p>Als abhängige Variable nutzen wir für unser Regressionsmodell wieder die Internetnutzung (netustm); als unabhängige Variablen schauen wir uns wie beim letzten Mal das Alter, sowie heute zusätzlich die Rezeptionszeit von politischen Nachrichten (nwspol) sowie das Geschlecht der Befragten (gndr) an. Damit der Output etwas nachvollziehbarer wird, benennen wir diese Variablen mit dem rename-Befehl um.</p>
+<p>Dann setzen wir den drop_na-Befehl, um alle Fällen mit fehlenden Werten zu entfernen (in der Klammer spezifizieren wir wieder, auf welche Variablen sich der Befehl beziehen soll). Das modifizierte Datenset weisen wir einem neuen Datenobjekt zu: daten_mod2</p>
+<p>Schließlich nutze ich den slice_sample-Befehl, um aus unseren 8432 Fällen ein Zufallssample von n=100 Fällen zu ziehen, weil mir das die visuelle Interpretation erleichtert (diesen Befehl könnten wir hier auch weglassen, dann bekommen wir unten aber sehr sehr viele Datenpunkt in unserem Streudiagramm - probieren Sie es mal aus!)</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>daten_mod <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">rename</span>(<span class="at">internetnutzung =</span> netustm,</span>
+<span id="cb19-3"><a href="#cb19-3"></a>         <span class="at">alter =</span> agea,</span>
+<span id="cb19-4"><a href="#cb19-4"></a>         <span class="at">politische_Nachrichtenrezeption =</span> nwspol,</span>
+<span id="cb19-5"><a href="#cb19-5"></a>         <span class="at">gender =</span> gndr) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">drop_na</span>(<span class="fu">c</span>(internetnutzung, alter, politische_Nachrichtenrezeption, gender)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>) </span>
+<span id="cb19-8"><a href="#cb19-8"></a>daten_mod</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 166
+        idno cntry gender alter marsts                   edubde1 eduade2 eduade3
+       &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;                    &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  
+ 1  10008368 DE    Female    17 None of these (NEVER ma… (Noch)… Kein H… Kein b…
+ 2      1834 SE    Male      48 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 3      3551 FR    Male      48 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 4      1231 FR    Female    35 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 5      2164 SE    Male      42 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 6      2817 FR    Female    23 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 7       591 SE    Male      70 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 8      1135 SE    Male      60 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 9      3556 FR    Male      17 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+10 100004408 GB    Male      77 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+# ℹ 90 more rows
+# ℹ 158 more variables: politische_Nachrichtenrezeption &lt;dbl&gt;, netusoft &lt;fct&gt;,
+#   internetnutzung &lt;dbl&gt;, ppltrst &lt;dbl&gt;, pplfair &lt;dbl&gt;, pplhlp &lt;dbl&gt;,
+#   polintr &lt;fct&gt;, psppsgva &lt;fct&gt;, actrolga &lt;fct&gt;, psppipla &lt;fct&gt;,
+#   cptppola &lt;fct&gt;, trstprl &lt;dbl&gt;, trstlgl &lt;dbl&gt;, trstplc &lt;dbl&gt;, trstplt &lt;dbl&gt;,
+#   trstprt &lt;dbl&gt;, trstep &lt;dbl&gt;, trstun &lt;dbl&gt;, vote &lt;fct&gt;, prtvede1 &lt;fct&gt;,
+#   prtvede2 &lt;fct&gt;, contplt &lt;fct&gt;, wrkprty &lt;fct&gt;, wrkorg &lt;fct&gt;, badge &lt;fct&gt;, …</code></pre>
+</div>
+</div>
 </section>
-<section id="prüfung-der-voraussetzungen" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="prüfung-der-voraussetzungen"><span class="header-section-number">1.3</span> Prüfung der Voraussetzungen</h2>
+<section id="erinnerung-einfache-lineare-regression-mit-alter-als-uv-und-internetnutzung-als-av-mit-lm-linear-models" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="erinnerung-einfache-lineare-regression-mit-alter-als-uv-und-internetnutzung-als-av-mit-lm-linear-models"><span class="header-section-number">1.1.3</span> Erinnerung: Einfache lineare Regression mit Alter als UV und Internetnutzung als AV mit lm (=linear models)</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(internetnutzung <span class="sc">~</span> alter, <span class="at">data =</span> daten_mod) </span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">summary</span>(model) <span class="co"># klassischer Output mit relevanten Kennzahlen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = internetnutzung ~ alter, data = daten_mod)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-242.44 -120.64  -58.85   46.57  804.39 
+
+Coefficients:
+            Estimate Std. Error t value        Pr(&gt;|t|)    
+(Intercept)  386.729     50.953   7.590 0.0000000000188 ***
+alter         -3.803      1.039  -3.659         0.00041 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 192.3 on 98 degrees of freedom
+Multiple R-squared:  0.1202,    Adjusted R-squared:  0.1112 
+F-statistic: 13.39 on 1 and 98 DF,  p-value: 0.0004104</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">#summary(lm.beta(model)) # klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Mit diesem Regressionsmodell haben wir übeprüft, ob das Alter die Internetnutzung erklären kann. Im Output sehen wir, dass das Alter einen signifikanten negativen Einfluss auf die Internetnutzung. Je älter ein Nutzer ist, desto weniger nutzt er das Internet. Die Regressionsanalyse lässt dabei auch eine Quantifizierung dieses Zusammenhangs zu: Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable Internetnutzung um “den Estimate-Wert” in Messeinheiten (hier: -4.296 Minuten) ab. Dieser Zusammenhang ist mit p &gt; .05 statistisch signifikant.</p>
+<p>Soweit die Wiederholung. Beginnen wir nun mit dem Teil A dieses Skripts, nämlich der Prüfung der <strong>Voraussetzungen einer Regressionsanalyse</strong>. Vielleicht wundern Sie sich, warum wir die Voraussetzungen erst im zweiten Schritt prüfen? Sie haben Recht: Eigentlich würden wir erst die Voraussetzungen prüfen, dann das Modell schätzen. Wenn wir unser Modell aber schon geschätzt haben, können wir Funktionen zur Prüfung der Voraussetzungen auf unser gesamtes Modell anwenden (bzw. auf das entsprechende Datenobjekt “model”) - und das erspart uns eine Menge “Handarbeit” mit vielen kleinen Zwischenschritten. Zum Beispiel müssten wir für die Prüfung der Voraussetzungen, die die Residuen betreffen, diese erst einmal berechnen und in einer neuen Variable abspeichern. Es ist also weniger Aufwand, die Voraussetzungen ex post zu prüfen.</p>
 </section>
-<section id="berechnung-und-interpretation-einer-multiplen-regression" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="berechnung-und-interpretation-einer-multiplen-regression"><span class="header-section-number">1.4</span> Berechnung und Interpretation einer multiplen Regression</h2>
+<section id="erinnerung-voraussetzungen-der-einfachen-linearen-regression" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="erinnerung-voraussetzungen-der-einfachen-linearen-regression"><span class="header-section-number">1.1.4</span> Erinnerung: Voraussetzungen der einfachen linearen Regression:</h3>
+<p>Bevor wir zum statistischen Teil kommen, lassen Sie uns noch einmal Revue passieren, was die wichtigsten Voraussetzungen der einfachen linearen Regression sind: 1) (quasi-)metrisches Skalenniveau 2) Linearität des Zusammenhangs zwischen x und y 3) Homoskedastizität der Residuen: Varianzen der Residuen der prognostizierten abhängigen Variablen sind gleich 4) Unabhängigkeit der Residuen: ansonsten Autokorrelation, die Aussagekraft reduziert 5) Normalverteilung der Residuen 6) Keine Ausreißer in den Daten, da schon einzelne Ausreißer einen sonst signifikanten Trend zunichte machen können (ggf. also eliminieren)</p>
+</section>
+<section id="teil-a-prüfung-der-voraussetzungen-einer-regressionsanalyse" class="level3" data-number="1.1.5">
+<h3 data-number="1.1.5" class="anchored" data-anchor-id="teil-a-prüfung-der-voraussetzungen-einer-regressionsanalyse"><span class="header-section-number">1.1.5</span> TEIL A: Prüfung der Voraussetzungen einer Regressionsanalyse</h3>
+<section id="prüfung-der-voraussetzungen-1-und-2-metrisches-skalenniveau-linearität-des-zusammenhangs" class="level4" data-number="1.1.5.1">
+<h4 data-number="1.1.5.1" class="anchored" data-anchor-id="prüfung-der-voraussetzungen-1-und-2-metrisches-skalenniveau-linearität-des-zusammenhangs"><span class="header-section-number">1.1.5.1</span> Prüfung der Voraussetzungen 1 und 2: metrisches Skalenniveau &amp; Linearität des Zusammenhangs</h4>
+<p>Ob 1.) die Variablen, die wir in das Regressionsmodell einbeziehen wollen (Alter, Internet-Nutzung) metrisch sind, und ob 2.) ein linearer Zusammenhang besteht, haben wir in der letzten Woche bereits überprüft. Für die Prüfung nach der Linearität des Zusammenhangs zwischen x und y hatten wir ein Streudiagramm mit der geschätzten Regressionsgeraden erzeugt.</p>
+</section>
+<section id="prüfung-der-voraussetzungen-3-homoskedastizität-der-residuen" class="level4" data-number="1.1.5.2">
+<h4 data-number="1.1.5.2" class="anchored" data-anchor-id="prüfung-der-voraussetzungen-3-homoskedastizität-der-residuen"><span class="header-section-number">1.1.5.2</span> Prüfung der Voraussetzungen 3: Homoskedastizität der Residuen</h4>
+<p>Lineare Modelle setzen eine konstante Fehlervarianz (Homoskedastizität) voraus. Eine weitere Bedingung der Regressionanalyse ist also, dass die Varianzen der Residuen der prognostizierten abhängigen Variablen für alle Werte des Prädiktors gleich sind, so dass das Modell gleich gute Vorhersagen über alle Werte machen kann. Liegt Homoskedastizität vor, sind die Abweichungen der vorhergesagten Werte von den gemessenen Werten konstant gleich groß – unabhängig wie hoch oder niedrig der Wert des Prädiktors ist. Das ist eine wichtige Voraussetzung, denn das Gegenteil - Heterokedastizität der Residuen - würde zur Ineffizienz unserer Schätzung führen! Denn die Standardfehler der Regressionskoeffizienten werden bei vorhandener Heteroskedastizität nach oben verzerrt geschätzt. Das Ergebnis wäre, dass unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben liegt, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen.</p>
+<p>Das klingt kompliziert? Kann sein, aber keine Panik: Mit der Funktionen <em>check_heteroscedasticity()</em> aus dem performance-package können wir sehr einfach prüfen, ob diese Annahme verletzt wurde.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">check_heteroscedasticity</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p = 0.001).</code></pre>
+</div>
+</div>
+<p>Die Interpretation des Outputs ist einfach, weil R hier uns eine sehr konkrete Aussage zur Überpüfung der Annahme macht: Bei grüner Schrift ist das Ergebnis in Ordnung, d.h. die Fehlervarianz scheint homoskedastisch, denn p wäre dann nicht signifikant. Bei roter Schrift ist die Fehlervarianz heteroskedastisch und p ist signifikant (p &lt; 0.05). In diesem Fall liegt unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen. Das müssen wir dann bei der Interpretation der Daten berücksichtigen.</p>
+<p>Wie das ganze aussieht, können wir uns auch grafisch über die plot-Funktion anschauen. Dazu erzeugen wir ein Streudiagramm, das die vorhergesagten Werte und die Residuen enthält:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">plot</span>(model, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Skript_7.3_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">plot</span>(<span class="fu">fitted.values</span>(model), <span class="fu">rstandard</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Skript_7.3_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="was-sehen-wir-im-plot" class="level4" data-number="1.1.5.3">
+<h4 data-number="1.1.5.3" class="anchored" data-anchor-id="was-sehen-wir-im-plot"><span class="header-section-number">1.1.5.3</span> Was sehen wir im Plot?</h4>
+<p>Zunächst betrachten wir die Streuung der Punkte im Streudiagramm ohne Linie. Hier können wir bereits sehen, dass eine Zunahme der Streuung bei höheren Werten erkennbar ist, weil wir einen leicht nach rechts geöffneten Trichter haben. Das zweite Diagramm hilft zusätzlich mit einer roten Linie, die bei Homoskedastizität möglichst gerade wird. Ist sie wellig oder hat sie eine positive oder negative Steigung, können wir von Heteroskedastizität ausgehen. Genauere Auskunft gibt aber der oben gerechnete Test!</p>
+</section>
+<section id="was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors" class="level4" data-number="1.1.5.4">
+<h4 data-number="1.1.5.4" class="anchored" data-anchor-id="was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors"><span class="header-section-number">1.1.5.4</span> Was tun bei Heteroskedastizität der Residuen? Berechnung von HC-Standard Errors!</h4>
+<p>Liegt Heteroskedastizität vor, müssen Sie nicht verzweifeln: Erstens ist die Regressionsanalyse sehr robuts gegen die Verletzung ihrer Voraussetzungen. Zweitens können wir diesen Konflikt einigermaßen elegant auflösen, indem wir pauschal <strong>robuste Standardfehler</strong> schätzen lassen, so dass die Verletzung nicht mehr zu Schätzfehlern führt. In R gibt es (wie immer) verschiedene Wege Heteroskedastizität zu kontern. Eine einfache Lösung bietet das <em>lmtest-Paket</em> mit der <em>coeftest-Funktion</em> in Kombination mit dem Befehl <em>vcov()</em>, der zur Berechnung von heteroscedasticity consistent (HC) standard errors führt. So ermöglichen wir die Berechnung von <strong>heteroskedastizitätskonsistenten bzw. heteroskedastizitätsrobusten Schätzern</strong>. Nutzen wir diese Lösung, werden die Standardfehler nicht mehr verzerrt und damit auch nicht die t-Werte und p-Werte unserer Schätzung.</p>
+<p>PS: Zur Berechnung von heteroscedasticity consistent (HC) standard errors gibt es verschiedene HC-Funktionen. Hier nutzen wir zunächst Typ 3, die auch Hayes &amp; Cai empfehlen (Hayes, A. F., &amp; Cai, L. (2007): Using heteroskedasticity-consistent standard error estimators in OLS regression: An introduction and software implementation. Behavior research methods, 39(4), 709-722). HC4 (die zweite Variante) ist dann sinnvoll, wenn die Residuen nicht normalverteilt sind. (Wie wir später sehen werden, ist das bei uns leider auch der Fall)</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">coeftest</span>(model, <span class="at">vcov =</span> <span class="fu">vcovHC</span>(model, <span class="at">type =</span> <span class="st">"HC3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+             Estimate Std. Error t value         Pr(&gt;|t|)    
+(Intercept) 386.72912   51.86565  7.4564 0.00000000003596 ***
+alter        -3.80262    0.84009 -4.5264 0.00001688258964 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co">#coeftest(model, vcov = vcovHC(model, type = "HC4")) # diese Variante wählen, wenn Residuen nicht normalverteilt sind </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Nach der Ausführung erhalten wir eine neue Regressionstabelle. Wenn Sie diese Tabelle mit dem obigen Output unseres Regressionsmodells abgleichen, sehen Sie, dass sich die eigentlichen Koeffizienten (“Estimates”) nicht verändert haben - aber alle Werte, die rechts davon stehen, also Standardfehler (Std. Error), t-Werte und p-Werte. Diese sind nun um unsere Schätzfehler durch Heteroskedastizität korrigiert.</p>
+<p>Also weiter geht’s!</p>
+</section>
+<section id="prüfung-der-voraussetzungen-3-unabhängigkeit-der-residuen" class="level4" data-number="1.1.5.5">
+<h4 data-number="1.1.5.5" class="anchored" data-anchor-id="prüfung-der-voraussetzungen-3-unabhängigkeit-der-residuen"><span class="header-section-number">1.1.5.5</span> Prüfung der Voraussetzungen 3: Unabhängigkeit der Residuen</h4>
+<p>Auch die Annahme, dass die <strong>Residuen unabhängig</strong> voneinander sind, ist eine wichtige Voraussetzung der Regressionsanalyse. Unabhängigkeit der Residuen bedeutet inhaltlich: Wenn ich den Fehlerterm für eine bestimmte Beobachtung kenne, darf mir das keine Information über den Fehlerterm für die nächste Beobachtung liefern. Es darf also nichts systematisch zu einer Verzerrung meiner Beobachtungen (bzw. meiner Fehlerterme) führen. Ansonsten läge eine Autokorrelation der Fehlerterme vor, die die Aussagekraft des Modells reduzieren würde.</p>
+<p>Das performance-package ist einfach soooo cool! Es beinhaltet auch die check_autocorrelation-Funktion, mit der wir diese Annahme sehr einfach prüfen können:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">check_autocorrelation</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: Residuals appear to be independent and not autocorrelated (p = 0.658).</code></pre>
+</div>
+</div>
+<p>Auch hier ist der Output wieder sehr klar: Die Prüfung ergibt, dass die Residuen unabhängig und nicht autokorreliert sind (p = 0,588) - sonst hätten wir auch hier einen signifikanten p-Wert erhalten. Prima!</p>
+</section>
+<section id="prüfung-der-voraussetzungen-4-normalverteilung-der-residuen" class="level4" data-number="1.1.5.6">
+<h4 data-number="1.1.5.6" class="anchored" data-anchor-id="prüfung-der-voraussetzungen-4-normalverteilung-der-residuen"><span class="header-section-number">1.1.5.6</span> Prüfung der Voraussetzungen 4: Normalverteilung der Residuen</h4>
+<p>Wenn die Residuuen nicht der Normalverteilungskurve folgen, sondern stattdessen eigene “Muster” in ihrer Verteilung aufweisen, kann dies darauf hindeuten, dass wir nicht alle Prädiktoren im Modell berücksichtigt haben und somit ein Teil der erklärenden Information in die Residuen übergeht, wo sie das erkennbare Muster “verursacht”.</p>
+<p>Auch die Voraussetzung, dass die Residuen normalverteilt sein sollen, lässt sich mit einer Funktion aus dem performance-Package sehr einfach überprüfen:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">check_normality</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Non-normality of residuals detected (p &lt; .001).</code></pre>
+</div>
+</div>
+<p>Auch hier ist das Ergebnis ohne Probleme zu interpretieren, weil R hier eine “direkte Ansage” macht. In unserem Fall ist die Voraussetzung der Normalverteilung verletzt, weil p signifikant wird. Das müssen wir bei der Interpretation der Daten berücksichtigen. Grundsätzlich können wir hier wieder darauf verweisen, dass die Regressionsanalyse robust gegen die Verletzung ihrer Voraussetzungen ist. Eine Alternative ist, dass wir ein <strong>Bootstrapping-Verfahren</strong> auf unsere Daten anwenden. Das aber nur zur Info, wenn Sie hier selbstständig weitermachen wollen - das würde jetzt etwas zu weit führen :) Außerdem werden wir unten bei der zusätzlichen visuellen Inspektion mit der Funktion <em>check_models</em> auch noch sehen, dass unsere Annahme nicht allzu schlimm verletzt ist.</p>
+</section>
+<section id="prüfung-der-voraussetzungen-5-ausreißer-im-modell" class="level4" data-number="1.1.5.7">
+<h4 data-number="1.1.5.7" class="anchored" data-anchor-id="prüfung-der-voraussetzungen-5-ausreißer-im-modell"><span class="header-section-number">1.1.5.7</span> Prüfung der Voraussetzungen 5: Ausreißer im Modell</h4>
+<p>Ausreißer sind ein Problem für viele parametrische Verfahren, denn einzelne Ausreißer können einen sonst signifikanten Trend zunichte machen (ggf. also eliminieren). Ob es in unserem Modell Ausreißer gibt, kann ich wieder mit einer sehr einfachen Funktion aus dem performance-Package prüfen, die auf das sogenannte “cooks distance” zurückgreift. Der Wert gibt mir Auskunft darüber, welchen Einfluss mögliche Ausreißer auf das Modell haben.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">check_outliers</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: No outliers detected.
+- Based on the following method and threshold: cook (0.7).
+- For variable: (Whole model)</code></pre>
+</div>
+</div>
+<p>In unserem Fall gibt es keine Ausreißer, die das Modell beinträchtigen - vielleicht hätten wir sonst auch keinen signifikanten Zusammenhang beobachten können.</p>
+</section>
+<section id="add-on-visuelle-inspektion-der-modellgüte-bzw.-der-modellannahmen" class="level4" data-number="1.1.5.8">
+<h4 data-number="1.1.5.8" class="anchored" data-anchor-id="add-on-visuelle-inspektion-der-modellgüte-bzw.-der-modellannahmen"><span class="header-section-number">1.1.5.8</span> Add-on: Visuelle Inspektion der Modellgüte bzw. der Modellannahmen</h4>
+<p>Es gibt im performance-Package auch eine sehr coole Funktion, die mir eine visuelle Inspektion meiner Modellgüte bzw. verschiedenen Modellannahmen erlaubt (Normalität der Residuen, Normalität der zufälligen Effekte, lineare Beziehung, Homogenität der Varianz, Multikollinearität). Mit der check_model-Funktion kann ich mir dazu mehrere Grafiken im Überblick ausgeben lassen. YEAH! :)</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">check_model</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Not enough model terms in the conditional part of the model to check for
+  multicollinearity.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Skript_7.3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="teil-b-die-multiple-lineare-regression" class="level3" data-number="1.1.6">
+<h3 data-number="1.1.6" class="anchored" data-anchor-id="teil-b-die-multiple-lineare-regression"><span class="header-section-number">1.1.6</span> TEIL B: Die multiple lineare Regression</h3>
+<section id="anwendungsbereich-der-multiplen-linearen-regression" class="level4" data-number="1.1.6.1">
+<h4 data-number="1.1.6.1" class="anchored" data-anchor-id="anwendungsbereich-der-multiplen-linearen-regression"><span class="header-section-number">1.1.6.1</span> Anwendungsbereich der multiplen linearen Regression</h4>
+<p>Die <strong>multiple lineare Regressionsanalyse</strong> wird angewandt, wenn geprüft werden soll, ob ein (als linear vermuteter) Zusammenhang zwischen metrischen Variablen besteht. Die multiple lineare Regressionsanalyse hat das Ziel, eine abhängige Variable (y) mittels <strong>mehrerer unabhängigen Variablen</strong> (x1, x2, …) zu erklären. (Zur Erinnerung: Für nur eine x-Variable nutzen wir die einfache lineare Regression)</p>
+<p>Mit Hilfe der Regressionsanalyse können drei Arten von Fragestellungen untersucht werden: 1) Ursachenanalyse: Gibt es einen Zusammenhang zwischen den unabhängigen und der einen abhängigen Variable? Wie stark ist dieser? 2) Wirkungsanalyse: Wie verändert sich die abhängige Variable bei einer Änderung der unabhängigen Variablen? 3) Prognose: Können die Messwerte der abhängigen Variable durch die Werte der unabhängigen Variablen vorhergesagt werden?</p>
+<p>Die multiple Regression entspricht in ihrer Analyslogik also der einfachen linearen Regression - nur dass sie mehr als eine unabhängige Variable berücksichtigt.</p>
+</section>
+<section id="ziel-der-analyse" class="level4" data-number="1.1.6.2">
+<h4 data-number="1.1.6.2" class="anchored" data-anchor-id="ziel-der-analyse"><span class="header-section-number">1.1.6.2</span> Ziel der Analyse</h4>
+<p>Mit Hilfe der multiplen Regression wollen wir die Annahme prüfen, dass die Variablen Alter (agea) sowie die Rezeptionszeit von politischen Nachrichten (nwspol) der Befragten einen Einfluss auf die Internetnutzung (netustm, in Minuten) haben bzw. diese erklären und vorhersagen können. Alle Variablen sind metrisch und erfüllen damit die Voraussetzung, dass eine Regression gerechnet werden kann. (Achtung: auch kategorische Variablen können bei der Regressionsanalyse eingesetzt werden, sie müssen dann aber durch Dummy-Coding passend gemacht werden).</p>
+</section>
+<section id="modell-zum-zusammenhang-von-alter-politischer-nachrichtenrezeption-und-internetnutzung-spezifizieren-und-anzeigen-lassen" class="level4" data-number="1.1.6.3">
+<h4 data-number="1.1.6.3" class="anchored" data-anchor-id="modell-zum-zusammenhang-von-alter-politischer-nachrichtenrezeption-und-internetnutzung-spezifizieren-und-anzeigen-lassen"><span class="header-section-number">1.1.6.3</span> Modell zum Zusammenhang von Alter, politischer Nachrichtenrezeption und Internetnutzung spezifizieren und anzeigen lassen</h4>
+<p>Die Berechnung der multiplen Regression unterscheidet sich nicht stark von der Berechnung der einfachen linearen Regression. In die bereits bekannte Regressionsfunktion lm() fügen wir im hinteren Teil (d.h. hinter der Tilde) einfach die zusätzliche unabhängige Variable (politische_Nachrichtenrezeption) ein, indem wir sie mit einem + Zeichen anhängen:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>model_m <span class="ot">&lt;-</span> <span class="fu">lm</span>(internetnutzung <span class="sc">~</span> alter <span class="sc">+</span> politische_Nachrichtenrezeption, <span class="at">data =</span> daten_mod)</span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="fu">summary</span>(<span class="fu">lm.beta</span>(model_m))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = internetnutzung ~ alter + politische_Nachrichtenrezeption, 
+    data = daten_mod)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-238.73 -125.00  -58.46   48.47  807.40 
+
+Coefficients:
+                                Estimate Standardized Std. Error t value
+(Intercept)                     388.7652           NA    51.0342   7.618
+alter                            -4.0829      -0.3722     1.0826  -3.771
+politische_Nachrichtenrezeption   0.1260       0.0920     0.1352   0.932
+                                       Pr(&gt;|t|)    
+(Intercept)                     0.0000000000173 ***
+alter                                  0.000279 ***
+politische_Nachrichtenrezeption        0.353583    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 192.4 on 97 degrees of freedom
+Multiple R-squared:  0.128, Adjusted R-squared:   0.11 
+F-statistic: 7.118 on 2 and 97 DF,  p-value: 0.001304</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation-des-outputs-was-sehen-wir-in-der-regressionstabelle" class="level4" data-number="1.1.6.4">
+<h4 data-number="1.1.6.4" class="anchored" data-anchor-id="interpretation-des-outputs-was-sehen-wir-in-der-regressionstabelle"><span class="header-section-number">1.1.6.4</span> Interpretation des Outputs: Was sehen wir in der Regressionstabelle?</h4>
+<p>Unter Call wird zunächst noch einmal das Regresssionsmodell beschrieben, das wir hier berechnet haben. In diesem versuchen wir auf Basis des Datensatzes “daten_mod” die abhängige Variable “internetnutzung” durch die unabhängigen Variablen “alter” und “politische_Nachrichtenrezeption” zu erklären.</p>
+</section>
+<section id="residuen" class="level4" data-number="1.1.6.5">
+<h4 data-number="1.1.6.5" class="anchored" data-anchor-id="residuen"><span class="header-section-number">1.1.6.5</span> Residuen</h4>
+<p>Unter Resdiuen erhalten wir Informationen zur Verteilung der Residuen. Diese geben die Abweichung der beobachteten Werte von den durch das Regressionsmodell erwarteten Werten an.</p>
+<p>Coefficients: #### Intercept Das Intercept definiert den Schnittpunkt der Regressionsgeraden mit der y-Achse (theoretischer Wert für y, wenn x den Wert 0 annimmt).</p>
+</section>
+<section id="estimate" class="level4" data-number="1.1.6.6">
+<h4 data-number="1.1.6.6" class="anchored" data-anchor-id="estimate"><span class="header-section-number">1.1.6.6</span> Estimate</h4>
+<p>Die Estimates sind die unstandardisierte b-Werte. Das sind die Werte, die zur Vorhersage in die Regressionsgleichung eingetragen werden (könnten).</p>
+</section>
+<section id="standardized" class="level4" data-number="1.1.6.7">
+<h4 data-number="1.1.6.7" class="anchored" data-anchor-id="standardized"><span class="header-section-number">1.1.6.7</span> Standardized</h4>
+<p>Diese Estimates sind die standardisierte b-Werte. Weil wir diese über die lm.beta-Funktion standardisiert haben, lassen sich die Koeefizienten auch bei unterschiedlicher Skalierung vergleichen.</p>
+</section>
+<section id="st.-error" class="level4" data-number="1.1.6.8">
+<h4 data-number="1.1.6.8" class="anchored" data-anchor-id="st.-error"><span class="header-section-number">1.1.6.8</span> St.&nbsp;error</h4>
+<p>Hiermit wird der Standard-Fehler der unstandardisierten b-Werte ausgegeben.</p>
+</section>
+<section id="t-value" class="level4" data-number="1.1.6.9">
+<h4 data-number="1.1.6.9" class="anchored" data-anchor-id="t-value"><span class="header-section-number">1.1.6.9</span> t-value</h4>
+<p>Der t-value gibt den t-Wert des Modells an (Koeffizient / Standardfehler)</p>
+</section>
+<section id="p-value" class="level4" data-number="1.1.6.10">
+<h4 data-number="1.1.6.10" class="anchored" data-anchor-id="p-value"><span class="header-section-number">1.1.6.10</span> p-value</h4>
+<p>Der p-value ist für uns von besonderem Interesse - das ist der Signfikanzwert des Modells (unten mit Signfikanzsschwellen) bzw. des statistischen Zusammenhangs</p>
+</section>
+<section id="r-squared" class="level4" data-number="1.1.6.11">
+<h4 data-number="1.1.6.11" class="anchored" data-anchor-id="r-squared"><span class="header-section-number">1.1.6.11</span> R-squared</h4>
+<p>Auch beide R-Werte (R2, Adjusted R2) sind von zentraler Bedeutung für die Interpretation: R2 gibt uns die erklärte Gesamtvarianz des Modells der abhängigen Variable an, also die “Erklärungskraft” der unabhängigen Variable Alter und politische Nachrichtenrezeption auf die abhängige Internetnutzung. Zur Interpretation bietet es sich an, R2 als Prozentwert mit 100 zu multiplizieren. Wir können hier dann daraus lesen, dass das Alter und die politische Nachrichtenrezeption etwa 20 Prozent der Varianz der Internetnutzung erklärt. Das ist nicht super viel, aber auch nicht nichts. Wir können daraus aber auch ableiten, dass - neben dem Alter - noch andere Einflussfaktoren die Internetnutzung mitbestimmen müssen. Übrigens: Das R2 könnte theoretisch maximal den Wert 1 annehmen, dann hätten wir eine 100% Erklärung der abhängigen Variable durch die unabhängige Variable (=&gt; das kommt aber in der Realität aber fast nicht vor)</p>
+</section>
+<section id="adjusted-r2" class="level4" data-number="1.1.6.12">
+<h4 data-number="1.1.6.12" class="anchored" data-anchor-id="adjusted-r2"><span class="header-section-number">1.1.6.12</span> Adjusted R2</h4>
+<p>Wie der Name schon sagt bezeichnet Adjusted R2 die Anpassung des Modells, wobei für die Anzahl der aufgenommenen Variablen korrigiert wird (“Strafterm für viele aufgenommene Variablen”). Das Adjusted R2 ist daher immer schlechter als R2.</p>
+</section>
+<section id="f-statistik" class="level4" data-number="1.1.6.13">
+<h4 data-number="1.1.6.13" class="anchored" data-anchor-id="f-statistik"><span class="header-section-number">1.1.6.13</span> F-Statistik</h4>
+<p>Auch die F-Statistik ist wichtig: Sie gibt uns nämlich die Signfikanz des Gesamtmodells an (nicht einzelner Variablen wie bei R2!)</p>
+</section>
+<section id="inhaltliche-interpretation-was-bedeutet-das-jetzt-also-alles" class="level4" data-number="1.1.6.14">
+<h4 data-number="1.1.6.14" class="anchored" data-anchor-id="inhaltliche-interpretation-was-bedeutet-das-jetzt-also-alles"><span class="header-section-number">1.1.6.14</span> Inhaltliche Interpretation: Was bedeutet das jetzt also alles?</h4>
+<p>Der Output zeigt uns: Das Alter hat einen negativen Einfluss auf die Internetnutzung. Je älter ein Nutzer ist, desto weniger nutzt er das Internet. Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable Internetnutzung um (-4.9169) Messeinheiten (hier: Minuten) ab. Dieser Zusammenhang ist mit p &lt; .05 statistisch signifikant. Diese Ergebnisse überraschen uns nicht: Den Einfluss des Alters haben wir ja letzte Woche schon überprüft. Mit der Erweiterung zur multiplen Regression können wir nun zusätzlich sagen, dass die politische Nachrichtenrezeption auch einen Einfluss auf die Internet-Nutzung hat, denn der Wert ist ebenfalls signifikant (p &lt; .05)! Die F-Statistik sagt uns zusätzlich, dass auch unser Gesamtmodell signifikant ist (p-value: 0.00001239, also &lt; .05).</p>
+</section>
+<section id="erinnerung-zusatzfunktionen-zur-schöneren-ergebnisdarstellung-durch-das-paket-broom" class="level4" data-number="1.1.6.15">
+<h4 data-number="1.1.6.15" class="anchored" data-anchor-id="erinnerung-zusatzfunktionen-zur-schöneren-ergebnisdarstellung-durch-das-paket-broom"><span class="header-section-number">1.1.6.15</span> Erinnerung: Zusatzfunktionen zur schöneren Ergebnisdarstellung durch das Paket broom</h4>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">tidy</span>(<span class="fu">lm.beta</span>(model_m))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 6
+  term                        estimate std_estimate std.error statistic  p.value
+  &lt;chr&gt;                          &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)                  389.         NA         51.0       7.62  1.73e-11
+2 alter                         -4.08       -0.372      1.08     -3.77  2.79e- 4
+3 politische_Nachrichtenreze…    0.126       0.0920     0.135     0.932 3.54e- 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">glance</span>(model_m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.128         0.110  192.      7.12 0.00130     2  -666. 1341. 1351.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="multiple-regression-mit-dummy-codierung" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="multiple-regression-mit-dummy-codierung"><span class="header-section-number">1.2</span> Multiple Regression mit Dummy-Codierung</h2>
+<section id="vorbereitung-der-daten-zum-zusammenhang-von-alter-bildung-geschlecht-und-internetnutzung" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="vorbereitung-der-daten-zum-zusammenhang-von-alter-bildung-geschlecht-und-internetnutzung"><span class="header-section-number">1.2.1</span> Vorbereitung der Daten zum Zusammenhang von Alter, Bildung, Geschlecht und Internetnutzung</h3>
+<p>Nun wollen wir noch Geschlecht (gndr) als unabhängige Variable mit in unser Regressionsmodell aufnehmen. Bei Gender haben wir aber das Problem, dass diese Variable nicht metrisch skaliert ist! Es handelt sich vielmehr um eine kategoriale Variable. Wie Sie schon gelernt haben, können Sie diese mit einem “Trick” ebenfalls in die Regressionsanalyse einbringen - Sie müssen diese dann aber durch Dummy-Coding passend machen. Wir wollen uns hier mal anschauen, wie das funktioniert. Dazu müssen wir die Variable mittels mutate-Befehl erst einmal umcodieren.</p>
+<p>Durch die Dummy-Codierung wird die kategoriale Variable in zwei Gruppen übersetzt, von denen die eine mit 1 und die andere mit 0 codiert wird. Die Gruppe, der der Wert 0 zugeordnet wird, ist dann die Referenzkategorie. In unserem Beispiel Beispiel machen wir “männlich” zur Referenzkategorie (und codieren es mit 0 um). Der Regressionskoeffizient b gibt dann genau die Menge an, um die sich die Internetnutzung ändert, wenn sich das Geschlecht gegenüber der Referenzkategorie verändert.</p>
+<p>PS: Die Variable als numerischen Wert zu behandeln, ist in unserem Fall etwas kompliziert, weil diese eine Faktorvariable war, die wir zuerst in eine Charaktervariable umwandeln mussten.</p>
+</section>
+<section id="dummy-codierung-der-variable-gender" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="dummy-codierung-der-variable-gender"><span class="header-section-number">1.2.2</span> Dummy Codierung der Variable Gender</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>daten_mod2 <span class="ot">&lt;-</span> daten_mod <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="fu">mutate</span>(<span class="at">gender_r  =</span> <span class="fu">recode</span>(gender, <span class="st">'Male'</span><span class="ot">=</span><span class="st">'0'</span>, <span class="st">'Female'</span><span class="ot">=</span><span class="st">'1'</span>)) <span class="sc">%&gt;%</span> <span class="co"># Recodierung der Var Gender zur Dummy-Variable</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">mutate</span>(<span class="at">gender_r =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(gender_r))) <span class="co"># Variable als numerischen Wert behandeln</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a>daten_mod2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 167
+        idno cntry gender alter marsts                   edubde1 eduade2 eduade3
+       &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;                    &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  
+ 1  10008368 DE    Female    17 None of these (NEVER ma… (Noch)… Kein H… Kein b…
+ 2      1834 SE    Male      48 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 3      3551 FR    Male      48 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 4      1231 FR    Female    35 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 5      2164 SE    Male      42 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 6      2817 FR    Female    23 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 7       591 SE    Male      70 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 8      1135 SE    Male      60 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 9      3556 FR    Male      17 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+10 100004408 GB    Male      77 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+# ℹ 90 more rows
+# ℹ 159 more variables: politische_Nachrichtenrezeption &lt;dbl&gt;, netusoft &lt;fct&gt;,
+#   internetnutzung &lt;dbl&gt;, ppltrst &lt;dbl&gt;, pplfair &lt;dbl&gt;, pplhlp &lt;dbl&gt;,
+#   polintr &lt;fct&gt;, psppsgva &lt;fct&gt;, actrolga &lt;fct&gt;, psppipla &lt;fct&gt;,
+#   cptppola &lt;fct&gt;, trstprl &lt;dbl&gt;, trstlgl &lt;dbl&gt;, trstplc &lt;dbl&gt;, trstplt &lt;dbl&gt;,
+#   trstprt &lt;dbl&gt;, trstep &lt;dbl&gt;, trstun &lt;dbl&gt;, vote &lt;fct&gt;, prtvede1 &lt;fct&gt;,
+#   prtvede2 &lt;fct&gt;, contplt &lt;fct&gt;, wrkprty &lt;fct&gt;, wrkorg &lt;fct&gt;, badge &lt;fct&gt;, …</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">table</span>(daten_mod2<span class="sc">$</span>gender_r)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 0  1 
+55 45 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">summary</span>(daten_mod2<span class="sc">$</span>gender_r)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.00    0.00    0.00    0.45    1.00    1.00 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">class</span>(daten_mod2<span class="sc">$</span>gender_r)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+</section>
+<section id="regressionsmodell-zum-zusammenhang-von-alter-nachrichtenrezeptiion-geschlecht-und-internetnutzung-spezifizieren-und-anzeigen-lassen" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="regressionsmodell-zum-zusammenhang-von-alter-nachrichtenrezeptiion-geschlecht-und-internetnutzung-spezifizieren-und-anzeigen-lassen"><span class="header-section-number">1.2.3</span> Regressionsmodell zum Zusammenhang von Alter, Nachrichtenrezeptiion, Geschlecht und Internetnutzung spezifizieren und anzeigen lassen</h3>
+<p>In die bereits bekannte Regressionsfunktion lm() fügen wir im hinteren Teil (d.h. hinter der Tilde) nun einfach die weitere unabhängige Variable gender_r ein, indem wir sie mit einem + Zeichen anhängen.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>model_m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(internetnutzung <span class="sc">~</span> alter <span class="sc">+</span> politische_Nachrichtenrezeption <span class="sc">+</span> gender_r, <span class="at">data =</span> daten_mod2)</span>
+<span id="cb53-2"><a href="#cb53-2"></a><span class="fu">summary</span>(<span class="fu">lm.beta</span>(model_m2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = internetnutzung ~ alter + politische_Nachrichtenrezeption + 
+    gender_r, data = daten_mod2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-247.11 -119.22  -56.06   56.57  798.75 
+
+Coefficients:
+                                 Estimate Standardized Std. Error t value
+(Intercept)                     396.34627           NA   53.46603   7.413
+alter                            -4.05957     -0.37009    1.08787  -3.732
+politische_Nachrichtenrezeption   0.12644      0.09230    0.13573   0.932
+gender_r                        -19.27530     -0.04725   38.87015  -0.496
+                                       Pr(&gt;|t|)    
+(Intercept)                     0.0000000000486 ***
+alter                                  0.000322 ***
+politische_Nachrichtenrezeption        0.353919    
+gender_r                               0.621106    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 193.2 on 96 degrees of freedom
+Multiple R-squared:  0.1302,    Adjusted R-squared:  0.103 
+F-statistic: 4.791 on 3 and 96 DF,  p-value: 0.003738</code></pre>
+</div>
+</div>
+</section>
+<section id="inhaltliche-interpretation" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="inhaltliche-interpretation"><span class="header-section-number">1.2.4</span> Inhaltliche Interpretation</h3>
+<p>Gender hat hier keinen signifikanten Einfluss auf den Internetkonsum. Wenn es einen hätte, wäre der Einfluss geringer als bei Alter und Ausbildungsjahren (ersichtlich an der Größe des standardisierten beta-Koeffizienten). Wichtig: Gender ist als eine Dummy- Variable in 0=männlich und 1=weiblich codiert, deshalb ist der Estimate hier etwas schwieriger zu lesen. Die Frauen sind als 1 codiert und stellen hier die Vergleichsgruppe zur Referenzgruppe der Männer (=0) dar.</p>
+<p>Frauen haben eine um (9,8) Minuten geringeren Internetkonsum als Männer (wobei dieser Befund statistisch ja (nicht) signifikant ist). (Nicht wundern, wenn Ihr Ergebnis leicht anders ausfällt: Der Wert variiert entsprechend der gezogenen Zufallsstichprobe.)</p>
+</section>
+<section id="vorhersage-des-multivariaten-modells-für-die-tägliche-internetnutzung-durch-alter-nachrichtenrezeption-und-geschlecht" class="level3" data-number="1.2.5">
+<h3 data-number="1.2.5" class="anchored" data-anchor-id="vorhersage-des-multivariaten-modells-für-die-tägliche-internetnutzung-durch-alter-nachrichtenrezeption-und-geschlecht"><span class="header-section-number">1.2.5</span> Vorhersage des multivariaten Modells für die tägliche Internetnutzung durch Alter, Nachrichtenrezeption und Geschlecht</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">predict.lm</span>(model_m2, <span class="fu">data.frame</span>(<span class="at">alter =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">75</span>), <span class="at">gender_r =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">politische_Nachrichtenrezeption =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1        2 
+295.4892  73.8676 </code></pre>
+</div>
+</div>
+</section>
+<section id="inhaltliche-interpretation-1" class="level3" data-number="1.2.6">
+<h3 data-number="1.2.6" class="anchored" data-anchor-id="inhaltliche-interpretation-1"><span class="header-section-number">1.2.6</span> Inhaltliche Interpretation</h3>
+<p>Eine männliche Person, die 25 Jahre alt ist und 5 Minuten pro Tag politische Nachrichten rezipiert hat, einen prognostizierten Internetkonsum von 293 Minuten. Eine weibliche Person, die 75 Jahre alt ist und ebenfalls 5 Minuten pro Tag politische Nachrichten rezipiert, hat einen prognostizierten Internetkonsum von 41 Minuten. (Nicht wundern, wenn Ihr Ergebnis leicht anders ausfällt: Der Wert variiert entsprechend der gezogenen Zufallsstichprobe.)</p>
+</section>
+<section id="zusätzliche-voraussetzungsprüfung-bei-der-multiplen-linearen-regression-liegt-multikollinearität-vor" class="level3" data-number="1.2.7">
+<h3 data-number="1.2.7" class="anchored" data-anchor-id="zusätzliche-voraussetzungsprüfung-bei-der-multiplen-linearen-regression-liegt-multikollinearität-vor"><span class="header-section-number">1.2.7</span> Zusätzliche Voraussetzungsprüfung bei der multiplen linearen Regression: Liegt Multikollinearität vor?</h3>
+<p>Die multiple lineare Regression erfordert alle Voraussetzungen, die für die einfache Regression auch verlangt sind - wie Sie diese ausführen, haben Sie ja heute zu Anfang der Sitzung gelernt (siehe oben). Zusätzlich müssen Sie bei einer multiplen Regresssion noch prüfen, ob <strong>Multikollinearität</strong> vorliegt. Multikollinearität bedeutet, dass mindestens einer unserer Prädiktoren durch einen oder mehrere der anderen Prädiktoren vorhergesagt werden kann. Die Prädiktoren wären in diesem Fall nicht unabängig voneinander, sondern würden hoch miteinander korrelieren und hätten damit sozusagen keine selbstständige Erklärungskraft im Modell.</p>
+<p>Ob Multikollinearität vorliegt, können wir durch den <strong>VIF-Wert (variance inflation factor)</strong> ermitteln. Dieser darf nicht über 10 liegen, idealerweise auch nicht über 5. Um dies zu prüfen, nutzen wir den check_collinearity-Befehl aus dem Performance package:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">check_collinearity</span>(model_m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+Low Correlation
+
+                            Term  VIF       VIF 95% CI Increased SE Tolerance
+                           alter 1.09 [1.01,     2.05]         1.04      0.92
+ politische_Nachrichtenrezeption 1.08 [1.01,     2.08]         1.04      0.92
+                        gender_r 1.00 [1.00,      Inf]         1.00      1.00
+ Tolerance 95% CI
+     [0.49, 0.99]
+     [0.48, 0.99]
+     [0.00, 1.00]</code></pre>
+</div>
+</div>
+</section>
+<section id="inhaltliche-interpretation-2" class="level3" data-number="1.2.8">
+<h3 data-number="1.2.8" class="anchored" data-anchor-id="inhaltliche-interpretation-2"><span class="header-section-number">1.2.8</span> Inhaltliche Interpretation</h3>
+<p>Die VIF-Werte liegen zwischen 0 und 5; wir können daher davon ausgehen, dass keine Multikollinearität vorliegt (grün = “Low Correlation”).</p>
+</section>
+</section>
+<section id="add-on-weitere-plots-zur-vergleichenden-regressionsanalyse" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="add-on-weitere-plots-zur-vergleichenden-regressionsanalyse"><span class="header-section-number">1.3</span> Add-On: Weitere Plots zur (vergleichenden) Regressionsanalyse</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>daten_mod3 <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="#cb59-2"></a>  <span class="fu">select</span>(agea, netustm, cntry) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-3"><a href="#cb59-3"></a>  <span class="fu">rename</span>(<span class="at">alter =</span> agea,</span>
+<span id="cb59-4"><a href="#cb59-4"></a>         <span class="at">internetnutzung =</span> netustm,</span>
+<span id="cb59-5"><a href="#cb59-5"></a>         <span class="at">land =</span> cntry) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-6"><a href="#cb59-6"></a>  <span class="fu">filter</span>(land <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DE"</span>, <span class="st">"FR"</span>, <span class="st">"IS"</span>, <span class="st">"PL"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-7"><a href="#cb59-7"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb59-8"><a href="#cb59-8"></a>  <span class="fu">group_by</span>(land) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-9"><a href="#cb59-9"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-10"><a href="#cb59-10"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb59-11"><a href="#cb59-11"></a>daten_mod3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 200 × 3
+   alter internetnutzung land 
+   &lt;dbl&gt;           &lt;dbl&gt; &lt;fct&gt;
+ 1    67              60 DE   
+ 2    30              90 DE   
+ 3    29             360 DE   
+ 4    19             180 DE   
+ 5    28             270 DE   
+ 6    28             240 DE   
+ 7    34             180 DE   
+ 8    69              60 DE   
+ 9    60             240 DE   
+10    21             180 DE   
+# ℹ 190 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">ggplot</span>(daten_mod3, <span class="fu">aes</span>(alter, internetnutzung, <span class="at">colour =</span> land)) <span class="sc">+</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> <span class="st">"y ~ x"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb61-4"><a href="#cb61-4"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span> </span>
+<span id="cb61-5"><a href="#cb61-5"></a>  <span class="fu">ggtitle</span>(<span class="st">"Lineare Regression für Alter und Internetnutzung (vier Länder)"</span>) <span class="sc">+</span> </span>
+<span id="cb61-6"><a href="#cb61-6"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"tägliche Internetnutzung (Minuten)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Skript_7.3_files/figure-html/Lineare Regression für Alter und Internetnutzung (vier Länder) plotten-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
 </section>

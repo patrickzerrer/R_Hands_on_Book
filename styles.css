@@ -1,1 +1,29 @@
 /* css styles */
+
+
+/*-- scss:functions --*/
+
+
+/*-- scss:defaults --*/
+
+
+/*-- scss:rules --*/
+h1 {
+  color: #104210;
+}
+
+h2 {
+  color: #1c731c;
+}
+
+h3 {
+  color: #228b22;
+}
+
+h4 {
+  color: #6bdb6b;
+}
+
+h5 {
+  color: #b5edb5;
+}

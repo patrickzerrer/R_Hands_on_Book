@@ -1,12 +1,12 @@
 ---
 title: "Der Aufbau von Datensätzen"
-author: "Katharina Maubach, Stephanie Geise, Hannah-Marie Büttner, Cornelius Puschmann, & Patrick Zerrer"
+author: "tba"
 toc: true
 number-sections: true
 highlight-style: pygments
 format:
   html:
-    code-fold: true
+    code-fold: false
     code-line-numbers: true
 ---
 
