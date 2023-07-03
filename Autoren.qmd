@@ -1,0 +1,44 @@
+---
+title: "Das Team stellt sich vor"
+author: "Patrick Zerrer"
+toc: true
+number-sections: false
+highlight-style: pygments
+format:
+  html:
+    code-fold: false
+    code-line-numbers: false
+sidebar: false
+---
+
+# Das Team stellt sich vor!
+
+Wir möchten uns einmal kurz vorstellen...
+
+## Patrick Zerrer
+
+![Patrick Zerrer](bild_patrick.png)
+
+**Vita**
+
+Patrick Zerrer ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen. Von September 2013 bis 2017 studierte er an der Universität Passau „B.A. Governance and Public Policy -- Staatswissenschaften\". Das Masterstudium „Öffentliche Kommunikation\" an der Friedrich-Schiller-Universität schloss er von Oktober 2017 bis März 2020 ab. Seine Masterarbeit legte er in Form einer Gruppenarbeit zum Thema „Eine methodische Triangulation zur Identifizierung der Motivationen der öffentlichen Meinungsäußerung nach dem Social Identity Model of Collective Action\" mit einer Teilstudie von Online-Kommentaren auf deutschen Nachrichtenwebsites zum Thema der „Klimapolitik\" mittels einer quantitativen Inhaltsanalyse ab. Die Forschungsinteressen liegen insbesondere im Bereich der politischen Online-Kommunikation.
+
+**Forschungsschwerpunkte**
+
+Politische Kommunikation, Online-Kommunikation, Digitale Mediennutzungsforschung
+
+
+::: {.callout-note collapse="true" icon="false"}
+## Kontakt
+
+🏠 Universität Bremen;
+ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung;
+Linzer Str. 4;
+28359 Bremen
+
+🎓 [Webseite](https://www.uni-bremen.de/zemki/das-zemki/personen/profilseite/idm/24668?cHash=3dca3e98ee8a659c9390ae7bcf8178d5)
+
+#️⃣ [Twitter](https://twitter.com/patrick_zerrer)
+
+:::
+

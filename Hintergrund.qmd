@@ -1,0 +1,26 @@
+---
+title: "Die Idee hinter der Konzeption des Kurses"
+author: "Patrick Zerrer"
+toc: true
+number-sections: false
+highlight-style: pygments
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+sidebar: false
+---
+
+# Leitbild: Lernen durch Praxis - Der Weg zu fundierten statistischen Kenntnissen
+
+Unser Leitbild ist es, Ihnen einen Kurs anzubieten, der auf der Verschränkung von praktischem Lernen, grundlegenden Kenntnissen und eigenständigem Forschen basiert. Unser Ziel ist es, Ihnen die Werkzeuge und das Verständnis zu vermitteln, um quantitative Forschungsdesigns mit R erfolgreich umzusetzen.
+
+Wir beginnen mit einer soliden Grundlage, in der wir Ihnen die wesentlichen Konzepte und Techniken der quantitativen Forschung vermitteln. Wir legen Wert darauf, dass Sie die grundlegenden Prinzipien verstehen, bevor wir Sie in die Praxis entlassen. Sie werden lernen, wie Sie Daten in R importieren, explorieren und visualisieren können, um ein tieferes Verständnis für Ihre Forschungsfragen zu gewinnen.
+
+Nachdem Sie diese Grundlagen erworben haben, gehen wir einen Schritt weiter und bieten Ihnen die Möglichkeit, Ihr eigenes Forschungsprojekt durchzuführen. Unter Anleitung unserer erfahrenen Tutoren werden Sie ein eigenständiges Projekt entwickeln, bei dem Sie Ihre neu erlernten statistischen Kenntnisse anwenden können. Sie werden Schritt für Schritt lernen, wie Sie Hypothesen aufstellen, Daten sammeln, analysieren und interpretieren. Durch dieses praktische Erleben vertiefen Sie nicht nur Ihr Verständnis, sondern gewinnen auch wertvolle Erfahrungen im Bereich der quantitativen Forschung.
+
+Unser Kurs legt großen Wert darauf, dass Sie nicht nur theoretisches Wissen erlangen, sondern dieses Wissen in die Praxis umsetzen können. Wir sind der festen Überzeugung, dass das eigenständige Durchführen eines Forschungsprojekts Ihnen nicht nur ein tieferes Verständnis für statistische Methoden gibt, sondern auch Ihre analytischen und Problemlösungsfähigkeiten stärkt. Unsere Tutoren stehen Ihnen dabei zur Seite und bieten Ihnen individuelle Unterstützung, um sicherzustellen, dass Sie Ihr volles Potenzial entfalten können.
+
+Willkommen zu einer spannenden Lernreise, bei der Sie nicht nur statistische Kenntnisse erwerben, sondern auch die Fähigkeit entwickeln, Ihr Wissen auf praktische Weise anzuwenden. Wir sind davon überzeugt, dass Sie durch dieses ganzheitliche Lernkonzept Ihre Ziele erreichen und in der Welt der quantitativen Forschung erfolgreich sein werden.
+
+(Platzhalter generiert durch ChatGDP)

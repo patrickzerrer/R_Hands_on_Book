@@ -3,10 +3,33 @@ project:
   output-dir: docs
 
 website:
-  title: "Inhalt"
+  
+  navbar: 
+    title: false
+    logo: logo_ub_2021.png
+    background: "#e3dac9"
+    foreground: "secondary"
+    search: true
+    left: 
+      - text: "Home"
+        file: Home.qmd
+      - text: "Der Kurs"
+        file: Skript_1.1.qmd
+      - text: "Die Grundidee"
+        file: Hintergrund.qmd
+      - text: "Die Autor:innen"
+        file: Autoren.qmd
+    
+    right: 
+      - icon: github
+        href: https://github.com/patrickzerrer/R_Hands_on_Book
+      - icon: twitter
+        href: https://twitter.com/ZeMKI_Bremen
+      
   sidebar: 
     style: "docked"
-    search: true
+    background: "light"
+    foreground: "secondary"
     contents:
     - section: "Einführung in R"
       contents:
@@ -52,6 +75,8 @@ website:
       - Skript_7.1.qmd
       - Skript_7.2.qmd
       - Skript_7.3.qmd
+  
+  page-footer: "Copyright 2023, Design by Katharina Maubach & Patrick Zerrer"
 
 format:
   html:
