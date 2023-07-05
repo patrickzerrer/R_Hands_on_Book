@@ -10,10 +10,162 @@ format:
     code-line-numbers: true
 ---
 
-# Analyselogik, Ziel und Einsatzgebiete einer Faktorenanalyse
-
 # Durchführen einer Faktorenanalyse in R
 
-# Interpretation einer Faktorenanalyse in R
+Wir möchten einen Index berechnen. Im Fragebogen des ESS sind einige Indikatoren enthalten, welche sich zu einem Index zusammenführen lassen. Dies möchten wir jetzt tun. Allerdings müssen wir sicher gehen, dass die Messung der Indikatoren auch wirklich nach unseren theoretischen Annahmen nach funktioniert hat. Konkret müssen wir überprüfen, ob sich die theoretisch angenommenen Dimensionen unseres Index auch in den Daten zu finden sind. Hierfür können wir die Faktorenanalyse oder Principal Component Analysis verwenden.
+
+## Analyselogik, Ziel und Einsatzgebiete einer Faktorenanalyse
 
 ![](feb_2022_Exkurs%20Faktorenanalyse%20-%20Was%20ist%20ein%20Faktor.mp4)
+
+
+Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete und Daten.
+
+## Laden der nötigen Pakete
+
+```{r Pakete}
+library(psych)
+library(psy)
+library(nFactors)
+library(tidyverse)
+library(dplyr)
+library(haven)
+```
+
+## Laden des Datensatzes
+
+```{r Laden der Daten}
+daten <- haven::read_dta("Datensatz/ESS8.dta")
+```
+
+## Teildatensatz mit den benötigten Index-Variablen
+
+Wir nehmen an, dass wir einen Index für die Erfassung politischer Kompetenz- und Einflusserwartungen (politische Selbstwirksamkeit) erstellen möchten.
+
+Messinstrument mit den Items: https://zis.gesis.org/skala/Beierlein-Kemper-Kovaleva-Rammstedt-Political-Efficacy-Kurzskala-(PEKS)# Ausführliche Erläuterung: https://www.gesis.org/fileadmin/kurzskalen/working_papers/PEKS_Workingpaper.pdf
+
+Hierfür haben wir aufgrundlage von Theorie die folgenden Indikatoren ausgewählt:
+
+psppsgva - Political system allows people to have a say in what government does actrolga - Able to take active role in political group psppipla - Political system allows people to have influence on politics cptppola - Confident in own ability to participate in politics
+
+```{r Teildatensatz}
+
+ess_wirksamkeit <- daten %>%
+  select(psppsgva,
+         actrolga,
+         psppipla,
+         cptppola) %>% 
+  mutate(psppsgva = as.numeric(psppsgva),
+         actrolga = as.numeric(actrolga),
+         psppipla = as.numeric(psppipla),
+         cptppola = as.numeric(cptppola)) %>% 
+  na.omit()
+head(ess_wirksamkeit)
+
+```
+
+## Deskriptive Statistik für den Teildatensatz
+
+```{r Deskriptive Statistik}
+summary(ess_wirksamkeit)
+
+#Alternativ kann describe() verwendet werden. Describe() ist eine Funktion des psych Pakets, welche die wichtigsten Streu- und Lageparameter für Variablen angiebt
+```
+
+## Suche nach der zugrunde liegenden Variable - Die Faktorenanalyse
+
+Die Faktorenanalyse bringt einige Voraussetzungen an die Daten mit sich, welche zu Beginn geprüft werden müssen. Zum Nachlesen bietet sich hier Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811 an.
+
+Voraussetzungen sind:
+
+-   Stichprobengröße (in unserem Fall kein Problem)
+-   Ausreichende Anzahl an Variablen (meist 4 oder mehr pro Faktor/Dimension)
+-   Die Variablen sind intervallskaliert (In der Praxis werden jedoch oft auch ordinalskalierte Variablen verwendet.)
+
+Diese Punkte sind bei uns alle gegeben.
+
+Anmerkung: Wir können auch eine Faktorenanalyse mit nicht-kontinuierlichen Daten rechnen (bspw. dichotome Variablen). Hier sollten wir sollten wir die Korrelationsmatrix aus polychorischen Korrelationskoeffizienten konstruieren (diese können mit der Funktion polychor() aus dem Paket polycor berechnet werden
+
+Zunächst schauen wir uns einmal die Korrelationskoeffizienten für einige Variablen an.
+
+```{r Beispiel für eine Korrelationsmatrix}
+
+# Auswählen einiger zusätzlichen Variablen zum zeigen der Korrelationstabelle
+
+beispiel = daten %>% 
+  select(netusoft, 
+         trstplt, 
+         trstep, 
+         psppsgva, 
+         actrolga,
+         psppipla,
+         cptppola) %>% 
+  mutate(across(netusoft:cptppola, as.numeric)) %>% # mit across kann die gleiche Funktion - in diesem Fall as.numeric() - mehrere Variablen angewandt werden
+  na.omit()
+
+# Bessere Darstellung der Tabelle mit htmlTable und gerundeten Werten für bessere Lesbarkeit
+
+library(htmlTable) # Falls das Paket noch nicht installiert ist, muss es mit install.packages("htmlTable") installiert werden
+htmlTable(round(cor(beispiel), digits = 3))
+```
+
+Noch zu prüfen ist die Korrelation der Items miteinander, hierfür nehmen wir den Bartlett Test.
+
+```{r Bartlett-Test}
+cortest.bartlett(ess_wirksamkeit)
+```
+
+Wenn der p-Wert signifikant ist (ist hier der Fall) korrelieren die Items miteinandern. Das ist gewünscht.
+
+Ansonsten prüfen wir das Kaiser-Meyer-Olkin-Kriterium (KMO) und die Measure of Sampling Adequacy (MSA) anschauen.
+
+```{r KMO und MSA}
+KMO(ess_wirksamkeit)
+```
+
+Die Werte für die MSA Werte sollten jeweils größer als 0.5 sein. Ist hier der Fall. Falls ein Item unter 0.5 liegen sollte würde dieses ausgeschlossen werden.
+
+Als nächster Schritt möchten wir Wissen wieviele Faktoren wir aus den Daten "ziehen" möchten. Hierfür nutzen wir die Funktion nfactors()
+
+```{r nfactors}
+nfactors(ess_wirksamkeit, rotate = "varimax", fm="MLE")
+#?nfactors 
+```
+
+Hier wählen wir zunächst den R Console Output aus und schauen auf den MAP Test, welcher uns hier einen Faktor/Dimension vorschlägt. Die Funktion gibt uns noch eine Reihe anderer Werte aus, welche wir jetzt aber nicht im Detail anschauen. Eine genauere Beschreibung der Werte kann mit ?nfactors aufgerufen werden.
+
+Dieser Schritt ist sehr wichtig. Wir müssen im nächsten Schritt die Anzahl der Faktoren angeben. Hierfür müssen wir uns zunächst auf Grundlage der Statistischen Tests UND der theoretischen Überlegungen auf eine Anzahl von Faktoren bzw. Dimensionen festgelegt haben.
+
+In unserem Beispiel gehen wir testweise von einem Faktoren aus.
+
+Wir legen das Modell an mit folgenden Parametern: Maximum-Likelihood (ML) 1 Faktor Varimax-Rotation --\> Mit einer Rotation kann man die Interpretation der Faktoren verbessern, hier gibt es verschiedene Möglichkeiten "varimax" ist eine Option.
+
+```{r Modell 1}
+fit <- factanal(ess_wirksamkeit, 1, rotation = "varimax")
+
+# Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind
+
+print(fit, digits = 2, cutoff = .3)
+```
+
+Beim Output ist das wichtigste die Faktorladungen. Im idealfall laden die Variablen nur jeweils auf einen Faktor. Wir haben bereits geringe Faktorladungen bereits aus der Darstellung ausgeschlossen.
+
+Hier laden alle Variablen mit hohen Werten auf den Faktor1. Wir können also davon ausgehen, dass wir diese Variablen zu einem Index verrechnen können.
+
+Jetzt schauen wir uns doch noch kurz die Uniquenes bzw. Kommunalitäten an. Die gibt uns an wieviel Varianz von den jeweiligen Variablen durch die Faktoren erklärt wird.
+
+```{r Kommunalitäten}
+1 - fit$uniquenesses
+```
+
+Die Werte geben uns eine Idee davon, wie wichtig die Variablen für die erzielte Lösung sind.
+
+## Andere Methoden der Faktorenanalyse
+
+1)  Hauptachsen-Analyse fa() Funktion. Anwendung wie oben beschrieben.
+
+2)  Hauptkomponentenanalyse principal() Funktion. Eigentlich keine Faktorenanalyse, beide Methoden sind sich aber sehr ähnlich. Anwendung wie oben beschrieben.
+
+## Quellen für das Script
+
+Stephanie Geise Daniela Keller https://www.youtube.com/watch?v=NFPGQcq1fO8 Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811

@@ -12,8 +12,90 @@ format:
 
 Berechnung und Interpretation der Reliabilität von Skalen
 
-# Ab wann sprechen wir von einer zuverlässigen Messung?
+# Ab wann sprechen wir von einer zuverlässigen Messung? - Das Zusammenführen der Variablen zu einem Index
 
-# Berechnung von Reliabilitätskoeffizienten in R
 
-# Interpretation von Reliabilitätskoeffizienten in R
+## Laden der nötigen Pakete
+
+```{r Pakete}
+library(psych)
+library(psy)
+library(nFactors)
+library(tidyverse)
+library(dplyr)
+library(haven)
+```
+
+## Laden des Datensatzes
+
+```{r Laden der Daten}
+daten <- haven::read_dta("Datensatz/ESS8.dta")
+```
+
+## Teildatensatz mit den benötigten Index-Variablen
+
+Wir nehmen an, dass wir einen Index für die Erfassung politischer Kompetenz- und Einflusserwartungen (politische Selbstwirksamkeit) erstellen möchten.
+
+Messinstrument mit den Items: https://zis.gesis.org/skala/Beierlein-Kemper-Kovaleva-Rammstedt-Political-Efficacy-Kurzskala-(PEKS)# Ausführliche Erläuterung: https://www.gesis.org/fileadmin/kurzskalen/working_papers/PEKS_Workingpaper.pdf
+
+Hierfür haben wir aufgrundlage von Theorie die folgenden Indikatoren ausgewählt:
+
+psppsgva - Political system allows people to have a say in what government does actrolga - Able to take active role in political group psppipla - Political system allows people to have influence on politics cptppola - Confident in own ability to participate in politics
+
+```{r Teildatensatz}
+
+ess_wirksamkeit <- daten %>%
+  select(psppsgva,
+         actrolga,
+         psppipla,
+         cptppola) %>% 
+  mutate(psppsgva = as.numeric(psppsgva),
+         actrolga = as.numeric(actrolga),
+         psppipla = as.numeric(psppipla),
+         cptppola = as.numeric(cptppola)) %>% 
+  na.omit()
+head(ess_wirksamkeit)
+
+```
+
+## Berechnen eines Ungewichteten Summenindex
+
+Wir haben statistisch getestet, ob wir einen Index aus den genannten Variablen bilden können.
+
+Wir berechnen nur die einfachste Form eines Index, den ungewichteten Summenindex. Das bedeutet, dass wir die Werte pro befragter Person für die genannten Variablen aufsummieren und KEINE Gewichtungen einbauen. Eine Gewichtung wäre bspw. wenn wir eine Variable doppelt zählen würden.
+
+```{r Berechung Index}
+
+index_wirksamkeit <- ess_wirksamkeit %>% 
+  mutate(index_trust = psppsgva + actrolga + psppipla + cptppola)
+head(index_wirksamkeit)
+summary(index_wirksamkeit)
+```
+
+Wir können uns noch die deskriptive Statistik für den Index anschauen, diese ist wichtig um den berechneten Index korrekt zu interpretieren. Mit dem Index können wir in den folgenden Sitzungen weiterrechnen.
+
+## Reliabilität des Indizes berechnen
+
+Bevor wir diesen Index einsetzen können, müssen wir zunächst noch checken, ob die Variablen auch inhaltlich zusammenpassen. Dazu ermitteln wir Crombach's Alpha als Maß der Skalenreliabilität:
+
+```{r}
+index_wirksamkeit %>%
+  select(psppsgva:cptppola) %>%
+  psych::alpha(check.keys=TRUE)
+```
+
+## Interpretation von Crombach's Alpha
+
+Zur Einordnung der erhaltenen Skalen-Reliabilität, gehen wir von folgenden Cronbachs Alpha-Bereichen und ihrer Beurteilung aus:
+
+Werte \<0,6: nicht akzeptabel 0,6 bis 0,7: akzeptabel, teilweise auch schon als grenzwertig klassifiziert 0,7 bis 0,8: gut, stellenweise auch nur als akzeptabel klassifiziert 0,8 bis 0,9: sehr gut
+
+## Interpretation des Wirksamkeit-Indizes
+
+Die Werte sind ein gutes Ergebnis. Die Items zeigen eine gute Inter-Item-Korrelation.
+
+Wir können noch nachschauen, ob wir die Skalen-Reliabilität verbessern können, indem wir einzelne Items herauswerfen. Denn der Output von Cronbachs Alpha gibt uns auch hilfreiche Aufschlüsse darüber, welche Items man evtl. ausschließen kann, um Cronbachs Alpha bei ungenügender Höhe noch auf ein mindestens akzeptables Maß zu heben. Diese Information findet sich im Bereich "Reliability if an item is dropped":. In unserem Fall wird die reliabitlitä aber noch schlechter - wir können nichts mehr verbessern.
+
+## Quellen für das Script
+
+Stephanie Geise Daniela Keller https://www.youtube.com/watch?v=NFPGQcq1fO8 Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811

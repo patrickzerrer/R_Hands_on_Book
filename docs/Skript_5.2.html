@@ -8,7 +8,7 @@
 
 <meta name="author" content="Patrick Zerrer">
 
-<title>Inhalt - Die Faktorenanalyse</title>
+<title>Die Faktorenanalyse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -41,11 +75,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -65,10 +99,57 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./Bilder/logo_ub_2021.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./Home.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./Skript_1.1.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Der Kurs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Hintergrund.html" rel="" target="">
+ <span class="menu-text">Die Grundidee</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Autoren.html" rel="" target="">
+ <span class="menu-text">Die Autor:innen</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/patrickzerrer/R_Hands_on_Book" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/ZeMKI_Bremen" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -77,26 +158,13 @@ ul.task-list li input[type="checkbox"] {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_5.1.html">Von einzelnen Antworten zum Index</a></li><li class="breadcrumb-item"><a href="./Skript_5.2.html">Die Faktorenanalyse</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Inhalt</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -330,9 +398,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse" id="toc-analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse" class="nav-link active" data-scroll-target="#analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse"><span class="header-section-number">1</span> Analyselogik, Ziel und Einsatzgebiete einer Faktorenanalyse</a></li>
-  <li><a href="#durchführen-einer-faktorenanalyse-in-r" id="toc-durchführen-einer-faktorenanalyse-in-r" class="nav-link" data-scroll-target="#durchführen-einer-faktorenanalyse-in-r"><span class="header-section-number">2</span> Durchführen einer Faktorenanalyse in R</a></li>
-  <li><a href="#interpretation-einer-faktorenanalyse-in-r" id="toc-interpretation-einer-faktorenanalyse-in-r" class="nav-link" data-scroll-target="#interpretation-einer-faktorenanalyse-in-r"><span class="header-section-number">3</span> Interpretation einer Faktorenanalyse in R</a></li>
+  <li><a href="#durchführen-einer-faktorenanalyse-in-r" id="toc-durchführen-einer-faktorenanalyse-in-r" class="nav-link active" data-scroll-target="#durchführen-einer-faktorenanalyse-in-r"><span class="header-section-number">1</span> Durchführen einer Faktorenanalyse in R</a>
+  <ul class="collapse">
+  <li><a href="#analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse" id="toc-analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse" class="nav-link" data-scroll-target="#analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse"><span class="header-section-number">1.1</span> Analyselogik, Ziel und Einsatzgebiete einer Faktorenanalyse</a></li>
+  <li><a href="#laden-der-nötigen-pakete" id="toc-laden-der-nötigen-pakete" class="nav-link" data-scroll-target="#laden-der-nötigen-pakete"><span class="header-section-number">1.2</span> Laden der nötigen Pakete</a></li>
+  <li><a href="#laden-des-datensatzes" id="toc-laden-des-datensatzes" class="nav-link" data-scroll-target="#laden-des-datensatzes"><span class="header-section-number">1.3</span> Laden des Datensatzes</a></li>
+  <li><a href="#teildatensatz-mit-den-benötigten-index-variablen" id="toc-teildatensatz-mit-den-benötigten-index-variablen" class="nav-link" data-scroll-target="#teildatensatz-mit-den-benötigten-index-variablen"><span class="header-section-number">1.4</span> Teildatensatz mit den benötigten Index-Variablen</a></li>
+  <li><a href="#deskriptive-statistik-für-den-teildatensatz" id="toc-deskriptive-statistik-für-den-teildatensatz" class="nav-link" data-scroll-target="#deskriptive-statistik-für-den-teildatensatz"><span class="header-section-number">1.5</span> Deskriptive Statistik für den Teildatensatz</a></li>
+  <li><a href="#suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse" id="toc-suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse" class="nav-link" data-scroll-target="#suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse"><span class="header-section-number">1.6</span> Suche nach der zugrunde liegenden Variable - Die Faktorenanalyse</a></li>
+  <li><a href="#andere-methoden-der-faktorenanalyse" id="toc-andere-methoden-der-faktorenanalyse" class="nav-link" data-scroll-target="#andere-methoden-der-faktorenanalyse"><span class="header-section-number">1.7</span> Andere Methoden der Faktorenanalyse</a></li>
+  <li><a href="#quellen-für-das-script" id="toc-quellen-für-das-script" class="nav-link" data-scroll-target="#quellen-für-das-script"><span class="header-section-number">1.8</span> Quellen für das Script</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -362,17 +438,362 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Analyselogik, Ziel und Einsatzgebiete einer Faktorenanalyse</h1>
-</section>
-<section id="durchführen-einer-faktorenanalyse-in-r" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Durchführen einer Faktorenanalyse in R</h1>
-</section>
-<section id="interpretation-einer-faktorenanalyse-in-r" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Interpretation einer Faktorenanalyse in R</h1>
+<section id="durchführen-einer-faktorenanalyse-in-r" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Durchführen einer Faktorenanalyse in R</h1>
+<p>Wir möchten einen Index berechnen. Im Fragebogen des ESS sind einige Indikatoren enthalten, welche sich zu einem Index zusammenführen lassen. Dies möchten wir jetzt tun. Allerdings müssen wir sicher gehen, dass die Messung der Indikatoren auch wirklich nach unseren theoretischen Annahmen nach funktioniert hat. Konkret müssen wir überprüfen, ob sich die theoretisch angenommenen Dimensionen unseres Index auch in den Daten zu finden sind. Hierfür können wir die Faktorenanalyse oder Principal Component Analysis verwenden.</p>
+<section id="analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse"><span class="header-section-number">1.1</span> Analyselogik, Ziel und Einsatzgebiete einer Faktorenanalyse</h2>
 <p><video src="feb_2022_Exkurs%20Faktorenanalyse%20-%20Was%20ist%20ein%20Faktor.mp4" class="img-fluid" controls=""><a href="feb_2022_Exkurs Faktorenanalyse - Was ist ein Faktor.mp4">Video</a></video></p>
+<p>Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete und Daten.</p>
+</section>
+<section id="laden-der-nötigen-pakete" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="laden-der-nötigen-pakete"><span class="header-section-number">1.2</span> Laden der nötigen Pakete</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(psych)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'psych' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(psy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attache Paket: 'psy'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Das folgende Objekt ist maskiert 'package:psych':
+
+    wkappa</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(nFactors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'nFactors' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Lade nötiges Paket: lattice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attache Paket: 'nFactors'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Das folgende Objekt ist maskiert 'package:lattice':
+
+    parallel</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ ggplot2::%+%()   masks psych::%+%()
+✖ ggplot2::alpha() masks psych::alpha()
+✖ dplyr::filter()  masks stats::filter()
+✖ dplyr::lag()     masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="laden-des-datensatzes" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="laden-des-datensatzes"><span class="header-section-number">1.3</span> Laden des Datensatzes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>daten <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/ESS8.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="teildatensatz-mit-den-benötigten-index-variablen" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="teildatensatz-mit-den-benötigten-index-variablen"><span class="header-section-number">1.4</span> Teildatensatz mit den benötigten Index-Variablen</h2>
+<p>Wir nehmen an, dass wir einen Index für die Erfassung politischer Kompetenz- und Einflusserwartungen (politische Selbstwirksamkeit) erstellen möchten.</p>
+<p>Messinstrument mit den Items: https://zis.gesis.org/skala/Beierlein-Kemper-Kovaleva-Rammstedt-Political-Efficacy-Kurzskala-(PEKS)# Ausführliche Erläuterung: https://www.gesis.org/fileadmin/kurzskalen/working_papers/PEKS_Workingpaper.pdf</p>
+<p>Hierfür haben wir aufgrundlage von Theorie die folgenden Indikatoren ausgewählt:</p>
+<p>psppsgva - Political system allows people to have a say in what government does actrolga - Able to take active role in political group psppipla - Political system allows people to have influence on politics cptppola - Confident in own ability to participate in politics</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>ess_wirksamkeit <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">select</span>(psppsgva,</span>
+<span id="cb16-3"><a href="#cb16-3"></a>         actrolga,</span>
+<span id="cb16-4"><a href="#cb16-4"></a>         psppipla,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>         cptppola) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">mutate</span>(<span class="at">psppsgva =</span> <span class="fu">as.numeric</span>(psppsgva),</span>
+<span id="cb16-7"><a href="#cb16-7"></a>         <span class="at">actrolga =</span> <span class="fu">as.numeric</span>(actrolga),</span>
+<span id="cb16-8"><a href="#cb16-8"></a>         <span class="at">psppipla =</span> <span class="fu">as.numeric</span>(psppipla),</span>
+<span id="cb16-9"><a href="#cb16-9"></a>         <span class="at">cptppola =</span> <span class="fu">as.numeric</span>(cptppola)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-10"><a href="#cb16-10"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="fu">head</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  psppsgva actrolga psppipla cptppola
+     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1        2        2        2        3
+2        1        3        2        3
+3        2        2        2        2
+4        3        2        3        4
+5        3        3        4        1
+6        2        2        2        2</code></pre>
+</div>
+</div>
+</section>
+<section id="deskriptive-statistik-für-den-teildatensatz" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="deskriptive-statistik-für-den-teildatensatz"><span class="header-section-number">1.5</span> Deskriptive Statistik für den Teildatensatz</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">summary</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    psppsgva        actrolga        psppipla        cptppola    
+ Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
+ 1st Qu.:1.000   1st Qu.:1.000   1st Qu.:1.000   1st Qu.:1.000  
+ Median :2.000   Median :2.000   Median :2.000   Median :2.000  
+ Mean   :2.211   Mean   :2.085   Mean   :2.154   Mean   :2.133  
+ 3rd Qu.:3.000   3rd Qu.:3.000   3rd Qu.:3.000   3rd Qu.:3.000  
+ Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">#Alternativ kann describe() verwendet werden. Describe() ist eine Funktion des psych Pakets, welche die wichtigsten Streu- und Lageparameter für Variablen angiebt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse"><span class="header-section-number">1.6</span> Suche nach der zugrunde liegenden Variable - Die Faktorenanalyse</h2>
+<p>Die Faktorenanalyse bringt einige Voraussetzungen an die Daten mit sich, welche zu Beginn geprüft werden müssen. Zum Nachlesen bietet sich hier Field, A., Miles, J., &amp; Field, Z. (2012). Discovering statistics using R. 749-811 an.</p>
+<p>Voraussetzungen sind:</p>
+<ul>
+<li>Stichprobengröße (in unserem Fall kein Problem)</li>
+<li>Ausreichende Anzahl an Variablen (meist 4 oder mehr pro Faktor/Dimension)</li>
+<li>Die Variablen sind intervallskaliert (In der Praxis werden jedoch oft auch ordinalskalierte Variablen verwendet.)</li>
+</ul>
+<p>Diese Punkte sind bei uns alle gegeben.</p>
+<p>Anmerkung: Wir können auch eine Faktorenanalyse mit nicht-kontinuierlichen Daten rechnen (bspw. dichotome Variablen). Hier sollten wir sollten wir die Korrelationsmatrix aus polychorischen Korrelationskoeffizienten konstruieren (diese können mit der Funktion polychor() aus dem Paket polycor berechnet werden</p>
+<p>Zunächst schauen wir uns einmal die Korrelationskoeffizienten für einige Variablen an.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Auswählen einiger zusätzlichen Variablen zum zeigen der Korrelationstabelle</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a>beispiel <span class="ot">=</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">select</span>(netusoft, </span>
+<span id="cb21-5"><a href="#cb21-5"></a>         trstplt, </span>
+<span id="cb21-6"><a href="#cb21-6"></a>         trstep, </span>
+<span id="cb21-7"><a href="#cb21-7"></a>         psppsgva, </span>
+<span id="cb21-8"><a href="#cb21-8"></a>         actrolga,</span>
+<span id="cb21-9"><a href="#cb21-9"></a>         psppipla,</span>
+<span id="cb21-10"><a href="#cb21-10"></a>         cptppola) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-11"><a href="#cb21-11"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(netusoft<span class="sc">:</span>cptppola, as.numeric)) <span class="sc">%&gt;%</span> <span class="co"># mit across kann die gleiche Funktion - in diesem Fall as.numeric() - mehrere Variablen angewandt werden</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb21-13"><a href="#cb21-13"></a></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="co"># Bessere Darstellung der Tabelle mit htmlTable und gerundeten Werten für bessere Lesbarkeit</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a></span>
+<span id="cb21-16"><a href="#cb21-16"></a><span class="fu">library</span>(htmlTable) <span class="co"># Falls das Paket noch nicht installiert ist, muss es mit install.packages("htmlTable") installiert werden</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="fu">htmlTable</span>(<span class="fu">round</span>(<span class="fu">cor</span>(beispiel), <span class="at">digits =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="gmisc_table table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; border-bottom: 1px solid grey; border-top: 2px solid grey;"></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">netusoft</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">trstplt</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">trstep</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">psppsgva</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">actrolga</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">psppipla</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">cptppola</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">netusoft</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.088</td>
+<td style="text-align: center;">0.128</td>
+<td style="text-align: center;">0.176</td>
+<td style="text-align: center;">0.267</td>
+<td style="text-align: center;">0.224</td>
+<td style="text-align: center;">0.25</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trstplt</td>
+<td style="text-align: center;">0.088</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.574</td>
+<td style="text-align: center;">0.424</td>
+<td style="text-align: center;">0.187</td>
+<td style="text-align: center;">0.421</td>
+<td style="text-align: center;">0.178</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trstep</td>
+<td style="text-align: center;">0.128</td>
+<td style="text-align: center;">0.574</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.294</td>
+<td style="text-align: center;">0.132</td>
+<td style="text-align: center;">0.291</td>
+<td style="text-align: center;">0.122</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">psppsgva</td>
+<td style="text-align: center;">0.176</td>
+<td style="text-align: center;">0.424</td>
+<td style="text-align: center;">0.294</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.329</td>
+<td style="text-align: center;">0.655</td>
+<td style="text-align: center;">0.312</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">actrolga</td>
+<td style="text-align: center;">0.267</td>
+<td style="text-align: center;">0.187</td>
+<td style="text-align: center;">0.132</td>
+<td style="text-align: center;">0.329</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.422</td>
+<td style="text-align: center;">0.688</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">psppipla</td>
+<td style="text-align: center;">0.224</td>
+<td style="text-align: center;">0.421</td>
+<td style="text-align: center;">0.291</td>
+<td style="text-align: center;">0.655</td>
+<td style="text-align: center;">0.422</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.408</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; border-bottom: 2px solid grey;">cptppola</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.25</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.178</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.122</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.312</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.688</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.408</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Noch zu prüfen ist die Korrelation der Items miteinander, hierfür nehmen wir den Bartlett Test.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">cortest.bartlett</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>R was not square, finding R from data</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$chisq
+[1] 61775.54
+
+$p.value
+[1] 0
+
+$df
+[1] 6</code></pre>
+</div>
+</div>
+<p>Wenn der p-Wert signifikant ist (ist hier der Fall) korrelieren die Items miteinandern. Das ist gewünscht.</p>
+<p>Ansonsten prüfen wir das Kaiser-Meyer-Olkin-Kriterium (KMO) und die Measure of Sampling Adequacy (MSA) anschauen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">KMO</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Kaiser-Meyer-Olkin factor adequacy
+Call: KMO(r = ess_wirksamkeit)
+Overall MSA =  0.65
+MSA for each item = 
+psppsgva actrolga psppipla cptppola 
+    0.65     0.65     0.67     0.65 </code></pre>
+</div>
+</div>
+<p>Die Werte für die MSA Werte sollten jeweils größer als 0.5 sein. Ist hier der Fall. Falls ein Item unter 0.5 liegen sollte würde dieses ausgeschlossen werden.</p>
+<p>Als nächster Schritt möchten wir Wissen wieviele Faktoren wir aus den Daten “ziehen” möchten. Hierfür nutzen wir die Funktion nfactors()</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">nfactors</span>(ess_wirksamkeit, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">fm=</span><span class="st">"MLE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_5.2_files/figure-html/nfactors-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Number of factors
+Call: vss(x = x, n = n, rotate = rotate, diagonal = diagonal, fm = fm, 
+    n.obs = n.obs, plot = FALSE, title = title, use = use, cor = cor)
+VSS complexity 1 achieves a maximimum of 0.78  with  1  factors
+VSS complexity 2 achieves a maximimum of 0.94  with  3  factors
+The Velicer MAP achieves a minimum of 0.24  with  1  factors 
+Empirical BIC achieves a minimum of  12803.87  with  1  factors
+Sample Size adjusted BIC achieves a minimum of  15644.55  with  1  factors
+
+Statistics by number of factors 
+  vss1 vss2  map dof chisq prob sqresid  fit RMSEA   BIC SABIC complex  eChisq
+1 0.78 0.00 0.24   2 15659    0    1.54 0.78  0.43 15638 15645     1.0 1.3e+04
+2 0.75 0.94 0.33  -1     0   NA    0.41 0.94    NA    NA    NA     1.2 2.0e-13
+3 0.75 0.94 1.00  -3     0   NA    0.41 0.94    NA    NA    NA     1.2 6.0e-18
+4 0.68 0.89   NA  -4  3079   NA    0.74 0.89    NA    NA    NA     1.3 1.6e+03
+     SRMR eCRMS  eBIC
+1 1.6e-01  0.28 12804
+2 6.3e-10    NA    NA
+3 3.4e-12    NA    NA
+4 5.7e-02    NA    NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">#?nfactors </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Hier wählen wir zunächst den R Console Output aus und schauen auf den MAP Test, welcher uns hier einen Faktor/Dimension vorschlägt. Die Funktion gibt uns noch eine Reihe anderer Werte aus, welche wir jetzt aber nicht im Detail anschauen. Eine genauere Beschreibung der Werte kann mit ?nfactors aufgerufen werden.</p>
+<p>Dieser Schritt ist sehr wichtig. Wir müssen im nächsten Schritt die Anzahl der Faktoren angeben. Hierfür müssen wir uns zunächst auf Grundlage der Statistischen Tests UND der theoretischen Überlegungen auf eine Anzahl von Faktoren bzw. Dimensionen festgelegt haben.</p>
+<p>In unserem Beispiel gehen wir testweise von einem Faktoren aus.</p>
+<p>Wir legen das Modell an mit folgenden Parametern: Maximum-Likelihood (ML) 1 Faktor Varimax-Rotation –&gt; Mit einer Rotation kann man die Interpretation der Faktoren verbessern, hier gibt es verschiedene Möglichkeiten “varimax” ist eine Option.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">factanal</span>(ess_wirksamkeit, <span class="dv">1</span>, <span class="at">rotation =</span> <span class="st">"varimax"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2"></a></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="co"># Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a></span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="fu">print</span>(fit, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cutoff =</span> .<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+factanal(x = ess_wirksamkeit, factors = 1, rotation = "varimax")
+
+Uniquenesses:
+psppsgva actrolga psppipla cptppola 
+    0.75     0.33     0.65     0.36 
+
+Loadings:
+         Factor1
+psppsgva 0.50   
+actrolga 0.82   
+psppipla 0.59   
+cptppola 0.80   
+
+               Factor1
+SS loadings       1.90
+Proportion Var    0.47
+
+Test of the hypothesis that 1 factor is sufficient.
+The chi square statistic is 15659.49 on 2 degrees of freedom.
+The p-value is 0 </code></pre>
+</div>
+</div>
+<p>Beim Output ist das wichtigste die Faktorladungen. Im idealfall laden die Variablen nur jeweils auf einen Faktor. Wir haben bereits geringe Faktorladungen bereits aus der Darstellung ausgeschlossen.</p>
+<p>Hier laden alle Variablen mit hohen Werten auf den Faktor1. Wir können also davon ausgehen, dass wir diese Variablen zu einem Index verrechnen können.</p>
+<p>Jetzt schauen wir uns doch noch kurz die Uniquenes bzw. Kommunalitäten an. Die gibt uns an wieviel Varianz von den jeweiligen Variablen durch die Faktoren erklärt wird.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="dv">1</span> <span class="sc">-</span> fit<span class="sc">$</span>uniquenesses</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> psppsgva  actrolga  psppipla  cptppola 
+0.2456154 0.6655900 0.3458397 0.6386451 </code></pre>
+</div>
+</div>
+<p>Die Werte geben uns eine Idee davon, wie wichtig die Variablen für die erzielte Lösung sind.</p>
+</section>
+<section id="andere-methoden-der-faktorenanalyse" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="andere-methoden-der-faktorenanalyse"><span class="header-section-number">1.7</span> Andere Methoden der Faktorenanalyse</h2>
+<ol type="1">
+<li><p>Hauptachsen-Analyse fa() Funktion. Anwendung wie oben beschrieben.</p></li>
+<li><p>Hauptkomponentenanalyse principal() Funktion. Eigentlich keine Faktorenanalyse, beide Methoden sind sich aber sehr ähnlich. Anwendung wie oben beschrieben.</p></li>
+</ol>
+</section>
+<section id="quellen-für-das-script" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="quellen-für-das-script"><span class="header-section-number">1.8</span> Quellen für das Script</h2>
+<p>Stephanie Geise Daniela Keller https://www.youtube.com/watch?v=NFPGQcq1fO8 Field, A., Miles, J., &amp; Field, Z. (2012). Discovering statistics using R. 749-811</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -610,6 +1031,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 
