@@ -172,7 +172,7 @@ Der Output zeigt uns: Das Alter hat einen negativen Einfluss auf die Internetnut
 
 Die Ergebnisse von Regressionsanalysen werden meistens in einer Tabelle dargestellt. Für die Angabe im Text wird folgendes gebraucht:
 
-✅ den R2-Wert (das Bestimmungskoeffizient)
+✅ den R^2^-Wert (das Bestimmungskoeffizient)
 
 ✅ den F-Wert (auch als F-Statistik bezeichnet)
 
