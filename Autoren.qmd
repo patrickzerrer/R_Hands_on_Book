@@ -11,13 +11,11 @@ format:
 sidebar: false
 ---
 
-# Das Team stellt sich vor!
-
 Wir möchten uns einmal kurz vorstellen...
 
 ## Patrick Zerrer
 
-![Patrick Zerrer](bild_patrick.png)
+![Patrick Zerrer](Bilder/bild_patrick.png)
 
 **Vita**
 

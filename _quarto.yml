@@ -6,7 +6,7 @@ website:
   
   navbar: 
     title: false
-    logo: logo_ub_2021.png
+    logo: Bilder/logo_ub_2021.png
     background: "#e3dac9"
     foreground: "secondary"
     search: true
