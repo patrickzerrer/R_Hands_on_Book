@@ -14,7 +14,6 @@ Berechnung und Interpretation der Reliabilität von Skalen
 
 # Ab wann sprechen wir von einer zuverlässigen Messung? - Das Zusammenführen der Variablen zu einem Index
 
-
 ## Laden der nötigen Pakete
 
 ```{r Pakete}

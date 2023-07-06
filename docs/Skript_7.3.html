@@ -8,7 +8,7 @@
 
 <meta name="author" content="Stephanie Geise">
 
-<title>Inhalt - Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</title>
+<title>Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,11 +75,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -99,10 +99,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./Bilder/logo_ub_2021.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./Home.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./Skript_1.1.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Der Kurs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Hintergrund.html" rel="" target="">
+ <span class="menu-text">Die Grundidee</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Autoren.html" rel="" target="">
+ <span class="menu-text">Die Autor:innen</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/patrickzerrer/R_Hands_on_Book" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/ZeMKI_Bremen" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -111,26 +158,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_7.1.html">Das Überprüfen von Zusammenhängen</a></li><li class="breadcrumb-item"><a href="./Skript_7.3.html">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Inhalt</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -514,16 +548,16 @@ Die folgenden Objekte sind maskiert von 'package:base':
 <pre><code># A tibble: 100 × 166
         idno cntry gender alter marsts                   edubde1 eduade2 eduade3
        &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;                    &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  
- 1  10002420 DE    Male      51 None of these (NEVER ma… Abitur… Diplom… 2. Sta…
- 2      1331 SE    Female    57 Legally divorced/civil … &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 3      2377 SE    Female    39 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 4 100002656 GB    Female    67 Legally married          &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 5  10000309 DE    Male      59 &lt;NA&gt;                     Abitur… Diplom… Abschl…
- 6      3118 FR    Male      46 Legally divorced/civil … &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 7  10006983 DE    Female    42 Legally divorced/civil … Mittle… Kein H… Berufs…
- 8      3262 FR    Female    43 Legally divorced/civil … &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 9  10004659 DE    Male      34 &lt;NA&gt;                     Volks-… Kein H… Gewerb…
-10      3452 FR    Female    58 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 1 100001263 GB    Female    72 Legally married          &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 2  10006488 DE    Female    42 None of these (NEVER ma… Abitur… Kein H… Kein b…
+ 3  10000260 DE    Male      55 &lt;NA&gt;                     Mittle… Kein H… Abgesc…
+ 4      1147 FR    Male      44 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 5      2089 FR    Male      72 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 6  10000032 DE    Male      30 None of these (NEVER ma… Refusal Kein H… Refusal
+ 7      1766 FR    Male      45 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 8 100000390 GB    Male      63 Legally divorced/civil … &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 9 100000483 GB    Female    55 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+10      2133 FR    Male      58 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
 # ℹ 90 more rows
 # ℹ 158 more variables: politische_Nachrichtenrezeption &lt;dbl&gt;, netusoft &lt;fct&gt;,
 #   internetnutzung &lt;dbl&gt;, ppltrst &lt;dbl&gt;, pplfair &lt;dbl&gt;, pplhlp &lt;dbl&gt;,
@@ -546,18 +580,18 @@ lm(formula = internetnutzung ~ alter, data = daten_mod)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--218.86  -97.69  -39.29   80.77  455.21 
+-222.39 -116.02  -56.96   35.95  719.76 
 
 Coefficients:
-            Estimate Std. Error t value           Pr(&gt;|t|)    
-(Intercept)  359.748     40.145   8.961 0.0000000000000217 ***
-alter         -3.517      0.782  -4.497 0.0000189362341791 ***
+            Estimate Std. Error t value     Pr(&gt;|t|)    
+(Intercept)  313.600     54.435   5.761 0.0000000965 ***
+alter         -2.186      1.086  -2.013       0.0469 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 137.9 on 98 degrees of freedom
-Multiple R-squared:  0.1711,    Adjusted R-squared:  0.1626 
-F-statistic: 20.22 on 1 and 98 DF,  p-value: 0.00001894</code></pre>
+Residual standard error: 186.3 on 98 degrees of freedom
+Multiple R-squared:  0.0397,    Adjusted R-squared:  0.0299 
+F-statistic: 4.051 on 1 and 98 DF,  p-value: 0.04688</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">#summary(lm.beta(model)) # klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -581,7 +615,7 @@ F-statistic: 20.22 on 1 and 98 DF,  p-value: 0.00001894</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">check_heteroscedasticity</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p = 0.003).</code></pre>
+<pre><code>OK: Error variance appears to be homoscedastic (p = 0.154).</code></pre>
 </div>
 </div>
 <p>Die Interpretation des Outputs ist einfach, weil R hier uns eine sehr konkrete Aussage zur Überpüfung der Annahme macht: Bei grüner Schrift ist das Ergebnis in Ordnung, d.h. die Fehlervarianz scheint homoskedastisch, denn p wäre dann nicht signifikant. Bei roter Schrift ist die Fehlervarianz heteroskedastisch und p ist signifikant (p &lt; 0.05). In diesem Fall liegt unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen. Das müssen wir dann bei der Interpretation der Daten berücksichtigen.</p>
@@ -611,9 +645,9 @@ F-statistic: 20.22 on 1 and 98 DF,  p-value: 0.00001894</code></pre>
 <pre><code>
 t test of coefficients:
 
-             Estimate Std. Error t value          Pr(&gt;|t|)    
-(Intercept) 359.74753   43.78006  8.2172 0.000000000000871 ***
-alter        -3.51685    0.73844 -4.7625 0.000006618652590 ***
+             Estimate Std. Error t value      Pr(&gt;|t|)    
+(Intercept) 313.60004   54.06636  5.8003 0.00000008113 ***
+alter        -2.18624    0.98757 -2.2137       0.02917 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -629,7 +663,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">check_autocorrelation</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>OK: Residuals appear to be independent and not autocorrelated (p = 0.678).</code></pre>
+<pre><code>OK: Residuals appear to be independent and not autocorrelated (p = 0.680).</code></pre>
 </div>
 </div>
 <p>Auch hier ist der Output wieder sehr klar: Die Prüfung ergibt, dass die Residuen unabhängig und nicht autokorreliert sind (p = 0,588) - sonst hätten wir auch hier einen signifikanten p-Wert erhalten. Prima!</p>
@@ -700,23 +734,23 @@ lm(formula = internetnutzung ~ alter + politische_Nachrichtenrezeption,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--210.95  -99.24  -43.22   77.15  450.49 
+-208.19 -111.70  -49.67   39.45  717.79 
 
 Coefficients:
                                 Estimate Standardized Std. Error t value
-(Intercept)                     352.4384           NA    41.3453   8.524
-alter                            -3.5431      -0.4167     0.7844  -4.517
-politische_Nachrichtenrezeption   0.1061       0.0707     0.1385   0.766
-                                         Pr(&gt;|t|)    
-(Intercept)                     0.000000000000204 ***
-alter                           0.000017699056448 ***
-politische_Nachrichtenrezeption             0.445    
+(Intercept)                     299.4215           NA    54.9302   5.451
+alter                            -2.2233      -0.2026     1.0798  -2.059
+politische_Nachrichtenrezeption   0.2045       0.1466     0.1373   1.490
+                                   Pr(&gt;|t|)    
+(Intercept)                     0.000000381 ***
+alter                                0.0422 *  
+politische_Nachrichtenrezeption      0.1395    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 138.2 on 97 degrees of freedom
-Multiple R-squared:  0.176, Adjusted R-squared:  0.1591 
-F-statistic: 10.36 on 2 and 97 DF,  p-value: 0.00008341</code></pre>
+Residual standard error: 185.1 on 97 degrees of freedom
+Multiple R-squared:  0.06118,   Adjusted R-squared:  0.04182 
+F-statistic:  3.16 on 2 and 97 DF,  p-value: 0.0468</code></pre>
 </div>
 </div>
 </section>
@@ -771,20 +805,20 @@ F-statistic: 10.36 on 2 and 97 DF,  p-value: 0.00008341</code></pre>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">tidy</span>(<span class="fu">lm.beta</span>(model_m))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 6
-  term                        estimate std_estimate std.error statistic  p.value
-  &lt;chr&gt;                          &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 (Intercept)                  352.         NA         41.3       8.52  2.04e-13
-2 alter                         -3.54       -0.417      0.784    -4.52  1.77e- 5
-3 politische_Nachrichtenreze…    0.106       0.0707     0.138     0.766 4.45e- 1</code></pre>
+  term                         estimate std_estimate std.error statistic p.value
+  &lt;chr&gt;                           &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 (Intercept)                   299.          NA        54.9        5.45 3.81e-7
+2 alter                          -2.22        -0.203     1.08      -2.06 4.22e-2
+3 politische_Nachrichtenrezep…    0.205        0.147     0.137      1.49 1.40e-1</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">glance</span>(model_m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 12
-  r.squared adj.r.squared sigma statistic   p.value    df logLik   AIC   BIC
-      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1     0.176         0.159  138.      10.4 0.0000834     2  -633. 1274. 1285.
+  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1    0.0612        0.0418  185.      3.16  0.0468     2  -662. 1333. 1343.
 # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
 </div>
 </div>
@@ -810,16 +844,16 @@ F-statistic: 10.36 on 2 and 97 DF,  p-value: 0.00008341</code></pre>
 <pre><code># A tibble: 100 × 167
         idno cntry gender alter marsts                   edubde1 eduade2 eduade3
        &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;                    &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  
- 1  10002420 DE    Male      51 None of these (NEVER ma… Abitur… Diplom… 2. Sta…
- 2      1331 SE    Female    57 Legally divorced/civil … &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 3      2377 SE    Female    39 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 4 100002656 GB    Female    67 Legally married          &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 5  10000309 DE    Male      59 &lt;NA&gt;                     Abitur… Diplom… Abschl…
- 6      3118 FR    Male      46 Legally divorced/civil … &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 7  10006983 DE    Female    42 Legally divorced/civil … Mittle… Kein H… Berufs…
- 8      3262 FR    Female    43 Legally divorced/civil … &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 9  10004659 DE    Male      34 &lt;NA&gt;                     Volks-… Kein H… Gewerb…
-10      3452 FR    Female    58 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 1 100001263 GB    Female    72 Legally married          &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 2  10006488 DE    Female    42 None of these (NEVER ma… Abitur… Kein H… Kein b…
+ 3  10000260 DE    Male      55 &lt;NA&gt;                     Mittle… Kein H… Abgesc…
+ 4      1147 FR    Male      44 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 5      2089 FR    Male      72 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 6  10000032 DE    Male      30 None of these (NEVER ma… Refusal Kein H… Refusal
+ 7      1766 FR    Male      45 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 8 100000390 GB    Male      63 Legally divorced/civil … &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 9 100000483 GB    Female    55 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+10      2133 FR    Male      58 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
 # ℹ 90 more rows
 # ℹ 159 more variables: politische_Nachrichtenrezeption &lt;dbl&gt;, netusoft &lt;fct&gt;,
 #   internetnutzung &lt;dbl&gt;, ppltrst &lt;dbl&gt;, pplfair &lt;dbl&gt;, pplhlp &lt;dbl&gt;,
@@ -834,12 +868,12 @@ F-statistic: 10.36 on 2 and 97 DF,  p-value: 0.00008341</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  0  1 
-50 50 </code></pre>
+49 51 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">summary</span>(daten_mod2<span class="sc">$</span>gender_r)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    0.0     0.0     0.5     0.5     1.0     1.0 </code></pre>
+   0.00    0.00    1.00    0.51    1.00    1.00 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">class</span>(daten_mod2<span class="sc">$</span>gender_r)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -861,25 +895,25 @@ lm(formula = internetnutzung ~ alter + politische_Nachrichtenrezeption +
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--210.38  -99.40  -42.98   76.54  447.50 
+-233.88 -120.66  -42.97   23.33  689.97 
 
 Coefficients:
-                                 Estimate Standardized Std. Error t value
-(Intercept)                     356.15498           NA   45.00809   7.913
-alter                            -3.54986     -0.41748    0.78895  -4.499
-politische_Nachrichtenrezeption   0.10155      0.06764    0.14081   0.721
-gender_r                         -6.04324     -0.02015   28.13138  -0.215
-                                        Pr(&gt;|t|)    
-(Intercept)                     0.00000000000434 ***
-alter                           0.00001910910194 ***
-politische_Nachrichtenrezeption            0.473    
-gender_r                                   0.830    
+                                Estimate Standardized Std. Error t value
+(Intercept)                     268.1371           NA    58.5986   4.576
+alter                            -2.1276      -0.1939     1.0753  -1.979
+politische_Nachrichtenrezeption   0.1925       0.1379     0.1367   1.408
+gender_r                         54.3519       0.1444    36.9466   1.471
+                                 Pr(&gt;|t|)    
+(Intercept)                     0.0000142 ***
+alter                              0.0507 .  
+politische_Nachrichtenrezeption    0.1625    
+gender_r                           0.1445    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 138.9 on 96 degrees of freedom
-Multiple R-squared:  0.1764,    Adjusted R-squared:  0.1507 
-F-statistic: 6.856 on 3 and 96 DF,  p-value: 0.0003107</code></pre>
+Residual standard error: 184 on 96 degrees of freedom
+Multiple R-squared:  0.08188,   Adjusted R-squared:  0.05318 
+F-statistic: 2.854 on 3 and 96 DF,  p-value: 0.04125</code></pre>
 </div>
 </div>
 </section>
@@ -893,8 +927,8 @@ F-statistic: 6.856 on 3 and 96 DF,  p-value: 0.0003107</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">predict.lm</span>(model_m2, <span class="fu">data.frame</span>(<span class="at">alter =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">75</span>), <span class="at">gender_r =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">politische_Nachrichtenrezeption =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        1         2 
-267.91618  84.88756 </code></pre>
+<pre><code>       1        2 
+215.9085 164.8410 </code></pre>
 </div>
 </div>
 </section>
@@ -915,12 +949,12 @@ Low Correlation
 
                             Term  VIF       VIF 95% CI Increased SE Tolerance
                            alter 1.00 [1.00,      Inf]         1.00      1.00
- politische_Nachrichtenrezeption 1.03 [1.00,    50.74]         1.01      0.98
-                        gender_r 1.03 [1.00,    48.33]         1.01      0.97
+ politische_Nachrichtenrezeption 1.00 [1.00,      Inf]         1.00      1.00
+                        gender_r 1.01 [1.00, 1.59e+09]         1.00      0.99
  Tolerance 95% CI
      [0.00, 1.00]
-     [0.02, 1.00]
-     [0.02, 1.00]</code></pre>
+     [0.00, 1.00]
+     [0.00, 1.00]</code></pre>
 </div>
 </div>
 </section>
@@ -947,16 +981,16 @@ Low Correlation
 <pre><code># A tibble: 200 × 3
    alter internetnutzung land 
    &lt;dbl&gt;           &lt;dbl&gt; &lt;fct&gt;
- 1    49             120 DE   
- 2    50              60 DE   
- 3    17             120 DE   
- 4    17             480 DE   
- 5    60              60 DE   
- 6    35             420 DE   
- 7    66             330 DE   
- 8    60              60 DE   
- 9    51              30 DE   
-10    51              60 DE   
+ 1    71              90 DE   
+ 2    29             180 DE   
+ 3    50             720 DE   
+ 4    50             360 DE   
+ 5    41             600 DE   
+ 6    19             360 DE   
+ 7    52             370 DE   
+ 8    34              60 DE   
+ 9    26              90 DE   
+10    18             120 DE   
 # ℹ 190 more rows</code></pre>
 </div>
 </div>
@@ -1211,6 +1245,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

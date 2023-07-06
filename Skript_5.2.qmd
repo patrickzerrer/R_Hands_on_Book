@@ -18,7 +18,6 @@ Wir möchten einen Index berechnen. Im Fragebogen des ESS sind einige Indikatore
 
 ![](feb_2022_Exkurs%20Faktorenanalyse%20-%20Was%20ist%20ein%20Faktor.mp4)
 
-
 Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete und Daten.
 
 ## Laden der nötigen Pakete
