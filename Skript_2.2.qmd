@@ -10,4 +10,4 @@ format:
     code-line-numbers: true
 ---
 
-# Klassische Formen von Datensätzen in der Kommunikationswissenschaft
+# Einlesen von Datensätzen und Praktische Tipps

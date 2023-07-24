@@ -1,6 +1,6 @@
 ---
 title: "Reliabilität von Skalen"
-author: "tba"
+author: "Patrick Zerrer"
 toc: true
 number-sections: true
 highlight-style: pygments
@@ -10,84 +10,132 @@ format:
     code-line-numbers: true
 ---
 
-Berechnung und Interpretation der Reliabilität von Skalen
+# Das Zusammenführen der Variablen zu einem Index
 
-# Ab wann sprechen wir von einer zuverlässigen Messung? - Das Zusammenführen der Variablen zu einem Index
+Wir haben in den vorangegangenen Kapitel zur Faktorenanalyse festgestellt, dass es einen empirisch messbaren Faktor in unseren Daten gibt, welchen wir unter Rückgriff auf unsere theoretischen Grundlagen als *Vertrauen in gesellschaftliche Institutionen* interpretieren. Wir haben also die beiden ersten Ziele des Kapitels bereicht erreicht und müssen nur noch die eigentliche Indexbildung sowie das Prüfen der Qualität des Index vornehmen.
+
+Wir beginnen zunächst mit dem Laden der notwendigen Pakete.
 
 ## Laden der nötigen Pakete
 
 ```{r Pakete}
 library(psych)
-library(psy)
-library(nFactors)
 library(tidyverse)
 library(dplyr)
 library(haven)
 ```
 
+Und laden im Anschluss den notwendigen Datensatz.
+
 ## Laden des Datensatzes
 
 ```{r Laden der Daten}
-daten <- haven::read_dta("Datensatz/ESS8.dta")
+daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
 ## Teildatensatz mit den benötigten Index-Variablen
 
-Wir nehmen an, dass wir einen Index für die Erfassung politischer Kompetenz- und Einflusserwartungen (politische Selbstwirksamkeit) erstellen möchten.
+Wir greifen natürlich auf die gleiche Datengrundlage zurück, welche wir auch für die Faktorenanalyse verwendet haben. Was in unserem Fall bedeutet, dass wir das *Vertrauen in gesellschaftliche Institutionen* untersuchen, entsprechend sollten wir Variablen bzw. Indikatoren auswählen, die die unterschiedlichen Bestandteile der latenten Variable abdecken.
 
-Messinstrument mit den Items: https://zis.gesis.org/skala/Beierlein-Kemper-Kovaleva-Rammstedt-Political-Efficacy-Kurzskala-(PEKS)# Ausführliche Erläuterung: https://www.gesis.org/fileadmin/kurzskalen/working_papers/PEKS_Workingpaper.pdf
+Ganz konkret wählen wir Variablen aus, die das...
 
-Hierfür haben wir aufgrundlage von Theorie die folgenden Indikatoren ausgewählt:
+* *Vertrauen in das Gesundheitswesen* (pt01)
+* *Vertrauen in das Bundesverfassungsgericht* (pt02)
+* *Vertrauen in den Bundestag* (pt03)
+* *Vertrauen in die Stadt- oder Gemeindeverwaltung* (pt04)
+* *Vertrauen in die Katholische Kirche* (pt06)
+* *Vertrauen in die Evangelische Kirche* (pt07)
+* *Vertrauen in die Justiz* (pt08)
+* *Vertrauen in das Fernsehen* (pt09)
+* *Vertrauen in das Zeitungswesen* (pt10)
+* *Vertrauen in die Hochschulen* (pt11)
+* *Vertrauen in die Bundesregierung* (pt12)
+* *Vertrauen in die Polizei* (pt14)
+* *Vertrauen in die Politischen Parteien* (pt15)
+* *Vertrauen in die Kommission der EU* (pt19)
+* *Vertrauen in das Europäische Parlament* (pt20)
 
-psppsgva - Political system allows people to have a say in what government does actrolga - Able to take active role in political group psppipla - Political system allows people to have influence on politics cptppola - Confident in own ability to participate in politics
+
+... erfassen.
+
+Wir bereiten die Daten entsprechend vor, indem wir die fehlenden Werte entfernen und die Variablen in numerische umwandeln.
 
 ```{r Teildatensatz}
+allbus_vertrauen = daten %>%
+  
+  # Wir wählen mit select() die gewünschten Variablen aus
+  select(pt01:pt20) %>% 
+  
+  # die Kombination aus mutate() und across() ermöglicht es uns die Funktion as.numeric() in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden
+  mutate(across(pt01:pt20, ~ as.numeric(.))) %>% 
 
-ess_wirksamkeit <- daten %>%
-  select(psppsgva,
-         actrolga,
-         psppipla,
-         cptppola) %>% 
-  mutate(psppsgva = as.numeric(psppsgva),
-         actrolga = as.numeric(actrolga),
-         psppipla = as.numeric(psppipla),
-         cptppola = as.numeric(cptppola)) %>% 
+  # Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen)
+  mutate(across(pt01:pt20, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>% 
+  
+  # Wir schmeißen fehlende Werte raus
   na.omit()
-head(ess_wirksamkeit)
+```
 
+Wir bennen die ausgewählten Indikatoren um, damit die Bezeichnungen der Indikatoren für uns leichter zu merken sind. 
+
+```{r Rename}
+allbus_vertrauen = allbus_vertrauen %>% 
+  
+  # mit dem rename() Befehl können wir die Variablen umbennen
+  rename(Ver_Gesundheitswesen = pt01,
+         Ver_BVerfG = pt02,
+         Ver_Bundestag = pt03,
+         Ver_Verwaltung = pt04,
+         Ver_kath_Kirche = pt06,
+         Ver_evan_Kirche = pt07,
+         Ver_Justiz = pt08,
+         Ver_TV = pt09,
+         Ver_Zeitung = pt10,
+         Ver_Uni = pt11,
+         Ver_Regierung = pt12,
+         Ver_Polizei = pt14,
+         Ver_Parteien = pt15,
+         Ver_Kom_EU = pt19,
+         Ver_EU_Par = pt20)
+head(allbus_vertrauen)
 ```
 
 ## Berechnen eines Ungewichteten Summenindex
 
-Wir haben statistisch getestet, ob wir einen Index aus den genannten Variablen bilden können.
+Wir haben bereits in Kapitel 5.2 mittels der explorativen Faktorenanalyse statistisch getestet, ob wir einen Index aus den genannten Variablen bilden können. Dies ist der Fall. Wir berechnen nur die einfachste Form eines Index, den ungewichteten Summenindex. Das bedeutet, dass wir die Werte pro befragter Person für die genannten Variablen aufsummieren und KEINE Gewichtungen einbauen. Eine Gewichtung wäre bspw. wenn wir eine Variable doppelt zählen würden.
 
-Wir berechnen nur die einfachste Form eines Index, den ungewichteten Summenindex. Das bedeutet, dass wir die Werte pro befragter Person für die genannten Variablen aufsummieren und KEINE Gewichtungen einbauen. Eine Gewichtung wäre bspw. wenn wir eine Variable doppelt zählen würden.
+Wir erstellen eine neue Variable `vertrauen_ges_inst` und summieren die Werte aller Indikatoren pro Fall (befragte Person) auf, bevor wir diese durch die Anzahl der Indikatoren teilen. Auf diese Art und Weise erhalten wir die selben Werteausprägungen, wie in den Indikatoren was uns die Interpretation erleichtert.
 
 ```{r Berechung Index}
-
-index_wirksamkeit <- ess_wirksamkeit %>% 
-  mutate(index_trust = psppsgva + actrolga + psppipla + cptppola)
-head(index_wirksamkeit)
-summary(index_wirksamkeit)
+index_vertrauen = allbus_vertrauen %>% 
+  mutate(vertrauen_ges_inst = (Ver_Gesundheitswesen + Ver_BVerfG + Ver_Bundestag + Ver_Verwaltung + Ver_kath_Kirche + Ver_evan_Kirche + Ver_Justiz+ Ver_TV +  Ver_Zeitung + Ver_Uni + Ver_Regierung + Ver_Polizei + Ver_Parteien + Ver_Kom_EU + Ver_EU_Par) / 15)
+head(index_vertrauen)
 ```
 
-Wir können uns noch die deskriptive Statistik für den Index anschauen, diese ist wichtig um den berechneten Index korrekt zu interpretieren. Mit dem Index können wir in den folgenden Sitzungen weiterrechnen.
+Wir können uns noch die deskriptive Statistik für den Index anschauen, diese ist wichtig um den berechneten Index korrekt zu interpretieren.
+
+```{r statistik}
+summary(index_vertrauen$vertrauen_ges_inst)
+```
 
 ## Reliabilität des Indizes berechnen
 
 Bevor wir diesen Index einsetzen können, müssen wir zunächst noch checken, ob die Variablen auch inhaltlich zusammenpassen. Dazu ermitteln wir Crombach's Alpha als Maß der Skalenreliabilität:
 
 ```{r}
-index_wirksamkeit %>%
-  select(psppsgva:cptppola) %>%
+index_vertrauen %>%
+  select(Ver_Gesundheitswesen:Ver_EU_Par) %>%
   psych::alpha(check.keys=TRUE)
 ```
 
-## Interpretation von Crombach's Alpha
+## Interpretation von Cronbach's Alpha
 
 Zur Einordnung der erhaltenen Skalen-Reliabilität, gehen wir von folgenden Cronbachs Alpha-Bereichen und ihrer Beurteilung aus:
 
-Werte \<0,6: nicht akzeptabel 0,6 bis 0,7: akzeptabel, teilweise auch schon als grenzwertig klassifiziert 0,7 bis 0,8: gut, stellenweise auch nur als akzeptabel klassifiziert 0,8 bis 0,9: sehr gut
+* Werte \<0,6: nicht akzeptabel
+* 0,6 bis 0,7: akzeptabel, teilweise auch schon als grenzwertig klassifiziert 
+* 0,7 bis 0,8: gut, stellenweise auch nur als akzeptabel klassifiziert 
+* 0,8 bis 0,9: sehr gut
 
 ## Interpretation des Wirksamkeit-Indizes
 
@@ -95,6 +143,43 @@ Die Werte sind ein gutes Ergebnis. Die Items zeigen eine gute Inter-Item-Korrela
 
 Wir können noch nachschauen, ob wir die Skalen-Reliabilität verbessern können, indem wir einzelne Items herauswerfen. Denn der Output von Cronbachs Alpha gibt uns auch hilfreiche Aufschlüsse darüber, welche Items man evtl. ausschließen kann, um Cronbachs Alpha bei ungenügender Höhe noch auf ein mindestens akzeptables Maß zu heben. Diese Information findet sich im Bereich "Reliability if an item is dropped":. In unserem Fall wird die reliabitlitä aber noch schlechter - wir können nichts mehr verbessern.
 
-## Quellen für das Script
+Entsprechend haben wir erfolgreich einen Index für die latente Variable *Vertrauen in gesellschaftliche Institutionen* gebildet. Wir haben eine theoretische Grundlage gefunden, diese empirisch anhand der Daten des Allbus mittels explorativer Faktorenanalyse geprüft und einen Summenindex berechnet, dessen Qualität wir mittels Cronbachs Alpha zeigen konnten.
 
-Stephanie Geise Daniela Keller https://www.youtube.com/watch?v=NFPGQcq1fO8 Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811
+::: callout-tip
+## Wie gebe ich die Ergebnisse korrekt an?
+
+Die Ergebnisse der Indexbildung werden meistens direkt im Text angegeben:
+
+✅ die Art des gebildeten Index (Summenindex, etc.)
+
+✅ Cronbachs Alpha
+
+✅ Enthaltene Indikatoren
+
+Das Format ist normalerweise:
+
+> ***Beispiel:*** Der Summenindex individuelle Identität umfasst fünf Indikatoren (Ziele und Befriedigung, Regeln und Verantwortung, Gefühle oder
+Emotionen, Verständnis der Welt, individuelle Identität im Allgemeinen; Krippendorffs α = 0,84). 
+:::
+
+
+## Danksagung und Würdigung
+
+Bei der Struktur und dem Inhalt dieser Seite haben mich die folgenden herausragenden Arbeiten inspieriert. Ich möchte mich bei den Autor:innen für ihre Arbeit sehr bedanken!
+
+* Daniela Keller [Link](https://www.youtube.com/watch?v=NFPGQcq1fO8) 
+* Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811
+
+::: callout-note
+## Literatur und Beispiele aus der Praxis
+
+Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen braucht.
+
+> 📖 Field, Z., Miles, J., & Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. [Link](https://suche.suub.uni-bremen.de/peid=B68436977&LAN=DE&CID=7699632&index=L&Hitnr=1&dtyp=D&rtyp=a&Exemplar=1)
+
+> 📖 Döring, N., & Bortz, J. (2016). Forschungsmethoden und evaluation. Wiesbaden: Springerverlag. [Link](https://suche.suub.uni-bremen.de/peid=B77441304&LAN=DE&CID=7699632&index=L&Hitnr=1&dtyp=D&rtyp=a&Exemplar=1)
+
+Hier findet ihr ein Beispiel aus der Forschungspraxis:
+
+> 🔬 Zerrer, P., & Engelmann, I. (2022). Users’ Political Motivations in Comment Sections on News Sites. International Journal of Communication, 16, 23. [Link](https://ijoc.org/index.php/ijoc/article/viewFile/18852/3808)
+:::

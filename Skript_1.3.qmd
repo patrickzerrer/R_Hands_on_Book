@@ -10,4 +10,4 @@ format:
     code-line-numbers: true
 ---
 
-# Was ist die Konsole und was ein Skript?
+# Die Logik von Markdown und Quarto

@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Einführung in R</span></a>
+ <span class="menu-text">Data-Bootcamp: Einführung in R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -194,12 +194,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Relevante Begriffe</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Datensätze</span></a>
+ <span class="menu-text">Data-Bootcamp: Datensätze</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -220,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Praktische Tipps</span></a>
+ <span class="menu-text">Der ALLBUS Datensatz</span></a>
   </div>
 </li>
       </ul>
@@ -228,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Der Umgang mit Daten</span></a>
+ <span class="menu-text">Data-Bootcamp: Der Umgang mit Daten</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -351,12 +357,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Proportionen Häufigkeiten mit dem Binomial Test und Pearson Chi-Quadrat</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -400,14 +400,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#durchführen-einer-faktorenanalyse-in-r" id="toc-durchführen-einer-faktorenanalyse-in-r" class="nav-link active" data-scroll-target="#durchführen-einer-faktorenanalyse-in-r"><span class="header-section-number">1</span> Durchführen einer Faktorenanalyse in R</a>
   <ul class="collapse">
-  <li><a href="#analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse" id="toc-analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse" class="nav-link" data-scroll-target="#analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse"><span class="header-section-number">1.1</span> Analyselogik, Ziel und Einsatzgebiete einer Faktorenanalyse</a></li>
-  <li><a href="#laden-der-nötigen-pakete" id="toc-laden-der-nötigen-pakete" class="nav-link" data-scroll-target="#laden-der-nötigen-pakete"><span class="header-section-number">1.2</span> Laden der nötigen Pakete</a></li>
-  <li><a href="#laden-des-datensatzes" id="toc-laden-des-datensatzes" class="nav-link" data-scroll-target="#laden-des-datensatzes"><span class="header-section-number">1.3</span> Laden des Datensatzes</a></li>
-  <li><a href="#teildatensatz-mit-den-benötigten-index-variablen" id="toc-teildatensatz-mit-den-benötigten-index-variablen" class="nav-link" data-scroll-target="#teildatensatz-mit-den-benötigten-index-variablen"><span class="header-section-number">1.4</span> Teildatensatz mit den benötigten Index-Variablen</a></li>
-  <li><a href="#deskriptive-statistik-für-den-teildatensatz" id="toc-deskriptive-statistik-für-den-teildatensatz" class="nav-link" data-scroll-target="#deskriptive-statistik-für-den-teildatensatz"><span class="header-section-number">1.5</span> Deskriptive Statistik für den Teildatensatz</a></li>
-  <li><a href="#suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse" id="toc-suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse" class="nav-link" data-scroll-target="#suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse"><span class="header-section-number">1.6</span> Suche nach der zugrunde liegenden Variable - Die Faktorenanalyse</a></li>
-  <li><a href="#andere-methoden-der-faktorenanalyse" id="toc-andere-methoden-der-faktorenanalyse" class="nav-link" data-scroll-target="#andere-methoden-der-faktorenanalyse"><span class="header-section-number">1.7</span> Andere Methoden der Faktorenanalyse</a></li>
-  <li><a href="#quellen-für-das-script" id="toc-quellen-für-das-script" class="nav-link" data-scroll-target="#quellen-für-das-script"><span class="header-section-number">1.8</span> Quellen für das Script</a></li>
+  <li><a href="#teildatensatz-mit-den-benötigten-variablen" id="toc-teildatensatz-mit-den-benötigten-variablen" class="nav-link" data-scroll-target="#teildatensatz-mit-den-benötigten-variablen"><span class="header-section-number">1.1</span> Teildatensatz mit den benötigten Variablen</a></li>
+  <li><a href="#deskriptive-statistik-für-den-teildatensatz" id="toc-deskriptive-statistik-für-den-teildatensatz" class="nav-link" data-scroll-target="#deskriptive-statistik-für-den-teildatensatz"><span class="header-section-number">1.2</span> Deskriptive Statistik für den Teildatensatz</a></li>
+  <li><a href="#suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse" id="toc-suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse" class="nav-link" data-scroll-target="#suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse"><span class="header-section-number">1.3</span> Suche nach der zugrunde liegenden Variable - Die Faktorenanalyse</a>
+  <ul class="collapse">
+  <li><a href="#modell-der-faktorenanalyse" id="toc-modell-der-faktorenanalyse" class="nav-link" data-scroll-target="#modell-der-faktorenanalyse"><span class="header-section-number">1.3.1</span> Modell der Faktorenanalyse</a></li>
+  <li><a href="#methode-der-schätzung" id="toc-methode-der-schätzung" class="nav-link" data-scroll-target="#methode-der-schätzung"><span class="header-section-number">1.3.2</span> Methode der Schätzung</a></li>
+  <li><a href="#anzahl-der-faktoren" id="toc-anzahl-der-faktoren" class="nav-link" data-scroll-target="#anzahl-der-faktoren"><span class="header-section-number">1.3.3</span> Anzahl der Faktoren</a></li>
+  <li><a href="#rotation-der-faktoren" id="toc-rotation-der-faktoren" class="nav-link" data-scroll-target="#rotation-der-faktoren"><span class="header-section-number">1.3.4</span> Rotation der Faktoren</a></li>
+  <li><a href="#interpretation-der-ergebnisse" id="toc-interpretation-der-ergebnisse" class="nav-link" data-scroll-target="#interpretation-der-ergebnisse"><span class="header-section-number">1.3.5</span> Interpretation der Ergebnisse</a></li>
+  </ul></li>
+  <li><a href="#danksagung-und-würdigung" id="toc-danksagung-und-würdigung" class="nav-link" data-scroll-target="#danksagung-und-würdigung"><span class="header-section-number">1.4</span> Danksagung und Würdigung</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -440,14 +443,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="durchführen-einer-faktorenanalyse-in-r" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Durchführen einer Faktorenanalyse in R</h1>
-<p>Wir möchten einen Index berechnen. Im Fragebogen des ESS sind einige Indikatoren enthalten, welche sich zu einem Index zusammenführen lassen. Dies möchten wir jetzt tun. Allerdings müssen wir sicher gehen, dass die Messung der Indikatoren auch wirklich nach unseren theoretischen Annahmen nach funktioniert hat. Konkret müssen wir überprüfen, ob sich die theoretisch angenommenen Dimensionen unseres Index auch in den Daten zu finden sind. Hierfür können wir die Faktorenanalyse oder Principal Component Analysis verwenden.</p>
-<section id="analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="analyselogik-ziel-und-einsatzgebiete-einer-faktorenanalyse"><span class="header-section-number">1.1</span> Analyselogik, Ziel und Einsatzgebiete einer Faktorenanalyse</h2>
-<p><video src="feb_2022_Exkurs%20Faktorenanalyse%20-%20Was%20ist%20ein%20Faktor.mp4" class="img-fluid" controls=""><a href="feb_2022_Exkurs Faktorenanalyse - Was ist ein Faktor.mp4">Video</a></video></p>
-<p>Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete und Daten.</p>
-</section>
-<section id="laden-der-nötigen-pakete" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="laden-der-nötigen-pakete"><span class="header-section-number">1.2</span> Laden der nötigen Pakete</h2>
+<p>Wir möchten - wie bereits in Kaptitel 5.1 angesprochen - ein Index die von uns angenommene latente Variable <em>Vertrauen in gesellschaftliche Institutionen</em> bilden. An dieser Stelle müssten wir uns zunächst Gedanken über das Konstrukt <em>Vertrauen in gesellschaftliche Institutionen</em> machen und eine theoretische Grundlage entwickeln. Wir überspringen an dieser Stelle diesen Schritt und legen euch eine kurze Literaturrecherche zu <em>Vertrauen</em> und <em>gesellschaftliche Institutionen</em> nahe. Wenn wir eine theoretische Vorstellung entwickelt haben, können wir mit der empirische Überprüfung der latenten Variable mittels explorativer Faktorenanalyse starten.</p>
+<p>Die explorative Faktorenanalyse (EFA) ist eine statistischen Methoden, die dazu dient, die kleinste Anzahl hypothetischer Konstrukte (auch als Faktoren, Dimensionen, latente Variablen bezeichnet) zu ermitteln. Indem die beobachtete Kovarianz zwischen einer Reihe von Messvariablen (auch als beobachtete Variablen oder Indikatoren bezeichnet) erklärt wird. Das heißt, es sollen die gemeinsamen Faktoren ermittelt werden, die die Struktur zwischen den gemessenen Variablen erklären. Wobei wir in den Sozialwissenschaften davon ausgehen, dass es sich bei diesen Faktoren um unbeobachtbare Merkmale - also latente Variablen - handelt.</p>
+<blockquote class="blockquote">
+<p><em>Ein Faktor ist eine unbeobachtbare Variable, die mehr als eine beobachtete Messgröße beeinflusst und für die Korrelationen zwischen diesen beobachteten Messgrößen verantwortlich ist. Mit anderen Worten, die beobachteten Maße stehen in Beziehung zueinander, weil sie eine gemeinsame Ursache haben (d.&nbsp;h. sie werden von demselben zugrunde liegenden Konstrukt beeinflusst); wenn das latente Konstrukt abgetrennt wurde, sind die Interkorrelationen zwischen den beobachteten Maßen gleich Null.</em> <a href="https://journals.sagepub.com/doi/10.1177/0095798418771807">(Brown, 2015: 10)</a></p>
+</blockquote>
+<p>In unserem Fall interessiert uns die latente Variable <em>Vertrauen in gesellschaftliche Institutionen</em>. Wir möchten Wissen, ob wir diese latente Variable bzw. diesen Faktor aus den einzelenen Indikatoren (den Fragen aus dem Allbus-Fragebogen) ableiten können. Konkret müssen wir überprüfen, ob sich die theoretisch angenommene latenten Variable auch in den Daten zu finden ist. Hierfür können wir die Faktorenanalyse oder Principal Component Analysis verwenden.</p>
+<p>Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(psych)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -496,176 +498,504 @@ Attache Paket: 'nFactors'</code></pre>
 ✖ dplyr::lag()     masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">library</span>(dplyr)</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="laden-des-datensatzes" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="laden-des-datensatzes"><span class="header-section-number">1.3</span> Laden des Datensatzes</h2>
+<p>Danach laden wir die Daten aus dem Allbus.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>daten <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/ESS8.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="teildatensatz-mit-den-benötigten-index-variablen" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="teildatensatz-mit-den-benötigten-index-variablen"><span class="header-section-number">1.4</span> Teildatensatz mit den benötigten Index-Variablen</h2>
-<p>Wir nehmen an, dass wir einen Index für die Erfassung politischer Kompetenz- und Einflusserwartungen (politische Selbstwirksamkeit) erstellen möchten.</p>
-<p>Messinstrument mit den Items: https://zis.gesis.org/skala/Beierlein-Kemper-Kovaleva-Rammstedt-Political-Efficacy-Kurzskala-(PEKS)# Ausführliche Erläuterung: https://www.gesis.org/fileadmin/kurzskalen/working_papers/PEKS_Workingpaper.pdf</p>
-<p>Hierfür haben wir aufgrundlage von Theorie die folgenden Indikatoren ausgewählt:</p>
-<p>psppsgva - Political system allows people to have a say in what government does actrolga - Able to take active role in political group psppipla - Political system allows people to have influence on politics cptppola - Confident in own ability to participate in politics</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>ess_wirksamkeit <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">select</span>(psppsgva,</span>
-<span id="cb16-3"><a href="#cb16-3"></a>         actrolga,</span>
-<span id="cb16-4"><a href="#cb16-4"></a>         psppipla,</span>
-<span id="cb16-5"><a href="#cb16-5"></a>         cptppola) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">mutate</span>(<span class="at">psppsgva =</span> <span class="fu">as.numeric</span>(psppsgva),</span>
-<span id="cb16-7"><a href="#cb16-7"></a>         <span class="at">actrolga =</span> <span class="fu">as.numeric</span>(actrolga),</span>
-<span id="cb16-8"><a href="#cb16-8"></a>         <span class="at">psppipla =</span> <span class="fu">as.numeric</span>(psppipla),</span>
-<span id="cb16-9"><a href="#cb16-9"></a>         <span class="at">cptppola =</span> <span class="fu">as.numeric</span>(cptppola)) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-10"><a href="#cb16-10"></a>  <span class="fu">na.omit</span>()</span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="fu">head</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 4
-  psppsgva actrolga psppipla cptppola
-     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1        2        2        2        3
-2        1        3        2        3
-3        2        2        2        2
-4        3        2        3        4
-5        3        3        4        1
-6        2        2        2        2</code></pre>
-</div>
-</div>
-</section>
-<section id="deskriptive-statistik-für-den-teildatensatz" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="deskriptive-statistik-für-den-teildatensatz"><span class="header-section-number">1.5</span> Deskriptive Statistik für den Teildatensatz</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">summary</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    psppsgva        actrolga        psppipla        cptppola    
- Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
- 1st Qu.:1.000   1st Qu.:1.000   1st Qu.:1.000   1st Qu.:1.000  
- Median :2.000   Median :2.000   Median :2.000   Median :2.000  
- Mean   :2.211   Mean   :2.085   Mean   :2.154   Mean   :2.133  
- 3rd Qu.:3.000   3rd Qu.:3.000   3rd Qu.:3.000   3rd Qu.:3.000  
- Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">#Alternativ kann describe() verwendet werden. Describe() ist eine Funktion des psych Pakets, welche die wichtigsten Streu- und Lageparameter für Variablen angiebt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse"><span class="header-section-number">1.6</span> Suche nach der zugrunde liegenden Variable - Die Faktorenanalyse</h2>
-<p>Die Faktorenanalyse bringt einige Voraussetzungen an die Daten mit sich, welche zu Beginn geprüft werden müssen. Zum Nachlesen bietet sich hier Field, A., Miles, J., &amp; Field, Z. (2012). Discovering statistics using R. 749-811 an.</p>
-<p>Voraussetzungen sind:</p>
+<section id="teildatensatz-mit-den-benötigten-variablen" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="teildatensatz-mit-den-benötigten-variablen"><span class="header-section-number">1.1</span> Teildatensatz mit den benötigten Variablen</h2>
+<p>Die Variablen werden aufgrund ihrer Nützlichkeit als Indikatoren für die zu untersuchende latente Variable ausgewählt. Entsprechend ist es wichtig, dass die Variablen <a href="https://dorsch.hogrefe.com/stichwort/validitaet-inhaltliche#search=59c61a28aad6ded0422fcadcc4bb8963&amp;offset=0">inhaltliche</a>, <a href="https://dorsch.hogrefe.com/stichwort/validitaet-diskriminante#search=bc41d30195bf495e7ff27be31e40a75c&amp;offset=0">diskriminante</a> und <a href="https://dorsch.hogrefe.com/stichwort/validitaet-konvergente">konvergente</a> Validität aufweisen. Etwas vereinfacht ausgedrückt sollten die Indikatoren über eine inhaltliche Passung zur latenten Variable verfügen, möglichst gut von anderen latenten Variablen abgrenzbar sein und mit mehreren unterschiedlichen Arten der Messung nachweisbar sein.</p>
+<p>In unserem Fall möchten wir das <em>Vertrauen in gesellschaftliche Institutionen</em> untersuchen, entsprechend sollten wir Variablen bzw. Indikatoren auswählen, die die unterschiedlichen Bestandteile der latenten Variable abdecken.</p>
+<p>Ganz konkret wählen wir Variablen aus, die das…</p>
 <ul>
-<li>Stichprobengröße (in unserem Fall kein Problem)</li>
-<li>Ausreichende Anzahl an Variablen (meist 4 oder mehr pro Faktor/Dimension)</li>
-<li>Die Variablen sind intervallskaliert (In der Praxis werden jedoch oft auch ordinalskalierte Variablen verwendet.)</li>
+<li><em>Vertrauen in das Gesundheitswesen</em> (pt01)</li>
+<li><em>Vertrauen in das Bundesverfassungsgericht</em> (pt02)</li>
+<li><em>Vertrauen in den Bundestag</em> (pt03)</li>
+<li><em>Vertrauen in die Stadt- oder Gemeindeverwaltung</em> (pt04)</li>
+<li><em>Vertrauen in die Katholische Kirche</em> (pt06)</li>
+<li><em>Vertrauen in die Evangelische Kirche</em> (pt07)</li>
+<li><em>Vertrauen in die Justiz</em> (pt08)</li>
+<li><em>Vertrauen in das Fernsehen</em> (pt09)</li>
+<li><em>Vertrauen in das Zeitungswesen</em> (pt10)</li>
+<li><em>Vertrauen in die Hochschulen</em> (pt11)</li>
+<li><em>Vertrauen in die Bundesregierung</em> (pt12)</li>
+<li><em>Vertrauen in die Polizei</em> (pt14)</li>
+<li><em>Vertrauen in die Politischen Parteien</em> (pt15)</li>
+<li><em>Vertrauen in die Kommission der EU</em> (pt19)</li>
+<li><em>Vertrauen in das Europäische Parlament</em> (pt20)</li>
 </ul>
-<p>Diese Punkte sind bei uns alle gegeben.</p>
-<p>Anmerkung: Wir können auch eine Faktorenanalyse mit nicht-kontinuierlichen Daten rechnen (bspw. dichotome Variablen). Hier sollten wir sollten wir die Korrelationsmatrix aus polychorischen Korrelationskoeffizienten konstruieren (diese können mit der Funktion polychor() aus dem Paket polycor berechnet werden</p>
-<p>Zunächst schauen wir uns einmal die Korrelationskoeffizienten für einige Variablen an.</p>
+<p>… erfassen.</p>
+<p>Für die statistische Identifizierung einer latenten Variablen bzw. eines Faktors werden mindestens drei gemessene Variablen benötigt, obwohl mehr Indikatoren vorzuziehen sind. Es werden beispielsweise auch vier bis sechs Indikatoren pro Faktor empfohlen. Im Allgemeinen funktioniert die EFA besser, wenn jeder Faktor überdeterminiert ist (d.&nbsp;h. es werden mehrere gemessene Variablen von der zu entdeckenden latenten Variable bzw. Faktor beeinflusst). Unabhängig von der Anzahl sollten Variablen, die voneinander abhängig sind, nicht in eine EFA einbezogen werden.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Auswählen einiger zusätzlichen Variablen zum zeigen der Korrelationstabelle</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-3"><a href="#cb21-3"></a>beispiel <span class="ot">=</span> daten <span class="sc">%&gt;%</span> </span>
-<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">select</span>(netusoft, </span>
-<span id="cb21-5"><a href="#cb21-5"></a>         trstplt, </span>
-<span id="cb21-6"><a href="#cb21-6"></a>         trstep, </span>
-<span id="cb21-7"><a href="#cb21-7"></a>         psppsgva, </span>
-<span id="cb21-8"><a href="#cb21-8"></a>         actrolga,</span>
-<span id="cb21-9"><a href="#cb21-9"></a>         psppipla,</span>
-<span id="cb21-10"><a href="#cb21-10"></a>         cptppola) <span class="sc">%&gt;%</span> </span>
-<span id="cb21-11"><a href="#cb21-11"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(netusoft<span class="sc">:</span>cptppola, as.numeric)) <span class="sc">%&gt;%</span> <span class="co"># mit across kann die gleiche Funktion - in diesem Fall as.numeric() - mehrere Variablen angewandt werden</span></span>
-<span id="cb21-12"><a href="#cb21-12"></a>  <span class="fu">na.omit</span>()</span>
-<span id="cb21-13"><a href="#cb21-13"></a></span>
-<span id="cb21-14"><a href="#cb21-14"></a><span class="co"># Bessere Darstellung der Tabelle mit htmlTable und gerundeten Werten für bessere Lesbarkeit</span></span>
-<span id="cb21-15"><a href="#cb21-15"></a></span>
-<span id="cb21-16"><a href="#cb21-16"></a><span class="fu">library</span>(htmlTable) <span class="co"># Falls das Paket noch nicht installiert ist, muss es mit install.packages("htmlTable") installiert werden</span></span>
-<span id="cb21-17"><a href="#cb21-17"></a><span class="fu">htmlTable</span>(<span class="fu">round</span>(<span class="fu">cor</span>(beispiel), <span class="at">digits =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>allbus_vertrauen <span class="ot">=</span> daten <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  </span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="co"># Wir wählen mit select() die gewünschten Variablen aus</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">select</span>(pt01<span class="sc">:</span>pt20) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-5"><a href="#cb16-5"></a>  </span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="co"># die Kombination aus mutate() und across() ermöglicht es uns die Funktion as.numeric() in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-8"><a href="#cb16-8"></a></span>
+<span id="cb16-9"><a href="#cb16-9"></a>  <span class="co"># Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen)</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">42</span>), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-11"><a href="#cb16-11"></a>  </span>
+<span id="cb16-12"><a href="#cb16-12"></a>  <span class="co"># Wir schmeißen fehlende Werte raus</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Wir bennen die ausgewählten Indikatoren um, damit die Bezeichnungen der Indikatoren für uns leichter zu merken sind.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>allbus_vertrauen <span class="ot">=</span> allbus_vertrauen <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2"></a>  </span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="co"># mit dem rename() Befehl können wir die Variablen umbennen</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">rename</span>(<span class="at">Ver_Gesundheitswesen =</span> pt01,</span>
+<span id="cb17-5"><a href="#cb17-5"></a>         <span class="at">Ver_BVerfG =</span> pt02,</span>
+<span id="cb17-6"><a href="#cb17-6"></a>         <span class="at">Ver_Bundestag =</span> pt03,</span>
+<span id="cb17-7"><a href="#cb17-7"></a>         <span class="at">Ver_Verwaltung =</span> pt04,</span>
+<span id="cb17-8"><a href="#cb17-8"></a>         <span class="at">Ver_kath_Kirche =</span> pt06,</span>
+<span id="cb17-9"><a href="#cb17-9"></a>         <span class="at">Ver_evan_Kirche =</span> pt07,</span>
+<span id="cb17-10"><a href="#cb17-10"></a>         <span class="at">Ver_Justiz =</span> pt08,</span>
+<span id="cb17-11"><a href="#cb17-11"></a>         <span class="at">Ver_TV =</span> pt09,</span>
+<span id="cb17-12"><a href="#cb17-12"></a>         <span class="at">Ver_Zeitung =</span> pt10,</span>
+<span id="cb17-13"><a href="#cb17-13"></a>         <span class="at">Ver_Uni =</span> pt11,</span>
+<span id="cb17-14"><a href="#cb17-14"></a>         <span class="at">Ver_Regierung =</span> pt12,</span>
+<span id="cb17-15"><a href="#cb17-15"></a>         <span class="at">Ver_Polizei =</span> pt14,</span>
+<span id="cb17-16"><a href="#cb17-16"></a>         <span class="at">Ver_Parteien =</span> pt15,</span>
+<span id="cb17-17"><a href="#cb17-17"></a>         <span class="at">Ver_Kom_EU =</span> pt19,</span>
+<span id="cb17-18"><a href="#cb17-18"></a>         <span class="at">Ver_EU_Par =</span> pt20)</span>
+<span id="cb17-19"><a href="#cb17-19"></a><span class="fu">head</span>(allbus_vertrauen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 15
+  Ver_Gesundheitswesen Ver_BVerfG Ver_Bundestag Ver_Verwaltung Ver_kath_Kirche
+                 &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt;
+1                    7          7             4              2               3
+2                    4          7             4              4               2
+3                    3          4             5              6               1
+4                    5          5             4              5               3
+5                    4          7             5              3               2
+6                    3          3             3              3               1
+# ℹ 10 more variables: Ver_evan_Kirche &lt;dbl&gt;, Ver_Justiz &lt;dbl&gt;, Ver_TV &lt;dbl&gt;,
+#   Ver_Zeitung &lt;dbl&gt;, Ver_Uni &lt;dbl&gt;, Ver_Regierung &lt;dbl&gt;, Ver_Polizei &lt;dbl&gt;,
+#   Ver_Parteien &lt;dbl&gt;, Ver_Kom_EU &lt;dbl&gt;, Ver_EU_Par &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Neben der Auswahl der Variablen bzw. Indikatoren müssen auch die Fälle (in unserem Fall die Anzahl der befragten Personen) festgelegt werden. Hier sollten wir uns zunächst fragen, ob die Stichprobe der Teilnehmer in Bezug auf die gemessenen Indikatoren sinnvoll ist? Handelt es sich um eine repräsentative Stichprobe? Bei dem Allbus ist das der Fall und entsprechend können wir davon ausgehen, dass wir eine passende Stichprobe für die Durchführung eine EFA vorliegen haben.</p>
+</section>
+<section id="deskriptive-statistik-für-den-teildatensatz" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="deskriptive-statistik-für-den-teildatensatz"><span class="header-section-number">1.2</span> Deskriptive Statistik für den Teildatensatz</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">summary</span>(allbus_vertrauen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Ver_Gesundheitswesen   Ver_BVerfG    Ver_Bundestag   Ver_Verwaltung 
+ Min.   :1.000        Min.   :1.000   Min.   :1.000   Min.   :1.000  
+ 1st Qu.:4.000        1st Qu.:4.000   1st Qu.:3.000   1st Qu.:4.000  
+ Median :5.000        Median :6.000   Median :4.000   Median :5.000  
+ Mean   :4.939        Mean   :5.255   Mean   :4.058   Mean   :4.482  
+ 3rd Qu.:6.000        3rd Qu.:6.000   3rd Qu.:5.000   3rd Qu.:5.000  
+ Max.   :7.000        Max.   :7.000   Max.   :7.000   Max.   :7.000  
+ Ver_kath_Kirche Ver_evan_Kirche   Ver_Justiz        Ver_TV     
+ Min.   :1.000   Min.   :1.00    Min.   :1.000   Min.   :1.000  
+ 1st Qu.:1.000   1st Qu.:1.00    1st Qu.:4.000   1st Qu.:3.000  
+ Median :2.000   Median :3.00    Median :5.000   Median :4.000  
+ Mean   :2.331   Mean   :3.04    Mean   :4.581   Mean   :3.577  
+ 3rd Qu.:3.000   3rd Qu.:4.00    3rd Qu.:6.000   3rd Qu.:4.000  
+ Max.   :7.000   Max.   :7.00    Max.   :7.000   Max.   :7.000  
+  Ver_Zeitung       Ver_Uni      Ver_Regierung    Ver_Polizei     Ver_Parteien 
+ Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.00  
+ 1st Qu.:3.000   1st Qu.:4.000   1st Qu.:3.000   1st Qu.:4.000   1st Qu.:2.00  
+ Median :4.000   Median :5.000   Median :4.000   Median :5.000   Median :3.00  
+ Mean   :4.012   Mean   :5.203   Mean   :4.054   Mean   :4.948   Mean   :3.19  
+ 3rd Qu.:5.000   3rd Qu.:6.000   3rd Qu.:5.000   3rd Qu.:6.000   3rd Qu.:4.00  
+ Max.   :7.000   Max.   :7.000   Max.   :7.000   Max.   :7.000   Max.   :7.00  
+   Ver_Kom_EU      Ver_EU_Par   
+ Min.   :1.000   Min.   :1.000  
+ 1st Qu.:2.000   1st Qu.:2.000  
+ Median :4.000   Median :4.000  
+ Mean   :3.515   Mean   :3.556  
+ 3rd Qu.:5.000   3rd Qu.:5.000  
+ Max.   :7.000   Max.   :7.000  </code></pre>
+</div>
+</div>
+</section>
+<section id="suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse"><span class="header-section-number">1.3</span> Suche nach der zugrunde liegenden Variable - Die Faktorenanalyse</h2>
+<p>Die Faktorenanalyse bringt, wie jedes statistische Verfahren, eine Reihe von Vorraussetzungen mit. Diese Vorraussetzungen sollten wir kennen und bei der Anwendung der Faktorenanalyse sicher gehen, dass wir die Vorraussetzungen beachtet haben. Viele der Vorraussetzungen beziehen sich auf Pearson-Korrelationskoeffizienten, welcher die statistsiche Grundlage für die Berechnung der Faktoren bildet.</p>
+<ul>
+<li><em>Varianz</em>: Wir sollten sichergehen, dass die Daten aus unserer Stichprobe ausreichend varrieren. Wir werfen hierfür ein Blick in die Daten.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Visuelle Überprüfung mit einem Histogram für die erste Variable (pt01)</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>colors <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"darkgreen"</span>, <span class="dv">1</span>))</span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> colors) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_5.2_files/figure-html/Varianz-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><em>Linearität</em>: Der Pearson-Korrelationskoeffizient (r) misst die lineare Beziehung zwischen zwei Variablen. Wenn die tatsächliche Beziehung nicht linear ist, dann verringert sich der Wert von r. Wir können auf Linearität u.a. visuell durch das Betrachten der Daten mittel Streudiagramm prüfen.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Visuelle Überprüfung mit einem Streudiagramm für die ersten beiden Variable (Ver_Gesundheitswesen und Ver_BVerfG)</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen, <span class="at">y =</span> Ver_BVerfG)) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">geom_abline</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkgreen"</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Skript_5.2_files/figure-html/Linearität-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><em>Normalverteilung</em>: Der Pearson-Korrelationskoeffizient setzt eine Normalverteilung voraus. Allerdings finden sich in der Realität fast nie perfekt normalverteilte Daten. Schiefe und Kurtosis sind besonders einflussreich die Ergebnisse der Faktorenanalyse und können im Extremfall artefaktische Ergenbnisse erzeugen.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Visuelle Überprüfung mit einem Histogram für die erste Variable (pt01 / Ver_Gesundheitswesen)</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="co"># Visuelle Überprüfung mit einem Histogram für die erste Variable (pt01)</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>colors <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"darkgreen"</span>, <span class="dv">1</span>))</span>
+<span id="cb24-4"><a href="#cb24-4"></a></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen)) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> colors) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_5.2_files/figure-html/Normalverteilung-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Statistische Überprüfung mittels Shapiro Wilk Test für die erste Variable (pt01)</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">shapiro.test</span>(allbus_vertrauen<span class="sc">$</span>Ver_Gesundheitswesen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  allbus_vertrauen$Ver_Gesundheitswesen
+W = 0.92081, p-value &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Ein p-Wert unter 0.05 = keine Normalverteilung </span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="co"># Ein p-Wert über 0.05 = Normalverteilung</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p><em>Level der Messung</em>: Bei Pearson-Korrelationen wird davon ausgegangen, dass normalverteilte Variablen auf Intervall- oder Verhältnisskalen gemessen werden, d.&nbsp;h. es handelt sich um kontinuierliche Daten mit gleichen Intervallen. Diese Eigenschaften treffen nicht auf ordinale (bspw. Kategorien) oder dochotome (bspw. Wahr-Falsch-Items) Variablen zu, was sich negativ auf Pearson-Korrelationskoeffizieten auswirkt und zu verzerrten Ergebnissen führen kann. Allerdings ist ein beträchtlicher Teil der Daten, mit denen wir zu tun haben, ordinal oder dichotom skaliert, um auch mit diesen Daten arbeiten zu können nutzen wir die polychorische Korrelation, welche robuster Nicht-Normalverteilung ist.</p></li>
+<li><p><em>Fehlende Werte</em>: In jeder Studie sollten wir die Anzahl und die Art der fehlenden Werte sowie die Gründe und die Methoden für den Umgang mit diesen Daten angegeben werden.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Wir haben den Code bereits am Anfang ausgefürht</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>allbus_vertrauen <span class="ot">=</span> allbus_vertrauen <span class="sc">%&gt;%</span>  </span>
+<span id="cb28-3"><a href="#cb28-3"></a>  </span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="co"># Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen)</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(Ver_Gesundheitswesen<span class="sc">:</span>Ver_EU_Par, <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">42</span>), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-6"><a href="#cb28-6"></a>  </span>
+<span id="cb28-7"><a href="#cb28-7"></a>  <span class="co"># Wir schmeißen fehlende Werte raus</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><em>Ausreißer / Outliers</em>: Wir sollten Ausreißer identifizieren und im Zweifel von der Analyse ausschließen, da diese zu einer Verzerrung der Ergebnisse führen können. Zu den Methoden zur Erkennung von Ausreißern gehören Boxplots und Streudiagramme für einzelne Variablen sowie der Mahalanobis-Abstand für mehrere Variablen.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">boxplot</span>(allbus_vertrauen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_5.2_files/figure-html/Beispiel Boxplot-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><em>Passung der Daten für die Faktorenanalyse</em>: Wir sollten trotz unserer guten Datengrundlage nochmals prüfen, ob die gemessenen Variablen ausreichend miteinander korreliert sind, um eine Faktorenanalyse zu rechtfertigen. Hierfür können wir einen Blick in die Korrelationsmatrix werfen - eine beträchtliche Anzahl von Korrelationen sollte ±.30 überschreiten. Alternativ können wir ein objektiveren Test der Faktorfähigkeit der Korrelationsmatrix durchführen. Hierfür greifen wir auf den Sphärizitätstest nach Bartlett (1954) zurück.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">library</span>(htmlTable) <span class="co"># Falls das Paket noch nicht installiert ist, muss es mit install.packages("htmlTable") installiert werden</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">htmlTable</span>(<span class="fu">round</span>(<span class="fu">cor</span>(allbus_vertrauen), <span class="at">digits =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="gmisc_table table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th" style="text-align: left; border-bottom: 1px solid grey; border-top: 2px solid grey;"></th>
-<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">netusoft</th>
-<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">trstplt</th>
-<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">trstep</th>
-<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">psppsgva</th>
-<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">actrolga</th>
-<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">psppipla</th>
-<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">cptppola</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Gesundheitswesen</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_BVerfG</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Bundestag</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Verwaltung</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_kath_Kirche</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_evan_Kirche</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Justiz</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_TV</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Zeitung</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Uni</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Regierung</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Polizei</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Parteien</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Kom_EU</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_EU_Par</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">netusoft</td>
+<td style="text-align: left;">Ver_Gesundheitswesen</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.088</td>
-<td style="text-align: center;">0.128</td>
-<td style="text-align: center;">0.176</td>
-<td style="text-align: center;">0.267</td>
-<td style="text-align: center;">0.224</td>
-<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">0.435</td>
+<td style="text-align: center;">0.446</td>
+<td style="text-align: center;">0.375</td>
+<td style="text-align: center;">0.184</td>
+<td style="text-align: center;">0.21</td>
+<td style="text-align: center;">0.384</td>
+<td style="text-align: center;">0.337</td>
+<td style="text-align: center;">0.334</td>
+<td style="text-align: center;">0.37</td>
+<td style="text-align: center;">0.43</td>
+<td style="text-align: center;">0.413</td>
+<td style="text-align: center;">0.349</td>
+<td style="text-align: center;">0.359</td>
+<td style="text-align: center;">0.357</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">trstplt</td>
-<td style="text-align: center;">0.088</td>
+<td style="text-align: left;">Ver_BVerfG</td>
+<td style="text-align: center;">0.435</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.574</td>
+<td style="text-align: center;">0.629</td>
+<td style="text-align: center;">0.397</td>
+<td style="text-align: center;">0.148</td>
+<td style="text-align: center;">0.223</td>
+<td style="text-align: center;">0.635</td>
+<td style="text-align: center;">0.385</td>
 <td style="text-align: center;">0.424</td>
-<td style="text-align: center;">0.187</td>
-<td style="text-align: center;">0.421</td>
-<td style="text-align: center;">0.178</td>
+<td style="text-align: center;">0.474</td>
+<td style="text-align: center;">0.561</td>
+<td style="text-align: center;">0.45</td>
+<td style="text-align: center;">0.429</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.476</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">trstep</td>
-<td style="text-align: center;">0.128</td>
-<td style="text-align: center;">0.574</td>
+<td style="text-align: left;">Ver_Bundestag</td>
+<td style="text-align: center;">0.446</td>
+<td style="text-align: center;">0.629</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.294</td>
-<td style="text-align: center;">0.132</td>
-<td style="text-align: center;">0.291</td>
-<td style="text-align: center;">0.122</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">psppsgva</td>
-<td style="text-align: center;">0.176</td>
-<td style="text-align: center;">0.424</td>
-<td style="text-align: center;">0.294</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0.329</td>
-<td style="text-align: center;">0.655</td>
-<td style="text-align: center;">0.312</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">actrolga</td>
+<td style="text-align: center;">0.553</td>
 <td style="text-align: center;">0.267</td>
-<td style="text-align: center;">0.187</td>
-<td style="text-align: center;">0.132</td>
-<td style="text-align: center;">0.329</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0.422</td>
-<td style="text-align: center;">0.688</td>
+<td style="text-align: center;">0.323</td>
+<td style="text-align: center;">0.571</td>
+<td style="text-align: center;">0.483</td>
+<td style="text-align: center;">0.487</td>
+<td style="text-align: center;">0.42</td>
+<td style="text-align: center;">0.816</td>
+<td style="text-align: center;">0.445</td>
+<td style="text-align: center;">0.677</td>
+<td style="text-align: center;">0.656</td>
+<td style="text-align: center;">0.661</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">psppipla</td>
-<td style="text-align: center;">0.224</td>
-<td style="text-align: center;">0.421</td>
-<td style="text-align: center;">0.291</td>
-<td style="text-align: center;">0.655</td>
-<td style="text-align: center;">0.422</td>
+<td style="text-align: left;">Ver_Verwaltung</td>
+<td style="text-align: center;">0.375</td>
+<td style="text-align: center;">0.397</td>
+<td style="text-align: center;">0.553</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.408</td>
+<td style="text-align: center;">0.274</td>
+<td style="text-align: center;">0.306</td>
+<td style="text-align: center;">0.471</td>
+<td style="text-align: center;">0.361</td>
+<td style="text-align: center;">0.377</td>
+<td style="text-align: center;">0.384</td>
+<td style="text-align: center;">0.485</td>
+<td style="text-align: center;">0.422</td>
+<td style="text-align: center;">0.472</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.455</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; border-bottom: 2px solid grey;">cptppola</td>
-<td style="text-align: center; border-bottom: 2px solid grey;">0.25</td>
-<td style="text-align: center; border-bottom: 2px solid grey;">0.178</td>
-<td style="text-align: center; border-bottom: 2px solid grey;">0.122</td>
-<td style="text-align: center; border-bottom: 2px solid grey;">0.312</td>
-<td style="text-align: center; border-bottom: 2px solid grey;">0.688</td>
-<td style="text-align: center; border-bottom: 2px solid grey;">0.408</td>
+<td style="text-align: left;">Ver_kath_Kirche</td>
+<td style="text-align: center;">0.184</td>
+<td style="text-align: center;">0.148</td>
+<td style="text-align: center;">0.267</td>
+<td style="text-align: center;">0.274</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.699</td>
+<td style="text-align: center;">0.23</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">0.202</td>
+<td style="text-align: center;">0.138</td>
+<td style="text-align: center;">0.261</td>
+<td style="text-align: center;">0.219</td>
+<td style="text-align: center;">0.301</td>
+<td style="text-align: center;">0.288</td>
+<td style="text-align: center;">0.284</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_evan_Kirche</td>
+<td style="text-align: center;">0.21</td>
+<td style="text-align: center;">0.223</td>
+<td style="text-align: center;">0.323</td>
+<td style="text-align: center;">0.306</td>
+<td style="text-align: center;">0.699</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.271</td>
+<td style="text-align: center;">0.258</td>
+<td style="text-align: center;">0.279</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">0.327</td>
+<td style="text-align: center;">0.27</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;">0.328</td>
+<td style="text-align: center;">0.325</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ver_Justiz</td>
+<td style="text-align: center;">0.384</td>
+<td style="text-align: center;">0.635</td>
+<td style="text-align: center;">0.571</td>
+<td style="text-align: center;">0.471</td>
+<td style="text-align: center;">0.23</td>
+<td style="text-align: center;">0.271</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.356</td>
+<td style="text-align: center;">0.418</td>
+<td style="text-align: center;">0.453</td>
+<td style="text-align: center;">0.56</td>
+<td style="text-align: center;">0.53</td>
+<td style="text-align: center;">0.48</td>
+<td style="text-align: center;">0.534</td>
+<td style="text-align: center;">0.541</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_TV</td>
+<td style="text-align: center;">0.337</td>
+<td style="text-align: center;">0.385</td>
+<td style="text-align: center;">0.483</td>
+<td style="text-align: center;">0.361</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">0.258</td>
+<td style="text-align: center;">0.356</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.714</td>
+<td style="text-align: center;">0.378</td>
+<td style="text-align: center;">0.49</td>
+<td style="text-align: center;">0.351</td>
+<td style="text-align: center;">0.492</td>
+<td style="text-align: center;">0.411</td>
+<td style="text-align: center;">0.415</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ver_Zeitung</td>
+<td style="text-align: center;">0.334</td>
+<td style="text-align: center;">0.424</td>
+<td style="text-align: center;">0.487</td>
+<td style="text-align: center;">0.377</td>
+<td style="text-align: center;">0.202</td>
+<td style="text-align: center;">0.279</td>
+<td style="text-align: center;">0.418</td>
+<td style="text-align: center;">0.714</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.488</td>
+<td style="text-align: center;">0.502</td>
+<td style="text-align: center;">0.365</td>
+<td style="text-align: center;">0.489</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.461</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_Uni</td>
+<td style="text-align: center;">0.37</td>
+<td style="text-align: center;">0.474</td>
+<td style="text-align: center;">0.42</td>
+<td style="text-align: center;">0.384</td>
+<td style="text-align: center;">0.138</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">0.453</td>
+<td style="text-align: center;">0.378</td>
+<td style="text-align: center;">0.488</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.467</td>
+<td style="text-align: center;">0.409</td>
+<td style="text-align: center;">0.368</td>
+<td style="text-align: center;">0.43</td>
+<td style="text-align: center;">0.435</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ver_Regierung</td>
+<td style="text-align: center;">0.43</td>
+<td style="text-align: center;">0.561</td>
+<td style="text-align: center;">0.816</td>
+<td style="text-align: center;">0.485</td>
+<td style="text-align: center;">0.261</td>
+<td style="text-align: center;">0.327</td>
+<td style="text-align: center;">0.56</td>
+<td style="text-align: center;">0.49</td>
+<td style="text-align: center;">0.502</td>
+<td style="text-align: center;">0.467</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.494</td>
+<td style="text-align: center;">0.719</td>
+<td style="text-align: center;">0.699</td>
+<td style="text-align: center;">0.694</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_Polizei</td>
+<td style="text-align: center;">0.413</td>
+<td style="text-align: center;">0.45</td>
+<td style="text-align: center;">0.445</td>
+<td style="text-align: center;">0.422</td>
+<td style="text-align: center;">0.219</td>
+<td style="text-align: center;">0.27</td>
+<td style="text-align: center;">0.53</td>
+<td style="text-align: center;">0.351</td>
+<td style="text-align: center;">0.365</td>
+<td style="text-align: center;">0.409</td>
+<td style="text-align: center;">0.494</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.414</td>
+<td style="text-align: center;">0.374</td>
+<td style="text-align: center;">0.37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ver_Parteien</td>
+<td style="text-align: center;">0.349</td>
+<td style="text-align: center;">0.429</td>
+<td style="text-align: center;">0.677</td>
+<td style="text-align: center;">0.472</td>
+<td style="text-align: center;">0.301</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;">0.48</td>
+<td style="text-align: center;">0.492</td>
+<td style="text-align: center;">0.489</td>
+<td style="text-align: center;">0.368</td>
+<td style="text-align: center;">0.719</td>
+<td style="text-align: center;">0.414</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.707</td>
+<td style="text-align: center;">0.696</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_Kom_EU</td>
+<td style="text-align: center;">0.359</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.656</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.288</td>
+<td style="text-align: center;">0.328</td>
+<td style="text-align: center;">0.534</td>
+<td style="text-align: center;">0.411</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.43</td>
+<td style="text-align: center;">0.699</td>
+<td style="text-align: center;">0.374</td>
+<td style="text-align: center;">0.707</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.957</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; border-bottom: 2px solid grey;">Ver_EU_Par</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.357</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.476</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.661</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.455</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.284</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.325</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.541</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.415</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.461</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.435</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.694</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.37</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.696</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.957</td>
 <td style="text-align: center; border-bottom: 2px solid grey;">1</td>
 </tr>
 </tbody>
@@ -674,38 +1004,66 @@ Attache Paket: 'nFactors'</code></pre>
 </div>
 <p>Noch zu prüfen ist die Korrelation der Items miteinander, hierfür nehmen wir den Bartlett Test.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">cortest.bartlett</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">cortest.bartlett</span>(allbus_vertrauen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>R was not square, finding R from data</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$chisq
-[1] 61775.54
+[1] 33164.76
 
 $p.value
 [1] 0
 
 $df
-[1] 6</code></pre>
+[1] 105</code></pre>
 </div>
 </div>
-<p>Wenn der p-Wert signifikant ist (ist hier der Fall) korrelieren die Items miteinandern. Das ist gewünscht.</p>
-<p>Ansonsten prüfen wir das Kaiser-Meyer-Olkin-Kriterium (KMO) und die Measure of Sampling Adequacy (MSA) anschauen.</p>
+<p>Bei großen Stichprobenumfängen, wie in unserem Fall mit dem Allbus, reagiert der Bartlett-Test selbst auf geringfügige Abweichungen vom Zufallsprinzip empfindlich, so dass seine Ergebnisse durch ein Maß für die Stichprobenadäquanz ergänzt werden sollten. Das Kaiser-Meyer-Olkin (KMO; Kaiser, 1974) Maß für die Stichprobenadäquanz ist das Verhältnis von Korrelationen und partiellen Korrelationen, das das Ausmaß widerspiegelt, in dem Korrelationen eine Folge der über alle Variablen geteilten Varianz sind und nicht der von bestimmten Variablenpaaren geteilten Varianz.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">KMO</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">KMO</span>(allbus_vertrauen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Kaiser-Meyer-Olkin factor adequacy
-Call: KMO(r = ess_wirksamkeit)
-Overall MSA =  0.65
+Call: KMO(r = allbus_vertrauen)
+Overall MSA =  0.89
 MSA for each item = 
-psppsgva actrolga psppipla cptppola 
-    0.65     0.65     0.67     0.65 </code></pre>
+Ver_Gesundheitswesen           Ver_BVerfG        Ver_Bundestag 
+                0.96                 0.91                 0.91 
+      Ver_Verwaltung      Ver_kath_Kirche      Ver_evan_Kirche 
+                0.95                 0.73                 0.78 
+          Ver_Justiz               Ver_TV          Ver_Zeitung 
+                0.94                 0.87                 0.88 
+             Ver_Uni        Ver_Regierung          Ver_Polizei 
+                0.94                 0.92                 0.94 
+        Ver_Parteien           Ver_Kom_EU           Ver_EU_Par 
+                0.97                 0.83                 0.83 </code></pre>
 </div>
 </div>
-<p>Die Werte für die MSA Werte sollten jeweils größer als 0.5 sein. Ist hier der Fall. Falls ein Item unter 0.5 liegen sollte würde dieses ausgeschlossen werden.</p>
-<p>Als nächster Schritt möchten wir Wissen wieviele Faktoren wir aus den Daten “ziehen” möchten. Hierfür nutzen wir die Funktion nfactors()</p>
+<p>KMO-Werte reichen von 0,00 bis 1,00 und können sowohl für die gesamte Korrelationsmatrix als auch für jede gemessene Variable berechnet werden. Insgesamt sind KMO-Werte ≥.70 erwünscht und Werte unter .50 werden im Allgemeinen als inakzeptabel angesehen. In diesem Fall ist die Korrelationsmatrix nicht faktoriell.</p>
+<section id="modell-der-faktorenanalyse" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="modell-der-faktorenanalyse"><span class="header-section-number">1.3.1</span> Modell der Faktorenanalyse</h3>
+<p>Wenn wir den Begriff Faktorenanalyse verwenden, meinen wir meistens zwei eigentlich unterschiedliche Verfahren, die sich in Zweck und Berechnung unterscheiden: die Hauptkomponentenanalyse (PCA) und die allgemeine Faktorenanalyse. Die Hauptkomponentenanalyse analysiert die gesamte Korrelationsmatrix und zielt darauf ab, Daten zu reduzieren und dabei so viele Informationen aus dem ursprünglichen Datensatz wie möglich zu erhalten. Zu diesem Zweck berechnet die Hauptkomponentenanalyse Linearkombinationen der ursprünglichen Messvariablen, die so viele Informationen wie möglich erklären. Diese neuen Messvariablen werden als sogenannte Komponenten bezeichnet und sind im engeren Sinn keine latenten Konstrukte.</p>
+<p>Die Faktorenanalyse versucht im Unterschied dazu, die Gesamtvarianz der gemessenen Variablen in <em>gemeinsame</em> Varianz (Kommmunialität oder h2) und die <em>einzigartige</em> Varianzen (u2) zu trennen. Dies geschieht indem eine reduzierte Korrelationsmatrix analysiert wird, bei der eine Schätzung der gemeinsamen Varianz jeder Messvariablen auf der Diagonalen der Korrelationsmatrix platziert wird.</p>
+<p>Zusammenfassend liefern beide Methoden, also sowohl die PCA als auch die Faktorenanalyse eine Schätzungen der Gemeinsamkeit, aber nur die Faktorenanalyse kann die Einzigartigkeit (u2) jeder gemessenen Variable schätzen.</p>
+<p>Die meisten Methodiker:innen empfehlen, dass die gemeinsame Faktorenanalyse verwendet wird, um latente Konstrukte zu identifizieren. Fabrigar und Wegener (2012) empfahlen zum Beispiel Folgendes:</p>
+<blockquote class="blockquote">
+<p><em>When the goal of research is to identify latent constructs for theory building or to create measurement instruments in which the researcher wishes to make the case that the resulting measurement instrument reflects a meaningful underlying construct, we argue that common factor analysis (EFA) procedures are usually preferable.</em> (Fabrigar und Wegener, 2012: 32)</p>
+</blockquote>
+<p>In unserem Fall wenden wir eine Faktorenanalyse an, da wir uns für die latente Variable <em>Vertrauen in gesellschaftliche Institutionen</em> interessieren. Hierfür greifen wir auf das <code>psych</code>-Paket zurück, welches die Funktion <code>fa</code> für eine Faktorenanalyse enthält.</p>
+</section>
+<section id="methode-der-schätzung" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="methode-der-schätzung"><span class="header-section-number">1.3.2</span> Methode der Schätzung</h3>
+<p>Nachdem wir die Faktorenanalyse (EFA) als bevorzugtes Modell festgelegt haben, müssen wir noch die Methode zur Schätzung (Extraktion) des Faktorenmodells auswählen. Konkret suchen wir ein mathematischen Verfahren, dass die Beziehungen zwischen den gemessenen Variablen und den Faktoren (d.&nbsp;h. die Regression der gemessenen Variablen auf die gemeinsamen Faktoren) möglichst genau schätzt.</p>
+<p>Es existieren eine ganze Reihe von unterschiedlichen Schätzmethoden, von denen zwei Methoden am häufigsten angewendet werden. (1) Die ML-Schätzung (Maximum Liklyhood) beruht auf der Normalverteilung und ist entsprechend empfindlicher multivariater Normalität und erfordert meistens einen größere Stichprobe (mehr Fälle). (2) Die PA (wird auch als Hauptfaktoren, MINRES oder OLS bezeichnet) ist im Gegenzug dazu eine Methode der kleinsten Quadrate, welche keine Annahmen über Verteilungen trifft. PA nutzt hier eine wiederholte Zwischenschätzung, welche eine bessere Schätzung der Gemeinsamkeit ermöglicht und wiederholt diese bis eine zufriedenstellende Lösung erreicht ist.</p>
+<p>Die PA eignet sich als Methode der Schätzung insbesondere dann, wenn die Beziehung zwischen den gemessenen Variablen und den Faktoren relativ schwach sind (≤.40), der Stichprobenumfang relativ klein ist (≤300), die multivariate Normalität verletzt ist oder wenn die Anzahl der den gemessenen Variablen zugrunde liegenden Faktoren falsch spezifiziert ist. Im Gegensatz dazu ist eine ML-Schätzung besser geeignet, wenn die Beziehungen zwischen Faktoren und Variablen stark sind (&gt;.40), der Stichprobenumfang groß ist, multivariate Normalität erreicht wird und die Anzahl der Faktoren korrekt angegeben ist.</p>
+<p>Wir können für unser Beispiel weiterhin die Maximum-likelihood Faktorenanalyse aus dem <code>psych</code>-Paket mit der Funktion <code>fa</code> verwenden, da wir mit dem Allbus die entsprechenden Vorraussetzungen erfüllen. Für dieses Beispiel nutzen wir trotz der nicht perfekten Normalverteilung die ML Methode, alternativ könnten die PA Methode als robustere Variante nehmen.</p>
+</section>
+<section id="anzahl-der-faktoren" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="anzahl-der-faktoren"><span class="header-section-number">1.3.3</span> Anzahl der Faktoren</h3>
+<p>Bei einer gekonnten Anwendung der Faktorenanalyse werden Sparsamkeit und Vollständigkeit geschickt gegeneinander abgewogen. Wir möchten einen Kompromiss zwischen diesen beiden Extremen erreichen und somit ein Modell zu schätzen, das gerade genug Faktoren enthält, um die wichtige Kovariation zwischen den gemessenen Variablen zu berücksichtigen. Dieser Kompromiss erfordert, dass wir die Anzahl der Faktoren für die weitere Analyse festlegen. Hierfür können wir mehrere Modelle schätzen und somit Rückschlüsse auf ein optimales Modell ziehen. Vereinfacht können wir uns das Auswringen eines nassen Handtuchs vorstellen, der erste Faktor die häufigste Varianz extrahiert - ergo am meisten Wasser - und die nachfolgenden Faktoren sukzessive kleinere Anteile der Varianz extrahieren. Auf diese Art und Weise können wir durch die sequentiell absteigenden sogenannten Eigenwerten eine Schätzung des optimalen Modells vornehmen.</p>
+<p>Wir verwenden hierfür die ‘nfactors’-Funktion, welche uns mehere Schätzungen ausgibt.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">nfactors</span>(ess_wirksamkeit, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">fm=</span><span class="st">"MLE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">nfactors</span>(allbus_vertrauen, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">fm=</span><span class="st">"mle"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_5.2_files/figure-html/nfactors-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -714,83 +1072,191 @@ psppsgva actrolga psppipla cptppola
 Number of factors
 Call: vss(x = x, n = n, rotate = rotate, diagonal = diagonal, fm = fm, 
     n.obs = n.obs, plot = FALSE, title = title, use = use, cor = cor)
-VSS complexity 1 achieves a maximimum of 0.78  with  1  factors
-VSS complexity 2 achieves a maximimum of 0.94  with  3  factors
-The Velicer MAP achieves a minimum of 0.24  with  1  factors 
-Empirical BIC achieves a minimum of  12803.87  with  1  factors
-Sample Size adjusted BIC achieves a minimum of  15644.55  with  1  factors
+VSS complexity 1 achieves a maximimum of 0.88  with  1  factors
+VSS complexity 2 achieves a maximimum of 0.9  with  3  factors
+The Velicer MAP achieves a minimum of 0.04  with  1  factors 
+Empirical BIC achieves a minimum of  -125.8  with  6  factors
+Sample Size adjusted BIC achieves a minimum of  -26  with  8  factors
 
 Statistics by number of factors 
-  vss1 vss2  map dof chisq prob sqresid  fit RMSEA   BIC SABIC complex  eChisq
-1 0.78 0.00 0.24   2 15659    0    1.54 0.78  0.43 15638 15645     1.0 1.3e+04
-2 0.75 0.94 0.33  -1     0   NA    0.41 0.94    NA    NA    NA     1.2 2.0e-13
-3 0.75 0.94 1.00  -3     0   NA    0.41 0.94    NA    NA    NA     1.2 6.0e-18
-4 0.68 0.89   NA  -4  3079   NA    0.74 0.89    NA    NA    NA     1.3 1.6e+03
-     SRMR eCRMS  eBIC
-1 1.6e-01  0.28 12804
-2 6.3e-10    NA    NA
-3 3.4e-12    NA    NA
-4 5.7e-02    NA    NA</code></pre>
+   vss1 vss2   map dof   chisq     prob sqresid  fit RMSEA  BIC SABIC complex
+1  0.88 0.00 0.035  90 1.0e+04  0.0e+00     7.0 0.88 0.187 9520  9806     1.0
+2  0.57 0.90 0.040  76 5.0e+03  0.0e+00     5.8 0.90 0.141 4348  4590     1.5
+3  0.62 0.90 0.044  63 3.0e+03  0.0e+00     3.8 0.93 0.120 2514  2714     1.5
+4  0.51 0.85 0.048  51 1.6e+03 1.8e-308     3.0 0.95 0.098 1221  1383     1.7
+5  0.38 0.71 0.061  40 6.0e+02 1.2e-100     2.4 0.96 0.066  275   402     2.0
+6  0.38 0.68 0.076  30 3.0e+02  6.2e-46     2.2 0.96 0.053   56   151     2.1
+7  0.34 0.58 0.101  21 1.5e+02  1.1e-21     2.0 0.97 0.044  -19    48     2.4
+8  0.32 0.57 0.138  13 3.8e+01  3.1e-04     1.3 0.98 0.024  -67   -26     2.5
+9  0.32 0.55 0.164   6 9.6e+00  1.4e-01     1.4 0.98 0.014  -39   -20     2.6
+10 0.31 0.52 0.164   0 6.0e+00       NA     1.6 0.97    NA   NA    NA     2.7
+11 0.29 0.53 0.240  -5 7.4e-02       NA     1.4 0.98    NA   NA    NA     2.7
+12 0.29 0.48 0.412  -9 2.6e-06       NA     1.4 0.98    NA   NA    NA     2.6
+13 0.30 0.52 0.719 -12 1.4e-08       NA     1.5 0.98    NA   NA    NA     2.7
+14 0.29 0.52 1.000 -14 0.0e+00       NA     1.4 0.98    NA   NA    NA     2.7
+15 0.36 0.68    NA -15 9.2e+02       NA     2.5 0.96    NA   NA    NA     2.2
+    eChisq    SRMR  eCRMS eBIC
+1  5.5e+03 9.0e-02 0.0969 4749
+2  3.8e+03 7.4e-02 0.0875 3150
+3  1.5e+03 4.8e-02 0.0614 1029
+4  7.6e+02 3.3e-02 0.0480  347
+5  2.0e+02 1.7e-02 0.0279 -122
+6  1.2e+02 1.3e-02 0.0245 -126
+7  6.4e+01 9.7e-03 0.0217 -106
+8  1.0e+01 3.9e-03 0.0111  -95
+9  2.8e+00 2.0e-03 0.0085  -46
+10 2.5e+00 1.9e-03     NA   NA
+11 1.1e-02 1.2e-04     NA   NA
+12 1.3e-06 1.4e-06     NA   NA
+13 5.4e-09 8.9e-08     NA   NA
+14 1.4e-12 1.4e-09     NA   NA
+15 2.3e+02 1.9e-02     NA   NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">#?nfactors </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Hier wählen wir zunächst den R Console Output aus und schauen auf den MAP Test, welcher uns hier einen Faktor/Dimension vorschlägt. Die Funktion gibt uns noch eine Reihe anderer Werte aus, welche wir jetzt aber nicht im Detail anschauen. Eine genauere Beschreibung der Werte kann mit ?nfactors aufgerufen werden.</p>
-<p>Dieser Schritt ist sehr wichtig. Wir müssen im nächsten Schritt die Anzahl der Faktoren angeben. Hierfür müssen wir uns zunächst auf Grundlage der Statistischen Tests UND der theoretischen Überlegungen auf eine Anzahl von Faktoren bzw. Dimensionen festgelegt haben.</p>
-<p>In unserem Beispiel gehen wir testweise von einem Faktoren aus.</p>
-<p>Wir legen das Modell an mit folgenden Parametern: Maximum-Likelihood (ML) 1 Faktor Varimax-Rotation –&gt; Mit einer Rotation kann man die Interpretation der Faktoren verbessern, hier gibt es verschiedene Möglichkeiten “varimax” ist eine Option.</p>
+<p>Die minimalen durchschnittlichen Teilwerte (MAP), wird als die genauesten empirischen Schätzungen für die Anzahl der beizubehaltenden Faktoren betrachtet. Der MAP Wert schlägt uns einen Faktor vor, entsprechend gehen wir im folgenden von einem Faktor bzw. einer lateten Variable aus.</p>
+</section>
+<section id="rotation-der-faktoren" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="rotation-der-faktoren"><span class="header-section-number">1.3.4</span> Rotation der Faktoren</h3>
+<p>Bei der Durchführung der Faktorenanalyse werden sogenannte Faktorladungen ermittelt, die anzeigen, wie stark jede Variable mit den extrahierten Faktoren zusammenhängt. Während des Analyseprozesses kann es vorkommen, dass die Faktorladungen rotiert werden, um eine klarere und interpretierbarere Struktur der Faktoren zu erzielen. Die Rotation der Faktorladungen ermöglicht es, die Ausprägung der Faktoren auf weniger, aber stärker ausgeprägte Variablen zu konzentrieren, was die Interpretation und Verständlichkeit der Analyseergebnisse erleichtert. Es gibt verschiedene Rotationsmethoden, wie beispielsweise die Varimax- oder Quartimax-Rotation, die je nach Ziel der Faktorenanalyse angewendet werden können. Es existieren Dutzende von analytischen Rotationsmethoden, wobei Varimax die beliebteste orthogonale Rotationsmethode ist, während Promax und Oblimin die beliebtesten schrägen Rotationsmethoden sind. Sowohl bei Promax als auch bei Oblimin können wir den Grad der Korrelation zwischen den Faktoren kontrollieren (über die Parameter Kappa bzw. Delta), allerdings sind die von den meisten statistischen Softwareprogrammen automatisch angewandten Werte in der Regel ausreichend.</p>
+<p>Wichtig ist, dass sich die Interpretation der Faktorladungen zwischen orthogonalen und schrägen Rotationen unterscheiden. Bei orthogonalen Lösungen können die Faktorladungen als Korrelationen zwischen gemeinsamen Faktoren und gemessenen Variablen interpretiert werden. Diese Korrelationen reichen von -1,00 bis +1,00, und der Anteil der Varianz in einer gemessenen Variablen, der durch einen gemeinsamen Faktor beigetragen wurde, kann durch Quadrieren der Faktorladung berechnet werden. Im Gegensatz dazu ergeben sich bei schrägen Lösungen zwei verschiedene Arten von Faktorladungen: Struktur- und Musterkoeffizienten. Strukturkoeffizienten können auch als Korrelationen zwischen gemeinsamen Faktoren und den gemessenen Variablen interpretiert werden. Im Gegensatz dazu sind die Musterkoeffizienten keine einfachen Faktor-Variablen-Korrelationen mehr, sondern sie ähneln standardisierten partiellen Regressionskoeffizienten. Das heißt, sie sind Korrelationen zwischen gemeinsamen Faktoren und gemessenen Variablen, nachdem der Einfluss aller anderen gemeinsamen Faktoren kontrolliert (herausgerechnet) wurde. Dementsprechend können Musterkoeffizienten den Wert von 1,00 überschreiten und können nicht quadriert werden, um den Anteil der Varianz zu ermitteln, der eindeutig auf einen gemeinsamen Faktor zurückzuführen ist.</p>
+<p>In unserem Fall greifen wir auf die etablierte Rotationsmethode <code>varimax</code> zurück, welches wir entsprechend im R-Code spezifizieren. Zusätzlich geben wir unsere erwartete Anzahl an Faktoren an, welche wir zuvor bestimmt haben (in unserem Fall: 1).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">factanal</span>(ess_wirksamkeit, <span class="dv">1</span>, <span class="at">rotation =</span> <span class="st">"varimax"</span>)</span>
-<span id="cb30-2"><a href="#cb30-2"></a></span>
-<span id="cb30-3"><a href="#cb30-3"></a><span class="co"># Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a></span>
-<span id="cb30-5"><a href="#cb30-5"></a><span class="fu">print</span>(fit, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cutoff =</span> .<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># Wir führen die Faktorenanalyse aus und speichern die Ergebnisse in dem Objekt fit ab</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>fit <span class="ot">=</span>  <span class="fu">fa</span>(allbus_vertrauen, <span class="at">factors =</span> <span class="dv">1</span>, <span class="at">fm =</span> <span class="st">"ml"</span>, <span class="at">rotation =</span> <span class="st">"varimax"</span>)</span>
+<span id="cb38-3"><a href="#cb38-3"></a></span>
+<span id="cb38-4"><a href="#cb38-4"></a><span class="co"># Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind</span></span>
+<span id="cb38-5"><a href="#cb38-5"></a></span>
+<span id="cb38-6"><a href="#cb38-6"></a><span class="fu">print</span>(fit, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cutoff =</span> .<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-factanal(x = ess_wirksamkeit, factors = 1, rotation = "varimax")
+<pre><code>Factor Analysis using method =  ml
+Call: fa(r = allbus_vertrauen, fm = "ml", factors = 1, rotation = "varimax")
+Standardized loadings (pattern matrix) based upon correlation matrix
+                      ML1   h2   u2 com
+Ver_Gesundheitswesen 0.50 0.25 0.75   1
+Ver_BVerfG           0.65 0.42 0.58   1
+Ver_Bundestag        0.84 0.71 0.29   1
+Ver_Verwaltung       0.60 0.36 0.64   1
+Ver_kath_Kirche      0.35 0.12 0.88   1
+Ver_evan_Kirche      0.41 0.17 0.83   1
+Ver_Justiz           0.68 0.46 0.54   1
+Ver_TV               0.58 0.33 0.67   1
+Ver_Zeitung          0.61 0.37 0.63   1
+Ver_Uni              0.55 0.31 0.69   1
+Ver_Regierung        0.86 0.74 0.26   1
+Ver_Polizei          0.55 0.30 0.70   1
+Ver_Parteien         0.80 0.64 0.36   1
+Ver_Kom_EU           0.85 0.72 0.28   1
+Ver_EU_Par           0.85 0.72 0.28   1
 
-Uniquenesses:
-psppsgva actrolga psppipla cptppola 
-    0.75     0.33     0.65     0.36 
+                ML1
+SS loadings    6.64
+Proportion Var 0.44
 
-Loadings:
-         Factor1
-psppsgva 0.50   
-actrolga 0.82   
-psppipla 0.59   
-cptppola 0.80   
-
-               Factor1
-SS loadings       1.90
-Proportion Var    0.47
-
+Mean item complexity =  1
 Test of the hypothesis that 1 factor is sufficient.
-The chi square statistic is 15659.49 on 2 degrees of freedom.
-The p-value is 0 </code></pre>
+
+df null model =  105  with the objective function =  10.26 0.3 with Chi Square =  33164.76
+df of  the model are 90  and the objective function was  3.17 
+ 0.3
+The root mean square of the residuals (RMSR) is  0.09 
+The df corrected root mean square of the residuals is  0.1 
+ 0.3
+The harmonic n.obs is  3238 with the empirical chi square  5475.99  with prob &lt;  0 
+ 0.3The total n.obs was  3238  with Likelihood Chi Square =  10247.57  with prob &lt;  0 
+ 0.3
+Tucker Lewis Index of factoring reliability =  0.641
+RMSEA index =  0.187  and the 90 % confidence intervals are  0.184 0.19 0.3
+BIC =  9520.13
+Fit based upon off diagonal values = 0.96
+Measures of factor score adequacy             
+                                                   ML1
+Correlation of (regression) scores with factors   0.97
+Multiple R square of scores with factors          0.94
+Minimum correlation of possible factor scores     0.89</code></pre>
 </div>
 </div>
-<p>Beim Output ist das wichtigste die Faktorladungen. Im idealfall laden die Variablen nur jeweils auf einen Faktor. Wir haben bereits geringe Faktorladungen bereits aus der Darstellung ausgeschlossen.</p>
-<p>Hier laden alle Variablen mit hohen Werten auf den Faktor1. Wir können also davon ausgehen, dass wir diese Variablen zu einem Index verrechnen können.</p>
-<p>Jetzt schauen wir uns doch noch kurz die Uniquenes bzw. Kommunalitäten an. Die gibt uns an wieviel Varianz von den jeweiligen Variablen durch die Faktoren erklärt wird.</p>
+</section>
+<section id="interpretation-der-ergebnisse" class="level3" data-number="1.3.5">
+<h3 data-number="1.3.5" class="anchored" data-anchor-id="interpretation-der-ergebnisse"><span class="header-section-number">1.3.5</span> Interpretation der Ergebnisse</h3>
+<p>Bei der Betrachtung des Outputs der explorativen Faktorenanalyse beginnen wir mit den Faktorladungen. Faktorladungen geben an, wie stark jede Variable mit den extrahierten Faktoren korreliert. Hohe positive Ladungen zeigen eine starke Beziehung zwischen der Variable und dem Faktor an, während hohe negative Ladungen darauf hindeuten, dass die Variable invers mit dem Faktor zusammenhängt. Variablen mit Ladungen nahe null haben wenig oder keine Beziehung zum jeweiligen Faktor. Durch die Betrachtung dieser Ladungen können wir die die Faktoren interpretieren und auch benennen. Auf diese Art und Weise können wir Rückschlüsse auf die zugrunde liegende latente Variable ziehen. In unserem Fall übersteigen für alle Indikatoren die Faktorladungen über den Wert 0.3, was auf einen relativ starken und damit für uns guten Zusammenhang mit dem Faktor bzw. der latenten Variable spricht.</p>
+<p>Zusätzlich zur Interpretation der Faktorladungen ist es auch wichtig, die Uniquenes der Faktoren zu berücksichtigen. Diese zeigen an, wie viel Varianz in den Daten von jedem extrahierten Faktor erklärt wird. In anderen Worten sagt sie also aus, wie gut die Information der Variable in den Faktoren insgesamt erhalten geblieben ist.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="dv">1</span> <span class="sc">-</span> fit<span class="sc">$</span>uniquenesses</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">print</span>(fit<span class="sc">$</span>uniquenesses, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> psppsgva  actrolga  psppipla  cptppola 
-0.2456154 0.6655900 0.3458397 0.6386451 </code></pre>
+<pre><code>Ver_Gesundheitswesen           Ver_BVerfG        Ver_Bundestag 
+                0.75                 0.58                 0.29 
+      Ver_Verwaltung      Ver_kath_Kirche      Ver_evan_Kirche 
+                0.64                 0.88                 0.83 
+          Ver_Justiz               Ver_TV          Ver_Zeitung 
+                0.54                 0.67                 0.63 
+             Ver_Uni        Ver_Regierung          Ver_Polizei 
+                0.69                 0.26                 0.70 
+        Ver_Parteien           Ver_Kom_EU           Ver_EU_Par 
+                0.36                 0.28                 0.28 </code></pre>
 </div>
 </div>
-<p>Die Werte geben uns eine Idee davon, wie wichtig die Variablen für die erzielte Lösung sind.</p>
+<p>Wenn wir auf die Uniqueness der einzelnen Indikatoren blicken, wird relativ schnell klar, dass wir eine Reihe von Indikatoren mit hohen Uniqueness-Werten haben, die einen großen Anteil der Varianz der latenten Variable erklären und somit stärker als andere Indikatoren zu der latenten Variable “beitragen”.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Wie gebe ich die Ergebnisse korrekt an?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Ergebnisse von Regressionsanalysen werden meistens in einer Tabelle dargestellt. Für die Angabe im Text wird folgendes gebraucht:</p>
+<p>✅ die Werte des Kaiser-Meyer-Olkin Kritierums (KMO)</p>
+<p>✅ das Ergebnis des Barlett-Tests</p>
+<p>✅ die Faktorladungen</p>
+<p>✅ die Uniqueness</p>
+<p>✅ die gewählte Rotations-Methode</p>
+<p>Das Format ist normalerweise:</p>
+<blockquote class="blockquote">
+<p><strong><em>Beispiel:</em></strong> Zunächst wurde Faktorenanalyse der 15 gemessenen Indikatoren durchgeführt. Das Kaiser-Meyer-Olkin (KMO)-Maß für die Stichprobenadäquanz betrug 0,89. Dies deutet darauf hin, dass die Korrelationsmuster relativ kompakt sind und die Faktorenanalyse eindeutige und zuverlässige Faktoren ergeben sollte. Der Bartlett-Test auf Sphärizität war ebenfalls signifikant (χ2(105) = 33164.76, p &lt; .001). Dies bedeutet, dass die Korrelationsmatrix keine Identitätsmatrix ist und dass es einige Beziehungen zwischen den untersuchten Variablen gibt. Sowohl der KMO-Test als auch der Bartlett-Test bestätigen, dass die Faktorenanalyse angemessen ist.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Die Faktoren werden rotiert, um eine einfache Struktur zu erhalten. In diesem Fall wurde die varimax Rotationsmethode verwendet. Nach sorgfältiger Betrachtung der zusammenhängenden Variablen in der Analyse wurden dann die Faktorbezeichnung vorgeschlagen und in Tabelle 1 dargestellt. Dabei handelt es sich um <em>Vertrauen in gesellschaftliche Institutionen</em>. Für den Faktor wurden Faktorladungen erstellt (siehe Tabelle 1).</p>
+</blockquote>
+</div>
+</div>
 </section>
-<section id="andere-methoden-der-faktorenanalyse" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="andere-methoden-der-faktorenanalyse"><span class="header-section-number">1.7</span> Andere Methoden der Faktorenanalyse</h2>
-<ol type="1">
-<li><p>Hauptachsen-Analyse fa() Funktion. Anwendung wie oben beschrieben.</p></li>
-<li><p>Hauptkomponentenanalyse principal() Funktion. Eigentlich keine Faktorenanalyse, beide Methoden sind sich aber sehr ähnlich. Anwendung wie oben beschrieben.</p></li>
-</ol>
 </section>
-<section id="quellen-für-das-script" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="quellen-für-das-script"><span class="header-section-number">1.8</span> Quellen für das Script</h2>
-<p>Stephanie Geise Daniela Keller https://www.youtube.com/watch?v=NFPGQcq1fO8 Field, A., Miles, J., &amp; Field, Z. (2012). Discovering statistics using R. 749-811</p>
+<section id="danksagung-und-würdigung" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="danksagung-und-würdigung"><span class="header-section-number">1.4</span> Danksagung und Würdigung</h2>
+<p>Bei der Struktur und dem Inhalt dieser Seite haben mich die folgenden herausragenden Arbeiten inspieriert. Ich möchte mich bei den Autor:innen für ihre Arbeit sehr bedanken!</p>
+<ul>
+<li>Daniela Keller <a href="https://www.youtube.com/watch?v=NFPGQcq1fO8">Link</a></li>
+<li>Field, A., Miles, J., &amp; Field, Z. (2012). Discovering statistics using R. 749-811</li>
+<li>Brown T. A. (2015). Confirmatory factor analysis for applied research (2nd ed.). New York, NY: Guilford Press. Watkins, M. W. (2018). Exploratory Factor Analysis: A Guide to Best Practice. Journal of Black Psychology, 44(3), 219–246. <a href="https://doi.org/10.1177/0095798418771807">Link</a></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Literatur und Beispiele aus der Praxis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen braucht.</p>
+<blockquote class="blockquote">
+<p>📖 Field, Z., Miles, J., &amp; Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. <a href="https://suche.suub.uni-bremen.de/peid=B68436977&amp;LAN=DE&amp;CID=7699632&amp;index=L&amp;Hitnr=1&amp;dtyp=D&amp;rtyp=a&amp;Exemplar=1">Link</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>📖 Brown T. A. (2015). Confirmatory factor analysis for applied research (2nd ed.). New York, NY: Guilford Press. Watkins, M. W. (2018). Exploratory Factor Analysis: A Guide to Best Practice. Journal of Black Psychology, 44(3), 219–246. <a href="https://doi.org/10.1177/0095798418771807">Link</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>📖 Fabrigar, L. R., &amp; Wegener, D. T. (2012). Exploratory factor analysis. Oxford University Press.</p>
+</blockquote>
+<p>Hier findet ihr ein Beispiel aus der Forschungspraxis:</p>
+<blockquote class="blockquote">
+<p>🔬 Koirala, B. P., Araghi, Y., Kroesen, M., Ghorbani, A., Hakvoort, R. A., &amp; Herder, P. M. (2018). Trust, awareness, and independence: Insights from a socio-psychological factor analysis of citizen knowledge and participation in community energy systems. Energy research &amp; social science, 38, 33-40. <a href="https://www.sciencedirect.com/science/article/pii/S2214629618300641">Link</a></p>
+</blockquote>
+</div>
+</div>
 
 
 </section>

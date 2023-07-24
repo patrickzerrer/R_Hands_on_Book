@@ -31,19 +31,20 @@ website:
     background: "light"
     foreground: "secondary"
     contents:
-    - section: "Einführung in R"
+    - section: "Data-Bootcamp: Einführung in R"
       contents:
       - Skript_1.1.qmd
       - Skript_1.2.qmd
       - Skript_1.3.qmd
+      - Skript_1.4.qmd
 
-    - section: "Datensätze"
+    - section: "Data-Bootcamp: Datensätze"
       contents:
       - Skript_2.1.qmd
       - Skript_2.2.qmd
       - Skript_2.3.qmd
 
-    - section: "Der Umgang mit Daten"
+    - section: "Data-Bootcamp: Der Umgang mit Daten"
       contents:
       - Skript_3.1.qmd
       - Skript_3.2.qmd
@@ -68,7 +69,6 @@ website:
       - Skript_6.1.qmd
       - Skript_6.2.qmd
       - Skript_6.3.qmd
-      - Skript_6.4.qmd
 
     - section: "Das Überprüfen von Zusammenhängen"
       contents:
