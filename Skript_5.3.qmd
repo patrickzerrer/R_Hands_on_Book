@@ -10,19 +10,23 @@ format:
     code-line-numbers: true
 ---
 
+![Validieren, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_asian_woman_in_the_foreground_undergro_3148633f-a89f-4395-b9dc-445837de505a.png)
+
 # Das Zusammenführen der Variablen zu einem Index
 
-Wir haben in den vorangegangenen Kapitel zur Faktorenanalyse festgestellt, dass es einen empirisch messbaren Faktor in unseren Daten gibt, welchen wir unter Rückgriff auf unsere theoretischen Grundlagen als *Vertrauen in gesellschaftliche Institutionen* interpretieren. Wir haben also die beiden ersten Ziele des Kapitels bereicht erreicht und müssen nur noch die eigentliche Indexbildung sowie das Prüfen der Qualität des Index vornehmen.
+Wir haben in den vorangegangenen Kapitel zur Faktorenanalyse festgestellt, dass es einen empirisch messbaren Faktor in unseren Daten gibt, welchen wir unter Rückgriff auf unsere theoretischen Grundlagen als *Vertrauen in gesellschaftliche Institutionen* interpretieren. Wir haben also die beiden ersten Ziele des Kapitels bereits erreicht und müssen nur noch die eigentliche Indexbildung sowie das Prüfen der Qualität des Index vornehmen.
+
+Falls ihr euch immer noch fragt was genau ein Index ist, könnte man etwas vereinfacht sagen, dass wir eine neue Variable (den Index) auf Grundlage der Indikatoren erstellen, welche die Informationen aus den Indikatoren möglichst gut bündelt. Das erleichtert uns die weitere Berechnung von statistischen Tests und Analysen und führt damit zu einer besseren Übersichtlichkeit und leichteren Interpretation der Ergebnisse. Wir müssen dann nur noch mit einer Index-Variable weiter arbeiten statt mit 15 Indikatoren.
+
+Entsprechend möchten wir jetzt eine neue Index-Variable für das *Vertrauen in gesellschaftliche Institutionen* auf Grundlage der Indikatoren bilden.
 
 Wir beginnen zunächst mit dem Laden der notwendigen Pakete.
 
 ## Laden der nötigen Pakete
 
 ```{r Pakete}
-library(psych)
-library(tidyverse)
-library(dplyr)
-library(haven)
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, haven, psych, dplyr, htmlTable)
 ```
 
 Und laden im Anschluss den notwendigen Datensatz.
@@ -39,22 +43,21 @@ Wir greifen natürlich auf die gleiche Datengrundlage zurück, welche wir auch f
 
 Ganz konkret wählen wir Variablen aus, die das...
 
-* *Vertrauen in das Gesundheitswesen* (pt01)
-* *Vertrauen in das Bundesverfassungsgericht* (pt02)
-* *Vertrauen in den Bundestag* (pt03)
-* *Vertrauen in die Stadt- oder Gemeindeverwaltung* (pt04)
-* *Vertrauen in die Katholische Kirche* (pt06)
-* *Vertrauen in die Evangelische Kirche* (pt07)
-* *Vertrauen in die Justiz* (pt08)
-* *Vertrauen in das Fernsehen* (pt09)
-* *Vertrauen in das Zeitungswesen* (pt10)
-* *Vertrauen in die Hochschulen* (pt11)
-* *Vertrauen in die Bundesregierung* (pt12)
-* *Vertrauen in die Polizei* (pt14)
-* *Vertrauen in die Politischen Parteien* (pt15)
-* *Vertrauen in die Kommission der EU* (pt19)
-* *Vertrauen in das Europäische Parlament* (pt20)
-
+-   *Vertrauen in das Gesundheitswesen* (pt01)
+-   *Vertrauen in das Bundesverfassungsgericht* (pt02)
+-   *Vertrauen in den Bundestag* (pt03)
+-   *Vertrauen in die Stadt- oder Gemeindeverwaltung* (pt04)
+-   *Vertrauen in die Katholische Kirche* (pt06)
+-   *Vertrauen in die Evangelische Kirche* (pt07)
+-   *Vertrauen in die Justiz* (pt08)
+-   *Vertrauen in das Fernsehen* (pt09)
+-   *Vertrauen in das Zeitungswesen* (pt10)
+-   *Vertrauen in die Hochschulen* (pt11)
+-   *Vertrauen in die Bundesregierung* (pt12)
+-   *Vertrauen in die Polizei* (pt14)
+-   *Vertrauen in die Politischen Parteien* (pt15)
+-   *Vertrauen in die Kommission der EU* (pt19)
+-   *Vertrauen in das Europäische Parlament* (pt20)
 
 ... erfassen.
 
@@ -76,7 +79,7 @@ allbus_vertrauen = daten %>%
   na.omit()
 ```
 
-Wir bennen die ausgewählten Indikatoren um, damit die Bezeichnungen der Indikatoren für uns leichter zu merken sind. 
+Wir bennen die ausgewählten Indikatoren um, damit die Bezeichnungen der Indikatoren für uns leichter zu merken sind.
 
 ```{r Rename}
 allbus_vertrauen = allbus_vertrauen %>% 
@@ -97,8 +100,22 @@ allbus_vertrauen = allbus_vertrauen %>%
          Ver_Parteien = pt15,
          Ver_Kom_EU = pt19,
          Ver_EU_Par = pt20)
-head(allbus_vertrauen)
+htmlTable(head(allbus_vertrauen))
 ```
+
+Wir haben nun alle Daten geladen und die Variablen entsprechend vorbereitet. Wir können eigentlich mit der Indexbidlung beginnen, müssen uns allerdings davor noch entscheiden, welche Art von Index wir bilden möchten.
+
+## Verschiedene Arten von Indizes
+
+Es gibt eine ganze Reihe von möglichen Arten von Indizes, welche wir theoretisch berechnen könnten.
+
+| Art des Index                       | Bildung (Beispiel)                              | Beschreibung                                                                                                                            |
+|----------------------|-----------------------------|---------------------|
+| Ungewichteter additivier Index      | Index = Indikator_1 + Indikator_2 + Indikator_3 | Die Ausprägungen der Indikatorvariablen werden addiert bzw. zu gemittelt.                                                               |
+| Ungewichteter multiplikativer Index | Index = V1 \* V2 \* V3                          | Wenn ein Index Mindestausprägungen auf allen Indikatorvariablen voraussetzt sollte multiplikativ zu einem Gesamtindex verknüpft werden. |
+| Gewichteter additivier Index        | Index = (2\*V1) + V2 + V3                       | Gewichtete additive Indizes ermöglichen eine differenzierte Behandlung der einzelnen Indikatoren.                                       |
+
+Die Entscheidung, welche Art der Indexbildung gewählt wird sollte vor dem Hintergrund der Daten, sowie der *latenten Variable* und deren Eigenschaften erfolgen. Beispielsweise würde es für ein Index, welcher die *Zufriedenheit mit einer Bahnreise* widerspiegelt und aus den Inidkatoren *Reisedauer*, *Service während der Reise*, *Komfort während der Fahrt* gebildet wird, Sinn ergeben einen Ungewichteten multiplikativen Index zu bilden, da bei einer *Reisedauer* von Null keine Reise stattgefunden hat und somit auch die anderen beiden Indikatoren nicht von Bedeutung sind.
 
 ## Berechnen eines Ungewichteten Summenindex
 
@@ -109,7 +126,7 @@ Wir erstellen eine neue Variable `vertrauen_ges_inst` und summieren die Werte al
 ```{r Berechung Index}
 index_vertrauen = allbus_vertrauen %>% 
   mutate(vertrauen_ges_inst = (Ver_Gesundheitswesen + Ver_BVerfG + Ver_Bundestag + Ver_Verwaltung + Ver_kath_Kirche + Ver_evan_Kirche + Ver_Justiz+ Ver_TV +  Ver_Zeitung + Ver_Uni + Ver_Regierung + Ver_Polizei + Ver_Parteien + Ver_Kom_EU + Ver_EU_Par) / 15)
-head(index_vertrauen)
+htmlTable(head(index_vertrauen))
 ```
 
 Wir können uns noch die deskriptive Statistik für den Index anschauen, diese ist wichtig um den berechneten Index korrekt zu interpretieren.
@@ -132,10 +149,10 @@ index_vertrauen %>%
 
 Zur Einordnung der erhaltenen Skalen-Reliabilität, gehen wir von folgenden Cronbachs Alpha-Bereichen und ihrer Beurteilung aus:
 
-* Werte \<0,6: nicht akzeptabel
-* 0,6 bis 0,7: akzeptabel, teilweise auch schon als grenzwertig klassifiziert 
-* 0,7 bis 0,8: gut, stellenweise auch nur als akzeptabel klassifiziert 
-* 0,8 bis 0,9: sehr gut
+-   Werte \<0,6: nicht akzeptabel
+-   0,6 bis 0,7: akzeptabel, teilweise auch schon als grenzwertig klassifiziert
+-   0,7 bis 0,8: gut, stellenweise auch nur als akzeptabel klassifiziert
+-   0,8 bis 0,9: sehr gut
 
 ## Interpretation des Wirksamkeit-Indizes
 
@@ -158,17 +175,15 @@ Die Ergebnisse der Indexbildung werden meistens direkt im Text angegeben:
 
 Das Format ist normalerweise:
 
-> ***Beispiel:*** Der Summenindex individuelle Identität umfasst fünf Indikatoren (Ziele und Befriedigung, Regeln und Verantwortung, Gefühle oder
-Emotionen, Verständnis der Welt, individuelle Identität im Allgemeinen; Krippendorffs α = 0,84). 
+> ***Beispiel:*** Der Summenindex individuelle Identität umfasst fünf Indikatoren (Ziele und Befriedigung, Regeln und Verantwortung, Gefühle oder Emotionen, Verständnis der Welt, individuelle Identität im Allgemeinen; α = 0,84).
 :::
-
 
 ## Danksagung und Würdigung
 
 Bei der Struktur und dem Inhalt dieser Seite haben mich die folgenden herausragenden Arbeiten inspieriert. Ich möchte mich bei den Autor:innen für ihre Arbeit sehr bedanken!
 
-* Daniela Keller [Link](https://www.youtube.com/watch?v=NFPGQcq1fO8) 
-* Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811
+-   Daniela Keller [Link](https://www.youtube.com/watch?v=NFPGQcq1fO8)
+-   Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811
 
 ::: callout-note
 ## Literatur und Beispiele aus der Praxis
@@ -181,5 +196,5 @@ Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen
 
 Hier findet ihr ein Beispiel aus der Forschungspraxis:
 
-> 🔬 Zerrer, P., & Engelmann, I. (2022). Users’ Political Motivations in Comment Sections on News Sites. International Journal of Communication, 16, 23. [Link](https://ijoc.org/index.php/ijoc/article/viewFile/18852/3808)
+> 🔬 Zerrer, P., & Engelmann, I. (2022). Users' Political Motivations in Comment Sections on News Sites. International Journal of Communication, 16, 23. [Link](https://ijoc.org/index.php/ijoc/article/viewFile/18852/3808)
 :::
