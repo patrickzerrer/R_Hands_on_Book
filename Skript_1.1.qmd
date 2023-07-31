@@ -19,6 +19,8 @@ R ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen lä
 
 ## Installation von R und RStudio
 
+Für alle üblichen Betriebssysteme können R und RStudio online heruntergeladen werden. 
+
 
 ## Projekte und Ordnerstrukturen
 
