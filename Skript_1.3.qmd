@@ -1,6 +1,6 @@
 ---
-title: "Relevante Begriffe"
-author: "tba"
+title: "Die Logik von Markdown und Quarto"
+author: "Katharina Maubach & Patrick Zerrer"
 toc: true
 number-sections: true
 highlight-style: pygments
@@ -10,6 +10,36 @@ format:
     code-line-numbers: true
 ---
 
-# Die Logik von Markdown und Quarto
 
-![R Markdown, (c) Allison Horst](Bilder/R Markdown Grafik.png)
+![Artwork by @allison_horst](Bilder/R Markdown Grafik.png)
+
+## R Markdown
+
+### YAML-Header
+
+### Text
+
+
+### Code Chunks
+
+::: callout-tip
+Codechunks sind der Bereich des Dokumentes in welchem wir R-Code ausführen.
+:::
+
+## Quarto
+
+
+## Literatur
+
+::: callout-note
+## Weiterführende Literatur
+
+> 📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. [Link](https://link.springer.com/book/10.1007/978-3-658-34285-2)
+
+> 📖 Xie, Y., Allaire, J. J., & Grolemund, G. (2020). R markdown: The definitive guide. Chapman; Hall/CRC [Link](https://bookdown.org/yihui/rmarkdown)
+
+> 📖 Xie, Y., Dervieux, C., & Riederer, E. (2020). R markdown cookbook. Chapman and Hall/CRC [Link](https://bookdown.org/yihui/rmarkdown-cookbook/#ref-R-rmarkdown)
+
+> 📖 Allaire, J. J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins, A., Wickham, H., Cheng, J., Chang, W., & Iannone, R. (2020a). rmarkdown: Dynamic documents for r. [Link](https://github.com/rstudio/rmarkdown)
+
+:::

@@ -46,7 +46,7 @@
     "href": "Skript_1.1.html",
     "title": "Was ist R?",
     "section": "",
-    "text": "# Was ist R?\nR ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen läuft. In seiner Grundfunktion ist R zunächst eine Konsole, in welcher wir zeilenweise Code eingeben und ausführen können. Dabei kann es sich um einfache Rechnungen oder auch komplexe Modelle handeln. Die meisten arbeiten dabei nicht mit R als solches sondern nutzen verschiedene Umgebungen, etwa RStudio oder Jupyter Hub um mit R zu arbeiten."
+    "text": "Artwork by @allison_horst"
   },
   {
     "objectID": "Skript_1.2.html",
@@ -58,9 +58,9 @@
   {
     "objectID": "Skript_1.3.html",
     "href": "Skript_1.3.html",
-    "title": "Relevante Begriffe",
+    "title": "Die Logik von Markdown und Quarto",
     "section": "",
-    "text": "1 Die Logik von Markdown und Quarto\n\n\n\nR Markdown, (c) Allison Horst"
+    "text": "Artwork by @allison_horst"
   },
   {
     "objectID": "Skript_2.1.html",
@@ -682,22 +682,22 @@
     "objectID": "Skript_1.1.html#installation-von-r-und-rstudio",
     "href": "Skript_1.1.html#installation-von-r-und-rstudio",
     "title": "Was ist R?",
-    "section": "1 Installation von R und RStudio",
-    "text": "1 Installation von R und RStudio\nFür alle üblichen Betriebssysteme können R und RStudio online heruntergeladen werden."
+    "section": "1.1 Installation von R und RStudio",
+    "text": "1.1 Installation von R und RStudio\nFür alle üblichen Betriebssysteme können R und RStudio online heruntergeladen werden."
   },
   {
     "objectID": "Skript_1.1.html#projekte-und-ordnerstrukturen",
     "href": "Skript_1.1.html#projekte-und-ordnerstrukturen",
     "title": "Was ist R?",
-    "section": "2 Projekte und Ordnerstrukturen",
-    "text": "2 Projekte und Ordnerstrukturen\nEinführung in die Logik von R, R Studio Server und das R Environment Einführung in Markdown (Quarto?) Basics der Befehlssyntax in Base R und Tidyverse (im Vergleich), ab dann aber alles in dplyr Laden von Daten und Importieren von anderen Datenformaten Einführung in das Datenmanagement: Projekte und Ordnerstrukturen auf dem PC Öffnen von Datensätzen, Laden von Daten, Importieren von anderen Datensätzen Speichern von Daten aus R in verschiedenen Formaten (Rda, csv etc.)"
+    "section": "1.2 Projekte und Ordnerstrukturen",
+    "text": "1.2 Projekte und Ordnerstrukturen\nEinführung in die Logik von R, R Studio Server und das R Environment Einführung in Markdown (Quarto?) Basics der Befehlssyntax in Base R und Tidyverse (im Vergleich), ab dann aber alles in dplyr Laden von Daten und Importieren von anderen Datenformaten Einführung in das Datenmanagement: Projekte und Ordnerstrukturen auf dem PC Öffnen von Datensätzen, Laden von Daten, Importieren von anderen Datensätzen Speichern von Daten aus R in verschiedenen Formaten (Rda, csv etc.)"
   },
   {
     "objectID": "Skript_1.1.html#pakete-als-erweiterung-von-r",
     "href": "Skript_1.1.html#pakete-als-erweiterung-von-r",
     "title": "Was ist R?",
-    "section": "3 Pakete als Erweiterung von R",
-    "text": "3 Pakete als Erweiterung von R\nInstallieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika."
+    "section": "1.3 Pakete als Erweiterung von R",
+    "text": "1.3 Pakete als Erweiterung von R\nInstallieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika."
   },
   {
     "objectID": "Autoren.html#katharina-maubach",
@@ -705,5 +705,26 @@
     "title": "Das Team stellt sich vor",
     "section": "Katharina Maubach",
     "text": "Katharina Maubach\n\n\n\n(c) B. Köhler\n\n\nVita\nKatharina Maubach ist seit Dezember 2022 als wissenschaftliche Mitarbeiterin am Zentrum für Medien-, Kommunikations- und Informationsforschung der Universität Bremen im Lab „Politische Kommunikation und Innovative Methoden“ tätig. Sie forscht im Rahmen des DFG-geförderten Projektes „Remixing Political News Reception“ unter der Leitung von Prof. Stephanie Geise zur Rezeption multimodaler Medieninhalte. Innerhalb des Projektes war sie seit Februar 2021 an der Universität Münster beschäftigt, wo Sie zudem von Januar 2019 bis Januar 2021 im Arbeitsbereich von Prof. Volker Gehrau forschte und lehrte. Ihr Studium der Kommunikationswissenschaft absolvierte sie ebenfalls an der Universität Münster; in ihrer Masterarbeit forschte sie zum Einfluss politischer Nachrichtensatire auf politisches Interesse und Informiertheit.\nForschungsschwerpunkte\n\nPolitische Kommunikation\nRezeptions- und Wirkungsforschung\nKlimakommunikation\nStatistische Methoden\n\n\n\n\n\n\n\nKontakt\n\n\n\n\n\n🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen\n🎓 Webseite\n#️⃣ Twitter"
+  },
+  {
+    "objectID": "Skript_1.3.html#r-markdown",
+    "href": "Skript_1.3.html#r-markdown",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "1 R Markdown",
+    "text": "1 R Markdown\n\n1.1 YAML-Header\n\n\n1.2 Text\n\n\n1.3 Code Chunks\n\n\n\n\n\n\nTip\n\n\n\nCodechunks sind der Bereich des Dokumentes in welchem wir R-Code ausführen."
+  },
+  {
+    "objectID": "Skript_1.3.html#quarto",
+    "href": "Skript_1.3.html#quarto",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "2 Quarto",
+    "text": "2 Quarto"
+  },
+  {
+    "objectID": "Skript_1.3.html#literatur",
+    "href": "Skript_1.3.html#literatur",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "3 Literatur",
+    "text": "3 Literatur\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link\n\n\n📖 Xie, Y., Allaire, J. J., & Grolemund, G. (2020). R markdown: The definitive guide. Chapman; Hall/CRC Link\n\n\n📖 Xie, Y., Dervieux, C., & Riederer, E. (2020). R markdown cookbook. Chapman and Hall/CRC Link\n\n\n📖 Allaire, J. J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins, A., Wickham, H., Cheng, J., Chang, W., & Iannone, R. (2020a). rmarkdown: Dynamic documents for r. Link"
   }
 ]
