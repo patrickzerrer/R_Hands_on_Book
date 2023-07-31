@@ -449,11 +449,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="laden-der-nötigen-pakete" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="laden-der-nötigen-pakete"><span class="header-section-number">1.2</span> Laden der nötigen Pakete</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(psych)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Paket 'psych' wurde unter R Version 4.3.1 erstellt</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(psy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(psy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attache Paket: 'psy'</code></pre>
@@ -463,10 +460,7 @@ Attache Paket: 'psy'</code></pre>
 
     wkappa</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(nFactors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Paket 'nFactors' wurde unter R Version 4.3.1 erstellt</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(nFactors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Lade nötiges Paket: lattice</code></pre>
 </div>
@@ -479,7 +473,7 @@ Attache Paket: 'nFactors'</code></pre>
 
     parallel</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.2     ✔ readr     2.1.4
@@ -496,14 +490,14 @@ Attache Paket: 'nFactors'</code></pre>
 ✖ dplyr::lag()     masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="laden-des-datensatzes" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="laden-des-datensatzes"><span class="header-section-number">1.3</span> Laden des Datensatzes</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>daten <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/ESS8.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>daten <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/ESS8.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="teildatensatz-mit-den-benötigten-index-variablen" class="level2" data-number="1.4">
@@ -513,17 +507,17 @@ Attache Paket: 'nFactors'</code></pre>
 <p>Hierfür haben wir aufgrundlage von Theorie die folgenden Indikatoren ausgewählt:</p>
 <p>psppsgva - Political system allows people to have a say in what government does actrolga - Able to take active role in political group psppipla - Political system allows people to have influence on politics cptppola - Confident in own ability to participate in politics</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>ess_wirksamkeit <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">select</span>(psppsgva,</span>
-<span id="cb16-3"><a href="#cb16-3"></a>         actrolga,</span>
-<span id="cb16-4"><a href="#cb16-4"></a>         psppipla,</span>
-<span id="cb16-5"><a href="#cb16-5"></a>         cptppola) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">mutate</span>(<span class="at">psppsgva =</span> <span class="fu">as.numeric</span>(psppsgva),</span>
-<span id="cb16-7"><a href="#cb16-7"></a>         <span class="at">actrolga =</span> <span class="fu">as.numeric</span>(actrolga),</span>
-<span id="cb16-8"><a href="#cb16-8"></a>         <span class="at">psppipla =</span> <span class="fu">as.numeric</span>(psppipla),</span>
-<span id="cb16-9"><a href="#cb16-9"></a>         <span class="at">cptppola =</span> <span class="fu">as.numeric</span>(cptppola)) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-10"><a href="#cb16-10"></a>  <span class="fu">na.omit</span>()</span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="fu">head</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>ess_wirksamkeit <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">select</span>(psppsgva,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>         actrolga,</span>
+<span id="cb13-4"><a href="#cb13-4"></a>         psppipla,</span>
+<span id="cb13-5"><a href="#cb13-5"></a>         cptppola) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">mutate</span>(<span class="at">psppsgva =</span> <span class="fu">as.numeric</span>(psppsgva),</span>
+<span id="cb13-7"><a href="#cb13-7"></a>         <span class="at">actrolga =</span> <span class="fu">as.numeric</span>(actrolga),</span>
+<span id="cb13-8"><a href="#cb13-8"></a>         <span class="at">psppipla =</span> <span class="fu">as.numeric</span>(psppipla),</span>
+<span id="cb13-9"><a href="#cb13-9"></a>         <span class="at">cptppola =</span> <span class="fu">as.numeric</span>(cptppola)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-10"><a href="#cb13-10"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="fu">head</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   psppsgva actrolga psppipla cptppola
@@ -540,7 +534,7 @@ Attache Paket: 'nFactors'</code></pre>
 <section id="deskriptive-statistik-für-den-teildatensatz" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="deskriptive-statistik-für-den-teildatensatz"><span class="header-section-number">1.5</span> Deskriptive Statistik für den Teildatensatz</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">summary</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">summary</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    psppsgva        actrolga        psppipla        cptppola    
  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
@@ -550,7 +544,7 @@ Attache Paket: 'nFactors'</code></pre>
  3rd Qu.:3.000   3rd Qu.:3.000   3rd Qu.:3.000   3rd Qu.:3.000  
  Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">#Alternativ kann describe() verwendet werden. Describe() ist eine Funktion des psych Pakets, welche die wichtigsten Streu- und Lageparameter für Variablen angiebt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">#Alternativ kann describe() verwendet werden. Describe() ist eine Funktion des psych Pakets, welche die wichtigsten Streu- und Lageparameter für Variablen angiebt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="suche-nach-der-zugrunde-liegenden-variable---die-faktorenanalyse" class="level2" data-number="1.6">
@@ -566,23 +560,23 @@ Attache Paket: 'nFactors'</code></pre>
 <p>Anmerkung: Wir können auch eine Faktorenanalyse mit nicht-kontinuierlichen Daten rechnen (bspw. dichotome Variablen). Hier sollten wir sollten wir die Korrelationsmatrix aus polychorischen Korrelationskoeffizienten konstruieren (diese können mit der Funktion polychor() aus dem Paket polycor berechnet werden</p>
 <p>Zunächst schauen wir uns einmal die Korrelationskoeffizienten für einige Variablen an.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Auswählen einiger zusätzlichen Variablen zum zeigen der Korrelationstabelle</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-3"><a href="#cb21-3"></a>beispiel <span class="ot">=</span> daten <span class="sc">%&gt;%</span> </span>
-<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">select</span>(netusoft, </span>
-<span id="cb21-5"><a href="#cb21-5"></a>         trstplt, </span>
-<span id="cb21-6"><a href="#cb21-6"></a>         trstep, </span>
-<span id="cb21-7"><a href="#cb21-7"></a>         psppsgva, </span>
-<span id="cb21-8"><a href="#cb21-8"></a>         actrolga,</span>
-<span id="cb21-9"><a href="#cb21-9"></a>         psppipla,</span>
-<span id="cb21-10"><a href="#cb21-10"></a>         cptppola) <span class="sc">%&gt;%</span> </span>
-<span id="cb21-11"><a href="#cb21-11"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(netusoft<span class="sc">:</span>cptppola, as.numeric)) <span class="sc">%&gt;%</span> <span class="co"># mit across kann die gleiche Funktion - in diesem Fall as.numeric() - mehrere Variablen angewandt werden</span></span>
-<span id="cb21-12"><a href="#cb21-12"></a>  <span class="fu">na.omit</span>()</span>
-<span id="cb21-13"><a href="#cb21-13"></a></span>
-<span id="cb21-14"><a href="#cb21-14"></a><span class="co"># Bessere Darstellung der Tabelle mit htmlTable und gerundeten Werten für bessere Lesbarkeit</span></span>
-<span id="cb21-15"><a href="#cb21-15"></a></span>
-<span id="cb21-16"><a href="#cb21-16"></a><span class="fu">library</span>(htmlTable) <span class="co"># Falls das Paket noch nicht installiert ist, muss es mit install.packages("htmlTable") installiert werden</span></span>
-<span id="cb21-17"><a href="#cb21-17"></a><span class="fu">htmlTable</span>(<span class="fu">round</span>(<span class="fu">cor</span>(beispiel), <span class="at">digits =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Auswählen einiger zusätzlichen Variablen zum zeigen der Korrelationstabelle</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a>beispiel <span class="ot">=</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">select</span>(netusoft, </span>
+<span id="cb18-5"><a href="#cb18-5"></a>         trstplt, </span>
+<span id="cb18-6"><a href="#cb18-6"></a>         trstep, </span>
+<span id="cb18-7"><a href="#cb18-7"></a>         psppsgva, </span>
+<span id="cb18-8"><a href="#cb18-8"></a>         actrolga,</span>
+<span id="cb18-9"><a href="#cb18-9"></a>         psppipla,</span>
+<span id="cb18-10"><a href="#cb18-10"></a>         cptppola) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-11"><a href="#cb18-11"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(netusoft<span class="sc">:</span>cptppola, as.numeric)) <span class="sc">%&gt;%</span> <span class="co"># mit across kann die gleiche Funktion - in diesem Fall as.numeric() - mehrere Variablen angewandt werden</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb18-13"><a href="#cb18-13"></a></span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="co"># Bessere Darstellung der Tabelle mit htmlTable und gerundeten Werten für bessere Lesbarkeit</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a></span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="fu">library</span>(htmlTable) <span class="co"># Falls das Paket noch nicht installiert ist, muss es mit install.packages("htmlTable") installiert werden</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="fu">htmlTable</span>(<span class="fu">round</span>(<span class="fu">cor</span>(beispiel), <span class="at">digits =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="gmisc_table table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -674,7 +668,7 @@ Attache Paket: 'nFactors'</code></pre>
 </div>
 <p>Noch zu prüfen ist die Korrelation der Items miteinander, hierfür nehmen wir den Bartlett Test.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">cortest.bartlett</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">cortest.bartlett</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>R was not square, finding R from data</code></pre>
 </div>
@@ -692,7 +686,7 @@ $df
 <p>Wenn der p-Wert signifikant ist (ist hier der Fall) korrelieren die Items miteinandern. Das ist gewünscht.</p>
 <p>Ansonsten prüfen wir das Kaiser-Meyer-Olkin-Kriterium (KMO) und die Measure of Sampling Adequacy (MSA) anschauen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">KMO</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">KMO</span>(ess_wirksamkeit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Kaiser-Meyer-Olkin factor adequacy
 Call: KMO(r = ess_wirksamkeit)
@@ -705,7 +699,7 @@ psppsgva actrolga psppipla cptppola
 <p>Die Werte für die MSA Werte sollten jeweils größer als 0.5 sein. Ist hier der Fall. Falls ein Item unter 0.5 liegen sollte würde dieses ausgeschlossen werden.</p>
 <p>Als nächster Schritt möchten wir Wissen wieviele Faktoren wir aus den Daten “ziehen” möchten. Hierfür nutzen wir die Funktion nfactors()</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">nfactors</span>(ess_wirksamkeit, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">fm=</span><span class="st">"MLE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">nfactors</span>(ess_wirksamkeit, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">fm=</span><span class="st">"MLE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_5.2_files/figure-html/nfactors-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -732,18 +726,18 @@ Statistics by number of factors
 3 3.4e-12    NA    NA
 4 5.7e-02    NA    NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">#?nfactors </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">#?nfactors </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Hier wählen wir zunächst den R Console Output aus und schauen auf den MAP Test, welcher uns hier einen Faktor/Dimension vorschlägt. Die Funktion gibt uns noch eine Reihe anderer Werte aus, welche wir jetzt aber nicht im Detail anschauen. Eine genauere Beschreibung der Werte kann mit ?nfactors aufgerufen werden.</p>
 <p>Dieser Schritt ist sehr wichtig. Wir müssen im nächsten Schritt die Anzahl der Faktoren angeben. Hierfür müssen wir uns zunächst auf Grundlage der Statistischen Tests UND der theoretischen Überlegungen auf eine Anzahl von Faktoren bzw. Dimensionen festgelegt haben.</p>
 <p>In unserem Beispiel gehen wir testweise von einem Faktoren aus.</p>
 <p>Wir legen das Modell an mit folgenden Parametern: Maximum-Likelihood (ML) 1 Faktor Varimax-Rotation –&gt; Mit einer Rotation kann man die Interpretation der Faktoren verbessern, hier gibt es verschiedene Möglichkeiten “varimax” ist eine Option.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">factanal</span>(ess_wirksamkeit, <span class="dv">1</span>, <span class="at">rotation =</span> <span class="st">"varimax"</span>)</span>
-<span id="cb30-2"><a href="#cb30-2"></a></span>
-<span id="cb30-3"><a href="#cb30-3"></a><span class="co"># Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a></span>
-<span id="cb30-5"><a href="#cb30-5"></a><span class="fu">print</span>(fit, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cutoff =</span> .<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">factanal</span>(ess_wirksamkeit, <span class="dv">1</span>, <span class="at">rotation =</span> <span class="st">"varimax"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2"></a></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="co"># Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="fu">print</span>(fit, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cutoff =</span> .<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -773,7 +767,7 @@ The p-value is 0 </code></pre>
 <p>Hier laden alle Variablen mit hohen Werten auf den Faktor1. Wir können also davon ausgehen, dass wir diese Variablen zu einem Index verrechnen können.</p>
 <p>Jetzt schauen wir uns doch noch kurz die Uniquenes bzw. Kommunalitäten an. Die gibt uns an wieviel Varianz von den jeweiligen Variablen durch die Faktoren erklärt wird.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="dv">1</span> <span class="sc">-</span> fit<span class="sc">$</span>uniquenesses</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="dv">1</span> <span class="sc">-</span> fit<span class="sc">$</span>uniquenesses</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> psppsgva  actrolga  psppipla  cptppola 
 0.2456154 0.6655900 0.3458397 0.6386451 </code></pre>

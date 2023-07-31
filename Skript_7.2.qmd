@@ -14,7 +14,7 @@ Das Überprüfen von Zusammenhängen bei zwei Variablen
 
 # Das Überprüfen von Zusammenhängen bei zwei nominalskalierten Variablen
 
-Pearson Chi-Quadrat
+Pearson Chi-Quadrat ergänzen
 
 # Das Überprüfen von Zusammenhängen bei zwei nominalskalierten Variablen
 
