@@ -1,6 +1,5 @@
 ---
 title: "Das Team stellt sich vor"
-author: "Patrick Zerrer"
 toc: true
 number-sections: false
 highlight-style: pygments
