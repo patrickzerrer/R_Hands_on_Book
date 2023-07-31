@@ -12,4 +12,20 @@ format:
 
 # Was ist R?
 
-Einführung in die Logik von R, R Studio Server und das R Environment Einführung in Markdown (Quarto?) Basics der Befehlssyntax in Base R und Tidyverse (im Vergleich), ab dann aber alles in dplyr Laden von Daten und Importieren von anderen Datenformaten Einführung in das Datenmanagement: Projekte und Ordnerstrukturen auf dem PC Öffnen von Datensätzen, Laden von Daten, Importieren von anderen Datensätzen Speichern von Daten aus R in verschiedenen Formaten (Rda, csv etc.) Installieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika.
+![(c) Allison Horst, https://allisonhorst.com/r-packages-functions](C:/Users/Katharina Maubach/Desktop/Skill/GITHUB Hands On R Book/R_Hands_on_Book/Bilder/Grafik R Lernen.png)
+
+R ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen läuft. In seiner Grundfunktion ist R zunächst eine Konsole, in welcher wir zeilenweise Code eingeben und ausführen können. Dabei kann es sich um einfache Rechnungen oder auch komplexe Modelle handeln. Die meisten arbeiten dabei nicht mit R als solches sondern nutzen verschiedene Umgebungen, etwa RStudio oder Jupyter Hub um mit R zu arbeiten. 
+
+
+## Installation von R und RStudio
+
+
+## Projekte und Ordnerstrukturen
+
+Einführung in die Logik von R, R Studio Server und das R Environment Einführung in Markdown (Quarto?) Basics der Befehlssyntax in Base R und Tidyverse (im Vergleich), ab dann aber alles in dplyr Laden von Daten und Importieren von anderen Datenformaten Einführung in das Datenmanagement: Projekte und Ordnerstrukturen auf dem PC Öffnen von Datensätzen, Laden von Daten, Importieren von anderen Datensätzen Speichern von Daten aus R in verschiedenen Formaten (Rda, csv etc.) 
+
+## Pakete als Erweiterung von R
+
+Installieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika.
+
+

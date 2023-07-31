@@ -11,3 +11,5 @@ format:
 ---
 
 # Die Logik von Markdown und Quarto
+
+![R Markdown, (C) Allison Horst, https://allisonhorst.com/r-packages-functions](C:/Users/Katharina Maubach/Desktop/Skill/GITHUB Hands On R Book/R_Hands_on_Book/Bilder/R Markdown Grafik.png)
