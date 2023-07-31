@@ -23,7 +23,9 @@ Patrick Zerrer ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommu
 
 **Forschungsschwerpunkte**
 
-Politische Kommunikation, Online-Kommunikation, Digitale Mediennutzungsforschung
+- Politische Kommunikation
+- Online-Kommunikation
+- Digitale Mediennutzungsforschung
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
@@ -37,7 +39,7 @@ Politische Kommunikation, Online-Kommunikation, Digitale Mediennutzungsforschung
 
 ## Katharina Maubach
 
-![Katharina Maubach, (c) B. Köhler](Bilder/Katharina_Maubach.jpeg)
+![(c) B. Köhler](Bilder/Katharina_Maubach.jpeg)
 
 **Vita**
 
