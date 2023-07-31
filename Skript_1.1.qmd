@@ -1,6 +1,6 @@
 ---
 title: "Was ist R?"
-author: "tba"
+author: "Katharina Maubach & Patrick Zerrer"
 toc: true
 number-sections: true
 highlight-style: pygments
