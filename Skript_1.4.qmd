@@ -1,0 +1,15 @@
+---
+title: "Die Kunst vom Umgang mit Daten"
+author: "tba"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+---
+
+# Die Kunst vom Umgang mit Daten
+
+## 

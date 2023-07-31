@@ -20,7 +20,7 @@ Berechnung und Interpretation von Streuungsmaßen
 
 ## Interpretation
 
-# Die Standartabweichung
+# Die Varianz
 
 ## Berechnung
 
@@ -28,7 +28,7 @@ Berechnung und Interpretation von Streuungsmaßen
 
 ## Interpretation
 
-# Die Varianz
+# Die Standardabweichung
 
 ## Berechnung
 

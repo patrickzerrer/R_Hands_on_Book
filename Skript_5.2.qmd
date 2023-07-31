@@ -10,161 +10,308 @@ format:
     code-line-numbers: true
 ---
 
+![Betreten der zugrunde liegenden Struktur der Stadt, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_walking_down_the_stairs_and_entering_t_191dbce1-eeb0-4ac5-8a31-497d40f45b11.png)
+
 # Durchführen einer Faktorenanalyse in R
 
-Wir möchten einen Index berechnen. Im Fragebogen des ESS sind einige Indikatoren enthalten, welche sich zu einem Index zusammenführen lassen. Dies möchten wir jetzt tun. Allerdings müssen wir sicher gehen, dass die Messung der Indikatoren auch wirklich nach unseren theoretischen Annahmen nach funktioniert hat. Konkret müssen wir überprüfen, ob sich die theoretisch angenommenen Dimensionen unseres Index auch in den Daten zu finden sind. Hierfür können wir die Faktorenanalyse oder Principal Component Analysis verwenden.
+Wir möchten - wie bereits in Kaptitel 5.1 angesprochen - ein Index für die von uns angenommene latente Variable *Vertrauen in gesellschaftliche Institutionen* bilden. An dieser Stelle müssten wir uns zunächst Gedanken über das Konstrukt *Vertrauen in gesellschaftliche Institutionen* machen und eine theoretische Grundlage entwickeln. Wir kürzen diesen Prozess an dieser Stelle etwas ab und möchten die lesende Person ermutigen einen kurzen Blick in den Aufsatz von [Nina Steindl](https://link.springer.com/content/pdf/10.1007/978-3-658-27910-3_7.pdf) aus dem Jahr 2019 zum *Vertrauen in gesellschaftliche Institutionen* von Journalist:innen zu werfen. Wenn wir eine theoretische Vorstellung entwickelt haben, können wir mit der empirische Überprüfung der latenten Variable mittels explorativer Faktorenanalyse starten.
 
-## Analyselogik, Ziel und Einsatzgebiete einer Faktorenanalyse
+Die explorative Faktorenanalyse (EFA) ist eine statistischen Methoden, die dazu dient, die kleinste Anzahl hypothetischer Konstrukte (auch als Faktoren, Dimensionen, latente Variablen bezeichnet) zu ermitteln. Indem die beobachtete Kovarianz zwischen einer Reihe von Messvariablen (auch als beobachtete Variablen oder Indikatoren bezeichnet) erklärt wird. Konkret sollen die gemeinsamen Faktoren ermittelt werden, die die Struktur zwischen den gemessenen Variablen erklären. Wobei wir in den Sozialwissenschaften davon ausgehen, dass es sich bei diesen Faktoren um unbeobachtbare Merkmale - also *latente Variablen* - handelt.
 
-![](feb_2022_Exkurs%20Faktorenanalyse%20-%20Was%20ist%20ein%20Faktor.mp4)
+> *Ein Faktor ist eine unbeobachtbare Variable, die mehr als eine beobachtete Messgröße beeinflusst und für die Korrelationen zwischen diesen beobachteten Messgrößen verantwortlich ist. Mit anderen Worten, die beobachteten Maße stehen in Beziehung zueinander, weil sie eine gemeinsame Ursache haben (d. h. sie werden von demselben zugrunde liegenden Konstrukt beeinflusst); wenn das latente Konstrukt abgetrennt wurde, sind die Interkorrelationen zwischen den beobachteten Maßen gleich Null.* [(Brown, 2015: 10)](https://journals.sagepub.com/doi/10.1177/0095798418771807)
 
-Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete und Daten.
+In unserem Fall interessiert uns die latente Variable *Vertrauen in gesellschaftliche Institutionen*. Wir möchten Wissen, ob wir diese latente Variable bzw. diesen Faktor aus den einzelenen Indikatoren (den Fragen aus dem Allbus-Fragebogen) ableiten können. Konkret müssen wir überprüfen, ob sich die theoretisch angenommene *latenten Variable* auch in den Daten zu finden ist. Hierfür können wir die Faktorenanalyse oder Principal Component Analysis (PCA) verwenden.
 
-## Laden der nötigen Pakete
+Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.
 
 ```{r Pakete}
-library(psych)
-library(psy)
-library(nFactors)
-library(tidyverse)
-library(dplyr)
-library(haven)
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)
 ```
 
-## Laden des Datensatzes
+Danach laden wir die Daten aus dem Allbus.
 
 ```{r Laden der Daten}
-daten <- haven::read_dta("Datensatz/ESS8.dta")
+daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
-## Teildatensatz mit den benötigten Index-Variablen
+## Teildatensatz mit den benötigten Variablen
 
-Wir nehmen an, dass wir einen Index für die Erfassung politischer Kompetenz- und Einflusserwartungen (politische Selbstwirksamkeit) erstellen möchten.
+Die Variablen werden aufgrund ihrer Nützlichkeit als Indikatoren für die zu untersuchende latente Variable ausgewählt. Entsprechend ist es wichtig, dass die Variablen [inhaltliche](https://dorsch.hogrefe.com/stichwort/validitaet-inhaltliche#search=59c61a28aad6ded0422fcadcc4bb8963&offset=0), [diskriminante](https://dorsch.hogrefe.com/stichwort/validitaet-diskriminante#search=bc41d30195bf495e7ff27be31e40a75c&offset=0) und [konvergente](https://dorsch.hogrefe.com/stichwort/validitaet-konvergente) Validität aufweisen. Etwas vereinfacht ausgedrückt sollten die Indikatoren über eine inhaltliche Passung zur latenten Variable verfügen, möglichst gut von anderen latenten Variablen abgrenzbar und mit mehreren unterschiedlichen Arten der Messung nachweisbar sein.
 
-Messinstrument mit den Items: https://zis.gesis.org/skala/Beierlein-Kemper-Kovaleva-Rammstedt-Political-Efficacy-Kurzskala-(PEKS)# Ausführliche Erläuterung: https://www.gesis.org/fileadmin/kurzskalen/working_papers/PEKS_Workingpaper.pdf
+In unserem Fall möchten wir das *Vertrauen in gesellschaftliche Institutionen* untersuchen, entsprechend sollten wir Variablen bzw. Indikatoren auswählen, die die unterschiedlichen Bestandteile der latenten Variable abdecken.
 
-Hierfür haben wir aufgrundlage von Theorie die folgenden Indikatoren ausgewählt:
+Ganz konkret wählen wir Variablen aus, die das...
 
-psppsgva - Political system allows people to have a say in what government does actrolga - Able to take active role in political group psppipla - Political system allows people to have influence on politics cptppola - Confident in own ability to participate in politics
+* *Vertrauen in das Gesundheitswesen* (pt01)
+* *Vertrauen in das Bundesverfassungsgericht* (pt02)
+* *Vertrauen in den Bundestag* (pt03)
+* *Vertrauen in die Stadt- oder Gemeindeverwaltung* (pt04)
+* *Vertrauen in die Katholische Kirche* (pt06)
+* *Vertrauen in die Evangelische Kirche* (pt07)
+* *Vertrauen in die Justiz* (pt08)
+* *Vertrauen in das Fernsehen* (pt09)
+* *Vertrauen in das Zeitungswesen* (pt10)
+* *Vertrauen in die Hochschulen* (pt11)
+* *Vertrauen in die Bundesregierung* (pt12)
+* *Vertrauen in die Polizei* (pt14)
+* *Vertrauen in die Politischen Parteien* (pt15)
+* *Vertrauen in die Kommission der EU* (pt19)
+* *Vertrauen in das Europäische Parlament* (pt20)
+
+
+... erfassen.
+
+Für die statistische Identifizierung einer latenten Variablen bzw. eines Faktors werden mindestens drei gemessene Variablen benötigt, obwohl mehr Indikatoren vorzuziehen sind. Es werden beispielsweise auch vier bis sechs Indikatoren pro Faktor empfohlen. Im Allgemeinen funktioniert die EFA besser, wenn jeder Faktor überdeterminiert ist (d. h. es werden mehrere gemessene Variablen von der zu entdeckenden latenten Variable bzw. Faktor beeinflusst). Unabhängig von der Anzahl sollten Variablen, die voneinander abhängig sind, nicht in eine EFA einbezogen werden.
 
 ```{r Teildatensatz}
+allbus_vertrauen = daten %>%
+  
+  # Wir wählen mit select() die gewünschten Variablen aus
+  select(pt01:pt20) %>% 
+  
+  # die Kombination aus mutate() und across() ermöglicht es uns die Funktion as.numeric() in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden
+  mutate(across(pt01:pt20, ~ as.numeric(.))) %>% 
 
-ess_wirksamkeit <- daten %>%
-  select(psppsgva,
-         actrolga,
-         psppipla,
-         cptppola) %>% 
-  mutate(psppsgva = as.numeric(psppsgva),
-         actrolga = as.numeric(actrolga),
-         psppipla = as.numeric(psppipla),
-         cptppola = as.numeric(cptppola)) %>% 
+  # Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen)
+  mutate(across(pt01:pt20, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>% 
+  
+  # Wir schmeißen fehlende Werte raus
   na.omit()
-head(ess_wirksamkeit)
-
 ```
+
+Wir bennen die ausgewählten Indikatoren um, damit die Bezeichnungen der Indikatoren für uns leichter zu merken sind. 
+
+```{r Rename}
+allbus_vertrauen = allbus_vertrauen %>% 
+  
+  # mit dem rename() Befehl können wir die Variablen umbennen
+  rename(Ver_Gesundheitswesen = pt01,
+         Ver_BVerfG = pt02,
+         Ver_Bundestag = pt03,
+         Ver_Verwaltung = pt04,
+         Ver_kath_Kirche = pt06,
+         Ver_evan_Kirche = pt07,
+         Ver_Justiz = pt08,
+         Ver_TV = pt09,
+         Ver_Zeitung = pt10,
+         Ver_Uni = pt11,
+         Ver_Regierung = pt12,
+         Ver_Polizei = pt14,
+         Ver_Parteien = pt15,
+         Ver_Kom_EU = pt19,
+         Ver_EU_Par = pt20)
+
+# Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen
+htmlTable(head(allbus_vertrauen))
+```
+
+
+Neben der Auswahl der Variablen bzw. Indikatoren müssen auch die Fälle (in unserem Fall die Anzahl der befragten Personen) festgelegt werden. Hier sollten wir uns zunächst fragen, ob die Stichprobe der Teilnehmer:innen in Bezug auf die gemessenen Indikatoren sinnvoll ist? Handelt es sich um eine repräsentative Stichprobe? Bei dem Allbus ist das der Fall und entsprechend können wir davon ausgehen, dass wir eine passende Stichprobe für die Durchführung eine EFA vorliegen haben.
 
 ## Deskriptive Statistik für den Teildatensatz
 
-```{r Deskriptive Statistik}
-summary(ess_wirksamkeit)
+Wir werfen einen kurzen Blick in die deskriptive Statistik für unseren Teildatensatz, um ein besseres Verständnis für die Daten zu erhalten.
 
-#Alternativ kann describe() verwendet werden. Describe() ist eine Funktion des psych Pakets, welche die wichtigsten Streu- und Lageparameter für Variablen angiebt
+```{r Deskriptive Statistik}
+summary(allbus_vertrauen)
 ```
 
 ## Suche nach der zugrunde liegenden Variable - Die Faktorenanalyse
 
-Die Faktorenanalyse bringt einige Voraussetzungen an die Daten mit sich, welche zu Beginn geprüft werden müssen. Zum Nachlesen bietet sich hier Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811 an.
+Die Faktorenanalyse bringt, wie jedes statistische Verfahren, eine Reihe von Vorraussetzungen mit. Diese Vorraussetzungen sollten wir kennen und bei der Anwendung der Faktorenanalyse beachten. Viele der Vorraussetzungen beziehen sich auf Pearson-Korrelationskoeffizienten, welcher die statistsiche Grundlage für die Berechnung der Faktoren bildet.
 
-Voraussetzungen sind:
+* *Varianz*: Wir sollten sichergehen, dass die Daten aus unserer Stichprobe ausreichend varrieren. Wir werfen hierfür ein Blick in die Daten.
 
--   Stichprobengröße (in unserem Fall kein Problem)
--   Ausreichende Anzahl an Variablen (meist 4 oder mehr pro Faktor/Dimension)
--   Die Variablen sind intervallskaliert (In der Praxis werden jedoch oft auch ordinalskalierte Variablen verwendet.)
+```{r Varianz}
+# Visuelle Überprüfung mit einem Histogram für die erste Variable "Ver_Gesundheitswesen". Die restlichen Variablen sollten auch überprüft werden.
+colors = c(rep("darkgreen", 1))
 
-Diese Punkte sind bei uns alle gegeben.
+ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen)) +
+  geom_histogram(binwidth = 0.5, fill = colors) 
+```
 
-Anmerkung: Wir können auch eine Faktorenanalyse mit nicht-kontinuierlichen Daten rechnen (bspw. dichotome Variablen). Hier sollten wir sollten wir die Korrelationsmatrix aus polychorischen Korrelationskoeffizienten konstruieren (diese können mit der Funktion polychor() aus dem Paket polycor berechnet werden
 
-Zunächst schauen wir uns einmal die Korrelationskoeffizienten für einige Variablen an.
+* *Linearität*: Der Pearson-Korrelationskoeffizient (r) misst die lineare Beziehung zwischen zwei Variablen. Wenn die tatsächliche Beziehung nicht linear ist, dann verringert sich der Wert von r. Wir können auf Linearität u.a. visuell durch das Betrachten der Daten mittel Streudiagramm prüfen.
+
+```{r Linearität}
+# Visuelle Überprüfung mit einem Streudiagramm für die ersten beiden Variable (Ver_Gesundheitswesen und Ver_BVerfG)
+
+ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen, y = Ver_BVerfG)) +
+  geom_point() +
+  geom_abline(linetype = "dashed", color = "darkgreen", size = 1)
+```
+
+
+* *Normalverteilung*: Der Pearson-Korrelationskoeffizient setzt eine Normalverteilung voraus. Allerdings finden sich in der Realität fast nie perfekt normalverteilte Daten. Schiefe und Kurtosis sind besonders einflussreich die Ergebnisse der Faktorenanalyse und können im Extremfall artefaktische Ergenbnisse erzeugen. 
+
+```{r Normalverteilung}
+# Visuelle Überprüfung mit einem Histogram für die erste Variable (Ver_Gesundheitswesen)
+colors = c(rep("darkgreen", 1))
+
+ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen)) +
+  geom_histogram(binwidth = 0.5, fill = colors) 
+
+# Statistische Überprüfung mittels Shapiro Wilk Test für die erste Variable (pt01)
+shapiro.test(allbus_vertrauen$Ver_Gesundheitswesen)
+
+# Ein p-Wert unter 0.05 = keine Normalverteilung 
+# Ein p-Wert über 0.05 = Normalverteilung
+```
+
+* *Level der Messung*: Bei Pearson-Korrelationen wird davon ausgegangen, dass normalverteilte Variablen auf Intervall- oder Verhältnisskalen gemessen werden, d. h. es handelt sich um kontinuierliche Daten mit gleichen Intervallen. Diese Eigenschaften treffen nicht auf ordinale (bspw. Kategorien) oder dochotome (bspw. Wahr-Falsch-Items) Variablen zu, was sich negativ auf Pearson-Korrelationskoeffizieten auswirkt und zu verzerrten Ergebnissen führen kann. Allerdings ist ein beträchtlicher Teil der Daten, mit denen wir zu tun haben, ordinal oder dichotom skaliert, um auch mit diesen Daten arbeiten zu können nutzen wir die polychorische Korrelation, welche robuster Nicht-Normalverteilung ist.
+
+* *Fehlende Werte*: In jeder Studie sollten wir die Anzahl und die Art der fehlenden Werte sowie die Gründe und die Methoden für den Umgang mit diesen Daten angegeben werden. 
+
+```{r fehlende Werte}
+# Wir haben den Code bereits am Anfang ausgefürht
+allbus_vertrauen = allbus_vertrauen %>%  
+  
+  # Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen)
+  mutate(across(Ver_Gesundheitswesen:Ver_EU_Par, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>% 
+  
+  # Wir schmeißen fehlende Werte raus
+  na.omit()
+```
+
+* *Ausreißer / Outliers*: Wir sollten Ausreißer identifizieren und im Zweifel von der Analyse ausschließen, da diese zu einer Verzerrung der Ergebnisse führen können. Zu den Methoden zur Erkennung von Ausreißern gehören Boxplots und Streudiagramme für einzelne Variablen sowie der Mahalanobis-Abstand für mehrere Variablen.
+
+```{r Beispiel Boxplot}
+boxplot(allbus_vertrauen)
+```
+
+* *Passung der Daten für die Faktorenanalyse*: Wir sollten trotz unserer guten Datengrundlage nochmals prüfen, ob die gemessenen Variablen ausreichend miteinander korreliert sind, um eine Faktorenanalyse zu rechtfertigen. Eine Korrelation zwischen zwei Variablen gibt an, ob und wie stark ein Zusammenhang zwischen den beiden Variablen besteht. An dieser Stelle ist es wichtig, sich zu merken, dass eine Korrelation die Stärke eines Zusammenhangs angibt. Eine genauere Erklärung findet ihr im Kapitel 7. Zunächst können wir einen Blick in die Korrelationsmatrix werfen - eine beträchtliche Anzahl von Korrelationen sollte ±.30 überschreiten. Alternativ können wir ein objektiveren Test der Faktorfähigkeit der Korrelationsmatrix durchführen. Hierfür greifen wir auf den Sphärizitätstest nach Bartlett (1954) zurück.
 
 ```{r Beispiel für eine Korrelationsmatrix}
-
-# Auswählen einiger zusätzlichen Variablen zum zeigen der Korrelationstabelle
-
-beispiel = daten %>% 
-  select(netusoft, 
-         trstplt, 
-         trstep, 
-         psppsgva, 
-         actrolga,
-         psppipla,
-         cptppola) %>% 
-  mutate(across(netusoft:cptppola, as.numeric)) %>% # mit across kann die gleiche Funktion - in diesem Fall as.numeric() - mehrere Variablen angewandt werden
-  na.omit()
-
-# Bessere Darstellung der Tabelle mit htmlTable und gerundeten Werten für bessere Lesbarkeit
-
-library(htmlTable) # Falls das Paket noch nicht installiert ist, muss es mit install.packages("htmlTable") installiert werden
-htmlTable(round(cor(beispiel), digits = 3))
+htmlTable(round(cor(allbus_vertrauen), digits = 3))
 ```
 
 Noch zu prüfen ist die Korrelation der Items miteinander, hierfür nehmen wir den Bartlett Test.
 
 ```{r Bartlett-Test}
-cortest.bartlett(ess_wirksamkeit)
+cortest.bartlett(allbus_vertrauen)
 ```
 
-Wenn der p-Wert signifikant ist (ist hier der Fall) korrelieren die Items miteinandern. Das ist gewünscht.
-
-Ansonsten prüfen wir das Kaiser-Meyer-Olkin-Kriterium (KMO) und die Measure of Sampling Adequacy (MSA) anschauen.
+Bei großen Stichprobenumfängen, wie in unserem Fall mit dem Allbus, reagiert der Bartlett-Test selbst auf geringfügige Abweichungen vom Zufallsprinzip empfindlich, so dass seine Ergebnisse durch ein Maß für die Stichprobenadäquanz ergänzt werden sollten. Das Kaiser-Meyer-Olkin (KMO; Kaiser, 1974) Maß für die Stichprobenadäquanz ist das Verhältnis von Korrelationen und partiellen Korrelationen, das das Ausmaß widerspiegelt, in dem Korrelationen eine Folge der über alle Variablen geteilten Varianz sind und nicht der von bestimmten Variablenpaaren geteilten Varianz.
 
 ```{r KMO und MSA}
-KMO(ess_wirksamkeit)
+KMO(allbus_vertrauen)
 ```
 
-Die Werte für die MSA Werte sollten jeweils größer als 0.5 sein. Ist hier der Fall. Falls ein Item unter 0.5 liegen sollte würde dieses ausgeschlossen werden.
+KMO-Werte reichen von 0,00 bis 1,00 und können sowohl für die gesamte Korrelationsmatrix als auch für jede gemessene Variable berechnet werden. Insgesamt sind KMO-Werte ≥.70 erwünscht und Werte unter .50 werden im Allgemeinen als inakzeptabel angesehen. In diesem Fall ist die Korrelationsmatrix nicht faktoriell. 
 
-Als nächster Schritt möchten wir Wissen wieviele Faktoren wir aus den Daten "ziehen" möchten. Hierfür nutzen wir die Funktion nfactors()
+### Modell der Faktorenanalyse 
+
+Wenn wir den Begriff Faktorenanalyse verwenden, meinen wir meistens zwei eigentlich unterschiedliche Verfahren, die sich in Zweck und Berechnung unterscheiden: die Hauptkomponentenanalyse (PCA) und die explorative Faktorenanalyse. Die Hauptkomponentenanalyse analysiert die gesamte Korrelationsmatrix und zielt darauf ab, Daten zu reduzieren und dabei so viele Informationen aus dem ursprünglichen Datensatz wie möglich zu erhalten. Zu diesem Zweck berechnet die Hauptkomponentenanalyse sogenannte Linearkombinationen der ursprünglichen Messvariablen, die so viele Informationen wie möglich erklären. Diese neuen Messvariablen werden als sogenannte Komponenten bezeichnet und sind im engeren Sinn keine latenten Konstrukte. 
+
+Die Faktorenanalyse versucht im Unterschied dazu, die Gesamtvarianz der gemessenen Variablen in *gemeinsame* Varianz (Kommmunialität oder h2) und die *einzigartige* Varianzen (u2) zu trennen. Dies geschieht indem eine reduzierte Korrelationsmatrix analysiert wird, bei der eine Schätzung der gemeinsamen Varianz jeder Messvariablen auf der Diagonalen der Korrelationsmatrix platziert wird. 
+
+Zusammenfassend liefern beide Methoden, also sowohl die PCA als auch die Faktorenanalyse eine Schätzungen der Gemeinsamkeit, aber nur die  Faktorenanalyse kann die Einzigartigkeit (u2) jeder gemessenen Variable schätzen. 
+
+Die meisten Methodiker:innen empfehlen, dass die explorative Faktorenanalyse verwendet wird, um latente Konstrukte zu identifizieren. Fabrigar und Wegener (2012) empfahlen zum Beispiel Folgendes:
+
+> *When the goal of research is to identify latent constructs for theory building or to create measurement instruments in which the researcher wishes to make the case that the resulting measurement instrument reflects a meaningful underlying construct, we argue that common factor analysis (EFA) procedures are usually preferable.* (Fabrigar und Wegener, 2012: 32)
+
+In unserem Fall wenden wir eine explorative Faktorenanalyse an, da wir uns für die latente Variable *Vertrauen in gesellschaftliche Institutionen* interessieren. Hierfür greifen wir auf das `psych`-Paket zurück, welches die Funktion `fa` für eine Faktorenanalyse enthält.
+
+### Methode der Schätzung
+
+Nachdem wir die Faktorenanalyse (EFA) als bevorzugtes Modell festgelegt haben, müssen wir noch die Methode zur Schätzung (Extraktion) des Faktorenmodells auswählen. Konkret suchen wir ein mathematischen Verfahren, dass die Beziehungen zwischen den gemessenen Variablen und den Faktoren (d. h. die Regression der gemessenen Variablen auf die gemeinsamen Faktoren) möglichst genau schätzt.
+
+Wir möchten kurz anmerken, dass der mathematische Hintergrund an dieser Stelle des Kurses noch nicht so wichtig ist, da hier einige Grundlagen erst imd Kapitel 7 erklärt werden. Trotzdem macht es unserer Einschätzung nach Sinn die Begriffe bereits zu kennen und deren Vor- und Nachteile bennen zu können.
+
+Es existieren eine ganze Reihe von unterschiedlichen Schätzmethoden, von denen zwei Methoden am häufigsten angewendet werden. (1) Die *ML-Schätzung* (Maximum Liklelihood) beruht auf der Normalverteilung und ist entsprechend empfindlicher multivariater Normalität und erfordert meistens einen größere Stichprobe (mehr Fälle). (2) Die *PA* (wird auch als Hauptfaktoren, MINRES oder OLS bezeichnet) ist im Gegenzug dazu eine Methode der kleinsten Quadrate, welche keine Annahmen über Verteilungen trifft. PA nutzt hier eine wiederholte Zwischenschätzung, welche eine bessere Schätzung der Gemeinsamkeit ermöglicht und wiederholt diese bis eine zufriedenstellende Lösung erreicht ist. 
+
+Die PA eignet sich als Methode der Schätzung insbesondere dann, wenn der Zusammenhang zwischen den gemessenen Variablen und den Faktoren relativ schwach sind (≤.40), der Stichprobenumfang relativ klein ist (≤300), die multivariate Normalität verletzt ist oder wenn die Anzahl der den gemessenen Variablen zugrunde liegenden Faktoren falsch spezifiziert ist. Im Gegensatz dazu ist eine ML-Schätzung besser geeignet, wenn die Beziehungen zwischen Faktoren und Variablen stark sind (\>.40), der Stichprobenumfang groß ist, multivariate Normalität erreicht wird und die Anzahl der Faktoren korrekt angegeben ist.
+
+Wir können für unser Beispiel weiterhin die Maximum-likelihood Faktorenanalyse aus dem `psych`-Paket mit der Funktion `fa` verwenden, da wir in unserem Fall die entsprechenden Voraussetzungen in Bezug auf den Stichprobenumfang, die Stärke der Beziehung, sowie der Anzahl der Faktoren  erfüllen. Für dieses Beispiel nutzen wir trotz der nicht perfekten Normalverteilung die ML Methode, alternativ könnten die PA Methode als robustere Variante nehmen.
+
+### Anzahl der Faktoren
+
+Wie bereits bei der ML-Schätzung angedeutet, müssen wir die Anzahl der Faktoren festlegen. Hierfür müssen wir die Anzahl der Faktoren für die weitere Analyse festlegen. Wir erreichen das indem wir mehrere Modelle schätzen und somit Rückschlüsse auf ein optimales Modell mit der für uns passenden Anzahl an Faktoren ziehen. Vereinfacht können wir uns das Auswringen eines nassen Handtuchs vorstellen, bei der der erste Faktor die meiste Varianz extrahiert - ergo die größte Mene an Wasser - und die nachfolgenden Faktoren sukzessive kleinere Anteile der Varianz extrahieren. Auf diese Art und Weise können wir eine Schätzung des optimalen Modells vornehmen.
+
+Wir verwenden hierfür die `nfactors`-Funktion, welche uns mehere Schätzungen ausgibt.
 
 ```{r nfactors}
-nfactors(ess_wirksamkeit, rotate = "varimax", fm="MLE")
-#?nfactors 
+nfactors(allbus_vertrauen, rotate = "varimax", fm="mle")
 ```
 
-Hier wählen wir zunächst den R Console Output aus und schauen auf den MAP Test, welcher uns hier einen Faktor/Dimension vorschlägt. Die Funktion gibt uns noch eine Reihe anderer Werte aus, welche wir jetzt aber nicht im Detail anschauen. Eine genauere Beschreibung der Werte kann mit ?nfactors aufgerufen werden.
+Die minimalen durchschnittlichen Teilwerte (MAP), wird als die genauesten empirischen Schätzungen für die Anzahl der beizubehaltenden Faktoren betrachtet. Der MAP Wert schlägt uns einen Faktor vor, entsprechend gehen wir im folgenden von einem Faktor bzw. einer lateten Variable aus.
 
-Dieser Schritt ist sehr wichtig. Wir müssen im nächsten Schritt die Anzahl der Faktoren angeben. Hierfür müssen wir uns zunächst auf Grundlage der Statistischen Tests UND der theoretischen Überlegungen auf eine Anzahl von Faktoren bzw. Dimensionen festgelegt haben.
+### Rotation der Faktoren
 
-In unserem Beispiel gehen wir testweise von einem Faktoren aus.
+Bei der Durchführung der Faktorenanalyse werden sogenannte *Faktorladungen* ermittelt, die anzeigen, wie stark jede Variable mit den extrahierten Faktoren zusammenhängt. Während des Analyseprozesses kann es vorkommen, dass die *Faktorladungen* rotiert werden, um eine eindeutigere und interpretierbarere Struktur der Faktoren zu erzielen. Die Rotation der *Faktorladungen* ermöglicht es, die Ausprägung der Faktoren auf weniger, aber stärker ausgeprägte Variablen zu konzentrieren, was die Interpretation und Verständlichkeit der Analyseergebnisse erleichtert. Es gibt verschiedene Rotationsmethoden, wie beispielsweise die Varimax- oder Quartimax-Rotation, die je nach Ziel der Faktorenanalyse angewendet werden können. Es existieren Dutzende von analytischen Rotationsmethoden, wobei Varimax die beliebteste orthogonale Rotationsmethode ist, während Promax und Oblimin die beliebtesten schrägen Rotationsmethoden sind. Sowohl bei Promax als auch bei Oblimin können wir den Grad der Korrelation zwischen den Faktoren kontrollieren (über die Parameter Kappa bzw. Delta).
 
-Wir legen das Modell an mit folgenden Parametern: Maximum-Likelihood (ML) 1 Faktor Varimax-Rotation --\> Mit einer Rotation kann man die Interpretation der Faktoren verbessern, hier gibt es verschiedene Möglichkeiten "varimax" ist eine Option.
+Wichtig ist, dass sich die Interpretation der *Faktorladungen* zwischen orthogonalen und schrägen Rotationen unterscheiden. Bei orthogonalen Lösungen können die *Faktorladungen* als Korrelationen zwischen gemeinsamen Faktoren und gemessenen Variablen interpretiert werden. Diese Korrelationen reichen von -1,00 bis +1,00, und der Anteil der Varianz in einer gemessenen Variablen, der durch einen gemeinsamen Faktor beigetragen wurde, kann durch Quadrieren der Faktorladung berechnet werden. Im Gegensatz dazu ergeben sich bei schrägen Lösungen zwei verschiedene Arten von *Faktorladungen*: Struktur- und Musterkoeffizienten. Strukturkoeffizienten können auch als Korrelationen zwischen gemeinsamen Faktoren und den gemessenen Variablen interpretiert werden. Im Gegensatz dazu sind die Musterkoeffizienten keine einfachen Faktor-Variablen-Korrelationen mehr, sondern sie ähneln standardisierten partiellen Regressionskoeffizienten. Das heißt, sie sind Korrelationen zwischen gemeinsamen Faktoren und gemessenen Variablen, nachdem der Einfluss aller anderen gemeinsamen Faktoren kontrolliert (herausgerechnet) wurde. Dementsprechend können Musterkoeffizienten den Wert von 1,00 überschreiten und können nicht quadriert werden, um den Anteil der Varianz zu ermitteln, der eindeutig auf einen gemeinsamen Faktor zurückzuführen ist. 
 
-```{r Modell 1}
-fit <- factanal(ess_wirksamkeit, 1, rotation = "varimax")
+In unserem Fall greifen wir auf die etablierte Rotationsmethode `varimax` zurück, welches wir entsprechend im R-Code spezifizieren. Zusätzlich geben wir unsere erwartete Anzahl an Faktoren an, welche wir zuvor bestimmt haben (in unserem Fall: 1).
+
+```{r Modell der Faktorenanalyse}
+
+# Wir führen die Faktorenanalyse aus und speichern die Ergebnisse in dem Objekt fit ab
+fit =  fa(allbus_vertrauen, factors = 1, fm = "ml", rotation = "varimax")
 
 # Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind
 
 print(fit, digits = 2, cutoff = .3)
 ```
 
-Beim Output ist das wichtigste die Faktorladungen. Im idealfall laden die Variablen nur jeweils auf einen Faktor. Wir haben bereits geringe Faktorladungen bereits aus der Darstellung ausgeschlossen.
+### Interpretation der Ergebnisse
 
-Hier laden alle Variablen mit hohen Werten auf den Faktor1. Wir können also davon ausgehen, dass wir diese Variablen zu einem Index verrechnen können.
+Bei der Betrachtung des Outputs der explorativen Faktorenanalyse beginnen wir mit den *Faktorladungen*. *Faktorladungen* geben an, wie stark jede Variable mit den extrahierten Faktoren korreliert. Hohe positive Ladungen zeigen eine starke Beziehung zwischen der Variable und dem Faktor an, während hohe negative Ladungen darauf hindeuten, dass die Variable invers mit dem Faktor zusammenhängt. Variablen mit Ladungen nahe null haben wenig oder keine Beziehung zum jeweiligen Faktor. Durch die Betrachtung dieser Ladungen können wir die die Faktoren interpretieren und auch benennen. Auf diese Art und Weise können wir Rückschlüsse auf die zugrunde liegende latente Variable ziehen. In unserem Fall übersteigen für alle Indikatoren die Faktorladungen über den Wert 0.3, was auf einen relativ starken und damit für uns guten Zusammenhang mit dem Faktor bzw. der latenten Variable spricht.
 
-Jetzt schauen wir uns doch noch kurz die Uniquenes bzw. Kommunalitäten an. Die gibt uns an wieviel Varianz von den jeweiligen Variablen durch die Faktoren erklärt wird.
+Zusätzlich zur Interpretation der Faktorladungen ist es auch wichtig, die Uniquenes der Faktoren zu berücksichtigen. Diese zeigen an, wie viel Varianz in den Daten von jedem extrahierten Faktor erklärt wird.  In anderen Worten sagt sie also aus, wie gut die Information der Variablen in den Faktoren insgesamt erhalten geblieben ist.
 
-```{r Kommunalitäten}
-1 - fit$uniquenesses
+```{r Uniqueness}
+print(fit$uniquenesses, digits = 2)
 ```
 
-Die Werte geben uns eine Idee davon, wie wichtig die Variablen für die erzielte Lösung sind.
+Wenn wir auf die Uniqueness der einzelnen Indikatoren blicken, wird relativ schnell klar, dass wir eine Reihe von Indikatoren mit hohen Uniqueness-Werten haben, deren Varianz zu großen Teilen von der latenten Variable erklären wird und somit stärker als andere Indikatoren zu der latenten Variable "beitragen".
 
-## Andere Methoden der Faktorenanalyse
+::: callout-tip
+## Wie gebe ich die Ergebnisse korrekt an?
 
-1)  Hauptachsen-Analyse fa() Funktion. Anwendung wie oben beschrieben.
+Die Ergebnisse von Regressionsanalysen werden meistens in einer Tabelle dargestellt. Für die Angabe im Text wird folgendes gebraucht:
 
-2)  Hauptkomponentenanalyse principal() Funktion. Eigentlich keine Faktorenanalyse, beide Methoden sind sich aber sehr ähnlich. Anwendung wie oben beschrieben.
+✅ die Werte des Kaiser-Meyer-Olkin Kritierums  (KMO)
 
-## Quellen für das Script
+✅ das Ergebnis des Barlett-Tests
 
-Stephanie Geise Daniela Keller https://www.youtube.com/watch?v=NFPGQcq1fO8 Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811
+✅ die Faktorladungen
+
+✅ die Uniqueness
+
+✅ die gewählte Rotations-Methode
+
+
+Das Format ist normalerweise:
+
+> ***Beispiel:*** Zunächst wurde Faktorenanalyse der 15 gemessenen Indikatoren durchgeführt. Das Kaiser-Meyer-Olkin (KMO)-Maß für die Stichprobenadäquanz betrug 0,89. Dies deutet darauf hin, dass die Korrelationsmuster relativ kompakt sind und die Faktorenanalyse eindeutige und zuverlässige Faktoren ergeben sollte. Der Bartlett-Test auf Sphärizität war ebenfalls signifikant (χ2(105) = 33164.76, p < .001). Dies bedeutet, dass es einige Beziehungen zwischen den untersuchten Variablen gibt. Sowohl der KMO-Test als auch der Bartlett-Test bestätigen, dass die Faktorenanalyse angemessen ist. 
+
+>Die Faktoren werden rotiert, um eine einfache Struktur zu erhalten. In diesem Fall wurde die varimax Rotationsmethode verwendet. Nach sorgfältiger Betrachtung der zusammenhängenden Variablen in der Analyse wurden dann die Faktorbezeichnung vorgeschlagen und in Tabelle 1 dargestellt. Dabei handelt es sich um *Vertrauen in gesellschaftliche Institutionen*. Für den Faktor wurden Faktorladungen erstellt (siehe Tabelle 1).
+:::
+
+
+## Danksagung und Würdigung
+
+Bei der Struktur und dem Inhalt dieser Seite haben mich die folgenden herausragenden Arbeiten inspieriert. Ich möchte mich bei den Autor:innen für ihre Arbeit sehr bedanken!
+
+* Daniela Keller [Link](https://www.youtube.com/watch?v=NFPGQcq1fO8) 
+* Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811
+* Brown T. A. (2015). Confirmatory factor analysis for applied research (2nd ed.). New York, NY: Guilford Press. Watkins, M. W. (2018). Exploratory Factor Analysis: A Guide to Best Practice. Journal of Black Psychology, 44(3), 219--246. [Link](https://doi.org/10.1177/0095798418771807)
+
+::: callout-note
+## Literatur und Beispiele aus der Praxis
+
+Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen braucht.
+
+> 📖 Field, Z., Miles, J., & Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. [Link](https://suche.suub.uni-bremen.de/peid=B68436977&LAN=DE&CID=7699632&index=L&Hitnr=1&dtyp=D&rtyp=a&Exemplar=1)
+
+> 📖 Brown T. A. (2015). Confirmatory factor analysis for applied research (2nd ed.). New York, NY: Guilford Press. Watkins, M. W. (2018). Exploratory Factor Analysis: A Guide to Best Practice. Journal of Black Psychology, 44(3), 219--246. [Link](https://doi.org/10.1177/0095798418771807)
+
+> 📖 Fabrigar, L. R., & Wegener, D. T. (2012). Exploratory factor analysis. Oxford University Press.
+
+Hier findet ihr ein Beispiel aus der Forschungspraxis:
+
+> 🔬 Koirala, B. P., Araghi, Y., Kroesen, M., Ghorbani, A., Hakvoort, R. A., & Herder, P. M. (2018). Trust, awareness, and independence: Insights from a socio-psychological factor analysis of citizen knowledge and participation in community energy systems. Energy research & social science, 38, 33-40. [Link](https://www.sciencedirect.com/science/article/pii/S2214629618300641)
+:::

@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Einführung in R</span></a>
+ <span class="menu-text">Data-Bootcamp: Einführung in R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -194,12 +194,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Relevante Begriffe</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Datensätze</span></a>
+ <span class="menu-text">Data-Bootcamp: Datensätze</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -220,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Praktische Tipps</span></a>
+ <span class="menu-text">Der ALLBUS Datensatz</span></a>
   </div>
 </li>
       </ul>
@@ -228,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Der Umgang mit Daten</span></a>
+ <span class="menu-text">Data-Bootcamp: Der Umgang mit Daten</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -351,12 +357,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Proportionen Häufigkeiten mit dem Binomial Test und Pearson Chi-Quadrat</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -456,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Das Überprüfen von Zusammenhängen bei zwei Variablen</p>
 <section id="das-überprüfen-von-zusammenhängen-bei-zwei-nominalskalierten-variablen" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Das Überprüfen von Zusammenhängen bei zwei nominalskalierten Variablen</h1>
-<p>Pearson Chi-Quadrat ergänzen</p>
+<p>Pearson Chi-Quadrat</p>
 </section>
 <section id="das-überprüfen-von-zusammenhängen-bei-zwei-nominalskalierten-variablen-1" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Das Überprüfen von Zusammenhängen bei zwei nominalskalierten Variablen</h1>
@@ -505,19 +505,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(lm.beta)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(broom) <span class="co"># hier stecken einige Befehle zur Bereinigung der Daten und der Modelloutputs drin</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">library</span>(performance)</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">library</span>(see)</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#Daten laden und zum Datenobjekt "daten" zuweisen</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>daten <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ESS8_vier_laender.rds"</span>)</span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#Visualisierungshintergrund der Grafiken in ggplot festlegen</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span>
-<span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co"># Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(lm.beta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'lm.beta' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(broom) <span class="co"># hier stecken einige Befehle zur Bereinigung der Daten und der Modelloutputs drin</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'broom' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'performance' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(see)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'see' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">#Daten laden und zum Datenobjekt "daten" zuweisen</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>daten <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ESS8_vier_laender.rds"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#Visualisierungshintergrund der Grafiken in ggplot festlegen</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co"># Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="ziel-der-analyse" class="level3" data-number="3.2.3">
@@ -529,26 +540,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Damit der Output etwas nachvollziehbarer wird, benenne ich die Variablen mit dem rename-Befehl zunächst einmal um. Dann nutze ich den drop_na-Befehl, um alle Fällen mit fehlenden Werten zu entfernen (in der Klammer spezifiziere ich, auf welche Variablen sich der Befehl beziehen soll). Das alles weise ich einem neuen Datenobjekt zu: daten_mod</p>
 <p>Schließlich nutze ich den slice_sample-Befehl, um aus unseren 8432 Fällen ein Zufallssample von n=100 Fällen zu ziehen, weil mir das die visuelle Interpretation erleichtert (diesen Befehl könnten wir hier auch weglassen, dann bekommen wir unten aber sehr sehr viele Datenpunkt in unserem Streudiagramm - probieren Sie es mal aus!)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>daten_mod <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">rename</span>(<span class="at">alter =</span> agea,</span>
-<span id="cb4-3"><a href="#cb4-3"></a>         <span class="at">internetnutzung =</span> netustm) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">drop_na</span>(<span class="fu">c</span>(alter, internetnutzung)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>) </span>
-<span id="cb4-6"><a href="#cb4-6"></a>daten_mod</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>daten_mod <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">rename</span>(<span class="at">alter =</span> agea,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>         <span class="at">internetnutzung =</span> netustm) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">drop_na</span>(<span class="fu">c</span>(alter, internetnutzung)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>) </span>
+<span id="cb12-6"><a href="#cb12-6"></a>daten_mod</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 100 × 166
         idno cntry gndr   alter marsts   edubde1 eduade2 eduade3 nwspol netusoft
        &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;    &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;    &lt;dbl&gt; &lt;fct&gt;   
- 1      2882 FR    Female    26 None of… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        90 Every d…
- 2      1844 SE    Male      48 &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        60 Every d…
- 3       920 SE    Male      64 &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        60 Every d…
- 4 100004717 GB    Male      53 None of… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        30 Every d…
- 5       995 SE    Female    63 Widowed… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        30 Most da…
- 6  10008742 DE    Male      42 Legally… Mittle… Kein H… Meiste…     20 Every d…
- 7      3811 FR    Female    38 &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        10 Every d…
- 8 100001399 GB    Female    28 None of… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        60 Every d…
- 9 100003501 GB    Male      25 None of… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        30 Every d…
-10  10001546 DE    Male      47 &lt;NA&gt;     Mittle… Kein H… Meiste…     90 Every d…
+ 1       835 FR    Male      16 None of… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        30 Every d…
+ 2  10006306 DE    Female    39 None of… Abitur… Diplom… Kein b…     25 Every d…
+ 3  10008723 DE    Male      16 None of… (Noch)… Kein H… Kein b…     30 Most da…
+ 4       231 SE    Female    80 Legally… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;       270 Most da…
+ 5 100003876 GB    Male      33 None of… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;       120 Every d…
+ 6       408 FR    Female    30 &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        30 Every d…
+ 7  10009322 DE    Male      72 &lt;NA&gt;     Abitur… Diplom… Kein b…     90 Every d…
+ 8 100003453 GB    Male      45 None of… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;       120 Every d…
+ 9      1126 SE    Female    60 None of… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;       120 Every d…
+10 100001390 GB    Female    77 Widowed… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;        10 Every d…
 # ℹ 90 more rows
 # ℹ 156 more variables: internetnutzung &lt;dbl&gt;, ppltrst &lt;dbl&gt;, pplfair &lt;dbl&gt;,
 #   pplhlp &lt;dbl&gt;, polintr &lt;fct&gt;, psppsgva &lt;fct&gt;, actrolga &lt;fct&gt;,
@@ -564,11 +575,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>ACHTUNG! Für die Regressionsanalyse müssen noch weitere Voraussetzungen geprüft werden (insb. Homoskedastizität der Residuen; Unabhängigkeit der Residuen; Normalverteilung der Residuen; keine Ausreißer in den Daten). An dieser Stelle klammern wir die anderen Voraussetzungsprüfungen aber vorerst aus, und kommen in der nächsten Sitzung darauf zurück (das ist sonst zu viel auf einmal).</p>
 <p>Zur visuellen Inspektion, ob der Zusammenhang zwischen unseren beiden Variablen linear ist, erstellen wir nun mit dem Befehl geom_point ein Punktdiagramm mit den Variablen Alter und Internetnutzung. Praktischerweise ist die Regressionsformel schon in ggplot integriert: Der Befehl geom_smooth erzeugt eine Trendlinie nach dem linear model (method = lm), die die Beziehung von y (=Internetznutzung) und x (=Alter) abbildet. Das Ergebnis ist eine Linie nach einer linearen Gleichung, die den Daten so eng wie möglich folgt. Mit dem Befehl ggtitle legen wir dann noch in den Klammern den Titel der Grafik fest, und mit xlab und ylab ergänzen wir die Achsenbeschriftung.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(daten_mod, <span class="fu">aes</span>(alter, internetnutzung)) <span class="sc">+</span> </span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> <span class="st">"y ~ x"</span>) <span class="sc">+</span> </span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Zusammenhang der Variablen Alter und Internetnutzung"</span>) <span class="sc">+</span> </span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"tägliche Internetnutzung (Minuten)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(daten_mod, <span class="fu">aes</span>(alter, internetnutzung)) <span class="sc">+</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> <span class="st">"y ~ x"</span>) <span class="sc">+</span> </span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Zusammenhang der Variablen Alter und Internetnutzung"</span>) <span class="sc">+</span> </span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"tägliche Internetnutzung (Minuten)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_7.2_files/figure-html/Zusammenhang von Alter und Internetnutzung plotten-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -587,8 +598,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="einfache-lineare-regression-mit-lm-linear-models" class="level3" data-number="3.2.8">
 <h3 data-number="3.2.8" class="anchored" data-anchor-id="einfache-lineare-regression-mit-lm-linear-models"><span class="header-section-number">3.2.8</span> Einfache lineare Regression mit lm (=linear models)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(internetnutzung <span class="sc">~</span> alter, <span class="at">data =</span> daten_mod) </span>
-<span id="cb7-2"><a href="#cb7-2"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(internetnutzung <span class="sc">~</span> alter, <span class="at">data =</span> daten_mod) </span>
+<span id="cb15-2"><a href="#cb15-2"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -596,12 +607,12 @@ lm(formula = internetnutzung ~ alter, data = daten_mod)
 
 Coefficients:
 (Intercept)        alter  
-     321.39        -2.97  </code></pre>
+    378.194       -3.982  </code></pre>
 </div>
 </div>
 <p>Da dieser Output sehr, sehr sparsam und für uns noch wenig aussagekräftig ist, ergänzen wir ihn mit dem bekannten summary-Befehl, den wir auf unser Modell anwenden. Die dann erscheinende Ausgabe ist das “Herzstück” unserer Regressionsanalyse (insbesondere, wenn sie um die standardisierten B-Koeffizienten erweitert wird - dazu kommen wir aber unten noch). Jetzt nutzen wir erst einmal die summary-Funktion, und wir erhalten im Output einen guten Überblick über unser Regressionsmodell:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -609,18 +620,18 @@ lm(formula = internetnutzung ~ alter, data = daten_mod)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--205.25  -94.75  -41.28   51.69  588.72 
+-280.49 -115.87  -43.01   46.13  921.37 
 
 Coefficients:
-            Estimate Std. Error t value       Pr(&gt;|t|)    
-(Intercept) 321.3915    44.9280   7.153 0.000000000155 ***
-alter        -2.9704     0.9321  -3.187        0.00193 ** 
+            Estimate Std. Error t value     Pr(&gt;|t|)    
+(Intercept)  378.194     59.747   6.330 0.0000000074 ***
+alter         -3.982      1.198  -3.324      0.00125 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 144.7 on 98 degrees of freedom
-Multiple R-squared:  0.09389,   Adjusted R-squared:  0.08465 
-F-statistic: 10.16 on 1 and 98 DF,  p-value: 0.001931</code></pre>
+Residual standard error: 198.2 on 98 degrees of freedom
+Multiple R-squared:  0.1013,    Adjusted R-squared:  0.09218 
+F-statistic: 11.05 on 1 and 98 DF,  p-value: 0.001247</code></pre>
 </div>
 </div>
 </section>
@@ -691,15 +702,15 @@ Wie gebe ich die Ergebnisse korrekt an?
 <p>Da bei der Regression eine Funktion geschätzt wird, können wir anhand der b-Werte und des Intercepts auch Vorhersagen für bestimmte Fälle treffen. Das ist eine der <strong>coolen Superkräfte</strong> der Regressionsanalyse :) (Das gilt aber streng genommen nur, wenn das zu Grunde liegende Sample repräsentativ ist und das Modell sowie die Parameter signifikant sind).</p>
 <p>Zur Prognose von erwarteten Werten der abhängigen Variable (Internetnutzung) auf Basis von gegebenen Werten der unabhänigen Variable (Alter) kann man die predict.lm()-Funktion nutzen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">predict.lm</span>(model, <span class="fu">data.frame</span>(<span class="at">alter =</span> <span class="dv">25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">predict.lm</span>(model, <span class="fu">data.frame</span>(<span class="at">alter =</span> <span class="dv">25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1 
-247.1303 </code></pre>
+278.6328 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">predict.lm</span>(model, <span class="fu">data.frame</span>(<span class="at">alter =</span> <span class="dv">75</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">predict.lm</span>(model, <span class="fu">data.frame</span>(<span class="at">alter =</span> <span class="dv">75</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1 
-98.60797 </code></pre>
+79.51086 </code></pre>
 </div>
 </div>
 </section>
@@ -708,10 +719,10 @@ Wie gebe ich die Ergebnisse korrekt an?
 <p>Eine Person mit einem Alter von 25 Jahren weist laut Modell eine prognostizierte Internetnutzung von (306) Minuten auf. Eine Person mit einem Alter von 75 Jahren weist laut Modell eine prognostizierte Internetnutzung von (74) Minuten auf. (Nicht wundern, wenn Ihr Ergebnis leicht anders ausfällt: Der Wert variiert entsprechend der gezogenen Zufallsstichprobe.)</p>
 <p>Das geht natürlich auch kombiniert in einem Befehl, dann müssen wir aber mit c() einen combine-Befehl einfügen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">predict.lm</span>(model, <span class="fu">data.frame</span>(<span class="at">alter =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">75</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">predict.lm</span>(model, <span class="fu">data.frame</span>(<span class="at">alter =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">75</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        1         2 
-247.13033  98.60797 </code></pre>
+278.63275  79.51086 </code></pre>
 </div>
 </div>
 </section>
@@ -719,74 +730,74 @@ Wie gebe ich die Ergebnisse korrekt an?
 <h3 data-number="3.2.13" class="anchored" data-anchor-id="vorhersage-und-residuen-berechnen"><span class="header-section-number">3.2.13</span> Vorhersage und Residuen berechnen</h3>
 <p>Die Prognose-Leistung unseres Regressionsmodels können wir auch auf den gesamten Datensatz anwenden - dann bekommen wir für jeden Fall im Datensatz den prognostizierten Wert der abhängigen Variable Internetkonsum ausgegeben. Dazu können wir den Befehl fitted nutzen. Der Fall Nummer 3 hat also laut Modell (!) einen Internetkonsum von (X) Minuten. (Nicht wundern, wenn Ihr Ergebnis leicht anders ausfällt: Der Wert variiert entsprechend der gezogenen Zufallsstichprobe.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">fitted</span>(model) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">fitted</span>(model) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        1         2         3         4         5         6         7         8 
-244.15988 178.81004 131.28289 163.95780 134.25333 196.63272 208.51451 238.21898 
+314.47470 222.87862 314.47470  59.59867 246.77325 258.72057  91.45818 198.98400 
         9        10        11        12        13        14        15        16 
-247.13033 181.78049 184.75093 160.98736 116.43065 235.24854  95.63752 172.86915 
+139.24743  71.54599 163.14206 195.00156 254.73813 242.79081 306.50982 175.08937 
        17        18        19        20        21        22        23        24 
-146.13512 184.75093 143.16467 149.10557 235.24854 131.28289 223.36675 128.31244 
+131.28255 131.28255 155.17718 218.89619 111.37036 202.96644 119.33524  99.42305 
        25        26        27        28        29        30        31        32 
-128.31244 160.98736 181.78049 238.21898 146.13512 163.95780 175.83959 163.95780 
+242.79081 274.65032 103.40549 103.40549 155.17718  99.42305 210.93131 167.12449 
        33        34        35        36        37        38        39        40 
-220.39630 155.04646 270.89390 223.36675 160.98736 113.46020 267.92346 214.45541 
+310.49226 179.07181 107.38793 131.28255 222.87862  67.56355 198.98400 302.52738 
        41        42        43        44        45        46        47        48 
-256.04167 226.33719 190.69183 229.30764 259.01211 175.83959 190.69183 253.07122 
+270.66788 278.63275 187.03668  99.42305 234.82594 226.86106 246.77325 262.70300 
        49        50        51        52        53        54        55        56 
-169.89870 193.66228 199.60317 125.34199 175.83959 166.92825 208.51451  98.60797 
+115.35280  71.54599 163.14206 274.65032 155.17718 163.14206 187.03668 163.14206 
        57        58        59        60        61        62        63        64 
-253.07122 140.19423 175.83959 169.89870 155.04646 229.30764 267.92346 184.75093 
+234.82594 226.86106  99.42305 250.75569 115.35280 175.08937 183.05425 202.96644 
        65        66        67        68        69        70        71        72 
-253.07122 205.54406 241.18943 166.92825 128.31244 184.75093 131.28289 169.89870 
+159.15962 123.31768 123.31768 143.22987 155.17718 254.73813 242.79081 278.63275 
        73        74        75        76        77        78        79        80 
-134.25333 166.92825 101.57841 232.27809 259.01211 113.46020 244.15988 137.22378 
+210.93131 151.19474 270.66788 234.82594 191.01912 119.33524 310.49226 226.86106 
        81        82        83        84        85        86        87        88 
-229.30764 178.81004 163.95780 217.42585 199.60317 241.18943 223.36675 140.19423 
+159.15962 206.94887 270.66788 250.75569 147.21231 238.80838 230.84350 103.40549 
        89        90        91        92        93        94        95        96 
-163.95780 122.37154 232.27809 172.86915 267.92346 169.89870 235.24854 116.43065 
+147.21231 159.15962 167.12449 151.19474 302.52738 210.93131 187.03668 119.33524 
        97        98        99       100 
-140.19423 205.54406 247.13033 134.25333 </code></pre>
+175.08937 266.68544 302.52738 198.98400 </code></pre>
 </div>
 </div>
 <p>Nun haben wir aber im Rahmen unserer Befragung die Internetnutzung der Befragten aber ja schon erhoben. Wozu dient das dann? Ganz einfach: Über die Ausgabe der prognostizierten Werte und der Residuen können wir sehen, wie hoch die Abweichung der Modellprognose ist, d.h. wie sehr die empirisch beobachteten Werte unserer Fälle im Datensatz von den laut Modell erwarteten Werten abweichen. Um die Abweichung zu quantifizieren, nutzen wir die residuals.lm-Funktion:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">residuals.lm</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">residuals.lm</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          1           2           3           4           5           6 
--124.159878    1.189960  588.717115  -43.957804  -74.253333 -136.632723 
+-194.474695 -162.878625 -269.474695  -29.598673 -126.773252 -228.720565 
           7           8           9          10          11          12 
- -28.514512 -178.218984  112.869675   88.219513  -94.750935   19.012643 
+ -31.458176  -78.983998 -109.247430  -11.545986  -43.142057  404.998440 
          13          14          15          16          17          18 
-   3.569350  244.751463  -35.637519  187.130854  -86.135121 -124.750935 
+-194.738127  237.209186  -96.509820  304.910630  -41.282554  -71.282554 
          19          20          21          22          23          24 
- -83.164674  330.894432    4.751463  -71.282885 -103.366748   51.687562 
+ -35.177181  -38.896187  -51.370365 -142.966435   90.664759  -49.423051 
          25          26          27          28          29          30 
-  -8.312438  -40.987357 -121.780487  -58.218984  -56.135121 -103.957804 
+-240.790814   25.349683  -13.405489   16.594511 -125.177181  -84.423051 
          31          32          33          34          35          36 
- -25.839593  -43.957804 -100.396301   24.953537 -150.893903  -43.366748 
+ -30.931311  132.875505 -130.492257  -89.071808   72.612073  -11.282554 
          37          38          39          40          41          42 
- 259.012643  -53.460202   92.076545  -94.455406   43.958333 -106.337195 
+ -42.878625  112.436451  401.016002   -2.527382  629.332121  921.367245 
          43          44          45          46          47          48 
-  49.308171   10.692358  -79.012114  304.160407  109.308171  346.928780 
+ 112.963316  -84.423051 -114.825938 -136.861063  353.226748   37.296997 
          49          50          51          52          53          54 
--109.898699  -13.662276  -19.603170  174.658009 -160.839593  133.071749 
+ 184.647197  108.454014   16.857943  385.349683 -125.177181 -133.142057 
          55          56          57          58          59          60 
- -88.514512  -38.607966  -13.071220  -20.194227  124.160407 -154.898699 
+-172.036684  -73.142057  365.174062 -166.861063  -39.423051 -205.755690 
          61          62          63          64          65          66 
--140.046463 -109.307642  212.076545  -94.750935  346.928780   94.455935 
+ 184.647197 -115.089370  -63.054246  -62.966435  -99.159619  176.682322 
          67          68          69          70          71          72 
- 118.810569   43.071749   51.687562   -4.750935  -71.282885  -49.898699 
+-108.317678 -118.229868  -35.177181  -74.738127  -32.790814   81.367245 
          73          74          75          76          77          78 
-  45.746667   13.071749  -41.578414  127.721911 -199.012114  -53.460202 
+-180.931311  -31.194743  449.332121 -114.825938  348.980878  -29.335241 
          79          80          81          82          83          84 
--124.159878  102.776220 -139.307642  181.189960  -73.957804 -127.425853 
+-280.492257 -166.861063  -99.159619  -86.948873  -30.667879  -10.755690 
          85          86          87          88          89          90 
--139.603170 -181.189431 -103.366748   99.805773  -73.957804  -92.371544 
+ -27.212306 -118.808376 -200.843500  -73.405489   92.787694 -114.159619 
          91          92          93          94          95          96 
- 127.721911  -52.869146  -87.923455  -79.898699 -205.248537  -56.430650 
+  12.875505  328.805257 -212.527382   29.068689 -127.036684  120.664759 
          97          98          99         100 
--110.194227  -25.544065  472.869675  -14.253333 </code></pre>
+-165.089370  273.314559  -92.527382 -108.983998 </code></pre>
 </div>
 </div>
 </section>
@@ -798,20 +809,20 @@ Wie gebe ich die Ergebnisse korrekt an?
 <h3 data-number="3.2.15" class="anchored" data-anchor-id="vorhersage-und-residuen-grafisch-darstellen"><span class="header-section-number">3.2.15</span> Vorhersage und Residuen grafisch darstellen</h3>
 <p>Um das grafisch gegenüberzustellen, speichern wir die obenen ausgegeben Daten zur Vorhersage (aus der predict-Funktion) und die Daten zu den Abweichungen von der Vorhersage (residuals-Funktion) jeweils als neue Variablen “vorhersage” und “residuen” ab.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>daten_mod<span class="sc">$</span>vorhersage <span class="ot">&lt;-</span> <span class="fu">predict</span>(model) </span>
-<span id="cb21-2"><a href="#cb21-2"></a>daten_mod<span class="sc">$</span>residuen <span class="ot">&lt;-</span> <span class="fu">residuals</span>(model) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>daten_mod<span class="sc">$</span>vorhersage <span class="ot">&lt;-</span> <span class="fu">predict</span>(model) </span>
+<span id="cb29-2"><a href="#cb29-2"></a>daten_mod<span class="sc">$</span>residuen <span class="ot">&lt;-</span> <span class="fu">residuals</span>(model) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Und dann machen wir eine fancy Grafik, die uns die Abweichung der prognostizierten Werte nach oben und nach unten visuell nachvollziehen lässt:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggplot</span>(daten_mod, <span class="fu">aes</span>(alter, internetnutzung)) <span class="sc">+</span> </span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> residuen)) <span class="sc">+</span> <span class="co"># Festlegung der Farbmarkierung für die Residuen (Punkte sind tatsächliche Werte, Linien die Residuen, Farbe gibt Größe der Abweichung an)</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">scale_color_gradient2</span>(<span class="at">low =</span> <span class="st">"blue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"red"</span>) <span class="sc">+</span> <span class="co"># Festlegung der Farbe für die Residuen</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) <span class="sc">+</span> <span class="co"># Unterdrückt eine Legende an der Seite (ist obligatorisch)</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> vorhersage), <span class="at">shape =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># gibt die vorhergesagten Punkte auf der Regressionsgeraden aus</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># gibt die Regressionsgerade als Linie aus </span></span>
-<span id="cb22-7"><a href="#cb22-7"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> alter, <span class="at">yend =</span> vorhersage), <span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> <span class="co"># zeichnet die Linie vom Punkt zur Regressionsgeraden transparent ein </span></span>
-<span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">ggtitle</span>(<span class="st">"Vorhergesagte Werte und Residuen für Alter und Internetnutzung"</span>) <span class="sc">+</span> <span class="co"># Titel</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"tägliche Internetnutzung (Minuten)"</span>) <span class="co"># Achsen-Beschriftung</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(daten_mod, <span class="fu">aes</span>(alter, internetnutzung)) <span class="sc">+</span> </span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> residuen)) <span class="sc">+</span> <span class="co"># Festlegung der Farbmarkierung für die Residuen (Punkte sind tatsächliche Werte, Linien die Residuen, Farbe gibt Größe der Abweichung an)</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">scale_color_gradient2</span>(<span class="at">low =</span> <span class="st">"blue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"red"</span>) <span class="sc">+</span> <span class="co"># Festlegung der Farbe für die Residuen</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) <span class="sc">+</span> <span class="co"># Unterdrückt eine Legende an der Seite (ist obligatorisch)</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> vorhersage), <span class="at">shape =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># gibt die vorhergesagten Punkte auf der Regressionsgeraden aus</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># gibt die Regressionsgerade als Linie aus </span></span>
+<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> alter, <span class="at">yend =</span> vorhersage), <span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> <span class="co"># zeichnet die Linie vom Punkt zur Regressionsgeraden transparent ein </span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>  <span class="fu">ggtitle</span>(<span class="st">"Vorhergesagte Werte und Residuen für Alter und Internetnutzung"</span>) <span class="sc">+</span> <span class="co"># Titel</span></span>
+<span id="cb30-9"><a href="#cb30-9"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"tägliche Internetnutzung (Minuten)"</span>) <span class="co"># Achsen-Beschriftung</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_7.2_files/figure-html/Beobachtete und vorhergesagte Werte sowie Residuen gemeinsam plotten-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -823,7 +834,7 @@ Wie gebe ich die Ergebnisse korrekt an?
 <p>Um uns die standardisierten beta-Koeffizienten ausgeben zu lassen, können wir auf das Paket lm.beta mit der gleichnamigen Funktion zurückgreifen, die auf ein mit lm() erzeugtes Modell angewendet werden kann. Der nun folgende Befehl ist im Prinzip wie oben, nur in den Klammern ergänzt um die Funktion lm.beta(), die dafür sorgt, dass wir im Output unten eine zusätzliche Spalte erhalten, in der die standardisierten B-Koeffizienten angezeigt werden. Diese sind als standardisierte “Regressionsgewichte” zu interpretieren - je höher der Wert, desto stärker der erklärende Beitrag der Variable.</p>
 <p>Das ist natürlich vor allem dann spannend, wenn ich den Einfluss mehrerer Variablen vergleichen will. Dabei haben die standardisierten beta-Werte einen wichtigen Vorteil: Sollte man mehrere Prädiktoren in einem Modell haben, die aber auf unterschiedlichen Skalen gemessen wurden (z.B. 1x 5er und 1x 7er Skala), kann man ihren relativen Erklärungsbeitrag untereinander vergleichen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">summary</span>(<span class="fu">lm.beta</span>(model)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">summary</span>(<span class="fu">lm.beta</span>(model)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -831,59 +842,59 @@ lm(formula = internetnutzung ~ alter, data = daten_mod)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--205.25  -94.75  -41.28   51.69  588.72 
+-280.49 -115.87  -43.01   46.13  921.37 
 
 Coefficients:
-            Estimate Standardized Std. Error t value       Pr(&gt;|t|)    
-(Intercept) 321.3915           NA    44.9280   7.153 0.000000000155 ***
-alter        -2.9704      -0.3064     0.9321  -3.187        0.00193 ** 
+            Estimate Standardized Std. Error t value     Pr(&gt;|t|)    
+(Intercept) 378.1937           NA    59.7466   6.330 0.0000000074 ***
+alter        -3.9824      -0.3183     1.1979  -3.324      0.00125 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 144.7 on 98 degrees of freedom
-Multiple R-squared:  0.09389,   Adjusted R-squared:  0.08465 
-F-statistic: 10.16 on 1 and 98 DF,  p-value: 0.001931</code></pre>
+Residual standard error: 198.2 on 98 degrees of freedom
+Multiple R-squared:  0.1013,    Adjusted R-squared:  0.09218 
+F-statistic: 11.05 on 1 and 98 DF,  p-value: 0.001247</code></pre>
 </div>
 </div>
 </section>
 <section id="zusatzfunktionen-zur-schöneren-ergebnisdarstellung-durch-das-paket-broom" class="level3" data-number="3.2.17">
 <h3 data-number="3.2.17" class="anchored" data-anchor-id="zusatzfunktionen-zur-schöneren-ergebnisdarstellung-durch-das-paket-broom"><span class="header-section-number">3.2.17</span> Zusatzfunktionen zur schöneren Ergebnisdarstellung durch das Paket broom</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">tidy</span>(<span class="fu">lm.beta</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">tidy</span>(<span class="fu">lm.beta</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 6
-  term        estimate std_estimate std.error statistic  p.value
-  &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 (Intercept)   321.         NA        44.9        7.15 1.55e-10
-2 alter          -2.97       -0.306     0.932     -3.19 1.93e- 3</code></pre>
+  term        estimate std_estimate std.error statistic       p.value
+  &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+1 (Intercept)   378.         NA         59.7       6.33 0.00000000740
+2 alter          -3.98       -0.318      1.20     -3.32 0.00125      </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">glance</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">glance</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 12
   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1    0.0939        0.0846  145.      10.2 0.00193     1  -638. 1283. 1291.
+1     0.101        0.0922  198.      11.1 0.00125     1  -670. 1346. 1353.
 # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">augment</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">augment</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 100 × 8
-   internetnutzung alter .fitted  .resid   .hat .sigma     .cooksd .std.resid
-             &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
- 1             120    26    244. -124.   0.0260   145. 0.0101        -0.869  
- 2             180    48    179.    1.19 0.0102   145. 0.000000353    0.00826
- 3             720    64    131.  589.   0.0240   132. 0.208          4.12   
- 4             120    53    164.  -44.0  0.0123   145. 0.000579      -0.306  
- 5              60    63    134.  -74.3  0.0225   145. 0.00310       -0.519  
- 6              60    42    197. -137.   0.0105   145. 0.00480       -0.949  
- 7             180    38    209.  -28.5  0.0124   145. 0.000247      -0.198  
- 8              60    28    238. -178.   0.0229   144. 0.0182        -1.25   
- 9             360    25    247.  113.   0.0277   145. 0.00890        0.791  
-10             270    47    182.   88.2  0.0101   145. 0.00191        0.613  
+   internetnutzung alter .fitted .resid   .hat .sigma   .cooksd .std.resid
+             &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+ 1             120    16   314.  -194.  0.0452   198. 0.0239       -1.00  
+ 2              60    39   223.  -163.  0.0124   199. 0.00428      -0.827 
+ 3              45    16   314.  -269.  0.0452   197. 0.0458       -1.39  
+ 4              30    80    59.6  -29.6 0.0496   199. 0.000613     -0.153 
+ 5             120    33   247.  -127.  0.0172   199. 0.00364      -0.645 
+ 6              30    30   259.  -229.  0.0206   198. 0.0143       -1.17  
+ 7              60    72    91.5  -31.5 0.0327   199. 0.000441     -0.161 
+ 8             120    45   199.   -79.0 0.0102   199. 0.000823     -0.400 
+ 9              30    60   139.  -109.  0.0161   199. 0.00253      -0.556 
+10              60    77    71.5  -11.5 0.0428   199. 0.0000792    -0.0595
 # ℹ 90 more rows</code></pre>
 </div>
 </div>

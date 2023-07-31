@@ -136,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Einführung in R</span></a>
+ <span class="menu-text">Data-Bootcamp: Einführung in R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -160,12 +160,18 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Relevante Begriffe</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Datensätze</span></a>
+ <span class="menu-text">Data-Bootcamp: Datensätze</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -186,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Praktische Tipps</span></a>
+ <span class="menu-text">Der ALLBUS Datensatz</span></a>
   </div>
 </li>
       </ul>
@@ -194,7 +200,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Der Umgang mit Daten</span></a>
+ <span class="menu-text">Data-Bootcamp: Der Umgang mit Daten</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -317,12 +323,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Proportionen Häufigkeiten mit dem Binomial Test und Pearson Chi-Quadrat</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -370,13 +370,13 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#visualisierung" id="toc-visualisierung" class="nav-link" data-scroll-target="#visualisierung"><span class="header-section-number">1.2</span> Visualisierung</a></li>
   <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">1.3</span> Interpretation</a></li>
   </ul></li>
-  <li><a href="#die-standartabweichung" id="toc-die-standartabweichung" class="nav-link" data-scroll-target="#die-standartabweichung"><span class="header-section-number">2</span> Die Standartabweichung</a>
+  <li><a href="#die-varianz" id="toc-die-varianz" class="nav-link" data-scroll-target="#die-varianz"><span class="header-section-number">2</span> Die Varianz</a>
   <ul class="collapse">
   <li><a href="#berechnung-1" id="toc-berechnung-1" class="nav-link" data-scroll-target="#berechnung-1"><span class="header-section-number">2.1</span> Berechnung</a></li>
   <li><a href="#visualisierung-1" id="toc-visualisierung-1" class="nav-link" data-scroll-target="#visualisierung-1"><span class="header-section-number">2.2</span> Visualisierung</a></li>
   <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1"><span class="header-section-number">2.3</span> Interpretation</a></li>
   </ul></li>
-  <li><a href="#die-varianz" id="toc-die-varianz" class="nav-link" data-scroll-target="#die-varianz"><span class="header-section-number">3</span> Die Varianz</a>
+  <li><a href="#die-standardabweichung" id="toc-die-standardabweichung" class="nav-link" data-scroll-target="#die-standardabweichung"><span class="header-section-number">3</span> Die Standardabweichung</a>
   <ul class="collapse">
   <li><a href="#berechnung-2" id="toc-berechnung-2" class="nav-link" data-scroll-target="#berechnung-2"><span class="header-section-number">3.1</span> Berechnung</a></li>
   <li><a href="#visualisierung-2" id="toc-visualisierung-2" class="nav-link" data-scroll-target="#visualisierung-2"><span class="header-section-number">3.2</span> Visualisierung</a></li>
@@ -424,8 +424,8 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="1.3" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">1.3</span> Interpretation</h2>
 </section>
 </section>
-<section id="die-standartabweichung" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Die Standartabweichung</h1>
+<section id="die-varianz" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Die Varianz</h1>
 <section id="berechnung-1" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="berechnung-1"><span class="header-section-number">2.1</span> Berechnung</h2>
 </section>
@@ -436,8 +436,8 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="2.3" class="anchored" data-anchor-id="interpretation-1"><span class="header-section-number">2.3</span> Interpretation</h2>
 </section>
 </section>
-<section id="die-varianz" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Die Varianz</h1>
+<section id="die-standardabweichung" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Die Standardabweichung</h1>
 <section id="berechnung-2" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="berechnung-2"><span class="header-section-number">3.1</span> Berechnung</h2>
 </section>

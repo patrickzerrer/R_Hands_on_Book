@@ -1,5 +1,5 @@
 ---
-title: "Praktische Tipps"
+title: "Der ALLBUS Datensatz"
 author: "tba"
 toc: true
 number-sections: true
@@ -10,4 +10,4 @@ format:
     code-line-numbers: true
 ---
 
-# Praktische Tipps im Umgang mit Datensätzen
+# Der ALLBUS
