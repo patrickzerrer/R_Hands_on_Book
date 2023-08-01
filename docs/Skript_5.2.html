@@ -191,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Relevante Begriffe</span></a>
+ <span class="menu-text">Die Logik von Markdown und Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -459,35 +459,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="1" data-code-lines="2">Laden der Pakete mit <code>p_load</code></span>
+<span data-code-annotation="1" data-code-lines="2" data-code-cell="annotated-cell-1">Laden der Pakete mit <code>p_load</code></span>
 </dd>
 </dl>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-annotation="1" data-code-lines="1">Visualisierungshintergrund festlegen</span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-2">Visualisierungshintergrund festlegen</span>
 </dd>
 </dl>
 </div>
 </div>
 <p>Danach laden wir die Daten aus dem Allbus.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="1" data-code-lines="1">Laden des Datensatzes</span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-3">Laden des Datensatzes</span>
 </dd>
 </dl>
 </div>
@@ -517,32 +517,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>… erfassen.</p>
 <p>Für die statistische Identifizierung einer latenten Variablen bzw. eines Faktors werden mindestens drei gemessene Variablen benötigt, obwohl mehr Indikatoren vorzuziehen sind. Es werden beispielsweise auch vier bis sechs Indikatoren pro Faktor empfohlen. Im Allgemeinen funktioniert die EFA besser, wenn jeder Faktor überdeterminiert ist (d.&nbsp;h. es werden mehrere gemessene Variablen von der zu entdeckenden latenten Variable bzw. Faktor beeinflusst). Unabhängig von der Anzahl sollten Variablen, die voneinander abhängig sind, nicht in eine EFA einbezogen werden.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1"></a>allbus_vertrauen <span class="ot">=</span> daten <span class="sc">%&gt;%</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2"></a>  <span class="fu">select</span>(pt01<span class="sc">:</span>pt20) <span class="sc">%&gt;%</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">if_else</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">42</span>), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5"></a>  <span class="fu">na.omit</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1"></a>allbus_vertrauen <span class="ot">=</span> daten <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2"></a>  <span class="fu">select</span>(pt01<span class="sc">:</span>pt20) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3">3</button><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">if_else</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">42</span>), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="5">5</button><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5"></a>  <span class="fu">na.omit</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="1" data-code-lines="1">Wir erstellen ein neues Objekt basierend auf dem Datensatz <code>daten</code></span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-4">Wir erstellen ein neues Objekt basierend auf dem Datensatz <code>daten</code></span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="2" data-code-lines="2">Mit dem Doppelpunkt wählen wir alle Variablen zwischen <code>pt01</code> bis <code>pt20</code> aus</span>
+<span data-code-annotation="2" data-code-lines="2" data-code-cell="annotated-cell-4">Mit dem Doppelpunkt wählen wir alle Variablen zwischen <code>pt01</code> bis <code>pt20</code> aus</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="3" data-code-lines="3">Die Kombination aus <code>mutate</code> und <code>across</code> ermöglicht es uns die Funktion <code>as.numeric</code> in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die <code>~</code> gibt den Start der anzuwenden Funktion (hier <code>as.numeric</code> an), der Punkt innerhalb der Klammer der <code>as.numeric</code> Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen</span>
+<span data-code-annotation="3" data-code-lines="3" data-code-cell="annotated-cell-4">Die Kombination aus <code>mutate</code> und <code>across</code> ermöglicht es uns die Funktion <code>as.numeric</code> in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die <code>~</code> gibt den Start der anzuwenden Funktion (hier <code>as.numeric</code> an), der Punkt innerhalb der Klammer der <code>as.numeric</code> Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="4" data-code-lines="4">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter, mit dem Ausdruck <code>%in%</code> prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
+<span data-code-annotation="4" data-code-lines="4" data-code-cell="annotated-cell-4">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter, mit dem Ausdruck <code>%in%</code> prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="5" data-code-lines="5">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
+<span data-code-annotation="5" data-code-lines="5" data-code-cell="annotated-cell-4">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
 </dd>
 </dl>
 </div>
@@ -551,7 +551,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a>allbus_vertrauen <span class="ot">=</span> allbus_vertrauen <span class="sc">%&gt;%</span> </span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2"></a>  </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3"></a>  <span class="fu">rename</span>(<span class="at">Ver_Gesundheitswesen =</span> pt01,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3"></a>  <span class="fu">rename</span>(<span class="at">Ver_Gesundheitswesen =</span> pt01,</span>
 <span id="annotated-cell-5-4"><a href="#annotated-cell-5-4"></a>         <span class="at">Ver_BVerfG =</span> pt02,</span>
 <span id="annotated-cell-5-5"><a href="#annotated-cell-5-5"></a>         <span class="at">Ver_Bundestag =</span> pt03,</span>
 <span id="annotated-cell-5-6"><a href="#annotated-cell-5-6"></a>         <span class="at">Ver_Verwaltung =</span> pt04,</span>
@@ -567,16 +567,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="annotated-cell-5-16"><a href="#annotated-cell-5-16"></a>         <span class="at">Ver_Kom_EU =</span> pt19,</span>
 <span id="annotated-cell-5-17"><a href="#annotated-cell-5-17"></a>         <span class="at">Ver_EU_Par =</span> pt20)</span>
 <span id="annotated-cell-5-18"><a href="#annotated-cell-5-18"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-5-19" class="code-annotation-target"><a href="#annotated-cell-5-19"></a><span class="fu">htmlTable</span>(<span class="fu">head</span>(allbus_vertrauen))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2">2</button><span id="annotated-cell-5-19" class="code-annotation-target"><a href="#annotated-cell-5-19"></a><span class="fu">htmlTable</span>(<span class="fu">head</span>(allbus_vertrauen))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-annotation="1" data-code-lines="3,4,5,6,7,8,9,10,11,12,13,14,15,16,17">Mit dem <code>rename</code> Befehl können wir die Variablen umbennen</span>
+<span data-code-annotation="1" data-code-lines="3,4,5,6,7,8,9,10,11,12,13,14,15,16,17" data-code-cell="annotated-cell-5">Mit dem <code>rename</code> Befehl können wir die Variablen umbennen</span>
 </dd>
 <dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-annotation="2" data-code-lines="19">Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir <code>htmlTable</code> für eine schönere Darstellung der Tabelle sowie <code>head</code>, um uns die ersten paar Zeilen des Datensatzes <code>allbus_vertrauen</code> anzeigen zu lassen</span>
+<span data-code-annotation="2" data-code-lines="19" data-code-cell="annotated-cell-5">Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir <code>htmlTable</code> für eine schönere Darstellung der Tabelle sowie <code>head</code>, um uns die ersten paar Zeilen des Datensatzes <code>allbus_vertrauen</code> anzeigen zu lassen</span>
 </dd>
 </dl>
 </div>
@@ -721,12 +721,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1.2" class="anchored" data-anchor-id="deskriptive-statistik-für-den-teildatensatz"><span class="header-section-number">1.2</span> Deskriptive Statistik für den Teildatensatz</h2>
 <p>Wir werfen einen kurzen Blick in die deskriptive Statistik für unseren Teildatensatz, um ein besseres Verständnis für die Daten zu erhalten.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1"></a><span class="fu">summary</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1"></a><span class="fu">summary</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-annotation="1" data-code-lines="1">Mit dem <code>summary</code> Befehl können wir uns die deskritpive Statistik ausgeben lassen</span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-6">Mit dem <code>summary</code> Befehl können wir uns die deskritpive Statistik ausgeben lassen</span>
 </dd>
 </dl>
 </div>
@@ -771,13 +771,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a>colors <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"darkgreen"</span>, <span class="dv">1</span>))</span>
 <span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen)) <span class="sc">+</span></span>
 <span id="annotated-cell-7-4"><a href="#annotated-cell-7-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> colors)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-annotation="1" data-code-lines="3,4">Visuelle Überprüfung mit einem Histogram für die erste Variable <code>Ver_Gesundheitswesen</code>. Die restlichen Variablen sollten auch überprüft werden.</span>
+<span data-code-annotation="1" data-code-lines="3,4" data-code-cell="annotated-cell-7">Visuelle Überprüfung mit einem Histogram für die erste Variable <code>Ver_Gesundheitswesen</code>. Die restlichen Variablen sollten auch überprüft werden.</span>
 </dd>
 </dl>
 </div>
@@ -789,14 +789,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><em>Linearität</em>: Der Pearson-Korrelationskoeffizient (r) misst die lineare Beziehung zwischen zwei Variablen. Wenn die tatsächliche Beziehung nicht linear ist, dann verringert sich der Wert von r. Wir können auf Linearität u.a. visuell durch das Betrachten der Daten mittel Streudiagramm prüfen.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen, <span class="at">y =</span> Ver_BVerfG)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen, <span class="at">y =</span> Ver_BVerfG)) <span class="sc">+</span></span>
 <span id="annotated-cell-8-2"><a href="#annotated-cell-8-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="annotated-cell-8-3"><a href="#annotated-cell-8-3"></a>  <span class="fu">geom_abline</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkgreen"</span>, <span class="at">size =</span> <span class="dv">1</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-annotation="1" data-code-lines="1,2,3">Visuelle Überprüfung mit einem Streudiagramm für die erste Variable <code>Ver_Gesundheitswesen</code> &amp; <code>Ver_BVerfG</code>. Die restlichen Variablen sollten auch überprüft werden.</span>
+<span data-code-annotation="1" data-code-lines="1,2,3" data-code-cell="annotated-cell-8">Visuelle Überprüfung mit einem Streudiagramm für die erste Variable <code>Ver_Gesundheitswesen</code> &amp; <code>Ver_BVerfG</code>. Die restlichen Variablen sollten auch überprüft werden.</span>
 </dd>
 </dl>
 </div>
@@ -813,17 +813,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen)) <span class="sc">+</span></span>
 <span id="annotated-cell-9-4"><a href="#annotated-cell-9-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-10" data-code-annotation="2" data-code-lines="1">Statistische Überprüfung mittels Shapiro Wilk Test für die erste Variable <code>Ver_Gesundheitswesen</code>. Ein p-Wert unter 0.05 = keine Normalverteilung und ein p-Wert über 0.05 = Normalverteilung</span>
+<span data-code-annotation="2" data-code-lines="1" data-code-cell="annotated-cell-10">Statistische Überprüfung mittels Shapiro Wilk Test für die erste Variable <code>Ver_Gesundheitswesen</code>. Ein p-Wert unter 0.05 = keine Normalverteilung und ein p-Wert über 0.05 = Normalverteilung</span>
 </dd>
 </dl>
 </div>
 <div class="cell-output-display">
 <p><img src="Skript_5.2_files/figure-html/Normalverteilung-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a><span class="fu">shapiro.test</span>(allbus_vertrauen<span class="sc">$</span>Ver_Gesundheitswesen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a><span class="fu">shapiro.test</span>(allbus_vertrauen<span class="sc">$</span>Ver_Gesundheitswesen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -838,17 +838,17 @@ W = 0.92081, p-value &lt; 2.2e-16</code></pre>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1"></a>allbus_vertrauen <span class="ot">=</span> allbus_vertrauen <span class="sc">%&gt;%</span>   </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-11-2" class="code-annotation-target"><a href="#annotated-cell-11-2"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(Ver_Gesundheitswesen<span class="sc">:</span>Ver_EU_Par, <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">42</span>), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-11-3" class="code-annotation-target"><a href="#annotated-cell-11-3"></a>  <span class="fu">na.omit</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-2" class="code-annotation-target"><a href="#annotated-cell-11-2"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(Ver_Gesundheitswesen<span class="sc">:</span>Ver_EU_Par, <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">42</span>), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-3" class="code-annotation-target"><a href="#annotated-cell-11-3"></a>  <span class="fu">na.omit</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-annotation="1" data-code-lines="2">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter. Während <code>%in%</code> angibt, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
+<span data-code-annotation="1" data-code-lines="2" data-code-cell="annotated-cell-11">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter. Während <code>%in%</code> angibt, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-annotation="2" data-code-lines="3">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
+<span data-code-annotation="2" data-code-lines="3" data-code-cell="annotated-cell-11">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
 </dd>
 </dl>
 </div>
@@ -861,12 +861,12 @@ W = 0.92081, p-value &lt; 2.2e-16</code></pre>
 <li><em>Ausreißer / Outliers</em>: Wir sollten Ausreißer identifizieren und im Zweifel von der Analyse ausschließen, da diese zu einer Verzerrung der Ergebnisse führen können. Zu den Methoden zur Erkennung von Ausreißern gehören Boxplots und Streudiagramme für einzelne Variablen sowie der Mahalanobis-Abstand für mehrere Variablen.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1"></a><span class="fu">boxplot</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1"></a><span class="fu">boxplot</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-12" data-code-annotation="1" data-code-lines="1">Erstellen des Boxpltos</span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-12">Erstellen des Boxpltos</span>
 </dd>
 </dl>
 </div>
@@ -878,12 +878,12 @@ W = 0.92081, p-value &lt; 2.2e-16</code></pre>
 <li><em>Passung der Daten für die Faktorenanalyse</em>: Wir sollten trotz unserer guten Datengrundlage nochmals prüfen, ob die gemessenen Variablen ausreichend miteinander korreliert sind, um eine Faktorenanalyse zu rechtfertigen. Eine Korrelation zwischen zwei Variablen gibt an, ob und wie stark ein Zusammenhang zwischen den beiden Variablen besteht. An dieser Stelle ist es wichtig, sich zu merken, dass eine Korrelation die Stärke eines Zusammenhangs angibt. Eine genauere Erklärung findet ihr im Kapitel 7. Zunächst können wir einen Blick in die Korrelationsmatrix werfen - eine beträchtliche Anzahl von Korrelationen sollte ±.30 überschreiten. Alternativ können wir ein objektiveren Test der Faktorfähigkeit der Korrelationsmatrix durchführen. Hierfür greifen wir auf den Sphärizitätstest nach Bartlett (1954) zurück.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1"></a><span class="fu">htmlTable</span>(<span class="fu">round</span>(<span class="fu">cor</span>(allbus_vertrauen), <span class="at">digits =</span> <span class="dv">3</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1"></a><span class="fu">htmlTable</span>(<span class="fu">round</span>(<span class="fu">cor</span>(allbus_vertrauen), <span class="at">digits =</span> <span class="dv">3</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-annotation="1" data-code-lines="1">Die <code>htmlTable</code> Funktion ermöglicht uns eine schönere Darstellung der Tabelle, <code>round</code> rundet die Werte auf die von uns mit <code>digits = 3</code> festgelegten drei Nachkommastellen, während wir mit <code>cor</code> die Korrelationen für die Werte in unserem Datensatz <code>allbus_vertrauen</code> berechnen</span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-13">Die <code>htmlTable</code> Funktion ermöglicht uns eine schönere Darstellung der Tabelle, <code>round</code> rundet die Werte auf die von uns mit <code>digits = 3</code> festgelegten drei Nachkommastellen, während wir mit <code>cor</code> die Korrelationen für die Werte in unserem Datensatz <code>allbus_vertrauen</code> berechnen</span>
 </dd>
 </dl>
 </div>
@@ -1186,12 +1186,12 @@ W = 0.92081, p-value &lt; 2.2e-16</code></pre>
 </div>
 <p>Noch zu prüfen ist die Korrelation der Items miteinander, hierfür nehmen wir den Bartlett Test.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1"></a><span class="fu">cortest.bartlett</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1"></a><span class="fu">cortest.bartlett</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-14" data-code-annotation="1" data-code-lines="1">Wir führen den Bartlett-Test durch</span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-14">Wir führen den Bartlett-Test durch</span>
 </dd>
 </dl>
 </div>
@@ -1208,12 +1208,12 @@ $df
 </div>
 <p>Bei großen Stichprobenumfängen, wie in unserem Fall mit dem Allbus, reagiert der Bartlett-Test selbst auf geringfügige Abweichungen vom Zufallsprinzip empfindlich, so dass seine Ergebnisse durch ein Maß für die Stichprobenadäquanz ergänzt werden sollten. Das Kaiser-Meyer-Olkin (KMO; Kaiser, 1974) Maß für die Stichprobenadäquanz ist das Verhältnis von Korrelationen und partiellen Korrelationen, das das Ausmaß widerspiegelt, in dem Korrelationen eine Folge der über alle Variablen geteilten Varianz sind und nicht der von bestimmten Variablenpaaren geteilten Varianz.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-15-1" class="code-annotation-target"><a href="#annotated-cell-15-1"></a><span class="fu">KMO</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1">1</button><span id="annotated-cell-15-1" class="code-annotation-target"><a href="#annotated-cell-15-1"></a><span class="fu">KMO</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-15" data-code-annotation="1" data-code-lines="1">Wir lassen uns das KMO berechnen</span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-15">Wir lassen uns das KMO berechnen</span>
 </dd>
 </dl>
 </div>
@@ -1259,12 +1259,12 @@ Ver_Gesundheitswesen           Ver_BVerfG        Ver_Bundestag
 <p>Wie bereits bei der ML-Schätzung angedeutet, müssen wir die Anzahl der Faktoren festlegen. Hierfür müssen wir die Anzahl der Faktoren für die weitere Analyse festlegen. Wir erreichen das indem wir mehrere Modelle schätzen und somit Rückschlüsse auf ein optimales Modell mit der für uns passenden Anzahl an Faktoren ziehen. Vereinfacht können wir uns das Auswringen eines nassen Handtuchs vorstellen, bei der der erste Faktor die meiste Varianz extrahiert - ergo die größte Mene an Wasser - und die nachfolgenden Faktoren sukzessive kleinere Anteile der Varianz extrahieren. Auf diese Art und Weise können wir eine Schätzung des optimalen Modells vornehmen.</p>
 <p>Wir verwenden hierfür die <code>nfactors</code>-Funktion, welche uns mehere Schätzungen ausgibt.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-16-1" class="code-annotation-target"><a href="#annotated-cell-16-1"></a><span class="fu">nfactors</span>(allbus_vertrauen, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">fm=</span><span class="st">"mle"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-1" class="code-annotation-target"><a href="#annotated-cell-16-1"></a><span class="fu">nfactors</span>(allbus_vertrauen, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">fm=</span><span class="st">"mle"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-annotation="1" data-code-lines="1">Mit der <code>nfactors</code> Funktion können wir verschiedene Schätzungen durchführen. Hierfür wählen wir ein Rotation mit <code>rotate</code> aus, sowie eine Methode der Schätzung mittels <code>fm</code></span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-16">Mit der <code>nfactors</code> Funktion können wir verschiedene Schätzungen durchführen. Hierfür wählen wir ein Rotation mit <code>rotate</code> aus, sowie eine Methode der Schätzung mittels <code>fm</code></span>
 </dd>
 </dl>
 </div>
@@ -1279,8 +1279,8 @@ Call: vss(x = x, n = n, rotate = rotate, diagonal = diagonal, fm = fm,
 VSS complexity 1 achieves a maximimum of 0.88  with  1  factors
 VSS complexity 2 achieves a maximimum of 0.9  with  3  factors
 The Velicer MAP achieves a minimum of 0.04  with  1  factors 
-Empirical BIC achieves a minimum of  -125.8  with  6  factors
-Sample Size adjusted BIC achieves a minimum of  -26  with  8  factors
+Empirical BIC achieves a minimum of  -125.81  with  6  factors
+Sample Size adjusted BIC achieves a minimum of  -26.01  with  8  factors
 
 Statistics by number of factors 
    vss1 vss2   map dof   chisq     prob sqresid  fit RMSEA  BIC SABIC complex
@@ -1292,9 +1292,9 @@ Statistics by number of factors
 6  0.38 0.68 0.076  30 3.0e+02  6.2e-46     2.2 0.96 0.053   56   151     2.1
 7  0.34 0.58 0.101  21 1.5e+02  1.1e-21     2.0 0.97 0.044  -19    48     2.4
 8  0.32 0.57 0.138  13 3.8e+01  3.1e-04     1.3 0.98 0.024  -67   -26     2.5
-9  0.32 0.55 0.164   6 9.6e+00  1.4e-01     1.4 0.98 0.014  -39   -20     2.6
+9  0.32 0.54 0.164   6 9.7e+00  1.4e-01     1.4 0.98 0.014  -39   -20     2.6
 10 0.31 0.52 0.164   0 6.0e+00       NA     1.6 0.97    NA   NA    NA     2.7
-11 0.29 0.53 0.240  -5 7.4e-02       NA     1.4 0.98    NA   NA    NA     2.7
+11 0.30 0.53 0.240  -5 3.5e-02       NA     1.4 0.98    NA   NA    NA     2.6
 12 0.29 0.48 0.412  -9 2.6e-06       NA     1.4 0.98    NA   NA    NA     2.6
 13 0.30 0.52 0.719 -12 1.4e-08       NA     1.5 0.98    NA   NA    NA     2.7
 14 0.29 0.52 1.000 -14 0.0e+00       NA     1.4 0.98    NA   NA    NA     2.7
@@ -1308,9 +1308,9 @@ Statistics by number of factors
 6  1.2e+02 1.3e-02 0.0245 -126
 7  6.4e+01 9.7e-03 0.0217 -106
 8  1.0e+01 3.9e-03 0.0111  -95
-9  2.8e+00 2.0e-03 0.0085  -46
+9  2.6e+00 2.0e-03 0.0082  -46
 10 2.5e+00 1.9e-03     NA   NA
-11 1.1e-02 1.2e-04     NA   NA
+11 4.7e-03 8.4e-05     NA   NA
 12 1.3e-06 1.4e-06     NA   NA
 13 5.4e-09 8.9e-08     NA   NA
 14 1.4e-12 1.4e-09     NA   NA
@@ -1325,18 +1325,18 @@ Statistics by number of factors
 <p>Wichtig ist, dass sich die Interpretation der <em>Faktorladungen</em> zwischen orthogonalen und schrägen Rotationen unterscheiden. Bei orthogonalen Lösungen können die <em>Faktorladungen</em> als Korrelationen zwischen gemeinsamen Faktoren und gemessenen Variablen interpretiert werden. Diese Korrelationen reichen von -1,00 bis +1,00, und der Anteil der Varianz in einer gemessenen Variablen, der durch einen gemeinsamen Faktor beigetragen wurde, kann durch Quadrieren der Faktorladung berechnet werden. Im Gegensatz dazu ergeben sich bei schrägen Lösungen zwei verschiedene Arten von <em>Faktorladungen</em>: Struktur- und Musterkoeffizienten. Strukturkoeffizienten können auch als Korrelationen zwischen gemeinsamen Faktoren und den gemessenen Variablen interpretiert werden. Im Gegensatz dazu sind die Musterkoeffizienten keine einfachen Faktor-Variablen-Korrelationen mehr, sondern sie ähneln standardisierten partiellen Regressionskoeffizienten. Das heißt, sie sind Korrelationen zwischen gemeinsamen Faktoren und gemessenen Variablen, nachdem der Einfluss aller anderen gemeinsamen Faktoren kontrolliert (herausgerechnet) wurde. Dementsprechend können Musterkoeffizienten den Wert von 1,00 überschreiten und können nicht quadriert werden, um den Anteil der Varianz zu ermitteln, der eindeutig auf einen gemeinsamen Faktor zurückzuführen ist.</p>
 <p>In unserem Fall greifen wir auf die etablierte Rotationsmethode <code>varimax</code> zurück, welches wir entsprechend im R-Code spezifizieren. Zusätzlich geben wir unsere erwartete Anzahl an Faktoren an, welche wir zuvor bestimmt haben (in unserem Fall: 1).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1"></a>fit <span class="ot">=</span>  <span class="fu">fa</span>(allbus_vertrauen, <span class="at">factors =</span> <span class="dv">1</span>, <span class="at">fm =</span> <span class="st">"ml"</span>, <span class="at">rotation =</span> <span class="st">"varimax"</span>)</span>
+<div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1"></a>fit <span class="ot">=</span>  <span class="fu">fa</span>(allbus_vertrauen, <span class="at">factors =</span> <span class="dv">1</span>, <span class="at">fm =</span> <span class="st">"ml"</span>, <span class="at">rotation =</span> <span class="st">"varimax"</span>)</span>
 <span id="annotated-cell-17-2"><a href="#annotated-cell-17-2"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-17-3" class="code-annotation-target"><a href="#annotated-cell-17-3"></a><span class="fu">print</span>(fit, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cutoff =</span> .<span class="dv">3</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2">2</button><span id="annotated-cell-17-3" class="code-annotation-target"><a href="#annotated-cell-17-3"></a><span class="fu">print</span>(fit, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cutoff =</span> .<span class="dv">3</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
-<dl class="code-annotation-container-grid">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-17" data-code-annotation="1" data-code-lines="1">Mit der <code>fa</code> Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit <code>factors</code> aus, legen ein Rotation mit <code>rotate</code> sowie eine Methode der Schätzung mittels <code>fm</code> fest</span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-17">Mit der <code>fa</code> Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit <code>factors</code> aus, legen ein Rotation mit <code>rotate</code> sowie eine Methode der Schätzung mittels <code>fm</code> fest</span>
 </dd>
 <dt data-target-cell="annotated-cell-17" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-17" data-code-annotation="2" data-code-lines="3">Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind</span>
+<span data-code-annotation="2" data-code-lines="3" data-code-cell="annotated-cell-17">Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind</span>
 </dd>
 </dl>
 </div>
@@ -1649,25 +1649,90 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
+      // Handle positioning of the toggle
+      window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
           }
-        });
+        };
+      }
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
+          }
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;

@@ -46,7 +46,7 @@
     "href": "Skript_1.1.html",
     "title": "Was ist R?",
     "section": "",
-    "text": "1 Was ist R?\nEinführung in die Logik von R, R Studio Server und das R Environment Einführung in Markdown (Quarto?) Basics der Befehlssyntax in Base R und Tidyverse (im Vergleich), ab dann aber alles in dplyr Laden von Daten und Importieren von anderen Datenformaten Einführung in das Datenmanagement: Projekte und Ordnerstrukturen auf dem PC Öffnen von Datensätzen, Laden von Daten, Importieren von anderen Datensätzen Speichern von Daten aus R in verschiedenen Formaten (Rda, csv etc.) Installieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika."
+    "text": "Artwork by @allison_horst"
   },
   {
     "objectID": "Skript_1.2.html",
@@ -691,5 +691,26 @@
     "title": "Reliabilität von Skalen",
     "section": "1.7 Danksagung und Literatur",
     "text": "1.7 Danksagung und Literatur\nDie Struktur und Inhalt dieser Seite orientiert sich an den folgenden Arbeiten. Ich möchte mich bei den Autor:innen sehr bedanken!\n\nDaniela Keller Link\nField, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811\n\n\n\n\n\n\n\nLiteratur und Beispiele aus der Praxis\n\n\n\nWir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen braucht.\n\n📖 Field, Z., Miles, J., & Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. Link\n\n\n📖 Döring, N., & Bortz, J. (2016). Forschungsmethoden und evaluation. Wiesbaden: Springerverlag. Link\n\nHier findet ihr ein Beispiel aus der Forschungspraxis:\n\n🔬 Zerrer, P., & Engelmann, I. (2022). Users’ Political Motivations in Comment Sections on News Sites. International Journal of Communication, 16, 23. Link"
+  },
+  {
+    "objectID": "Skript_1.1.html#installation-von-r-und-rstudio",
+    "href": "Skript_1.1.html#installation-von-r-und-rstudio",
+    "title": "Was ist R?",
+    "section": "1.1 Installation von R und RStudio",
+    "text": "1.1 Installation von R und RStudio\nFür alle üblichen Betriebssysteme können R und RStudio online heruntergeladen werden."
+  },
+  {
+    "objectID": "Skript_1.1.html#projekte-und-ordnerstrukturen",
+    "href": "Skript_1.1.html#projekte-und-ordnerstrukturen",
+    "title": "Was ist R?",
+    "section": "1.2 Projekte und Ordnerstrukturen",
+    "text": "1.2 Projekte und Ordnerstrukturen\nEinführung in die Logik von R, R Studio Server und das R Environment Einführung in Markdown (Quarto?) Basics der Befehlssyntax in Base R und Tidyverse (im Vergleich), ab dann aber alles in dplyr Laden von Daten und Importieren von anderen Datenformaten Einführung in das Datenmanagement: Projekte und Ordnerstrukturen auf dem PC Öffnen von Datensätzen, Laden von Daten, Importieren von anderen Datensätzen Speichern von Daten aus R in verschiedenen Formaten (Rda, csv etc.)"
+  },
+  {
+    "objectID": "Skript_1.1.html#pakete-als-erweiterung-von-r",
+    "href": "Skript_1.1.html#pakete-als-erweiterung-von-r",
+    "title": "Was ist R?",
+    "section": "1.3 Pakete als Erweiterung von R",
+    "text": "1.3 Pakete als Erweiterung von R\nInstallieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika."
   }
 ]

@@ -10,7 +10,10 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 ---
+
+
 
 ![Betreten der zugrunde liegenden Struktur der Stadt, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_walking_down_the_stairs_and_entering_t_191dbce1-eeb0-4ac5-8a31-497d40f45b11.png)
 
