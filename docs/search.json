@@ -58,9 +58,9 @@
   {
     "objectID": "Skript_1.3.html",
     "href": "Skript_1.3.html",
-    "title": "Relevante Begriffe",
+    "title": "Die Logik von Markdown und Quarto",
     "section": "",
-    "text": "1 Die Logik von Markdown und Quarto"
+    "text": "Artwork by @allison_horst"
   },
   {
     "objectID": "Skript_2.1.html",
@@ -712,5 +712,26 @@
     "title": "Was ist R?",
     "section": "1.3 Pakete als Erweiterung von R",
     "text": "1.3 Pakete als Erweiterung von R\nInstallieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika."
+  },
+  {
+    "objectID": "Skript_1.3.html#r-markdown",
+    "href": "Skript_1.3.html#r-markdown",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "1 R Markdown",
+    "text": "1 R Markdown\n\n1.1 YAML-Header\n\n\n1.2 Text\n\n\n1.3 Code Chunks\n\n\n\n\n\n\nTip\n\n\n\nCodechunks sind der Bereich des Dokumentes in welchem wir R-Code ausführen."
+  },
+  {
+    "objectID": "Skript_1.3.html#quarto",
+    "href": "Skript_1.3.html#quarto",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "2 Quarto",
+    "text": "2 Quarto"
+  },
+  {
+    "objectID": "Skript_1.3.html#literatur",
+    "href": "Skript_1.3.html#literatur",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "3 Literatur",
+    "text": "3 Literatur\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link\n\n\n📖 Xie, Y., Allaire, J. J., & Grolemund, G. (2020). R markdown: The definitive guide. Chapman; Hall/CRC Link\n\n\n📖 Xie, Y., Dervieux, C., & Riederer, E. (2020). R markdown cookbook. Chapman and Hall/CRC Link\n\n\n📖 Allaire, J. J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins, A., Wickham, H., Cheng, J., Chang, W., & Iannone, R. (2020a). rmarkdown: Dynamic documents for r. Link"
   }
 ]
