@@ -10,15 +10,13 @@ format:
     code-line-numbers: true
 ---
 
-
-![Artwork by @allison_horst](Bilder/R Markdown Grafik.png)
+![Artwork by @allison_horst](Bilder/R%20Markdown%20Grafik.png)
 
 ## R Markdown
 
 ### YAML-Header
 
 ### Text
-
 
 ### Code Chunks
 
@@ -27,7 +25,6 @@ Codechunks sind der Bereich des Dokumentes in welchem wir R-Code ausführen.
 :::
 
 ## Quarto
-
 
 ## Literatur
 
@@ -41,5 +38,4 @@ Codechunks sind der Bereich des Dokumentes in welchem wir R-Code ausführen.
 > 📖 Xie, Y., Dervieux, C., & Riederer, E. (2020). R markdown cookbook. Chapman and Hall/CRC [Link](https://bookdown.org/yihui/rmarkdown-cookbook/#ref-R-rmarkdown)
 
 > 📖 Allaire, J. J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins, A., Wickham, H., Cheng, J., Chang, W., & Iannone, R. (2020a). rmarkdown: Dynamic documents for r. [Link](https://github.com/rstudio/rmarkdown)
-
 :::

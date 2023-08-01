@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Einführung in R</span></a>
+ <span class="menu-text">Data-Bootcamp: Einführung in R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -191,7 +191,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Relevante Begriffe</span></a>
+ <span class="menu-text">Die Logik von Markdown und Quarto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
   </div>
 </li>
       </ul>
@@ -199,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Datensätze</span></a>
+ <span class="menu-text">Data-Bootcamp: Datensätze</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -220,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Praktische Tipps</span></a>
+ <span class="menu-text">Der ALLBUS Datensatz</span></a>
   </div>
 </li>
       </ul>
@@ -228,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Der Umgang mit Daten</span></a>
+ <span class="menu-text">Data-Bootcamp: Der Umgang mit Daten</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -349,12 +355,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Proportionen Häufigkeiten mit dem Binomial Test und Pearson Chi-Quadrat</span></a>
   </div>
 </li>
       </ul>
@@ -548,16 +548,16 @@ Die folgenden Objekte sind maskiert von 'package:base':
 <pre><code># A tibble: 100 × 166
         idno cntry gender alter marsts                   edubde1 eduade2 eduade3
        &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;                    &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  
- 1 100001263 GB    Female    72 Legally married          &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 2  10006488 DE    Female    42 None of these (NEVER ma… Abitur… Kein H… Kein b…
- 3  10000260 DE    Male      55 &lt;NA&gt;                     Mittle… Kein H… Abgesc…
- 4      1147 FR    Male      44 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 5      2089 FR    Male      72 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 6  10000032 DE    Male      30 None of these (NEVER ma… Refusal Kein H… Refusal
- 7      1766 FR    Male      45 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 8 100000390 GB    Male      63 Legally divorced/civil … &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 9 100000483 GB    Female    55 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
-10      2133 FR    Male      58 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 1 100001074 GB    Female    67 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 2      1044 SE    Male      62 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 3  10007670 DE    Male      58 &lt;NA&gt;                     Fachho… Diplom… Laufba…
+ 4 100002656 GB    Female    67 Legally married          &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 5      1333 SE    Male      56 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 6  10002266 DE    Male      21 None of these (NEVER ma… Abitur… Kein H… Kein b…
+ 7 100000680 GB    Female    31 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 8  10009262 DE    Female    47 None of these (NEVER ma… Mittle… Kein H… Abgesc…
+ 9 100002806 GB    Male      57 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+10  10002009 DE    Female    76 &lt;NA&gt;                     Mittle… Kein H… Laufba…
 # ℹ 90 more rows
 # ℹ 158 more variables: politische_Nachrichtenrezeption &lt;dbl&gt;, netusoft &lt;fct&gt;,
 #   internetnutzung &lt;dbl&gt;, ppltrst &lt;dbl&gt;, pplfair &lt;dbl&gt;, pplhlp &lt;dbl&gt;,
@@ -580,18 +580,18 @@ lm(formula = internetnutzung ~ alter, data = daten_mod)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--222.39 -116.02  -56.96   35.95  719.76 
+-211.39  -97.38  -44.70   53.71  487.73 
 
 Coefficients:
             Estimate Std. Error t value     Pr(&gt;|t|)    
-(Intercept)  313.600     54.435   5.761 0.0000000965 ***
-alter         -2.186      1.086  -2.013       0.0469 *  
+(Intercept) 279.2690    45.2122   6.177 0.0000000149 ***
+alter        -1.9585     0.9218  -2.125       0.0361 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 186.3 on 98 degrees of freedom
-Multiple R-squared:  0.0397,    Adjusted R-squared:  0.0299 
-F-statistic: 4.051 on 1 and 98 DF,  p-value: 0.04688</code></pre>
+Residual standard error: 150 on 98 degrees of freedom
+Multiple R-squared:  0.04404,   Adjusted R-squared:  0.03428 
+F-statistic: 4.514 on 1 and 98 DF,  p-value: 0.03613</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">#summary(lm.beta(model)) # klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -615,7 +615,7 @@ F-statistic: 4.051 on 1 and 98 DF,  p-value: 0.04688</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">check_heteroscedasticity</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>OK: Error variance appears to be homoscedastic (p = 0.154).</code></pre>
+<pre><code>OK: Error variance appears to be homoscedastic (p = 0.329).</code></pre>
 </div>
 </div>
 <p>Die Interpretation des Outputs ist einfach, weil R hier uns eine sehr konkrete Aussage zur Überpüfung der Annahme macht: Bei grüner Schrift ist das Ergebnis in Ordnung, d.h. die Fehlervarianz scheint homoskedastisch, denn p wäre dann nicht signifikant. Bei roter Schrift ist die Fehlervarianz heteroskedastisch und p ist signifikant (p &lt; 0.05). In diesem Fall liegt unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen. Das müssen wir dann bei der Interpretation der Daten berücksichtigen.</p>
@@ -645,9 +645,9 @@ F-statistic: 4.051 on 1 and 98 DF,  p-value: 0.04688</code></pre>
 <pre><code>
 t test of coefficients:
 
-             Estimate Std. Error t value      Pr(&gt;|t|)    
-(Intercept) 313.60004   54.06636  5.8003 0.00000008113 ***
-alter        -2.18624    0.98757 -2.2137       0.02917 *  
+            Estimate Std. Error t value      Pr(&gt;|t|)    
+(Intercept) 279.2690    44.7423  6.2417 0.00000001109 ***
+alter        -1.9585     0.8609 -2.2749       0.02509 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -663,7 +663,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">check_autocorrelation</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>OK: Residuals appear to be independent and not autocorrelated (p = 0.680).</code></pre>
+<pre><code>OK: Residuals appear to be independent and not autocorrelated (p = 0.294).</code></pre>
 </div>
 </div>
 <p>Auch hier ist der Output wieder sehr klar: Die Prüfung ergibt, dass die Residuen unabhängig und nicht autokorreliert sind (p = 0,588) - sonst hätten wir auch hier einen signifikanten p-Wert erhalten. Prima!</p>
@@ -734,23 +734,23 @@ lm(formula = internetnutzung ~ alter + politische_Nachrichtenrezeption,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--208.19 -111.70  -49.67   39.45  717.79 
+-203.71  -92.77  -47.73   38.81  457.27 
 
 Coefficients:
                                 Estimate Standardized Std. Error t value
-(Intercept)                     299.4215           NA    54.9302   5.451
-alter                            -2.2233      -0.2026     1.0798  -2.059
-politische_Nachrichtenrezeption   0.2045       0.1466     0.1373   1.490
-                                   Pr(&gt;|t|)    
-(Intercept)                     0.000000381 ***
-alter                                0.0422 *  
-politische_Nachrichtenrezeption      0.1395    
+(Intercept)                     261.8715           NA    44.9628   5.824
+alter                            -2.0528      -0.2200     0.9041  -2.271
+politische_Nachrichtenrezeption   0.2785       0.2186     0.1234   2.256
+                                    Pr(&gt;|t|)    
+(Intercept)                     0.0000000745 ***
+alter                                 0.0254 *  
+politische_Nachrichtenrezeption       0.0263 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 185.1 on 97 degrees of freedom
-Multiple R-squared:  0.06118,   Adjusted R-squared:  0.04182 
-F-statistic:  3.16 on 2 and 97 DF,  p-value: 0.0468</code></pre>
+Residual standard error: 147 on 97 degrees of freedom
+Multiple R-squared:  0.09171,   Adjusted R-squared:  0.07299 
+F-statistic: 4.897 on 2 and 97 DF,  p-value: 0.009415</code></pre>
 </div>
 </div>
 </section>
@@ -807,9 +807,9 @@ F-statistic:  3.16 on 2 and 97 DF,  p-value: 0.0468</code></pre>
 <pre><code># A tibble: 3 × 6
   term                         estimate std_estimate std.error statistic p.value
   &lt;chr&gt;                           &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-1 (Intercept)                   299.          NA        54.9        5.45 3.81e-7
-2 alter                          -2.22        -0.203     1.08      -2.06 4.22e-2
-3 politische_Nachrichtenrezep…    0.205        0.147     0.137      1.49 1.40e-1</code></pre>
+1 (Intercept)                   262.          NA        45.0        5.82 7.45e-8
+2 alter                          -2.05        -0.220     0.904     -2.27 2.54e-2
+3 politische_Nachrichtenrezep…    0.278        0.219     0.123      2.26 2.63e-2</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -818,7 +818,7 @@ F-statistic:  3.16 on 2 and 97 DF,  p-value: 0.0468</code></pre>
 <pre><code># A tibble: 1 × 12
   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1    0.0612        0.0418  185.      3.16  0.0468     2  -662. 1333. 1343.
+1    0.0917        0.0730  147.      4.90 0.00941     2  -639. 1287. 1297.
 # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
 </div>
 </div>
@@ -844,16 +844,16 @@ F-statistic:  3.16 on 2 and 97 DF,  p-value: 0.0468</code></pre>
 <pre><code># A tibble: 100 × 167
         idno cntry gender alter marsts                   edubde1 eduade2 eduade3
        &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;                    &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  
- 1 100001263 GB    Female    72 Legally married          &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 2  10006488 DE    Female    42 None of these (NEVER ma… Abitur… Kein H… Kein b…
- 3  10000260 DE    Male      55 &lt;NA&gt;                     Mittle… Kein H… Abgesc…
- 4      1147 FR    Male      44 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 5      2089 FR    Male      72 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 6  10000032 DE    Male      30 None of these (NEVER ma… Refusal Kein H… Refusal
- 7      1766 FR    Male      45 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 8 100000390 GB    Male      63 Legally divorced/civil … &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
- 9 100000483 GB    Female    55 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
-10      2133 FR    Male      58 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 1 100001074 GB    Female    67 &lt;NA&gt;                     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 2      1044 SE    Male      62 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 3  10007670 DE    Male      58 &lt;NA&gt;                     Fachho… Diplom… Laufba…
+ 4 100002656 GB    Female    67 Legally married          &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 5      1333 SE    Male      56 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 6  10002266 DE    Male      21 None of these (NEVER ma… Abitur… Kein H… Kein b…
+ 7 100000680 GB    Female    31 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 8  10009262 DE    Female    47 None of these (NEVER ma… Mittle… Kein H… Abgesc…
+ 9 100002806 GB    Male      57 None of these (NEVER ma… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+10  10002009 DE    Female    76 &lt;NA&gt;                     Mittle… Kein H… Laufba…
 # ℹ 90 more rows
 # ℹ 159 more variables: politische_Nachrichtenrezeption &lt;dbl&gt;, netusoft &lt;fct&gt;,
 #   internetnutzung &lt;dbl&gt;, ppltrst &lt;dbl&gt;, pplfair &lt;dbl&gt;, pplhlp &lt;dbl&gt;,
@@ -868,12 +868,12 @@ F-statistic:  3.16 on 2 and 97 DF,  p-value: 0.0468</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  0  1 
-49 51 </code></pre>
+56 44 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">summary</span>(daten_mod2<span class="sc">$</span>gender_r)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   0.00    0.00    1.00    0.51    1.00    1.00 </code></pre>
+   0.00    0.00    0.00    0.44    1.00    1.00 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">class</span>(daten_mod2<span class="sc">$</span>gender_r)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -895,25 +895,25 @@ lm(formula = internetnutzung ~ alter + politische_Nachrichtenrezeption +
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--233.88 -120.66  -42.97   23.33  689.97 
+-202.12  -94.50  -51.31   32.24  471.47 
 
 Coefficients:
-                                Estimate Standardized Std. Error t value
-(Intercept)                     268.1371           NA    58.5986   4.576
-alter                            -2.1276      -0.1939     1.0753  -1.979
-politische_Nachrichtenrezeption   0.1925       0.1379     0.1367   1.408
-gender_r                         54.3519       0.1444    36.9466   1.471
-                                 Pr(&gt;|t|)    
-(Intercept)                     0.0000142 ***
-alter                              0.0507 .  
-politische_Nachrichtenrezeption    0.1625    
-gender_r                           0.1445    
+                                 Estimate Standardized Std. Error t value
+(Intercept)                     265.27637           NA   45.47227   5.834
+alter                            -1.93149     -0.20696    0.92960  -2.078
+politische_Nachrichtenrezeption   0.26651      0.20918    0.12545   2.124
+gender_r                        -18.36732     -0.06002   30.78140  -0.597
+                                   Pr(&gt;|t|)    
+(Intercept)                     0.000000073 ***
+alter                                0.0404 *  
+politische_Nachrichtenrezeption      0.0362 *  
+gender_r                             0.5521    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 184 on 96 degrees of freedom
-Multiple R-squared:  0.08188,   Adjusted R-squared:  0.05318 
-F-statistic: 2.854 on 3 and 96 DF,  p-value: 0.04125</code></pre>
+Residual standard error: 147.5 on 96 degrees of freedom
+Multiple R-squared:  0.09507,   Adjusted R-squared:  0.06679 
+F-statistic: 3.362 on 3 and 96 DF,  p-value: 0.02189</code></pre>
 </div>
 </div>
 </section>
@@ -928,7 +928,7 @@ F-statistic: 2.854 on 3 and 96 DF,  p-value: 0.04125</code></pre>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">predict.lm</span>(model_m2, <span class="fu">data.frame</span>(<span class="at">alter =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">75</span>), <span class="at">gender_r =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">politische_Nachrichtenrezeption =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2 
-215.9085 164.8410 </code></pre>
+218.3217 104.7124 </code></pre>
 </div>
 </div>
 </section>
@@ -947,14 +947,14 @@ F-statistic: 2.854 on 3 and 96 DF,  p-value: 0.04125</code></pre>
 
 Low Correlation
 
-                            Term  VIF       VIF 95% CI Increased SE Tolerance
-                           alter 1.00 [1.00,      Inf]         1.00      1.00
- politische_Nachrichtenrezeption 1.00 [1.00,      Inf]         1.00      1.00
-                        gender_r 1.01 [1.00, 1.59e+09]         1.00      0.99
+                            Term  VIF    VIF 95% CI Increased SE Tolerance
+                           alter 1.05 [1.00,  3.50]         1.03      0.95
+ politische_Nachrichtenrezeption 1.03 [1.00, 26.71]         1.01      0.97
+                        gender_r 1.07 [1.00,  2.29]         1.04      0.93
  Tolerance 95% CI
-     [0.00, 1.00]
-     [0.00, 1.00]
-     [0.00, 1.00]</code></pre>
+     [0.29, 1.00]
+     [0.04, 1.00]
+     [0.44, 1.00]</code></pre>
 </div>
 </div>
 </section>
@@ -981,16 +981,16 @@ Low Correlation
 <pre><code># A tibble: 200 × 3
    alter internetnutzung land 
    &lt;dbl&gt;           &lt;dbl&gt; &lt;fct&gt;
- 1    71              90 DE   
- 2    29             180 DE   
- 3    50             720 DE   
- 4    50             360 DE   
- 5    41             600 DE   
- 6    19             360 DE   
- 7    52             370 DE   
- 8    34              60 DE   
- 9    26              90 DE   
-10    18             120 DE   
+ 1    59             240 DE   
+ 2    35              60 DE   
+ 3    38             240 DE   
+ 4    20             240 DE   
+ 5    51              60 DE   
+ 6    64             150 DE   
+ 7    60              30 DE   
+ 8    28             540 DE   
+ 9    21             300 DE   
+10    53              45 DE   
 # ℹ 190 more rows</code></pre>
 </div>
 </div>

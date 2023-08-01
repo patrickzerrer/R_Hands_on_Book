@@ -10,7 +10,7 @@ format:
     code-line-numbers: true
 ---
 
-![Eine überfüllte Stadt an der Oberfläche, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_asian_woman_in_the_foreground_parliame_a5fdf4aa-53f3-430a-b4b2-a548f546eb0f.png)
+![Eine überfüllte & scheinbar unstrukturierte Stadt an der Oberfläche, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_crowded_city_Berlin_top_down_view_wi_b1fd8d2c-2a0f-4a76-ab4c-86e98105ee37.png)
 
 # Einführung in die Messung von latenten Variablen
 
@@ -24,8 +24,4 @@ Latente Variablen spielen eine wichtige Rolle in der statistischen Modellierung 
 
 Die *Indexbildung* umfasst drei relevante Schritte: (1) Zunächst muss ein theoretisches Konstrukt entwickelt werden. In unserem Fall würde das bedeuten, dass wir ein theoretisches Verständnis von *Vertrauen in gesellschaftliche Institutionen* entwickeln und uns klar werden was wir darunter verstehen. (2) Im nächsten Schritt müssten wir klären, ob sich dieses theoretisches Konstrukt in Form einer latenten Variable auch in unseren Daten finden lässt, hierfür werden wir eine explorative Faktorenanalyse durchführen. (3) Als letzten Schritt führen wir die eigentliche Indexbidlung durch. Hier berechnen wir eine neue Variable, den Index für *Vertrauen in gesellschaftliche Institutionen* und Überprüfen dessen Güte.
 
-**Vor diesem Hintergrund können wir einige Ziele für das Kapitel 5 aufstellen:**
 
-1.  Wir möchten zunächst ein besseres Verständnis der latenten Variable *Vertrauen in gesellschaftliche Institutionen* entwickeln.
-2.  Des Weiteren möchten wir unser Verständnis von *Vertrauen in gesellschaftliche Institutionen* empirisch anhand der Daten überprüfen, um zu klären, ob eine latente Variable messbar ist.
-3.  Wir möchten einen Index für das *Vertrauen in gesellschaftliche Institutionen* berechnen und dessen Qualität prüfen.

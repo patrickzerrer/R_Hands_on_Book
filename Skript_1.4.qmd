@@ -10,6 +10,8 @@ format:
     code-line-numbers: true
 ---
 
+![Bild generiert von Midjourney](Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png)
+
 # Die Kunst vom Umgang mit Daten
 
 ## 
