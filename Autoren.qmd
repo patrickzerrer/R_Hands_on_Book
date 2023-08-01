@@ -13,17 +13,48 @@ sidebar: false
 
 Wir möchten uns einmal kurz vorstellen...
 
+## Katharina Maubach
+
+**Vita**
+
+::: column-margin
+![(c) B. Köhler](Bilder/Katharina_Maubach.jpeg)
+:::
+
+Katharina Maubach ist seit Dezember 2022 als wissenschaftliche Mitarbeiterin am Zentrum für Medien-, Kommunikations- und Informationsforschung der Universität Bremen im Lab „Politische Kommunikation und Innovative Methoden“ tätig. Sie forscht im Rahmen des DFG-geförderten Projektes „Remixing Political News Reception“ unter der Leitung von Prof. Stephanie Geise zur Rezeption multimodaler Medieninhalte. Innerhalb des Projektes war sie seit Februar 2021 an der Universität Münster beschäftigt, wo Sie zudem von Januar 2019 bis Januar 2021 im Arbeitsbereich von Prof. Volker Gehrau forschte und lehrte. Ihr Studium der Kommunikationswissenschaft absolvierte sie ebenfalls an der Universität Münster; in ihrer Masterarbeit forschte sie zum Einfluss politischer Nachrichtensatire auf politisches Interesse und Informiertheit.
+
+**Forschungsschwerpunkte**
+
+- Politische Kommunikation
+- Rezeptions- und Wirkungsforschung
+- Klimakommunikation
+- Statistische Methoden
+
+::: {.callout-note collapse="true" icon="false"}
+## Kontakt
+
+🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen
+
+🎓 [Webseite](https://www.uni-bremen.de/zemki/das-zemki/personen/profilseite/idm/60190?cHash=20e8456893536253bab523dc0c84fc9c)
+
+#️⃣ [Twitter](https://twitter.com/k_maubach)
+:::
 
 ## Patrick Zerrer
 
 **Vita**
 
-::: {.column-margin}
+::: column-margin
 ![Patrick Zerrer](Bilder/Patrick_600x400.png)
 :::
 
-Patrick Zerrer ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen. Er schloss den „B.A. Governance and Public Policy - Staatswissenschaften" an der Universität Passau sowie den „M.A. Öffentliche Kommunikation" an der Friedrich-Schiller-Universität ab. Seine Forschungsinteressen liegen insbesondere im Bereich der politischen Online-Kommunikation, der Nachrichten- und Mediennutzung sowie der politischen Partizipation mit einem Fokus auf (digitalen) Klimaprotest und -bewegungen. Für seine Forschung nutzer er unterschiedliche Methoden, u.a. digitales (mobiles) Tracking, digitale Spurdaten, Umfragen, (automatisierter) Inhaltsanalysen und Interviews. 
+Patrick Zerrer ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen. Er schloss den „B.A. Governance and Public Policy - Staatswissenschaften" an der Universität Passau sowie den „M.A. Öffentliche Kommunikation" an der Friedrich-Schiller-Universität ab. Seine Forschungsinteressen liegen insbesondere im Bereich der politischen Online-Kommunikation, der Nachrichten- und Mediennutzung sowie der politischen Partizipation mit einem Fokus auf (digitalen) Klimaprotest und -bewegungen. Für seine Forschung nutzer er unterschiedliche Methoden, u.a. digitales (mobiles) Tracking, digitale Spurdaten, Umfragen, (automatisierter) Inhaltsanalysen und Interviews.
 
+**Forschungsschwerpunkte**
+
+- Politische Kommunikation
+- (mobile) Mediennutzungsforschung
+- Klimaprotestforschung
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt

@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="tba">
+<meta name="author" content="Stephanie Geise">
 
-<title>Selektion, Manipulation und Transformation</title>
+<title>Willkommen zur Einführung in quantitative Forschungsdesigns und Datenanalyse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -87,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./Skript_1.1.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./Skript_1.1.html" rel="" target="">
  <span class="menu-text">Der Kurs</span></a>
   </li>  
   <li class="nav-item">
@@ -116,255 +116,18 @@ ul.task-list li input[type="checkbox"] {
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_3.1.html">Data-Bootcamp: Der Umgang mit Daten</a></li><li class="breadcrumb-item"><a href="./Skript_3.3.html">Selektion, Manipulation und Transformation</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Data-Bootcamp: Einführung in R</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_1.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Was ist R?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_1.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R-Studio</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_1.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Logik von Markdown und Quarto</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Data-Bootcamp: Datensätze</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_2.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Der Aufbau von Datensätzen</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_2.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">klassische Formen von Datensätzen</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_2.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Der ALLBUS Datensatz</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Data-Bootcamp: Der Umgang mit Daten</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_3.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_3.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Datentypen und -strukturen</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_3.3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Selektion, Manipulation und Transformation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_3.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tabellen und Grafiken in R</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Die ersten Schritte bei der Datenanalyse</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_4.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Häufigkeiten und deren Visualisierung</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_4.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lageparameter: Modus, Median, Mittelwert</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Streuungsmaße: Spannweite, Standartabweichung, Varianz</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Verteilungen und deren Visualisierung</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Von einzelnen Antworten zum Index</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_5.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Messung von latenten Variablen</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_5.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Faktorenanalyse</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_5.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reliabilität von Skalen</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Das Überprüfen von Unterschieden</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_6.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bivariate Statistik &amp; Mittelwertvergleiche</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_6.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bestimmen von Unterschieden in der Varianz mit Kreuztabellen und dem Chi-Quadrat Test</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
- <span class="menu-text">Das Überprüfen von Zusammenhängen</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_7.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Einführung</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei zwei Variablen mittels Korrelation und Regression</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#selektion-manipulation-und-transformation-von-daten" id="toc-selektion-manipulation-und-transformation-von-daten" class="nav-link active" data-scroll-target="#selektion-manipulation-und-transformation-von-daten"><span class="header-section-number">1</span> Selektion, Manipulation und Transformation von Daten</a></li>
+  <li><a href="#license" id="toc-license" class="nav-link active" data-scroll-target="#license">License</a></li>
+  <li><a href="#acknowledements" id="toc-acknowledements" class="nav-link" data-scroll-target="#acknowledements">Acknowledements</a></li>
   </ul>
 </nav>
     </div>
@@ -373,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Selektion, Manipulation und Transformation</h1>
+<h1 class="title">Willkommen zur Einführung in quantitative Forschungsdesigns und Datenanalyse</h1>
 </div>
 
 
@@ -383,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>tba </p>
+             <p>Stephanie Geise </p>
           </div>
   </div>
     
@@ -394,10 +157,26 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="selektion-manipulation-und-transformation-von-daten" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Selektion, Manipulation und Transformation von Daten</h1>
-<p>Das tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)</p>
-<p>Umgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/zemkipatrick_comic_style_factor_analysis_statistics_trust_widef_e7631b78-22da-4267-8a0a-dc0b89c76dd5.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Bild generiert von Midjourney</figcaption>
+</figure>
+</div>
+<p>Willkommen auf der Startseite unserer Webseite, die Ihnen einen umfassenden Einführungskurs in quantitative Forschungsdesigns mit R bietet. Dieser Kurs ist Teil der Lehrveranstaltung des Bachelors in Kommunikations- und Medienwissenschaften an der Universität Bremen und wird durch das renommierte Zentrum für Medien, Kommunikations- und Informationsforschung ausgerichtet. Wir freuen uns, Ihnen dieses Wissen und diese Fähigkeiten im Rahmen des SKILL-Projekts der Universität präsentieren zu können.</p>
+<p>In diesem Kurs werden wir Sie schrittweise durch die Grundlagen der quantitativen Forschungsdesigns führen und Ihnen zeigen, wie Sie R, eine leistungsstarke Programmiersprache und Umgebung für statistische Berechnungen und Datenanalyse, effektiv einsetzen können. Egal, ob Sie ein angehender Forscher, ein Kommunikations- oder Medienwissenschaftler oder einfach nur daran interessiert sind, quantitative Forschungsmethoden zu erlernen, dieser Kurs bietet Ihnen das nötige Wissen, um Ihre analytischen Fähigkeiten zu erweitern.</p>
+<p>Dank der großzügigen Förderung durch das SKILL-Projekt der Universität können wir Ihnen diesen Kurs kostenlos zur Verfügung stellen. Sie haben Zugang zu umfangreichen Lernmaterialien, interaktiven Übungen und praktischen Beispielen, die Ihnen helfen werden, quantitative Forschungsdesigns zu verstehen und diese mit Hilfe von R umzusetzen. Beginnen Sie noch heute und entdecken Sie die faszinierende Welt der quantitativen Forschungsdesigns mit R. Wir freuen uns darauf, Sie auf Ihrer Lernreise zu begleiten!</p>
+<p>In den kommenden Abschnitten werden wir Ihnen die Grundlagen der quantitativen Forschung vermitteln und Ihnen dabei helfen, ein solides Verständnis für verschiedene statistische Konzepte und Methoden zu entwickeln. Egal, ob Sie in den Bereichen Wissenschaft, Wirtschaft oder Gesundheitswesen tätig sind, das Erlernen von R und statistischer Datenanalyse wird Ihnen helfen, Ihre Daten effektiv zu analysieren, aussagekräftige Erkenntnisse zu gewinnen und fundierte Entscheidungen zu treffen.</p>
+<p>Unser Ziel ist es, Ihnen das nötige Wissen und die praktischen Fähigkeiten zu vermitteln, um quantitative Forschung durchzuführen und Daten mit R zu analysieren. Wir werden Ihnen Schritt für Schritt erklären, wie Sie Daten in R importieren, explorieren, bereinigen und visualisieren können. Darüber hinaus werden wir auf verschiedene statistische Techniken eingehen, darunter Hypothesentests, lineare Regression, multivariate Analyse und vieles mehr. Beginnen Sie noch heute und entdecken Sie die aufregende Welt der quantitativen Forschung und Datenanalyse mit R!</p>
+<p>(Platzhalter generiert durch ChatGDP)</p>
+<section id="license" class="level1">
+<h1>License</h1>
+<p>Creative Commons License This online work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International. Visit here for more information about the license.</p>
+</section>
+<section id="acknowledements" class="level1">
+<h1>Acknowledements</h1>
+<p>Vielen Dank an die #rstats-Community!</p>
+<p>This website is built with Quarto, the lovely icons by icons8 &amp; Emojipedia, and none of this would be possible without the tidyverse.</p>
 
 
 </section>
