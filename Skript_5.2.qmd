@@ -4,6 +4,8 @@ author: "Patrick Zerrer"
 toc: true
 number-sections: true
 highlight-style: pygments
+execute: 
+  warning: false
 format:
   html:
     code-fold: false
@@ -26,14 +28,24 @@ Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.
 
 ```{r Pakete}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
-p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)
+p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) # <1>
 ```
+
+1. Laden der Pakete mit `p_load`
+
+```{r}
+theme_set(theme_classic()) # <1>
+```
+
+1. Visualisierungshintergrund festlegen
 
 Danach laden wir die Daten aus dem Allbus.
 
 ```{r Laden der Daten}
-daten = haven::read_dta("Datensatz/Allbus_2021.dta")
+daten = haven::read_dta("Datensatz/Allbus_2021.dta") # <1>
 ```
+
+1. Laden des Datensatzes
 
 ## Teildatensatz mit den benötigten Variablen
 
@@ -65,47 +77,46 @@ Ganz konkret wählen wir Variablen aus, die das...
 Für die statistische Identifizierung einer latenten Variablen bzw. eines Faktors werden mindestens drei gemessene Variablen benötigt, obwohl mehr Indikatoren vorzuziehen sind. Es werden beispielsweise auch vier bis sechs Indikatoren pro Faktor empfohlen. Im Allgemeinen funktioniert die EFA besser, wenn jeder Faktor überdeterminiert ist (d. h. es werden mehrere gemessene Variablen von der zu entdeckenden latenten Variable bzw. Faktor beeinflusst). Unabhängig von der Anzahl sollten Variablen, die voneinander abhängig sind, nicht in eine EFA einbezogen werden.
 
 ```{r Teildatensatz}
-allbus_vertrauen = daten %>%
-  
-  # Wir wählen mit select() die gewünschten Variablen aus
-  select(pt01:pt20) %>% 
-  
-  # die Kombination aus mutate() und across() ermöglicht es uns die Funktion as.numeric() in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden
-  mutate(across(pt01:pt20, ~ as.numeric(.))) %>% 
-
-  # Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen)
-  mutate(across(pt01:pt20, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>% 
-  
-  # Wir schmeißen fehlende Werte raus
-  na.omit()
+allbus_vertrauen = daten %>%                                              # <1>
+  select(pt01:pt20) %>%                                                   # <2>
+  mutate(across(pt01:pt20, ~ as.numeric(.))) %>%                          # <3>
+  mutate(across(pt01:pt20, ~ if_else(.%in% c(-9, -11, -42), NA,.))) %>%   # <4>
+  na.omit()                                                               # <5>
 ```
+
+1. Wir erstellen ein neues Objekt basierend auf dem Datensatz `daten`
+2. Mit dem Doppelpunkt wählen wir alle Variablen zwischen `pt01` bis `pt20` aus
+3. Die Kombination aus `mutate` und `across` ermöglicht es uns die Funktion `as.numeric` in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die `~` gibt den Start der anzuwenden Funktion (hier `as.numeric` an), der Punkt innerhalb der Klammer der `as.numeric` Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen
+4. Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter, mit dem Ausdruck `%in%` prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
+5. Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+
 
 Wir bennen die ausgewählten Indikatoren um, damit die Bezeichnungen der Indikatoren für uns leichter zu merken sind. 
 
 ```{r Rename}
 allbus_vertrauen = allbus_vertrauen %>% 
   
-  # mit dem rename() Befehl können wir die Variablen umbennen
-  rename(Ver_Gesundheitswesen = pt01,
-         Ver_BVerfG = pt02,
-         Ver_Bundestag = pt03,
-         Ver_Verwaltung = pt04,
-         Ver_kath_Kirche = pt06,
-         Ver_evan_Kirche = pt07,
-         Ver_Justiz = pt08,
-         Ver_TV = pt09,
-         Ver_Zeitung = pt10,
-         Ver_Uni = pt11,
-         Ver_Regierung = pt12,
-         Ver_Polizei = pt14,
-         Ver_Parteien = pt15,
-         Ver_Kom_EU = pt19,
-         Ver_EU_Par = pt20)
+  rename(Ver_Gesundheitswesen = pt01, # <1>
+         Ver_BVerfG = pt02,           # <1>    
+         Ver_Bundestag = pt03,        # <1> 
+         Ver_Verwaltung = pt04,       # <1>
+         Ver_kath_Kirche = pt06,      # <1>
+         Ver_evan_Kirche = pt07,      # <1>
+         Ver_Justiz = pt08,           # <1>
+         Ver_TV = pt09,               # <1>
+         Ver_Zeitung = pt10,          # <1>
+         Ver_Uni = pt11,              # <1>
+         Ver_Regierung = pt12,        # <1>
+         Ver_Polizei = pt14,          # <1>
+         Ver_Parteien = pt15,         # <1>
+         Ver_Kom_EU = pt19,           # <1>
+         Ver_EU_Par = pt20)           # <1>
 
-# Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen
-htmlTable(head(allbus_vertrauen))
+htmlTable(head(allbus_vertrauen))     # <2>
 ```
 
+1. Mit dem `rename` Befehl können wir die Variablen umbennen
+2. Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir `htmlTable` für eine schönere Darstellung der Tabelle sowie `head`, um uns die ersten paar Zeilen des Datensatzes `allbus_vertrauen` anzeigen zu lassen
 
 Neben der Auswahl der Variablen bzw. Indikatoren müssen auch die Fälle (in unserem Fall die Anzahl der befragten Personen) festgelegt werden. Hier sollten wir uns zunächst fragen, ob die Stichprobe der Teilnehmer:innen in Bezug auf die gemessenen Indikatoren sinnvoll ist? Handelt es sich um eine repräsentative Stichprobe? Bei dem Allbus ist das der Fall und entsprechend können wir davon ausgehen, dass wir eine passende Stichprobe für die Durchführung eine EFA vorliegen haben.
 
@@ -114,8 +125,9 @@ Neben der Auswahl der Variablen bzw. Indikatoren müssen auch die Fälle (in uns
 Wir werfen einen kurzen Blick in die deskriptive Statistik für unseren Teildatensatz, um ein besseres Verständnis für die Daten zu erhalten.
 
 ```{r Deskriptive Statistik}
-summary(allbus_vertrauen)
+summary(allbus_vertrauen)  # <1>
 ```
+1. Mit dem `summary` Befehl können wir uns die deskritpive Statistik ausgeben lassen
 
 ## Suche nach der zugrunde liegenden Variable - Die Faktorenanalyse
 
@@ -124,79 +136,84 @@ Die Faktorenanalyse bringt, wie jedes statistische Verfahren, eine Reihe von Vor
 * *Varianz*: Wir sollten sichergehen, dass die Daten aus unserer Stichprobe ausreichend varrieren. Wir werfen hierfür ein Blick in die Daten.
 
 ```{r Varianz}
-# Visuelle Überprüfung mit einem Histogram für die erste Variable "Ver_Gesundheitswesen". Die restlichen Variablen sollten auch überprüft werden.
 colors = c(rep("darkgreen", 1))
 
-ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen)) +
-  geom_histogram(binwidth = 0.5, fill = colors) 
+ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen)) +   # <1>
+  geom_histogram(binwidth = 0.5, fill = colors)             # <1>
 ```
 
+1. Visuelle Überprüfung mit einem Histogram für die erste Variable `Ver_Gesundheitswesen`. Die restlichen Variablen sollten auch überprüft werden.
 
 * *Linearität*: Der Pearson-Korrelationskoeffizient (r) misst die lineare Beziehung zwischen zwei Variablen. Wenn die tatsächliche Beziehung nicht linear ist, dann verringert sich der Wert von r. Wir können auf Linearität u.a. visuell durch das Betrachten der Daten mittel Streudiagramm prüfen.
 
 ```{r Linearität}
-# Visuelle Überprüfung mit einem Streudiagramm für die ersten beiden Variable (Ver_Gesundheitswesen und Ver_BVerfG)
-
-ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen, y = Ver_BVerfG)) +
-  geom_point() +
-  geom_abline(linetype = "dashed", color = "darkgreen", size = 1)
+ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen, y = Ver_BVerfG)) +  # <1>
+  geom_point() +                                                           # <1>
+  geom_abline(linetype = "dashed", color = "darkgreen", size = 1)          # <1>
 ```
 
+1. Visuelle Überprüfung mit einem Streudiagramm für die erste Variable `Ver_Gesundheitswesen` & `Ver_BVerfG`. Die restlichen Variablen sollten auch überprüft werden.
 
 * *Normalverteilung*: Der Pearson-Korrelationskoeffizient setzt eine Normalverteilung voraus. Allerdings finden sich in der Realität fast nie perfekt normalverteilte Daten. Schiefe und Kurtosis sind besonders einflussreich die Ergebnisse der Faktorenanalyse und können im Extremfall artefaktische Ergenbnisse erzeugen. 
 
 ```{r Normalverteilung}
-# Visuelle Überprüfung mit einem Histogram für die erste Variable (Ver_Gesundheitswesen)
 colors = c(rep("darkgreen", 1))
 
-ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen)) +
-  geom_histogram(binwidth = 0.5, fill = colors) 
+ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen)) +   # <1>
+  geom_histogram(binwidth = 0.5, fill = colors)             # <1>
 
-# Statistische Überprüfung mittels Shapiro Wilk Test für die erste Variable (pt01)
-shapiro.test(allbus_vertrauen$Ver_Gesundheitswesen)
-
-# Ein p-Wert unter 0.05 = keine Normalverteilung 
-# Ein p-Wert über 0.05 = Normalverteilung
+shapiro.test(allbus_vertrauen$Ver_Gesundheitswesen)         # <2>
 ```
+
+1. Visuelle Überprüfung mit einem Histogram für die erste Variable `Ver_Gesundheitswesen`
+2. Statistische Überprüfung mittels Shapiro Wilk Test für die erste Variable `Ver_Gesundheitswesen`. Ein p-Wert unter 0.05 = keine Normalverteilung und ein p-Wert über 0.05 = Normalverteilung
 
 * *Level der Messung*: Bei Pearson-Korrelationen wird davon ausgegangen, dass normalverteilte Variablen auf Intervall- oder Verhältnisskalen gemessen werden, d. h. es handelt sich um kontinuierliche Daten mit gleichen Intervallen. Diese Eigenschaften treffen nicht auf ordinale (bspw. Kategorien) oder dochotome (bspw. Wahr-Falsch-Items) Variablen zu, was sich negativ auf Pearson-Korrelationskoeffizieten auswirkt und zu verzerrten Ergebnissen führen kann. Allerdings ist ein beträchtlicher Teil der Daten, mit denen wir zu tun haben, ordinal oder dichotom skaliert, um auch mit diesen Daten arbeiten zu können nutzen wir die polychorische Korrelation, welche robuster Nicht-Normalverteilung ist.
 
 * *Fehlende Werte*: In jeder Studie sollten wir die Anzahl und die Art der fehlenden Werte sowie die Gründe und die Methoden für den Umgang mit diesen Daten angegeben werden. 
 
 ```{r fehlende Werte}
-# Wir haben den Code bereits am Anfang ausgefürht
-allbus_vertrauen = allbus_vertrauen %>%  
-  
-  # Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen)
-  mutate(across(Ver_Gesundheitswesen:Ver_EU_Par, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>% 
-  
-  # Wir schmeißen fehlende Werte raus
-  na.omit()
+allbus_vertrauen = allbus_vertrauen %>%   
+  mutate(across(Ver_Gesundheitswesen:Ver_EU_Par, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>%  # <1>
+  na.omit()                                                                                   # <2>
 ```
+
+1. Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter. Während `%in%` angibt, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
+2. Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+
+# Wir haben den Code bereits am Anfang ausgefürht
 
 * *Ausreißer / Outliers*: Wir sollten Ausreißer identifizieren und im Zweifel von der Analyse ausschließen, da diese zu einer Verzerrung der Ergebnisse führen können. Zu den Methoden zur Erkennung von Ausreißern gehören Boxplots und Streudiagramme für einzelne Variablen sowie der Mahalanobis-Abstand für mehrere Variablen.
 
 ```{r Beispiel Boxplot}
-boxplot(allbus_vertrauen)
+boxplot(allbus_vertrauen) # <1>
 ```
+
+1. Erstellen des Boxpltos
 
 * *Passung der Daten für die Faktorenanalyse*: Wir sollten trotz unserer guten Datengrundlage nochmals prüfen, ob die gemessenen Variablen ausreichend miteinander korreliert sind, um eine Faktorenanalyse zu rechtfertigen. Eine Korrelation zwischen zwei Variablen gibt an, ob und wie stark ein Zusammenhang zwischen den beiden Variablen besteht. An dieser Stelle ist es wichtig, sich zu merken, dass eine Korrelation die Stärke eines Zusammenhangs angibt. Eine genauere Erklärung findet ihr im Kapitel 7. Zunächst können wir einen Blick in die Korrelationsmatrix werfen - eine beträchtliche Anzahl von Korrelationen sollte ±.30 überschreiten. Alternativ können wir ein objektiveren Test der Faktorfähigkeit der Korrelationsmatrix durchführen. Hierfür greifen wir auf den Sphärizitätstest nach Bartlett (1954) zurück.
 
 ```{r Beispiel für eine Korrelationsmatrix}
-htmlTable(round(cor(allbus_vertrauen), digits = 3))
+htmlTable(round(cor(allbus_vertrauen), digits = 3)) # <1>
 ```
+
+1. Die `htmlTable` Funktion ermöglicht uns eine schönere Darstellung der Tabelle, `round` rundet die Werte auf die von uns mit `digits = 3` festgelegten drei Nachkommastellen, während wir mit `cor` die Korrelationen für die Werte in unserem Datensatz `allbus_vertrauen` berechnen
 
 Noch zu prüfen ist die Korrelation der Items miteinander, hierfür nehmen wir den Bartlett Test.
 
 ```{r Bartlett-Test}
-cortest.bartlett(allbus_vertrauen)
+cortest.bartlett(allbus_vertrauen) # <1>
 ```
+
+1. Wir führen den Bartlett-Test durch
 
 Bei großen Stichprobenumfängen, wie in unserem Fall mit dem Allbus, reagiert der Bartlett-Test selbst auf geringfügige Abweichungen vom Zufallsprinzip empfindlich, so dass seine Ergebnisse durch ein Maß für die Stichprobenadäquanz ergänzt werden sollten. Das Kaiser-Meyer-Olkin (KMO; Kaiser, 1974) Maß für die Stichprobenadäquanz ist das Verhältnis von Korrelationen und partiellen Korrelationen, das das Ausmaß widerspiegelt, in dem Korrelationen eine Folge der über alle Variablen geteilten Varianz sind und nicht der von bestimmten Variablenpaaren geteilten Varianz.
 
 ```{r KMO und MSA}
-KMO(allbus_vertrauen)
-```
+KMO(allbus_vertrauen) # <1>
+``` 
+
+1. Wir lassen uns das KMO berechnen
 
 KMO-Werte reichen von 0,00 bis 1,00 und können sowohl für die gesamte Korrelationsmatrix als auch für jede gemessene Variable berechnet werden. Insgesamt sind KMO-Werte ≥.70 erwünscht und Werte unter .50 werden im Allgemeinen als inakzeptabel angesehen. In diesem Fall ist die Korrelationsmatrix nicht faktoriell. 
 
@@ -233,8 +250,10 @@ Wie bereits bei der ML-Schätzung angedeutet, müssen wir die Anzahl der Faktore
 Wir verwenden hierfür die `nfactors`-Funktion, welche uns mehere Schätzungen ausgibt.
 
 ```{r nfactors}
-nfactors(allbus_vertrauen, rotate = "varimax", fm="mle")
+nfactors(allbus_vertrauen, rotate = "varimax", fm="mle") # <1>
 ```
+
+1. Mit der `nfactors` Funktion können wir verschiedene Schätzungen durchführen. Hierfür wählen wir ein Rotation mit `rotate` aus, sowie eine Methode der Schätzung mittels `fm`
 
 Die minimalen durchschnittlichen Teilwerte (MAP), wird als die genauesten empirischen Schätzungen für die Anzahl der beizubehaltenden Faktoren betrachtet. Der MAP Wert schlägt uns einen Faktor vor, entsprechend gehen wir im folgenden von einem Faktor bzw. einer lateten Variable aus.
 
@@ -247,14 +266,13 @@ Wichtig ist, dass sich die Interpretation der *Faktorladungen* zwischen orthogon
 In unserem Fall greifen wir auf die etablierte Rotationsmethode `varimax` zurück, welches wir entsprechend im R-Code spezifizieren. Zusätzlich geben wir unsere erwartete Anzahl an Faktoren an, welche wir zuvor bestimmt haben (in unserem Fall: 1).
 
 ```{r Modell der Faktorenanalyse}
+fit =  fa(allbus_vertrauen, factors = 1, fm = "ml", rotation = "varimax") # <1>
 
-# Wir führen die Faktorenanalyse aus und speichern die Ergebnisse in dem Objekt fit ab
-fit =  fa(allbus_vertrauen, factors = 1, fm = "ml", rotation = "varimax")
-
-# Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind
-
-print(fit, digits = 2, cutoff = .3)
+print(fit, digits = 2, cutoff = .3) # <2>
 ```
+
+1. Mit der `fa` Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit `factors` aus, legen ein Rotation mit `rotate` sowie eine Methode der Schätzung mittels `fm` fest
+2. Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind
 
 ### Interpretation der Ergebnisse
 
@@ -292,9 +310,9 @@ Das Format ist normalerweise:
 :::
 
 
-## Danksagung und Würdigung
+## Danksagung und Literatur
 
-Bei der Struktur und dem Inhalt dieser Seite haben mich die folgenden herausragenden Arbeiten inspieriert. Ich möchte mich bei den Autor:innen für ihre Arbeit sehr bedanken!
+Die Struktur und Inhalt dieser Seite orientiert sich an den folgenden Arbeiten. Ich möchte mich bei den Autor:innen sehr bedanken!
 
 * Daniela Keller [Link](https://www.youtube.com/watch?v=NFPGQcq1fO8) 
 * Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811

@@ -4,6 +4,8 @@ author: "Patrick Zerrer"
 toc: true
 number-sections: true
 highlight-style: pygments
+execute: 
+  warning: false
 format:
   html:
     code-fold: false
@@ -20,22 +22,28 @@ Falls ihr euch immer noch fragt was genau ein Index ist, könnte man etwas verei
 
 Entsprechend möchten wir jetzt eine neue Index-Variable für das *Vertrauen in gesellschaftliche Institutionen* auf Grundlage der Indikatoren bilden.
 
-Wir beginnen zunächst mit dem Laden der notwendigen Pakete.
-
-## Laden der nötigen Pakete
+Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.
 
 ```{r Pakete}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
-p_load(tidyverse, haven, psych, dplyr, htmlTable)
+p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) # <1>
 ```
 
-Und laden im Anschluss den notwendigen Datensatz.
+1. Laden der Pakete mit `p_load`
 
-## Laden des Datensatzes
+```{r}
+theme_set(theme_classic()) # <1>
+```
+
+1. Visualisierungshintergrund festlegen
+
+Danach laden wir die Daten aus dem Allbus.
 
 ```{r Laden der Daten}
-daten = haven::read_dta("Datensatz/Allbus_2021.dta")
+daten = haven::read_dta("Datensatz/Allbus_2021.dta") # <1>
 ```
+
+1. Laden des Datensatzes
 
 ## Teildatensatz mit den benötigten Index-Variablen
 
@@ -64,44 +72,47 @@ Ganz konkret wählen wir Variablen aus, die das...
 Wir bereiten die Daten entsprechend vor, indem wir die fehlenden Werte entfernen und die Variablen in numerische umwandeln.
 
 ```{r Teildatensatz}
-allbus_vertrauen = daten %>%
-  
-  # Wir wählen mit select() die gewünschten Variablen aus
-  select(pt01:pt20) %>% 
-  
-  # die Kombination aus mutate() und across() ermöglicht es uns die Funktion as.numeric() in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden
-  mutate(across(pt01:pt20, ~ as.numeric(.))) %>% 
-
-  # Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen)
-  mutate(across(pt01:pt20, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>% 
-  
-  # Wir schmeißen fehlende Werte raus
-  na.omit()
+allbus_vertrauen = daten %>%                                              # <1>
+  select(pt01:pt20) %>%                                                   # <2>
+  mutate(across(pt01:pt20, ~ as.numeric(.))) %>%                          # <3>
+  mutate(across(pt01:pt20, ~ if_else(.%in% c(-9, -11, -42), NA,.))) %>%   # <4>
+  na.omit()                                                               # <5>
 ```
 
-Wir bennen die ausgewählten Indikatoren um, damit die Bezeichnungen der Indikatoren für uns leichter zu merken sind.
+1. Wir erstellen ein neues Objekt basierend auf dem Datensatz `daten`
+2. Mit dem Doppelpunkt wählen wir alle Variablen zwischen `pt01` bis `pt20` aus
+3. Die Kombination aus `mutate` und `across` ermöglicht es uns die Funktion `as.numeric` in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die `~` gibt den Start der anzuwenden Funktion (hier `as.numeric` an), der Punkt innerhalb der Klammer der `as.numeric` Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen
+4. Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter, mit dem Ausdruck `%in%` prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
+5. Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+
+
+Wir bennen die ausgewählten Indikatoren um, damit die Bezeichnungen der Indikatoren für uns leichter zu merken sind. 
 
 ```{r Rename}
 allbus_vertrauen = allbus_vertrauen %>% 
   
-  # mit dem rename() Befehl können wir die Variablen umbennen
-  rename(Ver_Gesundheitswesen = pt01,
-         Ver_BVerfG = pt02,
-         Ver_Bundestag = pt03,
-         Ver_Verwaltung = pt04,
-         Ver_kath_Kirche = pt06,
-         Ver_evan_Kirche = pt07,
-         Ver_Justiz = pt08,
-         Ver_TV = pt09,
-         Ver_Zeitung = pt10,
-         Ver_Uni = pt11,
-         Ver_Regierung = pt12,
-         Ver_Polizei = pt14,
-         Ver_Parteien = pt15,
-         Ver_Kom_EU = pt19,
-         Ver_EU_Par = pt20)
-htmlTable(head(allbus_vertrauen))
+  rename(Ver_Gesundheitswesen = pt01, # <1>
+         Ver_BVerfG = pt02,           # <1>    
+         Ver_Bundestag = pt03,        # <1> 
+         Ver_Verwaltung = pt04,       # <1>
+         Ver_kath_Kirche = pt06,      # <1>
+         Ver_evan_Kirche = pt07,      # <1>
+         Ver_Justiz = pt08,           # <1>
+         Ver_TV = pt09,               # <1>
+         Ver_Zeitung = pt10,          # <1>
+         Ver_Uni = pt11,              # <1>
+         Ver_Regierung = pt12,        # <1>
+         Ver_Polizei = pt14,          # <1>
+         Ver_Parteien = pt15,         # <1>
+         Ver_Kom_EU = pt19,           # <1>
+         Ver_EU_Par = pt20)           # <1>
+
+htmlTable(head(allbus_vertrauen))     # <2>
 ```
+
+1. Mit dem `rename` Befehl können wir die Variablen umbennen
+2. Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir `htmlTable` für eine schönere Darstellung der Tabelle sowie `head`, um uns die ersten paar Zeilen des Datensatzes `allbus_vertrauen` anzeigen zu lassen
+
 
 Wir haben nun alle Daten geladen und die Variablen entsprechend vorbereitet. Wir können eigentlich mit der Indexbidlung beginnen, müssen uns allerdings davor noch entscheiden, welche Art von Index wir bilden möchten.
 
@@ -112,8 +123,8 @@ Es gibt eine ganze Reihe von möglichen Arten von Indizes, welche wir theoretisc
 | Art des Index                       | Bildung (Beispiel)                              | Beschreibung                                                                                                                            |
 |----------------------|-----------------------------|---------------------|
 | Ungewichteter additivier Index      | Index = Indikator_1 + Indikator_2 + Indikator_3 | Die Ausprägungen der Indikatorvariablen werden addiert bzw. zu gemittelt.                                                               |
-| Ungewichteter multiplikativer Index | Index = V1 \* V2 \* V3                          | Wenn ein Index Mindestausprägungen auf allen Indikatorvariablen voraussetzt sollte multiplikativ zu einem Gesamtindex verknüpft werden. |
-| Gewichteter additivier Index        | Index = (2\*V1) + V2 + V3                       | Gewichtete additive Indizes ermöglichen eine differenzierte Behandlung der einzelnen Indikatoren.                                       |
+| Ungewichteter multiplikativer Index | Index = Indikator_1 \* Indikator_2 \* Indikator_3                          | Wenn ein Index Mindestausprägungen auf allen Indikatorvariablen voraussetzt sollte multiplikativ zu einem Gesamtindex verknüpft werden. |
+| Gewichteter additivier Index        | Index = (2\*Indikator_1) + Indikator_2 + Indikator_3                       | Gewichtete additive Indizes ermöglichen eine differenzierte Behandlung der einzelnen Indikatoren.                                       |
 
 Die Entscheidung, welche Art der Indexbildung gewählt wird sollte vor dem Hintergrund der Daten, sowie der *latenten Variable* und deren Eigenschaften erfolgen. Beispielsweise würde es für ein Index, welcher die *Zufriedenheit mit einer Bahnreise* widerspiegelt und aus den Inidkatoren *Reisedauer*, *Service während der Reise*, *Komfort während der Fahrt* gebildet wird, Sinn ergeben einen Ungewichteten multiplikativen Index zu bilden, da bei einer *Reisedauer* von Null keine Reise stattgefunden hat und somit auch die anderen beiden Indikatoren nicht von Bedeutung sind.
 
@@ -125,25 +136,33 @@ Wir erstellen eine neue Variable `vertrauen_ges_inst` und summieren die Werte al
 
 ```{r Berechung Index}
 index_vertrauen = allbus_vertrauen %>% 
-  mutate(vertrauen_ges_inst = (Ver_Gesundheitswesen + Ver_BVerfG + Ver_Bundestag + Ver_Verwaltung + Ver_kath_Kirche + Ver_evan_Kirche + Ver_Justiz+ Ver_TV +  Ver_Zeitung + Ver_Uni + Ver_Regierung + Ver_Polizei + Ver_Parteien + Ver_Kom_EU + Ver_EU_Par) / 15)
-htmlTable(head(index_vertrauen))
+  mutate(vertrauen_ges_inst = (Ver_Gesundheitswesen + Ver_BVerfG + Ver_Bundestag + Ver_Verwaltung + Ver_kath_Kirche + Ver_evan_Kirche + Ver_Justiz+ Ver_TV +  Ver_Zeitung + Ver_Uni + Ver_Regierung + Ver_Polizei + Ver_Parteien + Ver_Kom_EU + Ver_EU_Par) / 15)   # <1>
+htmlTable(head(index_vertrauen))   # <2>
 ```
+
+1. Wir bilden mit Hilfe von `mutate` die neue Variable `vertrauen_ges_inst`, welche sich aus der Summe der Indikatoren geteilt durch die Anzahl der Indikatoren zusammensetzt.
+2. Die `htmlTable` Funktion ermöglicht uns eine schönere Darstellung der Tabelle. Mit `head` wählen wir die ersten paar Fälle aus dem Datensatz `index_vertrauen` aus
 
 Wir können uns noch die deskriptive Statistik für den Index anschauen, diese ist wichtig um den berechneten Index korrekt zu interpretieren.
 
 ```{r statistik}
-summary(index_vertrauen$vertrauen_ges_inst)
+summary(index_vertrauen$vertrauen_ges_inst) # <1>
 ```
+
+1. Mit dem `summary` Befehl können wir uns die deskritpive Statistik ausgeben lassen
 
 ## Reliabilität des Indizes berechnen
 
-Bevor wir diesen Index einsetzen können, müssen wir zunächst noch checken, ob die Variablen auch inhaltlich zusammenpassen. Dazu ermitteln wir Crombach's Alpha als Maß der Skalenreliabilität:
+Bevor wir diesen Index einsetzen können, müssen wir zunächst noch checken, ob die Variablen auch inhaltlich zusammenpassen. Dazu ermitteln wir Cronbach's Alpha als Maß der Skalenreliabilität:
 
 ```{r}
 index_vertrauen %>%
-  select(Ver_Gesundheitswesen:Ver_EU_Par) %>%
-  psych::alpha(check.keys=TRUE)
+  select(Ver_Gesundheitswesen:Ver_EU_Par) %>%  # <1>
+  psych::alpha(check.keys=TRUE)                # <2>
 ```
+
+1. Wir wählen mit `select` alle Variablen zwischen `Ver_Gesundheitswesen` und `Ver_EU_Par` aus
+2. Hier rufen wir das Paket `psych` auf, nutzen aus diesem die Funktion `alpha`, um Cronbach's Alpha zu berechnen
 
 ## Interpretation von Cronbach's Alpha
 
@@ -178,9 +197,9 @@ Das Format ist normalerweise:
 > ***Beispiel:*** Der Summenindex individuelle Identität umfasst fünf Indikatoren (Ziele und Befriedigung, Regeln und Verantwortung, Gefühle oder Emotionen, Verständnis der Welt, individuelle Identität im Allgemeinen; α = 0,84).
 :::
 
-## Danksagung und Würdigung
+## Danksagung und Literatur
 
-Bei der Struktur und dem Inhalt dieser Seite haben mich die folgenden herausragenden Arbeiten inspieriert. Ich möchte mich bei den Autor:innen für ihre Arbeit sehr bedanken!
+Die Struktur und Inhalt dieser Seite orientiert sich an den folgenden Arbeiten. Ich möchte mich bei den Autor:innen sehr bedanken!
 
 -   Daniela Keller [Link](https://www.youtube.com/watch?v=NFPGQcq1fO8)
 -   Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. 749-811
