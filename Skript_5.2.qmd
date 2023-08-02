@@ -80,7 +80,7 @@ Für die statistische Identifizierung einer latenten Variablen bzw. eines Faktor
 allbus_vertrauen = daten %>%                                              # <1>
   select(pt01:pt20) %>%                                                   # <2>
   mutate(across(pt01:pt20, ~ as.numeric(.))) %>%                          # <3>
-  mutate(across(pt01:pt20, ~ if_else(.%in% c(-9, -11, -42), NA,.))) %>%   # <4>
+  mutate(across(pt01:pt20, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>%    # <4>
   na.omit()                                                               # <5>
 ```
 
@@ -136,7 +136,7 @@ Die Faktorenanalyse bringt, wie jedes statistische Verfahren, eine Reihe von Vor
 -   *Varianz*: Wir sollten sichergehen, dass die Daten aus unserer Stichprobe ausreichend varrieren. Wir werfen hierfür ein Blick in die Daten.
 
 ```{r Varianz}
-colors = c(rep("darkgreen", 1))
+colors = c(rep("darkgreen", 1))                             # <1>
 
 ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen)) +   # <1>
   geom_histogram(binwidth = 0.5, fill = colors)             # <1>

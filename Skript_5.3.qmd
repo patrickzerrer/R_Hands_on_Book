@@ -76,7 +76,7 @@ Wir bereiten die Daten entsprechend vor, indem wir die fehlenden Werte entfernen
 allbus_vertrauen = daten %>%                                              # <1>
   select(pt01:pt20) %>%                                                   # <2>
   mutate(across(pt01:pt20, ~ as.numeric(.))) %>%                          # <3>
-  mutate(across(pt01:pt20, ~ if_else(.%in% c(-9, -11, -42), NA,.))) %>%   # <4>
+  mutate(across(pt01:pt20, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>%    # <4>
   na.omit()                                                               # <5>
 ```
 

@@ -1,6 +1,6 @@
 ---
-title: "Die Kunst vom Umgang mit Daten"
-author: "tba"
+title: "Vorbereiten der R-Umgebung"
+author: "Patrick Zerrer & Katharina Maubach"
 toc: true
 number-sections: true
 highlight-style: pygments
@@ -8,10 +8,53 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 ---
 
 ![Bild generiert von Midjourney](Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png)
 
-# Die Kunst vom Umgang mit Daten
+# Vorbereitende Schritte
 
-## 
+Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten wir uns zunächst einige Grundlagen widmen Wir beschäftigen uns im Folgenden mit einigen fundamentalen Begriffen, deren Funktionsweisen wir kennen sollten - das erleichtert uns zumindest die Arbeit deutlich und vermeidet wahrscheinlich den ein oder anderen Fehler samt dazugehörigen frustrierten Verfluchen des Kurses und R. 
+
+Lasst uns Beginnen und Schritt für Schritt die wichtigsten Punkte durchgehen, die ihr zur Vorbereitung eures Analyse-Projekts machen solltet.
+
+## Das Anlegen eines R-Projekts
+
+Starten wir zunächst mit dem Anlegen eines sogenannten R-Projekts. RStudio-Projekte ermöglichen es uns alle mit einem Projekt verbundenen Dateien an einem Ort zu speichern. Das umfasst Datensätze, R-Skripte, Ergebnisse, Abbildungen, Berichte usw. Projekte sind bereits in RStudio integriert.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot1.png)
+Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button `New Project` ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.
+
+## Das Working-Dictonary (wd)
+
+Im Allgemeinen ist das Arbeitsverzeichnis (das Working-Dictonary, wd) der Ort, an dem R nach Dateien (vor allem nach Datensätzen) sucht. Wenn ihr kein Projekt verwenden, müsst ihr wahrscheinlich durch die Funktion `setwd` oder das Interface (siehe Screenshot) ein Working-Dictonary setzen, bevor ihr euren R-Code ausführen könnt.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot2.png)
+Wenn ihr beispielsweise den Code verwenden möchtet, den wir euch in diesem Kurs zu Verfügung stellen, müsst ihr darauf achten, dass ihr die Dateipfade auf euer Working-Dictonary und Ordnerstruktur anpasst.
+
+```{r Beispiel Dateipfad}
+daten = haven::read_dta("Datensatz/Allbus_2021.dta") # <1>
+```
+
+1.  Der Bereich in Anführungszeichen gibt den Dateipfad an. Damit sagt ihr R, wo sich die zu ladende Datei befindet. 
+
+In dem Beispiel ist im Working-Dictonary des Projekts ein Unterordner mit der zu ladenden Datei. Der Dateipfad befindet sich im R-Code in den Anführungszeichen, also `"Datensatz/Allbus_2021.dta"`. Der erste Teil `"Datensatz/"` gibt an, dass sich die Datei in einem Ordner befindet, der Datensatz heißt. Der zweite Teil `Allbus_2021.dta"` gibt den eigentlichen Dateinamen mit der entsprechend Dateiendung an (also .dta). Wahrscheinlich müsst ihr den R-Code entsprechend anpassen.
+
+## Das Zugreifen auf Dateien und Datensätze
+
+Bevor wir allerdings auf Dateien und Datensätze zugreifen können, müssen wir diese zunächst in unseren Projekt-Ordner (also in das Working-Dictonary) verschieben. Falls ihr für diesen Kurs die Desktop-Version von RStudio nutzt, könnt ihr hier einfach die entsprechenden Datein auf eurem lokalen Rechner in das zuvor von euch festgelegte Working-Dictonary kopieren. Wenn ihr die Cloud-Version von RStudio nutzt, müsst ihr hier die Dateien und Datensätze zunächst in die Cloud laden. Hierfür könnt ihr auf den `Upload`-Button in der unteren rechten Ecke des Interfaces gehen und in dem sich öffnenden Fenster die entsprechende Datei auswählen.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot3.png)
+
+Sobald ihr durch das Klicken von OK bestätigt habt, wird die Datei hochgeladen und erscheint in dem unteren rechten Fenster im `Files`-Reiter. 
+
+## Die Installation von Paketen
+
+## Das Laden von Paketen
+
+## Die Session
+
+## Hilfe zur Selbsthilfe
+
+

@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+ <span class="menu-text">Vorbereiten der R-Umgebung</span></a>
   </div>
 </li>
       </ul>
@@ -464,7 +464,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-cell="annotated-cell-1" data-code-annotation="1">Laden der Pakete mit <code>p_load</code></span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-1" data-code-lines="2">Laden der Pakete mit <code>p_load</code></span>
 </dd>
 </dl>
 </div>
@@ -475,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-2" data-code-annotation="1">Visualisierungshintergrund festlegen</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-2" data-code-lines="1">Visualisierungshintergrund festlegen</span>
 </dd>
 </dl>
 </div>
@@ -487,7 +487,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-3" data-code-annotation="1">Laden des Datensatzes</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-3" data-code-lines="1">Laden des Datensatzes</span>
 </dd>
 </dl>
 </div>
@@ -520,29 +520,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1"></a>allbus_vertrauen <span class="ot">=</span> daten <span class="sc">%&gt;%</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2"></a>  <span class="fu">select</span>(pt01<span class="sc">:</span>pt20) <span class="sc">%&gt;%</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3">3</button><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">if_else</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">42</span>), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">42</span>), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="5">5</button><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5"></a>  <span class="fu">na.omit</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-4" data-code-annotation="1">Wir erstellen ein neues Objekt basierend auf dem Datensatz <code>daten</code></span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-4" data-code-lines="1">Wir erstellen ein neues Objekt basierend auf dem Datensatz <code>daten</code></span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="2" data-code-cell="annotated-cell-4" data-code-annotation="2">Mit dem Doppelpunkt wählen wir alle Variablen zwischen <code>pt01</code> bis <code>pt20</code> aus</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-4" data-code-lines="2">Mit dem Doppelpunkt wählen wir alle Variablen zwischen <code>pt01</code> bis <code>pt20</code> aus</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="3" data-code-cell="annotated-cell-4" data-code-annotation="3">Die Kombination aus <code>mutate</code> und <code>across</code> ermöglicht es uns die Funktion <code>as.numeric</code> in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die <code>~</code> gibt den Start der anzuwenden Funktion (hier <code>as.numeric</code> an), der Punkt innerhalb der Klammer der <code>as.numeric</code> Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen</span>
+<span data-code-annotation="3" data-code-cell="annotated-cell-4" data-code-lines="3">Die Kombination aus <code>mutate</code> und <code>across</code> ermöglicht es uns die Funktion <code>as.numeric</code> in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die <code>~</code> gibt den Start der anzuwenden Funktion (hier <code>as.numeric</code> an), der Punkt innerhalb der Klammer der <code>as.numeric</code> Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="4" data-code-cell="annotated-cell-4" data-code-annotation="4">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter, mit dem Ausdruck <code>%in%</code> prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
+<span data-code-annotation="4" data-code-cell="annotated-cell-4" data-code-lines="4">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter, mit dem Ausdruck <code>%in%</code> prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-lines="5" data-code-cell="annotated-cell-4" data-code-annotation="5">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
+<span data-code-annotation="5" data-code-cell="annotated-cell-4" data-code-lines="5">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
 </dd>
 </dl>
 </div>
@@ -572,11 +572,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="3,4,5,6,7,8,9,10,11,12,13,14,15,16,17" data-code-cell="annotated-cell-5" data-code-annotation="1">Mit dem <code>rename</code> Befehl können wir die Variablen umbennen</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-5" data-code-lines="3,4,5,6,7,8,9,10,11,12,13,14,15,16,17">Mit dem <code>rename</code> Befehl können wir die Variablen umbennen</span>
 </dd>
 <dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="19" data-code-cell="annotated-cell-5" data-code-annotation="2">Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir <code>htmlTable</code> für eine schönere Darstellung der Tabelle sowie <code>head</code>, um uns die ersten paar Zeilen des Datensatzes <code>allbus_vertrauen</code> anzeigen zu lassen</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-5" data-code-lines="19">Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir <code>htmlTable</code> für eine schönere Darstellung der Tabelle sowie <code>head</code>, um uns die ersten paar Zeilen des Datensatzes <code>allbus_vertrauen</code> anzeigen zu lassen</span>
 </dd>
 </dl>
 </div>
@@ -726,7 +726,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-6" data-code-annotation="1">Mit dem <code>summary</code> Befehl können wir uns die deskritpive Statistik ausgeben lassen</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-6" data-code-lines="1">Mit dem <code>summary</code> Befehl können wir uns die deskritpive Statistik ausgeben lassen</span>
 </dd>
 </dl>
 </div>
@@ -769,15 +769,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><em>Varianz</em>: Wir sollten sichergehen, dass die Daten aus unserer Stichprobe ausreichend varrieren. Wir werfen hierfür ein Blick in die Daten.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a>colors <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"darkgreen"</span>, <span class="dv">1</span>))</span>
+<div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1"></a>colors <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"darkgreen"</span>, <span class="dv">1</span>))</span>
 <span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen)) <span class="sc">+</span></span>
+<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen)) <span class="sc">+</span></span>
 <span id="annotated-cell-7-4"><a href="#annotated-cell-7-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> colors)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="3,4" data-code-cell="annotated-cell-7" data-code-annotation="1">Visuelle Überprüfung mit einem Histogram für die erste Variable <code>Ver_Gesundheitswesen</code>. Die restlichen Variablen sollten auch überprüft werden.</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-7" data-code-lines="1,3,4">Visuelle Überprüfung mit einem Histogram für die erste Variable <code>Ver_Gesundheitswesen</code>. Die restlichen Variablen sollten auch überprüft werden.</span>
 </dd>
 </dl>
 </div>
@@ -796,7 +796,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1,2,3" data-code-cell="annotated-cell-8" data-code-annotation="1">Visuelle Überprüfung mit einem Streudiagramm für die erste Variable <code>Ver_Gesundheitswesen</code> &amp; <code>Ver_BVerfG</code>. Die restlichen Variablen sollten auch überprüft werden.</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-8" data-code-lines="1,2,3">Visuelle Überprüfung mit einem Streudiagramm für die erste Variable <code>Ver_Gesundheitswesen</code> &amp; <code>Ver_BVerfG</code>. Die restlichen Variablen sollten auch überprüft werden.</span>
 </dd>
 </dl>
 </div>
@@ -816,7 +816,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-10" data-code-annotation="2">Statistische Überprüfung mittels Shapiro Wilk Test für die erste Variable <code>Ver_Gesundheitswesen</code>. Ein p-Wert unter 0.05 = keine Normalverteilung und ein p-Wert über 0.05 = Normalverteilung</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-10" data-code-lines="1">Statistische Überprüfung mittels Shapiro Wilk Test für die erste Variable <code>Ver_Gesundheitswesen</code>. Ein p-Wert unter 0.05 = keine Normalverteilung und ein p-Wert über 0.05 = Normalverteilung</span>
 </dd>
 </dl>
 </div>
@@ -844,11 +844,11 @@ W = 0.92081, p-value &lt; 2.2e-16</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-cell="annotated-cell-11" data-code-annotation="1">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter. Während <code>%in%</code> angibt, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-11" data-code-lines="2">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter. Während <code>%in%</code> angibt, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-cell="annotated-cell-11" data-code-annotation="2">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-11" data-code-lines="3">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
 </dd>
 </dl>
 </div>
@@ -866,7 +866,7 @@ W = 0.92081, p-value &lt; 2.2e-16</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-12" data-code-annotation="1">Erstellen des Boxpltos</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-12" data-code-lines="1">Erstellen des Boxpltos</span>
 </dd>
 </dl>
 </div>
@@ -883,7 +883,7 @@ W = 0.92081, p-value &lt; 2.2e-16</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-13" data-code-annotation="1">Die <code>htmlTable</code> Funktion ermöglicht uns eine schönere Darstellung der Tabelle, <code>round</code> rundet die Werte auf die von uns mit <code>digits = 3</code> festgelegten drei Nachkommastellen, während wir mit <code>cor</code> die Korrelationen für die Werte in unserem Datensatz <code>allbus_vertrauen</code> berechnen</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-13" data-code-lines="1">Die <code>htmlTable</code> Funktion ermöglicht uns eine schönere Darstellung der Tabelle, <code>round</code> rundet die Werte auf die von uns mit <code>digits = 3</code> festgelegten drei Nachkommastellen, während wir mit <code>cor</code> die Korrelationen für die Werte in unserem Datensatz <code>allbus_vertrauen</code> berechnen</span>
 </dd>
 </dl>
 </div>
@@ -1191,7 +1191,7 @@ W = 0.92081, p-value &lt; 2.2e-16</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-14" data-code-annotation="1">Wir führen den Bartlett-Test durch</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-14" data-code-lines="1">Wir führen den Bartlett-Test durch</span>
 </dd>
 </dl>
 </div>
@@ -1213,7 +1213,7 @@ $df
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-15" data-code-annotation="1">Wir lassen uns das KMO berechnen</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-15" data-code-lines="1">Wir lassen uns das KMO berechnen</span>
 </dd>
 </dl>
 </div>
@@ -1264,7 +1264,7 @@ Ver_Gesundheitswesen           Ver_BVerfG        Ver_Bundestag
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-16" data-code-annotation="1">Mit der <code>nfactors</code> Funktion können wir verschiedene Schätzungen durchführen. Hierfür wählen wir ein Rotation mit <code>rotate</code> aus, sowie eine Methode der Schätzung mittels <code>fm</code></span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-16" data-code-lines="1">Mit der <code>nfactors</code> Funktion können wir verschiedene Schätzungen durchführen. Hierfür wählen wir ein Rotation mit <code>rotate</code> aus, sowie eine Methode der Schätzung mittels <code>fm</code></span>
 </dd>
 </dl>
 </div>
@@ -1332,11 +1332,11 @@ Statistics by number of factors
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-17" data-code-annotation="1">Mit der <code>fa</code> Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit <code>factors</code> aus, legen ein Rotation mit <code>rotate</code> sowie eine Methode der Schätzung mittels <code>fm</code> fest</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-17" data-code-lines="1">Mit der <code>fa</code> Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit <code>factors</code> aus, legen ein Rotation mit <code>rotate</code> sowie eine Methode der Schätzung mittels <code>fm</code> fest</span>
 </dd>
 <dt data-target-cell="annotated-cell-17" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-cell="annotated-cell-17" data-code-annotation="2">Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-17" data-code-lines="3">Anzeigen der Ergebnisse mit 2 Nachkommastellen und dem Ausblenden von Faktorladungen die kleiner als 0.3 sind</span>
 </dd>
 </dl>
 </div>
