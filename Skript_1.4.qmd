@@ -15,7 +15,7 @@ format:
 
 # Vorbereitende Schritte
 
-Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten wir uns zunächst einige Grundlagen widmen Wir beschäftigen uns im Folgenden mit einigen fundamentalen Begriffen, deren Funktionsweisen wir kennen sollten - das erleichtert uns zumindest die Arbeit deutlich und vermeidet wahrscheinlich den ein oder anderen Fehler samt dazugehörigen frustrierten Verfluchen des Kurses und R. 
+Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten wir uns zunächst einige Grundlagen widmen Wir beschäftigen uns im Folgenden mit einigen fundamentalen Begriffen, deren Funktionsweisen wir kennen sollten - das erleichtert uns zumindest die Arbeit deutlich und vermeidet wahrscheinlich den ein oder anderen Fehler samt dazugehörigen frustrierten Verfluchen des Kurses und R.
 
 Lasst uns Beginnen und Schritt für Schritt die wichtigsten Punkte durchgehen, die ihr zur Vorbereitung eures Analyse-Projekts machen solltet.
 
@@ -23,21 +23,19 @@ Lasst uns Beginnen und Schritt für Schritt die wichtigsten Punkte durchgehen, d
 
 Starten wir zunächst mit dem Anlegen eines sogenannten R-Projekts. RStudio-Projekte ermöglichen es uns alle mit einem Projekt verbundenen Dateien an einem Ort zu speichern. Das umfasst Datensätze, R-Skripte, Ergebnisse, Abbildungen, Berichte usw. Projekte sind bereits in RStudio integriert.
 
-![Screenshot RStudio](Bilder/Skript_1_4_Screenshot1.png)
-Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button `New Project` ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot1.png) Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button `New Project` ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.
 
 ## Das Working-Dictonary (wd)
 
 Im Allgemeinen ist das Arbeitsverzeichnis (das Working-Dictonary, wd) der Ort, an dem R nach Dateien (vor allem nach Datensätzen) sucht. Wenn ihr kein Projekt verwenden, müsst ihr wahrscheinlich durch die Funktion `setwd` oder das Interface (siehe Screenshot) ein Working-Dictonary setzen, bevor ihr euren R-Code ausführen könnt.
 
-![Screenshot RStudio](Bilder/Skript_1_4_Screenshot2.png)
-Wenn ihr beispielsweise den Code verwenden möchtet, den wir euch in diesem Kurs zu Verfügung stellen, müsst ihr darauf achten, dass ihr die Dateipfade auf euer Working-Dictonary und Ordnerstruktur anpasst.
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot2.png) Wenn ihr beispielsweise den Code verwenden möchtet, den wir euch in diesem Kurs zu Verfügung stellen, müsst ihr darauf achten, dass ihr die Dateipfade auf euer Working-Dictonary und Ordnerstruktur anpasst.
 
 ```{r Beispiel Dateipfad}
 daten = haven::read_dta("Datensatz/Allbus_2021.dta") # <1>
 ```
 
-1.  Der Bereich in Anführungszeichen gibt den Dateipfad an. Damit sagt ihr R, wo sich die zu ladende Datei befindet. 
+1.  Der Bereich in Anführungszeichen gibt den Dateipfad an. Damit sagt ihr R, wo sich die zu ladende Datei befindet.
 
 In dem Beispiel ist im Working-Dictonary des Projekts ein Unterordner mit der zu ladenden Datei. Der Dateipfad befindet sich im R-Code in den Anführungszeichen, also `"Datensatz/Allbus_2021.dta"`. Der erste Teil `"Datensatz/"` gibt an, dass sich die Datei in einem Ordner befindet, der Datensatz heißt. Der zweite Teil `Allbus_2021.dta"` gibt den eigentlichen Dateinamen mit der entsprechend Dateiendung an (also .dta). Wahrscheinlich müsst ihr den R-Code entsprechend anpassen.
 
@@ -47,14 +45,69 @@ Bevor wir allerdings auf Dateien und Datensätze zugreifen können, müssen wir 
 
 ![Screenshot RStudio](Bilder/Skript_1_4_Screenshot3.png)
 
-Sobald ihr durch das Klicken von OK bestätigt habt, wird die Datei hochgeladen und erscheint in dem unteren rechten Fenster im `Files`-Reiter. 
+Sobald ihr durch das Klicken von OK bestätigt habt, wird die Datei hochgeladen und erscheint in dem unteren rechten Fenster im `Files`-Reiter.
 
 ## Die Installation von Paketen
 
+Wir möchten für unser Analyse-Projekt nicht nur die Standartausführung von R verwenden, welche auch als base R bezeichnet wird, sondnern einige Pakte installieren. R-Pakete sind Erweiterungen, die Funktionen, Daten, Code und dessen Dokumentation enthalten und uns damit unsere Arbeit deutlich erleichtern. Wir können Pakete über CRAN (Comprehensive R Archive Network) - das ist ein zentrales Software-Repository - installieren. R hat den Vorteil, dass es über eine große Zahl an frei verfügbaren und einfach zu installierenden Paketen verfügt. Das hat unter anderem dazu geführt, dass die Programmiersprache im Data Science Bereich verbreitet ist.
+
+Wenn wir ein R-Paket installieren möchten können wir hierfür die Funktion `install.packages` verwenden, in deren Klammer wir in Anführungszeichen den Namen des zu installierenden Pakets setzen.
+
+```{r installation package}
+install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+```
+
+Beim Ausführen des Codes gibt R in der Konsole Auskunft über die verschiedenen Installationsschritte sowie über den (Mis-)Erfolg der Installation. Alternativ könnt ihr auch über das RStudio Interface Pakete installieren. Hierfür geht ihr in der rechten unteren Ecke auf den Reiter `Packages` und wählt den Buttion `Install` aus. In dem sich öffnenen Fenster gebt ihr den Namen des von euch gewünschten Pakets ein und Bestätigt.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot4.png) Einige der Pakete, die wir im Rahmen des Kurses verwenden sind bereits in der R Cloud vorinstalliert und müssen nicht mehr von euch eigenhändig installiert werden.
+
 ## Das Laden von Paketen
+
+Im vorherigen Schritt haben wir bereits die von uns benötigten Pakete installiert, jetzt müssen wir R nur noch sagen, dass wir diese Pakete für die aktuelle Session nutzen möchten. Ihr könnt euch das so vorstellen, dass ihr die benötigten Pakete *aktiv* schaltet.
+
+Wir nutzen in diesem Kurs `pacman`, um etwas einfacher die von uns benötigten Pakete zu laden. Mit der Funktion `p_load` könnt ihr die von euch in der Klammer angegebenen Pakete laden und damit für die aktuelle Session aktivieren.
+
+```{r Pakete pacman}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) 
+```
+
+Alternativ könnt ihr mit dem `library` Befehl einzelne Pakete laden.
+
+```{r Pakete library}
+library(tidyr)
+```
+
+Ansonsten habt ihr noch die Möglichkeit die Pakete händisch über das R Studio Interface zu aktiveren, was ich persönlich ab einer gewissen Anzahl von benötigten Paketen eher nervig finde. Nichtsdestotrotz könnt ihr hierfür in der rechten unteren Ecke des Interfaces auf den Reiter `Packages` gehen und in der unteren Liste das gewünschte Paket durch das Setzen eines Hakens auswählen.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot5.png)
 
 ## Die Session
 
+Die sogenannte *Session* wurde bereits mehrmals kurz erwähnt. Bei der *Session* handelt es sich um eine laufende Instanz des R-Programms, die ihr beenden und neustarten könnt. Das macht insbesondere dann Sinn, wenn ihr die falsche Version eines Pakets installiert habt oder ihr einen sauberen Start für euren R Code haben möchtet. Durch einen Neustart der *Session* könnt ihr euch sicher sein, dass ihr nicht ausversehen irgendwelche zuvor verwendeten Pakete oder Berechnungen mitnehmt.
+
+Ihr könnt die *Session* mit der `.rs.restartR` Funktion in der Konsole neustarten. Alternativ könnt ihr im R Studio Interface auf `Session`und `Restart R` gehen.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot6.png) 
+
+Ein kurze Mitteilung in der Konsole gibt euch an, dass die *Session* neu gestartet wurde.
+
 ## Hilfe zur Selbsthilfe
 
+Ihr werdet im Laufe des Kurses immer wieder mit Fehlermeldungen zu tun haben. Hier ist es wichtig einen kühlen Kopf zu bewahren und möglichst systematisch zu versuchen den Fehler zu finden und zu beheben. Der Umgang mit Fehlern ist ein großer und wichtiger Teil bei jeglicher Programmierung und es gibt hier ein paar Tipps, wie man damit am besten umgeht.
 
+1.  *Atmen*: Bleib ruhig und atme ein paar mal tief durch, gerade wenn es nicht der erste Fehler ist der dir heute begegnet.
+
+2.  *Lesen*: Lies aufmerksam die Fehlermeldung.
+
+3.  *Code überprüfen*: Schaue nach, ob sich ein Warnzeichen am Rand deines R Codes befindet. Dieses Warnzeichen weist dich auf einen Syntaxfehler (bspw. eine vergessene Klammer oder Komma) hin.
+
+4.  *Variablen überprüfen*: Überprüfe kurz, ob du die richtigen Variablen verwendest oder sich ein Tippfehler eingeschlichen hat.
+
+5.  *Informationen suchen*: Rufe eine Vignette (mit dem Befehl `vignette`) oder rufe die Hilfeseite mit einem der Funktion vorgelagerten Fragezeichen auf (mit bspw. `?dpylr()`) auf und lies sie dir durch.
+
+6.  *Sich im Netz Hilfe suchen*: Suche auf [Stack Overflow](https://stackoverflow.com/questions/tagged/r) nach deinem Problem, meistens hat jemand auf der Welt das oder ein ähnliches Problem schon einmal gelöst.
+
+7.  *Die KI fragen*: Nutze ein KI Chatbot, um dir die Fehlermeldung erklären zu lassen und Lösungsvorschläge zu unterbreiten. Beachte hierbei bitte, dass die Antworten nicht immer korrekt sind und meist Kontextwissen von dir benötigt wird, um die Korrektheit der Antworten zu prüfen [Link](https://www.r-bloggers.com/2023/04/tips-for-using-chatgpt-to-learn-r/).
+
+8.  *Frag uns*: Frag dein:e Dozent:in :)
