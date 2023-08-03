@@ -44,7 +44,7 @@
   {
     "objectID": "Skript_1.1.html",
     "href": "Skript_1.1.html",
-    "title": "Was ist R?",
+    "title": "Einführung in R und RStudio",
     "section": "",
     "text": "Artwork by @allison_horst"
   },
@@ -695,23 +695,23 @@
   {
     "objectID": "Skript_1.1.html#installation-von-r-und-rstudio",
     "href": "Skript_1.1.html#installation-von-r-und-rstudio",
-    "title": "Was ist R?",
-    "section": "1.1 Installation von R und RStudio",
-    "text": "1.1 Installation von R und RStudio\nFür alle üblichen Betriebssysteme können R und RStudio online heruntergeladen werden."
+    "title": "Einführung in R und RStudio",
+    "section": "3 Installation von R und RStudio",
+    "text": "3 Installation von R und RStudio\nFür alle üblichen Betriebssysteme können R und RStudio online heruntergeladen werden."
   },
   {
     "objectID": "Skript_1.1.html#projekte-und-ordnerstrukturen",
     "href": "Skript_1.1.html#projekte-und-ordnerstrukturen",
-    "title": "Was ist R?",
-    "section": "1.2 Projekte und Ordnerstrukturen",
-    "text": "1.2 Projekte und Ordnerstrukturen\nEinführung in die Logik von R, R Studio Server und das R Environment Einführung in Markdown (Quarto?) Basics der Befehlssyntax in Base R und Tidyverse (im Vergleich), ab dann aber alles in dplyr Laden von Daten und Importieren von anderen Datenformaten Einführung in das Datenmanagement: Projekte und Ordnerstrukturen auf dem PC Öffnen von Datensätzen, Laden von Daten, Importieren von anderen Datensätzen Speichern von Daten aus R in verschiedenen Formaten (Rda, csv etc.)"
+    "title": "Einführung in R und RStudio",
+    "section": "4 Projekte und Ordnerstrukturen",
+    "text": "4 Projekte und Ordnerstrukturen\nEinführung in die Logik von R, R Studio Server und das R Environment Einführung in Markdown (Quarto?) Basics der Befehlssyntax in Base R und Tidyverse (im Vergleich), ab dann aber alles in dplyr Laden von Daten und Importieren von anderen Datenformaten Einführung in das Datenmanagement: Projekte und Ordnerstrukturen auf dem PC Öffnen von Datensätzen, Laden von Daten, Importieren von anderen Datensätzen Speichern von Daten aus R in verschiedenen Formaten (Rda, csv etc.)"
   },
   {
     "objectID": "Skript_1.1.html#pakete-als-erweiterung-von-r",
     "href": "Skript_1.1.html#pakete-als-erweiterung-von-r",
-    "title": "Was ist R?",
-    "section": "1.3 Pakete als Erweiterung von R",
-    "text": "1.3 Pakete als Erweiterung von R\nInstallieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika."
+    "title": "Einführung in R und RStudio",
+    "section": "5 Pakete als Erweiterung von R",
+    "text": "5 Pakete als Erweiterung von R\nInstallieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika."
   },
   {
     "objectID": "Skript_1.3.html#r-markdown",
@@ -803,5 +803,19 @@
     "title": "Vorbereiten der R-Umgebung",
     "section": "1.7 Hilfe zur Selbsthilfe",
     "text": "1.7 Hilfe zur Selbsthilfe\nIhr werdet im Laufe des Kurses immer wieder mit Fehlermeldungen zu tun haben. Hier ist es wichtig einen kühlen Kopf zu bewahren und möglichst systematisch zu versuchen den Fehler zu finden und zu beheben. Der Umgang mit Fehlern ist ein großer und wichtiger Teil bei jeglicher Programmierung und es gibt hier ein paar Tipps, wie man damit am besten umgeht.\n\nAtmen: Bleib ruhig und atme ein paar mal tief durch, gerade wenn es nicht der erste Fehler ist der dir heute begegnet.\nLesen: Lies aufmerksam die Fehlermeldung.\nCode überprüfen: Schaue nach, ob sich ein Warnzeichen am Rand deines R Codes befindet. Dieses Warnzeichen weist dich auf einen Syntaxfehler (bspw. eine vergessene Klammer oder Komma) hin.\nVariablen überprüfen: Überprüfe kurz, ob du die richtigen Variablen verwendest oder sich ein Tippfehler eingeschlichen hat.\nInformationen suchen: Rufe eine Vignette (mit dem Befehl vignette) oder rufe die Hilfeseite mit einem der Funktion vorgelagerten Fragezeichen auf (mit bspw. ?dpylr()) auf und lies sie dir durch.\nSich im Netz Hilfe suchen: Suche auf Stack Overflow nach deinem Problem, meistens hat jemand auf der Welt das oder ein ähnliches Problem schon einmal gelöst.\nDie KI fragen: Nutze ein KI Chatbot, um dir die Fehlermeldung erklären zu lassen und Lösungsvorschläge zu unterbreiten. Beachte hierbei bitte, dass die Antworten nicht immer korrekt sind und meist Kontextwissen von dir benötigt wird, um die Korrektheit der Antworten zu prüfen Link.\nFrag uns: Frag dein:e Dozent:in :)"
+  },
+  {
+    "objectID": "Skript_1.1.html#was-ist-r",
+    "href": "Skript_1.1.html#was-ist-r",
+    "title": "Einführung in R und RStudio",
+    "section": "1 Was ist R?",
+    "text": "1 Was ist R?\nR ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen läuft. In seiner Grundfunktion ist R zunächst eine Konsole, in welcher wir zeilenweise Code eingeben und ausführen können. Dabei kann es sich um einfache Rechnungen oder auch komplexe Modelle handeln. Die meisten arbeiten dabei nicht mit R als solches sondern nutzen verschiedene Umgebungen, etwa RStudio oder Jupyter Hub um mit R zu arbeiten."
+  },
+  {
+    "objectID": "Skript_1.1.html#was-ist-rstudio",
+    "href": "Skript_1.1.html#was-ist-rstudio",
+    "title": "Einführung in R und RStudio",
+    "section": "2 Was ist RStudio?",
+    "text": "2 Was ist RStudio?"
   }
 ]

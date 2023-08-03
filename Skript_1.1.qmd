@@ -1,5 +1,5 @@
 ---
-title: "Was ist R?"
+title: "Einführung in R und RStudio"
 author: "Katharina Maubach & Patrick Zerrer"
 toc: true
 number-sections: true
@@ -13,9 +13,11 @@ format:
 
 ![Artwork by @allison_horst](Bilder/Grafik R Lernen.png)
 
-# Was ist R?
+## Was ist R?
 
 R ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen läuft. In seiner Grundfunktion ist R zunächst eine Konsole, in welcher wir zeilenweise Code eingeben und ausführen können. Dabei kann es sich um einfache Rechnungen oder auch komplexe Modelle handeln. Die meisten arbeiten dabei nicht mit R als solches sondern nutzen verschiedene Umgebungen, etwa RStudio oder Jupyter Hub um mit R zu arbeiten. 
+
+## Was ist RStudio?
 
 
 ## Installation von R und RStudio
