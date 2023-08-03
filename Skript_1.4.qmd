@@ -67,17 +67,17 @@ Beim Ausführen des Codes gibt R in der Konsole Auskunft über die verschiedenen
 
 Im vorherigen Schritt haben wir bereits die von uns benötigten Pakete installiert, jetzt müssen wir R nur noch sagen, dass wir diese Pakete für die aktuelle Session nutzen möchten. Ihr könnt euch das so vorstellen, dass ihr die benötigten Pakete *aktiv* schaltet.
 
-Wir nutzen in diesem Kurs `pacman`, um etwas einfacher die von uns benötigten Pakete zu laden. Mit der Funktion `p_load` könnt ihr die von euch in der Klammer angegebenen Pakete laden und damit für die aktuelle Session aktivieren.
+Dies geschieht mit dem `library` Befehl (Achtung, hier benötigen wir im Gegensatz zum `install.packages` Befehl keine Anführungszeichen).
+
+```{r Pakete library}
+library(tidyr)
+```
+
+Wir nutzen in diesem Kurs wiederum `pacman`, um automatisch mehrere Pakete installieren und laden zu können. Dafür installieren und laden wir einmalig das Paket `pacman` und können anschließend mit der Funktion `p_load` die von euch in der Klammer angegebenen Pakete installieren und laden.
 
 ```{r Pakete pacman}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
 p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) 
-```
-
-Alternativ könnt ihr mit dem `library` Befehl einzelne Pakete laden.
-
-```{r Pakete library}
-library(tidyr)
 ```
 
 Ansonsten habt ihr noch die Möglichkeit die Pakete händisch über das R Studio Interface zu aktiveren, was ich persönlich ab einer gewissen Anzahl von benötigten Paketen eher nervig finde. Nichtsdestotrotz könnt ihr hierfür in der rechten unteren Ecke des Interfaces auf den Reiter `Packages` gehen und in der unteren Liste das gewünschte Paket durch das Setzen eines Hakens auswählen.
