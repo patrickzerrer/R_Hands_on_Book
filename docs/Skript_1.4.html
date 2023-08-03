@@ -462,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-1">Der Bereich in Anführungszeichen gibt den Dateipfad an. Damit sagt ihr R, wo sich die zu ladende Datei befindet.</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-1" data-code-lines="1">Der Bereich in Anführungszeichen gibt den Dateipfad an. Damit sagt ihr R, wo sich die zu ladende Datei befindet.</span>
 </dd>
 </dl>
 </div>
@@ -486,15 +486,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Wenn wir ein R-Paket installieren möchten können wir hierfür die Funktion <code>install.packages</code> verwenden, in deren Klammer wir in Anführungszeichen den Namen des zu installierenden Pakets setzen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>, <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Installiere Paket nach 'C:/Users/Patrick Zerrer/AppData/Local/R/win-library/4.3'
-(da 'lib' nicht spezifiziert)</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Paket 'tidyverse' erfolgreich ausgepackt und MD5 Summen abgeglichen
 
 Die heruntergeladenen Binärpakete sind in 
-    C:\Users\Patrick Zerrer\AppData\Local\Temp\RtmpywnwHd\downloaded_packages</code></pre>
+    C:\Users\Patrick Zerrer\AppData\Local\Temp\RtmpoL6PDC\downloaded_packages</code></pre>
 </div>
 </div>
 <p>Beim Ausführen des Codes gibt R in der Konsole Auskunft über die verschiedenen Installationsschritte sowie über den (Mis-)Erfolg der Installation. Alternativ könnt ihr auch über das RStudio Interface Pakete installieren. Hierfür geht ihr in der rechten unteren Ecke auf den Reiter <code>Packages</code> und wählt den Buttion <code>Install</code> aus. In dem sich öffnenen Fenster gebt ihr den Namen des von euch gewünschten Pakets ein und Bestätigt.</p>
@@ -505,18 +501,12 @@ Die heruntergeladenen Binärpakete sind in
 <p>Im vorherigen Schritt haben wir bereits die von uns benötigten Pakete installiert, jetzt müssen wir R nur noch sagen, dass wir diese Pakete für die aktuelle Session nutzen möchten. Ihr könnt euch das so vorstellen, dass ihr die benötigten Pakete <em>aktiv</em> schaltet.</p>
 <p>Wir nutzen in diesem Kurs <code>pacman</code>, um etwas einfacher die von uns benötigten Pakete zu laden. Mit der Funktion <code>p_load</code> könnt ihr die von euch in der Klammer angegebenen Pakete laden und damit für die aktuelle Session aktivieren.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Lade nötiges Paket: pacman</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Paket 'pacman' wurde unter R Version 4.3.1 erstellt</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Alternativ könnt ihr mit dem <code>library</code> Befehl einzelne Pakete laden.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ansonsten habt ihr noch die Möglichkeit die Pakete händisch über das R Studio Interface zu aktiveren, was ich persönlich ab einer gewissen Anzahl von benötigten Paketen eher nervig finde. Nichtsdestotrotz könnt ihr hierfür in der rechten unteren Ecke des Interfaces auf den Reiter <code>Packages</code> gehen und in der unteren Liste das gewünschte Paket durch das Setzen eines Hakens auswählen.</p>
 <div class="quarto-figure quarto-figure-center">

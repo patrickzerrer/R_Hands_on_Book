@@ -4,6 +4,8 @@ author: "Patrick Zerrer & Katharina Maubach"
 toc: true
 number-sections: true
 highlight-style: pygments
+execute: 
+  warning: false
 format:
   html:
     code-fold: false
