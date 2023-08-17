@@ -34,7 +34,6 @@ website:
     - section: "Data-Bootcamp: Einführung in R"
       contents:
       - Skript_1.1.qmd
-      - Skript_1.2.qmd
       - Skript_1.3.qmd
       - Skript_1.4.qmd
 
