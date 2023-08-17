@@ -697,7 +697,7 @@
     "href": "Skript_1.1.html#installation-von-r-und-rstudio",
     "title": "Einführung in R und RStudio",
     "section": "3 Installation von R und RStudio",
-    "text": "3 Installation von R und RStudio\nFür alle üblichen Betriebssysteme können R und RStudio online heruntergeladen werden."
+    "text": "3 Installation von R und RStudio\nMöchtet ihr das Programm lokal auf eurem Rechner nutzen, müsst ihr zunächst die Programme R, RStudio und gegebenfalls RTools installieren. Alle Programme sind kostenlos online verfügbar und lassen sich auf allen gängigen Betriebssystemen installieren. Installiert zunächst R und anschließend RStudio und achtet darauf regelmäßig auf die aktuelle Version zu aktualisieren.\nInnerhalb unseres Kurse arbeiten wir mit R und RStudio, nutzen die Programme allerdings in der Umgebung von Jupyter."
   },
   {
     "objectID": "Skript_1.1.html#projekte-und-ordnerstrukturen",
@@ -817,5 +817,19 @@
     "title": "Einführung in R und RStudio",
     "section": "2 Was ist RStudio?",
     "text": "2 Was ist RStudio?"
+  },
+  {
+    "objectID": "Skript_1.1.html#das-interface-von-rstudio",
+    "href": "Skript_1.1.html#das-interface-von-rstudio",
+    "title": "Einführung in R und RStudio",
+    "section": "4 Das Interface von RStudio",
+    "text": "4 Das Interface von RStudio\nGrundsätzliches zur Oberfläche\nSchaltflächen\nMenüleiste\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link"
+  },
+  {
+    "objectID": "Skript_1.1.html#die-programmoberfläche-von-rstudio",
+    "href": "Skript_1.1.html#die-programmoberfläche-von-rstudio",
+    "title": "Einführung in R und RStudio",
+    "section": "4 Die Programmoberfläche von RStudio",
+    "text": "4 Die Programmoberfläche von RStudio\nGrundsätzliches zur Oberfläche\nSchaltflächen\nMenüleiste\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link"
   }
 ]

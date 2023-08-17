@@ -10,27 +10,32 @@ format:
     code-line-numbers: true
 ---
 
-
-![Artwork by @allison_horst](Bilder/Grafik R Lernen.png)
+![Artwork by @allison_horst](Bilder/Grafik%20R%20Lernen.png)
 
 ## Was ist R?
 
-R ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen läuft. In seiner Grundfunktion ist R zunächst eine Konsole, in welcher wir zeilenweise Code eingeben und ausführen können. Dabei kann es sich um einfache Rechnungen oder auch komplexe Modelle handeln. Die meisten arbeiten dabei nicht mit R als solches sondern nutzen verschiedene Umgebungen, etwa RStudio oder Jupyter Hub um mit R zu arbeiten. 
+R ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen läuft. In seiner Grundfunktion ist R zunächst eine Konsole, in welcher wir zeilenweise Code eingeben und ausführen können. Dabei kann es sich um einfache Rechnungen oder auch komplexe Modelle handeln. Die meisten arbeiten dabei nicht mit R als solches sondern nutzen verschiedene Umgebungen, etwa RStudio oder Jupyter Hub um mit R zu arbeiten.
 
 ## Was ist RStudio?
 
-
 ## Installation von R und RStudio
 
-Für alle üblichen Betriebssysteme können R und RStudio online heruntergeladen werden. 
+Möchtet ihr das Programm lokal auf eurem Rechner nutzen, müsst ihr zunächst die Programme R, RStudio und gegebenfalls RTools installieren. Alle Programme sind kostenlos online verfügbar und lassen sich auf allen gängigen Betriebssystemen installieren. Installiert zunächst [R](https://cran.uni-muenster.de/) und anschließend [RStudio](https://posit.co/download/rstudio-desktop/) und achtet darauf regelmäßig auf die aktuelle Version zu aktualisieren.
 
+Innerhalb unseres Kurse arbeiten wir mit R und RStudio, nutzen die Programme allerdings in der Umgebung von Jupyter.
 
-## Projekte und Ordnerstrukturen
+## Die Programmoberfläche von RStudio
 
-Einführung in die Logik von R, R Studio Server und das R Environment Einführung in Markdown (Quarto?) Basics der Befehlssyntax in Base R und Tidyverse (im Vergleich), ab dann aber alles in dplyr Laden von Daten und Importieren von anderen Datenformaten Einführung in das Datenmanagement: Projekte und Ordnerstrukturen auf dem PC Öffnen von Datensätzen, Laden von Daten, Importieren von anderen Datensätzen Speichern von Daten aus R in verschiedenen Formaten (Rda, csv etc.) 
+Grundsätzliches zur Oberfläche
 
-## Pakete als Erweiterung von R
+Schaltflächen
 
-Installieren von Paketen und Laden von Librarys (p_load) Vorschau: Datentypen und deren Charakteristika.
+Menüleiste
 
+::: callout-note
 
+## Weiterführende Literatur
+
+> 📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. [Link](https://link.springer.com/book/10.1007/978-3-658-34285-2)
+
+:::
