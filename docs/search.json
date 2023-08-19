@@ -816,7 +816,7 @@
     "href": "Skript_1.1.html#was-ist-rstudio",
     "title": "Einführung in R und RStudio",
     "section": "2 Was ist RStudio?",
-    "text": "2 Was ist RStudio?"
+    "text": "2 Was ist RStudio?\nRStudio ist eine Erweiterung von R und bietete den Nutzer*innen eine benutzerfreundlichere Programmoberfläche. So ermöglicht RStudio einen direkten Überblick über die geladenen Pakete, Datensätze und im Arbeitsverzeichnis gespeicherten Dateien. Zudem ermöglicht RStudio die Arbeit mit Skripten, Markdown und Quarto Dokumenten."
   },
   {
     "objectID": "Skript_1.1.html#das-interface-von-rstudio",
@@ -830,6 +830,6 @@
     "href": "Skript_1.1.html#die-programmoberfläche-von-rstudio",
     "title": "Einführung in R und RStudio",
     "section": "4 Die Programmoberfläche von RStudio",
-    "text": "4 Die Programmoberfläche von RStudio\nGrundsätzliches zur Oberfläche\nSchaltflächen\nMenüleiste\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link"
+    "text": "4 Die Programmoberfläche von RStudio\nInnerhalb von RStudio unterscheiden wir 4 Schaltflächen:\n\nIst der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können (siehe auch Markdown und Quarto)\nIst die Konsole. Dies ist der Bereich in welchem wir weiterhin oldschool R angezeigt bekommen. Dieser Bereich kann sehr hilfreich sein, wenn man kurz Befehle benötigt, welche nicht im Skript auftauchen sollen (beispielsweise eine kurze Hilfe zu Funktionen mittels ?)\nIn diesem Bereich findet sich alles zu den innerhalb von R geladenen Datensätzen. Unter Environment finden sich die Datensätze (Data), die Historie der genutzten Befehle (History), eine Schnittstelle zu Datenbanken (Connection) sowie R-interne Tutorials (Tutorial).\nIn diesem Bereich finden sich verschiedene Reiter, welche die Organisation der Arbeit mit R erleichtern. Unter File befinden sich alle innerhalb des Ordners oder Projektes befindlichen Dateien. Unter Plots kann man sich die in R erstellten Grafiken anzeigen lassen. Packages zeigt alle in R installierten Pakete an. Hier lassen sich mittels install auch neue Pakete installieren oder über updatedie aktuellen Pakete updaten. Bei Help können wir eine Hilfeseite aufrufen. Es kann wahlweise direkt innerhalb der Seite nach Hilfen gesucht werden oder mit dem Befehl ?Name der Funktion bzw. ??Name des Packages innerhalb der Konsole. Möchte man nach einem Befehl aus einem Paket suchen nutzt man den Suchbefehle?Name des Packages::Name der Funktion. Unter *Viewer finden sich gerenderte Dokumente (beispielsweise ein gerendertes Markdown oder Quarto Dokument) und unter Presentation** gerenderte Shiny-Dokumente.\n\nMenüleiste\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link"
   }
 ]

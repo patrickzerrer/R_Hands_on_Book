@@ -18,6 +18,9 @@ R ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen lä
 
 ## Was ist RStudio?
 
+RStudio ist eine Erweiterung von R und bietete den Nutzer*innen eine benutzerfreundlichere Programmoberfläche. So ermöglicht RStudio einen direkten Überblick über die geladenen Pakete, Datensätze und im Arbeitsverzeichnis gespeicherten Dateien. Zudem ermöglicht RStudio die Arbeit mit Skripten, Markdown und Quarto Dokumenten. 
+
+
 ## Installation von R und RStudio
 
 Möchtet ihr das Programm lokal auf eurem Rechner nutzen, müsst ihr zunächst die Programme R, RStudio und gegebenfalls RTools installieren. Alle Programme sind kostenlos online verfügbar und lassen sich auf allen gängigen Betriebssystemen installieren. Installiert zunächst [R](https://cran.uni-muenster.de/) und anschließend [RStudio](https://posit.co/download/rstudio-desktop/) und achtet darauf regelmäßig auf die aktuelle Version zu aktualisieren.
@@ -26,9 +29,18 @@ Innerhalb unseres Kurse arbeiten wir mit R und RStudio, nutzen die Programme all
 
 ## Die Programmoberfläche von RStudio
 
-Grundsätzliches zur Oberfläche
+Innerhalb von RStudio unterscheiden wir 4 Schaltflächen:
 
-Schaltflächen
+
+1) Ist der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können (siehe auch Markdown und Quarto)
+
+2) Ist die Konsole. Dies ist der Bereich in welchem wir weiterhin oldschool R angezeigt bekommen. Dieser Bereich kann sehr hilfreich sein, wenn man kurz Befehle benötigt, welche nicht im Skript auftauchen sollen (beispielsweise eine kurze Hilfe zu Funktionen mittels `?`) 
+
+3) In diesem Bereich findet sich alles zu den innerhalb von R geladenen Datensätzen. Unter Environment finden sich die Datensätze (**Data**), die Historie der genutzten Befehle (**History**), eine Schnittstelle zu Datenbanken (**Connection**) sowie R-interne Tutorials (**Tutorial**). 
+
+4) In diesem Bereich finden sich verschiedene Reiter, welche die Organisation der Arbeit mit R erleichtern. Unter **File** befinden sich alle innerhalb des Ordners oder Projektes befindlichen Dateien. Unter **Plots** kann man sich die in R erstellten Grafiken anzeigen lassen. **Packages** zeigt alle in R installierten Pakete an. Hier lassen sich mittels `install` auch neue Pakete installieren oder über `update`die aktuellen Pakete updaten. Bei **Help** können wir eine Hilfeseite aufrufen. Es kann wahlweise direkt innerhalb der Seite nach Hilfen gesucht werden oder mit dem Befehl `?Name der Funktion` bzw. `??Name des Packages` innerhalb der Konsole. Möchte man nach einem Befehl aus einem Paket suchen nutzt man den Suchbefehle` ?Name des Packages::Name der Funktion`. Unter *Viewer** finden sich gerenderte Dokumente (beispielsweise ein gerendertes Markdown oder Quarto Dokument) und unter **Presentation** gerenderte Shiny-Dokumente.  
+
+
 
 Menüleiste
 

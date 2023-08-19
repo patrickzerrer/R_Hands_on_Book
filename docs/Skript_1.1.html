@@ -150,12 +150,6 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Skript_1.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R-Studio</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Skript_1.3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Die Logik von Markdown und Quarto</span></a>
   </div>
@@ -409,6 +403,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="was-ist-rstudio" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="was-ist-rstudio"><span class="header-section-number">2</span> Was ist RStudio?</h2>
+<p>RStudio ist eine Erweiterung von R und bietete den Nutzer*innen eine benutzerfreundlichere Programmoberfläche. So ermöglicht RStudio einen direkten Überblick über die geladenen Pakete, Datensätze und im Arbeitsverzeichnis gespeicherten Dateien. Zudem ermöglicht RStudio die Arbeit mit Skripten, Markdown und Quarto Dokumenten.</p>
 </section>
 <section id="installation-von-r-und-rstudio" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="installation-von-r-und-rstudio"><span class="header-section-number">3</span> Installation von R und RStudio</h2>
@@ -417,8 +412,13 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="die-programmoberfläche-von-rstudio" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="die-programmoberfläche-von-rstudio"><span class="header-section-number">4</span> Die Programmoberfläche von RStudio</h2>
-<p>Grundsätzliches zur Oberfläche</p>
-<p>Schaltflächen</p>
+<p>Innerhalb von RStudio unterscheiden wir 4 Schaltflächen:</p>
+<ol type="1">
+<li><p>Ist der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können (siehe auch Markdown und Quarto)</p></li>
+<li><p>Ist die Konsole. Dies ist der Bereich in welchem wir weiterhin oldschool R angezeigt bekommen. Dieser Bereich kann sehr hilfreich sein, wenn man kurz Befehle benötigt, welche nicht im Skript auftauchen sollen (beispielsweise eine kurze Hilfe zu Funktionen mittels <code>?</code>)</p></li>
+<li><p>In diesem Bereich findet sich alles zu den innerhalb von R geladenen Datensätzen. Unter Environment finden sich die Datensätze (<strong>Data</strong>), die Historie der genutzten Befehle (<strong>History</strong>), eine Schnittstelle zu Datenbanken (<strong>Connection</strong>) sowie R-interne Tutorials (<strong>Tutorial</strong>).</p></li>
+<li><p>In diesem Bereich finden sich verschiedene Reiter, welche die Organisation der Arbeit mit R erleichtern. Unter <strong>File</strong> befinden sich alle innerhalb des Ordners oder Projektes befindlichen Dateien. Unter <strong>Plots</strong> kann man sich die in R erstellten Grafiken anzeigen lassen. <strong>Packages</strong> zeigt alle in R installierten Pakete an. Hier lassen sich mittels <code>install</code> auch neue Pakete installieren oder über <code>update</code>die aktuellen Pakete updaten. Bei <strong>Help</strong> können wir eine Hilfeseite aufrufen. Es kann wahlweise direkt innerhalb der Seite nach Hilfen gesucht werden oder mit dem Befehl <code>?Name der Funktion</code> bzw. <code>??Name des Packages</code> innerhalb der Konsole. Möchte man nach einem Befehl aus einem Paket suchen nutzt man den Suchbefehle<code>?Name des Packages::Name der Funktion</code>. Unter *Viewer<strong> finden sich gerenderte Dokumente (beispielsweise ein gerendertes Markdown oder Quarto Dokument) und unter </strong>Presentation** gerenderte Shiny-Dokumente.</p></li>
+</ol>
 <p>Menüleiste</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
