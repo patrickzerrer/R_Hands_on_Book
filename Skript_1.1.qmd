@@ -18,8 +18,7 @@ R ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen lä
 
 ## Was ist RStudio?
 
-RStudio ist eine Erweiterung von R und bietete den Nutzer*innen eine benutzerfreundlichere Programmoberfläche. So ermöglicht RStudio einen direkten Überblick über die geladenen Pakete, Datensätze und im Arbeitsverzeichnis gespeicherten Dateien. Zudem ermöglicht RStudio die Arbeit mit Skripten, Markdown und Quarto Dokumenten. 
-
+RStudio ist eine Erweiterung von R und bietete den Nutzer\*innen eine benutzerfreundlichere Programmoberfläche. So ermöglicht RStudio einen direkten Überblick über die geladenen Pakete, Datensätze und im Arbeitsverzeichnis gespeicherten Dateien. Zudem ermöglicht RStudio die Arbeit mit Skripten, Markdown und Quarto Dokumenten.
 
 ## Installation von R und RStudio
 
@@ -29,25 +28,38 @@ Innerhalb unseres Kurse arbeiten wir mit R und RStudio, nutzen die Programme all
 
 ## Die Programmoberfläche von RStudio
 
-Innerhalb von RStudio unterscheiden wir 4 Schaltflächen:
+### Schaltflächen
+
+Innerhalb von RStudio unterscheiden wir 4 Schaltflächen welche sich beliebig via Drag and Drop verschieben oder auch minimieren lassen.
+
+![die Programmoberfläche](Bilder/RStudio_Programmoberfläche.jpeg)
+
+1)  Ist der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können (siehe auch Markdown und Quarto)
+
+2)  Ist die Konsole. Dies ist der Bereich in welchem wir weiterhin oldschool R angezeigt bekommen. Dieser Bereich kann sehr hilfreich sein, wenn man kurz Befehle benötigt, welche nicht im Skript auftauchen sollen (beispielsweise eine kurze Hilfe zu Funktionen mittels `?`)
+
+3)  In diesem Bereich findet sich alles zu den innerhalb von R geladenen Datensätzen. Unter Environment finden sich die Datensätze (*Data*), die Historie der genutzten Befehle (*History*), eine Schnittstelle zu Datenbanken (*Connection*) sowie R-interne Tutorials (*Tutorial*).
+
+4)  In diesem Bereich finden sich verschiedene Reiter, welche die Organisation der Arbeit mit R erleichtern. Unter *File* befinden sich alle innerhalb des Ordners oder Projektes befindlichen Dateien. Unter *Plots* kann man sich die in R erstellten Grafiken anzeigen lassen. *Packages* zeigt alle in R installierten Pakete an. Hier lassen sich mittels *install* auch neue Pakete installieren oder über *update* die aktuellen Pakete updaten. Bei *Help* können wir eine Hilfeseite aufrufen. Es kann wahlweise direkt innerhalb der Seite nach Hilfen gesucht werden oder mit dem Befehl `?Name der Funktion` bzw. `??Name des Packages` innerhalb der Konsole. Möchte man nach einem Befehl aus einem Paket suchen nutzt man den Suchbefehle`?Name des Packages::Name der Funktion`. Unter *Viewer* finden sich gerenderte Dokumente (beispielsweise ein gerendertes Markdown oder Quarto Dokument) und unter *Presentation* gerenderte Shiny-Dokumente.
+
+### Menüleiste
 
 
-1) Ist der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können (siehe auch Markdown und Quarto)
+Zusätzlich zu den Schaltflächen findet sich oben links eine Menüleiste:
 
-2) Ist die Konsole. Dies ist der Bereich in welchem wir weiterhin oldschool R angezeigt bekommen. Dieser Bereich kann sehr hilfreich sein, wenn man kurz Befehle benötigt, welche nicht im Skript auftauchen sollen (beispielsweise eine kurze Hilfe zu Funktionen mittels `?`) 
+- Unter *File* können neue Dateien erstellt, geöffnet und gespeichert werden. 
+- *Edit* bietet Möglichkeiten der Dateibearbeitung (bspw. Kopieren, Ausschneiden, Rückgängig etc.) falls ihr keine Short-Cuts nutzen wollt. 
+- *Code* gibt eine Übersicht über Funktionen innerhalb des Markdown-Dokumentes (bspw. Codechunks einfügen). 
+- Unter *View* können die einzelnen Schaltflächen und deren Aufteilung geändert werden. Wahlweise geht dies auch via Drag & Drop. 
+- *Plots* vereinfacht den Umgang mit in r erstellten Grafiken. Wahlweise könnt ihr hier auch den Reiter Plots in Schaltfläche 4 nutzen. 
+- *Session* hier kann eine R-Session neu gestartet oder beendet werden (siehe auch [1.6 Die Session](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_1.4.html#die-session)). 
+- *Build*, *Debug* und *Profile* beinhaltet Sonderanwendungen, wie beispielsweise das [Debugging von Funktionen](https://support.posit.co/hc/en-us/articles/200713843) oder Fragen nach der [Speed-Optimierung von R-Code](https://rstudio.github.io/profvis/). 
+- *Tools* . 
+- Auch der Reiter *Help* kann sehr hilfreich sein. Hier finden sich eine Hilfeseite (siehe auch Reiter Help in Schaltfläche 4), Möglichkeiten der besseren Zugänglichkeit (*Accessibility*), *Cheat Sheets* für die Arbeit mit R und erneut eine Übersicht über Shortcuts für die Arbeit mit R.   
 
-3) In diesem Bereich findet sich alles zu den innerhalb von R geladenen Datensätzen. Unter Environment finden sich die Datensätze (**Data**), die Historie der genutzten Befehle (**History**), eine Schnittstelle zu Datenbanken (**Connection**) sowie R-interne Tutorials (**Tutorial**). 
-
-4) In diesem Bereich finden sich verschiedene Reiter, welche die Organisation der Arbeit mit R erleichtern. Unter **File** befinden sich alle innerhalb des Ordners oder Projektes befindlichen Dateien. Unter **Plots** kann man sich die in R erstellten Grafiken anzeigen lassen. **Packages** zeigt alle in R installierten Pakete an. Hier lassen sich mittels `install` auch neue Pakete installieren oder über `update`die aktuellen Pakete updaten. Bei **Help** können wir eine Hilfeseite aufrufen. Es kann wahlweise direkt innerhalb der Seite nach Hilfen gesucht werden oder mit dem Befehl `?Name der Funktion` bzw. `??Name des Packages` innerhalb der Konsole. Möchte man nach einem Befehl aus einem Paket suchen nutzt man den Suchbefehle` ?Name des Packages::Name der Funktion`. Unter *Viewer** finden sich gerenderte Dokumente (beispielsweise ein gerendertes Markdown oder Quarto Dokument) und unter **Presentation** gerenderte Shiny-Dokumente.  
-
-
-
-Menüleiste
 
 ::: callout-note
-
 ## Weiterführende Literatur
 
 > 📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. [Link](https://link.springer.com/book/10.1007/978-3-658-34285-2)
-
 :::
