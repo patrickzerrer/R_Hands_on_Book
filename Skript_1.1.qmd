@@ -32,7 +32,7 @@ Innerhalb unseres Kurse arbeiten wir mit R und RStudio, nutzen die Programme all
 
 Innerhalb von RStudio unterscheiden wir 4 Schaltflächen welche sich beliebig via Drag and Drop verschieben oder auch minimieren lassen.
 
-![die Programmoberfläche](Bilder/RStudio_Programmoberfläche.jpeg)
+![ ](Bilder/RStudio_Programmoberfläche.jpg)
 
 1)  Ist der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können (siehe auch Markdown und Quarto)
 
@@ -44,8 +44,9 @@ Innerhalb von RStudio unterscheiden wir 4 Schaltflächen welche sich beliebig vi
 
 ### Menüleiste
 
-
 Zusätzlich zu den Schaltflächen findet sich oben links eine Menüleiste:
+
+![ ](Bilder/Menüleiste.jpg)
 
 - Unter *File* können neue Dateien erstellt, geöffnet und gespeichert werden. 
 - *Edit* bietet Möglichkeiten der Dateibearbeitung (bspw. Kopieren, Ausschneiden, Rückgängig etc.) falls ihr keine Short-Cuts nutzen wollt. 
