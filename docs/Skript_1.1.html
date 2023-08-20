@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -366,6 +400,15 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#schaltflächen" id="toc-schaltflächen" class="nav-link" data-scroll-target="#schaltflächen"><span class="header-section-number">4.1</span> Schaltflächen</a></li>
   <li><a href="#menüleiste" id="toc-menüleiste" class="nav-link" data-scroll-target="#menüleiste"><span class="header-section-number">4.2</span> Menüleiste</a></li>
   </ul></li>
+  <li><a href="#die-grundlogik-von-r" id="toc-die-grundlogik-von-r" class="nav-link" data-scroll-target="#die-grundlogik-von-r"><span class="header-section-number">5</span> Die Grundlogik von R</a>
+  <ul class="collapse">
+  <li><a href="#kurz-exkurs-das-tidyverse" id="toc-kurz-exkurs-das-tidyverse" class="nav-link" data-scroll-target="#kurz-exkurs-das-tidyverse"><span class="header-section-number">5.1</span> Kurz-Exkurs: das tidyverse</a></li>
+  </ul></li>
+  <li><a href="#pakete" id="toc-pakete" class="nav-link" data-scroll-target="#pakete"><span class="header-section-number">6</span> Pakete</a>
+  <ul class="collapse">
+  <li><a href="#die-installation-von-paketen" id="toc-die-installation-von-paketen" class="nav-link" data-scroll-target="#die-installation-von-paketen"><span class="header-section-number">6.1</span> Die Installation von Paketen</a></li>
+  <li><a href="#das-laden-von-paketen" id="toc-das-laden-von-paketen" class="nav-link" data-scroll-target="#das-laden-von-paketen"><span class="header-section-number">6.2</span> Das Laden von Paketen</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -420,12 +463,10 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="4.1" class="anchored" data-anchor-id="schaltflächen"><span class="header-section-number">4.1</span> Schaltflächen</h3>
 <p>Innerhalb von RStudio unterscheiden wir 4 Schaltflächen welche sich beliebig via Drag and Drop verschieben oder auch minimieren lassen.</p>
 <p><img src="Bilder/RStudio_Programmoberfläche.jpg" class="img-fluid"></p>
-<ol type="1">
-<li><p>Ist der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können (siehe auch Markdown und Quarto)</p></li>
-<li><p>Ist die Konsole. Dies ist der Bereich in welchem wir weiterhin oldschool R angezeigt bekommen. Dieser Bereich kann sehr hilfreich sein, wenn man kurz Befehle benötigt, welche nicht im Skript auftauchen sollen (beispielsweise eine kurze Hilfe zu Funktionen mittels <code>?</code>)</p></li>
-<li><p>In diesem Bereich findet sich alles zu den innerhalb von R geladenen Datensätzen. Unter Environment finden sich die Datensätze (<em>Data</em>), die Historie der genutzten Befehle (<em>History</em>), eine Schnittstelle zu Datenbanken (<em>Connection</em>) sowie R-interne Tutorials (<em>Tutorial</em>).</p></li>
-<li><p>In diesem Bereich finden sich verschiedene Reiter, welche die Organisation der Arbeit mit R erleichtern. Unter <em>File</em> befinden sich alle innerhalb des Ordners oder Projektes befindlichen Dateien. Unter <em>Plots</em> kann man sich die in R erstellten Grafiken anzeigen lassen. <em>Packages</em> zeigt alle in R installierten Pakete an. Hier lassen sich mittels <em>install</em> auch neue Pakete installieren oder über <em>update</em> die aktuellen Pakete updaten. Bei <em>Help</em> können wir eine Hilfeseite aufrufen. Es kann wahlweise direkt innerhalb der Seite nach Hilfen gesucht werden oder mit dem Befehl <code>?Name der Funktion</code> bzw. <code>??Name des Packages</code> innerhalb der Konsole. Möchte man nach einem Befehl aus einem Paket suchen nutzt man den Suchbefehle<code>?Name des Packages::Name der Funktion</code>. Unter <em>Viewer</em> finden sich gerenderte Dokumente (beispielsweise ein gerendertes Markdown oder Quarto Dokument) und unter <em>Presentation</em> gerenderte Shiny-Dokumente.</p></li>
-</ol>
+<p><strong>1</strong> Ist der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können (siehe auch Markdown und Quarto)</p>
+<p><strong>2</strong> Ist die Konsole. Dies ist der Bereich in welchem wir weiterhin oldschool R angezeigt bekommen. Dieser Bereich kann sehr hilfreich sein, wenn man kurz Befehle benötigt, welche nicht im Skript auftauchen sollen (beispielsweise eine kurze Hilfe zu Funktionen mittels <code>?</code>)</p>
+<p><strong>3</strong> In diesem Bereich findet sich alles zu den innerhalb von R geladenen Datensätzen. Unter Environment finden sich die Datensätze (<em>Data</em>), die Historie der genutzten Befehle (<em>History</em>), eine Schnittstelle zu Datenbanken (<em>Connection</em>) sowie R-interne Tutorials (<em>Tutorial</em>).</p>
+<p><strong>4</strong> In diesem Bereich finden sich verschiedene Reiter, welche die Organisation der Arbeit mit R erleichtern. Unter <em>File</em> befinden sich alle innerhalb des Ordners oder Projektes befindlichen Dateien. Unter <em>Plots</em> kann man sich die in R erstellten Grafiken anzeigen lassen. <em>Packages</em> zeigt alle in R installierten Pakete an. Hier lassen sich mittels <em>install</em> auch neue Pakete installieren oder über <em>update</em> die aktuellen Pakete updaten. Bei <em>Help</em> können wir eine Hilfeseite aufrufen. Es kann wahlweise direkt innerhalb der Seite nach Hilfen gesucht werden oder mit dem Befehl <code>?Name der Funktion</code> bzw. <code>??Name des Packages</code> innerhalb der Konsole. Möchte man nach einem Befehl aus einem Paket suchen nutzt man den Suchbefehle<code>?Name des Packages::Name der Funktion</code>. Unter <em>Viewer</em> finden sich gerenderte Dokumente (beispielsweise ein gerendertes Markdown oder Quarto Dokument) und unter <em>Presentation</em> gerenderte Shiny-Dokumente.</p>
 </section>
 <section id="menüleiste" class="level3" data-number="4.2">
 <h3 data-number="4.2" class="anchored" data-anchor-id="menüleiste"><span class="header-section-number">4.2</span> Menüleiste</h3>
@@ -439,9 +480,72 @@ ul.task-list li input[type="checkbox"] {
 <li><em>Plots</em> vereinfacht den Umgang mit in r erstellten Grafiken. Wahlweise könnt ihr hier auch den Reiter Plots in Schaltfläche 4 nutzen.</li>
 <li><em>Session</em> hier kann eine R-Session neu gestartet oder beendet werden (siehe auch <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_1.4.html#die-session">1.6 Die Session</a>).</li>
 <li><em>Build</em>, <em>Debug</em> und <em>Profile</em> beinhaltet Sonderanwendungen, wie beispielsweise das <a href="https://support.posit.co/hc/en-us/articles/200713843">Debugging von Funktionen</a> oder Fragen nach der <a href="https://rstudio.github.io/profvis/">Speed-Optimierung von R-Code</a>.</li>
-<li><em>Tools</em> .</li>
+<li><em>Tools</em> hat viele hilfreiche Funktionen. Hier können unter anderem Pakete installiert und hilfreiche Keyboard Shortcuts ausgegeben werden. Am bedeutsamsten ist hier jedoch der Bereich Global Options, in welchem unter anderem grundlegende Einstellungen zum Speicherort von R und den Paketen, zur Aufteilung und Aussehen von RStudio und zur Funktionalität von R Markdown getroffen werden können.<br>
+</li>
 <li>Auch der Reiter <em>Help</em> kann sehr hilfreich sein. Hier finden sich eine Hilfeseite (siehe auch Reiter Help in Schaltfläche 4), Möglichkeiten der besseren Zugänglichkeit (<em>Accessibility</em>), <em>Cheat Sheets</em> für die Arbeit mit R und erneut eine Übersicht über Shortcuts für die Arbeit mit R.</li>
 </ul>
+</section>
+</section>
+<section id="die-grundlogik-von-r" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="die-grundlogik-von-r"><span class="header-section-number">5</span> Die Grundlogik von R</h2>
+<p>Wie bereits zuvor erwähnt ist R eine Programmiersprache. Das bedeutet, dass alle Schritte in R, vom Datenmanagement bis zu komplizierteren statistischen Analysen, mit Befehlen bzw. Funktionen erfolgen. Grundsätzlich funktionieren Befehle so, dass zunächst der Befehl erfolgt und in Klammern anschließend worauf sich dieser Befehl bezieht.</p>
+<p>Dabei können sich manche Befehle auf den gesamten Datensatz beziehen (etwa der Befehl <code>str</code> der die Struktur des Datensatzes anzeigt) oder auch jeweils nur auf einzelne Variablen (beispielsweise wenn wir den Mittelwert einer einzelnen Variablen des Datensatzes ermitteln wollen).</p>
+<p>Für den Befehl <code>str()</code> sieht die Code-Zeile bei einem Datensatz names <code>data</code> wie folgt aus:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">str</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Für die Berechnung des Mittelwertes mit der Funktion <code>mean()</code> müssen wir R ebenfalls den Datensatz nennen, auf welchen wir uns beziehen wollen (💡 Fun-Fact, R “denkt nicht mit”, also auch wenn für euch klar ist, dass ihr doch die gesamte Zeit mit dem selben Datensatz arbeitet, muss R das immer wieder gesagt bekommen). Zusätzlich müssen wir die Variable angeben, von welcher der Mittelwert berechnet werden soll. Datensatz und Variable können wir dabei mit einem Dollarzeichen <code>$</code> verbinden, dass sagt R, dass es sich um die Variable aus dem jeweiligen Datensatz handelt. Möchten wir nun den Mittelwert der Variablen <code>Alter</code> aus dem Datensatz <code>data</code> berechnen, sieht der Code wie folgt aus:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">mean</span>(data<span class="sc">$</span>Alter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Dabei haben die meisten Funktionen noch weitere Zusatzoptionen, welche wir nutzen können. Bei dem Befehl <code>mean</code> können wir beispielsweise angeben, ob fehlende Werte in die Berechnung mit einfließen sollen oder nicht. Dies geschieht mit den Zusatz <code>na.rm = TRUE</code> bzw. <code>na.rm = FALSE</code>. <code>Na.rm</code> steht in diesem Fall für NA (=not available, fehlende Fälle) und remove (also entfernen), fragt demnach ob fehlende Fälle aus der Berechnung ausgeschlossen werden sollen. Dabei ist die <em>default-Option</em>, also die Option die in dem Befehl voreingestellt ist, dass fehlende Werte nicht aus der Berechnung ausgeschlossen werden (<code>na.rm=F</code>). Die meisten Befehle haben bestimmte defaults, da dies diese den Normalfall der Nutzung beschreiben und uns beim Programmieren Schreibaufwand ersparen (möchten wir die defaults nutzen, müssen wir immerhin nichts zusätzliches in der Funktion angeben). Allerdings können wir hier auch immer die anderen Optionen nutzen, wir müssen dies nur in unserem Befehl angeben:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">mean</span>(data<span class="sc">$</span>Alter, <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Hier haben wir auch bereits eine weitere Funktionalität von R kennengelernt, nämlich die Operationalisierung einzelner Parameter über <code>T</code> (<code>TRUE</code>) und <code>F</code> (<code>FALSE</code>). Doch woher weiß ich nun als neuer Nutzer, welche Optionen mit bei einzelnen Befehlen zur Verfügung stehen?</p>
+<p>Hier hilf ein Blick in die Hilfeseite, welche wir beispielsweise für den Mittelwert mit dem Befehl <code>?mean()</code> aufrufen können. Für jede Funktion stehen - wie oben bereits erwähnt - <em>Hilfeseiten</em> zur Verfügung. Diese beinhalten zunächst eine kurze Beschreibung <em>Description</em>, anschließend einen Überblick zur Nutzung <em>Usage</em> sowie dem <em>Default</em> des Befehles. Anschließend finden sich die <em>Arguments</em>, dies sind die Möglichkeiten, wie wir die Funktion nutzen können und welche zusätzlichen Optionen zur Verfügung stehen. Oftmals finden sich zudem weitere Erklärungen und Beispiele der Nutzung.</p>
+<section id="kurz-exkurs-das-tidyverse" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="kurz-exkurs-das-tidyverse"><span class="header-section-number">5.1</span> Kurz-Exkurs: das tidyverse</h3>
+<p>In R selbst findet sich eine Vielzahl von Befehlen. Zusätzlich wird R von den Nutzern immer weiter entwickelt und es kommen neue Funktionen in Form von Paketen hinzu. Eines der meist genutzten Pakete(-universen) stellt dabei das <a href="https://www.tidyverse.org/">tidyverse</a> dar. Mit den Befehlen und Funktionen dieses Paketes kommt eine etwas andere Programmiersprache, welche uns jedoch die Arbeit mit R erleichtert. Gerade auch bei Fragen des Datenmanagementes ist das tidyverse hilfreich, denn hier kommt ein zweiter Fun-Fact über R:💡 R kann nicht nur manchmal etwas dumm sein (wir erinnern uns, es denkt nicht mit), es ist auch recht vergesslich. Wir haben oben bereits gelernt, dass wir in Befehlen immer den Datensatz und die Variable spezifizieren müssen. Dies stellt kein Problem bei einzelnen Befehlen dar, ist jedoch bei einer Vielzahl von Befehlen etwas nervig. Hier kommt uns die tidyverse Logik zu Nutze, in welcher einmal zu Beginn des Dokumentes der Datensatz spezifziert wird und anschließend alle weiteren Schritte durch eine Pipe <code>%&gt;%</code> verbunden werden. Die Pipe (Shortcut Windows: Ctrl + Shift + M; MAC: Cmd + Shift + M) bedeutet so viel wie “und dann”. Also im Prinzip sagen wir R, nehme diesen Datensatz und dann mache die folgenden Dinge, wobei wir so viele Schritte wie wir möchten jeweils mit Pipes verbinden können. Wir nutzen in unseren Skripten hauptsächlich die tidyverse-Logik, erklären diese daher grundlegender in Kapitel <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.1.html">3.1</a>, wenn wir uns mit den ersten Schritten des Datenmanagements beschäftigen.</p>
+</section>
+</section>
+<section id="pakete" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="pakete"><span class="header-section-number">6</span> Pakete</h2>
+<p>R-Pakete sind Erweiterungen, die Funktionen, Daten, Code und dessen Dokumentation enthalten und uns damit unsere Arbeit deutlich erleichtern. Diese erweiteren die Funktionen, die bereits in der Standardausführung von R (bekannt als base R) gegeben sind.</p>
+<section id="die-installation-von-paketen" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="die-installation-von-paketen"><span class="header-section-number">6.1</span> Die Installation von Paketen</h3>
+<p>Pakete können wahlweise R-intern über <em>CRAN</em> (das steht für <em>Comprehensive R Archive Network</em> und ist das zentrale Software-Repository) oder direkt von GitHub (für sehr neue Pakete, welche noch nicht auf CRAN sind) installiert werden. Im Normalfall installieren wir jedoch direkt von CRAN, da hier eine Vielzahl von Paketen und Funktionen vorhanden sind und die Installation sehr simpel ist.</p>
+<p>Wenn wir ein R-Paket von CRAN installieren möchten nutzen wir die Funktion <code>install.packages()</code>, in deren Klammer wir in Anführungszeichen den Namen des zu installierenden Pakets setzen. Für das Paket <code>tidyverse</code> wäre der Befehl wie folgt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Beim Ausführen des Codes gibt R in der Konsole Auskunft über die verschiedenen Installationsschritte sowie über den (Mis-)Erfolg der Installation. Alternativ könnt ihr auch über das RStudio Interface Pakete installieren. Hierfür geht ihr in der rechten unteren Ecke auf den Reiter <code>Packages</code> und wählt den Buttion <code>Install</code> aus. In dem sich öffnenen Fenster gebt ihr den Namen des von euch gewünschten Pakets ein und bestätigt die Anwendung wiederum mit <code>Install</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Skript_1_4_Screenshot4.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Screenshot RStudio</figcaption>
+</figure>
+</div>
+<p>Einige der Pakete, die wir im Rahmen des Kurses verwenden sind bereits in der R Cloud vorinstalliert und müssen nicht mehr von euch eigenhändig installiert werden. Grundsätzlich ist es jedoch immer ratsam, einmal zu checken, ob die Pakete in der aktuellen Version installiert sind, da ansonsten die Funktionen der Pakete nicht funktionieren können.</p>
+</section>
+<section id="das-laden-von-paketen" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="das-laden-von-paketen"><span class="header-section-number">6.2</span> Das Laden von Paketen</h3>
+<p>Im vorherigen Schritt haben wir bereits die von uns benötigten Pakete installiert, jetzt müssen wir R nur noch sagen, dass wir diese Pakete für die aktuelle Session nutzen möchten. Ihr könnt euch das so vorstellen, dass ihr die benötigten Pakete <em>aktiv</em> schaltet. Dies geschieht mit dem <code>library</code> Befehl (Achtung, hier benötigen wir im Gegensatz zum <code>install.packages</code> Befehl keine Anführungszeichen):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Wir nutzen in diesem Kurs wiederum <code>pacman</code>, um automatisch mehrere Pakete installieren und laden zu können. Dafür installieren und laden wir einmalig das Paket <code>pacman</code> und können anschließend mit der Funktion <code>p_load</code> die von euch in der Klammer angegebenen Pakete installieren und laden:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ansonsten habt ihr noch die Möglichkeit die Pakete händisch über das R Studio Interface zu aktiveren, was ich persönlich ab einer gewissen Anzahl von benötigten Paketen eher nervig finde. Nichtsdestotrotz könnt ihr hierfür in der rechten unteren Ecke des Interfaces auf den Reiter <code>Packages</code> gehen und in der unteren Liste das gewünschte Paket durch das Setzen eines Hakens auswählen.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Skript_1_4_Screenshot5.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Screenshot RStudio</figcaption>
+</figure>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
