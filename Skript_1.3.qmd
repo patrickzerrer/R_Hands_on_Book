@@ -8,42 +8,78 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+execute: 
+  echo: fenced
 ---
 
 ![Artwork by @allison_horst](Bilder/R%20Markdown%20Grafik.png)
 
-## R Markdown
+## R Markdown und Quarto
 
-In diesem Kurs verwenden wir R Markdown bzw. R Quarto Dokumente. Diese haben den Vorteil, dass wir innerhalb eines Dokumentes Codeteile (sogenannte *Code Chunks*) und Text kombinieren können. Dies erlaubt die Dokumentation und Reproduzierbarkeit statistischer Auswertungen. Markdown bzw. Quarto-Dokumente bestehen aus drei Bestandteilen
+In diesem Kurs verwenden wir R Markdown bzw. R Quarto Dokumente. Diese haben den Vorteil, dass wir innerhalb eines Dokumentes Codeteile (sogenannte *Code Chunks*) und Text kombinieren können. Dies erlaubt die Dokumentation und Reproduzierbarkeit statistischer Auswertungen.
 
+Bei [Quarto](https://quarto.org/) handelt es sich im Prinzip um die neuere Variante von RMarkdown Dokumenten. Diese beinhalten alle Funktionalitäten von Markdown-Dokumenten (sind genauso aufgebaut und lassen sich normal rendern), aber bieten zusätzlich die Möglichkeit weitere Programmiersprachen (wie Python, Julia und Javascript) und interaktive Elemente (Widgets und Shiny-Anwendungen). Markdown-Dokumente weisen die Endung `.rmd` auf wohingegen Quarto-Dokumente den Endung `.qmd` haben. Beide Dokumenttypen können für unseren Kurszweck gleichwertig genutzt werden. Lediglich bei der Arbeit mit interaktiven, multimedialen oder mehrsprachigen Dokumenten ist Quarto besser geeignet als Markdown.
 
+## Installation der Programme
+
+Markdown kann innerhalb von R mit dem Befehl `install.packages("Rmarkdown")` installiert und anschließend geladen werden. Da es sich bei Quarto nicht um ein Package, sondern ein eigenes Interface handelt, muss das Programm extern [heruntergeladen](https://quarto.org/docs/get-started/) und auf dem Rechner installiert werden.
+
+## Bestehende Dokument laden
+
+## Neue Dokumente anlegen
+
+## Übergreifende Menüpunkte
+
+![Dokumentmenüleistet](Bilder/Quartomenü.jpg)
+
+## Überblick über die Dokumentkomponenten
+
+Sowohl Markdown, als auch Quarto-Dokumente bestehen aus drei Bestandteilen: dem YAML-Header, Textbereichen und Codebereichen.
 
 ### YAML-Header
 
+Innerhalb des YAML Headers, welcher jeweils von `---` umgeben ist, legen wir die Dokumentstruktur fest.
+
+![YAML Header in einem Quarto Dokument](Bilder/YAMLHeader.jpg)
+
+Dies beinhaltet beispielsweise den Titel des Dokumentes `title:`, die Autoren `author`, sowie Spezifikationen zur Dokumentstruktur, wie beispielsweise das Outputformat `format:` oder auch in Quarto Spezifikationen zum Umgang mit den Codechunks `output: echo = TRUE` auf Gesamtdokumentebene.
+
 ### Text
+
+In Markdown und Quarto-Dokumenten können wir Text einbinden und diesen beliebig formatieren. Dazu können wir wahlweise die Source-Variante oder die Visual-Variante nutzen. In der Source-Variante variieren wir Text mittels Syntax. Typische Syntaxbefehle sind:
+
+-   \**kursiv*\*: jeweils einen Stern vor und nach einem Wort um dieses kursiv zu schreiben
+-   \*\***fett**\*\*: jeweils zwei Sterne vor und nach einem Wort um dieses fett zu schreiben
+-   #: Rauten für Überschriften, wobei eine Raute die erste Überschrift signalisiert, zwei Rauten die zweite usw.
+-   \![Bildunterschrift\](Link des Bildes): um Bilder einzufügen
+-   \[Linktext\](url): Um Links einzufügen
+
+Möchten wir übrigens die oben genutzten Symbole im Text nutzen, so können wir mit einem  vor dem jeweiligen Symbol die Formatierung umgehen.
+
+Wahlweise können wir auch den Visual-Modus nutzen, indem wir oben in der Dokumentleiste von `Source`auf `Visual` umstellen. In diesem Modus erhalten wir ein Word-ähnliches Interface und können Formatoptionen durch Klicken auf die jeweilige Formatierung umsetzen:
+
+![Formatierungsoptionen im Visual Modus](Bilder/visualmode.jpg)
+
 
 ### Code Chunks
 
+```{r}
 
-💡
+# Dies ist ein Code Chunk
 
-## Quarto
+```
 
-Bei [Quarto](https://quarto.org/) handelt es sich im Prinzip um die neuere Variante von RMarkdown Dokumenten. Diese beinhalten alle Funktionalitäten von Markdown-Dokumenten (sind genauso aufgebaut und lassen sich normal rendern), aber bieten zusätzlich die Möglichkeit weitere Programmiersprachen (wie Python, Julia und Javascript) und interaktive Elemente (Widgets und Shiny-Anwendungen). 
+```{r, echo = T}
 
+# Dies ist ein Code Chunk
 
+```
 
+Wahlweise können wir diese Optionen auch für das Gesamtdokument im YAML-Header festlegen. Dafür nutzen wir den Zusatz `execute:` und geben anschließend alle unsere Dokumentoptionen (für einen Überblick siehe [hier](https://quarto.org/docs/computations/execution-options.html)) an.
 
-## Getting Started mit Markdown und Quarto
+![Codeoptionen im Quarto Header](Bilder/YAMLOptions.jpg)
 
-### Installation 
-
-### Dokument laden
-
-### Neues Dokument anlegen
-
-
-
+*Achtung*: wir nutzen hier `:` statt `=` und schreiben `true` und `false` statt `TRUE`/`T` und `FALSE`/`F`.
 
 ## Literatur
 

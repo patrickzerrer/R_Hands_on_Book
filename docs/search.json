@@ -731,8 +731,8 @@
     "objectID": "Skript_1.3.html#literatur",
     "href": "Skript_1.3.html#literatur",
     "title": "Die Logik von Markdown und Quarto",
-    "section": "4 Literatur",
-    "text": "4 Literatur\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link\n\n\n📖 Xie, Y., Allaire, J. J., & Grolemund, G. (2020). R markdown: The definitive guide. Chapman; Hall/CRC Link\n\n\n📖 Xie, Y., Dervieux, C., & Riederer, E. (2020). R markdown cookbook. Chapman and Hall/CRC Link\n\n\n📖 Allaire, J. J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins, A., Wickham, H., Cheng, J., Chang, W., & Iannone, R. (2020a). rmarkdown: Dynamic documents for r. Link"
+    "section": "7 Literatur",
+    "text": "7 Literatur\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link\n\n\n📖 Xie, Y., Allaire, J. J., & Grolemund, G. (2020). R markdown: The definitive guide. Chapman; Hall/CRC Link\n\n\n📖 Xie, Y., Dervieux, C., & Riederer, E. (2020). R markdown cookbook. Chapman and Hall/CRC Link\n\n\n📖 Allaire, J. J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins, A., Wickham, H., Cheng, J., Chang, W., & Iannone, R. (2020a). rmarkdown: Dynamic documents for r. Link"
   },
   {
     "objectID": "Autoren.html#katharina-maubach",
@@ -866,5 +866,47 @@
     "title": "Die Logik von Markdown und Quarto",
     "section": "3 Getting Started mit Markdown und Quarto",
     "text": "3 Getting Started mit Markdown und Quarto\n\n3.1 Installation\n\n\n3.2 Dokument laden\n\n\n3.3 Neues Dokument anlegen"
+  },
+  {
+    "objectID": "Skript_1.3.html#r-markdown-und-quarto",
+    "href": "Skript_1.3.html#r-markdown-und-quarto",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "1 R Markdown und Quarto",
+    "text": "1 R Markdown und Quarto\nIn diesem Kurs verwenden wir R Markdown bzw. R Quarto Dokumente. Diese haben den Vorteil, dass wir innerhalb eines Dokumentes Codeteile (sogenannte Code Chunks) und Text kombinieren können. Dies erlaubt die Dokumentation und Reproduzierbarkeit statistischer Auswertungen.\nBei Quarto handelt es sich im Prinzip um die neuere Variante von RMarkdown Dokumenten. Diese beinhalten alle Funktionalitäten von Markdown-Dokumenten (sind genauso aufgebaut und lassen sich normal rendern), aber bieten zusätzlich die Möglichkeit weitere Programmiersprachen (wie Python, Julia und Javascript) und interaktive Elemente (Widgets und Shiny-Anwendungen). Markdown-Dokumente weisen die Endung .rmd auf wohingegen Quarto-Dokumente den Endung .qmd haben. Beide Dokumenttypen können für unseren Kurszweck gleichwertig genutzt werden. Lediglich bei der Arbeit mit interaktiven, multimedialen oder mehrsprachigen Dokumenten ist Quarto besser geeignet als Markdown."
+  },
+  {
+    "objectID": "Skript_1.3.html#installation-der-programme",
+    "href": "Skript_1.3.html#installation-der-programme",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "2 Installation der Programme",
+    "text": "2 Installation der Programme\nMarkdown kann innerhalb von R mit dem Befehl install.packages(\"Rmarkdown\") installiert und anschließend geladen werden. Da es sich bei Quarto nicht um ein Package, sondern ein eigenes Interface handelt, muss das Programm extern heruntergeladen und auf dem Rechner installiert werden."
+  },
+  {
+    "objectID": "Skript_1.3.html#bestehende-dokument-laden",
+    "href": "Skript_1.3.html#bestehende-dokument-laden",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "3 Bestehende Dokument laden",
+    "text": "3 Bestehende Dokument laden"
+  },
+  {
+    "objectID": "Skript_1.3.html#neue-dokumente-anlegen",
+    "href": "Skript_1.3.html#neue-dokumente-anlegen",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "4 Neue Dokumente anlegen",
+    "text": "4 Neue Dokumente anlegen"
+  },
+  {
+    "objectID": "Skript_1.3.html#überblick-über-die-dokumentkomponenten",
+    "href": "Skript_1.3.html#überblick-über-die-dokumentkomponenten",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "6 Überblick über die Dokumentkomponenten",
+    "text": "6 Überblick über die Dokumentkomponenten\nSowohl Markdown, als auch Quarto-Dokumente bestehen aus drei Bestandteilen: dem YAML-Header, Textbereichen und Codebereichen.\n\n6.1 YAML-Header\nInnerhalb des YAML Headers, welcher jeweils von --- umgeben ist, legen wir die Dokumentstruktur fest.\n\n\n\nYAML Header in einem Quarto Dokument\n\n\nDies beinhaltet beispielsweise den Titel des Dokumentes title:, die Autoren author, sowie Spezifikationen zur Dokumentstruktur, wie beispielsweise das Outputformat format: oder auch in Quarto Spezifikationen zum Umgang mit den Codechunks output: echo = TRUE auf Gesamtdokumentebene.\n\n\n6.2 Text\nIn Markdown und Quarto-Dokumenten können wir Text einbinden und diesen beliebig formatieren. Dazu können wir wahlweise die Source-Variante oder die Visual-Variante nutzen. In der Source-Variante variieren wir Text mittels Syntax. Typische Syntaxbefehle sind:\n\n*kursiv*: jeweils einen Stern vor und nach einem Wort um dieses kursiv zu schreiben\n**fett**: jeweils zwei Sterne vor und nach einem Wort um dieses fett zu schreiben\n#: Rauten für Überschriften, wobei eine Raute die erste Überschrift signalisiert, zwei Rauten die zweite usw.\n![Bildunterschrift](Link des Bildes): um Bilder einzufügen\n[Linktext](url): Um Links einzufügen\n\nMöchten wir übrigens die oben genutzten Symbole im Text nutzen, so können wir mit einem  vor dem jeweiligen Symbol die Formatierung umgehen.\nWahlweise können wir auch den Visual-Modus nutzen. In diesem erhalten wir ein Word-ähnliches Interface und können Formatoptionen durch Klicken auf die jeweilige Formatierung umsetzen:\n\n\n\nFormatierungsoptionen im Visual Modus\n\n\n\n\n6.3 Code Chunks\n\n```{r}\n# Dies ist ein Code Chunk\n```\n\n\n```{r, echo = T}\n# Dies ist ein Code Chunk\n```\n\nWahlweise können wir diese Optionen auch für das Gesamtdokument im YAML-Header festlegen. Dafür nutzen wir den Zusatz execute: und geben anschließend alle unsere Dokumentoptionen (für einen Überblick siehe hier) an.\n\n\n\nCodeoptionen im Header\n\n\nAchtung: wir nutzen hier : statt = und schreiben true und false statt TRUE/T und FALSE/F."
+  },
+  {
+    "objectID": "Skript_1.3.html#übergreifende-menüpunkte",
+    "href": "Skript_1.3.html#übergreifende-menüpunkte",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "5 Übergreifende Menüpunkte",
+    "text": "5 Übergreifende Menüpunkte\n\n\n\nDokumentmenüleistet"
   }
 ]

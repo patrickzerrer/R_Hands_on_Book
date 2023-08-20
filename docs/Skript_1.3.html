@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -358,20 +392,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link active" data-scroll-target="#r-markdown"><span class="header-section-number">1</span> R Markdown</a>
+  <li><a href="#r-markdown-und-quarto" id="toc-r-markdown-und-quarto" class="nav-link active" data-scroll-target="#r-markdown-und-quarto"><span class="header-section-number">1</span> R Markdown und Quarto</a></li>
+  <li><a href="#installation-der-programme" id="toc-installation-der-programme" class="nav-link" data-scroll-target="#installation-der-programme"><span class="header-section-number">2</span> Installation der Programme</a></li>
+  <li><a href="#bestehende-dokument-laden" id="toc-bestehende-dokument-laden" class="nav-link" data-scroll-target="#bestehende-dokument-laden"><span class="header-section-number">3</span> Bestehende Dokument laden</a></li>
+  <li><a href="#neue-dokumente-anlegen" id="toc-neue-dokumente-anlegen" class="nav-link" data-scroll-target="#neue-dokumente-anlegen"><span class="header-section-number">4</span> Neue Dokumente anlegen</a></li>
+  <li><a href="#übergreifende-menüpunkte" id="toc-übergreifende-menüpunkte" class="nav-link" data-scroll-target="#übergreifende-menüpunkte"><span class="header-section-number">5</span> Übergreifende Menüpunkte</a></li>
+  <li><a href="#überblick-über-die-dokumentkomponenten" id="toc-überblick-über-die-dokumentkomponenten" class="nav-link" data-scroll-target="#überblick-über-die-dokumentkomponenten"><span class="header-section-number">6</span> Überblick über die Dokumentkomponenten</a>
   <ul class="collapse">
-  <li><a href="#yaml-header" id="toc-yaml-header" class="nav-link" data-scroll-target="#yaml-header"><span class="header-section-number">1.1</span> YAML-Header</a></li>
-  <li><a href="#text" id="toc-text" class="nav-link" data-scroll-target="#text"><span class="header-section-number">1.2</span> Text</a></li>
-  <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks"><span class="header-section-number">1.3</span> Code Chunks</a></li>
+  <li><a href="#yaml-header" id="toc-yaml-header" class="nav-link" data-scroll-target="#yaml-header"><span class="header-section-number">6.1</span> YAML-Header</a></li>
+  <li><a href="#text" id="toc-text" class="nav-link" data-scroll-target="#text"><span class="header-section-number">6.2</span> Text</a></li>
+  <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks"><span class="header-section-number">6.3</span> Code Chunks</a></li>
   </ul></li>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto"><span class="header-section-number">2</span> Quarto</a></li>
-  <li><a href="#getting-started-mit-markdown-und-quarto" id="toc-getting-started-mit-markdown-und-quarto" class="nav-link" data-scroll-target="#getting-started-mit-markdown-und-quarto"><span class="header-section-number">3</span> Getting Started mit Markdown und Quarto</a>
-  <ul class="collapse">
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">3.1</span> Installation</a></li>
-  <li><a href="#dokument-laden" id="toc-dokument-laden" class="nav-link" data-scroll-target="#dokument-laden"><span class="header-section-number">3.2</span> Dokument laden</a></li>
-  <li><a href="#neues-dokument-anlegen" id="toc-neues-dokument-anlegen" class="nav-link" data-scroll-target="#neues-dokument-anlegen"><span class="header-section-number">3.3</span> Neues Dokument anlegen</a></li>
-  </ul></li>
-  <li><a href="#literatur" id="toc-literatur" class="nav-link" data-scroll-target="#literatur"><span class="header-section-number">4</span> Literatur</a></li>
+  <li><a href="#literatur" id="toc-literatur" class="nav-link" data-scroll-target="#literatur"><span class="header-section-number">7</span> Literatur</a></li>
   </ul>
 </nav>
     </div>
@@ -407,38 +439,87 @@ ul.task-list li input[type="checkbox"] {
 <figcaption class="figure-caption">Artwork by <span class="citation" data-cites="allison_horst">@allison_horst</span></figcaption>
 </figure>
 </div>
-<section id="r-markdown" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="r-markdown"><span class="header-section-number">1</span> R Markdown</h2>
-<p>In diesem Kurs verwenden wir R Markdown bzw. R Quarto Dokumente. Diese haben den Vorteil, dass wir innerhalb eines Dokumentes Codeteile (sogenannte <em>Code Chunks</em>) und Text kombinieren können. Dies erlaubt die Dokumentation und Reproduzierbarkeit statistischer Auswertungen. Markdown bzw. Quarto-Dokumente bestehen aus drei Bestandteilen</p>
-<section id="yaml-header" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="yaml-header"><span class="header-section-number">1.1</span> YAML-Header</h3>
+<section id="r-markdown-und-quarto" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="r-markdown-und-quarto"><span class="header-section-number">1</span> R Markdown und Quarto</h2>
+<p>In diesem Kurs verwenden wir R Markdown bzw. R Quarto Dokumente. Diese haben den Vorteil, dass wir innerhalb eines Dokumentes Codeteile (sogenannte <em>Code Chunks</em>) und Text kombinieren können. Dies erlaubt die Dokumentation und Reproduzierbarkeit statistischer Auswertungen.</p>
+<p>Bei <a href="https://quarto.org/">Quarto</a> handelt es sich im Prinzip um die neuere Variante von RMarkdown Dokumenten. Diese beinhalten alle Funktionalitäten von Markdown-Dokumenten (sind genauso aufgebaut und lassen sich normal rendern), aber bieten zusätzlich die Möglichkeit weitere Programmiersprachen (wie Python, Julia und Javascript) und interaktive Elemente (Widgets und Shiny-Anwendungen). Markdown-Dokumente weisen die Endung <code>.rmd</code> auf wohingegen Quarto-Dokumente den Endung <code>.qmd</code> haben. Beide Dokumenttypen können für unseren Kurszweck gleichwertig genutzt werden. Lediglich bei der Arbeit mit interaktiven, multimedialen oder mehrsprachigen Dokumenten ist Quarto besser geeignet als Markdown.</p>
 </section>
-<section id="text" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="text"><span class="header-section-number">1.2</span> Text</h3>
+<section id="installation-der-programme" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="installation-der-programme"><span class="header-section-number">2</span> Installation der Programme</h2>
+<p>Markdown kann innerhalb von R mit dem Befehl <code>install.packages("Rmarkdown")</code> installiert und anschließend geladen werden. Da es sich bei Quarto nicht um ein Package, sondern ein eigenes Interface handelt, muss das Programm extern <a href="https://quarto.org/docs/get-started/">heruntergeladen</a> und auf dem Rechner installiert werden.</p>
 </section>
-<section id="code-chunks" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="code-chunks"><span class="header-section-number">1.3</span> Code Chunks</h3>
-<p>💡</p>
+<section id="bestehende-dokument-laden" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="bestehende-dokument-laden"><span class="header-section-number">3</span> Bestehende Dokument laden</h2>
+</section>
+<section id="neue-dokumente-anlegen" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="neue-dokumente-anlegen"><span class="header-section-number">4</span> Neue Dokumente anlegen</h2>
+</section>
+<section id="übergreifende-menüpunkte" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="übergreifende-menüpunkte"><span class="header-section-number">5</span> Übergreifende Menüpunkte</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Quartomenü.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Dokumentmenüleistet</figcaption>
+</figure>
+</div>
+</section>
+<section id="überblick-über-die-dokumentkomponenten" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="überblick-über-die-dokumentkomponenten"><span class="header-section-number">6</span> Überblick über die Dokumentkomponenten</h2>
+<p>Sowohl Markdown, als auch Quarto-Dokumente bestehen aus drei Bestandteilen: dem YAML-Header, Textbereichen und Codebereichen.</p>
+<section id="yaml-header" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="yaml-header"><span class="header-section-number">6.1</span> YAML-Header</h3>
+<p>Innerhalb des YAML Headers, welcher jeweils von <code>---</code> umgeben ist, legen wir die Dokumentstruktur fest.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/YAMLHeader.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">YAML Header in einem Quarto Dokument</figcaption>
+</figure>
+</div>
+<p>Dies beinhaltet beispielsweise den Titel des Dokumentes <code>title:</code>, die Autoren <code>author</code>, sowie Spezifikationen zur Dokumentstruktur, wie beispielsweise das Outputformat <code>format:</code> oder auch in Quarto Spezifikationen zum Umgang mit den Codechunks <code>output: echo = TRUE</code> auf Gesamtdokumentebene.</p>
+</section>
+<section id="text" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="text"><span class="header-section-number">6.2</span> Text</h3>
+<p>In Markdown und Quarto-Dokumenten können wir Text einbinden und diesen beliebig formatieren. Dazu können wir wahlweise die Source-Variante oder die Visual-Variante nutzen. In der Source-Variante variieren wir Text mittels Syntax. Typische Syntaxbefehle sind:</p>
+<ul>
+<li>*<em>kursiv</em>*: jeweils einen Stern vor und nach einem Wort um dieses kursiv zu schreiben</li>
+<li>**<strong>fett</strong>**: jeweils zwei Sterne vor und nach einem Wort um dieses fett zu schreiben</li>
+<li>#: Rauten für Überschriften, wobei eine Raute die erste Überschrift signalisiert, zwei Rauten die zweite usw.</li>
+<li>![Bildunterschrift](Link des Bildes): um Bilder einzufügen</li>
+<li>[Linktext](url): Um Links einzufügen</li>
+</ul>
+<p>Möchten wir übrigens die oben genutzten Symbole im Text nutzen, so können wir mit einem &nbsp;vor dem jeweiligen Symbol die Formatierung umgehen.</p>
+<p>Wahlweise können wir auch den Visual-Modus nutzen. In diesem erhalten wir ein Word-ähnliches Interface und können Formatoptionen durch Klicken auf die jeweilige Formatierung umsetzen:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/visualmode.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Formatierungsoptionen im Visual Modus</figcaption>
+</figure>
+</div>
+</section>
+<section id="code-chunks" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="code-chunks"><span class="header-section-number">6.3</span> Code Chunks</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Dies ist ein Code Chunk</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="in">```{r, echo = T}</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># Dies ist ein Code Chunk</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Wahlweise können wir diese Optionen auch für das Gesamtdokument im YAML-Header festlegen. Dafür nutzen wir den Zusatz <code>execute:</code> und geben anschließend alle unsere Dokumentoptionen (für einen Überblick siehe <a href="https://quarto.org/docs/computations/execution-options.html">hier</a>) an.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/YAMLOptions.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Codeoptionen im Header</figcaption>
+</figure>
+</div>
+<p><em>Achtung</em>: wir nutzen hier <code>:</code> statt <code>=</code> und schreiben <code>true</code> und <code>false</code> statt <code>TRUE</code>/<code>T</code> und <code>FALSE</code>/<code>F</code>.</p>
 </section>
 </section>
-<section id="quarto" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="quarto"><span class="header-section-number">2</span> Quarto</h2>
-<p>Bei <a href="https://quarto.org/">Quarto</a> handelt es sich im Prinzip um die neuere Variante von RMarkdown Dokumenten. Diese beinhalten alle Funktionalitäten von Markdown-Dokumenten (sind genauso aufgebaut und lassen sich normal rendern), aber bieten zusätzlich die Möglichkeit weitere Programmiersprachen (wie Python, Julia und Javascript) und interaktive Elemente (Widgets und Shiny-Anwendungen).</p>
-</section>
-<section id="getting-started-mit-markdown-und-quarto" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="getting-started-mit-markdown-und-quarto"><span class="header-section-number">3</span> Getting Started mit Markdown und Quarto</h2>
-<section id="installation" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="installation"><span class="header-section-number">3.1</span> Installation</h3>
-</section>
-<section id="dokument-laden" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="dokument-laden"><span class="header-section-number">3.2</span> Dokument laden</h3>
-</section>
-<section id="neues-dokument-anlegen" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="neues-dokument-anlegen"><span class="header-section-number">3.3</span> Neues Dokument anlegen</h3>
-</section>
-</section>
-<section id="literatur" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="literatur"><span class="header-section-number">4</span> Literatur</h2>
+<section id="literatur" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="literatur"><span class="header-section-number">7</span> Literatur</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
