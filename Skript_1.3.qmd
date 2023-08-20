@@ -14,17 +14,36 @@ format:
 
 ## R Markdown
 
+In diesem Kurs verwenden wir R Markdown bzw. R Quarto Dokumente. Diese haben den Vorteil, dass wir innerhalb eines Dokumentes Codeteile (sogenannte *Code Chunks*) und Text kombinieren können. Dies erlaubt die Dokumentation und Reproduzierbarkeit statistischer Auswertungen. Markdown bzw. Quarto-Dokumente bestehen aus drei Bestandteilen
+
+
+
 ### YAML-Header
 
 ### Text
 
 ### Code Chunks
 
-::: callout-tip
-Codechunks sind der Bereich des Dokumentes in welchem wir R-Code ausführen.
-:::
+
+💡
 
 ## Quarto
+
+Bei [Quarto](https://quarto.org/) handelt es sich im Prinzip um die neuere Variante von RMarkdown Dokumenten. Diese beinhalten alle Funktionalitäten von Markdown-Dokumenten (sind genauso aufgebaut und lassen sich normal rendern), aber bieten zusätzlich die Möglichkeit weitere Programmiersprachen (wie Python, Julia und Javascript) und interaktive Elemente (Widgets und Shiny-Anwendungen). 
+
+
+
+
+## Getting Started mit Markdown und Quarto
+
+### Installation 
+
+### Dokument laden
+
+### Neues Dokument anlegen
+
+
+
 
 ## Literatur
 

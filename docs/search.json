@@ -718,21 +718,21 @@
     "href": "Skript_1.3.html#r-markdown",
     "title": "Die Logik von Markdown und Quarto",
     "section": "1 R Markdown",
-    "text": "1 R Markdown\n\n1.1 YAML-Header\n\n\n1.2 Text\n\n\n1.3 Code Chunks\n\n\n\n\n\n\nTip\n\n\n\nCodechunks sind der Bereich des Dokumentes in welchem wir R-Code ausführen."
+    "text": "1 R Markdown\nIn diesem Kurs verwenden wir R Markdown bzw. R Quarto Dokumente. Diese haben den Vorteil, dass wir innerhalb eines Dokumentes Codeteile (sogenannte Code Chunks) und Text kombinieren können. Dies erlaubt die Dokumentation und Reproduzierbarkeit statistischer Auswertungen. Markdown bzw. Quarto-Dokumente bestehen aus drei Bestandteilen\n\n1.1 YAML-Header\n\n\n1.2 Text\n\n\n1.3 Code Chunks\n💡"
   },
   {
     "objectID": "Skript_1.3.html#quarto",
     "href": "Skript_1.3.html#quarto",
     "title": "Die Logik von Markdown und Quarto",
     "section": "2 Quarto",
-    "text": "2 Quarto"
+    "text": "2 Quarto\nBei Quarto handelt es sich im Prinzip um die neuere Variante von RMarkdown Dokumenten. Diese beinhalten alle Funktionalitäten von Markdown-Dokumenten (sind genauso aufgebaut und lassen sich normal rendern), aber bieten zusätzlich die Möglichkeit weitere Programmiersprachen (wie Python, Julia und Javascript) und interaktive Elemente (Widgets und Shiny-Anwendungen)."
   },
   {
     "objectID": "Skript_1.3.html#literatur",
     "href": "Skript_1.3.html#literatur",
     "title": "Die Logik von Markdown und Quarto",
-    "section": "3 Literatur",
-    "text": "3 Literatur\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link\n\n\n📖 Xie, Y., Allaire, J. J., & Grolemund, G. (2020). R markdown: The definitive guide. Chapman; Hall/CRC Link\n\n\n📖 Xie, Y., Dervieux, C., & Riederer, E. (2020). R markdown cookbook. Chapman and Hall/CRC Link\n\n\n📖 Allaire, J. J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins, A., Wickham, H., Cheng, J., Chang, W., & Iannone, R. (2020a). rmarkdown: Dynamic documents for r. Link"
+    "section": "4 Literatur",
+    "text": "4 Literatur\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link\n\n\n📖 Xie, Y., Allaire, J. J., & Grolemund, G. (2020). R markdown: The definitive guide. Chapman; Hall/CRC Link\n\n\n📖 Xie, Y., Dervieux, C., & Riederer, E. (2020). R markdown cookbook. Chapman and Hall/CRC Link\n\n\n📖 Allaire, J. J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins, A., Wickham, H., Cheng, J., Chang, W., & Iannone, R. (2020a). rmarkdown: Dynamic documents for r. Link"
   },
   {
     "objectID": "Autoren.html#katharina-maubach",
@@ -852,5 +852,19 @@
     "title": "Einführung in R und RStudio",
     "section": "6 Pakete",
     "text": "6 Pakete\nR-Pakete sind Erweiterungen, die Funktionen, Daten, Code und dessen Dokumentation enthalten und uns damit unsere Arbeit deutlich erleichtern. Diese erweiteren die Funktionen, die bereits in der Standardausführung von R (bekannt als base R) gegeben sind.\n\n6.1 Die Installation von Paketen\nPakete können wahlweise R-intern über CRAN (das steht für Comprehensive R Archive Network und ist das zentrale Software-Repository) oder direkt von GitHub (für sehr neue Pakete, welche noch nicht auf CRAN sind) installiert werden. Im Normalfall installieren wir jedoch direkt von CRAN, da hier eine Vielzahl von Paketen und Funktionen vorhanden sind und die Installation sehr simpel ist.\nWenn wir ein R-Paket von CRAN installieren möchten nutzen wir die Funktion install.packages(), in deren Klammer wir in Anführungszeichen den Namen des zu installierenden Pakets setzen. Für das Paket tidyverse wäre der Befehl wie folgt:\n\ninstall.packages(\"tidyverse\")\n\nBeim Ausführen des Codes gibt R in der Konsole Auskunft über die verschiedenen Installationsschritte sowie über den (Mis-)Erfolg der Installation. Alternativ könnt ihr auch über das RStudio Interface Pakete installieren. Hierfür geht ihr in der rechten unteren Ecke auf den Reiter Packages und wählt den Buttion Install aus. In dem sich öffnenen Fenster gebt ihr den Namen des von euch gewünschten Pakets ein und bestätigt die Anwendung wiederum mit Install.\n\n\n\nScreenshot RStudio\n\n\nEinige der Pakete, die wir im Rahmen des Kurses verwenden sind bereits in der R Cloud vorinstalliert und müssen nicht mehr von euch eigenhändig installiert werden. Grundsätzlich ist es jedoch immer ratsam, einmal zu checken, ob die Pakete in der aktuellen Version installiert sind, da ansonsten die Funktionen der Pakete nicht funktionieren können.\n\n\n6.2 Das Laden von Paketen\nIm vorherigen Schritt haben wir bereits die von uns benötigten Pakete installiert, jetzt müssen wir R nur noch sagen, dass wir diese Pakete für die aktuelle Session nutzen möchten. Ihr könnt euch das so vorstellen, dass ihr die benötigten Pakete aktiv schaltet. Dies geschieht mit dem library Befehl (Achtung, hier benötigen wir im Gegensatz zum install.packages Befehl keine Anführungszeichen):\n\nlibrary(tidyverse)\n\nWir nutzen in diesem Kurs wiederum pacman, um automatisch mehrere Pakete installieren und laden zu können. Dafür installieren und laden wir einmalig das Paket pacman und können anschließend mit der Funktion p_load die von euch in der Klammer angegebenen Pakete installieren und laden:\n\nif(!require(\"pacman\")) {install.packages(\"pacman\");library(pacman)}\np_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) \n\nAnsonsten habt ihr noch die Möglichkeit die Pakete händisch über das R Studio Interface zu aktiveren, was ich persönlich ab einer gewissen Anzahl von benötigten Paketen eher nervig finde. Nichtsdestotrotz könnt ihr hierfür in der rechten unteren Ecke des Interfaces auf den Reiter Packages gehen und in der unteren Liste das gewünschte Paket durch das Setzen eines Hakens auswählen.\n\n\n\nScreenshot RStudio\n\n\n\n\n\n\n\n\nWeiterführende Literatur\n\n\n\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link"
+  },
+  {
+    "objectID": "Skript_1.1.html#was-sind-r-und-rstudio",
+    "href": "Skript_1.1.html#was-sind-r-und-rstudio",
+    "title": "Einführung in R und RStudio",
+    "section": "1 Was sind R und RStudio?",
+    "text": "1 Was sind R und RStudio?\nR ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen läuft. In seiner Grundfunktion ist R zunächst eine Konsole, in welcher wir zeilenweise Code eingeben und ausführen können. Dabei kann es sich um einfache Rechnungen oder auch komplexe Modelle handeln. Die meisten arbeiten dabei nicht mit R als solches sondern nutzen verschiedene Umgebungen, etwa RStudio oder Jupyter Hub um mit R zu arbeiten.\nRStudio ist eine Erweiterung von R und bietete den Nutzer*innen eine benutzerfreundlichere Programmoberfläche. So ermöglicht RStudio einen direkten Überblick über die geladenen Pakete, Datensätze und im Arbeitsverzeichnis gespeicherten Dateien. Zudem ermöglicht RStudio die Arbeit mit Skripten, Markdown und Quarto Dokumenten.\n\n1.1 Installation von R und RStudio\nMöchtet ihr das Programm lokal auf eurem Rechner nutzen, müsst ihr zunächst die Programme R, RStudio und gegebenfalls RTools installieren. Alle Programme sind kostenlos online verfügbar und lassen sich auf allen gängigen Betriebssystemen installieren. Installiert zunächst R und anschließend RStudio und achtet darauf regelmäßig auf die aktuelle Version zu aktualisieren.\nInnerhalb unseres Kurse arbeiten wir mit R und RStudio, nutzen die Programme allerdings in der Umgebung von Jupyter."
+  },
+  {
+    "objectID": "Skript_1.3.html#getting-started-mit-markdown-und-quarto",
+    "href": "Skript_1.3.html#getting-started-mit-markdown-und-quarto",
+    "title": "Die Logik von Markdown und Quarto",
+    "section": "3 Getting Started mit Markdown und Quarto",
+    "text": "3 Getting Started mit Markdown und Quarto\n\n3.1 Installation\n\n\n3.2 Dokument laden\n\n\n3.3 Neues Dokument anlegen"
   }
 ]
