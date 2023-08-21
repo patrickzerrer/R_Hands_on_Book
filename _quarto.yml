@@ -68,6 +68,7 @@ website:
       - Skript_6.1.qmd
       - Skript_6.2.qmd
       - Skript_6.3.qmd
+      - Skript_6.4.qmd
 
     - section: "Das Überprüfen von Zusammenhängen"
       contents:

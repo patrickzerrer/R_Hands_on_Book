@@ -1,5 +1,5 @@
 ---
-title: "Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse"
+title: "Die Bestimmung der Zentrale Tendenz mittels t-Tests"
 author: "Katharina Maubach"
 toc: true
 number-sections: true
@@ -10,7 +10,7 @@ format:
     code-line-numbers: true
 ---
 
-Bestimmen von Unterschieden in der zentralen Tendenz
+
 
 # Was sind unabhängige und verbundene Stichproben?
 
@@ -18,204 +18,12 @@ Bestimmen von Unterschieden in der zentralen Tendenz
 
 ## t-Test für unabhängige Stichproben
 
-## Mann-Whitney
 
-## Die Varianzanalyse
-
-Die Varianzanalyse weitet den Grundgedanken des t-Tests aus, indem sie den simultanen Vergleich von Gruppenmittelwerten über mehr als zwei Gruppen erlaubt. Die einfaktorielle Varianzanalyse definiert die Gruppen dabei anhand eines Faktors (einer unabhängigen Variable), die mehrfaktorielle Varianzanalyse erlaubt mehrere unabhängige kategoriale Variablen im Modell, ist aber nicht mit der multivariaten Varianzanalyse (MANOVA) zu verwechseln, die auch mehrere metrische abhängige Variablen gleichzeitig zulässt. Wenn die Gruppierungsvariable (also die unabhängige Faktor-Variable) mehr als zwei Gruppen unterscheidet, müssen nach der Anova Post-Hoc Tests durchgeführt werden. Denn sollte die Varianzanalyse insgesamt signifikante Werte liefern, wurde zwar festgestellt, dass es überzufällige Unterschiede zwischen den durch die Faktorstufen definierten Gruppen gibt, bei drei und mehr Faktorstufen bleibt aber noch unklar, auf welchen Gruppenunterschieden dieses Ergebnis beruht. Post hoc-Tests liefern spezifischere Informationen dazu, welche Gruppenmittelwerte signifikant voneinander abweichen.
-
-### Datenmanagement
-
-In R ist es zwingend notwendig, neben dem Programm als solches auch die Daten zu laden. Nachfolgend findet sich der `load`-Befehl. Dieser lädt die R-Daten. Dafür ist es wichtig, das diese im selben Ordner wie dieses Skript gespeichert sind. Zudem müssen wir die Pakete laden. Hier nutzen wir den Paketmanagaer pacman. Diese muss einmal installiert und geladen werden und anschließend können mit dem Befehl p_load alle benötigten Pakete gleichzeitig installiert und geladen werden.
-
-```{r}
-#Pakete laden
-if(!require("pacman")) {install.packages("pacman");library(pacman)}
-p_load(knitr,car, tidyverse, ggplot2, DescTools, dplyr,afex, emmeans, PMCMRplus)
-
-#Daten laden
-daten <- read_rds("Datensatz/ESS8_vier_laender.rds")
-
-#Visualisierungshintergrund festlegen
-theme_set(theme_minimal())
-```
-
-### Voraussetzungsprüfung für einfaktorielle und mehrfaktorielle Varianzanalyse
-
-Die Varianzanalyse ist ein statistisches Verfahren, dass bestimmte Voraussetzungen bezüglich der abhängigen und unabhängigen Variablen voraussetzt. Dies sind im Überblick:
-
--   Datenniveau der AV (metrisch) und UV (Faktor)
--   Normalverteilung der abhängiven Variablen
--   Homogenität der Fehlervarianzen der unabhängigen Variablen
-
-Die meisten Voraussetzungen, die für die Durchführung und Interpretation einer Varianzanalyse erfüllt sein müssen, lassen sich bereits im Vorfeld der eigentlichen Analyse überprüfen. So kann das Messniveau unmitttelbar festgestellt werden. Es gilt für die **abhängige (y-)Variable** stets, dass sie **intervallskaliert** sein muss, in R also als ein Vektor vorliegen muss. Die Faktoren bzw. **unabhängige(n) (x-) Variable(n)** hingegen müssen zwingend nominalskaliert sein und in R demnach als **Faktoren** vorliegen.
-
-### Überprüfung der Normalverteilung
-
-Eine weitere wichtige, leicht vorab zu prüfende Bedingung, die für eine Varianzanalyse erfüllt sein muss, ist die **Normalverteilung der abhängigen Variable**. Diese können wir graphisch überprüfen:
-
-In R nutzen wir das Paket `ggplot2` von Wickham et al. um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket `ggplot2` mit dem Befehl `ggplot()` aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier `Varianzanalyse`) und unter aes unsere Variable (hier `Angst`). Mit einem Plus-Zeichen legen wir die nächste Ebene fest und geben hier mit `geom_histogram` an, dass wir ein Histogramm wünschen. Die Spezifizierungen innerhalb der Klammer geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll `(aes(y = ..count..))`, wir die Außenumrandung schwarz `color = black` und die Füllfarbe grau wünschen (`fill = grey`). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik. Zuletzt legen wir innerhalb der Klammer die Breite unserer Säulen fest. Mit `binwidth = 1` verweisen wir hier auf eine Breite der Balken 1. Nun haben wir ein vollständiges Histogramm. Wir können jedoch für ein verschönertes Aussehen unseres Graphen mit `labs` zusätzlich die Achsen beschriften.
-
-```{r}
-#Histogramm ausgeben
-ggplot(daten, aes(happy)) +
-  geom_histogram(aes(y = ..count..), 
-                 color = "black", fill = "grey", 
-                 binwidth = 1) +
-  labs(x = "Zufriedenheit", 
-         y = "")
-```
-
-Wir sehen an der Grafik, dass die Variable Zufriedenheit rechtssteil ist, also die Teilnehmer der Befragung eher eine höhere Zufriedenheit angegeben haben.
-
-Zusätzliche Gewissheit beuüglich des Vorliegens der Normalverteilung bietet der Kolmogorov-Smirnov-Test oder der Shapiro-Wilk-Test (bei diesem wird jedoch eine Stichprobengröße zwischen 3 und 5000 vorausgesetzt, welche wir hier überschreiten, daher rechnen wir nur den Kolmogorov-Smirnov-Test). In R erhalten wir diese Tests mit dem Befehl `LillieTest()` aus dem Paket `DescTools()` bzw. `shapiro.test()`. Beide Tests testen auf Abweichung von der Normalverteilung, demnach sollte diese nicht signifikant ausfallen (da ein signifikanter Test aussagt, dass eine Abweichung von der Normalverteilung besteht, was wir nicht möchten).
-
-```{r}
-#Lilliefors Kolmogorov-Smirnov-Test
-LillieTest(daten$happy)
-#Shapiro-Wilk Test
-#shapiro.test(daten$happy)
-```
-
-Im vorliegenden Beispiel ist der Test signifikant. Allerdings reagieren beide Tests insbesondere bei großen Stichproben sehr sensibel, sodass bereits leichte Abweichungen von der Normalverteilung (etwa durch Ausreißer) die Tests signifikant werden lassen; in diesen Fällen ist es sinnvoll eher auf die graphische Überprüfung (siehe oben) zu schauen. Sowohl der Kolmogorov-Smirnov-Test als auch die Grafik lassen jedoch nicht auf eine perfekte Normalverteilung unserer abhängigen Variablen schließen. In diesem Fall kann die Varianzanalyse dennoch gerechnet werden, da solange die Verteilung nicht extrem steil ist, das Verfahren einigermaßen robust ist. Bei einer sehr starken Verletzung der Normalverteilung müsste ggf. auf nicht parametrische Tests ausgewichen werden.
-
-### Überprüfung der Homogenität der Fehlervarianzen
-
-Die letzte Voraussetzung, die für eine Varianzanalyse erfüllt sein muss, ist die Homogenität der Fehlervarianzen. Um diese zu testen, nutzen wir den Levene-Test auf Varianzhomogenität. Hierfür nutzen wir die Funktion `leveneTest()`aus dem Paket `car`. Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (\~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird. Haben wir nur eine abhängige Variable, so geben wir diese an. Haben wir mehrere so können wir diese mit einem \* verbinden. Hier wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.
-
-```{r}
-#Levene-Test für einfaktorielle Varianzanalyse
-daten %>% 
-  leveneTest(happy~cntry, data = ., center = mean)
-
-#Levene-Test für mehrfaktorielle Varianzanalyse ausgeben
-daten %>% 
-  leveneTest(happy ~ cntry*gndr, data = ., center = mean)
-```
-
-Wenn der Levene-Test statistisch signifikant ausfällt, sollte die Hypothese homogener Varianzen abgelehnt werden. Falls der Test wie im vorliegenden Fall signifikant ausfällt (da der `Pr(>F-Wert)` kleiner als 0.05 ist) wurde die Voraussetzung der Homogenität der Fehlervarianzen verletzt. In einem solchen Fall können wir wahlweise auf nicht-parametrische Tests ausweichen, oder die Varianzanalyse dennoch berechnen, wenn wahlweise die deskriptiven Kennwerte keine allzu große Streuung aufweisen, oder wir einen alternativen Posthoc-Test (etwa Tamhame T2) wählen.
-
-### Einfaktorielle Varianzanalyse (ohne Messwiederholung)
-
-Nachdem wir die Voraussetzungen geprüft haben, schauen wir uns die einfaktorielle Varianzanalyse an. Im vorliegenden Beispiel möchten wir gerne überprüfen, inwiefern sich die Nationalität bzw. Länderzugehörigkeit (Variable `cntry`; Deutschland, Schweden, Frankreich und Großbritannien) auf die Lebenszufriedenheit (Variable `happy`) auswirkt.
-
-Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die `group_by`-Funktion in Kombination mit der `summarise`-Funktion. Im nachfolgenden Schritt haben wir mit Hilfe des Befehls `kable()` aus dem Paket `knitr` das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.
-
-```{r}
-daten %>% 
-  group_by(cntry) %>% 
-  summarise(Mittelwert = mean(happy, na.rm = T), 
-            Standardabweichung = sd(happy, na.rm = T)) %>% 
-  kable(digits = 2, col.names = c("Land", "M", "SD"), caption = "Descriptives Lebenszufriedenheit")
-```
-
-Anhand der deskriptiven Statistiken sehen wir, dass die Zufriedenheit in Frankreich am geringsten ist und in Schweden am höchsten. Zudem erkennen wir, dass die Standardabweichungen der Ländern sich nicht drastisch unterscheiden, wir demnach trotz der Verletzung der Varianzhomogenität die ANOVA rechnen können.
-
-Anschließend können wir die einfaktorielle ANOVA berechnen.Dafür nutzen wir die Funktion `aov_car` aus dem `afex`-Package, in welcher wir zunächst die abhängige Variable (`happy`) angeben müssen und nach einer Tilde die unabhängige Variabel (`cntry`) Zudem müssen wir den Zusatz `+ Error()` nutzen un in der Klammer die Fallid (hier `idno`) angeben. Da die Variable idno doppelte Fälle hatte müssen wir in dem vorliegenden Beispiel diese ausschließen, da andernfalls der Befehl nicht funktioniert. Dies geschieht mit dem Befehl `distinct` welcher aus der Variablen `idno` alle doppelten Fälle ausschließt. Der Zusatz `.keep_all = T` bedeutet, dass wir alle Variablen des Datensatzes behalten wollen und nur die doppelten Fälle ausgeschlossen werden sollen. Alles speichern wir als Objekt `fit` welches wir anschließend mit `print` aufrufen.
-
-```{r}
-#Einfaktorielle ANOVA
-fit <- daten %>% 
-dplyr::distinct(idno, .keep_all = T) %>% 
-aov_car(happy ~ cntry + Error(idno), data = ., anova_table = "pes")
-
-print(fit)
-```
-
-Als Output erhalten wir eine Tabelle mit den folgenden Parametern:
-
--   Effect: unabhängige Variable
--   df: Freiheitsgrade (degrees of freedom)
--   MSE: Fehlervarianz, mittlere quadratische Abweichung (mean squared errors)
--   F: F-Werte
--   pes: parties Eta-Quadrat (partial eta-quared)
--   p.value: Signifikanz
-
-**Effect** zeigt die unabhängige Variable des Modells, in diesem Fall die Ländervariable `cntry`. Die drei bedeutet, dass hier insgesamt eine Gruppe mit 3 anderen (= vier Ausprägungen) verglichen wurde. mean-squared errors
-
-Über die Werte der zweiten und vierten Spalte, die **Freiheitsgrade** (`df`) und die **F-Werte** (`F`) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte `p.value` die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert \<.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied der Länder im Bezug auf die Lebenszufriedenheit ersichtlich.
-
-Die mittlere quadratische Abweichung (MSE) oder Fehlervarianz ist die Summe der Abweichungsquadrate aller Werte vom jeweiligen Gruppenmittelwert. Berechnet wird diese durch die Quadratsummer der Fehlerresiduen geteilt durch die Freiheitsgrade. Sie gibt damit die Varianz innerhalb der einzelnen Gruppen (=nicht erklärte Varianz) wieder.
-
-Die Spalte `pes` steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an -- partiell ist das Eta^2^, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Im Datenbeispiel hat demnach die Länderzugehörigkeit (und damit auch unser Gesamtmodell) eine Erklärkraft von 1.8 Prozent. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.
-
-### PostHocTests
-
-Zuletzt müssen wir die Posthoc-Tests berechnen, welche uns Aufschluss darüber geben, welche unserer Gruppen sich unterscheiden. Es gibt verschiedene Posthoc-Tests. Grundsätzlich ist der Tukex-Post-Hoc Test zu empfehlen, welche wir über die Funktion `emmeans`aus dem `emmeans`-Package aufrufen. Bei fehlender Varianzhomogenität können wir zudem den tamhane-T2 Test nutzen. Dieser basiert allerdings auf einem aov-Objekt, daher geben wir hier mit aov die ANOVA erneut aus. Innerhalb von emmeans können wir hingegen einfach auf unser zuvor spezifiziertes Modell fit verweisen, müssen allerdings noch mit specs= angeben, auf Basis welcher Variablen der Gruppenvergleich durchgeführt werden soll.
-
-```{r}
-#Tukey Post-Hoc Test
-emmeans::emmeans(fit, specs = "cntry") %>% 
-  pairs()
-
-#Tamhame T2 Test
-daten %>% 
-aov(happy ~ cntry, data = .) %>% 
-  tamhaneT2Test(.)
-```
-
-Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur dieser angezeigt). Werte unter .05 bedeuten, dass zwischen diesen Gruppen ein signifikanter Mittelwertunterschied besteht. In unserem Beispiel sehen wir Unterschiede zwischen Frankreich und allen weiteren Ländern, sowie einen Unterschied zwischen Großbritannien und Schweden. Wenn wir auf die deskriptiven Statistiken schauen, sehen wir demnach, dass in Frankreich die Lebenszufriedenheit signifikant geringer als in Deutschland, Schweden und Großbritannien ist, sowie die Lebenszufriedenheit in Großbritannien signifikant geringer als in Schweden ausfällt.
-
-## Kruskal Wallis
-
-## Mehrfaktorielle Varianzanalyse
-
-In der mehrfaktoriellen Varianzanalyse können wir unser Modell aus der einfachen Varianzananlyse erweitern. In diesem Beispiel nutzen wir neben der Ländervariablen (`cntry`) zusätzlich die Variable Geschlecht (`gndr`) um die Lebenszufriedenheit (`happy`) vorherzusagen.
-
-Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die `group_by`-Funktion in Kombination mit der `summarise`-Funktion. Im nachfolgenden Schritt haben wir mit Hilfe des Befehls `kable()` aus dem Paket `knitr` das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.
-
-```{r}
-#Deskriptive Statistiken ausgeben
-daten %>% 
-  group_by(cntry, gndr) %>% 
-  summarise(Mittelwert = mean(happy, na.rm = T), 
-            Standardabweichung = SD(happy, na.rm = T)) %>% 
-  kable(digits = 2, col.names = c("Land", "Geschlecht", "M", "SD"), caption = "Descriptives Lebenszufriedenheit")
-```
-
-Zunächst können wir unsere deskriptiven Statistiken betrachten. Hier interessieren uns insbesondere die Mittelwerte für die einzelnen Gruppen. Diese Mittelwerte im Fließtext kurz zu erwähnen, gehört zum „guten Ton" bei der Auswertung einer Varianzanalyse und sollte daher nicht vergessen werden.
-
-Nun können wir unsere ANOVA aufstellen. Es gibt verschiedene Möglichkeiten eine ANOVA zu berechnen, namentlich Type I, II und III. Die einzelnen Typen unterscheiden sich darin, wie die Parameter (insbesondere die Quadratsumme) berechnet wird. Typ I sollte vor allem für ausgeglichene Daten verwendet werden, also Daten bei der für jede Gruppe die gleiche Anzahl an Fällen vorliegen. Ist dies nicht der Fall, sollte Typ II oder Typ III (beispielsweise die Option der Anova in SPSS) verwendet werden. Der typische Befehl für eine Anova in R ist der Befehl `aov()`. Dieser ist jedoch nur für die Typ I Anova ausgelegt, daher nutzen wir hier erneut den Befehl `aov_car()` (sowie den distict-Befehl) aus dem `afex`-Paket welcher standardmäßig die Anova nach Typ III berechnet. Im Prinzip nutzen wir die selbe Syntax wie bei der unifaktoriellen Anova. Wir ergänzen allerdings unsere zweitere unabhängige Variable, beziehungsweise verbinden die beiden unabhängigen Variablen mit einem \*. Dadurch erhalten wir sowohl die Werte für die einzelnen Variablen als auch für den Interaktionsterm, also das Zusammenspiel der Variablen.
-
-```{r}
-fit2 <- daten %>% 
-dplyr::distinct(idno, .keep_all = TRUE) %>% 
-  afex::aov_car(happy ~ cntry * gndr + Error(idno),
-                                     data = ., anova_table = "pes")
-print(fit2)
-```
-
-Die Erläuterungen der einzelnen Parameter sind gleich zu den Erläuterungen der unifaktoriellen ANOVA, daher werden diese nicht wiederholt. Es zeigt sich, dass das Land erneut einen signifikanten Einfluss auf die Zufriedenheit hat (welcher im vorliegenden Modell etwas geringer mit 1.7 Prozent erklärter Varianz ausfällt). Keinen signfikanten Einfluss haben hingegen das Geschlecht der Befragten sowie das Zusammenspiel aus Geschlecht und Länderzugehörigkeit (p.value über .05).
-
-Im Anschluss müssen wir, wie in der univariaten ANOVA, die Posthoc-Tests berechnen (im vorliegenden Fall können wir lediglich den Tukey-Test berechnen, das der Tamhame-Test nur für einfaktorielle Designs funktioniert).
-
-### Post-Hoc Tests
-
-```{r}
-#Tukey Post-Hoc Test
-emmeans::emmeans(fit2, specs = c("cntry", "gndr")) %>% 
-  pairs()
-```
-
-### Interaktionen visualisieren
-
-Um einen möglichen Interaktionseffekt (auch wenn in unseren Fall der Interkationseffekt nicht signifikant war) auch anschaulich vermitteln bzw. oft auch verstehen zu können, empfiehlt es sich, diesen als Diagramm darzustellen. Hierzu nutzen wir die Pakete `emmeans` und `ggplot2`.
-
-```{r}
-#Interaktionsplot ausgeben
-emmip(fit2, cntry ~ gndr) + 
-  labs(title = "Geschätzes Randmittel von Lebenszufriedenheit", 
-       y = "Geschätzte Randmittel",
-       x = "Geschlecht")
-
-emmip(fit2, gndr ~ cntry) + 
-  labs(title = "Geschätzes Randmittel von Lebenszufriedenheit", 
-       y = "Geschätzte Randmittel",
-       x = "Land")
-```
 
 # Das Testen von Unterschieden bei verbundenen Stichproben
 
 ## t-Test für verbundene Stichproben
 
-## Wilcoxon
+## Exkurs: nicht parametrische Tests
+
+Mann-Whitney-U & Wilcoxon
