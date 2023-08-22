@@ -12,4 +12,10 @@ format:
 
 # Die Kunst vom Umgang mit Daten
 
+
+```{r}
+
+```
+
+
 ## 
