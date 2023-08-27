@@ -348,7 +348,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
+ <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Varianzanalyse</span></a>
   </div>
 </li>
       </ul>
@@ -450,18 +456,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="bestehende-dokument-laden" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="bestehende-dokument-laden"><span class="header-section-number">3</span> Bestehende Dokument laden</h2>
+<p>Zum Laden eines Quarto- oder Markdown Dokumentes könnt ihr dieses einfach auf eurem Rechner doppelklicken. Wahlweise könnt ihr auch über File -&gt; Open File (oder Strg + O) innerhalb von RStudio ein Dokument öffnen.</p>
 </section>
 <section id="neue-dokumente-anlegen" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="neue-dokumente-anlegen"><span class="header-section-number">4</span> Neue Dokumente anlegen</h2>
+<p>Um ein neues Dokument anzulegen, könnt ihr einfach über File -&gt; New File das gewünschte Dokument anlegen. Sowohl bei Markdown, als auch bei Quarto öffnet sich dann das Folgende Fenster:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/NewDocument.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Neues Dokument anlegen</figcaption>
+</figure>
+</div>
+<p>Dort könnt ihr euer Dokument benennen (<em>Title</em>), die Autoren festlegen (<em>Author</em>) sowie das Output-Format (<em>HTML, PDF oder WORD</em>) festlegen. Zudem könnt ihr bei Quarto angeben, wie ist das Dokument gerendert werden soll (<em>Knitr</em> vs.&nbsp;<em>Jupyter</em>). Hier könnt ihr die Auswahl auf Knitr belassen. Zuletzt könnt ihr festlegen, ob ihr den visual markdown editor oder den source editor nutzen möchtet. All diese Punkte könnt ihr jedoch auch noch nachfolgend im <a href="###yaml-header">YAML-Header</a> oder im <a href="###übergreifende_menüpunkte">Menü</a>) ändern.</p>
 </section>
 <section id="übergreifende-menüpunkte" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="übergreifende-menüpunkte"><span class="header-section-number">5</span> Übergreifende Menüpunkte</h2>
+<p>Unterhalb der allgemeinen RStudio-Menüleiste findet ihr eine eigene Markdown und Quarto-Dokumentleiste:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Bilder/Quartomenü.jpg" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Dokumentmenüleistet</figcaption>
 </figure>
 </div>
+<p>Hier könnt ihr euer Dokument speichern (Diskettensymbol), in eurem Dokument suchen und ersetzen (Lupensymbol) oder euer Dokument Rendern (Quarto) oder Knitten (Markdown). Hiermit rendert ihr euer Dokument von R in euer gewünschtes Outputformat (Word, Pdf, oder Html). Zusätzlich könnt ihr mit dem Zahnrad Optionen für den Umgang mit dem gerenderten Dokument und den Codechunks festlegen. Zusätzlich könnt ihr hier neue Codechunks anlegen (+C-Symbol auf der rechten Seite) oder die bestehenden Code-Chunks ausführen (Run-Symbol)</p>
 </section>
 <section id="überblick-über-die-dokumentkomponenten" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="überblick-über-die-dokumentkomponenten"><span class="header-section-number">6</span> Überblick über die Dokumentkomponenten</h2>
@@ -475,7 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">YAML Header in einem Quarto Dokument</figcaption>
 </figure>
 </div>
-<p>Dies beinhaltet beispielsweise den Titel des Dokumentes <code>title:</code>, die Autoren <code>author</code>, sowie Spezifikationen zur Dokumentstruktur, wie beispielsweise das Outputformat <code>format:</code> oder auch in Quarto Spezifikationen zum Umgang mit den Codechunks <code>output: echo = TRUE</code> auf Gesamtdokumentebene.</p>
+<p>Dies beinhaltet beispielsweise den Titel des Dokumentes <code>title:</code>, die Autoren <code>author</code>, sowie Spezifikationen zur Dokumentstruktur, wie beispielsweise das Outputformat <code>format:</code> oder auch in Quarto Spezifikationen zum Umgang mit den Codechunks <code>execute: echo : true</code> auf Gesamtdokumentebene.</p>
 </section>
 <section id="text" class="level3" data-number="6.2">
 <h3 data-number="6.2" class="anchored" data-anchor-id="text"><span class="header-section-number">6.2</span> Text</h3>
@@ -498,11 +515,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="code-chunks" class="level3" data-number="6.3">
 <h3 data-number="6.3" class="anchored" data-anchor-id="code-chunks"><span class="header-section-number">6.3</span> Code Chunks</h3>
+<p>Innerhalb von Markdown und Quarto können wir Codebefehle direkt in unser Dokument innerhalb von sogenannten Codechunks integrieren. Hier können wir alle Arten von Code schreiben sowie diese mit Hilfe von <code>#</code> direkt kommentieren (alles hinter einer Raute wird dabei nicht ausgeführt). Codechunks beginnen mit drei Backticks und einem <code>r</code> in geschweiften Klammern und enden wieder mit drei Backticks:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="in">```{r}</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Dies ist ein Code Chunk</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Um die Codechunks zu erzeugen können wir einfach auf Code -&gt; Insert Codechunk gehen, auf das +C-Symbol in der Dokumentmenüleiste oder den Shortcut <code>Alt + Strg + I</code> nutzen. Innerhalb der Chunks können wir Code schreiben und ausführen. Dies geschieht für eine einzelne Codezeile mit dem Shortcut <code>Strg + Enter</code> und für den gesamten Codechunk mit dem Shortcut <code>Strg + Shift + Enter</code>. Wahlweise könnt ihr auch den kleinen grünen Pfeil in der rechten oberen Ecke des Chunks, Code -&gt; Run Selected Lines oder den Punkt Run in der Quarto-Dokumentleiste auswählen.</p>
+<p>Zusätzlich können wir hinter dem <code>{r}</code> angeben, wie R mit dem Code des Chunks umgehen soll. Wir können beispielsweise auswählen, ob R den Code ausführen soll (<code>eval = T/F</code>) ob der Codebereich in unserem Enddokument aufgeführt sein soll (<code>echo = T</code>) oder wir lediglich die Ergebnisse angezeigt wollen (<code>echo = F</code>) oder ob wir beispielsweise Warnungen (<code>warnings = T/F</code>) oder Messages (<code>message = T/F</code>) in unserem Output-Dokument wünschen:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="in">```{r, echo = T}</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="co"># Dies ist ein Code Chunk</span></span>
