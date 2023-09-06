@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -145,13 +179,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Was ist R?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_1.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R-Studio</span></a>
+ <span class="menu-text">Einführung in R und RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -163,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+ <span class="menu-text">Vorbereiten der R-Umgebung</span></a>
   </div>
 </li>
       </ul>
@@ -320,7 +348,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
+ <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Varianzanalyse</span></a>
   </div>
 </li>
       </ul>
@@ -364,7 +398,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#selektion-manipulation-und-transformation-von-daten" id="toc-selektion-manipulation-und-transformation-von-daten" class="nav-link active" data-scroll-target="#selektion-manipulation-und-transformation-von-daten"><span class="header-section-number">1</span> Selektion, Manipulation und Transformation von Daten</a></li>
+  <li><a href="#selektion-manipulation-und-transformation-von-daten" id="toc-selektion-manipulation-und-transformation-von-daten" class="nav-link active" data-scroll-target="#selektion-manipulation-und-transformation-von-daten"><span class="header-section-number">1</span> Selektion, Manipulation und Transformation von Daten</a>
+  <ul class="collapse">
+  <li><a href="#die-tidyverse-schreibweise-und-der-pipe-operator" id="toc-die-tidyverse-schreibweise-und-der-pipe-operator" class="nav-link" data-scroll-target="#die-tidyverse-schreibweise-und-der-pipe-operator"><span class="header-section-number">1.1</span> Die Tidyverse-Schreibweise und der Pipe-Operator %&gt;%</a></li>
+  <li><a href="#daten-selektion-und-subset-bildung" id="toc-daten-selektion-und-subset-bildung" class="nav-link" data-scroll-target="#daten-selektion-und-subset-bildung"><span class="header-section-number">1.2</span> Daten-Selektion und Subset-Bildung</a>
+  <ul class="collapse">
+  <li><a href="#auswahl-von-spalten" id="toc-auswahl-von-spalten" class="nav-link" data-scroll-target="#auswahl-von-spalten"><span class="header-section-number">1.2.1</span> Auswahl von Spalten</a></li>
+  <li><a href="#filtern-von-fällen" id="toc-filtern-von-fällen" class="nav-link" data-scroll-target="#filtern-von-fällen"><span class="header-section-number">1.2.2</span> Filtern von Fällen</a></li>
+  </ul></li>
+  <li><a href="#manipulation-und-transformation-von-daten" id="toc-manipulation-und-transformation-von-daten" class="nav-link" data-scroll-target="#manipulation-und-transformation-von-daten"><span class="header-section-number">1.3</span> Manipulation und Transformation von Daten</a>
+  <ul class="collapse">
+  <li><a href="#neue-spalten-erstellen" id="toc-neue-spalten-erstellen" class="nav-link" data-scroll-target="#neue-spalten-erstellen"><span class="header-section-number">1.3.1</span> Neue Spalten erstellen</a></li>
+  <li><a href="#variablen-umbenennen" id="toc-variablen-umbenennen" class="nav-link" data-scroll-target="#variablen-umbenennen"><span class="header-section-number">1.3.2</span> Variablen umbenennen</a></li>
+  </ul></li>
+  <li><a href="#gruppieren-von-daten-und-aggregation" id="toc-gruppieren-von-daten-und-aggregation" class="nav-link" data-scroll-target="#gruppieren-von-daten-und-aggregation"><span class="header-section-number">1.4</span> Gruppieren von Daten und Aggregation</a></li>
+  <li><a href="#umgang-mit-realen-datensätzen-und-fehlenden-werten" id="toc-umgang-mit-realen-datensätzen-und-fehlenden-werten" class="nav-link" data-scroll-target="#umgang-mit-realen-datensätzen-und-fehlenden-werten"><span class="header-section-number">1.5</span> Umgang mit realen Datensätzen und fehlenden Werten</a></li>
+  <li><a href="#erstellung-von-indizes" id="toc-erstellung-von-indizes" class="nav-link" data-scroll-target="#erstellung-von-indizes"><span class="header-section-number">1.6</span> Erstellung von Indizes</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -394,12 +444,442 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Skript_3.3_Bild_1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Bild von Gerd Altmann auf Pixabay</figcaption>
+</figure>
+</div>
 <section id="selektion-manipulation-und-transformation-von-daten" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Selektion, Manipulation und Transformation von Daten</h1>
-<p>Das tidyverse-Universum Manipulation und Transformation von Daten Zufallsstichprobe ziehen Daten filtern/Fälle und Spalten auswählen; Subsets bilden aufgrund von konditionalen Bedingungen Gruppieren von Fällen (group_by)</p>
-<p>Umgang mit realen, nicht-sauberen Datensätzen an konkreten Beispielen (z.B. missing data; -99/-77, invertierte Items; “weiß nicht”; fehlende Faktoren) Variablen recodieren / rename (Neue) Variablen berechnen (z.B. mehrere Variablen in einem Index bzw. einer Skala zusammenfassen)</p>
+<p>In diesem Kapitel werden wir uns mit den Schritten der Datenbearbeitung befassen, die essentiell für die quantitative Datenanalyse sind. Wir werden lernen, wie wir Daten gezielt auswählen, verändern und transformieren können, um die für uns relevanten Informationen zu gewinnen. Dabei werden wir das umfassende “tidyverse”-Universum nutzen, insbesondere das leistungsstarke R-Paket “dplyr”, das speziell für diese Art von Datenmanipulation entwickelt wurde. Bevor wir mit der Selektion, Manipulation und Transformation unserer Daten starten können, müssen wir die nötogen Pakete und unseren Datensatz lasen. Dazu laden wir zunächst unseren Paketmanager mit dem Befehl <code>library(pacman)</code>. Anschließend können wir mit <code>p_load()</code> die Libraries laden, die wir in diesem Kapitel benötigen. Diese sind “haven”, um unseren Datensatz in dem entsprechenden Dateiformat (Endung .dta) öffnen zu können und “tidyr” und “dplyr”, um Daten auszuwählen, zu manipulieren und zu transformieren:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(pacman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'pacman' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">p_load</span>(haven,tidyr,dplyr)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>daten <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="die-tidyverse-schreibweise-und-der-pipe-operator" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="die-tidyverse-schreibweise-und-der-pipe-operator"><span class="header-section-number">1.1</span> Die Tidyverse-Schreibweise und der Pipe-Operator %&gt;%</h2>
+<p>In der tidyverse-Logik verwenden wir eine bestimmte Schreibweise, die es uns ermöglicht, viele Funktionen zu kombinieren und unseren Code trotzdem einfach verständlich und leserlich zu halten. Dabei ist der Pipe-Operator %&gt;% eines der markantesten Merkmale des Tidyverse und dient dazu, komplexe Datenverarbeitungsketten auf eine lesbarere und effizientere Weise zu erstellen. Die Pipe ermöglicht es, die Ergebnisse einer vorherigen Operation als Eingabe für die nächste Operation zu verwenden, ohne explizit Zwischenvariablen erstellen zu müssen. Dies fördert nicht nur die Lesbarkeit des Codes, sondern verringert auch die Wahrscheinlichkeit von Fehlerquellen.</p>
+<p>Die grundlegende Logik der Pipe %&gt;% ist wie folgt:</p>
+<p>daten %&gt;% operation_1 %&gt;% operation_2 %&gt;% operation_3</p>
+<p>Hier ist daten der Ausgangspunkt (Datensatz oder Objekt), auf dem verschiedene Operationen nacheinander ausgeführt werden. Jede Operation erzeugt eine modifizierte Version des vorherigen Objekts, die dann als Eingabe für die nächste Operation verwendet wird. Dies erzeugt eine Kette von Operationen, die von links nach rechts ausgeführt werden.</p>
+</section>
+<section id="daten-selektion-und-subset-bildung" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="daten-selektion-und-subset-bildung"><span class="header-section-number">1.2</span> Daten-Selektion und Subset-Bildung</h2>
+<p>Die Datenanalyse beginnt oft damit, die relevanten Informationen aus einem umfangreichen Datensatz auszuwählen. Hierbei können wir uns auf bestimmte Variablen (Spalten im Datensatz) konzentrieren, die für unsere Fragestellung von Interesse sind. Das “dplyr”-Paket in R bietet uns eine einfache und mächtige Möglichkeit, diese Daten auszuwählen.</p>
+<section id="auswahl-von-spalten" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="auswahl-von-spalten"><span class="header-section-number">1.2.1</span> Auswahl von Spalten</h3>
+<p>Die Funktion <code>select()</code> ermöglicht es uns, Spalten basierend auf ihren Namen auszuwählen. Dies ist besonders hilfreich, wenn wir nur bestimmte Aspekte unserer Daten benötigen. Wollen wir beispielsweise aus unserem ALLBUS-Datensatz ein Subset ziehen, dass nur das Alter der Befragten enthält und die Variablen, die mit Vertrauen in Institutionen zu tun haben, können wir dies wie folgt machen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>vertrauen_institutionen <span class="ot">&lt;-</span> <span class="fu">select</span>(daten, age, pt01, pt02, pt03, pt04, pt06, pt07, pt08, pt09, pt10, pt11, pt12, pt14, pt15, pt19, pt20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In diesem Beispiel generieren wir einen neuen Datenrahmen, dem wir den Namen vertrauen_institutionen zuordnen. Innerhalb der Funktion <code>select()</code> geben wir zuerst den Datensatz an, aus dem wir Variablen auswählen wollen. Dieser heißt in unserem Fall daten. Darauf folgt nach einem Komma die Auflistung jener Variablen anhand ihrer Namen im Datensatz, die wir auswählen wollen. Ein Blick in das <a href="Datensatz/ALLBUS_Codebook.pdf">Codebook</a> des ALLBUS-Datensatzes zeigt uns, welche Variablen mit dem Vertrauen in Institutionen zu tun haben (STRG+F zur Suche im Dokument nach “Vertrauen in Institutionen”, Auflistung der Variablen in der Tabelle auf Seite xiii). Mit dem Befehl <code>View()</code>, oder indem wir auf den generierten Datensatz in unserem Global Environment (RStudio-Schaltfläche 3) klicken, können wir uns das Subset ansehen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">View</span>(vertrauen_institutionen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Auf eine einzelne Variable in einem Datensatz können wir mit dem Dollar-Zeichen $ zugreifen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>vertrauen_institutionen<span class="sc">$</span>age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;labelled&lt;double&gt;[5342]&gt;: ALTER: BEFRAGTE(R)
+   [1]  54  53  89  79  62  23  31  57  68  51  57  85  55  26  38  58  54  45
+  [19]  49  26  83  48  48  73  62  25  54  54  51  60  49  57  58  58  39  82
+  [37]  77  79  22  77  54  50  23  25  65  56  72  52  68  55  31  79  62  67
+  [55]  66  23  83  62  41  57  22  38  69  62  48  64  26  73  49  38  40 -32
+  [73]  50  57  42  55  31  55  68  91  63  56  77  56  30  58  60  59  51  25
+  [91]  62  59  65  50  36  25  44  59  46  44  50  39  49  21  60  77  21  60
+ [109]  55  52  66  26  42  71  77  48  68  26  50  69  64  44  73  70  60  66
+ [127]  33  20  79  83  22  37  21  53  59  26  32  25  80  47  54  23  64  42
+ [145]  24  75  49  87  78  54  70  70  38  22  48  52  57  51  47  50  39  37
+ [163]  61  70  83  59  48  34  68  27  61  57  40  58  70  51  56  67  33  74
+ [181]  70  46  18  23  42  65  28  23  40  58  64  63  44  64  61  64  53  60
+ [199]  58  70  65  49  46  51  57  55  37  46  60  52  29  37 -32  86 -32  51
+ [217]  29  82  67  77  78  26  55  32  61  21  38  37  25  48  24  41  69  51
+ [235]  69  54  36  84  67  67  37  52  29  74  77  78  26  57  22  52  25  69
+ [253]  49  37  65  60  61  52  66  45  44  40  33  22  55  51  38  80  87  50
+ [271]  22  66  37  33 -32  36  71  77  50  64  69  40  69  18  53  66  71  79
+ [289]  51  66  68  67  36  32  63  58  19  38  32  71  37  41  50  19  56  55
+ [307]  48  62  68  28  82  74  66  56  66  20  36  19  33  71  56  57  36  26
+ [325]  60  74  28  55  29  40  78  63  39  26  45  51  65  54  64  92  43  26
+ [343]  54  36  78  78  55  54  60  67  36  77  81  55  62  47  56  54  46  77
+ [361]  24  59  45  61  29  69  25  61  28  84  80  80  58  52  40  65  52  60
+ [379]  51  59  42  63  19  26  57  53  66  53  54  76  30  28  61  81  71  65
+ [397]  61  79  50  69  51  84  55  60  47  34  59  79  86  60  36  26  62  62
+ [415]  36  67  63  73  25  63  78  19  59  47  67  40  32  35  70  25  70  69
+ [433]  32  37  43  22  69  62  62  41  40  82  22  66  54  49  50  85  52  29
+ [451]  45  37  43  70  66  38  64  49  75  36  42  59  39  65  53  67  75  30
+ [469]  78  36  65  61  32  84  39  80  31  69  31  44  64  78  32  64  70  41
+ [487]  63  70  32  65  62  50  46  25  68  74  66  32  59  63  81  72  81  77
+ [505]  53  76  36  90  83  33  43  78  78  77  39  33  34 -32  42  25  22  26
+ [523]  53  65  54  31  24  55  56  63  38  44  24  56  73  61  63  68  61  33
+ [541]  41  53  50  46  51  64  81  68  73  56  70  66  82  62  32  47  57  33
+ [559]  75  32  60  85  64  40  32  62  66  44  63  61  68  73  54  59  67  37
+ [577]  42  33  62  61  72  48  58  57  85  45  62  42  43  26  56  55  34  27
+ [595]  52  64  68  28  72  42  82  70  47  59  63  21  57  69  47  52  52  38
+ [613]  65  73  45  60  61  77  41  36  49  73  52  19  63  19  33  35  33  62
+ [631]  52  47  77  69  53  56  39  68  44  81  60  78  22  92  58  24  72  83
+ [649]  77  86  53  31  76  20  81  43  20  58  48  31  54  42  66  48  78  59
+ [667]  60  37  37  36  67  40  37  55  72  61  27  81  61  67  57  82  53  53
+ [685]  43  57  59  26  81  78  68  65  79  56  62  78  36  66  74  75  34  74
+ [703]  30  75  42  65  24  43  54  63  30  39  78  87  49  65  82  64  35  19
+ [721]  46  64  26  56  79  21  38  57  24  19  47  37  57  30  72  67  46  24
+ [739]  44  60  32  45  52  62  45  54  35  60  68  84  38  24  57  84  35  57
+ [757]  58  58  57  66  58  39  63  26  66  58  37  61  52  77  24  63  73  23
+ [775]  48  56  61  31  55  59  42  57  28  42  46  24  57  29  58  53  76  72
+ [793]  31  34  64  35  66  67  27  34  80  78  60  51  83  39  38  68  67  82
+ [811]  40  21  34  70  59  79  56  83  70  33  70  46  47  37  87  52  26  19
+ [829]  44  39  49  66  75  71  46  49  33  71  70  37  50  26  61  33  24  58
+ [847]  50  54  62  52  62  26  33  67  68  66  38  59  59  53  48  41  58  41
+ [865]  20  60  56  28  63  54  27  56  39  61  47  75  67  70  45  33  80  82
+ [883]  26  61  73  72  58  58  30  47  26  49  43  46  70  31  41  23  52  57
+ [901]  77  31  63  73  46  56  37  27  40  23  49  56  87  38  20  42  52  63
+ [919]  78  64  46  40  61  48  54  59  48  78  58  53  36  48  45  40  68  59
+ [937]  20  46  25  51  66  61  45  25  76  69  34  73  56  52  69  40  68  31
+ [955]  63  49  69  60  37  81  74  33  59  58  62  69  60  71  66  45  49  26
+ [973]  69  52  44  58  76  39  61  87  71  74  40  70  32  62  85  79  36  63
+ [991]  88  50  69  70  46  59  28  28  79  55  70  66  53  54  64  72  81  39
+[1009]  39  20  74  66  48  28  81  68  56  65  51  61  33  81  58  43  53  38
+[1027]  77  25  71  48  59 -32  31  52  88  33  87  29  70  58  54  38  68  61
+[1045]  29  59  35  73  31  40  73  50  30  23  80  67  63  56  24  21  62  81
+[1063]  33  62  23  56  26  67  27  64  72  19  50  33  71  62  90  65  36  41
+[1081]  39  77  22  59  64  67  67  51  43  57  54  32  62  50  41  19  39  42
+[1099]  52  47  51  58 -32 -32  53  40  31  61  66  56  58  72  52  26  74  38
+[1117]  63  36  42  25  82  60  27  53  48  81  86  67  23  30  43  64  52  49
+[1135]  38  49  40  61  57  56  27  64  60  66  80  78  20  36  77  38  50  63
+[1153]  89  51  29  78  28  85  58  31  54  86  37  58  66  58  55  35  64  46
+[1171]  26  81  67  43  34  35  23  70  40  30  46  56  64  26  27  59  43  22
+[1189]  61  41  37  51  72  61  52  30  53  42  18  66  60  27  57  43  29  34
+[1207]  69  63  38  71  71  65  57  81  61  73  64  34  58  55  58  51  62  51
+[1225]  56  72  25 -32  43  55  59  66  34  67  81  80  74  39  66  73  56  38
+[1243]  66  56  34  35  56  59  32  57  90  44  63  64  35  63  88  55  42  68
+[1261]  70  26  73  24  77  22  25  69  54  82  49  67  55  61  74  53  61  26
+[1279]  90  46  52  68  29  38  65  37  59  23  56  83  50  71  62  56  54  56
+[1297]  51  66  37  25  79  53  52  51  60  57  73  42  55  79  60  56  73  80
+[1315]  66  52  52  36 -32  23  55  62  73  56  54  68  64  45  32  71  24  40
+[1333]  61  41  80  58  71  43  36  45  58  46  80  35 -32  80  83  53  41  20
+[1351]  55  47  77  44  39  34  77  27  50 -32  27  31  57  85  67  73  78  53
+[1369]  60  44  60  62  77  48  59  60  68  50  19  67  42  63  56  33  72  74
+[1387]  38  51  77  72  61  71  73  38  40  68  60  59  74  28  42  57  43  71
+[1405]  67  41  38  84  32  63  73  31  60  51  25  74  62  57  81  82  60  76
+[1423]  71  27  30  54  57  60  24  48  67  60  64  74  23  62  68  66  20  58
+[1441]  57  65  45  31  50  72  53  30  35  41  82  35  76  57  64  54  77  19
+[1459]  41  24  36  36  80  39  21  53  19  38  62  34  44  34  78  44  54  76
+[1477]  59 -32  75  69  74  23  64  62 -32  60  48  38  59  47  69  73  38  25
+[1495]  34  76  20  56  37  67  51  74  19  60  41  58  60  53  86  67  64  24
+[1513]  61  72  82  28  67  45  73  28  76  70  44  66  57  64  49  51  53  22
+[1531]  56  32  74  39  42  34  43  59  38  43  94  41  44  78  82  36  51  58
+[1549]  81  63  24  61  58  67  81  69  61  71  50  65  36  45  33  63  61  81
+[1567]  41  22  32  89  47  44  45  62  49  26  59  40  67  52  52  53  62  61
+[1585]  56  27  30  49  28  77  29  36  70  54  57  66  87  59  37  39  18  57
+[1603]  78  80  49  35  53  21  45  73  33  48  42  83  44  66  57  30  67  79
+[1621]  74  70  66  52  20  66  52  41  42  48  56  73  57  39  21  22  57  70
+[1639]  38  60  71  64  78  18  79  27  35  28  20  56  75  69  49  62  54  68
+[1657]  36  51  45  46  43  62  83  65  39  30  31  72  23  79  46  42  53  27
+[1675]  51  20  41  73  61  80  29  66  42  51  19 -32  31  67  42  52  41  67
+[1693]  19  55  44  70  27  48  39  38  71  65  60  50  36  41  65  53  30  73
+[1711]  84  32  68  53  67  67  25  62  54  32  38  64  81  53  66  48  75  19
+[1729]  45  92  53  69  69 -32  82  52  41  61  36  55  75  67  56  24  66  47
+[1747]  40  41  66  53  61  42  85  27  57  58  79  26  65  27  65  61  63  85
+[1765]  59  59  46  33  56  34  39  23  42  85  80  22  33  27  40  66  71  89
+[1783]  35  64  70  78  75  51  37  48  79  41  76  35  77  41  52  64  68  61
+[1801]  75  28  46  21  37  58  63  39  43  62  21  53  71  72  40  25  67  64
+[1819]  43  40  83  44  44  28  75  21  69  47  31  80  83  74  46  20  55  34
+[1837]  42  80  79  32  24  47  57  28  34  35  36  59  63  68  61  55  82  38
+[1855]  49  54  62  26  66  39  71  68  69  68  57  21  51  82  50  66  25  22
+[1873]  41  58  55  72  35  59  76  58  38  50  50  32  46  47  39  67  61  57
+[1891]  69  63  58  34  69  54  50  20  69  94  59  65  33  54  75  94  48  80
+[1909]  66  68  52  20  22  38  35  52  51  25  72  57  61  25  50  36  21  30
+[1927]  64  44  45  55  76  79  80  61  41  35  83  42  19  75  52  25  57  44
+[1945]  36  18  53  73  43  39  58  47  66  54  41  87  73  46  53  71  36  62
+[1963]  50  78  67  55  61  21  70  39  64  67  52  51  88  46  49  27  38  30
+[1981]  55  56  80  42  69  46  68  50  60  22  20  50  72  38  30  40  45  47
+[1999]  66  72  62  52  36  33  83  68  63  46  53  68  52  58  70  46  66  27
+[2017]  33  36  51  80  57  26  68  39  61  26  52  33  29  70  64  59  68  55
+[2035]  55  72  68  60  57  35  21  60  69  30  60  74  57  52  24  56  46  61
+[2053]  64  25  50  93  33  63  20  59  37  54  68  78  58  82  73  68  64  33
+[2071]  68  50  45  24  65  40  28  43  73  53  52  70  48  56  82  63  69  51
+[2089]  69  72  91  65  62  32  80  78  35  38  65  80  65  65  72  47  34  54
+[2107]  78  36  43  63  53  45  28  38  25  57  59  69  70  37  41  51  60  36
+[2125]  84  24  76  61  45  60  81  54  33  60  46  59  71  61  59  39  60  74
+[2143]  23  68  55  20  64  58  73  45  20  41  22  82  56  61  24  56  62  68
+[2161]  35  73  66  64  33  83  62  49  49  21  80  55  70  71  73  32  54  78
+[2179]  20  67  62  48  59  27  43  61  70  42  80  59  79  24  39  37  44  49
+[2197]  57  53  39  43  86  80  36  23  34  59  21  55  52  56  65  23  69  21
+[2215]  55  21  79  63  57  20  73  68  43  35  60  39  50  55  64  29  85  25
+[2233]  28  33  62  28  58  57  43  57  57  25  36  57  69  79  85  42  50  59
+[2251]  53  34  60  44  65  53  50  41  77  60  41  37  70  48  41  18  52  52
+[2269]  59  42  72  21  52  50  49  47  62  65  61  20  67  19  56  30  86  65
+[2287]  32  56  52  82  80  25  66  66  69  76  66  27  61  21  32  50  45  26
+[2305]  26  56  34  40  25  62  36  55  19  41  22  29  34  46  57  40  26  67
+[2323]  47  50  40  84  55  74  30  36  79  70  71  72  48  78  23  25  22  51
+[2341]  23  24  44  37  23  57  80  35  43  19  47  47  56  64  67  88  83  29
+[2359]  30  48  52  77  67  41  22  63  35  70  43  62  76  65  82  49  34  79
+[2377]  79  25  22  77  69  58  47  72  52  67  36  33  24  44  71  48  48  33
+[2395]  66  50  39  49  35  77  19 -32  47  52  33  68  39  69  78  65  52  65
+[2413]  67  39  69  59  19  61  36  68  73  59  55  64  63  38  41  68  22  58
+[2431]  73  80  78  40  36  63  60  57  22  61  70 -32  66  54  49  37  95  53
+[2449]  41  57  24  22  29  92  34  30  61  83  70  80  53  72  82  52  44  41
+[2467]  43  63  90  67  53  55  50  56  37  44  34  74  49  72  45  76  27  26
+[2485]  71  63  82  70  65  52  64  54  55  35  32  40  82  67  33  33  77  34
+[2503]  58  55  62  55  24  74  34  35  29  39  75  62  59  46  38  62  35  22
+[2521]  28  37  60  62  43  54  38  60  68  41  71  30  53  32  73  29  51  42
+[2539]  79  61  76  34  85  44  22  57  40  58  34  34  54  69  64  58  43  26
+[2557]  31  59  54  57  30  24  46  51  43  45  83  50  83  91  80  55  44  61
+[2575]  44  77  42  66  72  81  27  30  64  73  35  64  29  73  61  68  47  50
+[2593]  60  39  69  19  45  64  48  53  44  21  20  59  20  61  38  63  44  52
+[2611]  88  73  24  41  68  58  81  62  57  66  42  25  72  74  85  48  49  30
+[2629]  51  31  63  57  67  33  64  33  38  66  58  52  80  71  32  74  27  64
+[2647]  51  38  54  65  64  76  29  42  36  79  57  38  71  29  75  93  70  62
+[2665]  78  57  64  83  42  65  67  48  54  64  46  71  49  24  49  66  57  64
+[2683]  64  32  66  40  46  85  43  78  34  27  43  67  57  83  44  35  52  42
+[2701]  20  23  55  67  67  59  64  56  81  35  25  32  58  74  46  62  38  52
+[2719]  73  28  52  78  51  62  77  61  36  19  37  56  38  59  41  56  19  73
+[2737]  47  81  36  50  58  73  29  58  32  42  70  46  57  72  77  33  63  74
+[2755]  64  24  35  63  19  33  70  38  64  56  81  22  53  40  41  58  70  60
+[2773]  60  83  64  55  28  67  46  53  55  28  47  38  49  33  43  40  42  57
+[2791]  28  51  53  75  32  75  57  94  29  59  70  40  74  70  71  41  49  37
+[2809]  28  58  47  73  33  57  42  77  56  65  42  30  51  57 -32  65  27  63
+[2827]  47  60  63  66  53  21  37  78  78  66  44  38  70  64  68  42  19  33
+[2845]  62  33  64  58  80  18  36  79  40  47  54  64  79  38  36  34  69  40
+[2863]  45  28  66  58  48  79  20  54  64  35  80  53  26  53  51  71  81  22
+[2881]  58  61  80  27  40  46  67  84  74  66  51 -32  82  43  63  38  43  41
+[2899]  18  62  42  61  71  71  63  35  24  55  62  47  64  52  61  82  62  29
+[2917]  27  32  34  49  47  41  48  70  69  40 -32  36  67  58  79  26  60  34
+[2935]  30  59  73  29  68  69  69  29  53  63  65  58  67  52  55  62  66  26
+[2953]  83  54  86  52  31  44  44  35  41  36  36  60  63  38  46  44  85  50
+[2971]  60  39  62  73  85  25  34  95  31  63  28  81  27  66  36  66 -32  52
+[2989]  52  46  32  89  46  33  74  57  78  23  72  30  80  76  73  68  44  76
+[3007] -32  30  31  69  39  83  35  59  54  56  54  46  18  54  56  32  25  55
+[3025]  73  20  20  21  64  67  71  49  66  58  56  56  62  51  58  67  69  28
+[3043]  88  59  54  83  49  88  71  52  28  92  55  29  36  61  43  53  75  27
+[3061]  78  61  37  74  64  71  34  28  49  90  30  70  57  56  50  56  35  35
+[3079]  37  70  66  40  49  63  86  58  77  60  79  73  58  70  39  58  77  28
+[3097]  56  50  29  45  77  23  51  44  71  44  32  38  41  53  61  57  77  70
+[3115]  60  66  58  33  35  83  76  46  34  53  72  54  50  42  54  38  21  20
+[3133] -32  55  40  77  81  63  61  59  62  84  92  54  30  46  85  75  40  44
+[3151]  33  49  45  66  69  45  65  57  60  56  21  65  28  35  64  68  49  75
+[3169]  50  84  43  77  35  50  45  39  50  81  63  44  50  67  69  51 -32  81
+[3187]  49  40  80  33  34  52  40  85  46  73  23  26  70  21  50  55  69  52
+[3205]  48  34  51  65  56  39  67  53  74  30  68  18  52  64  24  20  68  55
+[3223]  63  69  44  34  73  40  66  57  74  77  57  60  66  61  44  85  71  21
+[3241]  31  75  77  30  55  69  38  23  81  32  62  65  46  63  80  57  56  59
+[3259]  60  83  73  32  34  36  83  59  78  25  81  64  22  79  68  56  32  68
+[3277]  47  29  77  73  79  67  55  71  27  62  67  40  51  57  39  44  53  38
+[3295]  35  42  79  69  33  52  82  38  27  70  75  42  56  73  33  32  81  71
+[3313]  43  82  67  78  43  46  92  68  78  44  77  80  44 -32  86  63  31  62
+[3331]  53  53  63  79  54  64  41  62  57  66  73  29  33  72  73  70  66  79
+[3349]  67  66  28  60  19  69  89  28  31  52  45  53  41  19  78  75  56  54
+[3367]  79  30  62  76  55  45  46  39  75  70  23  72  50  68  57  84  34  56
+[3385]  21  89  67  29  62  42  78  73  38  86  62  47  54  58  57  46  50  45
+[3403]  57  68  51  83  66  54  36  54  81  70  37  71  76  79  48  73  39  79
+[3421]  63  34  67  51  45  37  23  91  32  40  43  71  72  29  77  71  33  76
+[3439]  74  49  66  42  58  50  64  32  60  28  58  59  56  53  27  82  53  59
+[3457]  31  44  62  88  64  60  82  60  61  31  58  67  37  23  18  66  81  60
+[3475]  63  59  31  27  23  84  49  65  57  77  28  40  58  49  55  57  44  42
+[3493]  44  81  83  83  52  57  25  58  63  79  55  57  82  70  81  54  42  76
+[3511]  56  29  81  24 -32  58  75  53  61  37  61  82  58  68  63  54  85  47
+[3529]  57  65  64  32  78  53  33  31  28  71  45  27  61  31  78  54  49  58
+[3547]  68  27  52  80  42  71  51  82  27  55  64  34  33  66  67  85  64  85
+[3565]  79  62  41  55  47  50  73 -32  57  51  55  62  26  27  49  34  54  74
+[3583]  67  27  29  74  23  34  56  56  62  37  29  65  49  36  56  34  60  33
+[3601]  76  49  44  63  56  24  58  44  25  49  56  58  76  31  44  37  36  32
+[3619]  27  22  21  67  72  45  50  40  51  78  60  41  31  33  62  55  45  62
+[3637]  35  49  77  61  29  71  33  42  54  83  48  51  33  55  63  20  80  22
+[3655]  62  68  55  23  56  32  71  63  56  47  61  56  39  65  38  59  56  36
+[3673]  83  41  64  82  56  22 -32  45  80  92  38  32  70  52  58  31  59  43
+[3691]  47  57  79  66  45  61  44  87  40  54  37  70  40  42  52  34  19  33
+[3709]  68  61  43  33  35  70  88  51  36  71  73  64  79  40  70  24  52  48
+[3727]  42  40  69  51  55  60  44  72  45  78  31  53  65  53  85  63  81  71
+[3745]  59  28  60  28  60  51  61  44  67  58  47  56  64  23  47  57  33  72
+[3763]  48  66  54  61  20  44  53  24  67  46  73  38  78  48  81  58  56  68
+[3781]  74  53  21  57  62  58  64  32  27  70  68  48  47  73  53  59  68  68
+[3799]  75  60  64  54  32  56  60  79  67  69  78  20  69  67  59  48  48  40
+[3817]  52  71  86  22  58  30  66  60  61  36  28  30  72  41  67  22  26  76
+[3835]  46  18  55  46  30  31  67  70  39  38  36  52  38  34  52  32  40  86
+[3853]  76  45  55  60  42  71  62  86  60  27  88  42  64  52  27  30  23  71
+[3871]  64  34  20  35  49  71  23  27  49  19  86  69  82  72  66  67  54  44
+[3889]  54  48  64  42  82  48  44  44  20  31  72  23  72  77  33  59  42  68
+[3907]  27  53  41  69  61  73  27  85  34  82  50  86  46  57  63  58  78  81
+[3925]  77  59  20 -32  61  26  66  31  47  49  31  66  32  48  44  43  43  72
+[3943]  44 -32  61  63  26  40  56  53 -32  51  76  83  33  58  43  68  49  27
+[3961]  52  74  29  79  40  66  43  50  54  41  81  63  54  23  71  28  68  86
+[3979]  76  69  29  40  39  76  26  53  79  37  62  38  30  45  58  25  58  45
+[3997]  35  78  49  54  81  58  61  38  61  72  22  54  75  49  32  37  37  63
+[4015]  62  56  23  60  61  26  64  61  29  59  69  37  65  81  52  57  74  52
+[4033]  56  19  42  43  72  51  69  44  37  21  83  26  24  36 -32  45  62  34
+[4051]  42  61  64  45  23  48  69  33  52  38  61  34  54  57  48  55  51  70
+[4069]  54  72  71  84  64  47  42  55  54  55  52  52  68  49  46  29  41  20
+[4087]  41  38  69  55  73  76  41  39  46  38  28  36  85  27  52  29  79  57
+[4105]  77  70  64  38  55  65  58  34  50  24  25  63  64  64  55 -32  37  56
+[4123]  37  67  54  38  57  41  65  36  59  69  79  19  34  48  66  64  24  65
+[4141]  66  78  58  53  46  56  21  87  56  50  56  43  51  57  42  19  49  57
+[4159]  63  30  53  67  59 -32  27  67  68  50  64  69  26  81  47  61  62  28
+[4177]  59  68  64  61  70  32  68  30  36  57  65  40  29  63  59  38  82  33
+[4195]  68  75  39  54  28  81  22  49  24  64 -32  41  56  56  63  41  85  49
+[4213]  65  61  80  78  43  42  49  49  63  62  61  42  79  21  30  80  21  65
+[4231]  62  71  34  53  47  79  25  75  30  55  45  43  93  22  87  59  39  60
+[4249]  39  60  82  55  79  67  33  51  42  55  59  63  73  63  62  34  39  27
+[4267]  25  22  29  59  32  47  67  21  67  62  60  70  52  44  35  40  60  37
+[4285]  62  47  41  42  64  52  53  37  64  45  32  33  23  71  72  59  66  70
+[4303]  41  53  51  47  41  75  49  66  20  71  33  66  53  39  43  44  68  54
+[4321]  59  54  52  60  65  59  54  64  71  77  37  45  51  32  36  41  72 -32
+[4339]  71  65  61  58  59  56  63  27  48  33  33  46  46  61 -32  69  56  43
+[4357]  32  64  66  56  35  43  39  30  62  39  20  26  39  31  39  69  67  48
+[4375]  49  52  46  76  71  70  58  81  19  30  64  57  58  36  47  60  77  64
+[4393]  83  41  63  57  53  38  21  39  57  23  74  60  63  66  52  73  32  40
+[4411]  19  54  36  52  60  20  32  70  22  30  36  60  76  40  37  71  22  64
+[4429]  23  19  82  51  80  40  60  69  82  81  41  67  37  35  55  81  62  40
+[4447]  63  53  52  37  37  37  78  56  54  60  56  42  76  61  20  45  64  20
+[4465]  66  21  54  26  82  81  55  69  48  34  48  34  87  83  85  77  57  49
+[4483]  50  50  30  20  28  32  37  65  45  42  86  61  24  62  77  57  42  65
+[4501]  45  54  69  70  53  53  24  83  30  82  54  59  80  91  52  74  83  71
+[4519]  50  67  37  67  60  46  69  92  77  58  62  56  55  51  59  58  65  25
+[4537]  83  38  60  23  19  54  25  72  36  72  44  53  32  23  74  30  49  58
+[4555]  65  78  37  49  44  72  71  63  20  68  53  56  34  76  47  48  54  59
+[4573]  27  60  52  62  84  38  50  69  48  43  33  78  20  32  81  22  28  64
+[4591]  47  34  39  80  36  58  63  18  68  55  38  42  77  69  62  74  36  51
+[4609]  76  69  71  19  69  54  50  71  71  53  81  37  51  78  64  52  68  69
+[4627]  68  57  57  78  49  41  34  43  74  45  96  43  54  71  35  54  67  61
+[4645]  57  68  26  63  56  64  59  75  77  74  62  35  56  58  58  56  35  70
+[4663]  54  64  25  34  63  79  43  37  32  86  71  19  34  59  31  60  66  37
+[4681]  83  65  81  20  22  86  70  43  40  51  56  35  88  62  50  89  78  83
+[4699]  61  19  70  83  68  71  33  49  39  58  68  55  22  26  76  62  34  58
+[4717]  43  56  69  43  57  57  23  50  65  77  49  22  40  26  81  26  63  82
+[4735]  61  60  36  58  43  64  46  20  43  82  79  71  69  58  58  67  54  55
+[4753]  65  46  49  65  47  53  38  23  63  96  83  20  27  66  82  62  25  73
+[4771]  45  58  33  60  29  60  72  44  32  59  55  30  76  40  64  65  19  60
+[4789]  25  26  76  81  46  56  42  78  76  56  84  62  67  19  35  49  70  39
+[4807]  44  26  25  68  83  67  37  70  31  43  18  63  43  38  42  57  66  69
+[4825]  34  33  38  54  25  50  53  79  77  60  69  57  58  55  58  55  85  45
+[4843]  24  19  49  57  44  56  69  74  53  30  30  46  40  70  73  53  60  57
+[4861]  69  38  27  62  57  69  59  36  39  50  55  47  61  71  71  52  55  51
+[4879]  61  72  52  52  71  83  77  64  56  78  63  39  58  57  33  61  76  39
+[4897]  48  19 -32  61  77  57  42  65  34  55  50  65  40  75  41  38  76  25
+[4915]  59  51  59  51  55  40  28  61  55  51  65  58  34  29  37  64  23  63
+[4933]  72  45  58  69  79  42  38  83  55  38  25  77  35  74  58  86  73  43
+[4951]  69  83  43  39  38  52  41  69  22  32  62  33  37  59  58  65  70  83
+[4969]  47  63  30  63  56  63  45  49  29  42  52  71  38  75  64  67  52  24
+[4987]  40  26  72  43  46  30  73  73  61  62  70  93  59  20  57  52  63  20
+[5005]  34  59  38  20  34  84  35  32  22  34  55  72  81  55  22  53  40  59
+[5023]  81  70  69  61  87  70  59  68  78  42  21  36  55  51  74  46  59  58
+[5041]  36  61  78  38  79  66  34  52  71  41  68  65  58  78  45  31  21  61
+[5059]  49  57  74  30  63  40  72  53  59  65  67  55  53  70  24  57  67  42
+[5077]  64  36  64  70  56  41  59  38  29  59  65  63  34  63  69  76  68  51
+[5095]  85  25  21  44  72  59  32  55  69  78  23  51  44  57  28  64  69  61
+[5113]  31  78  56  66  55  74  60  37  48  66  61  41  53 -32  48  60  33  52
+[5131]  67  29  54  77  80  30  59  49  57  78  32  78  31  62  59  78  62  62
+[5149]  54  46  78  42  59  29  65  36  28  21  62  56  56  34  47  55  22  32
+[5167]  67  39  60  34  35  64  66  67  18  66  64  31  29  69  57  54  59  50
+[5185]  59  61  77  51  54  56  62  47  72  78  57  52  49  43  38  77  66  34
+[5203]  23  50  72  77  58  63  25  45  49  82  58  36  46  80  83  45  27  66
+[5221]  77  27  36  38  62  55  66  44  72  72  73  53  52  47  70  31  59  72
+[5239]  22  86  68  57  71  74  40  71  54  52  39  65  29  63  48  66  52  48
+[5257]  65  23  20  69  60  35  23  59  27  60  53 -32  52  24  24  59  73  39
+[5275]  65  56  54  64  35  59  80  68  81  58  33  47  67  82  68  33  31  47
+[5293]  81  64  50  68  32  66  68  69  75  67  80  44  60  74  57  53  56  58
+[5311]  61  69  58  47  81  34  68  62  67  48  62  25  39  39  23  74  50  25
+[5329]  54  22  21  52  26  62  47  33  86  58  33  53  68  44
+
+Labels:
+ value             label
+   -32 NICHT GENERIERBAR</code></pre>
+</div>
+</div>
+</section>
+<section id="filtern-von-fällen" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="filtern-von-fällen"><span class="header-section-number">1.2.2</span> Filtern von Fällen</h3>
+<p>Neben der Auswahl von Spalten ist es oft auch erforderlich, Fälle bzw. Zeilen basierend auf bestimmten Bedingungen auszuwählen. Hierfür verwenden wir die Funktion <code>filter()</code>. Angenommen wir möchten für unser Subset vertrauen_institutionen nur die Daten der Personen auswählen, die sehr großes Vertrauen in das Gesundheitswesen (Variable pt01) haben, können wir dies wie folgt machen - aus dem Codebook können wir ableiten, dass “sehr großes Vertrauen” dem Zahlenwert 7 entspricht:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>vertrauen_institutionen_filter1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(vertrauen_institutionen, pt01 <span class="sc">==</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In diesem Beispiel haben wir aus dem Subset vertrauen_institutionen erneut ein Subset gezogen, indem wir mit der Funktion <code>filter()</code> nur die Zeilen aus dem ursprünglichen Subset ausgewählt haben, in denen die Variable pt01 (Vertrauen in das Gesundheitswesen) den Wert 7 annimmt. Hier ist es wichtig, ein doppeltes Gleichheitszeichen zu verwenden: pt01 == 7. Wir können auch mehrere Filter gleichzeitig anwenden. Zum Beispiel können wir ein Subset ziehen, dass nur die Daten von Personen enthält, die sehr großes Vertrauen in das Gesundheitswesen haben und gar kein Vertrauen in das Bundesverfassungsgericht (pt02):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>vertrauen_institutionen_filter2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(vertrauen_institutionen, pt01 <span class="sc">==</span> <span class="dv">7</span> <span class="sc">&amp;</span> pt02 <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Müssen beide Konditionen zutreffen, damit eine Zeile ausgewählt wird, verbinden wir diese mit dem und-Zeichen &amp;. In unserem Global Environment sehen wir, dass dies auf vier Fälle (4 obs.) zutrifft. Wollen wir hingegen alle Fälle auswählen, bei denen entweder ein sehr großes Vertrauen in das Gesundheitswesen oder gar kein Vertrauen in das Bundesverfassungsgericht besteht, trennen wir durch den senkrechten Strich |:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>vertrauen_institutionen_filter3 <span class="ot">&lt;-</span> <span class="fu">filter</span>(vertrauen_institutionen, pt01 <span class="sc">==</span> <span class="dv">7</span> <span class="sc">|</span> pt02 <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In unserem Global Environment sehen wir, dass dies auf 486 Fälle (486 obs.) zutrifft.</p>
+</section>
+</section>
+<section id="manipulation-und-transformation-von-daten" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="manipulation-und-transformation-von-daten"><span class="header-section-number">1.3</span> Manipulation und Transformation von Daten</h2>
+<p>In vielen Datenanalyseprojekten ist es notwendig, Variablen zu bearbeiten, um sie für Analysen oder Visualisierungen vorzubereiten. Dieser Prozess kann das Recodieren von Werten, das Umbenennen von Variablen und die Berechnung neuer Variablen umfassen. Das “dplyr”-Paket ermöglicht uns, diese Aufgaben auf eine intuitive Weise zu erledigen. Zum Beispiel verwenden wir die Funktion <code>mutate()</code> für die Transformation von Variablen und das Erstellen neuer Spalten.</p>
+<section id="neue-spalten-erstellen" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="neue-spalten-erstellen"><span class="header-section-number">1.3.1</span> Neue Spalten erstellen</h3>
+<p>Angenommen wir möchten eine neue Variable (Spalte) für unser Subset vertrauen_institutionen erstellen, die den Wert “großes vertrauen” annehmen soll, wenn die Variable pt01 (Vertrauen in das Gesundheitswesen) einen Wert größer vier (&gt; 4) annimmt und “wenig vertrauen”, wenn pt01 einen anderen Wert annimmt, können wir dies folgermaßen erreichen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>transformierte_daten <span class="ot">&lt;-</span> <span class="fu">mutate</span>(vertrauen_institutionen, <span class="at">vertrauen_gesundheitswesen =</span> <span class="fu">ifelse</span>(pt01 <span class="sc">&gt;</span> <span class="dv">4</span>, <span class="st">"großes vertrauen"</span>, <span class="st">"wenig vertrauen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In diesem Beispiel haben wir einen neuen Datensatz generiert und ihm den Namen transformierte_daten zugewiesen. Mit den Funktionen <code>mutate()</code> und <code>ifelse()</code> haben wir basierend auf der Variable pt01 eine neue Spalte im Datensatz erstellt mit dem Namen vertrauen_gesundheitswesen. Innerhalb der Funktion <code>mutate()</code> haben wir dafür zunächst unseren Datensatz angegeben, in diesem Fall vertrauen_institutionen. Nach einem Komma folgt der Name der neuen Variable (Spalte) mit einem Gleichheitszeichen =. In der Funktion <code>ifelse()</code> geben wir erst die Kondition an, die wir testen wollen (pt01 &gt; 4), gefolgt von einem Komma und dem Wert, den die Variable annehmen soll, sofern die getestete Kondition zutrifft. Dann folgt nach einem erneuten Komma der Wert, den die Variable annehmen soll, falls die Kondition nicht zutrifft.</p>
+</section>
+<section id="variablen-umbenennen" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="variablen-umbenennen"><span class="header-section-number">1.3.2</span> Variablen umbenennen</h3>
+<p>Manchmal ist es sinnvoll, Variablennamen zu ändern, um sie verständlicher zu machen oder um Konventionen zu folgen. Die Funktion <code>rename()</code> ermöglicht das Umbenennen von Variablen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>transformierte_daten <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">rename</span>(<span class="at">vertrauen_gesundheit =</span> pt01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Hier ändern wir den Namen der Variable pt01 im Datensatz transformierte_daten zu vertrauen_gesundheit.</p>
+</section>
+</section>
+<section id="gruppieren-von-daten-und-aggregation" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="gruppieren-von-daten-und-aggregation"><span class="header-section-number">1.4</span> Gruppieren von Daten und Aggregation</h2>
+<p>Eine weitere wichtige Fähigkeit ist das Gruppieren von Fällen basierend auf bestimmten Kategorien. Die Funktion <code>group_by()</code> aus dem dplyr-Paket ermöglicht es, Datensätze nach bestimmten Variablen zu gruppieren. Zum Beispiel könnten wir den Datensatz vertrauen_institutionen nach dem Alter der Befragten gruppieren und das durchschnittliche Vertrauen in das Gesundheitswesen pro Alter berechnen. Wollen wir den Datensatz vertrauen_institutionen nach dem Alter der Befragten gruppieren und das durchschnittliche Vertrauen in das Gesundheitswesen pro Alter berechnen, kombinieren wir die Befehle <code>group_by()</code>, <code>summarize()</code> und <code>mean()</code> nach der tidyverse-Logik wie folgt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>aggregierte_daten <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">summarize</span>(<span class="at">durchschnitt_vertrauen =</span> <span class="fu">mean</span>(vertrauen_gesundheit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Sehen wir uns den Datensatz aggregierte_daten mit <code>View()</code> oder über unser Global Enviroment an, können wir feststellen, dass dieser aus zwei Variablen (Spalten) besteht: age und durchschnitt_vertrauen. Die Spalte age enthält für jedes Alter, das im Datensatz transformierte_daten vorkommt, eine Zeile. Die Spalte durchschnitt_vertrauen gibt den durchschnittlichen Wert für die Variable vertrauen_gesundheit für jedes Alter an. Den Durchschnitt haben wir mit der Funktion <code>mean()</code> berechnet.</p>
+</section>
+<section id="umgang-mit-realen-datensätzen-und-fehlenden-werten" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="umgang-mit-realen-datensätzen-und-fehlenden-werten"><span class="header-section-number">1.5</span> Umgang mit realen Datensätzen und fehlenden Werten</h2>
+<p>Bei der Arbeit mit realen Datensätzen ist es häufig der Fall, dass diese nicht perfekt und sauber sind. Es können verschiedene Probleme auftreten, wie fehlende Daten, inkonsistente Codierungen oder unerwartete Werte. In diesem Abschnitt werden wir uns damit beschäftigen, wie Sie solche Herausforderungen bewältigen können.</p>
+<p>Fehlende Daten sind ein häufiges Problem in Datensätzen. In R werden fehlende Werte oft mit dem Wert NA (Not Available) oder NaN (Not a Number) dargestellt. Ist dies der Fall, können wir fehlende Werte mit der Funktion <code>drop_na()</code> entfernen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>vertrauen_institutionen_dropna <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">drop_na</span>(vertrauen_gesundheit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Je nach Datensatz kann die Codierung fehlender Werte aber stark variieren. Im ALLBUS-Datensatz ist die Variable pt01 (vertrauen_gesundheit) zum Beispiel so codiert, dass fehlende Werte mit einer -9 (keine Angabe), -42 (Datenfehler: Mehrfachnennung) oder -11 (keine Teilnhame an Split A oder B) gekennzeichnet sind. Dadurch wurden durch obenstehenden Code, der <code>drop_na</code> verwendet keinerlei Zeilen gelöscht und der Datensatz vertrauen_institutionen_dropna entspricht vertrauen_institutionen. In diesem Fall müssen wir die spezifischen fehlenden Werte angeben, die wir herausfiltern wollen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>missing_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">42</span>, <span class="sc">-</span><span class="dv">11</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a>vertrauen_institutionen_dropna <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">filter</span>(<span class="sc">!</span>vertrauen_gesundheit <span class="sc">%in%</span> missing_codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Hier geben wir zunächst die möglichen Ausprägungen für fehlende Werte an und speichern diese als Vektor missing_codes. Dann wenden wir die Funktion <code>filter()</code> auf den Datensatz vertrauen_institutionen so an, dass nur Zeilen ausgewählt werden, in denen die Variable keinen der Werte in missing_codes annimmt. Das Gegenteil einer Kondition errreichen wir mit einem Ausrufezeichen !. vertrauen_gesundheit %in% missing_code würde alle Fälle filtern, die einen der Werte in missing_codes annehmen. Setzen wir ein ! davor, erhalten wir genau den umgekehrten Fall.</p>
+<p>Wir können auch die fehlenden Werte aus allen Vertrauensvariablen löschen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>vertrauen_institutionen_dropna <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">filter</span>(<span class="fu">across</span>(vertrauen_gesundheit<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="sc">!</span>. <span class="sc">%in%</span> missing_codes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `across()` in `filter()` was deprecated in dplyr 1.0.8.
+ℹ Please use `if_any()` or `if_all()` instead.</code></pre>
+</div>
+</div>
+<p>In dieser Version wird die Funktion <code>across()</code> verwendet, um Operationen auf mehreren Spalten gleichzeitig durchzuführen. Es werden nur die Zeilen beibehalten, in denen keine fehlenden Werte (definiert in missing_codes) in den angegebenen Variablen zwischen vertrauen_gesundheit und pt20 vorkommen.</p>
+</section>
+<section id="erstellung-von-indizes" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="erstellung-von-indizes"><span class="header-section-number">1.6</span> Erstellung von Indizes</h2>
+<p>Oft müssen aus vorhandenen Variablen neue abgeleitete Variablen berechnet werden. Dies kann beispielsweise das Berechnen von Indizes oder Skalen sein, um Zusammenfassungen oder Vergleiche zu erleichtern. Wir können zum Beispiel alle Vertrauensvariablen zu einem Index zusammenfassen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>vertrauen_institutionen_index <span class="ot">&lt;-</span> vertrauen_institutionen_dropna <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">mutate</span>(<span class="at">index_vertrauen =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(vertrauen_gesundheit<span class="sc">:</span>pt20)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Hier haben wir eine neue Spalte index_vertrauen erstellt, die die Summe der Vertrauensvariablen enthält. Wir verwenden wieder die Funktion <code>across()</code>, um Operationen auf mehreren Spalten gleichzeitig durchzuführen. Für jede Zeile haben wir mit dem Befehl <code>rowSums()</code> die Werte für alle Variablen von vertrauen_gesundheit bis pt20 addiert und den resultierenden Wert in die neue Spalte geschrieben. Anstatt der Summe können wir auch den Mittelwert der Variablen berechnen und diesen als Index verwenden, dazu teilen wir die Summe, die wir wie im Beispiel zuvor berechnen, durch die Anzahl an Vertrauensvariablen (20):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>vertrauen_institutionen_index_2 <span class="ot">&lt;-</span> vertrauen_institutionen_dropna <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">mutate</span>(<span class="at">index_vertrauen =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(vertrauen_gesundheit<span class="sc">:</span>pt20))<span class="sc">/</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
