@@ -1,6 +1,6 @@
 ---
 title: "Häufigkeiten und deren Visualisierung"
-author: "tba"
+author: "Michael Linke"
 toc: true
 number-sections: true
 highlight-style: pygments
@@ -11,6 +11,16 @@ format:
 ---
 
 # Berechnung von einfachen Häufigkeiten
+
+Text 
+
+Mittelwert wird so berechnet:
+
+
+```{r}
+
+```
+
 
 # Visuelle Darstellung von einfachen Häufigkeiten
 

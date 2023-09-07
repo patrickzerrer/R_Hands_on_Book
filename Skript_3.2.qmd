@@ -17,21 +17,27 @@ format:
 Die Welt der Datenanalyse ist reichhaltig und vielfältig. Bevor wir jedoch in die Tiefe der quantitativen Datenanalyse eintauchen, ist es wichtig, die Grundlagen zu verstehen, die uns bei der Arbeit mit Daten leiten. In diesem Kapitel werden wir uns mit den grundlegenden Konzepten der Datentypen, Skalenniveaus und Datenstrukturen vertraut machen.
 
 ## Datentypen in R
+
 In der Datenanalyse ist die korrekte Interpretation und Handhabung von verschiedenen Datentypen von entscheidender Bedeutung. R bietet eine Vielzahl von Datentypen, die es uns ermöglichen, eine breite Palette von Informationen zu repräsentieren und zu verarbeiten. In diesem Kapitel werden wir uns mit den fünf grundlegenden Datentypen in R vertraut machen: Numeric, Integer, Logical, Character und Factor.
 
 ### Numeric
+
 Der Datentyp Numeric repräsentiert dezimale Zahlen. Beispiele für numerische Daten sind 4.5, -12, 0.75 usw. Numerische Daten werden oft für Berechnungen und mathematische Operationen verwendet.
 
 ### Integer
+
 Der Integer-Datentyp repräsentiert ganze Zahlen. Beachten Sie, dass Ganze Zahlen ebenfalls zum Datentyp NUmeric gehören, da diese als spezielle Art von Dezimalzahlen betrachtet werden - dabei gilt: alle ganzen Zahlen (Integer-Datentyp) sind numerische Daten, aber nicht alle numerischen Daten (Numeric-Datentyp) sind ganze Zahlen. Beispiele für Integer-Daten sind 4, -7, 100 usw.
 
 ### Logical
+
 Der Logical-Datentyp besteht aus sogenannten booleschen Werten, die genau zwei verschiedene Ausprägungen annehmen können: entweder TRUE (wahr) oder FALSE (falsch). Boolesche Werte werden häufig in logischen Ausdrücken und Bedingungen verwendet, um Entscheidungen zu treffen und Filter anzuwenden.
 
 ### Character
-Der Character-Datentyp repräsentiert Textwerte oder Zeichenketten. Textwerte werden in R in doppelten Anführungszeichen (" ") oder einfachen Anführungszeichen (' ') eingeschlossen. Beispiele für Character-Daten sind "Hallo", "Datenanalyse" usw.
+
+Der Character-Datentyp repräsentiert Textwerte oder Zeichenketten. Textwerte werden in R in doppelten Anführungszeichen (" ") oder einfachen Anführungszeichen (' ') eingeschlossen. Beispiele für Character-Daten sind"Hallo", "Datenanalyse" usw.
 
 ### Factor
+
 Der Factor-Datentyp wird für kategoriale Variablen verwendet, die eine begrenzte Anzahl von Merkmalsausprägungen (levels) haben. Ein Factor besteht aus den Merkmalsausprägungen selbst und optionalen Bezeichnungen (labels) für diese Ausprägungen. Factors sind hilfreich, um kategorische Daten in einer strukturierten und sinnvollen Weise zu speichern und zu analysieren.
 
 In den kommenden Abschnitten dieses Kapitels werden wir uns ausführlicher mit jedem dieser Datentypen befassen. Wir werden lernen, wie man Daten erfasst, speichert und manipuliert, um aussagekräftige Analysen durchzuführen. Die korrekte Handhabung der Datentypen bildet die Grundlage für jede erfolgreiche Datenanalyse in R.
@@ -61,9 +67,11 @@ Das höchste Skalenniveau ist das Verhältnis-Skalenniveau. Hierbei besitzen die
 Es ist wichtig zu beachten, dass die allgemeinen Skalenniveaus nicht eins zu eins den spezifischen Datentypen in R entsprechen. Zum Beispiel können kategoriale Variablen in R als Faktoren dargestellt werden. Diese können das Skalenniveau nominal oder ordinal aufweisen - um welches von den beiden es sich handelt, kann nicht mit R bestimmt werden. Numerische Variablen können ebenfalls unterschiedliche Skalenniveaus haben. Ob eine Variable dabei intervall- oder verhältnisskaliert ist muss durch die Analystin/den Analysten bestimmt werden. Dieser Unterschied zwischen den Konzepten der allgemeinen Skalenniveaus und den Datentypen in R erfordert eine sorgfältige Betrachtung, um sicherzustellen, dass wir unsere Daten angemessen interpretieren und analysieren.
 
 ## Datenstrukturen in R
+
 In R sind Datenstrukturen essentiell, um Informationen auf organisierte und effiziente Weise zu speichern und zu verarbeiten. In diesem Kapitel werden wir uns mit drei grundlegenden Datenstrukturen vertraut machen: Vektor, Matrix und Datenrahmen.
 
 ### Der Vektor
+
 Der Vektor ist die essentiellste und einfachste Datenstruktur in R. Ein Vektor ist eindimensional und enthält eine geordnete Sammlung von Elementen desselben Datentyps, er kann also entweder aus numerischen Werten, Integers (ganzen Zahlen), logischen Werten oder Characters (Textwerten) bestehen. Vektoren sind fundamental für viele Berechnungen und Operationen in R. Vektoren können in R mithilfe der Funktion c() erstellt werden, die die Elemente durch Kommas trennt. Im folgenden Beispiel erstellen wir für verschiedene Datentypen, die wir im vorherigen Kapitel kennengelernt haben, Beispiel-Vektoren und ordnen diesen Vektoren Namen zu.
 
 ```{r}
@@ -87,10 +95,13 @@ Wollen wir uns bestimmte Werte in einem Vektor anzeigen lassen, können wir dies
 ```{r}
 a[2]
 ```
+
 Wollen wir den zweiten, dritten und vierten Wert von Vektor a, können wir durch einen Doppelpunkt die Spanne zwischen dem zweiten und vierten Wert angeben:
+
 ```{r}
 a[2:4]
 ```
+
 Wollen wir einen Vektor des fünften Datentyps factor erstellen, müssen wir etwas anders vorgehen als bei den anderen. Hier starten wir zunächst mit der Erstellung eines Vektors mit der Funktion `c()` und wandeln diesen dann anschließend mit der Fuktion `factor()` zum gewünschten Datentyp um. In folgendem Beispiel erstellen wir einen Vektor, der Daten für die Nutzung von verschiedenen Verkehrsmitteln enthalten soll. Zuerst erstellen wir den numerischen Vektor, der die Verkehrsmittel als Zahlenwerte enthält.
 
 ```{r}
@@ -119,6 +130,7 @@ factor_verkehrsmittel
 ```
 
 ### Die Matrix
+
 Neben der essentiellen Datenstruktur des Vektors gibt es noch weitere Strukturen, die wir kennen müssen, um mit R Daten zu analysieren. Eine davon ist die Matrix, eine zweidimensionale Datenstruktur, die aus Zeilen und Spalten von Elementen besteht. Alle Elemente in einer Matrix müssen denselben Datentyp aufweisen. Matrizen können in R mit der Funktion `matrix()` erstellt werden. Grundlage hierfür ist wieder zunächst ein Vektor, erstellt mit der `c()`, der dann mit der Funktion `matrix()` umgewandelt wird:
 
 ```{r}
@@ -133,12 +145,14 @@ In diesem Beispiel erstellen wir zunächst mit der Funktion `c()` einen numerisc
 matrix_2 <- matrix(vec_1,ncol=3)
 matrix_2
 ```
+
 Für matrix_2 verwenden wir wieder den Vektor vec_1, haben dieses Mal aber angegeben, dass die Matrix drei Spalten (ncol = 3) haben soll. Die Anzahl an Reihen ergibt sich damit automatisch. Anstatt der Spaltenanzahl, können wir aber auch angeben, dass die Matrix drei Reihen haben soll (nrow = 3), in diesem Fall ergibt sich die Anzahl an Spalten automatisch:
 
 ```{r}
 matrix_3 <- matrix(vec_1,nrow=3)
 matrix_3
 ```
+
 Wir sehen, dass matrix_3 identisch ist mit matrix_2, beide haben jeweils drei Reihen und drei Spalten. Eine Matrix wird also immer befüllt mit allen Werten des Vektors, auf dem sie basiert. Versuchen wir, die Spalten- und Zeilenanzahl so festzulegen, dass die Matrix nicht alle Werte des Vektors enthalten kann - geben wir also eine konfligierende Spalten- und Zeilenanzahl an - erhalten wir eine Warnung:
 
 ```{r}
@@ -147,11 +161,8 @@ matrix_4
 ```
 
 ### Der Datenrahmen
-Neben dem eindimensionalen Vektor und der zweidimensionalen Matrix, gibt es noch eine weitere grundlegende Datenstruktur, mit der wir in der quantitativen Datenanalyse arbeiten: der Datenrahmen. Hierbei handelt es sich um eine zweidimensionale Datenstruktur, die ähnlich einer Tabelle aussieht. Im Gegensatz zur Matrix ermöglicht der Datenrahmen die Speicherung unterschiedlicher Datentypen in verschiedenen Spalten, was besonders hilfreich ist, wenn wir mit realen Datensätzen arbeiten.
-In einem Datenrahmen repräsentiert eine "Variable" eine einzelne Messgröße oder Eigenschaft. Variablen können verschiedene Datentypen aufweisen (numerische Werte, Texte, logische Werte oder kategoriale Merkmale). Jede Variable wird durch eine Spalte im Datenrahmen dargestellt.
-Eine "Beobachtung" hingegen entspricht einer einzelnen Einheit, von der wir Daten gesammelt haben. Beobachtungen werden als Zeilen im Datenrahmen angeordnet. Jede Zeile enthält die Datenwerte für jede der zugehörigen Variablen. Beispielsweise könnte eine Beobachtung in einem Datenrahmen zur Erfassung von Studierendendaten Informationen wie den Namen, das Alter und die erreichte Note für einen bestimmten Kurs enthalten.
-Zusammen repräsentieren Variablen und Beobachtungen die Informationen, die wir in einem Datensatz haben. Der Datenrahmen organisiert diese Informationen in einer tabellarischen Struktur, die es uns ermöglicht, Muster, Trends und Beziehungen zwischen den Variablen und Beobachtungen zu identifizieren. Dies ist der Grundstein quantitative Datenanalysen.
-Um in R einen Datenrahmen zu erstellen, bilden Vektoren wieder die Grundlage. Diese dienen als Variablen, d.h. als Spalten, in unserem Datenrahmen und werden mit dem Befehl `data.frame()` zusammengefügt:
+
+Neben dem eindimensionalen Vektor und der zweidimensionalen Matrix, gibt es noch eine weitere grundlegende Datenstruktur, mit der wir in der quantitativen Datenanalyse arbeiten: der Datenrahmen. Hierbei handelt es sich um eine zweidimensionale Datenstruktur, die ähnlich einer Tabelle aussieht. Im Gegensatz zur Matrix ermöglicht der Datenrahmen die Speicherung unterschiedlicher Datentypen in verschiedenen Spalten, was besonders hilfreich ist, wenn wir mit realen Datensätzen arbeiten. In einem Datenrahmen repräsentiert eine "Variable" eine einzelne Messgröße oder Eigenschaft. Variablen können verschiedene Datentypen aufweisen (numerische Werte, Texte, logische Werte oder kategoriale Merkmale). Jede Variable wird durch eine Spalte im Datenrahmen dargestellt. Eine "Beobachtung" hingegen entspricht einer einzelnen Einheit, von der wir Daten gesammelt haben. Beobachtungen werden als Zeilen im Datenrahmen angeordnet. Jede Zeile enthält die Datenwerte für jede der zugehörigen Variablen. Beispielsweise könnte eine Beobachtung in einem Datenrahmen zur Erfassung von Studierendendaten Informationen wie den Namen, das Alter und die erreichte Note für einen bestimmten Kurs enthalten. Zusammen repräsentieren Variablen und Beobachtungen die Informationen, die wir in einem Datensatz haben. Der Datenrahmen organisiert diese Informationen in einer tabellarischen Struktur, die es uns ermöglicht, Muster, Trends und Beziehungen zwischen den Variablen und Beobachtungen zu identifizieren. Dies ist der Grundstein quantitative Datenanalysen. Um in R einen Datenrahmen zu erstellen, bilden Vektoren wieder die Grundlage. Diese dienen als Variablen, d.h. als Spalten, in unserem Datenrahmen und werden mit dem Befehl `data.frame()` zusammengefügt:
 
 ```{r}
 name <- c('Esra','Mara','Adam','Luca')
@@ -166,6 +177,7 @@ In diesem Beispiel erstellen wir zunächst mit der Funktion `c()` die Vektoren (
 ```{r}
 studierendendaten
 ```
+
 ## Zusammenfassung
 
 In diesem Kapitel haben wir die Grundlagen der Datentypen, Skalenniveaus und Datenstrukturen erkundet, die die Grundlage für unsere quantitative Datenanalyse bilden. Wir haben gelernt, wie unterschiedliche Datentypen uns erlauben, verschiedene Arten von Informationen darzustellen, und wie Skalenniveaus die Bedeutung von Variablenwerten verdeutlichen. Weiterhin haben wir Datenstrukturen wie Vektoren, Matrizen und Datenrahmen kennengelernt, die uns ermöglichen, diese Informationen strukturiert zu speichern und zu verarbeiten. Im folgenden Kapitel werden wir lernen, wie wir Variablen und einzelne Beobachtungen auswählen, manipulieren und transformieren zu können, um sie auf unsere Analysezwecke anzupassen.

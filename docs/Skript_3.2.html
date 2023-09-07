@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="tba">
+<meta name="author" content="Hannah-Marie Büttner">
 
 <title>Datentypen und -strukturen</title>
 <style>
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -145,13 +179,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Was ist R?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_1.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R-Studio</span></a>
+ <span class="menu-text">Einführung in R und RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -163,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+ <span class="menu-text">Vorbereiten der R-Umgebung</span></a>
   </div>
 </li>
       </ul>
@@ -320,7 +348,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
+ <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Varianzanalyse</span></a>
   </div>
 </li>
       </ul>
@@ -364,7 +398,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#datentypen-und--strukturen-in-r" id="toc-datentypen-und--strukturen-in-r" class="nav-link active" data-scroll-target="#datentypen-und--strukturen-in-r"><span class="header-section-number">1</span> Datentypen und -strukturen in R</a></li>
+  <li><a href="#datentypen-skalenniveaus-und-datenstrukturen" id="toc-datentypen-skalenniveaus-und-datenstrukturen" class="nav-link active" data-scroll-target="#datentypen-skalenniveaus-und-datenstrukturen"><span class="header-section-number">1</span> Datentypen, Skalenniveaus und Datenstrukturen</a>
+  <ul class="collapse">
+  <li><a href="#datentypen-in-r" id="toc-datentypen-in-r" class="nav-link" data-scroll-target="#datentypen-in-r"><span class="header-section-number">1.1</span> Datentypen in R</a>
+  <ul class="collapse">
+  <li><a href="#numeric" id="toc-numeric" class="nav-link" data-scroll-target="#numeric"><span class="header-section-number">1.1.1</span> Numeric</a></li>
+  <li><a href="#integer" id="toc-integer" class="nav-link" data-scroll-target="#integer"><span class="header-section-number">1.1.2</span> Integer</a></li>
+  <li><a href="#logical" id="toc-logical" class="nav-link" data-scroll-target="#logical"><span class="header-section-number">1.1.3</span> Logical</a></li>
+  <li><a href="#character" id="toc-character" class="nav-link" data-scroll-target="#character"><span class="header-section-number">1.1.4</span> Character</a></li>
+  <li><a href="#factor" id="toc-factor" class="nav-link" data-scroll-target="#factor"><span class="header-section-number">1.1.5</span> Factor</a></li>
+  </ul></li>
+  <li><a href="#skalenniveaus" id="toc-skalenniveaus" class="nav-link" data-scroll-target="#skalenniveaus"><span class="header-section-number">1.2</span> Skalenniveaus</a>
+  <ul class="collapse">
+  <li><a href="#nominales-skalenniveau" id="toc-nominales-skalenniveau" class="nav-link" data-scroll-target="#nominales-skalenniveau"><span class="header-section-number">1.2.1</span> Nominales Skalenniveau</a></li>
+  <li><a href="#ordinales-skalenniveau" id="toc-ordinales-skalenniveau" class="nav-link" data-scroll-target="#ordinales-skalenniveau"><span class="header-section-number">1.2.2</span> Ordinales Skalenniveau</a></li>
+  <li><a href="#intervall-skalenniveau" id="toc-intervall-skalenniveau" class="nav-link" data-scroll-target="#intervall-skalenniveau"><span class="header-section-number">1.2.3</span> Intervall-Skalenniveau</a></li>
+  <li><a href="#verhältnis-skalenniveau" id="toc-verhältnis-skalenniveau" class="nav-link" data-scroll-target="#verhältnis-skalenniveau"><span class="header-section-number">1.2.4</span> Verhältnis-Skalenniveau</a></li>
+  <li><a href="#skalenniveau-versus-datentyp" id="toc-skalenniveau-versus-datentyp" class="nav-link" data-scroll-target="#skalenniveau-versus-datentyp"><span class="header-section-number">1.2.5</span> Skalenniveau versus Datentyp</a></li>
+  </ul></li>
+  <li><a href="#datenstrukturen-in-r" id="toc-datenstrukturen-in-r" class="nav-link" data-scroll-target="#datenstrukturen-in-r"><span class="header-section-number">1.3</span> Datenstrukturen in R</a>
+  <ul class="collapse">
+  <li><a href="#der-vektor" id="toc-der-vektor" class="nav-link" data-scroll-target="#der-vektor"><span class="header-section-number">1.3.1</span> Der Vektor</a></li>
+  <li><a href="#die-matrix" id="toc-die-matrix" class="nav-link" data-scroll-target="#die-matrix"><span class="header-section-number">1.3.2</span> Die Matrix</a></li>
+  <li><a href="#der-datenrahmen" id="toc-der-datenrahmen" class="nav-link" data-scroll-target="#der-datenrahmen"><span class="header-section-number">1.3.3</span> Der Datenrahmen</a></li>
+  </ul></li>
+  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung"><span class="header-section-number">1.4</span> Zusammenfassung</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -383,7 +442,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>tba </p>
+             <p>Hannah-Marie Büttner </p>
           </div>
   </div>
     
@@ -394,11 +453,229 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="datentypen-und--strukturen-in-r" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Datentypen und -strukturen in R</h1>
-<p>Grundsätzlicher Aufbau von einem Datensatz (Was ist ein Fall? Was ist eine Spalte? Was eine Zeile?) Überblick über die Daten erhalten Einführung in das Datenmanagement: Objekte festlegen und Variablen definieren Datentypen und deren Charakteristika Datentypen, Vektoren, Matrizen, und Data Frames in R Vorschau: Manipulation und Transformation von Daten jeweils alles mit dplyr</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Skript_3.2_Bild_1.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Bild von Jae Rue auf Pixabay</figcaption>
+</figure>
+</div>
+<section id="datentypen-skalenniveaus-und-datenstrukturen" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Datentypen, Skalenniveaus und Datenstrukturen</h1>
+<p>Die Welt der Datenanalyse ist reichhaltig und vielfältig. Bevor wir jedoch in die Tiefe der quantitativen Datenanalyse eintauchen, ist es wichtig, die Grundlagen zu verstehen, die uns bei der Arbeit mit Daten leiten. In diesem Kapitel werden wir uns mit den grundlegenden Konzepten der Datentypen, Skalenniveaus und Datenstrukturen vertraut machen.</p>
+<section id="datentypen-in-r" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="datentypen-in-r"><span class="header-section-number">1.1</span> Datentypen in R</h2>
+<p>In der Datenanalyse ist die korrekte Interpretation und Handhabung von verschiedenen Datentypen von entscheidender Bedeutung. R bietet eine Vielzahl von Datentypen, die es uns ermöglichen, eine breite Palette von Informationen zu repräsentieren und zu verarbeiten. In diesem Kapitel werden wir uns mit den fünf grundlegenden Datentypen in R vertraut machen: Numeric, Integer, Logical, Character und Factor.</p>
+<section id="numeric" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="numeric"><span class="header-section-number">1.1.1</span> Numeric</h3>
+<p>Der Datentyp Numeric repräsentiert dezimale Zahlen. Beispiele für numerische Daten sind 4.5, -12, 0.75 usw. Numerische Daten werden oft für Berechnungen und mathematische Operationen verwendet.</p>
+</section>
+<section id="integer" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="integer"><span class="header-section-number">1.1.2</span> Integer</h3>
+<p>Der Integer-Datentyp repräsentiert ganze Zahlen. Beachten Sie, dass Ganze Zahlen ebenfalls zum Datentyp NUmeric gehören, da diese als spezielle Art von Dezimalzahlen betrachtet werden - dabei gilt: alle ganzen Zahlen (Integer-Datentyp) sind numerische Daten, aber nicht alle numerischen Daten (Numeric-Datentyp) sind ganze Zahlen. Beispiele für Integer-Daten sind 4, -7, 100 usw.</p>
+</section>
+<section id="logical" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="logical"><span class="header-section-number">1.1.3</span> Logical</h3>
+<p>Der Logical-Datentyp besteht aus sogenannten booleschen Werten, die genau zwei verschiedene Ausprägungen annehmen können: entweder TRUE (wahr) oder FALSE (falsch). Boolesche Werte werden häufig in logischen Ausdrücken und Bedingungen verwendet, um Entscheidungen zu treffen und Filter anzuwenden.</p>
+</section>
+<section id="character" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="character"><span class="header-section-number">1.1.4</span> Character</h3>
+<p>Der Character-Datentyp repräsentiert Textwerte oder Zeichenketten. Textwerte werden in R in doppelten Anführungszeichen (” “) oder einfachen Anführungszeichen (’ ’) eingeschlossen. Beispiele für Character-Daten sind”Hallo”, “Datenanalyse” usw.</p>
+</section>
+<section id="factor" class="level3" data-number="1.1.5">
+<h3 data-number="1.1.5" class="anchored" data-anchor-id="factor"><span class="header-section-number">1.1.5</span> Factor</h3>
+<p>Der Factor-Datentyp wird für kategoriale Variablen verwendet, die eine begrenzte Anzahl von Merkmalsausprägungen (levels) haben. Ein Factor besteht aus den Merkmalsausprägungen selbst und optionalen Bezeichnungen (labels) für diese Ausprägungen. Factors sind hilfreich, um kategorische Daten in einer strukturierten und sinnvollen Weise zu speichern und zu analysieren.</p>
+<p>In den kommenden Abschnitten dieses Kapitels werden wir uns ausführlicher mit jedem dieser Datentypen befassen. Wir werden lernen, wie man Daten erfasst, speichert und manipuliert, um aussagekräftige Analysen durchzuführen. Die korrekte Handhabung der Datentypen bildet die Grundlage für jede erfolgreiche Datenanalyse in R.</p>
+</section>
+</section>
+<section id="skalenniveaus" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="skalenniveaus"><span class="header-section-number">1.2</span> Skalenniveaus</h2>
+<p>Bei der quantitativen Datenanalyse ist es von entscheidender Bedeutung, die verschiedenen Skalenniveaus von Variablen zu verstehen. Skalenniveaus geben an, wie die Werte einer Variable gemessen werden und welchen Interpretationsraum sie besitzen. Die Kenntnis dieser Skalenniveaus hilft uns dabei, angemessene statistische Methoden anzuwenden und aussagekräftige Schlussfolgerungen aus unseren Analysen zu ziehen.</p>
+<section id="nominales-skalenniveau" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="nominales-skalenniveau"><span class="header-section-number">1.2.1</span> Nominales Skalenniveau</h3>
+<p>Am niedrigsten in der Hierarchie der Skalenniveaus befindet sich das nominale Skalenniveau. Hierbei werden Werte einer Variable lediglich zur Kategorisierung genutzt, ohne dass eine Reihenfolge oder quantitative Bedeutung besteht. Ein klassisches Beispiel wäre die Kategorisierung von Geschlechtern. Nominalskalierte Variablen können lediglich auf Gleichheit oder Ungleichheit überprüft werden.</p>
+</section>
+<section id="ordinales-skalenniveau" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="ordinales-skalenniveau"><span class="header-section-number">1.2.2</span> Ordinales Skalenniveau</h3>
+<p>Ein Schritt weiter ist das ordinale Skalenniveau. Hierbei können die Werte einer Variable nicht nur kategorisiert werden, sondern es besteht auch eine natürliche Ordnung zwischen den Kategorien. Ein Beispiel hierfür wäre die Bewertung von Produkten auf einer Skala von “schlecht”, “mittel” bis “gut”. Allerdings sind die Abstände zwischen den Kategorien nicht quantitativ interpretierbar.</p>
+</section>
+<section id="intervall-skalenniveau" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="intervall-skalenniveau"><span class="header-section-number">1.2.3</span> Intervall-Skalenniveau</h3>
+<p>Das Intervall-Skalenniveau ermöglicht nicht nur die Kategorisierung und Ordnung von Werten, sondern auch die Quantifizierung von Abständen zwischen den Werten. Bei dieser Skala ist die Differenz zwischen zwei Werten stets konstant, jedoch besitzt der Wert “null” keine inhärente Bedeutung. Ein Beispiel wäre die Temperaturskala in Celsius, bei der eine Temperaturdifferenz von 10 Grad Celsius immer gleichbedeutend ist, aber das Fehlen von Wärme (0 Grad Celsius) nicht bedeutet, dass keine Temperatur vorhanden ist.</p>
+</section>
+<section id="verhältnis-skalenniveau" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="verhältnis-skalenniveau"><span class="header-section-number">1.2.4</span> Verhältnis-Skalenniveau</h3>
+<p>Das höchste Skalenniveau ist das Verhältnis-Skalenniveau. Hierbei besitzen die Werte nicht nur eine Ordnung und gleichbleibende Abstände, sondern der Wert “null” hat auch eine klare und inhärente Bedeutung. Dies ermöglicht die Durchführung von mathematischen Operationen wie Multiplikation und Division auf den Werten. Beispiele hierfür sind Gewicht, Größe oder Einkommen.</p>
+</section>
+<section id="skalenniveau-versus-datentyp" class="level3" data-number="1.2.5">
+<h3 data-number="1.2.5" class="anchored" data-anchor-id="skalenniveau-versus-datentyp"><span class="header-section-number">1.2.5</span> Skalenniveau versus Datentyp</h3>
+<p>Es ist wichtig zu beachten, dass die allgemeinen Skalenniveaus nicht eins zu eins den spezifischen Datentypen in R entsprechen. Zum Beispiel können kategoriale Variablen in R als Faktoren dargestellt werden. Diese können das Skalenniveau nominal oder ordinal aufweisen - um welches von den beiden es sich handelt, kann nicht mit R bestimmt werden. Numerische Variablen können ebenfalls unterschiedliche Skalenniveaus haben. Ob eine Variable dabei intervall- oder verhältnisskaliert ist muss durch die Analystin/den Analysten bestimmt werden. Dieser Unterschied zwischen den Konzepten der allgemeinen Skalenniveaus und den Datentypen in R erfordert eine sorgfältige Betrachtung, um sicherzustellen, dass wir unsere Daten angemessen interpretieren und analysieren.</p>
+</section>
+</section>
+<section id="datenstrukturen-in-r" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="datenstrukturen-in-r"><span class="header-section-number">1.3</span> Datenstrukturen in R</h2>
+<p>In R sind Datenstrukturen essentiell, um Informationen auf organisierte und effiziente Weise zu speichern und zu verarbeiten. In diesem Kapitel werden wir uns mit drei grundlegenden Datenstrukturen vertraut machen: Vektor, Matrix und Datenrahmen.</p>
+<section id="der-vektor" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="der-vektor"><span class="header-section-number">1.3.1</span> Der Vektor</h3>
+<p>Der Vektor ist die essentiellste und einfachste Datenstruktur in R. Ein Vektor ist eindimensional und enthält eine geordnete Sammlung von Elementen desselben Datentyps, er kann also entweder aus numerischen Werten, Integers (ganzen Zahlen), logischen Werten oder Characters (Textwerten) bestehen. Vektoren sind fundamental für viele Berechnungen und Operationen in R. Vektoren können in R mithilfe der Funktion c() erstellt werden, die die Elemente durch Kommas trennt. Im folgenden Beispiel erstellen wir für verschiedene Datentypen, die wir im vorherigen Kapitel kennengelernt haben, Beispiel-Vektoren und ordnen diesen Vektoren Namen zu.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="sc">-</span><span class="dv">4</span>) <span class="co">#numeric</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(1L,2L,3L) <span class="co">#integer</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"one"</span>,<span class="st">"two"</span>,<span class="st">"three"</span>) <span class="co">#character</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>d <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>) <span class="co">#logical</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Wir haben nun mit der Funktion <code>c()</code> Vektoren erstellt mit verschiedenen Datentypen. Wollen wir einen Vektor des Datentyps numeric erstellen, können wir diesen mit Zahlen befüllen, wie es bei Vektor a der Fall ist. Wollen wir hingegen spezifizieren, dass es sich ausschließlich um ganze Zahlen handelt und der Datentyp des Vektors daher integer ist, müssen wir dies mit einem L hinter den Zahlen angeben, wie wir es für Vektor b gemacht haben. Zur Erstellung eines Vektors des Datentyps character setzen wir die Werte in doppelte oder einfache Anführungszeichen, wie bei Vektor c.&nbsp;Für einen logischen Datentyp, befüllen wir den Vektor mit den Werten TRUE und False, wie in Beispiel d.&nbsp;Wollen wir uns den Datentyp eines Vektors anzeigen lassen, können wir dies mit dem Befehl <code>class()</code> machen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">class</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">class</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">class</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">class</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<p>Wollen wir uns bestimmte Werte in einem Vektor anzeigen lassen, können wir diese mit eckigen Klammern in R auswählen. Wollen wir beispielsweise den Wert, der an zweiter Stelle steht im Vektor a, machen wir das wie folgt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>a[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>Wollen wir den zweiten, dritten und vierten Wert von Vektor a, können wir durch einen Doppelpunkt die Spanne zwischen dem zweiten und vierten Wert angeben:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>a[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3 4</code></pre>
+</div>
+</div>
+<p>Wollen wir einen Vektor des fünften Datentyps factor erstellen, müssen wir etwas anders vorgehen als bei den anderen. Hier starten wir zunächst mit der Erstellung eines Vektors mit der Funktion <code>c()</code> und wandeln diesen dann anschließend mit der Fuktion <code>factor()</code> zum gewünschten Datentyp um. In folgendem Beispiel erstellen wir einen Vektor, der Daten für die Nutzung von verschiedenen Verkehrsmitteln enthalten soll. Zuerst erstellen wir den numerischen Vektor, der die Verkehrsmittel als Zahlenwerte enthält.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>verkehrsmittel <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">1</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">class</span>(verkehrsmittel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+<p>Anschließend können wir den numerischen Vektor in einen des Datentyps factor umwandeln und den verschiedenen Verkehrsmitteln jeweils ein Label zuordnen. Bei der Zuordnung der Labels müssen wir die Reihenfolge beachten: Das erste Label, das wir vergeben, wird dem niedrigsten Zahlenwert (in unserem Fall 1) zugeordnet, das zweite dem zweitniedrigsten (2) und so weiter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>factor_verkehrsmittel <span class="ot">&lt;-</span> <span class="fu">factor</span>(verkehrsmittel, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"bus"</span>,<span class="st">"zug"</span>,<span class="st">"fahrrad"</span>,</span>
+<span id="cb16-2"><a href="#cb16-2"></a>                                                 <span class="st">"auto"</span>,<span class="st">"andere"</span>))</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="fu">class</span>(factor_verkehrsmittel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
+</div>
+</div>
+<p>Lassen wir uns den zuerst erstellten numerischen Vektor verkehrsmittel anzeigen, bekommen wir die numerischen Werte:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>verkehrsmittel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 2 3 4 2 3 1 2 5 3 2 1 3 2 4 1</code></pre>
+</div>
+</div>
+<p>Lassen wir uns hingegen den in einen factor umgewandelten Vektor factor_verkehrsmittel anzeigen, bekommen wir die Werte mit ihren entsprechenden Labeln angezeigt. In der letzten Zeile des Outputs sehen wir außerdem, welche möglichen Merkmalsausprägungen vorkommen können (Levels):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>factor_verkehrsmittel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] bus     zug     fahrrad auto    zug     fahrrad bus     zug     andere 
+[10] fahrrad zug     bus     fahrrad zug     auto    bus    
+Levels: bus zug fahrrad auto andere</code></pre>
+</div>
+</div>
+</section>
+<section id="die-matrix" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="die-matrix"><span class="header-section-number">1.3.2</span> Die Matrix</h3>
+<p>Neben der essentiellen Datenstruktur des Vektors gibt es noch weitere Strukturen, die wir kennen müssen, um mit R Daten zu analysieren. Eine davon ist die Matrix, eine zweidimensionale Datenstruktur, die aus Zeilen und Spalten von Elementen besteht. Alle Elemente in einer Matrix müssen denselben Datentyp aufweisen. Matrizen können in R mit der Funktion <code>matrix()</code> erstellt werden. Grundlage hierfür ist wieder zunächst ein Vektor, erstellt mit der <code>c()</code>, der dann mit der Funktion <code>matrix()</code> umgewandelt wird:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>vec_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>matrix_1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec_1)</span>
+<span id="cb22-3"><a href="#cb22-3"></a>matrix_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1]
+ [1,]    1
+ [2,]    2
+ [3,]    3
+ [4,]    4
+ [5,]    5
+ [6,]    6
+ [7,]    7
+ [8,]    8
+ [9,]    9</code></pre>
+</div>
+</div>
+<p>In diesem Beispiel erstellen wir zunächst mit der Funktion <code>c()</code> einen numerischen Vektor namens vec_1. Diesen wandeln wir mit der Funktion <code>matrix()</code> in eine Matrix um, die wir matrix_1 nennen. Dann lassen wir uns matrix_1 anzeigen. Wir können sehen, dass die erstellte Matrix aus einer Spalte und neun Reihen besteht, die mit den Zahlenwerten des Vektors vec_1 befüllt wurden. Wir können die Anzahl der Spalten und Reihen in der Matrix mit den Argumenten ncol (number of columns = Spaltenanzahl) oder nrow (number of rows = Reihenanzahl) verändern:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>matrix_2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec_1,<span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb24-2"><a href="#cb24-2"></a>matrix_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+</div>
+</div>
+<p>Für matrix_2 verwenden wir wieder den Vektor vec_1, haben dieses Mal aber angegeben, dass die Matrix drei Spalten (ncol = 3) haben soll. Die Anzahl an Reihen ergibt sich damit automatisch. Anstatt der Spaltenanzahl, können wir aber auch angeben, dass die Matrix drei Reihen haben soll (nrow = 3), in diesem Fall ergibt sich die Anzahl an Spalten automatisch:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>matrix_3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec_1,<span class="at">nrow=</span><span class="dv">3</span>)</span>
+<span id="cb26-2"><a href="#cb26-2"></a>matrix_3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+</div>
+</div>
+<p>Wir sehen, dass matrix_3 identisch ist mit matrix_2, beide haben jeweils drei Reihen und drei Spalten. Eine Matrix wird also immer befüllt mit allen Werten des Vektors, auf dem sie basiert. Versuchen wir, die Spalten- und Zeilenanzahl so festzulegen, dass die Matrix nicht alle Werte des Vektors enthalten kann - geben wir also eine konfligierende Spalten- und Zeilenanzahl an - erhalten wir eine Warnung:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>matrix_4 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec_1,<span class="at">ncol=</span><span class="dv">3</span>,<span class="at">nrow=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in matrix(vec_1, ncol = 3, nrow = 2): Datenlänge [9] ist kein Teiler
+oder Vielfaches der Anzahl der Zeilen [2]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>matrix_4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6</code></pre>
+</div>
+</div>
+</section>
+<section id="der-datenrahmen" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="der-datenrahmen"><span class="header-section-number">1.3.3</span> Der Datenrahmen</h3>
+<p>Neben dem eindimensionalen Vektor und der zweidimensionalen Matrix, gibt es noch eine weitere grundlegende Datenstruktur, mit der wir in der quantitativen Datenanalyse arbeiten: der Datenrahmen. Hierbei handelt es sich um eine zweidimensionale Datenstruktur, die ähnlich einer Tabelle aussieht. Im Gegensatz zur Matrix ermöglicht der Datenrahmen die Speicherung unterschiedlicher Datentypen in verschiedenen Spalten, was besonders hilfreich ist, wenn wir mit realen Datensätzen arbeiten. In einem Datenrahmen repräsentiert eine “Variable” eine einzelne Messgröße oder Eigenschaft. Variablen können verschiedene Datentypen aufweisen (numerische Werte, Texte, logische Werte oder kategoriale Merkmale). Jede Variable wird durch eine Spalte im Datenrahmen dargestellt. Eine “Beobachtung” hingegen entspricht einer einzelnen Einheit, von der wir Daten gesammelt haben. Beobachtungen werden als Zeilen im Datenrahmen angeordnet. Jede Zeile enthält die Datenwerte für jede der zugehörigen Variablen. Beispielsweise könnte eine Beobachtung in einem Datenrahmen zur Erfassung von Studierendendaten Informationen wie den Namen, das Alter und die erreichte Note für einen bestimmten Kurs enthalten. Zusammen repräsentieren Variablen und Beobachtungen die Informationen, die wir in einem Datensatz haben. Der Datenrahmen organisiert diese Informationen in einer tabellarischen Struktur, die es uns ermöglicht, Muster, Trends und Beziehungen zwischen den Variablen und Beobachtungen zu identifizieren. Dies ist der Grundstein quantitative Datenanalysen. Um in R einen Datenrahmen zu erstellen, bilden Vektoren wieder die Grundlage. Diese dienen als Variablen, d.h. als Spalten, in unserem Datenrahmen und werden mit dem Befehl <code>data.frame()</code> zusammengefügt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Esra'</span>,<span class="st">'Mara'</span>,<span class="st">'Adam'</span>,<span class="st">'Luca'</span>)</span>
+<span id="cb32-2"><a href="#cb32-2"></a>alter <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">18</span>, <span class="dv">24</span>)</span>
+<span id="cb32-3"><a href="#cb32-3"></a>note <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.3</span>, <span class="fl">2.0</span>, <span class="fl">1.7</span>, <span class="fl">2.0</span>)</span>
+<span id="cb32-4"><a href="#cb32-4"></a></span>
+<span id="cb32-5"><a href="#cb32-5"></a>studierendendaten <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name,alter,note)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In diesem Beispiel erstellen wir zunächst mit der Funktion <code>c()</code> die Vektoren (Variablen) name, alter und note mit jeweils vier Werten. Anschließend erstellen wir aus diesen einen Datenrahmen mit dem Befehl <code>data.frame()</code>, der die Variablen durch Kommata trennt. Lassen wir uns den erstellten Datenrahmen, den wir studierendendaten genannt haben, anzeigen, sehen wir, dass jede Zeile eine Beobachtung enthält, nämlich den Namen, das Alter und die Note einer Person. Jede Spalte enthält eine der drei Variablen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>studierendendaten</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  name alter note
+1 Esra    22  1.3
+2 Mara    19  2.0
+3 Adam    18  1.7
+4 Luca    24  2.0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="zusammenfassung" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="zusammenfassung"><span class="header-section-number">1.4</span> Zusammenfassung</h2>
+<p>In diesem Kapitel haben wir die Grundlagen der Datentypen, Skalenniveaus und Datenstrukturen erkundet, die die Grundlage für unsere quantitative Datenanalyse bilden. Wir haben gelernt, wie unterschiedliche Datentypen uns erlauben, verschiedene Arten von Informationen darzustellen, und wie Skalenniveaus die Bedeutung von Variablenwerten verdeutlichen. Weiterhin haben wir Datenstrukturen wie Vektoren, Matrizen und Datenrahmen kennengelernt, die uns ermöglichen, diese Informationen strukturiert zu speichern und zu verarbeiten. Im folgenden Kapitel werden wir lernen, wie wir Variablen und einzelne Beobachtungen auswählen, manipulieren und transformieren zu können, um sie auf unsere Analysezwecke anzupassen.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
