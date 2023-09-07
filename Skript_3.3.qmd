@@ -4,10 +4,13 @@ author: "tba"
 toc: true
 number-sections: true
 highlight-style: pygments
+execute: 
+  warning: false
 format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 ---
 
 ![Bild von Gerd Altmann auf Pixabay](Bilder/Skript_3.3_Bild_1.png)
@@ -41,7 +44,8 @@ Die Datenanalyse beginnt oft damit, die relevanten Informationen aus einem umfan
 Die Funktion `select()` ermöglicht es uns, Spalten basierend auf ihren Namen auszuwählen. Dies ist besonders hilfreich, wenn wir nur bestimmte Aspekte unserer Daten benötigen. Wollen wir beispielsweise aus unserem ALLBUS-Datensatz ein Subset ziehen, dass nur das Alter der Befragten enthält und die Variablen, die mit Vertrauen in Institutionen zu tun haben, können wir dies wie folgt machen:
 
 ```{r}
-vertrauen_institutionen <- select(daten, age, pt01, pt02, pt03, pt04, pt06, pt07, pt08, pt09, pt10, pt11, pt12, pt14, pt15, pt19, pt20)
+vertrauen_institutionen <- daten %>% 
+  select(age, pt01, pt02, pt03, pt04, pt06, pt07, pt08, pt09, pt10, pt11, pt12, pt14, pt15, pt19, pt20)
 ```
 
 In diesem Beispiel generieren wir einen neuen Datenrahmen, dem wir den Namen vertrauen_institutionen zuordnen. Innerhalb der Funktion `select()` geben wir zuerst den Datensatz an, aus dem wir Variablen auswählen wollen. Dieser heißt in unserem Fall daten. Darauf folgt nach einem Komma die Auflistung jener Variablen anhand ihrer Namen im Datensatz, die wir auswählen wollen. Ein Blick in das [Codebook](Datensatz/ALLBUS_Codebook.pdf) des ALLBUS-Datensatzes zeigt uns, welche Variablen mit dem Vertrauen in Institutionen zu tun haben (STRG+F zur Suche im Dokument nach "Vertrauen in Institutionen", Auflistung der Variablen in der Tabelle auf Seite xiii). Mit dem Befehl `View()`, oder indem wir auf den generierten Datensatz in unserem Global Environment (RStudio-Schaltfläche 3) klicken, können wir uns das Subset ansehen:
@@ -53,27 +57,32 @@ View(vertrauen_institutionen)
 Auf eine einzelne Variable in einem Datensatz können wir mit dem Dollar-Zeichen \$ zugreifen:
 
 ```{r}
-vertrauen_institutionen$age
+head(vertrauen_institutionen$age) # <1>
 ```
+
+1. Wir verwenden hier zusätzlich die Funktion `head()`. Damit können wir uns die ersten Einträge anzeigen lassen und haben somit eine übersichtlichere Ausgabe.
 
 ### Filtern von Fällen
 
 Neben der Auswahl von Spalten ist es oft auch erforderlich, Fälle bzw. Zeilen basierend auf bestimmten Bedingungen auszuwählen. Hierfür verwenden wir die Funktion `filter()`. Angenommen wir möchten für unser Subset vertrauen_institutionen nur die Daten der Personen auswählen, die sehr großes Vertrauen in das Gesundheitswesen (Variable pt01) haben, können wir dies wie folgt machen - aus dem Codebook können wir ableiten, dass "sehr großes Vertrauen" dem Zahlenwert 7 entspricht:
 
 ```{r}
-vertrauen_institutionen_filter1 <- filter(vertrauen_institutionen, pt01 == 7)
+vertrauen_institutionen_filter1 <- vertrauen_institutionen %>% 
+  filter(pt01 == 7)
 ```
 
 In diesem Beispiel haben wir aus dem Subset vertrauen_institutionen erneut ein Subset gezogen, indem wir mit der Funktion `filter()` nur die Zeilen aus dem ursprünglichen Subset ausgewählt haben, in denen die Variable pt01 (Vertrauen in das Gesundheitswesen) den Wert 7 annimmt. Hier ist es wichtig, ein doppeltes Gleichheitszeichen zu verwenden: pt01 == 7. Wir können auch mehrere Filter gleichzeitig anwenden. Zum Beispiel können wir ein Subset ziehen, dass nur die Daten von Personen enthält, die sehr großes Vertrauen in das Gesundheitswesen haben und gar kein Vertrauen in das Bundesverfassungsgericht (pt02):
 
 ```{r}
-vertrauen_institutionen_filter2 <- filter(vertrauen_institutionen, pt01 == 7 & pt02 == 1)
+vertrauen_institutionen_filter2 <- vertrauen_institutionen %>% 
+  filter(pt01 == 7 & pt02 == 1)
 ```
 
 Müssen beide Konditionen zutreffen, damit eine Zeile ausgewählt wird, verbinden wir diese mit dem und-Zeichen &. In unserem Global Environment sehen wir, dass dies auf vier Fälle (4 obs.) zutrifft. Wollen wir hingegen alle Fälle auswählen, bei denen entweder ein sehr großes Vertrauen in das Gesundheitswesen oder gar kein Vertrauen in das Bundesverfassungsgericht besteht, trennen wir durch den senkrechten Strich \|:
 
 ```{r}
-vertrauen_institutionen_filter3 <- filter(vertrauen_institutionen, pt01 == 7 | pt02 == 1)
+vertrauen_institutionen_filter3 <- vertrauen_institutionen %>% 
+  filter(pt01 == 7 | pt02 == 1)
 ```
 
 In unserem Global Environment sehen wir, dass dies auf 486 Fälle (486 obs.) zutrifft.
@@ -87,7 +96,8 @@ In vielen Datenanalyseprojekten ist es notwendig, Variablen zu bearbeiten, um si
 Angenommen wir möchten eine neue Variable (Spalte) für unser Subset vertrauen_institutionen erstellen, die den Wert "großes vertrauen" annehmen soll, wenn die Variable pt01 (Vertrauen in das Gesundheitswesen) einen Wert größer vier (\> 4) annimmt und "wenig vertrauen", wenn pt01 einen anderen Wert annimmt, können wir dies folgermaßen erreichen:
 
 ```{r}
-transformierte_daten <- mutate(vertrauen_institutionen, vertrauen_gesundheitswesen = ifelse(pt01 > 4, "großes vertrauen", "wenig vertrauen"))
+transformierte_daten <- vertrauen_institutionen %>% 
+  mutate(vertrauen_gesundheitswesen = ifelse(pt01 > 4, "großes vertrauen", "wenig vertrauen"))
 ```
 
 In diesem Beispiel haben wir einen neuen Datensatz generiert und ihm den Namen transformierte_daten zugewiesen. Mit den Funktionen `mutate()` und `ifelse()` haben wir basierend auf der Variable pt01 eine neue Spalte im Datensatz erstellt mit dem Namen vertrauen_gesundheitswesen. Innerhalb der Funktion `mutate()` haben wir dafür zunächst unseren Datensatz angegeben, in diesem Fall vertrauen_institutionen. Nach einem Komma folgt der Name der neuen Variable (Spalte) mit einem Gleichheitszeichen =. In der Funktion `ifelse()` geben wir erst die Kondition an, die wir testen wollen (pt01 \> 4), gefolgt von einem Komma und dem Wert, den die Variable annehmen soll, sofern die getestete Kondition zutrifft. Dann folgt nach einem erneuten Komma der Wert, den die Variable annehmen soll, falls die Kondition nicht zutrifft.

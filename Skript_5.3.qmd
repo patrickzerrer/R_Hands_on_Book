@@ -120,7 +120,7 @@ Wir haben nun alle Daten geladen und die Variablen entsprechend vorbereitet. Wir
 Es gibt eine ganze Reihe von möglichen Arten von Indizes, welche wir theoretisch berechnen könnten.
 
 | Art des Index                       | Bildung (Beispiel)                                   | Beschreibung                                                                                                                            |
-|-------------------------------------|------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+|----------------|----------------|----------------------------------------|
 | Ungewichteter additivier Index      | Index = Indikator_1 + Indikator_2 + Indikator_3      | Die Ausprägungen der Indikatorvariablen werden addiert bzw. zu gemittelt.                                                               |
 | Ungewichteter multiplikativer Index | Index = Indikator_1 \* Indikator_2 \* Indikator_3    | Wenn ein Index Mindestausprägungen auf allen Indikatorvariablen voraussetzt sollte multiplikativ zu einem Gesamtindex verknüpft werden. |
 | Gewichteter additivier Index        | Index = (2\*Indikator_1) + Indikator_2 + Indikator_3 | Gewichtete additive Indizes ermöglichen eine differenzierte Behandlung der einzelnen Indikatoren.                                       |

@@ -4,15 +4,18 @@ author: "Hannah-Marie Büttner"
 toc: true
 number-sections: true
 highlight-style: pygments
+execute: 
+  warning: false
 format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 ---
 
 ![Bild von Jae Rue auf Pixabay](Bilder/Skript_3.2_Bild_1.jpg)
 
-# Datentypen, Skalenniveaus und Datenstrukturen
+# Verschiedene Datentypen, Skalenniveaus und Datenstrukturen
 
 Die Welt der Datenanalyse ist reichhaltig und vielfältig. Bevor wir jedoch in die Tiefe der quantitativen Datenanalyse eintauchen, ist es wichtig, die Grundlagen zu verstehen, die uns bei der Arbeit mit Daten leiten. In diesem Kapitel werden wir uns mit den grundlegenden Konzepten der Datentypen, Skalenniveaus und Datenstrukturen vertraut machen.
 
@@ -75,11 +78,16 @@ In R sind Datenstrukturen essentiell, um Informationen auf organisierte und effi
 Der Vektor ist die essentiellste und einfachste Datenstruktur in R. Ein Vektor ist eindimensional und enthält eine geordnete Sammlung von Elementen desselben Datentyps, er kann also entweder aus numerischen Werten, Integers (ganzen Zahlen), logischen Werten oder Characters (Textwerten) bestehen. Vektoren sind fundamental für viele Berechnungen und Operationen in R. Vektoren können in R mithilfe der Funktion c() erstellt werden, die die Elemente durch Kommas trennt. Im folgenden Beispiel erstellen wir für verschiedene Datentypen, die wir im vorherigen Kapitel kennengelernt haben, Beispiel-Vektoren und ordnen diesen Vektoren Namen zu.
 
 ```{r}
-a <- c(1,2,3,4,6,-4) #numeric
-b <- c(1L,2L,3L) #integer
-c <- c("one","two","three") #character
-d <- c(TRUE, FALSE, TRUE, FALSE) #logical
+a <- c(1,2,3,4,6,-4) # <1> 
+b <- c(1L,2L,3L) # <2> 
+c <- c("one","two","three") # <3> 
+d <- c(TRUE, FALSE, TRUE, FALSE) # <4> 
 ```
+
+1. numeric
+2. integer
+3. character
+4. logical
 
 Wir haben nun mit der Funktion `c()` Vektoren erstellt mit verschiedenen Datentypen. Wollen wir einen Vektor des Datentyps numeric erstellen, können wir diesen mit Zahlen befüllen, wie es bei Vektor a der Fall ist. Wollen wir hingegen spezifizieren, dass es sich ausschließlich um ganze Zahlen handelt und der Datentyp des Vektors daher integer ist, müssen wir dies mit einem L hinter den Zahlen angeben, wie wir es für Vektor b gemacht haben. Zur Erstellung eines Vektors des Datentyps character setzen wir die Werte in doppelte oder einfache Anführungszeichen, wie bei Vektor c. Für einen logischen Datentyp, befüllen wir den Vektor mit den Werten TRUE und False, wie in Beispiel d. Wollen wir uns den Datentyp eines Vektors anzeigen lassen, können wir dies mit dem Befehl `class()` machen.
 
@@ -112,8 +120,7 @@ class(verkehrsmittel)
 Anschließend können wir den numerischen Vektor in einen des Datentyps factor umwandeln und den verschiedenen Verkehrsmitteln jeweils ein Label zuordnen. Bei der Zuordnung der Labels müssen wir die Reihenfolge beachten: Das erste Label, das wir vergeben, wird dem niedrigsten Zahlenwert (in unserem Fall 1) zugeordnet, das zweite dem zweitniedrigsten (2) und so weiter.
 
 ```{r}
-factor_verkehrsmittel <- factor(verkehrsmittel, labels=c("bus","zug","fahrrad",
-                                                 "auto","andere"))
+factor_verkehrsmittel <- factor(verkehrsmittel, labels=c("bus","zug","fahrrad","auto","andere"))
 class(factor_verkehrsmittel)
 ```
 
