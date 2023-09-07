@@ -481,18 +481,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Auf eine einzelne Variable in einem Datensatz können wir mit dem Dollar-Zeichen $ zugreifen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1"></a><span class="fu">head</span>(vertrauen_institutionen<span class="sc">$</span>age)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="1" data-code-annotation="1">Wir verwenden hier zusätzlich die Funktion <code>head()</code>. Damit können wir uns die ersten Einträge anzeigen lassen und haben somit eine übersichtlichere Ausgabe.</span>
-</dd>
-</dl>
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>vertrauen_institutionen<span class="sc">$</span>age </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;labelled&lt;double&gt;[6]&gt;: ALTER: BEFRAGTE(R)
-[1] 54 53 89 79 62 23
+<pre><code>&lt;labelled&lt;double&gt;[5342]&gt;: ALTER: BEFRAGTE(R)
+  [1]  54  53  89  79  62  23  31  57  68  51  57  85  55  26  38  58  54  45
+ [19]  49  26  83  48  48  73  62  25  54  54  51  60  49  57  58  58  39  82
+ [37]  77  79  22  77  54  50  23  25  65  56  72  52  68  55  31  79  62  67
+ [55]  66  23  83  62  41  57  22  38  69  62  48  64  26  73  49  38  40 -32
+ [73]  50  57  42  55  31  55  68  91  63  56  77  56  30  58  60  59  51  25
+ [91]  62  59  65  50  36  25  44  59  46  44
+ [ reached getOption("max.print") -- omitted 5242 entries ]
 
 Labels:
  value             label
@@ -504,18 +502,18 @@ Labels:
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="filtern-von-fällen"><span class="header-section-number">1.2.2</span> Filtern von Fällen</h3>
 <p>Neben der Auswahl von Spalten ist es oft auch erforderlich, Fälle bzw. Zeilen basierend auf bestimmten Bedingungen auszuwählen. Hierfür verwenden wir die Funktion <code>filter()</code>. Angenommen wir möchten für unser Subset vertrauen_institutionen nur die Daten der Personen auswählen, die sehr großes Vertrauen in das Gesundheitswesen (Variable pt01) haben, können wir dies wie folgt machen - aus dem Codebook können wir ableiten, dass “sehr großes Vertrauen” dem Zahlenwert 7 entspricht:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>vertrauen_institutionen_filter1 <span class="ot">&lt;-</span> vertrauen_institutionen <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">filter</span>(pt01 <span class="sc">==</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>vertrauen_institutionen_filter1 <span class="ot">&lt;-</span> vertrauen_institutionen <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">filter</span>(pt01 <span class="sc">==</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In diesem Beispiel haben wir aus dem Subset vertrauen_institutionen erneut ein Subset gezogen, indem wir mit der Funktion <code>filter()</code> nur die Zeilen aus dem ursprünglichen Subset ausgewählt haben, in denen die Variable pt01 (Vertrauen in das Gesundheitswesen) den Wert 7 annimmt. Hier ist es wichtig, ein doppeltes Gleichheitszeichen zu verwenden: pt01 == 7. Wir können auch mehrere Filter gleichzeitig anwenden. Zum Beispiel können wir ein Subset ziehen, dass nur die Daten von Personen enthält, die sehr großes Vertrauen in das Gesundheitswesen haben und gar kein Vertrauen in das Bundesverfassungsgericht (pt02):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>vertrauen_institutionen_filter2 <span class="ot">&lt;-</span> vertrauen_institutionen <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">filter</span>(pt01 <span class="sc">==</span> <span class="dv">7</span> <span class="sc">&amp;</span> pt02 <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>vertrauen_institutionen_filter2 <span class="ot">&lt;-</span> vertrauen_institutionen <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(pt01 <span class="sc">==</span> <span class="dv">7</span> <span class="sc">&amp;</span> pt02 <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Müssen beide Konditionen zutreffen, damit eine Zeile ausgewählt wird, verbinden wir diese mit dem und-Zeichen &amp;. In unserem Global Environment sehen wir, dass dies auf vier Fälle (4 obs.) zutrifft. Wollen wir hingegen alle Fälle auswählen, bei denen entweder ein sehr großes Vertrauen in das Gesundheitswesen oder gar kein Vertrauen in das Bundesverfassungsgericht besteht, trennen wir durch den senkrechten Strich |:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>vertrauen_institutionen_filter3 <span class="ot">&lt;-</span> vertrauen_institutionen <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(pt01 <span class="sc">==</span> <span class="dv">7</span> <span class="sc">|</span> pt02 <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>vertrauen_institutionen_filter3 <span class="ot">&lt;-</span> vertrauen_institutionen <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">filter</span>(pt01 <span class="sc">==</span> <span class="dv">7</span> <span class="sc">|</span> pt02 <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In unserem Global Environment sehen wir, dass dies auf 486 Fälle (486 obs.) zutrifft.</p>
 </section>
@@ -527,8 +525,8 @@ Labels:
 <h3 data-number="1.3.1" class="anchored" data-anchor-id="neue-spalten-erstellen"><span class="header-section-number">1.3.1</span> Neue Spalten erstellen</h3>
 <p>Angenommen wir möchten eine neue Variable (Spalte) für unser Subset vertrauen_institutionen erstellen, die den Wert “großes vertrauen” annehmen soll, wenn die Variable pt01 (Vertrauen in das Gesundheitswesen) einen Wert größer vier (&gt; 4) annimmt und “wenig vertrauen”, wenn pt01 einen anderen Wert annimmt, können wir dies folgermaßen erreichen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>transformierte_daten <span class="ot">&lt;-</span> vertrauen_institutionen <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">vertrauen_gesundheitswesen =</span> <span class="fu">ifelse</span>(pt01 <span class="sc">&gt;</span> <span class="dv">4</span>, <span class="st">"großes vertrauen"</span>, <span class="st">"wenig vertrauen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>transformierte_daten <span class="ot">&lt;-</span> vertrauen_institutionen <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">mutate</span>(<span class="at">vertrauen_gesundheitswesen =</span> <span class="fu">ifelse</span>(pt01 <span class="sc">&gt;</span> <span class="dv">4</span>, <span class="st">"großes vertrauen"</span>, <span class="st">"wenig vertrauen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In diesem Beispiel haben wir einen neuen Datensatz generiert und ihm den Namen transformierte_daten zugewiesen. Mit den Funktionen <code>mutate()</code> und <code>ifelse()</code> haben wir basierend auf der Variable pt01 eine neue Spalte im Datensatz erstellt mit dem Namen vertrauen_gesundheitswesen. Innerhalb der Funktion <code>mutate()</code> haben wir dafür zunächst unseren Datensatz angegeben, in diesem Fall vertrauen_institutionen. Nach einem Komma folgt der Name der neuen Variable (Spalte) mit einem Gleichheitszeichen =. In der Funktion <code>ifelse()</code> geben wir erst die Kondition an, die wir testen wollen (pt01 &gt; 4), gefolgt von einem Komma und dem Wert, den die Variable annehmen soll, sofern die getestete Kondition zutrifft. Dann folgt nach einem erneuten Komma der Wert, den die Variable annehmen soll, falls die Kondition nicht zutrifft.</p>
 </section>
@@ -536,8 +534,8 @@ Labels:
 <h3 data-number="1.3.2" class="anchored" data-anchor-id="variablen-umbenennen"><span class="header-section-number">1.3.2</span> Variablen umbenennen</h3>
 <p>Manchmal ist es sinnvoll, Variablennamen zu ändern, um sie verständlicher zu machen oder um Konventionen zu folgen. Die Funktion <code>rename()</code> ermöglicht das Umbenennen von Variablen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>transformierte_daten <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">rename</span>(<span class="at">vertrauen_gesundheit =</span> pt01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>transformierte_daten <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">rename</span>(<span class="at">vertrauen_gesundheit =</span> pt01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Hier ändern wir den Namen der Variable pt01 im Datensatz transformierte_daten zu vertrauen_gesundheit.</p>
 </section>
@@ -546,9 +544,9 @@ Labels:
 <h2 data-number="1.4" class="anchored" data-anchor-id="gruppieren-von-daten-und-aggregation"><span class="header-section-number">1.4</span> Gruppieren von Daten und Aggregation</h2>
 <p>Eine weitere wichtige Fähigkeit ist das Gruppieren von Fällen basierend auf bestimmten Kategorien. Die Funktion <code>group_by()</code> aus dem dplyr-Paket ermöglicht es, Datensätze nach bestimmten Variablen zu gruppieren. Zum Beispiel könnten wir den Datensatz vertrauen_institutionen nach dem Alter der Befragten gruppieren und das durchschnittliche Vertrauen in das Gesundheitswesen pro Alter berechnen. Wollen wir den Datensatz vertrauen_institutionen nach dem Alter der Befragten gruppieren und das durchschnittliche Vertrauen in das Gesundheitswesen pro Alter berechnen, kombinieren wir die Befehle <code>group_by()</code>, <code>summarize()</code> und <code>mean()</code> nach der tidyverse-Logik wie folgt:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>aggregierte_daten <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarize</span>(<span class="at">durchschnitt_vertrauen =</span> <span class="fu">mean</span>(vertrauen_gesundheit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>aggregierte_daten <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">summarize</span>(<span class="at">durchschnitt_vertrauen =</span> <span class="fu">mean</span>(vertrauen_gesundheit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Sehen wir uns den Datensatz aggregierte_daten mit <code>View()</code> oder über unser Global Enviroment an, können wir feststellen, dass dieser aus zwei Variablen (Spalten) besteht: age und durchschnitt_vertrauen. Die Spalte age enthält für jedes Alter, das im Datensatz transformierte_daten vorkommt, eine Zeile. Die Spalte durchschnitt_vertrauen gibt den durchschnittlichen Wert für die Variable vertrauen_gesundheit für jedes Alter an. Den Durchschnitt haben wir mit der Funktion <code>mean()</code> berechnet.</p>
 </section>
@@ -557,21 +555,21 @@ Labels:
 <p>Bei der Arbeit mit realen Datensätzen ist es häufig der Fall, dass diese nicht perfekt und sauber sind. Es können verschiedene Probleme auftreten, wie fehlende Daten, inkonsistente Codierungen oder unerwartete Werte. In diesem Abschnitt werden wir uns damit beschäftigen, wie Sie solche Herausforderungen bewältigen können.</p>
 <p>Fehlende Daten sind ein häufiges Problem in Datensätzen. In R werden fehlende Werte oft mit dem Wert NA (Not Available) oder NaN (Not a Number) dargestellt. Ist dies der Fall, können wir fehlende Werte mit der Funktion <code>drop_na()</code> entfernen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>vertrauen_institutionen_dropna <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">drop_na</span>(vertrauen_gesundheit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>vertrauen_institutionen_dropna <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">drop_na</span>(vertrauen_gesundheit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Je nach Datensatz kann die Codierung fehlender Werte aber stark variieren. Im ALLBUS-Datensatz ist die Variable pt01 (vertrauen_gesundheit) zum Beispiel so codiert, dass fehlende Werte mit einer -9 (keine Angabe), -42 (Datenfehler: Mehrfachnennung) oder -11 (keine Teilnhame an Split A oder B) gekennzeichnet sind. Dadurch wurden durch obenstehenden Code, der <code>drop_na</code> verwendet keinerlei Zeilen gelöscht und der Datensatz vertrauen_institutionen_dropna entspricht vertrauen_institutionen. In diesem Fall müssen wir die spezifischen fehlenden Werte angeben, die wir herausfiltern wollen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>missing_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">42</span>, <span class="sc">-</span><span class="dv">11</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a>vertrauen_institutionen_dropna <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">filter</span>(<span class="sc">!</span>vertrauen_gesundheit <span class="sc">%in%</span> missing_codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>missing_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">42</span>, <span class="sc">-</span><span class="dv">11</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a>vertrauen_institutionen_dropna <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">filter</span>(<span class="sc">!</span>vertrauen_gesundheit <span class="sc">%in%</span> missing_codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Hier geben wir zunächst die möglichen Ausprägungen für fehlende Werte an und speichern diese als Vektor missing_codes. Dann wenden wir die Funktion <code>filter()</code> auf den Datensatz vertrauen_institutionen so an, dass nur Zeilen ausgewählt werden, in denen die Variable keinen der Werte in missing_codes annimmt. Das Gegenteil einer Kondition errreichen wir mit einem Ausrufezeichen !. vertrauen_gesundheit %in% missing_code würde alle Fälle filtern, die einen der Werte in missing_codes annehmen. Setzen wir ein ! davor, erhalten wir genau den umgekehrten Fall.</p>
 <p>Wir können auch die fehlenden Werte aus allen Vertrauensvariablen löschen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>vertrauen_institutionen_dropna <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">filter</span>(<span class="fu">across</span>(vertrauen_gesundheit<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="sc">!</span>. <span class="sc">%in%</span> missing_codes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>vertrauen_institutionen_dropna <span class="ot">&lt;-</span> transformierte_daten <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">filter</span>(<span class="fu">across</span>(vertrauen_gesundheit<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="sc">!</span>. <span class="sc">%in%</span> missing_codes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In dieser Version wird die Funktion <code>across()</code> verwendet, um Operationen auf mehreren Spalten gleichzeitig durchzuführen. Es werden nur die Zeilen beibehalten, in denen keine fehlenden Werte (definiert in missing_codes) in den angegebenen Variablen zwischen vertrauen_gesundheit und pt20 vorkommen.</p>
 </section>
@@ -579,13 +577,13 @@ Labels:
 <h2 data-number="1.6" class="anchored" data-anchor-id="erstellung-von-indizes"><span class="header-section-number">1.6</span> Erstellung von Indizes</h2>
 <p>Oft müssen aus vorhandenen Variablen neue abgeleitete Variablen berechnet werden. Dies kann beispielsweise das Berechnen von Indizes oder Skalen sein, um Zusammenfassungen oder Vergleiche zu erleichtern. Wir können zum Beispiel alle Vertrauensvariablen zu einem Index zusammenfassen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>vertrauen_institutionen_index <span class="ot">&lt;-</span> vertrauen_institutionen_dropna <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">mutate</span>(<span class="at">index_vertrauen =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(vertrauen_gesundheit<span class="sc">:</span>pt20)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>vertrauen_institutionen_index <span class="ot">&lt;-</span> vertrauen_institutionen_dropna <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">mutate</span>(<span class="at">index_vertrauen =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(vertrauen_gesundheit<span class="sc">:</span>pt20)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Hier haben wir eine neue Spalte index_vertrauen erstellt, die die Summe der Vertrauensvariablen enthält. Wir verwenden wieder die Funktion <code>across()</code>, um Operationen auf mehreren Spalten gleichzeitig durchzuführen. Für jede Zeile haben wir mit dem Befehl <code>rowSums()</code> die Werte für alle Variablen von vertrauen_gesundheit bis pt20 addiert und den resultierenden Wert in die neue Spalte geschrieben. Anstatt der Summe können wir auch den Mittelwert der Variablen berechnen und diesen als Index verwenden, dazu teilen wir die Summe, die wir wie im Beispiel zuvor berechnen, durch die Anzahl an Vertrauensvariablen (20):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>vertrauen_institutionen_index_2 <span class="ot">&lt;-</span> vertrauen_institutionen_dropna <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">mutate</span>(<span class="at">index_vertrauen =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(vertrauen_gesundheit<span class="sc">:</span>pt20))<span class="sc">/</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>vertrauen_institutionen_index_2 <span class="ot">&lt;-</span> vertrauen_institutionen_dropna <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">mutate</span>(<span class="at">index_vertrauen =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(vertrauen_gesundheit<span class="sc">:</span>pt20))<span class="sc">/</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
