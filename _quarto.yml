@@ -6,7 +6,7 @@ website:
   
   navbar: 
     title: false
-    logo: Bilder/logo_ub_2021.png
+    logo: Bilder/zemkipatrick_comic_style_logo_for_a_website_statistics_course_c_64bcc132-a065-4179-8260-472007d84903.png
     background: "#e3dac9"
     foreground: "secondary"
     search: true
@@ -23,8 +23,8 @@ website:
     right: 
       - icon: github
         href: https://github.com/patrickzerrer/R_Hands_on_Book
-      - icon: twitter
-        href: https://twitter.com/ZeMKI_Bremen
+      - icon: Bilder/logo_ub_2021.png
+        href: https://www.uni-bremen.de/
       
   sidebar: 
     style: "docked"
