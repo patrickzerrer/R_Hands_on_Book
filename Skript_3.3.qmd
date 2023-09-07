@@ -1,6 +1,6 @@
 ---
 title: "Selektion, Manipulation und Transformation"
-author: "tba"
+author: "Hannah-Marie Büttner"
 toc: true
 number-sections: true
 highlight-style: pygments
