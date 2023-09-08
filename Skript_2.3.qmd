@@ -1,6 +1,6 @@
 ---
 title: "Der ALLBUS Datensatz"
-author: "tba"
+author: "Cornelius Puschmann"
 toc: true
 number-sections: true
 highlight-style: pygments
@@ -11,3 +11,25 @@ format:
 ---
 
 # Der ALLBUS
+
+Die Allgemeine Bevölkerungsumfrage der Sozialwissenschaften (ALLBUS) ist eine Befragung der deutschen Bevölkerung, die seit 1980 regelmäßig durch das GESIS Leibniz Institut für Sozialforschung durchgeführt wird. Im ALLBUS werden in der Regel alle zwei Jahre Daten über Einstellungen, Verhaltensweisen und Sozialstruktur der Bevölkerung in der Bundesrepublik Deutschland gesammelt. Dafür wird in persönlichen Interviews jeweils eine repräsentative Stichprobe aus der Bevölkerung Deutschlands befragt (jeweils ca. 2800 bis 3500 Befragte).
+
+Abgefragt werden u.a. Einschätzungen und Einstellungen in den Bereichen:
+
+\- Wirtschaft
+
+\- Umwelt
+
+\- Immigration
+
+\- Politische Einstellungen und Partizipation
+
+\- Mediennutzung
+
+\- Einstellungen zu Ehe, Familie und Partnerschaft
+
+\- Einstellungen zu und Kontakte mit Behörden
+
+\- Freizeitaktivitäten
+
+\- Gesundheit und gesundheitsrelevantes Verhalten

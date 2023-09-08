@@ -1,6 +1,6 @@
 ---
-title: "klassische Formen von Datensätzen"
-author: "tba"
+title: "Einlesen von Datensätzen in unterschiedlichen Formaten"
+author: "Cornelius Puschmann"
 toc: true
 number-sections: true
 highlight-style: pygments
@@ -10,4 +10,4 @@ format:
     code-line-numbers: true
 ---
 
-# Einlesen von Datensätzen und Praktische Tipps
+# Einlesen von Datensätzen in unterschiedlichen Formaten

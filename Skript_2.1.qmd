@@ -1,6 +1,6 @@
 ---
 title: "Der Aufbau von Datensätzen"
-author: "tba"
+author: "Cornelius Puschmann"
 toc: true
 number-sections: true
 highlight-style: pygments
@@ -12,4 +12,10 @@ format:
 
 # Was ist ein Datensatz und wie ist dieser aufgebaut?
 
+Sozialwissenschaftlichen Daten sind Informationen, die zur Beschreibung und Erklärung der sozialen Welt verwendet werden. Sie können aus einer Vielzahl von Quellen stammen, zum Beispiel aus Umfragen, Experimenten, Interviews und Inhaltsanalysen. Kommunikationswissenschaftliche Daten können quantitativ oder qualitativ sein. Quantitative Daten sind in Zahlen ausgedrückt und können verwendet werden, um Muster und Zusammenhänge zu identifizieren. Qualitative Daten sind in Text oder Bildern ausgedrückt und können verwendet werden, um die Bedeutung von Ereignissen und Erfahrungen zu verstehen.
+
+Unter Datensätzen verzehen wir digital zusammengestellte Daten,
+
 # Klassische Formen von Datensätzen in der Kommunikationswissenschaft
+
+einfach auf Brosius et al oder Springer et al verweisen? Oder der aufbau in R? dazu müsste man ja erst data frames erklären.
