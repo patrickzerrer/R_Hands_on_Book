@@ -10,6 +10,20 @@ format:
     code-line-numbers: true
 ---
 
+```{r}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, ggplot2, haven, dplyr)  
+
+
+theme_set(theme_classic()) 
+
+daten = haven::read_dta("Datensatz/Allbus_2021.dta") 
+
+allbus_messniveau_bsp <- subset(daten, select=c("sex", "pt12", "di01a")) %>%          
+  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%                                     
+  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%          
+  na.omit()                                                                                  
+```
 
 ## Die Spannweite
 
