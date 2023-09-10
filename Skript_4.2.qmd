@@ -12,26 +12,141 @@ format:
 
 Berechnung von Lageparametern
 
-# Der Modus
+## Der Modus
+
+Der Modus, auch Modalwert genannt, gibt an, welche Ausprägung eines gemessenen Merkmals am häufigsten vorkommt.
+
+### Berechnung
+
+Wir müssen einfach nur zählen, wie oft jede Merkmalsausprägung vorkommt. Diejenige mit dem höchsten Wert (bzw. der größten absoluten Häufigkeit) ist der Modus. In R gibt es keine vorgefertigte Funktion, die diesen Parameter berechnet. Das folgende Code-Beispiel zeigt eine mögliche Lösung speziell für unseren "df.sex"-DataFrame, die aber nur für den Fall brauchbar ist, dass es exakt eine Merkmalsausprägung gibt, die häufiger vorkommt als alle anderen.
+
+
+```{r}
+df.sex$sex[which.max(df.sex$frequency.Freq)]
+```
+
+
+## Der Median
+
+Für mindestens ordinal skalierte Messwerte empfielt sich neben dem Modus zusätzlich der Median. Einen der Größe nach aufsteigend sortierten Datensatz teilt der Median genau in der Mitte, es liegen also genauso viele Elemente links wie rechts davon.
+
+### Berechnung
+
+Für den Fall, dass die Anzahl an Elementen im Datensatz $n$ ungerade ist, entspricht der Median dem Messwert, der genau in der Mitte liegt:
+
+$$
+x_{Med} = x_{\frac{n + 1}{2}}
+$$
+
+Ist $n$ gerade, kann jedes der beiden Elemente, die in der Mitte liegen, als Median verwendet werden. Es ist aber auch üblich, beide zu addieren und dann durch zwei zu teilen:
+
+$$
+x_{Med} = \frac{1}{2} (x_{\frac{n}{2}} + x_{\frac{n}{2} + 1})
+$$
+
+R stellt eine Funktion zur Berechnung des Medians bereit. Wir schauen uns als Beispiel das Vertrauen der Allbus-Befragten in die Bundesregierung an: Im Gegensatz zum Geschlecht können wir hier eine Rangfolge festlegen, jedoch nicht die Abstände dazwischen exakt messen. Wir haben es folglich mit ordinalen Daten zu tun. 
+
+Wir verschaffen uns zunächst wieder einen Überblick mit der `table`-Funktion und sehen sieben verschiedene Werte. 
+
+```{r}
+table(allbus_messniveau_bsp$pt12)
+```
+
+Die Daten sind bereits von "gar nicht" zu "sehr hoch" sortiert. Wir wenden die `median`-Funktion an und erhalten "4" als Ausgabe: 
+
+```{r}
+median(allbus_messniveau_bsp$pt12)
+```
+
+### Visualisierung
+
+```{r}
+ggplot(data=allbus_messniveau_bsp, aes(x=pt12)) +
+  geom_bar()
+```
+
+
+
+```{r}
+ggplot(data=allbus_messniveau_bsp, aes(x=pt12)) +
+  geom_bar(aes(y = after_stat(prop)))
+```
+
+
+
+```{r}
+
+
+barplot(table(allbus_messniveau_bsp$pt12) / length(allbus_messniveau_bsp$pt12))
+#abline(v = (length(allbus_messniveau_bsp$pt12)+1)/2, col = 'green')
+abline(v = median(allbus_messniveau_bsp$pt12), col = 'red')
+
+```
+
+
+## Quantile 
+
+Ein Quantil legt fest, wie viele Werte über bzw. unter einer bestimmten Grenze liegen und teilt den Datensatz damit in zwei Hälften. Den bekanntesten Spezialfall haben wir mit dem Median bereits kennengelernt. Die Grenze lag in dem Fall genau in der Mitte, es liegen also 50% unterhalb der Grenze und 50% darüber. Bei einem 31%-Quantil würden hingegen 31% der Werte unter der Grenze liegen und 69% darüber. Wichtige Quantile sind die sogenannten Quartile, zu denen das 25%-Quantil, der Median und das  75%-Quantil zusammengefasst werden. Sie teilen die Gesamtmenge an Messwererten in vier gleich große Teile. 
+
+
+### Berechnung 
+
+Das folgende R-Beispiel gibt die drei Quartile des Vertrauens-Datensatzes aus: 
+
+```{r}
+quantile(allbus_messniveau_bsp$pt12, probs = c(0.25, 0.5, 0.75))
+```
+
+
+
+## Der Mittelwert
+
+Der Begriff "Mittelwert" ist etwas ungenau, da es mehrere verschiedene Mittelwerte gibt. Oft ist damit das arithmetische Mittel gemeint. Es lässt sich nur bei mindestens kardinal skalierten Daten anwenden und bezieht die Gewichte der jeweiligen Merkmalsausprägungen mit ein.
 
 ## Berechnung
 
-## Visualisierung
+Das arithmetische Mittel erhält man, indem man alle Messwerte addiert und durch die Gesamtzahl an Messwerten teilt:  
 
-## Interpretation
+$$
+\bar{x} = \frac{x_{1} + x_{2} + \cdots + x_{n}}{n} = \frac{1}{n}  \sum_{i=1}^{n} {x_{i}}
+$$
+Schauen wir uns das am Beispiel des Netto-Einkommens der Befragten im Allbus-Datensatz an: Wir können dazu die bereits vorhandene Funktion `mean` nutzen: 
 
-# Der Median
+```{r}
+mean(allbus_messniveau_bsp$di01a)
+```
 
-## Berechnung
+Vergleichen wir das mit dem Median, fällt auf, dass zwischen beiden Lageparametern ca. 100 Euro Differenz bestehen: 
 
-## Visualisierung
+```{r}
+median(allbus_messniveau_bsp$di01a)
+```
 
-## Interpretation
 
-# Der Mittelwert
 
-## Berechnung
+```{r}
+plot(sort(allbus_messniveau_bsp$di01a))
+abline(h = median(allbus_messniveau_bsp$di01a), col = 'red')
+abline(h = mean(allbus_messniveau_bsp$di01a), col = 'orange')
+```
 
-## Visualisierung
+```{r}
+hist(allbus_messniveau_bsp$di01a, )
+```
+```{r}
+ggplot(allbus_messniveau_bsp, aes(x=di01a)) + geom_histogram(binwidth=100)
 
-## Interpretation
+
+```
+
+
+Nicht unerwähnt bleiben sollte das geometrische Mittel, das bei der Berechnung des Mittelwerts von prozentualen Veränderungen angewendet wird. Dabei werden die einzelnen Messwerte multipliziert und die n-te Wurzel aus dem Ergebnis gezogen, wobei n die Gesamtzahl an Messwerten ist:  
+
+
+
+$$
+x_{Geom} = (x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}}
+$$
+
+
+
