@@ -10,20 +10,303 @@ format:
     code-line-numbers: true
 ---
 
+
+
+```{r}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, ggplot2, haven, dplyr)  
+
+
+theme_set(theme_classic()) 
+
+daten = haven::read_dta("Datensatz/Allbus_2021.dta") 
+
+allbus_messniveau_bsp <- subset(daten, select=c("sex", "pt12", "di01a")) %>%          
+  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%                                     
+  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%          
+  na.omit()                                                                                  
+```
+
+
+
+
 Berechnung und Interpretation von Verteilungen
 
-# Die Normalverteilung
 
-## Berechnung
+Wir haben jetzt eine Menge verschiedener Methoden kennengelernt, mit denen wir uns einen Eindruck davon machen können, wie unsere Daten verteilt sind. Um den Begriff der Verteilung an sich haben wir dagegen bis hierher einen Bogen gemacht. Dabei spielt die Art der Verteilung für viele weiterführende Anwendungen eine große Rolle. Manche statistische Verfahren setzen spezifische Verteilungen voraus. 
 
-## Visualisierung
+Statistische Verteilungen stellen eine Verbindung her zwischen den empirisch gewonnenen Daten und auf Wahrscheinlichkeit basierenden Aussagen, die wir daraus ableiten wollen. Dabei steht die Frage im Zentrum, mit welcher Wahrscheinlichkeit ein bestimmtes Zufallsereignis eintritt bzw. wie wahrscheinlich es ist, dass eine zufällig gezogene Stichprobe so ausfällt, wie sie es tut. Können wir annehmen, dass ein Merkmal auf eine bestimmte Weise verteilt ist, können wir eine Prognose abgeben, in welchem Rahmen eine Stichprobe liegen wird. Interessant wird es insbesondere dann, wenn sich nachher zeigt, dass die theoretische Schätzung falsch war und völlig andere Ergebnisse herauskommen. Denn das bedeutet, dass unsere Daten von bisher noch unbekannten Faktoren beeinflusst werden, deren Ursache wir noch ergründen müssen. 
+
+Wir hätten also gerne eine Funktion, die es uns ermöglicht, alle denkbaren Stichproben auf einen Wahrscheinlichkeitswert zwischen 0 und 1 abzubilden. Wenn abzählbar viele Ereignisse eintreten können (z.B. beim Würfeln oder Münzwurf), spricht man von Wahrscheinlichkeitsfunktionen. Bei stetigen Verteilungen (z.B. wenn Zeiträume betrachtet werden) verwendet man den Begriff Dichtefunktion. In beiden Fällen summieren sich alle Funktionswerte zu 1 auf. Eine kumulierte Wahrscheinlichkeits- bzw. Dichtefunktion nennt man Verteilungsfunktion. D.h. bei der Verteilungsfunktion werden die Funktionswerte der Wahrscheinlichkeits summiert bzw. die Dichtefunktion integriert.  
+
+Schauen wir uns als Beispiel ein Histogramm der Allbus-Einkommensverteilung an: 
+
+```{r}
+df_income <- data.frame(income=allbus_messniveau_bsp$di01a)
+
+mittel <- mean(df_income$income)
+median <- median(df_income$income)
+modus <- as.numeric(names(sort(table(df_income$income), decreasing = TRUE)[1]))
+
+ggplot(df_income, aes(x = income)) + 
+    geom_histogram(aes(y =..density..),
+    breaks = seq(-0, 10000, by = 500), 
+    colour = "black", 
+    fill = "gray") +
+  labs(x = "Einkommen", y = "Häufigkeit") +
+  geom_vline(xintercept = mittel, color = "red", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = median, color = "blue", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = modus, color = "green", linetype = "dashed", linewidth = 1) 
+```
+
+Zunächst einmal sieht man, dass sich die Messwerte in einem bestimmten Bereich häufen und eine zumindest annähernde Glockenform aufweisen. Der höchste Punkt deckt sich in etwa mit dem Mittelwert, hier vor allem dem Median (blau) und dem arithmetischen Mittel (rot), während der Modus (grün) etwas abseits liegt. Sie verteilen sich nicht gleichmäßig, was bei Einkommensdaten auch nicht zu erwarten gewesen wäre. So ganz symmetrisch sieht die Verteilung aber auch nicht aus, sondern wirkt etwas nach links gequetscht. Man nennt das auch "rechtsschief" bzw. "linkssteil".  Ein Indiz hierfür ist auch, dass das arithmetische Mittel größer ist als der Median. Das nach rechts gequetschte Gegenstück hieße "linksschief" bzw. "rechtssteil". 
+Diese Asymmetrie ist auch dadurch bedingt, dass ein erheblicher Teil der Studienteilnehmenden im Datensatz nicht vorkommt. Leute, die keine Angabe gemacht oder angegeben haben, dass sie über kein eigenes Einkommen verfügen, wurden beim Laden herausgefiltert. Die annähernde Glockenform stimmt jedoch hoffnungsvoll, dass der Datensatz einer Verteilung folgt, die in der Statistik von besonders großer Bedeutung ist und die wir im Folgenden genauer betrachten werden: Die Normalverteilung.
+
+
+
+## Die Normalverteilung
+
+Diese Verteilung ist auch ihrer charakteristischen Form wegen als Glockenkurve oder nach ihrem maßgeblichen Entdecker Carl Friedrich Gauß als Gauß-Verteilung bekannt. Relativ viele andere Verteilungen lassen sich bei ausreichend großer Stichprobengröße mit der Normalverteilung approximieren. Sie ist symmetrisch und der Mittelwert ist ihr Maximum.  
+Ca. 68% der Werte liegen innerhalb einer Standardabweichung vom Mittelwert entfernt, ca. 95% innerhalb von zwei Standardabweichungen und ca. 99,7%, also fast alle, innerhalb von drei Standardabweichungen.
+
+### Berechnung
+
+Die Dichtefunktion der Normalverteilung wird folgendermaßen berechnet:
+
+
+
+$$
+f(x,\mu,\sigma) = \frac{1}{\sigma \sqrt{2 \pi}} \cdot e^{-\frac{(x-\mu)^2}{2 \sigma^2}}
+$$
+Dabei ist $\mu$ der Mittelwert (arithm. Mittel, Median, oder Modus) und $\sigma$ die Standardabweichung. 
+
+
+Bei einer Normalverteilung mit einem Mittelwert von null und einer Varianz von eins spricht man von einer Standardnormalverteilung:
+
+$$
+\phi(z) = f(z, 0, 1) = \frac{1}{\sqrt{2 \pi}} \cdot e^{- \frac{z^2}{2}}
+$$
+
+Normal- aber nicht standardnormal verteilte Werte lassen sich leicht standardisieren, indem man den Mittelwert von ihnen abzieht und das Ergebnis durch die Standardabweichung teilt: 
+
+$$
+z = \frac{Messwert - Mittelwert}{Standardabweichung} = \frac{x - \mu}{\sigma}
+$$
+$\mu$ kann dabei das arithmetische Mittel, der Median oder der Modus sein. 
+
+
+
+Der Vollständigkeit halber sei hier auch noch die Formel der Verteilungsfunktion aufgeschrieben:  
+$$
+F(x, \mu, \sigma) = \frac{1}{2} \left[1 + \text{erf} \left (\frac{x - \mu}{\sigma \sqrt{2}} \right) \right]
+$$
+$erf$ steht für die Gauß'sche Fehlerfunktion. 
+
+Da R umfangreiche Funktionalitäten bereitstellt, um diese Verteilungen zu berechnen, ist es an dieser Stelle nicht notwendig, sich diese Formel einzuprägen oder irgendwas damit per Hand zu rechnen. R hat eine ganze Reihe an Verteilungen implementiert und stellt zu jeder davon vier Funktionen bereit: 
+
+- die Wahrscheinlichkeits-/Dichtefunktion, beginnend mit dem Buchstaben d, 
+- die Verteilungsfunktion, beginnend mit p, 
+- Quantile, beginnend mit q sowie 
+- Zufallszahlen auf Basis der jeweiligen Verteilung, beginnend mit r. 
+
 
 ## Interpretation
+
+Wenn man weiß, dass ein bestimmtes Merkmal normalverteilt ist, kann man das nutzen, um mit relativ wenig Aufwand Berechnungen anzustellen. Angenommen, für unsere Einkommensdaten träfe das auch zu, dann könnte man z.B. mithilfe der Normalverteilung ausrechnen, wieviel Prozent der Population theoretisch maximal 1500 Euro Einkommen haben. 
+In unserem Beispiel können wir die Verteilungsfunktion der Normalverteilung verwenden, da wir an einem kumulierten Wert interessiert sind, nämlich allen möglichen Einkommenswerten bis maximal 1500 Euro.  Wir übergeben der Funktion Mittelwert und Standardabweichung unserer Daten sowie das maximale Einkommen: 
+
+```{r}
+income_mean <- mean(allbus_messniveau_bsp$di01a) 
+income_sd <- sd(allbus_messniveau_bsp$di01a)
+# Die Verteilungsfunktion der Normalverteilung: "p" + "norm": 
+pnorm(1500, mean=income_mean, sd=income_sd) 
+```
+
+Wir bekommen als Ergebnis ca. 0.278. Das vergleichen wir mit dem 27,8%-Quantil unserer Messwerte:
+
+```{r}
+quantile(allbus_messniveau_bsp$di01a, probs = c(0.278))
+```
+
+Zur Erinnerung: Das 27,8%-Quantil teilt die untersten 27,8% vom Rest der Messwerte. Interessanterweise liegt die Grenze genau bei 1500 Euro. Die Übereinstimmung wird aber deutlich schwächer, wenn wir das mit dem (100-27,8)%-Quantil vergleichen:
+
+```{r}
+q <- quantile(allbus_messniveau_bsp$di01a, probs = c(1 - 0.278))
+q
+```
+
+```{r}
+pnorm(2977.378, mean=income_mean, sd=income_sd)
+```
+
+Unsere Messwerte ergeben für das 72,2%-Quantil einen Wert von ca. 2977 Euro. Kalkulieren wir für das selbe Quantil bei der Normalverteilung das zu erwartende Einkommen, werden uns dagegen ca. 3393 Euro angezeigt:
+
+```{r}
+qnorm(0.722, mean=income_mean, sd=income_sd)
+```
+
+Die Datenlage weicht folglich um ganze 416 Euro von der theoretischen Annahme ab und fällt deutlich geringer aus. Ein Umstand, der sich auch grafisch widerspiegelt, wenn wir die Normalverteilung in unser Histogramm einzeichnen: Die blaue Kurve basiert auf dem Median als Mittelwert, die rote auf dem arithmetischen Mittel. 
+```{r}
+ggplot(df_income, aes(x = income)) + 
+    geom_histogram(aes(y =..density..),
+    breaks = seq(-0, 10000, by = 500), 
+    colour = "black", 
+    fill = "gray") +
+  labs(x = "Einkommen", y = "Häufigkeit") +
+  geom_vline(xintercept = mittel, color = "red", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = median, color = "blue", linetype = "dashed", linewidth = 1) +
+stat_function(fun=dnorm, args=list(mean=mittel, sd=income_sd), colour="red") +   # Einfügen der Normalcerteilung mit arithm. mittel
+stat_function(fun=dnorm, args=list(mean=median, sd=income_sd), colour="blue") +  # Einfügen der NV mit Median
+labs(x = "Einkommen", y = "Häufigkeit")
+```
+
+Man sieht darin zweierlei: Zum einen gibt es zwar eine gewisse Übereinstimmung, aber doch auch deutliche Unterschiede zwischen den Messwerten und der Normalverteilung und zum zweiten wirkt der Median etwas genauer als das arithmetische Mittel. Hier zeigt sich die stärkere Robustheit des Medians gegenüber Ausreißern. 
+
+Eine andere Möglichkeit, die Daten mit visuellen Methoden auf Normalverteilung zu prüfen, ist ein sogenannter Q-Q-Plot. Dabei werden die Quantile der theoretischen Verteilung auf einer Achse aufgetragen und die dazu korrespondierenden Quantile der empirischen Daten auf der anderen. Sind die Daten normalverteilt, sollten die Punkte im Plot alle sehr dicht an einer gemeinsamen Linie liegen. Glücklicherweise gibt es auch für diesen Plot eine Funktion:  
+```{r}
+#shapiro.test(allbus_messniveau_bsp$di01a)
+qqnorm(allbus_messniveau_bsp$di01a) # Erstellen des Q-Q-Plots
+qqline(allbus_messniveau_bsp$di01a) # Einfügen der Linie, auf der die Punkte liegen sollten
+```
+
+Wie leicht zu sehen ist, weichen die Daten sehr stark von der Linie ab. Der Bereich unterhalb  von ca. 3000 Euro Einkommen scheint zumindest teilweise als normalverteilt interpretierbar zu sein, während für höhere Werte die Ergebnisse massiv abweichen. Allerdings muss auch dazugesagt werden, dass ab 5000 Euro aufwärts die Anzahl an Messwerten deutlich abnimmt.  
+
+Es gibt Studien, die nahelegen, dass beim Einkommen durch Logarithmierung eine bessere Anpassung an die Normalverteilung erreicht werden kann. Da dies ohnehin eine vielversprechende Methode ist, um die Verteilung empirischer Daten einer Normalverteilung ähnlicher zu machen, probieren wir das einmal aus und werfen dann einen Blick auf den neuen Q-Q-Plot:  
+
+```{r}
+log.income = log(allbus_messniveau_bsp$di01a + 42) # 42 wird hier addiert, um negative Messwerte zu vermeiden.
+
+qqnorm(log.income)
+qqline(log.income)
+```
+
+Auch hier sieht man noch immer ein paar deutliche Ausreißer, aber verglichen mit vorher liegen die einzelnen Werte nun sehr viel dichter an der Linie. 
+
+
+
 
 # Was ist schon "normal" - Abweichungen von der Normalverteilung
 
-## Berechnung
 
-## Visualisierung
+## Binomialverteilung
 
-## Interpretation
+Diese Verteilung basiert auf Zufallsexperimenten, die genau zwei Versuchsausgänge aufweisen, welche sich gegenseitig ausschließen und konstante Wahrscheinlichkeiten für die beiden Ausgänge haben. Die einzelnen Versuche sollen voneinander unabhängig sein. 
+
+Ein bekanntes Beispiel für so ein Zufallsexperiment ist der Münzwurf. Anwendungen in der KMW wären etwa Kaufentscheidungen (Ja/Nein) in der Werbewirkungsforschung oder allgemein Interview-Fragen, auf die es nur Ja/Nein-Antworten gibt.  
+
+### Berechnung
+
+Bei einer Eintrittswahrscheinlichkeit $p$ für ein bestimmtes Ereignis berechnet sich die Wahrscheinlichkeit, dass das Ereignis nach $n$ Wiederholungen $k$ mal eintritt, mit folgender Formel: 
+
+$$
+f(k;n,p) = \binom{n}{k} p^k (1-p)^{n-k}
+$$
+
+
+Das folgende Beispiel zeigt, wie man in R die Wahrscheinlichkeit berechnet, bei zehn Münzwürfen genau 7 mal Kopf zu werfen:
+
+```{r}
+n <- 10 # Festlegen der Gesamtzahl an Würfen 
+kopf <- 7 # Festlegen der Anzahl, wie oft Kopf geworfen werden soll 
+p_kopf <- 0.5 # Festlegen der Wahrscheinlichkeit, Kopf zu werfen (hier: 50%)
+prob <- dbinom(kopf, size=n, prob=p_kopf) 
+prob
+```
+
+
+
+
+## Hypergeometrische Verteilung 
+
+Diese Verteilung kann vorliegen, wenn die Bedingung der Unabhängigkeit der einzelnen Versuche nicht einhaltbar ist.  
+
+### Berechnung
+
+Es wird wieder von zwei Ereignissen ausgegangen, die eintreten können. Angenommen, eine Grundgesamtheit setzt sich zusammen aus $N + M$ Ereignissen, wobei $M$ und $N$ sich gegenseitig ausschließen. Aus dieser Grundgesamtheit wird nun eine Stichprobe der Größe $k$ gezogen. Dann berechnet sich die Wahrscheinlichkeit, dass sich in der Stichprobe $x$ mal das Ereignis $M$ eintritt, folgendermaßen: 
+$$
+f(x, k, M, N) = \frac{\binom{M}{x} \binom{N}{k-x}}{\binom{N + M}{k}}
+$$
+
+Machen wir uns das an einem Beispiel deutlich: In einer Stadt mit ca. 600000 Einwohnern sind ca. 2000 Menschen mit HIV infiziert. Wie groß ist die Wahrscheinlichkeit, dass von 50 Leuten, die man bei einem Ausflug in die Stadt zufällig trifft, kein einziger HIV hat?    
+```{r}
+n <- 600000 # Grundgesamtheit
+m <- 2000   # Fälle, die eine bestimmte Merkmalsausprägung aufweisen
+k <- 50     # Stichprobengröße
+x <- 0      
+prob <- dhyper(x, m, n, k) 
+prob
+```
+
+Das heißt, die Wahrscheinlichkeit, dass mindestens eine Person, der man begegnet, HIV hat, beträgt ca. $1 - 0.8467$, also ca. 15,33 Prozent. 
+
+
+## Poissonverteilung
+
+Diese Verteilung kann herangezogen werden, wenn es um das durchschnittliche Eintreten bestimmter Ereignisse innerhalb es festen Zeitintervalls geht. 
+Dabei steht $\lambda$ für die Rate, mit der ein Ereignis durchschnittlich eintritt. 
+
+### Berechnung
+
+Die Poissonverteilung berechnet sich nach folgender Formel: 
+$$
+f(x;\lambda) =  \frac{\lambda^x e^{-\lambda} }{x!}
+$$
+
+Dazu wieder ein Beispiel: Eine Nachrichtenagentur veröffentlicht zu einem bestimmten Thema normalerweise 3 Artikel pro Tag. Wie wahrscheinlich ist es, dass sie an einem Tag 7 Artikel zu demselben Thema veröffentlicht? 
+
+```{r}
+x <- 7 
+lambda <- 3 
+dpois(x, lambda)
+```
+
+
+## Gleichverteilung
+
+Eine Zufallsvariable ist in einem gegebenen Intervall gleichmäßig verteilt. 
+Diese Verteilung ist besonders zur Erzeugung von Zufallszahlen hilfreich. 
+
+### Berechnung
+
+
+
+$$
+f(x;min,max) = \begin{cases}
+\frac{1}{max-min}, & min \leq x \leq max \\
+0, & \text{sonst}
+\end{cases}
+$$
+
+
+```{r}
+# Fünf Zufallszahlen, die im voreingestellten Intervall von 0 bis 1 liegen:
+runif(5) 
+
+# Drei Zufallszahlen, die im Intervall von -10 bis 10 liegen:
+runif(3, min=-10, max=10) 
+```
+
+
+### Exponentialverteilung
+
+Ähnlich wie die Poissonverteilung, allerdings stetig.
+
+### Berechnung
+
+$$
+f(x;\lambda) = \begin{cases}
+\lambda e^{-\lambda x}, & x \geq 0 \\
+0, & x < 0
+\end{cases}
+$$
+Beispiel: 
+
+Eine Nachrichtenagentur berichtet durchschnittlich alle 30 Tage über Proteste und Widerstandsaktionen in einem Land X. Wie wahrscheinlich ist es, dass zwischen den Nachrichten plötzlich nur noch maximal 5 Tage liegen?
+```{r}
+da <- 30 # Durchschnittlicher Abstand in Tagen
+lambda <- 1 / da
+x <- 5 
+prob <- pexp(x, rate=lambda)
+prob
+```
+
