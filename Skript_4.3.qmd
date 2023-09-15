@@ -10,28 +10,98 @@ format:
     code-line-numbers: true
 ---
 
-Berechnung und Interpretation von Streuungsmaßen
+```{r}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, ggplot2, haven, dplyr)  
 
-# Die Spannweite
 
-## Berechnung
+theme_set(theme_classic()) 
 
-## Visualisierung
+daten = haven::read_dta("Datensatz/Allbus_2021.dta") 
 
-## Interpretation
+allbus_messniveau_bsp <- subset(daten, select=c("sex", "pt12", "di01a")) %>%          
+  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%                                     
+  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%          
+  na.omit()                                                                                  
+```
 
-# Die Varianz
+## Die Spannweite
 
-## Berechnung
+Die Spannweite gibt den Abstand zwischen der kleinsten und der größten Merkmalsausprägung an:
 
-## Visualisierung
+### Berechnung
 
-## Interpretation
+$$
+SP = \max_{i}{x_{i}} - \min_{i}{x_{i}}
+$$
 
-# Die Standardabweichung
+Sie hat den Vorteil, dass sie von nominalen bis zu metrischen Daten angewendet werden kann, ist aber oft wenig aussagekräftig und sehr anfällig für Ausreißer. 
 
-## Berechnung
+```{r}
+max(allbus_messniveau_bsp$di01a) - min(allbus_messniveau_bsp$di01a)
+```
 
-## Visualisierung
 
-## Interpretation
+## Quantilsabstände 
+
+Dieses Maß gibt die Differenz zweier Quantile an. Insbesondere der Quartilsabstand (75%-Quantil - 25%-Quantil) 
+
+### Berechnung
+
+```{r}
+# Berechnung "zu Fuß": 
+quantile(allbus_messniveau_bsp$pt12, probs = c(0.75)) - quantile(allbus_messniveau_bsp$pt12, probs = c(0.25))
+# Berechnung mit der vorgefertigten R-Funktion IQR (Interquartile Range):
+IQR(allbus_messniveau_bsp$pt12)
+```
+
+
+
+
+
+## Varianz und Standardabweichung
+
+Ein nützlicheres Maß dafür, wie die einzelnen Merkmalsausprägungen um den Mittelwert verteilt sind - vorausgesetzt, man hat es mit kardinal skalierten Daten zu tun, kann daher die Varianz sein. 
+
+### Berechnung
+
+Es wird unterschieden zwischen der Varianz der Grundgesamtheit und der Stichprobenvarianz. Bei ersterer berechnet man für jede einzelne Merkmalsausprägung ihre Abweichung vom Mittelwert, quadriert die Ergebnisse und summiert diese. Anschließend teilt man durch die Größe der Grundgesamtheit:   
+
+$$
+Var = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2
+$$
+Da man wie gesagt meist nur auf eine Stichprobe zurückgreifen kann, kann man den Mittelwert der Grundgesamtheit durch den Mittelwert der Stichprobe nur schätzen. Um die damit verbundene Verzerrung auszugleichen, teilt man die Summe der quadrierten Abweichungen nicht durch n, sondern durch (n-1).  So ergibt sich folgende Formel, wobei n hier die Stichprobengröße darstellt:   
+
+$$
+Var = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
+$$
+In R bekommen wir die Varianz mit der `var`-Funktion, hier am Beispiel des Netto-Einkommens:
+
+```{r}
+var(allbus_messniveau_bsp$di01a)
+```
+
+Wie wir sehen, ist das Ergebnis sehr groß und auf den ersten Blick nicht leicht interpretierbar. Nützlicher ist da die Standardabweichung, die wir einfach dadurch erhalten, dass wir die Quadratwurzel der Varianz ziehen: 
+
+
+$$
+SD = \sqrt{Var} = s =  \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
+$$
+R bietet zur Berechnung der Standardabweichung die `sd`-Funktion an. 
+
+```{r}
+sd(allbus_messniveau_bsp$di01a)
+```
+
+## Zusammenfassungen ausgeben lassen 
+
+Wenn man nicht jeden Parameter einzeln abfragen will und kardinal skalierte Daten hat, kann man sich die wichtigsten Lageparameter auch als Zusammenfassung ausgeben lassen: 
+
+```{r}
+
+summary(allbus_messniveau_bsp$di01a)
+
+```
+
+
+
