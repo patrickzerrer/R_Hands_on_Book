@@ -11,3 +11,396 @@ format:
 ---
 
 # Eine Einführung in GGPlot
+
+
+Dieses Notebook illustriert verschiedene Möglichkeiten dafür, wie auf Grundlage der ESS-Daten informative Tabellen und Plots erstellt werden können. 
+
+Zunächst laden wir die die Pakete des tidyverse. Die Einstellung theme_set hat einen Einfluss auf die Grafiken, die wir später erstellen werden. 
+
+```{r Laden der notwendigen Pakete}
+library(tidyverse)
+theme_set(theme_minimal())
+```
+
+```{r}
+sample_klein <- read_rds("Datensatz/ALLBUS_sample_klein.rds")
+sample_mittel <- read_rds("Datensatz/ALLBUS_sample_mittel.rds")
+sample_gross <- read_rds("Datensatz/ALLBUS_sample_gross.rds")
+```
+
+
+Im nächsten Schritt lesen wir den vereinfachten ESS-Datensatz mit den Fällen für Deutschland ein, sowie einen zweiten Datensatz, der die Fälle aus vier Ländern zusammenfasst. 
+
+Wie sehen die Daten aus?
+
+```{r Datensatz anzeigen lassen}
+sample_klein
+```
+
+
+# Tabellen
+
+Tabellen (und besonder sog. Kontingenz- oder Häufigkeitstabellen) sind ein einfaches und praktisches Mittel, um sich einen Überblick über Daten zu verschaffen. 
+
+## Einfache Häufigkeitstabelle
+
+Wir berechnen eine einfache Häufigkeitstabelle für die Variable 'edubde1' (höchster Bildungsabschluss). 
+
+```{r Einfache Häufigkeitstabelle}
+geschlechterverteilung <- sample_klein %>% 
+  group_by(geschlecht) %>% 
+  summarise(anzahl = n())
+geschlechterverteilung
+```
+
+Im nächsten Schritt fügen wir relative Anteile hinzu, um Verhältnisse besser zu verstehen. 
+
+```{r Häufigkeitstabelle mit Anteilen}
+geschlechterverteilung <- sample_klein %>% 
+  group_by(geschlecht) %>% 
+  summarise(anzahl = n()) %>% 
+  mutate(anteil = anzahl/sum(anzahl))
+geschlechterverteilung
+```
+
+Nun fügen wir noch Prozentanteile ein, indem with mit 100 multiplizieren und runden (was in erster Linie kosmetischer Natur ist). 
+
+```{r Häufigkeitstabelle mit gerundeten Prozentwerten}
+geschlechterverteilung <- sample_klein %>% 
+  group_by(geschlecht) %>% 
+  summarise(anzahl = n()) %>% 
+  mutate(anteil = anzahl/sum(anzahl),
+         prozent = round(anteil * 100))
+geschlechterverteilung
+```
+
+## Tabellen speichern
+
+Jetzt schreiben wir die Daten in eine CSV-Datei, die wir bspw. später mit Excel oder einer anderen Tabellenkalkulation öffnen können. 
+
+```{r Daten als CSV schreiben}
+write_excel_csv2(geschlechterverteilung, file = "geschlechterverteilung.csv")
+```
+
+## Kreuztabellen 
+
+Was, wenn wir zwei Variablen mit Blick auf ihre Werte in Beziehung setzen wollen? Das bezeichnet man als Kreuz- oder Kontigenztabelle. 
+
+```{r Kreuztabelle berechnen}
+bildung_und_geschlecht <- sample_klein %>% 
+  group_by(bildung, geschlecht) %>% 
+  summarise(anzahl = n()) %>% 
+  mutate(anteil = anzahl/sum(anzahl),
+         prozent = round(anteil * 100))
+bildung_und_geschlecht
+```
+
+Möglicherweise möchte ich den Anteil anders berechnen und nicht die relative Geschlechterverteilung _innerhalb_ eines Bildungsabschlusses in den Blick nehmen, sondern etwa die Verteilung der Bildungsabschlüsse jeweils für männliche und weibliche Studienteilnehmer anschauen. Dies lässt sich mit einer Neugruppierung der Daten durch group_by() erreichen. 
+
+```{r Kreuztabelle umgruppieren}
+geschlecht_und_bildung <- sample_klein %>% 
+  group_by(geschlecht, bildung) %>% 
+  summarise(anzahl = n()) %>% 
+  mutate(anteil = anzahl/sum(anzahl),
+         prozent = round(anteil * 100))
+geschlecht_und_bildung
+```
+
+
+# Visualisierung
+
+Beim Erstellen von Grafiken (Plots) mit R kommt eines der populärsten tidyverse-Pakete zum Einsatz: [ggplot2](https://ggplot2.tidyverse.org/). Damit lassen sich sehr vielfältige Grafiken erstellen. 
+
+## Balkendiagramme
+
+Das einfachste Diagramm, das man mit dem ggplot2-Paket erstellen kann, ist ein Balkendiagramm (barplot). Das nachstehende Beispiel zeigt die Häufigkeitsverteilung der Variable gndr (gender = Geschlecht) im Datensatz. 
+
+```{r Ein erstes Plot}
+ggplot(sample_klein, aes(bildung)) + 
+  geom_bar()
+```
+
+Farben lassen sich in ggplot vielseitig einsetzen, um Kategorienunterschiede anzuzeigen. Dies geschieht mit den Argumenten 'fill' bzw. 'color'.
+
+```{r Barplot mit Farbpalette}
+ggplot(sample_klein, aes(geschlecht, fill = geschlecht)) + 
+  geom_bar()
+```
+
+Es existieren zahlreiche Farbpaletten für ggplot, um unterschiedliche Arten von Beziehungen darzustellen. Das nachstehende Palette unterscheidet verschiedenen Kategorien. Für gradierte Variablen ('viel' - 'wenig') sind andere Paletten z.T. besser geeignet. Eine gute Auswahl an Palette enthält u.a. das Paket [RColorBrewer](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html).
+
+```{r Barplot mit gradierter Farbpalette}
+ggplot(sample_klein, aes(geschlecht, fill = geschlecht)) + 
+  geom_bar() +
+  scale_fill_brewer(palette = "Set1")  # ersetzen Sie "Set1" durch "Reds" 
+```
+
+Schließlich lassen sich auch die Beschriftung und weitere Aspekte eines Plots anpassen (Achsenorientierung, Legende etc).
+
+```{r Barplot mit weiteren Anpassungen und Beschriftung}
+ggplot(sample_klein, aes(as_factor(fernsehkonsum))) + 
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) + 
+  ggtitle("Fernsehkonsum pro Woche") + 
+  xlab("Fernsehkonsum pro Woche in Tagen") + ylab("Anzahl der Respondenten")
+```
+
+## Histogramme
+
+Für ein besseres Verständnis einer Verteilung sind oftmals die Häufigkeitsausprägungen einer kontinuierlichen Variable in gleich großen Gruppen interessant (sog. "bins"). Dabei hilft der Visualisierungstyp Histogramm. 
+
+
+```{r Ein einfaches Histogramm}
+ggplot(sample_mittel, aes(alter)) + 
+  geom_histogram()
+```
+
+Auch hier lassen sich relevante Aspekte anpassen, etwa die Breite der Bins. 
+
+```{r Histogramm mit angepassten Bins}
+ggplot(sample_mittel, aes(alter)) + 
+  geom_histogram(bins = 40) + 
+  ggtitle("Altersverteilung") + 
+  xlab("Alter") + ylab("Anzahl der Respondenten")
+```
+
+Hier können wir erstmalig die Farbe eines Elements gezielt einsetzen, um eine zusätzliche (also nach Vetrauen auf der x-Achse und der Anzahl der Respondenten auf der y-Achse eine dritte Variable) darzustellen, nämlich das Geschlecht der Respondenten. 
+
+```{r Histogramm mit Gruppierung und Farbe nach Geschlecht}
+ggplot(sample_gross, aes(vertrauen_bundestag, fill = geschlecht)) + 
+  geom_histogram(binwidth = 0.5, position = "dodge") + 
+  ggtitle("Vertrauen in den Bundestag nach Geschlecht") + 
+  xlab("Vetrauen (0-10)") + ylab("Anzahl der Respondenten") + labs(fill = "Geschlecht") 
+```
+
+Neben Balken beherrscht ggplot auch zahlreiche weitere Darstellungsformen (sog. geoms). Eine interessante Alternative zum klassischen Histogramm ist etwa das Dichte-Plot (density plot). Nachstehend verwenden wir zwei Flächen und einen Trasparenz-Effekt für die Darstellung. 
+
+## Dichte-Plots
+
+```{r Dichte-Diagramm}
+ggplot(daten_deutschland, aes(trstprl, fill = gndr)) + 
+  geom_density(alpha = 0.5) + 
+  ggtitle("Vertrauen in den Bundestag nach Geschlecht") + 
+  xlab("Vetrauen (0-10)") + ylab("Anteil der Respondenten") + labs(fill = "Geschlecht") 
+```
+
+## Liniendiagramme
+
+Zu den klassischen Plot-Typen gehören neben Barplots und Histogrammen auch Linien-, Punkt- und Streudiagramme, sowie Boxplots.
+
+```{r Ein Liniendiagramm}
+vertrauen_nach_partei <- daten_deutschland %>% 
+  rename(Partei = prtvede1) %>%  # prtvede1 = Party voted for in last national election 
+  group_by(Partei) %>% 
+  summarise(Vertrauenswürdigkeit = mean(trstplc, na.rm = T))  # ppltrst = Most people can be trusted or you can't be too careful
+
+ggplot(vertrauen_nach_partei, aes(Partei, Vertrauenswürdigkeit, group = 1)) + 
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +
+  ggtitle("Vertrauen in andere Menschen nach Partei")
+```
+
+Es lassen sich auch problemlos mehrere Geoms kominieren (hier: Linie und Punkte). Im folgenden Beispiel lässt sich durch eine absteigende Sortierung der Ergebnisse ein klareres Resultat erzielen. 
+
+```{r Linien- und Punktediagramm sortiert}
+vertrauen_international <- daten_vier_laender %>% 
+  rename(Land = cntry) %>% 
+  group_by(Land) %>% 
+  summarise(Vertrauenswürdigkeit = mean(trstep, na.rm = T)) %>% 
+  arrange(desc(Vertrauenswürdigkeit)) %>% 
+  mutate(Rang = row_number())
+
+ggplot(vertrauen_international, aes(reorder(Land, Rang), Vertrauenswürdigkeit, group = 1)) + 
+  geom_line(linewidth = 1, linetype = "dashed") + 
+  ggtitle("Frage: \"Most people can be trusted vs. you can't be too careful\"") + 
+  xlab("Land")
+```
+
+## Streudiagramme
+
+Eine weiterer Diagrammtyp, der häufig zum Einsatz kommt, ist das Streudiagramm (scatter plot). Mit diesem Plottypen lassen sich die Beziehung mehrerer Variablen (i.d.R. zwei, jeweils auf der x/y-Achse) darstellen. 
+
+```{r Datenauswahl treffen}
+daten_auswahl <- daten_vier_laender %>% 
+  select(agea, netustm) %>% 
+  drop_na() %>% 
+  slice_sample(n = 20)
+
+daten_auswahl
+```
+
+Welche Beziehung lässt sich zwischen Alter (x-Achse) und täglicher Internetnutzung in Minuten (y-Achse) feststellen?
+
+```{r Ein einfaches Streudiagramm}
+ggplot(daten_auswahl, aes(agea, netustm)) +
+  geom_point()
+```
+
+Wir wenden uns jetzt einem etwas ausgefeilteren Beispiel zu, nämlich der Beziehung von politischen Interesse und Nachrichtennutzung. 
+
+```{r Ein weiteres Beispiel für ein Streudiagramm}
+daten_auswahl <- daten_vier_laender %>% 
+  select(polintr, nwspol, cntry, gndr) %>% 
+  mutate(polintr = as.numeric(forcats::fct_rev(polintr)),
+         nwspol = log(nwspol)) %>% 
+  filter(!nwspol == -Inf) %>% 
+  group_by(cntry) %>% 
+  slice_sample(n = 50)
+
+ggplot(daten_auswahl, aes(polintr, nwspol)) +
+  geom_jitter(width = .5, size = 1) +
+  geom_smooth(method = 'lm', formula = 'y ~ x') + 
+  ggtitle("Zusammenhang zwischen politischem Interesse und Nachrichtennutzung") + 
+  xlab("politisches Interesse") + ylab("Nachrichtennutzung in Minuten (log)")
+```
+
+Bei der Linie, die wir mit geom_smooth gezeichnet haben, handelt es sich um eine [Regressionsgerade](https://de.wikipedia.org/wiki/Lineare_Einfachregression). Der graue Bereich um die Gerade zeigt den lokalen Standardfehler an. Auf  Regressionmodelle gehen wir zum Abschluss des Moduls noch intensiv ein. 
+
+Was, wenn wir mehr als drei Variablen (bzw. unterschiedliche Ausprägungen einer kategorialen Variable) darstellen wollen? Neben der Positionierung auf der x- und y-Achse und der Farbe können wir hier zusätzlich auch noch mit unterschiedlichen Formen arbeiten. 
+
+Das nachstehende Beispiel ist nicht unbedingt besonders informativ, zeigt aber das Prinzip nachvollziehbar auf. 
+
+```{r Streudiagramm mit vier Farben und zwei Formen}
+ggplot(daten_auswahl, aes(polintr, nwspol, color = cntry, shape = gndr)) +
+  geom_jitter(width = .5, height = .5, size = 2) +
+  #geom_smooth(method = 'lm', formula = 'y ~ x', se = FALSE) + 
+  ggtitle("Zusammenhang zwischen politischem Interesse und Nachrichtennutzung") + 
+  xlab("politisches Interesse") + ylab("Nachrichtennutzung in Minuten (log)") + 
+  labs(color = "Land") + labs(shape = "Geschlecht")
+```
+
+
+## Facettierte Plots
+
+Neben dem Einsatz unterschiedlicher Farben und Formen kann auch sog. Facettierung zum Einsatz kommen um zusätzliche Informationen darzustellen. In einem weiteren Beispiel nehmen wir den Zusammenhang zwischen soziodemographischen Variablen und der Internetnutzung in den Blick. Dazu fügen wir zunächst eine Variable Altersgruppe ein, welche die einzelnen Altersangaben in Kohorten zusammenfasst. 
+
+```{r Neue Variable Altersgruppe einfügen}
+daten_vier_laender <- mutate(daten_vier_laender, Altersgruppe = cut(agea,
+                                                                    breaks = c(0, 24, 34, 44, 54, 64, Inf), 
+                                                                    labels = c("18-24", "25-34", "35-44", "45-54", "55-64", "65+")))
+```
+
+Dann führen wir eine Reihe von vorbereitenden Schritten durch. 
+
+```{r Internetnutzung und Soziodemographie}
+internetnutzung <- daten_vier_laender %>% 
+  select(gndr, Altersgruppe, cntry, 
+         netustm) %>% 
+  rename(Geschlecht = gndr,
+         Land = cntry,
+         Internetnutzung = netustm) %>% 
+  filter(!Geschlecht == "No answer") %>% 
+  filter(!Internetnutzung %in% c("Not applicable", "Refusal", "Don't know", "No answer")) %>% 
+  mutate(Land = as_factor(Land)) %>% 
+  mutate(Internetnutzung = as.numeric(Internetnutzung)) %>% 
+  drop_na()
+internetnutzung
+```
+
+Dann aggregieren wir nach Altersgruppe, Geschlecht und Land und plotten anschließend die Ergebnisse.
+
+```{r Internetnutzung und Soziodemographie aggregiert nach Land}
+internetnutzung_aggregiert <- internetnutzung %>% 
+  group_by(Altersgruppe, Geschlecht, Land) %>% 
+  summarise(Internetnutzung = median(Internetnutzung))
+
+ggplot(internetnutzung_aggregiert, aes(Land, Internetnutzung, fill = Geschlecht)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_grid(Altersgruppe ~ ., switch = "y") + 
+  ggtitle("Internetnutzung und Soziodemographie aggregiert nach Land")
+```
+
+Sie können Ihr einfaches Diagramm mit Hilfe zusätzlicher Komponenten verfeinern, indem Sie sie dem Diagramm hinzufügen (für ein sehr einfaches "Vokabular" von ggplot2 besuchen Sie diesen Link --> (https://ggplot2.tidyverse.org/reference/).
+
+Als nächstes schauen wir die Zustimmung zu der Aussafe an, dass der globale Klimawandel  größtenteils oder vollständig durch den Menschen verursacht wird.
+
+```{r Daten zum Klimawandel vorbereiten}
+klimawandel <- daten_vier_laender %>% 
+  select(Altersgruppe,
+         cntry, 
+         ccnthum) %>% 
+  rename(Land = cntry,
+         Klimawandelerklärung = ccnthum) %>% 
+  filter(!Klimawandelerklärung %in% c("Not applicable", "Refusal", "Don't know", "No answer")) %>% 
+  mutate(Land = as_factor(Land)) %>% 
+  drop_na() %>% 
+  group_by(Altersgruppe, Land, Klimawandelerklärung) %>% 
+  summarise(n = n()) %>% 
+  mutate(Einzelanteile = prop.table(n)) %>% 
+  filter(Klimawandelerklärung %in% c("Mainly by human activity",
+                            "Entirely by human activity")) %>% 
+  group_by(Altersgruppe, Land) %>%
+  summarise(Anteil = sum(Einzelanteile)) %>% 
+  arrange(desc(Anteil)) %>% 
+  mutate(Rang = row_number())
+klimawandel
+```
+
+```{r Klimawandel-Daten plotten}
+ggplot(klimawandel, aes(reorder(Land, Rang), Anteil, fill = Altersgruppe)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  coord_flip() + 
+  ggtitle("Der globale Klimawandel wird größtenteils oder vollständig\ndurch den Menschen verursacht (Zustimmung)") + 
+  xlab("Land")
+```
+
+Als weiteres Beispiel für einen sog. Index fassen wir unterschiedliche Variabeln zur politischen Selbstwirksamkeit zusammen. ACHTUNG: Hier etwas das pol. Interesse hinzuzuziehen ist theoretisch betrachtet nur bedingt sinnvoll. Es handelt sich also lediglich um ein (theoretisch nicht sehr fundiertes) Beispiel. 
+
+```{r Bereitschaft, sich in die parlamentarische Demokratie einzubringen}
+politik <- daten_deutschland %>% 
+  select(actrolga,     # Able to take active role in political group
+         cptppola,     # Confident in own ability to participate in politics
+         polintr,      # How interested in politics
+         trstplt,      # Trust in politicians
+         contplt) %>%  # Contacted politician or government official last 12 months
+  filter(contplt != "Refusal") %>% 
+  mutate(Politiker_kontaktiert = as_factor(contplt)) %>% 
+  group_by(Politiker_kontaktiert) %>% 
+  summarise(Selbstwirksamkeit = mean(as.numeric(actrolga) + as.numeric(cptppola) + as.numeric(polintr) + as.numeric(trstplt), na.rm = T))
+politik
+```
+
+Ein Boxplot zeigt die Verteilung einer kontinuierlichen (numerischen) Variable über verschiedenen Stufen einer kategorialen (Faktor-)Variable. Die horizontale schwarze Linie in der weißen Box zeigt den Median der Werte auf dieser spezifischen Faktorebene, die weiße Box selbst zeigt die mittleren 50 % der Beobachtungen, die vertikalen Linien an den beiden Enden der Box zeigen die mittleren 95 % der Werte an, während die Punkte Ausreißer anzeigen.
+
+```{r Daten zu Lebenszufriedenheit und Internetnutzung vorbereiten}
+boxplotdaten <- daten_vier_laender %>% 
+  select(happy, netustm, cntry, vote) %>% 
+  drop_na() %>% 
+  filter(!netustm %in% c("Don\'t know", "No answer", "Not applicable", "Refusal")) %>% 
+  filter(!happy %in% c("Don\'t know", "No answer", "Refusal")) %>% 
+  filter(!vote %in% c("Don\'t know", "No answer", "Refusal", "Not eligible to vote")) %>% 
+  mutate(Glücklich = as.factor(happy)) %>% 
+  rename(Internetnutzung = netustm) %>% 
+  rename(Land = cntry) %>% 
+  rename(Gewählt = vote)
+```
+
+```{r Ein Boxplot}
+ggplot(boxplotdaten, aes(Glücklich, Internetnutzung)) +
+  geom_boxplot()
+```
+
+Sie können dem Diagramm eine dritte (Kontroll)variable hinzufügen.
+
+```{r Boxplot mit Fülleffekt}
+ggplot(boxplotdaten, aes(Glücklich, Internetnutzung, fill = Land)) +
+  geom_boxplot()
+```
+
+Schließlich können Sie ein Plot auch als Grafikdatei speichern. Dazu erstellen wir zunächst das Objekt mein_plot. 
+
+```{r Plot beschriften und dann als Objekt speichern}
+ggplot(boxplotdaten, aes(Glücklich, Internetnutzung, fill = Gewählt)) +
+  geom_violin() + 
+  geom_jitter(aes(Glücklich, Internetnutzung), position = position_jitter(width = 0.4, height = 0), 
+              alpha = 0.1, size = 0.1, show.legend = F) + 
+  scale_x_discrete(name = "Lebenszufriedenheit") +
+  scale_y_continuous(name = "Internetnutzung") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) + 
+  labs(title = "Lebenszufriedenheit nach Internetnutzung ", fill = "Voted")
+
+ggsave("Internetnutzung_und_Lebenszufriedenheit.pdf")
+```
+
+
+
