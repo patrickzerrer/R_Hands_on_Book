@@ -49,27 +49,29 @@ sample_klein <- daten %>%
 
 # Mehr Fälle, wenige Variablen
 sample_mittel <- daten %>% 
-  select(age, sex, lm01, cf03) %>% 
+  select(age, sex, educ, lm01, cf03, pv01) %>% 
   slice_sample(n = 200) %>% 
   rename(alter = age,
          geschlecht = sex,
          fernsehkonsum = lm01,
-         kriminalitaet = cf03) %>% 
+         kriminalitaet = cf03,
+         wahlabsicht_partei = pv01) %>% 
   replace_with_na_all(condition = ~.x < 0) %>% 
-  mutate(across(c(geschlecht, kriminalitaet), as_factor),
+  mutate(across(c(geschlecht, kriminalitaet, wahlabsicht_partei), as_factor),
          fernsehkonsum = round(fernsehkonsum)) %>% 
   remove_labels() %>%
   remove_attributes("format.stata")
 
 # Mehr Fälle, viele Variablen
 sample_gross <- daten %>% 
-  select(age, sex, lm01, pa02a, pa01, ps03, cf03, lm35:lm39, st01:pt20) %>% 
+  select(age, sex, lm01, pa02a, pa01, pv01, ps03, cf03, lm35:lm39, st01:pt20) %>% 
   slice_sample(n = 500) %>% 
   rename(alter = age,
          geschlecht = sex,
          fernsehkonsum = lm01,
          politisches_interesse = pa02a,
          links_rechts_einordnung = pa01, 
+         wahlabsicht_partei = pv01,
          zufriedenheit_demokratie = ps03,
          entwicklung_kriminalitaet = cf03,
          social_media_nachrichtenquelle = lm35,
@@ -94,8 +96,9 @@ sample_gross <- daten %>%
          vertrauen_eu_kommission = pt19,
          vertrauen_eu_parlament = pt20) %>% 
   replace_with_na_all(condition = ~.x < 0) %>% 
-  mutate(across(c(geschlecht, fernsehkonsum, politisches_interesse, zufriedenheit_demokratie, entwicklung_kriminalitaet, social_media_nachrichtenquelle, glaubwuerdigkeit_oer_tv, 
-                  glaubwuerdigkeit_privat_tv, glaubwuerdigkeit_zeitungen, glaubwuerdigkeit_social_media), as_factor)) %>% 
+  mutate(across(c(geschlecht, fernsehkonsum, politisches_interesse, wahlabsicht_partei, zufriedenheit_demokratie, entwicklung_kriminalitaet, 
+                  social_media_nachrichtenquelle, glaubwuerdigkeit_oer_tv, glaubwuerdigkeit_privat_tv, glaubwuerdigkeit_zeitungen, 
+                  glaubwuerdigkeit_social_media), as_factor)) %>% 
   remove_labels() %>%
   remove_attributes("format.stata")
 
