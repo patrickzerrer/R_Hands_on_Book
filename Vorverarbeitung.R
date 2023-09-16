@@ -96,9 +96,11 @@ sample_gross <- daten %>%
          vertrauen_eu_kommission = pt19,
          vertrauen_eu_parlament = pt20) %>% 
   replace_with_na_all(condition = ~.x < 0) %>% 
-  mutate(across(c(geschlecht, fernsehkonsum, politisches_interesse, wahlabsicht_partei, zufriedenheit_demokratie, entwicklung_kriminalitaet, 
-                  social_media_nachrichtenquelle, glaubwuerdigkeit_oer_tv, glaubwuerdigkeit_privat_tv, glaubwuerdigkeit_zeitungen, 
-                  glaubwuerdigkeit_social_media), as_factor)) %>% 
+  mutate(across(c(geschlecht, politisches_interesse, wahlabsicht_partei, zufriedenheit_demokratie, 
+                  entwicklung_kriminalitaet, glaubwuerdigkeit_oer_tv, glaubwuerdigkeit_privat_tv, 
+                  glaubwuerdigkeit_zeitungen, glaubwuerdigkeit_social_media), as_factor),
+         fernsehkonsum = round(fernsehkonsum),
+         social_media_nachrichtenquelle = round(social_media_nachrichtenquelle)) %>% 
   remove_labels() %>%
   remove_attributes("format.stata")
 
