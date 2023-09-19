@@ -12,13 +12,13 @@ format:
 
 # Begrifflichkeiten
 
-Zunächst ein paar Begriffserläuterungen: Die quantitative Datenerhebung kann als Messung verstanden werden. Dabei ist man an der Ausprägung eines bestimmten Merkmals interessiert. Ein Merkmal kann zum Beispiel das Alter einer Person sein. Die Person ist dann der Merkmalsträger. Die Merkmalsausprägung bzw. der Messwert ist die konkrete Altersangabe, z.B. 23 Jahre. Die Menge aller Merkmalsträger, über die man durch die Untersuchung zu Erkenntnissen kommen will, heißt Grundgesamtheit. Oft kann man aber gar nicht oder nur sehr schwer die ganze Grundgesamtheit heranziehen und muss sich mit einer Teilmenge begnügen: Der Stichprobe. 
-Angenommen, die Daten sind erhoben, die Arbeitsumgebung ist eingerichtet, wir haben die Datensätze geladen und wissen, wie wir sie bearbeiten und visualisieren können. Nun wird es Zeit, sich einen ersten Eindruck von den statistischen Eigenschaften unserer Daten zu verschaffen. Von diesen Eigenschaften hängt ab, welche Methoden wir auf sie anwenden können und somit, welche Fragen wir mit ihnen überhaupt beantworten können. Dabei interessieren uns zunächst zwei Aspekte, erstens: Welche Methoden passen zur Beschaffenheit der Daten und zweitens: Welche inhaltlichen Eigenschaften können wir darauf aufbauend in den Daten erkennen? Ersteres ist abhängig vom Skalenniveau (nominal, ordinal, kardinal), für letzteres schauen wir uns einige der wichtigsten Maßzahlen (Parameter) an.
+Zunächst ein paar Begriffserläuterungen: Bei der quantitativen Datenerhebung misst man die Ausprägung eines bestimmten Merkmals. Ein Merkmal kann zum Beispiel das Alter einer Person sein. Die Person ist dann der Merkmalsträger. Die Merkmalsausprägung bzw. der Messwert ist die konkrete Altersangabe, z.B. 23 Jahre. Die Menge aller Merkmalsträger, über die man durch die Untersuchung zu Erkenntnissen kommen will, heißt Grundgesamtheit. Oft kann man aber gar nicht oder nur sehr schwer die ganze Grundgesamtheit heranziehen und muss sich mit einer Teilmenge begnügen: Der Stichprobe. 
+Die Daten sind erhoben, die Arbeitsumgebung ist eingerichtet, wir haben die Datensätze geladen und wissen, wie wir sie bearbeiten und visualisieren können. Nun wird es Zeit, sich einen ersten Eindruck von den statistischen Eigenschaften unserer Daten zu verschaffen. Von diesen Eigenschaften hängt ab, welche Methoden wir auf sie anwenden können und somit, welche Fragen wir mit ihnen überhaupt beantworten können. Dabei interessieren uns zunächst zwei Aspekte, erstens: Welche Methoden passen zur Beschaffenheit der Daten und zweitens: Welche inhaltlichen Eigenschaften können wir darauf aufbauend in den Daten erkennen? Ersteres ist abhängig vom Skalenniveau (nominal, ordinal, kardinal), für letzteres schauen wir uns einige der wichtigsten Maßzahlen (Parameter) an.
 
 ## Das Skalenniveau
 
 Durch eine Messung wird bestimmten Eigenschaften eines Merkmalsträgers ein bestimmter Wert zugeordnet. Dazu bedient man sich einer festgelegten Skala, damit alle Ergebnisse miteinander vergleichbar sind. Wir kennen solche Skalen aus unserem Alltag. Manche bestehen aus Zahlen (z.B. Maßbänder, Uhren), andere aus Symbolen (z.B. Vereinslogos). Das Niveau einer Skala hängt von ihrem Informationsgehalt ab. Je höher das Skalenniveau, desto vielfältiger ist die Auswahl an Methoden, die man auf die Daten anwenden kann und desto höher ist ihr Informationsgehalt. Allerdings neigen Methoden, die höhere Skalenniveaus erfordern, oft dazu, anfälliger gegenüber Ausreißern zu sein. 
-Bei der Einschätzung des Skalenniveaus kann es hilfreich sein zu prüfen, ob ein Merkmal diskret oder kontinuierlich ist. Diskret ist ein Merkmal, wenn es abzählbar viele Ausprägungen annehmen kann, z.B. die Anzahl an Haustieren: Unter 2 Katzen kann sich jeder was vorstellen, bei 1,5 Katzen wird es hingegen schwierig. Dagegen gibt es bei einem kontinuierlichen Merkmal zwischen zwei Ausprägungen unendlich viele weitere, z.B. bei der Körpergröße: Zwischen 0 und 200 cm sind nicht nur 1,2,..., 199 cm denkbar, sondern auch jeder beliebig genaue weitere Wert dazwischen.  
+Bei der Einschätzung des Skalenniveaus ist es hilfreich zu prüfen, ob ein Merkmal diskret oder kontinuierlich ist. Diskret ist ein Merkmal, wenn es abzählbar viele Ausprägungen annehmen kann, z.B. die Anzahl an Haustieren: Unter 2 Katzen kann sich jeder was vorstellen, bei 1,5 Katzen wird es hingegen schwierig. Dagegen gibt es bei einem kontinuierlichen Merkmal zwischen zwei Ausprägungen unendlich viele weitere, z.B. bei der Körpergröße: Hier sind nicht nur 1, 2 oder 199 cm denkbar, sondern auch jeder beliebig genaue weitere Wert dazwischen. Dafür macht eine Körpergröße von -5 cm wieder keinen Sinn.  
 
 ### Nominalskala 
 Es kann nur eine Aussage darüber gemacht werden, ob zwei Objekte gleich sind, aber es gibt keine sinnvolle hierarchische Einteilung, d.h. es kann keine Rangfolge im Sinne von "x ist größer/kleiner als y" erstellt werden. Beispiele: Geschlecht, Nationalität. Diese Skala setzt diskrete Merkmale voraus.    
@@ -33,10 +33,6 @@ a) Intervall: Man kann die Abstände zwischen zwei Messwerten genau berechnen. E
 b) Verhältnis: Wie die Intervallskala, aber es gibt einen natürlichen Nullpunkt. Beispiele: Distanz zwischen zwei Orten, Körpergröße. 
 
 
-## Maßzahlen
-Wir werden hier, abhängig vom Skalenniveau, zwei verschiedene Arten von Maßzahlen betrachten. Das ist zum einen das Lagemaß, das uns etwas über die zentrale Tendenz der Daten sagt, also wo sich besonders viele Messwerte häufen bzw. wo der zentrale Punkt ist, um den sich die Messwerte gruppieren. Zum anderen schauen wir uns verschiedene Streuungsparameter an, mit deren Hilfe wir einschätzen können, wie stark unsere Messwerte vom Lageparameter abweichen. 
-
-    
 
 ## Häufigkeiten
 
@@ -50,19 +46,26 @@ Die relative Häufigkeit gibt den Anteil eines bestimmten Messwertes im Datensat
 
 
 
+## Maßzahlen
+Wir werden hier, abhängig vom Skalenniveau, zwei verschiedene Arten von Maßzahlen betrachten. Das ist zum einen das Lagemaß, das uns etwas über die zentrale Tendenz der Daten sagt, also wo sich besonders viele Messwerte häufen bzw. wo der zentrale Punkt ist, um den sich die Messwerte gruppieren. Zum anderen schauen wir uns verschiedene Streuungsparameter an, mit deren Hilfe wir einschätzen können, wie stark unsere Messwerte vom Lageparameter abweichen. 
+
+    
+
+
+
 ## Zu den Programmierbeispielen 
 
 Im Folgenden werden wir aus dem Allbus-2021-Datensatz ein paar Beispiele herausgreifen, um die Berechnung und Visualisierung von Häufigkeiten und Parametern zu demonstrieren. Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem `p_load`-Befehl:
 
 ```{r Pakete}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
-p_load(tidyverse, ggplot2, haven, dplyr) # <1>
+p_load(tidyverse, ggplot2, haven, dplyr) 
 ```
 
 Dann legen wir den Visualisierungshintergrund fest: 
 
 ```{r}
-theme_set(theme_classic()) # <1>
+theme_set(theme_classic()) 
 ```
 
 
@@ -70,21 +73,20 @@ Nun laden wir den Allbus-Datensatz:
 
 
 ```{r Laden der Daten}
-daten = haven::read_dta("Datensatz/Allbus_2021.dta") # <1>
+daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
-Wir beschränken uns auf drei Teildatensätze, um die unterschiedlichen Skalenniveaus abzudecken: 
-Geschlecht ("sex"), Vertrauen in die Bundesregierung ("pt12") und Netto-Einkommen ("di01a"). 
-Anschließend konvertieren wir die Daten zu Zahlenwerten und entfernen fehlerhafte Daten. 
+Bei den Häufigkeiten beschränken wir uns auf einen nominal skalierten Datensatz: Das Geschlecht ("sex").  
+Anschließend konvertieren wir die Daten zu Zahlenwerten und entfernen fehlerhafte Daten: 
 
 
 
 
 ```{r}
-allbus_messniveau_bsp <- subset(daten, select=c("sex", "pt12", "di01a")) %>%              # <1>
-  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%                                  # <2>      
-  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%            # <3>
-  na.omit()                                                                                       # <4>
+allbus_messniveau_bsp <- subset(daten, select=c("sex")) %>%                             # <1>
+  mutate(across(c("sex"), ~ as.numeric(.))) %>%                                         # <2>      
+  mutate(across(c("sex"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%    # <3>
+  na.omit()                                                                             # <4>
 ```
 
 
@@ -105,7 +107,7 @@ abs_freq_sex        # Ausgabe der Tabelle
 ```
 
 
-Insgesamt summieren sie sich (wie erwartet) zu 3444 Merkmalsträgern auf, was auch der Größe des Datensatzes entspricht: 
+Insgesamt summieren sie sich (wie erwartet) zu 5322 Merkmalsträgern auf, was auch der Größe des Datensatzes entspricht: 
  
 
 ```{r}
@@ -139,3 +141,5 @@ ggplot(df.sex, aes(x="", y=frequency.Freq, fill=sex)) +
   geom_bar(stat="identity") +
   coord_polar("y")
 ```
+
+Auf den ersten Blick lässt sich so ein generelles Bild des Datensatzes machen: Es sind in etwa so viele Männer wie Frauen im Datensatz, wobei Frauen etwas stärker vertreten sind. Personen, die sich weder als Mann noch als Frau identifizieren, kommen nur in sehr geringer Zahl vor.  

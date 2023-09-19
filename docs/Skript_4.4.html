@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Cornelius Puschmann">
+<meta name="author" content="Michael Linke">
 
-<title>Verteilungen und deren Visualisierung</title>
+<title>Berechnung und Interpretation von Verteilungen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -56,11 +90,12 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -105,11 +140,6 @@ ul.task-list li input[type="checkbox"] {
 </i> 
  <span class="menu-text"></span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/ZeMKI_Bremen" rel="" target=""><i class="bi bi-twitter" role="img">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
 </ul>
             <div class="quarto-navbar-tools">
 </div>
@@ -121,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_4.1.html">Die ersten Schritte bei der Datenanalyse</a></li><li class="breadcrumb-item"><a href="./Skript_4.4.html">Verteilungen und deren Visualisierung</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_4.1.html">Die ersten Schritte bei der Datenanalyse</a></li><li class="breadcrumb-item"><a href="./Skript_4.4.html">Berechnung und Interpretation von Verteilungen</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -145,13 +175,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Was ist R?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_1.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R-Studio</span></a>
+ <span class="menu-text">Einführung in R und RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -163,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+ <span class="menu-text">Vorbereiten der R-Umgebung</span></a>
   </div>
 </li>
       </ul>
@@ -186,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">klassische Formen von Datensätzen</span></a>
+ <span class="menu-text">Einlesen von Datensätzen in unterschiedlichen Formaten</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -256,13 +280,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Streuungsmaße: Spannweite, Standartabweichung, Varianz</span></a>
+ <span class="menu-text">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Verteilungen und deren Visualisierung</span></a>
+ <span class="menu-text">Berechnung und Interpretation von Verteilungen</span></a>
   </div>
 </li>
       </ul>
@@ -320,7 +344,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
+ <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Varianzanalyse</span></a>
   </div>
 </li>
       </ul>
@@ -364,17 +394,31 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#die-normalverteilung" id="toc-die-normalverteilung" class="nav-link active" data-scroll-target="#die-normalverteilung"><span class="header-section-number">1</span> Die Normalverteilung</a>
+  <li><a href="#die-normalverteilung" id="toc-die-normalverteilung" class="nav-link active" data-scroll-target="#die-normalverteilung"><span class="header-section-number">0.1</span> Die Normalverteilung</a>
   <ul class="collapse">
-  <li><a href="#berechnung" id="toc-berechnung" class="nav-link" data-scroll-target="#berechnung"><span class="header-section-number">1.1</span> Berechnung</a></li>
-  <li><a href="#visualisierung" id="toc-visualisierung" class="nav-link" data-scroll-target="#visualisierung"><span class="header-section-number">1.2</span> Visualisierung</a></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">1.3</span> Interpretation</a></li>
+  <li><a href="#berechnung" id="toc-berechnung" class="nav-link" data-scroll-target="#berechnung"><span class="header-section-number">0.1.1</span> Berechnung</a></li>
   </ul></li>
-  <li><a href="#was-ist-schon-normal---abweichungen-von-der-normalverteilung" id="toc-was-ist-schon-normal---abweichungen-von-der-normalverteilung" class="nav-link" data-scroll-target="#was-ist-schon-normal---abweichungen-von-der-normalverteilung"><span class="header-section-number">2</span> Was ist schon “normal” - Abweichungen von der Normalverteilung</a>
+  <li><a href="#visualisierung" id="toc-visualisierung" class="nav-link" data-scroll-target="#visualisierung"><span class="header-section-number">0.2</span> Visualisierung</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">0.3</span> Interpretation</a></li>
+  <li><a href="#was-ist-schon-normal---abweichungen-von-der-normalverteilung" id="toc-was-ist-schon-normal---abweichungen-von-der-normalverteilung" class="nav-link" data-scroll-target="#was-ist-schon-normal---abweichungen-von-der-normalverteilung"><span class="header-section-number">1</span> Was ist schon “normal” - Abweichungen von der Normalverteilung</a>
   <ul class="collapse">
-  <li><a href="#berechnung-1" id="toc-berechnung-1" class="nav-link" data-scroll-target="#berechnung-1"><span class="header-section-number">2.1</span> Berechnung</a></li>
-  <li><a href="#visualisierung-1" id="toc-visualisierung-1" class="nav-link" data-scroll-target="#visualisierung-1"><span class="header-section-number">2.2</span> Visualisierung</a></li>
-  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1"><span class="header-section-number">2.3</span> Interpretation</a></li>
+  <li><a href="#lognormalverteilung" id="toc-lognormalverteilung" class="nav-link" data-scroll-target="#lognormalverteilung"><span class="header-section-number">1.1</span> Lognormalverteilung</a>
+  <ul class="collapse">
+  <li><a href="#berechnung-1" id="toc-berechnung-1" class="nav-link" data-scroll-target="#berechnung-1"><span class="header-section-number">1.1.1</span> Berechnung</a></li>
+  </ul></li>
+  <li><a href="#weibull-verteilung" id="toc-weibull-verteilung" class="nav-link" data-scroll-target="#weibull-verteilung"><span class="header-section-number">1.2</span> Weibull-Verteilung</a>
+  <ul class="collapse">
+  <li><a href="#berechnung-2" id="toc-berechnung-2" class="nav-link" data-scroll-target="#berechnung-2"><span class="header-section-number">1.2.1</span> Berechnung</a></li>
+  <li><a href="#visualisierung-1" id="toc-visualisierung-1" class="nav-link" data-scroll-target="#visualisierung-1"><span class="header-section-number">1.2.2</span> Visualisierung</a></li>
+  </ul></li>
+  <li><a href="#weitere-verteilungen" id="toc-weitere-verteilungen" class="nav-link" data-scroll-target="#weitere-verteilungen"><span class="header-section-number">1.3</span> Weitere Verteilungen</a>
+  <ul class="collapse">
+  <li><a href="#binomialverteilung" id="toc-binomialverteilung" class="nav-link" data-scroll-target="#binomialverteilung"><span class="header-section-number">1.3.1</span> Binomialverteilung</a></li>
+  <li><a href="#hypergeometrische-verteilung" id="toc-hypergeometrische-verteilung" class="nav-link" data-scroll-target="#hypergeometrische-verteilung"><span class="header-section-number">1.3.2</span> Hypergeometrische Verteilung</a></li>
+  <li><a href="#poissonverteilung" id="toc-poissonverteilung" class="nav-link" data-scroll-target="#poissonverteilung"><span class="header-section-number">1.3.3</span> Poissonverteilung</a></li>
+  <li><a href="#gleichverteilung" id="toc-gleichverteilung" class="nav-link" data-scroll-target="#gleichverteilung"><span class="header-section-number">1.3.4</span> Gleichverteilung</a></li>
+  <li><a href="#exponentialverteilung" id="toc-exponentialverteilung" class="nav-link" data-scroll-target="#exponentialverteilung"><span class="header-section-number">1.3.5</span> Exponentialverteilung</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -384,7 +428,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Verteilungen und deren Visualisierung</h1>
+<h1 class="title">Berechnung und Interpretation von Verteilungen</h1>
 </div>
 
 
@@ -394,7 +438,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Cornelius Puschmann </p>
+             <p>Michael Linke </p>
           </div>
   </div>
     
@@ -405,31 +449,463 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Berechnung und Interpretation von Verteilungen</p>
-<section id="die-normalverteilung" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Die Normalverteilung</h1>
-<section id="berechnung" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="berechnung"><span class="header-section-number">1.1</span> Berechnung</h2>
+<p>Wir haben jetzt eine Menge verschiedener Methoden kennengelernt, mit denen wir uns einen Eindruck davon machen können, wie unsere Daten verteilt sind. Um den Begriff der Verteilung an sich haben wir dagegen bis hierher einen Bogen gemacht. Dabei spielt die Art der Verteilung für viele weiterführende Anwendungen eine große Rolle. Manche statistische Verfahren setzen spezifische Verteilungen voraus.</p>
+<p>Statistische Verteilungen stellen eine Verbindung her zwischen den empirisch gewonnenen Daten und auf Wahrscheinlichkeit basierenden Aussagen, die wir daraus ableiten wollen. Dabei steht die Frage im Zentrum, mit welcher Wahrscheinlichkeit ein bestimmtes Zufallsereignis eintritt bzw. wie wahrscheinlich es ist, dass eine zufällig gezogene Stichprobe so ausfällt, wie es beobachtet wurde. Können wir annehmen, dass ein Merkmal auf eine bestimmte Weise verteilt ist, können wir eine Prognose abgeben, in welchem Rahmen eine Stichprobe liegen wird. Interessant wird es insbesondere dann, wenn sich nachher zeigt, dass die theoretische Schätzung falsch war und völlig andere Ergebnisse herauskommen. Denn das bedeutet, dass unsere Daten von Faktoren beeinflusst werden, die wir nicht mit eingerechnet haben.</p>
+<p>Wir hätten also gerne eine Funktion, die es uns ermöglicht, alle denkbaren Stichproben auf einen Wahrscheinlichkeitswert zwischen 0 und 1 abzubilden. Wenn abzählbar viele Ereignisse eintreten können (z.B. beim Würfeln oder Münzwurf), spricht man von Wahrscheinlichkeitsfunktionen. Bei stetigen Verteilungen (z.B. wenn Zeiträume betrachtet werden) verwendet man den Begriff Dichtefunktion. In beiden Fällen summieren sich alle Funktionswerte zu 1 auf. Eine kumulierte Wahrscheinlichkeits- bzw. Dichtefunktion nennt man Verteilungsfunktion. D.h. bei der Verteilungsfunktion werden die Funktionswerte der Wahrscheinlichkeits summiert bzw. die Dichtefunktion integriert.</p>
+<p>Schauen wir uns als Beispiel das Histogramm der Allbus-Einkommensverteilung aus den vorherigen Abschnitten an. Dazu laden wir zunächst die Daten und berechnen einige Parameter:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Lade nötiges Paket: pacman</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, dplyr, fitdistrplus)  </span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>) </span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a>allbus_df <span class="ot">&lt;-</span> <span class="fu">subset</span>(daten, <span class="at">select=</span><span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>)) <span class="sc">%&gt;%</span>          </span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>), <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span>                                     </span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>), <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">7</span>, <span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">15</span>, <span class="sc">-</span><span class="dv">42</span>, <span class="sc">-</span><span class="dv">50</span> ), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span>          </span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">na.omit</span>()   </span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">colnames</span>(allbus_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Geschlecht"</span>, <span class="st">"VertrauenBR"</span>, <span class="st">"Einkommen"</span>) <span class="co"># Umbenennen der Spaltennamen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Funktion zur Berechnung des geometrischen Mittels:</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>geom.mean <span class="ot">&lt;-</span> <span class="cf">function</span>(vector){</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">exp</span>(<span class="fu">mean</span>(<span class="fu">log</span>(vector)))</span>
+<span id="cb4-4"><a href="#cb4-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>get.mode <span class="ot">&lt;-</span> <span class="cf">function</span>(vector){</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  frequencies <span class="ot">=</span> <span class="fu">table</span>(vector) </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  max.freq <span class="ot">&lt;-</span> <span class="fu">max</span>(frequencies)  </span>
+<span id="cb5-4"><a href="#cb5-4"></a>  where.max <span class="ot">&lt;-</span>frequencies <span class="sc">==</span> max.freq </span>
+<span id="cb5-5"><a href="#cb5-5"></a>  modus <span class="ot">&lt;-</span> <span class="fu">names</span>(frequencies[where.max]) </span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">return</span>(modus)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Berechnung von arithmetischem und geometrischem Mittel, Median, Modus und </span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># Standardabweichung:  </span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>mean.einkommen <span class="ot">&lt;-</span> <span class="fu">mean</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>geom.einkommen <span class="ot">&lt;-</span> <span class="fu">geom.mean</span>(allbus_df<span class="sc">$</span>Einkommen <span class="sc">+</span> <span class="dv">43</span>) </span>
+<span id="cb6-5"><a href="#cb6-5"></a>median.einkommen <span class="ot">&lt;-</span> <span class="fu">median</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
+<span id="cb6-6"><a href="#cb6-6"></a>modus.einkommen <span class="ot">&lt;-</span> <span class="fu">get.mode</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="fu">sd</span>(allbus_df<span class="sc">$</span>Einkommen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1610.501</code></pre>
+</div>
+</div>
+<p>Wir plotten zunächst unsere Lageparameter im Histogramm:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(allbus_df, <span class="fu">aes</span>(<span class="at">x =</span> Einkommen)) <span class="sc">+</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span><span class="fu">after_stat</span>(density)),</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">0</span>, <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">500</span>), </span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Einkommen"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean.einkommen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median.einkommen, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.numeric</span>(modus.einkommen), <span class="at">color =</span> <span class="st">"green"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> geom.einkommen, <span class="at">color =</span> <span class="st">"yellow"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Zunächst einmal sieht man, dass sich die Messwerte in einem bestimmten Bereich häufen und eine zumindest annähernde Glockenform aufweisen. Der höchste Punkt deckt sich in etwa mit dem Mittelwert, hier vor allem dem Median (blau) und dem arithmetischen Mittel (rot), während der Modus (grün) etwas abseits liegt. Sie verteilen sich nicht gleichmäßig, was bei Einkommensdaten auch nicht zu erwarten gewesen wäre. So ganz symmetrisch sieht die Verteilung aber auch nicht aus, sondern wirkt etwas nach links gequetscht. Man nennt das auch “rechtsschief” bzw. “linkssteil”. Ein Indiz hierfür ist auch, dass das arithmetische Mittel größer ist als der Median. Das nach rechts gequetschte Gegenstück hieße “linksschief” bzw. “rechtssteil”. Diese Asymmetrie ist auch dadurch bedingt, dass ein erheblicher Teil der Studienteilnehmenden im Datensatz nicht vorkommt. Leute, die keine Angabe gemacht oder angegeben haben, dass sie über kein eigenes Einkommen verfügen, wurden beim Laden herausgefiltert. Die annähernde Glockenform stimmt jedoch hoffnungsvoll, dass der Datensatz einer Verteilung folgt, die in der Statistik von besonderer Bedeutung ist und die wir im Folgenden genauer betrachten werden: Die Normalverteilung.</p>
+<section id="die-normalverteilung" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="die-normalverteilung"><span class="header-section-number">0.1</span> Die Normalverteilung</h2>
+<p>Diese Verteilung ist auch ihrer charakteristischen Form wegen als Glockenkurve oder nach ihrem maßgeblichen Entdecker Carl Friedrich Gauß als Gauß-Verteilung bekannt. Relativ viele andere Verteilungen lassen sich bei ausreichend großer Stichprobengröße mit der Normalverteilung approximieren. Sie ist symmetrisch und der Mittelwert ist ihr Maximum.<br>
+Ca. 68% der Werte liegen innerhalb einer Standardabweichung vom Mittelwert entfernt, ca. 95% innerhalb von zwei Standardabweichungen und ca. 99,7%, also fast alle, innerhalb von drei Standardabweichungen.</p>
+<section id="berechnung" class="level3" data-number="0.1.1">
+<h3 data-number="0.1.1" class="anchored" data-anchor-id="berechnung"><span class="header-section-number">0.1.1</span> Berechnung</h3>
+<p>Die Dichtefunktion der Normalverteilung wird folgendermaßen berechnet:</p>
+<p><span class="math display">\[
+f(x,\mu,\sigma) = \frac{1}{\sigma \sqrt{2 \pi}} \cdot e^{-\frac{(x-\mu)^2}{2 \sigma^2}}
+\]</span> Dabei ist <span class="math inline">\(\mu\)</span> der Mittelwert (arithm. Mittel, Median, oder Modus) und <span class="math inline">\(\sigma\)</span> die Standardabweichung.</p>
+<p>Bei einer Normalverteilung mit einem Mittelwert von null und einer Varianz von eins spricht man von einer Standardnormalverteilung:</p>
+<p><span class="math display">\[
+\phi(z) = f(z, 0, 1) = \frac{1}{\sqrt{2 \pi}} \cdot e^{- \frac{z^2}{2}}
+\]</span></p>
+<p>Normal- aber nicht standardnormal verteilte Werte lassen sich leicht standardisieren, indem man den Mittelwert von ihnen abzieht und das Ergebnis durch die Standardabweichung teilt:</p>
+<p><span class="math display">\[
+z = \frac{Messwert - Mittelwert}{Standardabweichung} = \frac{x - \mu}{\sigma}
+\]</span> <span class="math inline">\(\mu\)</span> kann dabei das arithmetische Mittel, der Median oder der Modus sein.</p>
+<p>Der Vollständigkeit halber sei hier auch noch die Formel der Verteilungsfunktion aufgeschrieben:<br>
+<span class="math display">\[
+F(x, \mu, \sigma) = \frac{1}{2} \left[1 + \text{erf} \left (\frac{x - \mu}{\sigma \sqrt{2}} \right) \right]
+\]</span> <span class="math inline">\(erf\)</span> steht für die Gauß’sche Fehlerfunktion.</p>
+<p>Da R umfangreiche Funktionalitäten bereitstellt, um diese Verteilungen zu berechnen, ist es an dieser Stelle nicht notwendig, sich diese Formel einzuprägen oder irgendwas damit per Hand zu rechnen. R hat eine ganze Reihe an Verteilungen implementiert und stellt zu jeder davon u.a. vier Funktionen bereit:</p>
+<ul>
+<li>die Wahrscheinlichkeits-/Dichtefunktion, beginnend mit dem Buchstaben d,</li>
+<li>die Verteilungsfunktion, beginnend mit p,</li>
+<li>Quantile, beginnend mit q sowie</li>
+<li>Zufallszahlen auf Basis der jeweiligen Verteilung, beginnend mit r.</li>
+</ul>
 </section>
-<section id="visualisierung" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="visualisierung"><span class="header-section-number">1.2</span> Visualisierung</h2>
 </section>
-<section id="interpretation" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">1.3</span> Interpretation</h2>
+<section id="visualisierung" class="level2" data-number="0.2">
+<h2 data-number="0.2" class="anchored" data-anchor-id="visualisierung"><span class="header-section-number">0.2</span> Visualisierung</h2>
+<p>Die folgenden fünf Codebeispiele ergeben Visualisierungen der Normalverteilung bei unterschiedlichen Stichprobengrößen von <span class="math inline">\(n = 10\)</span> bis <span class="math inline">\(n = 100000\)</span>. Dabei wird jeweils eine Zufallsstichprobe gezogen und die Verteilung der “Messwerte” als Histogramm ausgegeben. Je größer die Stichprobe, desto stärker sollte sich dabei die Verteilung der Zufallswerte der Dichtefunktion der Normalverteilung annähern, die hier rot dargestellt ist. Mittelwert und Standardabweichung sind so gewählt, dass die Standardnormalverteilung herauskommt. Wiederholen Sie die einzelnen Beispiele mehrmals, dann sollte jedesmal eine andere Stichproben-Verteilung herauskommen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">#Zufalls-Stichprobe mit 10 Messwerten:</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>random.data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># Ziehen der Zufallsstichprobe</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Histogramm der Verteilung:</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> random.data), <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"gray"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="at">title =</span> <span class="st">"Zufallsstichprobe mit 10 Messwerten"</span>, <span class="at">x =</span> <span class="st">"Messwerte"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>), <span class="at">colour=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
+ℹ Please use `after_stat(density)` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>random.data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># Ziehen der Zufallsstichprobe</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># Histogramm der Verteilung:</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> random.data), <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"gray"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">title =</span> <span class="st">"Zufallsstichprobe mit 100 Messwerten"</span>, <span class="at">x =</span> <span class="st">"Messwerte"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>), <span class="at">colour=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>random.data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># Ziehen der Zufallsstichprobe</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># Histogramm der Verteilung:</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> random.data), <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"gray"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="at">title =</span> <span class="st">"Zufallsstichprobe mit 1000 Messwerten"</span>, <span class="at">x =</span> <span class="st">"Messwerte"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>), <span class="at">colour=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>random.data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># Ziehen der Zufallsstichprobe</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co"># Histogramm der Verteilung:</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> random.data), <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"gray"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="at">title =</span> <span class="st">"Zufallsstichprobe mit 10000 Messwerten"</span>, <span class="at">x =</span> <span class="st">"Messwerte"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>), <span class="at">colour=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>random.data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># Ziehen der Zufallsstichprobe</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># Histogramm der Verteilung:</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> random.data), <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"gray"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-6"><a href="#cb14-6"></a>    <span class="at">title =</span> <span class="st">"Zufallsstichprobe mit 100000 Messwerten"</span>, <span class="at">x =</span> <span class="st">"Messwerte"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>), <span class="at">colour=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="interpretation" class="level2" data-number="0.3">
+<h2 data-number="0.3" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">0.3</span> Interpretation</h2>
+<p>Aus der Visualisierung der unterschiedlichen Stichprobengrößen sollte ersichtlich geworden sein, warum ausreichend große Stichproben in der Statistik so wichtig sind. Erst ab einer ausreichend großen Anzahl Messwerten kann überhaupt festgestellt werden, ob die Daten der Normalverteilung (oder irgendeiner anderen in diesem Kapitel beschriebenen Verteilung) folgen.</p>
+<p>Wenn man weiß, dass ein bestimmtes Merkmal normalverteilt ist, kann man das nutzen, um mit relativ wenig Aufwand Berechnungen anzustellen. Angenommen, für unsere Einkommensdaten träfe das auch zu, dann könnte man z.B. mithilfe der Normalverteilung ausrechnen, wieviel Prozent der Population theoretisch über maximal 1500 Euro Netto-Einkommen im Monat verfügen. Dazu verwenden wir die Verteilungsfunktion der Normalverteilung, da wir an einem kumulierten Wert interessiert sind, nämlich allen möglichen Einkommenswerten bis maximal 1500 Euro. Wir übergeben der Funktion Mittelwert und Standardabweichung unserer Daten sowie die besagte Einkommensobergrenze:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>income_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(allbus_df<span class="sc">$</span>Einkommen) </span>
+<span id="cb15-2"><a href="#cb15-2"></a>income_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>income_median <span class="ot">&lt;-</span> <span class="fu">median</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Die Verteilungsfunktion der Normalverteilung: "p" + "norm": </span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">pnorm</span>(<span class="dv">1500</span>, <span class="at">mean=</span>income_mean, <span class="at">sd=</span>income_sd) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2786057</code></pre>
+</div>
+</div>
+<p>Wir bekommen als Ergebnis ca. 0.278. Das vergleichen wir mit dem 27,8%-Quantil unserer Messwerte:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">quantile</span>(allbus_df<span class="sc">$</span>Einkommen, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.278</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>27.8% 
+ 1500 </code></pre>
+</div>
+</div>
+<p>Zur Erinnerung: Das 27,8%-Quantil teilt die untersten 27,8% vom Rest der Messwerte. Interessanterweise liegt die Grenze genau bei 1500 Euro, was exakt der Vorhersage entspricht. Die Übereinstimmung wird aber deutlich schwächer, wenn wir das mit dem (100-27,8)%-Quantil vergleichen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>q <span class="ot">&lt;-</span> <span class="fu">quantile</span>(allbus_df<span class="sc">$</span>Einkommen, <span class="at">probs =</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.278</span>))</span>
+<span id="cb19-2"><a href="#cb19-2"></a>q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   72.2% 
+2977.378 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">pnorm</span>(<span class="fl">2977.378</span>, <span class="at">mean=</span>income_mean, <span class="at">sd=</span>income_sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6294329</code></pre>
+</div>
+</div>
+<p>Unsere Messwerte ergeben für das 72,2%-Quantil einen Wert von ca. 2977 Euro. Kalkulieren wir für das selbe Quantil bei der Normalverteilung das zu erwartende Einkommen, werden uns dagegen ca. 3393 Euro angegeben:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">qnorm</span>(<span class="fl">0.722</span>, <span class="at">mean=</span>income_mean, <span class="at">sd=</span>income_sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3393.598</code></pre>
+</div>
+</div>
+<p>Die Datenlage weicht folglich um ca. 416 Euro von der theoretischen Annahme ab und fällt deutlich geringer aus. Ein Umstand, der sich auch grafisch widerspiegelt, wenn wir die Normalverteilung in unser Histogramm einzeichnen: Die blaue Kurve basiert auf dem Median als Mittelwert, die rote auf dem arithmetischen Mittel, die gelbe auf dem geometrischen Mittel.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(allbus_df, <span class="fu">aes</span>(<span class="at">x =</span> Einkommen <span class="sc">+</span> <span class="dv">42</span>)) <span class="sc">+</span> </span>
+<span id="cb25-2"><a href="#cb25-2"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span>..density..),</span>
+<span id="cb25-3"><a href="#cb25-3"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">0</span>, <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">500</span>), </span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb25-5"><a href="#cb25-5"></a>    <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Einkommen"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> income_mean, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> income_median, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span>income_mean, <span class="at">sd=</span>income_sd), <span class="at">colour=</span><span class="st">"red"</span>) <span class="sc">+</span>   <span class="co"># Einfügen der Normalcerteilung mit arithm. mittel</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span>income_median, <span class="at">sd=</span>income_sd), <span class="at">colour=</span><span class="st">"blue"</span>) <span class="sc">+</span>  <span class="co"># Einfügen der NV mit Median</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span><span class="fu">geom.mean</span>(allbus_df<span class="sc">$</span>Einkommen <span class="sc">+</span> <span class="dv">42</span>), <span class="at">sd=</span>income_sd), <span class="at">colour=</span><span class="st">"yellow"</span>) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Einkommen"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Man sieht darin zweierlei: Zum einen gibt es zwar eine gewisse Übereinstimmung, aber doch auch deutliche Unterschiede zwischen den Messwerten und der Normalverteilung und zum zweiten wirken Median und geometrisches Mittel etwas genauer als das arithmetische Mittel. Hier zeigt sich die stärkere Robustheit des Medians gegenüber Ausreißern.</p>
+<p>Eine andere Möglichkeit, die Daten mit visuellen Methoden auf Normalverteilung zu prüfen, ist ein sogenannter Q-Q-Plot. Dabei werden die Quantile der theoretischen Verteilung auf einer Achse aufgetragen und die dazu korrespondierenden Quantile der empirischen Daten auf der anderen. Sind die Daten normalverteilt, sollten die Punkte im Plot alle sehr dicht an einer gemeinsamen Linie liegen. Glücklicherweise gibt es auch für diesen Plot eine Funktion:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">#shapiro.test(allbus_messniveau_bsp$di01a)</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">qqnorm</span>(allbus_df<span class="sc">$</span>Einkommen) <span class="co"># Erstellen des Q-Q-Plots</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="fu">qqline</span>(allbus_df<span class="sc">$</span>Einkommen) <span class="co"># Einfügen der Linie, auf der die Punkte liegen sollten</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Wie leicht zu sehen ist, weichen die Daten sehr stark von der Linie ab. Der Bereich unterhalb von ca. 3000 Euro Einkommen scheint zumindest teilweise als normalverteilt interpretierbar zu sein, während für höhere Werte die Ergebnisse massiv abweichen. Allerdings muss auch dazugesagt werden, dass ab 5000 Euro aufwärts die Anzahl an Messwerten deutlich abnimmt.</p>
+<p>Es gibt Studien, die nahelegen, dass beim Einkommen durch Logarithmierung eine bessere Anpassung an die Normalverteilung erreicht werden kann. Da dies ohnehin eine vielversprechende Methode ist, um die Verteilung empirischer Daten einer Normalverteilung ähnlicher zu machen, probieren wir das einmal aus und werfen dann einen Blick auf den neuen Q-Q-Plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>log.income <span class="ot">=</span> <span class="fu">log</span>(allbus_df<span class="sc">$</span>Einkommen <span class="sc">+</span> <span class="dv">42</span>) <span class="co"># 42 wird hier addiert, um negative Messwerte zu vermeiden.</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="fu">qqnorm</span>(log.income)</span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="fu">qqline</span>(log.income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Auch hier sieht man noch immer ein paar deutliche Ausreißer, aber verglichen mit vorher liegen die einzelnen Werte nun sehr viel dichter an der Linie.</p>
+<p>Wir belassen es an dieser Stelle dabei, angesichts unserer visuellen Mittel davon auszugehen, dass sich die Einkommensdaten zumindest innerhalb eines bestimmten Bereichs als lognormalverteilt ansehen lassen und damit nicht normalverteilt sind.</p>
+</section>
+<section id="was-ist-schon-normal---abweichungen-von-der-normalverteilung" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Was ist schon “normal” - Abweichungen von der Normalverteilung</h1>
+<p>Wenn die Stichprobe keiner Normalverteilung folgt, hat man mehrere Möglichkeiten: Man kann zum einen versuchen, die Daten zu normalisieren, also so zu transformieren, dass sie einer Normalverteilung ähnlicher werden, man kann eine Verteilung wählen, die besser zu den Daten passt und man kann auf Methoden ausweichen, die keine Normalverteilung voraussetzen.</p>
+<p>Das folgende Code-Beispiel zeigt eine R-Funktion, die einem helfen kann, eine passende Verteilung zu finden. Sie orientiert sich an den Eigenschaften Schiefe (Skewness) und Wölbung (Kurtosis). Die Schiefe haben wir bereits kennengelernt. Die Wölbung gibt an, wie flach eine Verteilung ist. Wir haben es mit kontinuierlichen Werten zu tun, also setzen wir “discrete” auf FALSE:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">descdist</span>(allbus_df<span class="sc">$</span>Einkommen, <span class="at">discrete =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>summary statistics
+------
+min:  -41   max:  14100 
+median:  2200 
+mean:  2445.346 
+estimated sd:  1610.501 
+estimated skewness:  2.343418 
+estimated kurtosis:  13.47263 </code></pre>
+</div>
+</div>
+<p>Der blaue Punkt gibt an, wo sich die Verteilung unserer empirischen Daten befindet. Er liegt sehr nahe an der Lognormalverteilung, aber auch die Weibull-Verteilung könnte ein passender Kandidat sein.</p>
+<section id="lognormalverteilung" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="lognormalverteilung"><span class="header-section-number">1.1</span> Lognormalverteilung</h2>
+<p>Wir haben diese Verteilung bereits angesprochen. Für Daten, die einen natürlichen Nullpunkt haben, ist die Lognormalverteilung ein möglicher Kandidat, weil sie nicht symmetrisch ist wie die Normalverteilung. Zur Normalisierung ist sie sehr nützlich. Allerdings sollte man daran denken, dass sie nur mit Werten funktioniert, die größer als Null sind. Man muss also ggf. die Messwerte vorher anpassen.</p>
+<section id="berechnung-1" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="berechnung-1"><span class="header-section-number">1.1.1</span> Berechnung</h3>
+<p>Die Formel ähnelt der für die Normalverteilung:</p>
+<p><span class="math display">\[
+f(x;\mu,\sigma) = \frac{1}{x \cdot \sigma \sqrt{2\pi}} \cdot e^{-\frac{(\ln(x)-\mu)^2}{2\sigma^2}}
+\]</span> ### Visualisierung</p>
+<p>Schauen wir uns einmal an, wie unsere Einkommensdaten zur Dichtefunktion der Lognormalverteilung passen. Dazu addieren wir zunächst zu jedem Messwert die Zahl 42, damit alle Werte größer Null sind, logarithmieren dann die Messwerte und ermitteln anschließend das arithmetische Mittel und die Standardabweichung:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>log.allbus.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">LogEinkommen=</span><span class="fu">log</span>(allbus_df<span class="sc">$</span>Einkommen <span class="sc">+</span> <span class="dv">42</span>)) </span>
+<span id="cb30-2"><a href="#cb30-2"></a>log.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(log.allbus.df<span class="sc">$</span>LogEinkommen) </span>
+<span id="cb30-3"><a href="#cb30-3"></a>log.sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(log.allbus.df<span class="sc">$</span>LogEinkommen)</span>
+<span id="cb30-4"><a href="#cb30-4"></a></span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="fu">cat</span>(<span class="st">"Mittelwert: "</span>, log.mean, <span class="st">"Standardabweichung: "</span>, log.sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mittelwert:  7.599235 Standardabweichung:  0.8405187</code></pre>
+</div>
+</div>
+<p>Dann plotten wir das Ergebnis in einem Histogramm, in das wir die theoretische Dichte der Lognormalverteilung eintragen, die unseren Parametern entspricht:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> allbus_df, <span class="fu">aes</span>(<span class="at">x=</span>Einkommen <span class="sc">+</span> <span class="dv">42</span>)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">binwidth =</span> <span class="dv">500</span>, <span class="at">fill =</span> <span class="st">"gray"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb32-4"><a href="#cb32-4"></a>    <span class="at">title =</span> <span class="st">"Nettoeinkommen und Lognormalverteilung"</span>, <span class="at">x =</span> <span class="st">"Messwerte"</span>, <span class="at">y =</span> <span class="st">"Dichte"</span>) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="fu">stat_function</span>(<span class="at">fun=</span>dlnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">meanlog=</span>log.mean, <span class="at">sdlog=</span>log.sd), <span class="at">colour=</span><span class="st">"red"</span>)  <span class="co">#meanlog=log.mean, sdlog=log.sd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Die theoretische Verteilung wirkt schiefer als die empirische, aber insgesamt scheint die Übereinstimmung auch visuell größer zu sein als mit der Normalverteilung.</p>
 </section>
 </section>
-<section id="was-ist-schon-normal---abweichungen-von-der-normalverteilung" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Was ist schon “normal” - Abweichungen von der Normalverteilung</h1>
-<section id="berechnung-1" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="berechnung-1"><span class="header-section-number">2.1</span> Berechnung</h2>
+<section id="weibull-verteilung" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="weibull-verteilung"><span class="header-section-number">1.2</span> Weibull-Verteilung</h2>
+<p>Der zweite Kandidat, der sich bei stetigen, asymmetrischen Verteilungen anbieten kann, ist die Weibull-Verteilung. Sie ist sehr vielseitig, bezogen auf die Formen, die sie annehmen kann und wird deshalb oft für die Kalkulation der Lebensdauer von Maschinenteilen u.ä. verwendet. Allerdings kann sie auch bei der Untersuchung von Einkommensungleichheiten von Bedeutung sein.</p>
+<section id="berechnung-2" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="berechnung-2"><span class="header-section-number">1.2.1</span> Berechnung</h3>
+<p>Diese Verteilung ist abhängig von einem Streuungsparameter <span class="math inline">\(1 / \lambda\)</span> und dem Formparameter <span class="math inline">\(k\)</span>:</p>
+<p>$$ f(x;,k) = ()^{k-1} e<sup>{-(x/)</sup>k}</p>
+<p>$$ Durch den Parameter <span class="math inline">\(k\)</span> kann man berücksichtigen, wie sich die Häufigkeit, mit der ein bestimmtes Ereignis auftritt, verändert. Wenn <span class="math inline">\(k = 1\)</span>, geht man davon aus, dass sich die Wahrscheinlichkeit, dass ein Ereignis eintritt, kaum verändert. Für <span class="math inline">\(k &lt; 1\)</span> erwartet man, dass Ereignisse über die Zeit seltener auftreten und für <span class="math inline">\(k &gt; 1\)</span>, dass sie mit der Zeit zunehmen.</p>
 </section>
-<section id="visualisierung-1" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="visualisierung-1"><span class="header-section-number">2.2</span> Visualisierung</h2>
+<section id="visualisierung-1" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="visualisierung-1"><span class="header-section-number">1.2.2</span> Visualisierung</h3>
+<p>Auf den Netto-Einkommens-Datensatz angewendet, ergibt sich ein Bild, das wie erwartet ähnlich wie die Lognormal-Verteilung wirkt, wenn auch immer noch mit deutlichen Abweichungen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>fit.weibull <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(allbus_df<span class="sc">$</span>Einkommen <span class="sc">+</span> <span class="dv">43</span>, <span class="st">"weibull"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> allbus_df, <span class="fu">aes</span>(<span class="at">x=</span>Einkommen <span class="sc">+</span> <span class="dv">42</span>)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">binwidth =</span> <span class="dv">500</span>, <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb33-5"><a href="#cb33-5"></a>    <span class="at">title =</span> <span class="st">"Netto-Einkommen und Weibull-Verteilung"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6"></a>    <span class="at">x =</span> <span class="st">"Messwerte"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7"></a>    <span class="at">y =</span> <span class="st">"Dichte"</span></span>
+<span id="cb33-8"><a href="#cb33-8"></a>  ) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="#cb33-9"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>dweibull, <span class="at">args=</span><span class="fu">list</span>(<span class="at">scale=</span>fit.weibull<span class="sc">$</span>estimate[<span class="st">"scale"</span>], <span class="at">shape=</span>fit.weibull<span class="sc">$</span>estimate[<span class="st">"shape"</span>]), <span class="at">colour=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.4_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
-<section id="interpretation-1" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="interpretation-1"><span class="header-section-number">2.3</span> Interpretation</h2>
+</section>
+<section id="weitere-verteilungen" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="weitere-verteilungen"><span class="header-section-number">1.3</span> Weitere Verteilungen</h2>
+<p>Damit verlassen wir das konkrete Einkommens-Beispiel und die Suche nach Alternativen zur Normalverteilung und schauen uns ein paar weitere Verteilungen an, die je nach Forschungsdesign ebenfalls wichtig sein können.</p>
+<section id="binomialverteilung" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="binomialverteilung"><span class="header-section-number">1.3.1</span> Binomialverteilung</h3>
+<p>Diese Verteilung basiert auf Zufallsexperimenten, die genau zwei Versuchsausgänge aufweisen, welche sich gegenseitig ausschließen und konstante Wahrscheinlichkeiten für die beiden Ausgänge haben. Die einzelnen Versuche sollen voneinander unabhängig sein.</p>
+<p>Ein bekanntes Beispiel für so ein Zufallsexperiment ist der Münzwurf. Anwendungen in der KMW wären etwa Kaufentscheidungen (Ja/Nein) in der Werbewirkungsforschung oder allgemein Interview-Fragen, auf die es nur Ja/Nein-Antworten gibt.</p>
+<section id="berechnung-und-visualisierung" class="level4" data-number="1.3.1.1">
+<h4 data-number="1.3.1.1" class="anchored" data-anchor-id="berechnung-und-visualisierung"><span class="header-section-number">1.3.1.1</span> Berechnung und Visualisierung</h4>
+<p>Bei einer Eintrittswahrscheinlichkeit <span class="math inline">\(p\)</span> für ein bestimmtes Ereignis berechnet sich die Wahrscheinlichkeit, dass das Ereignis nach <span class="math inline">\(n\)</span> Wiederholungen <span class="math inline">\(k\)</span> mal eintritt, mit folgender Formel:</p>
+<p><span class="math display">\[
+f(k;n,p) = \binom{n}{k} p^k (1-p)^{n-k}
+\]</span></p>
+<p>Das folgende Beispiel zeigt, wie man in R die Wahrscheinlichkeit berechnet, bei zehn Münzwürfen genau 7 mal Kopf zu werfen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># Festlegen der Gesamtzahl an Würfen </span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>kopf <span class="ot">&lt;-</span> <span class="dv">7</span> <span class="co"># Festlegen der Anzahl, wie oft Kopf geworfen werden soll </span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>p_kopf <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># Festlegen der Wahrscheinlichkeit, Kopf zu werfen (hier: 50%)</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>prob <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(kopf, <span class="at">size=</span>n, <span class="at">prob=</span>p_kopf) </span>
+<span id="cb34-5"><a href="#cb34-5"></a>prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1171875</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="hypergeometrische-verteilung" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="hypergeometrische-verteilung"><span class="header-section-number">1.3.2</span> Hypergeometrische Verteilung</h3>
+<p>Diese Verteilung kann vorliegen, wenn die Bedingung der Unabhängigkeit der einzelnen Versuche nicht einhaltbar ist.</p>
+<section id="berechnung-3" class="level4" data-number="1.3.2.1">
+<h4 data-number="1.3.2.1" class="anchored" data-anchor-id="berechnung-3"><span class="header-section-number">1.3.2.1</span> Berechnung</h4>
+<p>Es wird wieder von zwei Ereignissen ausgegangen, die eintreten können. Angenommen, eine Grundgesamtheit setzt sich zusammen aus <span class="math inline">\(N + M\)</span> Ereignissen, wobei <span class="math inline">\(M\)</span> und <span class="math inline">\(N\)</span> sich gegenseitig ausschließen. Aus dieser Grundgesamtheit wird nun eine Stichprobe der Größe <span class="math inline">\(k\)</span> gezogen. Dann berechnet sich die Wahrscheinlichkeit, dass sich in der Stichprobe <span class="math inline">\(x\)</span> mal das Ereignis <span class="math inline">\(M\)</span> eintritt, folgendermaßen: <span class="math display">\[
+f(x, k, M, N) = \frac{\binom{M}{x} \binom{N}{k-x}}{\binom{N + M}{k}}
+\]</span></p>
+<p>Machen wir uns das an einem Beispiel deutlich: In einer Stadt mit ca. 600000 Einwohnern sind ca. 2000 Menschen mit HIV infiziert. Wie groß ist die Wahrscheinlichkeit, dass von 50 Leuten, die man bei einem Ausflug in die Stadt zufällig trifft, kein einziger HIV hat?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>n <span class="ot">&lt;-</span> <span class="dv">600000</span> <span class="co"># Grundgesamtheit</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>m <span class="ot">&lt;-</span> <span class="dv">2000</span>   <span class="co"># Fälle, die eine bestimmte Merkmalsausprägung aufweisen</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a>k <span class="ot">&lt;-</span> <span class="dv">50</span>     <span class="co"># Stichprobengröße</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span>      </span>
+<span id="cb36-5"><a href="#cb36-5"></a>prob <span class="ot">&lt;-</span> <span class="fu">dhyper</span>(x, m, n, k) </span>
+<span id="cb36-6"><a href="#cb36-6"></a>prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8467106</code></pre>
+</div>
+</div>
+<p>Das heißt, die Wahrscheinlichkeit, dass mindestens eine Person, der man begegnet, HIV hat, beträgt ca. <span class="math inline">\(1 - 0.8467\)</span>, also ca. 15,33 Prozent.</p>
+</section>
+</section>
+<section id="poissonverteilung" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="poissonverteilung"><span class="header-section-number">1.3.3</span> Poissonverteilung</h3>
+<p>Diese Verteilung kann herangezogen werden, wenn es um das durchschnittliche Eintreten bestimmter Ereignisse innerhalb es festen Zeitintervalls geht. Dabei steht <span class="math inline">\(\lambda\)</span> für die Rate, mit der ein Ereignis durchschnittlich eintritt.</p>
+<section id="berechnung-4" class="level4" data-number="1.3.3.1">
+<h4 data-number="1.3.3.1" class="anchored" data-anchor-id="berechnung-4"><span class="header-section-number">1.3.3.1</span> Berechnung</h4>
+<p>Die Poissonverteilung berechnet sich nach folgender Formel: <span class="math display">\[
+f(x;\lambda) =  \frac{\lambda^x e^{-\lambda} }{x!}
+\]</span></p>
+<p>Dazu wieder ein Beispiel: Eine Nachrichtenagentur veröffentlicht zu einem bestimmten Thema normalerweise 3 Artikel pro Tag. Wie wahrscheinlich ist es, dass sie an einem Tag 7 Artikel zu demselben Thema veröffentlicht?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>x <span class="ot">&lt;-</span> <span class="dv">7</span> </span>
+<span id="cb38-2"><a href="#cb38-2"></a>lambda <span class="ot">&lt;-</span> <span class="dv">3</span> </span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="fu">dpois</span>(x, lambda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02160403</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="gleichverteilung" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="gleichverteilung"><span class="header-section-number">1.3.4</span> Gleichverteilung</h3>
+<p>Eine Zufallsvariable ist in einem gegebenen Intervall gleichmäßig verteilt. Diese Verteilung ist besonders zur Erzeugung von Zufallszahlen hilfreich.</p>
+<section id="berechnung-5" class="level4" data-number="1.3.4.1">
+<h4 data-number="1.3.4.1" class="anchored" data-anchor-id="berechnung-5"><span class="header-section-number">1.3.4.1</span> Berechnung</h4>
+<p><span class="math display">\[
+f(x;min,max) = \begin{cases}
+\frac{1}{max-min}, &amp; min \leq x \leq max \\
+0, &amp; \text{sonst}
+\end{cases}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># Fünf Zufallszahlen, die im voreingestellten Intervall von 0 bis 1 liegen:</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="fu">runif</span>(<span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02481623 0.65386128 0.94028002 0.76336627 0.49607065</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># Drei Zufallszahlen, die im Intervall von -10 bis 10 liegen:</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="fu">runif</span>(<span class="dv">3</span>, <span class="at">min=</span><span class="sc">-</span><span class="dv">10</span>, <span class="at">max=</span><span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.415376  1.154795  3.693968</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="exponentialverteilung" class="level3" data-number="1.3.5">
+<h3 data-number="1.3.5" class="anchored" data-anchor-id="exponentialverteilung"><span class="header-section-number">1.3.5</span> Exponentialverteilung</h3>
+<p>Ähnlich wie die Poissonverteilung, allerdings stetig. Sie ist ein Spezialfall der Weibull-Verteilung und wird z.B. bei der Untersuchung von Zeitabständen eingesetzt.</p>
+<section id="berechnung-6" class="level4" data-number="1.3.5.1">
+<h4 data-number="1.3.5.1" class="anchored" data-anchor-id="berechnung-6"><span class="header-section-number">1.3.5.1</span> Berechnung</h4>
+<p>Im Gegensatz zur etwas vielseitigeren Weibull-Verteilung hat sie einen Parameter weniger, da <span class="math inline">\(k\)</span> unveränderlich gleich 1 ist, geht also von weitgehend gleichmäßig auftretenden Ereignissen aus.</p>
+<p><span class="math display">\[
+f(x;\lambda) = \begin{cases}
+\lambda e^{-\lambda x}, &amp; x \geq 0 \\
+0, &amp; x &lt; 0
+\end{cases}
+\]</span> Beispiel:</p>
+<p>Eine Nachrichtenagentur berichtet durchschnittlich alle 30 Tage über Proteste und Widerstandsaktionen in einem Land X. Wie wahrscheinlich ist es, dass zwischen den Nachrichten plötzlich nur noch maximal 5 Tage liegen?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>da <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># Durchschnittlicher Abstand in Tagen</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>lambda <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> da</span>
+<span id="cb44-3"><a href="#cb44-3"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span> </span>
+<span id="cb44-4"><a href="#cb44-4"></a>prob <span class="ot">&lt;-</span> <span class="fu">pexp</span>(x, <span class="at">rate=</span>lambda)</span>
+<span id="cb44-5"><a href="#cb44-5"></a>prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1535183</code></pre>
+</div>
+</div>
 
 
+</section>
+</section>
 </section>
 </section>
 

@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Patrick Zerrer">
+<meta name="author" content="Michael Linke">
 
-<title>Streuungsmaße: Spannweite, Standartabweichung, Varianz</title>
+<title>Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -56,11 +90,12 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -105,11 +140,6 @@ ul.task-list li input[type="checkbox"] {
 </i> 
  <span class="menu-text"></span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/ZeMKI_Bremen" rel="" target=""><i class="bi bi-twitter" role="img">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
 </ul>
             <div class="quarto-navbar-tools">
 </div>
@@ -121,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_4.1.html">Die ersten Schritte bei der Datenanalyse</a></li><li class="breadcrumb-item"><a href="./Skript_4.3.html">Streuungsmaße: Spannweite, Standartabweichung, Varianz</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_4.1.html">Die ersten Schritte bei der Datenanalyse</a></li><li class="breadcrumb-item"><a href="./Skript_4.3.html">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -145,13 +175,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Was ist R?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_1.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R-Studio</span></a>
+ <span class="menu-text">Einführung in R und RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -163,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+ <span class="menu-text">Vorbereiten der R-Umgebung</span></a>
   </div>
 </li>
       </ul>
@@ -186,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">klassische Formen von Datensätzen</span></a>
+ <span class="menu-text">Einlesen von Datensätzen in unterschiedlichen Formaten</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -256,13 +280,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Streuungsmaße: Spannweite, Standartabweichung, Varianz</span></a>
+ <span class="menu-text">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Verteilungen und deren Visualisierung</span></a>
+ <span class="menu-text">Berechnung und Interpretation von Verteilungen</span></a>
   </div>
 </li>
       </ul>
@@ -320,7 +344,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
+ <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Varianzanalyse</span></a>
   </div>
 </li>
       </ul>
@@ -367,21 +397,17 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#die-spannweite" id="toc-die-spannweite" class="nav-link active" data-scroll-target="#die-spannweite"><span class="header-section-number">1</span> Die Spannweite</a>
   <ul class="collapse">
   <li><a href="#berechnung" id="toc-berechnung" class="nav-link" data-scroll-target="#berechnung"><span class="header-section-number">1.1</span> Berechnung</a></li>
-  <li><a href="#visualisierung" id="toc-visualisierung" class="nav-link" data-scroll-target="#visualisierung"><span class="header-section-number">1.2</span> Visualisierung</a></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">1.3</span> Interpretation</a></li>
   </ul></li>
-  <li><a href="#die-varianz" id="toc-die-varianz" class="nav-link" data-scroll-target="#die-varianz"><span class="header-section-number">2</span> Die Varianz</a>
+  <li><a href="#quantilsabstände" id="toc-quantilsabstände" class="nav-link" data-scroll-target="#quantilsabstände"><span class="header-section-number">2</span> Quantilsabstände</a>
   <ul class="collapse">
   <li><a href="#berechnung-1" id="toc-berechnung-1" class="nav-link" data-scroll-target="#berechnung-1"><span class="header-section-number">2.1</span> Berechnung</a></li>
-  <li><a href="#visualisierung-1" id="toc-visualisierung-1" class="nav-link" data-scroll-target="#visualisierung-1"><span class="header-section-number">2.2</span> Visualisierung</a></li>
-  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1"><span class="header-section-number">2.3</span> Interpretation</a></li>
   </ul></li>
-  <li><a href="#die-standardabweichung" id="toc-die-standardabweichung" class="nav-link" data-scroll-target="#die-standardabweichung"><span class="header-section-number">3</span> Die Standardabweichung</a>
+  <li><a href="#varianz-und-standardabweichung" id="toc-varianz-und-standardabweichung" class="nav-link" data-scroll-target="#varianz-und-standardabweichung"><span class="header-section-number">3</span> Varianz und Standardabweichung</a>
   <ul class="collapse">
   <li><a href="#berechnung-2" id="toc-berechnung-2" class="nav-link" data-scroll-target="#berechnung-2"><span class="header-section-number">3.1</span> Berechnung</a></li>
-  <li><a href="#visualisierung-2" id="toc-visualisierung-2" class="nav-link" data-scroll-target="#visualisierung-2"><span class="header-section-number">3.2</span> Visualisierung</a></li>
-  <li><a href="#interpretation-2" id="toc-interpretation-2" class="nav-link" data-scroll-target="#interpretation-2"><span class="header-section-number">3.3</span> Interpretation</a></li>
   </ul></li>
+  <li><a href="#zusammenfassungen-ausgeben-lassen" id="toc-zusammenfassungen-ausgeben-lassen" class="nav-link" data-scroll-target="#zusammenfassungen-ausgeben-lassen"><span class="header-section-number">4</span> Zusammenfassungen ausgeben lassen</a></li>
+  <li><a href="#visualisierung-der-streuungsparameter" id="toc-visualisierung-der-streuungsparameter" class="nav-link" data-scroll-target="#visualisierung-der-streuungsparameter"><span class="header-section-number">5</span> Visualisierung der Streuungsparameter</a></li>
   </ul>
 </nav>
     </div>
@@ -390,7 +416,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Streuungsmaße: Spannweite, Standartabweichung, Varianz</h1>
+<h1 class="title">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</h1>
 </div>
 
 
@@ -400,7 +426,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Patrick Zerrer </p>
+             <p>Michael Linke </p>
           </div>
   </div>
     
@@ -411,44 +437,142 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Berechnung und Interpretation von Streuungsmaßen</p>
-<section id="die-spannweite" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Die Spannweite</h1>
-<section id="berechnung" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="berechnung"><span class="header-section-number">1.1</span> Berechnung</h2>
+<p>Im letzten Abschnitt haben wir uns angesehen, mit welchen Maßen sich etwas darüber sagen lässt, um welche Punkte sich die Masse der Messwerte in unserem Datensatz konzentriert. Jetzt wollen wir wissen, wie stark die Messwerte streuen, also wie stark die Messwerte vom Lageparameter abweichen. Zunächst laden wir die benötigten Daten:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Lade nötiges Paket: pacman</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, dplyr)  </span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>) </span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a>allbus_df <span class="ot">&lt;-</span> <span class="fu">subset</span>(daten, <span class="at">select=</span><span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>)) <span class="sc">%&gt;%</span>          </span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>), <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span>                                     </span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>), <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">7</span>, <span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">15</span>, <span class="sc">-</span><span class="dv">42</span>, <span class="sc">-</span><span class="dv">50</span> ), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span>          </span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">na.omit</span>()   </span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">colnames</span>(allbus_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Geschlecht"</span>, <span class="st">"VertrauenBR"</span>, <span class="st">"Einkommen"</span>) <span class="co"># Umbenennen der Spaltennamen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="die-spannweite" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="die-spannweite"><span class="header-section-number">1</span> Die Spannweite</h2>
+<p>Die Spannweite (auch Range genannt) gibt den Abstand zwischen der kleinsten und der größten Merkmalsausprägung an. Sie ist das einfachste Streuungsmaß, zugleich aber nur wenig aussagekräftig.</p>
+<section id="berechnung" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="berechnung"><span class="header-section-number">1.1</span> Berechnung</h3>
+<p><span class="math display">\[
+SP = x_{max} - x_{min}  
+\]</span> Mit der <code>range</code>-Funktion kann man sich in R die beiden Extremwerte als Vektor ausgeben lassen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">range</span>(allbus_df<span class="sc">$</span>Einkommen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   -41 14100</code></pre>
+</div>
+</div>
+<p>Alternativ kann man auch einfach Das Maximum und das Minimum ermitteln und die Differenz berechnen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>einkommen.max <span class="ot">=</span> <span class="fu">max</span>(allbus_df<span class="sc">$</span>Einkommen) <span class="sc">-</span> <span class="fu">min</span>(allbus_df<span class="sc">$</span>Einkommen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="visualisierung" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="visualisierung"><span class="header-section-number">1.2</span> Visualisierung</h2>
 </section>
-<section id="interpretation" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">1.3</span> Interpretation</h2>
+<section id="quantilsabstände" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="quantilsabstände"><span class="header-section-number">2</span> Quantilsabstände</h2>
+<p>Dieses Maß gibt die Differenz zweier Quantile an. Insbesondere der Quartilsabstand (75%-Quantil - 25%-Quantil) ist hier von Bedeutung.</p>
+<section id="berechnung-1" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="berechnung-1"><span class="header-section-number">2.1</span> Berechnung</h3>
+<p>Der Quaantilsabstand berechnet sich für das obere Quantil <span class="math inline">\(Q_{o}\)</span> und das untere Quantil <span class="math inline">\(Q_{u}\)</span> folgendermaßen:</p>
+<p><span class="math display">\[
+QA = Q_{o} - Q_{u}
+\]</span></p>
+<p>Für den Quartilsabstand gibt es eine Funktion in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Berechnung mit der vorgefertigten R-Funktion IQR (Interquartile Range):</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">IQR</span>(allbus_df<span class="sc">$</span>VertrauenBR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>Um den mittleren Quartilsabstand zu ermitteln, kann man das Ergebnis noch durch 2 teilen.</p>
 </section>
 </section>
-<section id="die-varianz" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Die Varianz</h1>
-<section id="berechnung-1" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="berechnung-1"><span class="header-section-number">2.1</span> Berechnung</h2>
+<section id="varianz-und-standardabweichung" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="varianz-und-standardabweichung"><span class="header-section-number">3</span> Varianz und Standardabweichung</h2>
+<p>Ein nützlicheres Maß dafür, wie die einzelnen Merkmalsausprägungen um den Mittelwert verteilt sind - vorausgesetzt, man hat es mit kardinal skalierten Daten zu tun, kann die Varianz sein.</p>
+<section id="berechnung-2" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="berechnung-2"><span class="header-section-number">3.1</span> Berechnung</h3>
+<p>Es wird unterschieden zwischen der Varianz der Grundgesamtheit und der Stichprobenvarianz. Bei ersterer berechnet man für jede einzelne Merkmalsausprägung ihre Abweichung vom Mittelwert, quadriert die Ergebnisse und summiert diese. Anschließend teilt man durch die Größe der Grundgesamtheit:</p>
+<p><span class="math display">\[
+Var = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2
+\]</span> Da man wie gesagt meist nur auf eine Stichprobe zurückgreifen kann, kann man den Mittelwert der Grundgesamtheit durch den Mittelwert der Stichprobe nur schätzen. Um die damit verbundene Verzerrung auszugleichen, kann es sinnvoll sein die Summe der quadrierten Abweichungen nicht durch <span class="math inline">\(n\)</span>, sondern durch <span class="math inline">\((n-1)\)</span> zu teilen. So ergibt sich folgende Formel, wobei <span class="math inline">\(n\)</span> hier die Stichprobengröße darstellt:</p>
+<p><span class="math display">\[
+Var = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
+\]</span></p>
+<p>In R bekommen wir die Varianz mit der <code>var</code>-Funktion, hier am Beispiel des Netto-Einkommens:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">var</span>(allbus_df<span class="sc">$</span>Einkommen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2593715</code></pre>
+</div>
+</div>
+<p>Wie wir sehen, ist das Ergebnis sehr groß und auf den ersten Blick nicht leicht interpretierbar. Nützlicher ist da die Standardabweichung, die wir einfach dadurch erhalten, dass wir die Quadratwurzel der Varianz ziehen:</p>
+<p><span class="math display">\[
+SD = \sqrt{Var} = s =  \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
+\]</span> R bietet zur Berechnung der Standardabweichung die <code>sd</code>-Funktion an.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">sd</span>(allbus_df<span class="sc">$</span>Einkommen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1610.501</code></pre>
+</div>
+</div>
 </section>
-<section id="visualisierung-1" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="visualisierung-1"><span class="header-section-number">2.2</span> Visualisierung</h2>
 </section>
-<section id="interpretation-1" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="interpretation-1"><span class="header-section-number">2.3</span> Interpretation</h2>
+<section id="zusammenfassungen-ausgeben-lassen" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="zusammenfassungen-ausgeben-lassen"><span class="header-section-number">4</span> Zusammenfassungen ausgeben lassen</h2>
+<p>Wenn man nicht jeden Parameter einzeln abfragen will und kardinal skalierte Daten hat, kann man sich die wichtigsten Lageparameter auch als Zusammenfassung ausgeben lassen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">summary</span>(allbus_df<span class="sc">$</span>Einkommen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    -41    1500    2200    2445    3000   14100 </code></pre>
+</div>
+</div>
 </section>
-</section>
-<section id="die-standardabweichung" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Die Standardabweichung</h1>
-<section id="berechnung-2" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="berechnung-2"><span class="header-section-number">3.1</span> Berechnung</h2>
-</section>
-<section id="visualisierung-2" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="visualisierung-2"><span class="header-section-number">3.2</span> Visualisierung</h2>
-</section>
-<section id="interpretation-2" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="interpretation-2"><span class="header-section-number">3.3</span> Interpretation</h2>
+<section id="visualisierung-der-streuungsparameter" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="visualisierung-der-streuungsparameter"><span class="header-section-number">5</span> Visualisierung der Streuungsparameter</h2>
+<p>In folgendem Codebeispiel lassen wir uns das Histogramm aus dem letzten Abschnitt ausgeben, allerdings reduziert auf Median (blau, durchgezogene Linie) und das arithmetische Mittel (rot, durchgezogene Linie). Wir ergänzen diese Lageparameter um den Minimal- und den Maximalwert (schwarz, gestrichelt), das untere und obere Quartil (blau, gestrichelt) und die Standardabweichung, hier beiderseits vom Mittelwert aufgetragen(rot, gestrichelt).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>mean.einkommen <span class="ot">&lt;-</span> <span class="fu">mean</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
+<span id="cb15-2"><a href="#cb15-2"></a>median.einkommen <span class="ot">&lt;-</span> <span class="fu">median</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>range.einkommen <span class="ot">&lt;-</span> <span class="fu">range</span>(allbus_df<span class="sc">$</span>Einkommen) </span>
+<span id="cb15-4"><a href="#cb15-4"></a>iqr.einkommen <span class="ot">&lt;-</span> <span class="fu">IQR</span>(allbus_df<span class="sc">$</span>Einkommen) </span>
+<span id="cb15-5"><a href="#cb15-5"></a>sd.einkommen <span class="ot">&lt;-</span> <span class="fu">sd</span>(allbus_df<span class="sc">$</span>Einkommen) </span>
+<span id="cb15-6"><a href="#cb15-6"></a></span>
+<span id="cb15-7"><a href="#cb15-7"></a>quartil25.einkommen <span class="ot">&lt;-</span> <span class="fu">quantile</span>(allbus_df<span class="sc">$</span>Einkommen, <span class="fl">0.25</span>) </span>
+<span id="cb15-8"><a href="#cb15-8"></a>quartil75.einkommen <span class="ot">&lt;-</span> <span class="fu">quantile</span>(allbus_df<span class="sc">$</span>Einkommen, <span class="fl">0.75</span>)</span>
+<span id="cb15-9"><a href="#cb15-9"></a></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="fu">ggplot</span>(allbus_df, <span class="fu">aes</span>(<span class="at">x =</span> Einkommen)) <span class="sc">+</span> </span>
+<span id="cb15-11"><a href="#cb15-11"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span><span class="fu">after_stat</span>(density)),</span>
+<span id="cb15-12"><a href="#cb15-12"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">0</span>, <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">500</span>), </span>
+<span id="cb15-13"><a href="#cb15-13"></a>    <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb15-14"><a href="#cb15-14"></a>    <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Einkommen"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean.einkommen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>   <span class="co">#, linetype = "dashed"</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean.einkommen <span class="sc">-</span> sd.einkommen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean.einkommen <span class="sc">+</span> sd.einkommen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median.einkommen, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-20"><a href="#cb15-20"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> quartil25.einkommen, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> quartil75.einkommen, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-22"><a href="#cb15-22"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> range.einkommen[<span class="dv">1</span>], <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> range.einkommen[<span class="dv">2</span>], <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_4.3_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Es ist sehr deutlich zu erkennen, dass die Spannweite (die Distanz zwischen den beiden schwarzen gestrichelten Linien) wenig hilfreich ist, wenn man erfahren will, wo besonders viele Messwerte liegen. Der Interquartilsabstand scheint hier sehr viel aussagekräftiger zu sein, während die Standardabweichung unterhalb des Mittelwerts mehr Messwerte einzuschließen scheint als oberhalb davon. Dieses Ungleichgewicht wird im Abschnitt über Verteilungen noch eine Rolle spielen.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
