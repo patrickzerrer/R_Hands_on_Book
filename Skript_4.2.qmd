@@ -15,7 +15,7 @@ format:
 
 
 
-Berechnung von Lageparametern
+# Berechnung von Lageparametern
 
 
 Laden wir zunächst wieder unsere Daten: Da wir uns drei verschiedene Skalenniveaus ansehen wollen, verwenden wir Daten, die jeweils ein solches repräsentieren. Wir laden daher Daten zu Geschlecht ("sex"), Vertrauen in die Bundesregierung ("pt12") und Netto-Einkommen ("di01a").
@@ -100,7 +100,7 @@ table(allbus_df$VertrauenBR)
 Die Daten sind bereits von "gar nicht" zu "sehr hoch" sortiert. Wir wenden die `median`-Funktion an und erhalten "4" als Ausgabe: 
 
 ```{r}
-median.vertrauen = median(allbus_df$VertrauenBR)
+median_vertrauen = median(allbus_df$VertrauenBR)
 ```
 
 ### Visualisierung
@@ -111,7 +111,7 @@ Wenn man sich die Daten als Säulendiagramm bzw. Barplot ausgeben lässt und den
 ggplot(data=allbus_df, aes(x=VertrauenBR)) +
   geom_bar() + 
   labs(x="Vertrauen in die Bundesregierung", y="Häufigkeit") + 
-  geom_vline(xintercept = median.vertrauen, color = "red", linetype = "dashed", linewidth = 1)
+  geom_vline(xintercept = median_vertrauen, color = "red", linetype = "dashed", linewidth = 1)
 ```
 
 
@@ -144,7 +144,7 @@ ggplot(data=allbus_df, aes(x=VertrauenBR)) +
   geom_bar() + 
   labs(x="Vertrauen in die Bundesregierung", y="Häufigkeit") + 
   geom_vline(xintercept = quantile25, color = "blue", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = median.vertrauen, color = "red", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = median_vertrauen, color = "red", linetype = "dashed", linewidth = 1) +
   geom_vline(xintercept = quantile75, color = "green", linetype = "dashed", linewidth = 1)
 ```
 
@@ -176,7 +176,7 @@ mean_einkommen
 Vergleichen wir das mit dem Median, fällt auf, dass zwischen beiden Lageparametern über 200 Euro Differenz bestehen: 
 
 ```{r}
-median_einkommen <- median(allbus_df$Einkommen)
+median_einkommen = median(allbus_df$Einkommen)
 median_einkommen
 ```
 
@@ -184,7 +184,7 @@ Der Modus liegt noch weiter weg:
 
 
 ```{r}
-modus_einkommen <- get_mode(allbus_df$Einkommen)
+modus_einkommen = get_mode(allbus_df$Einkommen)
 modus_einkommen
 ```
 

@@ -83,7 +83,7 @@ Anschließend konvertieren wir die Daten zu Zahlenwerten und entfernen fehlerhaf
 
 
 ```{r}
-allbus_messniveau_bsp <- subset(daten, select=c("sex")) %>%                             # <1>
+allbus_messniveau_bsp = subset(daten, select=c("sex")) %>%                             # <1>
   mutate(across(c("sex"), ~ as.numeric(.))) %>%                                         # <2>      
   mutate(across(c("sex"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%    # <3>
   na.omit()                                                                             # <4>
@@ -100,8 +100,8 @@ allbus_messniveau_bsp <- subset(daten, select=c("sex")) %>%                     
  
  
 ```{r}
-geschlecht_haeufigkeit_abs <- table(allbus_messniveau_bsp$sex) 
-stichprobengroesse <- length(allbus_messniveau_bsp$sex)
+geschlecht_haeufigkeit_abs = table(allbus_messniveau_bsp$sex) 
+stichprobengroesse = length(allbus_messniveau_bsp$sex)
 
 geschlecht_haeufigkeit_abs        # Ausgabe der Tabelle
 ```
@@ -119,7 +119,7 @@ stichprobengroesse          # Ausgabe der Gesamtanzahl an Merkmalsträgern im Da
 Die relativen Häufigkeiten können wir uns ausgeben lassen, indem wir den Inhalt der Tabelle durch die Gesamtanzahl der Merkmalsträger teilen: 
 
 ```{r}
-geschlecht_haeufigkeit_rel <- geschlecht_haeufigkeit_abs / stichprobengroesse # Berechnung der relativen Häufigkeiten
+geschlecht_haeufigkeit_rel = geschlecht_haeufigkeit_abs / stichprobengroesse # Berechnung der relativen Häufigkeiten
 geschlecht_haeufigkeit_rel        # Ausgabe der Tabelle mit den relativen Häufigkeiten
 ```
 

@@ -20,12 +20,12 @@ theme_set(theme_classic())
 
 daten = haven::read_dta("Datensatz/Allbus_2021.dta") 
 
-allbus_df <- subset(daten, select=c("sex", "pt12", "di01a")) %>%          
+allbus_df = subset(daten, select=c("sex", "pt12", "di01a")) %>%          
   mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%                                     
   mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%          
   na.omit()   
 
-colnames(allbus_df) <- c("Geschlecht", "VertrauenBR", "Einkommen") # Umbenennen der Spaltennamen
+colnames(allbus_df) = c("Geschlecht", "VertrauenBR", "Einkommen") # Umbenennen der Spaltennamen
 ```
 
 ## Die Spannweite
@@ -45,7 +45,8 @@ range(allbus_df$Einkommen)
 Alternativ kann man auch einfach Das Maximum und das Minimum ermitteln und die Differenz berechnen: 
 
 ```{r}
-einkommen.max = max(allbus_df$Einkommen) - min(allbus_df$Einkommen)
+einkommen_max = max(allbus_df$Einkommen) - min(allbus_df$Einkommen)
+einkommen_max
 ```
 
 
@@ -118,14 +119,14 @@ summary(allbus_df$Einkommen)
 In folgendem Codebeispiel lassen wir uns das Histogramm aus dem letzten Abschnitt ausgeben, allerdings reduziert auf Median (blau, durchgezogene Linie) und das arithmetische Mittel (rot, durchgezogene Linie). Wir ergänzen diese Lageparameter um den Minimal- und den Maximalwert (schwarz, gestrichelt), das untere und obere Quartil (blau, gestrichelt) und die Standardabweichung, hier beiderseits vom Mittelwert aufgetragen(rot, gestrichelt).  
 ```{r}
 
-mean.einkommen = mean(allbus_df$Einkommen)
-median.einkommen = median(allbus_df$Einkommen)
-range.einkommen = range(allbus_df$Einkommen) 
-iqr.einkommen = IQR(allbus_df$Einkommen) 
-sd.einkommen = sd(allbus_df$Einkommen) 
+mean_einkommen = mean(allbus_df$Einkommen)
+median_einkommen = median(allbus_df$Einkommen)
+range_einkommen = range(allbus_df$Einkommen) 
+iqr_einkommen = IQR(allbus_df$Einkommen) 
+sd_einkommen = sd(allbus_df$Einkommen) 
 
-quartil25.einkommen = quantile(allbus_df$Einkommen, 0.25) 
-quartil75.einkommen = quantile(allbus_df$Einkommen, 0.75)
+quartil25_einkommen = quantile(allbus_df$Einkommen, 0.25) 
+quartil75_einkommen = quantile(allbus_df$Einkommen, 0.75)
 
 ggplot(allbus_df, aes(x = Einkommen)) + 
     geom_histogram(aes(y =after_stat(density)),
@@ -133,14 +134,14 @@ ggplot(allbus_df, aes(x = Einkommen)) +
     colour = "black", 
     fill = "gray") +
   labs(x = "Einkommen", y = "Häufigkeit") +
-  geom_vline(xintercept = mean.einkommen, color = "red", linewidth = 1) +   #, linetype = "dashed"
-  geom_vline(xintercept = mean.einkommen - sd.einkommen, color = "red", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = mean.einkommen + sd.einkommen, color = "red", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = median.einkommen, color = "blue", linewidth = 1) +
-  geom_vline(xintercept = quartil25.einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = quartil75.einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = range.einkommen[1], color = "black", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = range.einkommen[2], color = "black", linetype = "dashed", linewidth = 1) 
+  geom_vline(xintercept = mean_einkommen, color = "red", linewidth = 1) +   #, linetype = "dashed"
+  geom_vline(xintercept = mean_einkommen - sd_einkommen, color = "red", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = mean_einkommen + sd_einkommen, color = "red", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = median_einkommen, color = "blue", linewidth = 1) +
+  geom_vline(xintercept = quartil25_einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = quartil75_einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = range_einkommen[1], color = "black", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = range_einkommen[2], color = "black", linetype = "dashed", linewidth = 1) 
 
 ```
 
