@@ -100,10 +100,10 @@ allbus_messniveau_bsp <- subset(daten, select=c("sex")) %>%                     
  
  
 ```{r}
-abs_freq_sex <- table(allbus_messniveau_bsp$sex) 
-length_sex <- length(allbus_messniveau_bsp$sex)
+geschlecht_haeufigkeit_abs <- table(allbus_messniveau_bsp$sex) 
+stichprobengroesse <- length(allbus_messniveau_bsp$sex)
 
-abs_freq_sex        # Ausgabe der Tabelle
+geschlecht_haeufigkeit_abs        # Ausgabe der Tabelle
 ```
 
 
@@ -111,30 +111,30 @@ Insgesamt summieren sie sich (wie erwartet) zu 5322 Merkmalsträgern auf, was au
  
 
 ```{r}
-sum(abs_freq_sex)   # Ausgabe der Summe der absoluten Häufigkeiten
-length_sex          # Ausgabe der Gesamtanzahl an Merkmalsträgern im Datensatz
+sum(geschlecht_haeufigkeit_abs)   # Ausgabe der Summe der absoluten Häufigkeiten
+stichprobengroesse          # Ausgabe der Gesamtanzahl an Merkmalsträgern im Datensatz
 ```
 
 
 Die relativen Häufigkeiten können wir uns ausgeben lassen, indem wir den Inhalt der Tabelle durch die Gesamtanzahl der Merkmalsträger teilen: 
 
 ```{r}
-rel_freq_sex <- abs_freq_sex / length_sex # Berechnung der relativen Häufigkeiten
-rel_freq_sex        # Ausgabe der Tabelle mit den relativen Häufigkeiten
+geschlecht_haeufigkeit_rel <- geschlecht_haeufigkeit_abs / stichprobengroesse # Berechnung der relativen Häufigkeiten
+geschlecht_haeufigkeit_rel        # Ausgabe der Tabelle mit den relativen Häufigkeiten
 ```
 
 Erwartungsgemäß summieren sich die relativen Häufigkeiten zu 1 auf: 
 ```{r}
-sum(rel_freq_sex) # Ausgabe der Summe der relativen Häufigkeiten
+sum(geschlecht_haeufigkeit_rel) # Ausgabe der Summe der relativen Häufigkeiten
 ```
 
 Eine Möglichkeit der Darstellung von Häufigkeiten ist das Kuchendiagramm. Zu diesem Zweck erstellen wir einen eigenen Dataframe: 
 
 ```{r}
 
-df.sex <- data.frame(
-  sex=c("male", "female", "diverse"), 
-  frequency=abs_freq_sex
+df.sex = data.frame(
+  sex=c("Mann", "Frau", "divers"), 
+  frequency=geschlecht_haeufigkeit_abs
 )
 
 ggplot(df.sex, aes(x="", y=frequency.Freq, fill=sex)) +

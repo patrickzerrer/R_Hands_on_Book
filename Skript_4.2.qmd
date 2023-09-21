@@ -50,23 +50,23 @@ Wir müssen einfach nur zählen, wie oft jede Merkmalsausprägung vorkommt. Diej
 
 
 ```{r}
-get.mode <- function(vector){
+get_mode = function(vector){
 
   # Häufigkeitstabelle erstellen:
   frequencies = table(vector) 
   
   # Höhe der größten Häufigkeit ermitteln:
-  max.freq <- max(frequencies)  
+  max_freq = max(frequencies)  
   
   # Teiltabelle erstellen, die nur die Spalten mit der höchsten Häufigkeit enthält:
-  where.max <-frequencies == max.freq 
+  where_max =frequencies == max_freq 
   
   # Namen der verbliebenen Spalten (= Modus) ermitteln:
-  modus <- names(frequencies[where.max]) 
+  modus = names(frequencies[where_max]) 
   return(modus)
 }
 #Ausgabe des Modus:
-cat("Der Modus lautet ", get.mode(allbus_df$Geschlecht), ".")
+cat("Der Modus lautet ", get_mode(allbus_df$Geschlecht), ".")
 ```
 
 
@@ -100,7 +100,7 @@ table(allbus_df$VertrauenBR)
 Die Daten sind bereits von "gar nicht" zu "sehr hoch" sortiert. Wir wenden die `median`-Funktion an und erhalten "4" als Ausgabe: 
 
 ```{r}
-median.vertrauen <- median(allbus_df$VertrauenBR)
+median.vertrauen = median(allbus_df$VertrauenBR)
 ```
 
 ### Visualisierung
@@ -126,7 +126,7 @@ Ein Quantil legt fest, wie viele Werte über bzw. unter einer bestimmten Grenze 
 Das folgende R-Beispiel gibt die drei Quartile des Vertrauens-Datensatzes aus: 
 
 ```{r}
-quartile <- quantile(allbus_df$VertrauenBR, probs = c(0.25, 0.5, 0.75))
+quartile = quantile(allbus_df$VertrauenBR, probs = c(0.25, 0.5, 0.75))
 quartile
 ```
 
@@ -136,8 +136,8 @@ Das folgende Codebeispiel zeichnet neben dem Median (rot) auch das 25%-Quantil (
 
 ```{r}
 
-quantile25 <- quartile["25%"]  #quantile(allbus_df$VertrauenBR, probs=c(0.25)) 
-quantile75 <- quartile["75%"]
+quantile25 = quartile["25%"]  #quantile(allbus_df$VertrauenBR, probs=c(0.25)) 
+quantile75 = quartile["75%"]
 
 
 ggplot(data=allbus_df, aes(x=VertrauenBR)) +
@@ -163,8 +163,8 @@ $$
 Schauen wir uns das am Beispiel des Netto-Einkommens der Befragten im Allbus-Datensatz an: Wir können dazu die bereits vorhandene Funktion `mean` nutzen: 
 
 ```{r}
-mean.einkommen <- mean(allbus_df$Einkommen)
-mean.einkommen
+mean_einkommen = mean(allbus_df$Einkommen)
+mean_einkommen
 ```
 
 
@@ -176,16 +176,16 @@ mean.einkommen
 Vergleichen wir das mit dem Median, fällt auf, dass zwischen beiden Lageparametern über 200 Euro Differenz bestehen: 
 
 ```{r}
-median.einkommen <- median(allbus_df$Einkommen)
-median.einkommen
+median_einkommen <- median(allbus_df$Einkommen)
+median_einkommen
 ```
 
 Der Modus liegt noch weiter weg:
 
 
 ```{r}
-modus.einkommen <- get.mode(allbus_df$Einkommen)
-modus.einkommen
+modus_einkommen <- get_mode(allbus_df$Einkommen)
+modus_einkommen
 ```
 
 Das liegt daran, dass die Einkommensdaten kontinuierlich sind und es keinen homogenen An- und Abstieg der Häufigkeitsverteilung gibt. Der Einkommenswert, den am meisten Personen exakt gleich angegeben haben, ist deshalb wenig aussagekräftig und der Modus macht nur Sinn, nachdem man die Daten in Form von Einkommensklassen diskretisiert hat.   
@@ -200,9 +200,9 @@ ggplot(allbus_df, aes(x = Einkommen)) +
     colour = "black", 
     fill = "gray") +
   labs(x = "Netto-Einkommen", y = "Häufigkeit") +
-  geom_vline(xintercept = mean.einkommen, color = "red", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = median.einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = as.numeric(modus.einkommen), color = "green", linetype = "dashed", linewidth = 1) 
+  geom_vline(xintercept = mean_einkommen, color = "red", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = median_einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = as.numeric(modus_einkommen), color = "green", linetype = "dashed", linewidth = 1) 
 
 ```
 
@@ -218,9 +218,9 @@ ggplot(allbus_df, aes(x = Einkommen)) +
     colour = "black", 
     fill = "gray") +
   labs(x = "Einkommen", y = "Häufigkeit") +
-  geom_vline(xintercept = mean.einkommen, color = "red", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = median.einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = as.numeric(modus.einkommen), color = "green", linetype = "dashed", linewidth = 1) 
+  geom_vline(xintercept = mean_einkommen, color = "red", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = median_einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = as.numeric(modus_einkommen), color = "green", linetype = "dashed", linewidth = 1) 
 
 ```
 
@@ -251,7 +251,7 @@ Auch, wenn die resultierende Formel wenig ansprechend aussieht, kann man bei gen
 
 
 ```{r}
-geom.mean <- function(vector){
+geom_mean = function(vector){
   exp(mean(log(vector)))
 }
 ```
@@ -262,8 +262,8 @@ geom.mean <- function(vector){
 
 ```{r}
 min(allbus_df$Einkommen)
-geom.einkommen <- geom.mean(allbus_df$Einkommen + 42) 
-geom.einkommen
+geom_einkommen <- geom_mean(allbus_df$Einkommen + 42) 
+geom_einkommen
 ```
 ```{r}
 ggplot(allbus_df, aes(x = Einkommen)) + 
@@ -272,9 +272,9 @@ ggplot(allbus_df, aes(x = Einkommen)) +
     colour = "black", 
     fill = "gray") +
   labs(x = "Einkommen", y = "Häufigkeit") +
-  geom_vline(xintercept = mean.einkommen, color = "red", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = median.einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = as.numeric(modus.einkommen), color = "green", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = geom.einkommen, color = "yellow", linetype = "dashed", linewidth = 1) 
+  geom_vline(xintercept = mean_einkommen, color = "red", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = median_einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = as.numeric(modus_einkommen), color = "green", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = geom_einkommen, color = "yellow", linetype = "dashed", linewidth = 1) 
 
 ```

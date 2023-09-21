@@ -118,14 +118,14 @@ summary(allbus_df$Einkommen)
 In folgendem Codebeispiel lassen wir uns das Histogramm aus dem letzten Abschnitt ausgeben, allerdings reduziert auf Median (blau, durchgezogene Linie) und das arithmetische Mittel (rot, durchgezogene Linie). Wir ergänzen diese Lageparameter um den Minimal- und den Maximalwert (schwarz, gestrichelt), das untere und obere Quartil (blau, gestrichelt) und die Standardabweichung, hier beiderseits vom Mittelwert aufgetragen(rot, gestrichelt).  
 ```{r}
 
-mean.einkommen <- mean(allbus_df$Einkommen)
-median.einkommen <- median(allbus_df$Einkommen)
-range.einkommen <- range(allbus_df$Einkommen) 
-iqr.einkommen <- IQR(allbus_df$Einkommen) 
-sd.einkommen <- sd(allbus_df$Einkommen) 
+mean.einkommen = mean(allbus_df$Einkommen)
+median.einkommen = median(allbus_df$Einkommen)
+range.einkommen = range(allbus_df$Einkommen) 
+iqr.einkommen = IQR(allbus_df$Einkommen) 
+sd.einkommen = sd(allbus_df$Einkommen) 
 
-quartil25.einkommen <- quantile(allbus_df$Einkommen, 0.25) 
-quartil75.einkommen <- quantile(allbus_df$Einkommen, 0.75)
+quartil25.einkommen = quantile(allbus_df$Einkommen, 0.25) 
+quartil75.einkommen = quantile(allbus_df$Einkommen, 0.75)
 
 ggplot(allbus_df, aes(x = Einkommen)) + 
     geom_histogram(aes(y =after_stat(density)),
