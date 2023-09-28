@@ -1,4 +1,4 @@
-# Temporäre Tabellen 
+# Temporäre Tabellen
 *.csv
 
 # History files
@@ -49,3 +49,5 @@ Videos/
 
 # RStudio Connect folder
 rsconnect/
+
+/.quarto/

@@ -11,7 +11,6 @@ format:
 sidebar: false
 ---
 
-Wir möchten uns einmal kurz vorstellen...
 
 ## Katharina Maubach
 
@@ -45,7 +44,7 @@ Katharina Maubach ist seit Dezember 2022 als wissenschaftliche Mitarbeiterin am 
 **Vita**
 
 ::: column-margin
-![Patrick Zerrer](Bilder/Patrick_600x400.png)
+![Patrick Zerrer](Bilder/bild_patrick.png)
 :::
 
 Patrick Zerrer ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen. Er schloss den „B.A. Governance and Public Policy - Staatswissenschaften" an der Universität Passau sowie den „M.A. Öffentliche Kommunikation" an der Friedrich-Schiller-Universität ab. Seine Forschungsinteressen liegen insbesondere im Bereich der politischen Online-Kommunikation, der Nachrichten- und Mediennutzung sowie der politischen Partizipation mit einem Fokus auf (digitalen) Klimaprotest und -bewegungen. Für seine Forschung nutzer er unterschiedliche Methoden, u.a. digitales (mobiles) Tracking, digitale Spurdaten, Umfragen, (automatisierter) Inhaltsanalysen und Interviews.
@@ -64,4 +63,31 @@ Patrick Zerrer ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommu
 🎓 [Webseite](https://www.uni-bremen.de/zemki/das-zemki/personen/profilseite/idm/24668?cHash=3dca3e98ee8a659c9390ae7bcf8178d5)
 
 #️⃣ [Twitter](https://twitter.com/patrick_zerrer)
+:::
+
+## Hannah-Marie Büttner
+
+**Vita**
+
+::: column-margin
+![Hannah-Marie Büttner](Bilder/Bild_Hannah.jpeg)
+:::
+
+Hannah-Marie Büttner ist als wissenschaftliche Mitarbeiterin der Universität Bremen am Zentrum für Medien-, Kommunikations- und Informationsforschung sowie am Institut für Informationsmanagement tätig. Sie hat einen B.Sc. Sozialwissenschaften an der Universität Trier und einen Research Master Social Sciences an der University of Amsterdam absolviert.Ihre Forschungsinteressen und methodischen Schwerpunkte liegen im Feld der Computational Social Science. Gegenwärtig forscht sie zu Protestbewegungen und deren Social Media Aktivismus, insbesondere auf der Plattform Telegram.
+
+**Forschungsschwerpunkte**
+
+-   Politische Kommunikation
+-   Soziale Bewegungen
+-   Soziale Netzwerkanalyse
+-   Computerbasierte Methoden
+
+::: {.callout-note collapse="true" icon="false"}
+## Kontakt
+
+🏠 Universität Bremen; ifib, Institut für Informationsmanagement; Am Fallturm 1; TAB; 28359 Bremen
+
+🎓 [Webseite](https://www.uni-bremen.de/agim/team/hannah-marie-buettner)
+
+✉️ [E-Mail](habu@uni-bremen.de)
 :::

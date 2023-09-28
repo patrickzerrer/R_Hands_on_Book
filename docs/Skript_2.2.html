@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="tba">
+<meta name="author" content="Cornelius Puschmann">
 
-<title>klassische Formen von Datensätzen</title>
+<title>Einlesen von Datensätzen in unterschiedlichen Formaten</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,11 +105,6 @@ ul.task-list li input[type="checkbox"] {
 </i> 
  <span class="menu-text"></span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/ZeMKI_Bremen" rel="" target=""><i class="bi bi-twitter" role="img">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
 </ul>
             <div class="quarto-navbar-tools">
 </div>
@@ -121,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_2.1.html">Data-Bootcamp: Datensätze</a></li><li class="breadcrumb-item"><a href="./Skript_2.2.html">klassische Formen von Datensätzen</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_2.1.html">Data-Bootcamp: Datensätze</a></li><li class="breadcrumb-item"><a href="./Skript_2.2.html">Einlesen von Datensätzen in unterschiedlichen Formaten</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -145,13 +140,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Was ist R?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Skript_1.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R-Studio</span></a>
+ <span class="menu-text">Einführung in R und RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -163,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+ <span class="menu-text">Vorbereiten der R-Umgebung</span></a>
   </div>
 </li>
       </ul>
@@ -186,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">klassische Formen von Datensätzen</span></a>
+ <span class="menu-text">Einlesen von Datensätzen in unterschiedlichen Formaten</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -256,13 +245,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Streuungsmaße: Spannweite, Standartabweichung, Varianz</span></a>
+ <span class="menu-text">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Verteilungen und deren Visualisierung</span></a>
+ <span class="menu-text">Berechnung und Interpretation von Verteilungen</span></a>
   </div>
 </li>
       </ul>
@@ -320,7 +309,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse</span></a>
+ <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Varianzanalyse</span></a>
   </div>
 </li>
       </ul>
@@ -364,7 +359,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#einlesen-von-datensätzen-und-praktische-tipps" id="toc-einlesen-von-datensätzen-und-praktische-tipps" class="nav-link active" data-scroll-target="#einlesen-von-datensätzen-und-praktische-tipps"><span class="header-section-number">1</span> Einlesen von Datensätzen und Praktische Tipps</a></li>
+  <li><a href="#einlesen-von-datensätzen-in-unterschiedlichen-formaten" id="toc-einlesen-von-datensätzen-in-unterschiedlichen-formaten" class="nav-link active" data-scroll-target="#einlesen-von-datensätzen-in-unterschiedlichen-formaten"><span class="header-section-number">1</span> Einlesen von Datensätzen in unterschiedlichen Formaten</a></li>
   </ul>
 </nav>
     </div>
@@ -373,7 +368,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">klassische Formen von Datensätzen</h1>
+<h1 class="title">Einlesen von Datensätzen in unterschiedlichen Formaten</h1>
 </div>
 
 
@@ -383,7 +378,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>tba </p>
+             <p>Cornelius Puschmann </p>
           </div>
   </div>
     
@@ -394,8 +389,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="einlesen-von-datensätzen-und-praktische-tipps" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Einlesen von Datensätzen und Praktische Tipps</h1>
+<section id="einlesen-von-datensätzen-in-unterschiedlichen-formaten" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Einlesen von Datensätzen in unterschiedlichen Formaten</h1>
 
 
 </section>
