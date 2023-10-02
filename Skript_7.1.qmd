@@ -1,6 +1,6 @@
 ---
 title: "Einführung"
-author: "tba"
+author: "Stephanie Geise"
 toc: true
 number-sections: true
 highlight-style: pygments
