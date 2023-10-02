@@ -1,5 +1,5 @@
 ---
-title: "Einführung"
+title: "Einführung in die Analyse von Zusammenhängen zwischen Variablen"
 author: "Stephanie Geise"
 toc: true
 number-sections: true
@@ -42,7 +42,10 @@ Mit dem Chi-Quadrat-Test wird der Chi-Quadrat-Wert berechnet, indem die beobacht
 
 # Laden der Pakete und des Datensatzes
 ```{r}
-install.packages("haven")
+# Setze einen Paketmirror (CRAN)
+# chooseCRANmirror(39)
+install.packages("haven", repos = "https://cloud.r-project.org/")
+#install.packages("haven")
 install.packages("tidyverse")
 install.packages("vcd")
 library(tidyverse)
@@ -176,7 +179,6 @@ Nun nutzen wir die Funktion cor.test() und spezifizieren bei "method" den Korrel
 ```{r}
 result_spearman <- cor.test(daten$Einkommensgruppe, daten$Bildung, method = "spearman")
 print(result_spearman)
-      
 ```
 
 Der Wert *rho* gibt den berechneten Korrelationskoeffizienten wieder. Der Wert von 0,28 deutet darauf hin, dass es einen positiven Zusammenhang zwischen den beiden Variablen Bildungsabschluss und Einkommensgruppe gibt.
@@ -246,13 +248,4 @@ ggplot(daten_neu, aes(x = Einkommensgruppe, fill = sex)) +
   scale_fill_manual(values = c("blue", "red", "green")) # Farben anpassen
 ```
 Diese Visualisierung zeigt sehr schön, was wir auch schon anhand der Spearman's Rank Correlation ablesen konnten: Es sind mehr Frauen als Männer in den unteren Einkommensgruppen zu finden; es sind mehr Männer als Frauen in höheren Einkommensgruppen zu finden.
-
-
-# Das Überprüfen von Zusammenhängen bei zwei (intervallskalierten) Variablen
-
-## Korrelation
-
-## Korrelationskoeffizienten: 
-Der Pearson-Korrelationskoeffizient misst die Stärke und Richtung des linearen Zusammenhangs zwischen zwei kontinuierlichen Variablen. Er liegt zwischen -1 und 1, wobei -1 einen perfekten negativen linearen Zusammenhang, 1 einen perfekten positiven linearen Zusammenhang und 0 keinen linearen Zusammenhang anzeigt. Der Pearson-Korrelationskoeffizient wird verwendet, wenn man den linearen Zusammenhang zwischen zwei metrischen Variablen untersuchen möchte.
-
 
