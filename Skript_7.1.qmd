@@ -42,18 +42,16 @@ Ein Beispiel für eine Zusammenhangshypothese zwischen zwei nominalskalierten Va
 
 In R kann der Pearson Chi-Quadrat Test mit der Funktion chisq.test() durchgeführt werden. Zuerst müssen wir dazu aber erst einmal die benötigen Pakete und Daten laden...
 
-# Laden der Pakete und des Datensatzes
+# Laden der Pakete
 ```{r}
 # Setze einen Paketmirror (CRAN)
 # chooseCRANmirror(39)
 # install.packages("haven", repos = "https://cloud.r-project.org/")
 install.packages("haven")
 install.packages("tidyverse")
-install.packages("vcd")
 install.packages("devtools")
 library(tidyverse)
 library(haven)
-library(vcd)
 library(conflicted)
 library(dplyr)
 conflicts_prefer(dplyr::filter)
@@ -66,7 +64,7 @@ daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 
 Die Variable Konfessionszugehörigkeit ist im Allbus-Datensatz mit dem Namen "rd01" benannt; wie benennen sie in "Konfession" um; außerdem filtern wir die für uns relevanten Fälle der Variablen heraus (und ignorieren damit die irrelevanten Fälle, z.B. -9=Keine Angabe):
 
-# Umbenennen der Variablen
+# Erzeugen eines Teildatensatzes, Umbenennen und Filtern der Variablen
 ```{r}
 daten <- daten %>%
   rename(Konfession = rd01)%>%
@@ -88,10 +86,10 @@ In der Kreuztabelle können wir keine klare Tendenz erkennen, nach der das Gesch
 
 Mit einem gestapelten Balkendiagramm können wir diese Tendenz auch visualisieren:
 
-# Ein gestapeltes Balkendiagramm zur Visualisierung des Zusammenhangs erstellen
+# Visualisieren des Zusammenhangs mit Hilfe eines gestapelten Balkendiagramms 
 Ein gestapeltes Balkendiagramm ist ein Diagramm, dass die Verteilung von verschiedenen Kategorien innerhalb einer Gesamtheit farblich (nach Kategorien) differenziert darstellen kann. Dazu werden mehrere Balken für jede Kategorie (nach Farbe sortiert) "aufeinandergestapelt", wobei die Höhe des gesamten Balkens die Gesamtsumme (je Farbkategorie) repräsentiert. Um das auszuführen, müssen wir die unsere Daten wie Faktoren behandeln, weshalb wir den "as.factor"-Befehl nutzen:
 
-# Erstelle das gestapelte Balkendiagramm
+# Erstellen des gestapelten Balkendiagramms
 ```{r}
 library(ggplot2)
 
@@ -107,7 +105,7 @@ ggplot(daten, aes(x = Konfession, fill = sex)) +
 ```
 Diese Visualisierung zeigt sehr schön, was wir auch schon in der Kreuztabelle ablesen konnten: Es gibt keinen deutlich sichtbaren Zusammenhang zwischen der Konfessionszugehörigkeit und dem Geschlecht - allenfalls lässt sich vermuten, dass mehr Frauen als Männer überhaupt einer Konfession angehören. Ob sich der Zusammenhang als statistisch bedeutsam erweist, können wir nun mit dem Chi-Quadrat Test prüfen:
 
-# Überprüfung des Zusammenhangs mit dem Chi-Quadrat Test
+# Überprüfen des Zusammenhangs mit dem Chi-Quadrat Test
 Der Chi-Quadrat Test ist ein statistisches Verfahren, das verwendet wird, um festzustellen, ob es einen signifikanten Unterschied zwischen den beobachteten und erwarteten Häufigkeiten in einer Kreuztabelle gibt. Da wir schon eine Kreuztabelle erstellt haben, können wir die Funktion chisq.test auf unsere Kreuztabelle anwenden - das geht ganz einfach:
 
 ```{r}
@@ -122,7 +120,7 @@ Der *p-Wert* gibt die Wahrscheinlichkeit an, den beobachteten Chi-Quadrat-Wert z
 
 Allerdings ist der Chi-Quadrat-Test empfindlich gegenüber der Stichprobengröße: Bei sehr großen Stichproben können auch kleine Unterschiede signifikant werden. In solchen Fällen ist es ratsam, neben dem p-Wert auch die Effektstärke zu betrachten. Dazu ermitteln wir nun noch Cramér's V. Das ist ein Maß für den Zusammenhang zwischen zwei kategorialen Variablen. Es reicht von 0 bis 1, wobei 0 keinen Zusammenhang und 1 einen vollständigen Zusammenhang anzeigt.
 
-# Berechnung der Effektstärke Cramér's V
+# Berechnen der Effektstärke Cramér's V
 ```{r}
 #library(vcd)
 #cramers_v <- CramerV(kreuztabelle)
@@ -163,7 +161,7 @@ Nun wollen wir das an einem Beispiel untersuchen: Wir testen, ob es einen Zusamm
 
 Um den Zusammenhang zu analysieren, müssen wir wieder zuerst unsere Daten aufbereiten: Die Variable Einkommensgruppe ist im Datensatz mit dem Namen "di02a" benannt, die benenen wir in "Einkommensgruppe" um; außerdem filtern wir die für uns relevanten Fälle der Variable heraus (Einkommensgruppe 1 bis 25, ohne missings, z.B. -9=Keine Angabe; -8=Weiß nicht). Die Variable Bildungsabschluss ist im Datensatz mit dem Namen "educ" benannt, die benenen wir in "Bildung" um; auch hier filtern wir die für uns relevanten Fälle der Variable heraus (Bildung 1 bis 5, ohne missings, z.B. -9=Keine Angabe).  
 
-# Umbenennen der Variablen
+# Erzeugen eines Teildatensatzes, Umbenennen und Filtern der Variablen
 ```{r}
 daten <- daten %>%
   rename(Einkommensgruppe = di02a)%>%
@@ -206,7 +204,7 @@ Dazu haben wir folgende Zusammenhangshypothese aufgestellt: Es gibt einen Zusamm
 
 Um diese Hypothese zu testen, müssen wir zunächst unsere Daten vorbereiten: Die Variable Einkommensgruppe ist im Datensatz mit dem Namen "di02a" benannt, die benennen wir in "Einkommensgruppe" um. Dann filtern wir die für uns relevanten Fälle der Variablen heraus (Einkommensgruppe 1 bis 25, ohne missings, z.B. -9=Keine Angabe; -8=Weiß nicht). Die Variable Geschlecht stellt einen Faktor dar - um keine Fehlermeldung zu bekommen, müssen wir sie mittels as.numeric-Befehl als numerische Variable behandeln. Auch bei Geschlecht selektieren wir die Missungs aus (z.B. -9=Keine Angabe):
 
-# Umbenennen und Filtern der Variablen
+# Erzeugen eines Teildatensatzes, Umbenennen und Filtern der Variablen
 ```{r}
 daten_neu <- daten %>%
   filter(between(Einkommensgruppe, 1, 25))%>%
@@ -226,10 +224,10 @@ Im Datensatz entsprechen höhere Werte bei der variable Einkommensgruppe einem h
 
 Mit einem gestapelten Balkendiagramm können wir diese Tendenz auch visualisieren:
 
-# Ein gestapeltes Balkendiagramm zur Visualisierung des Zusammenhangs erstellen
+# Visualisieren des Zusammenhangs mit Hilfe eines gestapelten Balkendiagramms 
 Ein gestapeltes Balkendiagramm ist ein Diagramm, dass die Verteilung von verschiedenen Kategorien innerhalb einer Gesamtheit farblich (nach Kategorien) differenziert darstellen kann. Dazu werden mehrere Balken für jede Kategorie (nach Farbe sortiert) "aufeinandergestapelt", wobei die Höhe des gesamten Balkens die Gesamtsumme (je Farbkategorie) repräsentiert. Um das auszuführen, müssen wir die unsere Daten wie Faktoren behandeln, weshalb wir den "as.factor"-Befehl nutzen:
 
-# Erstelle das gestapelte Balkendiagramm
+# Erstellen des gestapelten Balkendiagramms
 ```{r}
 library(ggplot2)
 
