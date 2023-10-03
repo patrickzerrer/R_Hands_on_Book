@@ -1,5 +1,5 @@
 ---
-title: "Einführung in die Analyse von Zusammenhängen zwischen Variablen"
+title: "Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 1: Pearson Chi-Quadrat-Test & *Rangkorrelation"
 author: "Stephanie Geise"
 toc: true
 number-sections: true
@@ -26,9 +26,9 @@ Im Fokus dieses Kapitels stehen *lineare Zusammenhänge* zwischen Variablen vers
 
 Ein Beispiel für einen linearen Zusammenhang im Bereich der Mediennutzung könnte der Zusammenhang zwischen der Anzahl der verbrachten Stunden vor dem Fernseher und der Anzahl der Fernsehwerbespots sein, die eine Person pro Tag sieht. Wenn wir annehmen, dass eine Person pro Stunde kontant 10 Werbestpots sieht, hätte sie nach 2 Stunden 20 Werbespots rezipiert, nach 3 Stunden 30 Spots usw. Einen solchen linearen Zusammenhang kann man auch grafisch darstellen: Wenn man Punkte auf einem Streudiagramm zeichnet, dann könnte man eine gerade Linie durch die Punkte legen, und diese Linie würde den Zusammenhang zwischen den Variablen am besten beschreiben.
 
-GRAFIK LINEARER ZUSAMMENHANG
+![Grafik einfacher linearer Zusammenhang zwischen Fernsehnutzung und Anzahl der rezipierten Werbespots](Bilder/Einfaches Beispiel linearer Zusammenhang SG.png)
 
-Im Werbespot-Beispiel vermuten wir einen Zusammenhang zwischen zwei kontinuierlichen bzw. metrischen Variablen. Lineare Zusammenhänge zwischen kontinuierlichen bzw. metrischen Variablen werden oft durch *Korrelationskoeffizienten* und *lineare Regression* untersucht.
+Im diesem Werbespot-Beispiel vermuten wir einen Zusammenhang zwischen zwei kontinuierlichen bzw. metrischen Variablen. Lineare Zusammenhänge zwischen kontinuierlichen bzw. metrischen Variablen werden oft durch *Korrelationskoeffizienten* und *lineare Regression* untersucht.
 
 Häufig gibt es aber auch den Fall, dass man den Zusammenhang zwischen Variablen mit niedrigerem Skalenniveau untersuchen möchte, z.B. zwei nominalskalierten oder ordinalskalierten Variablen. Zur Erinnerung: *Nominalskalierte* Variablen haben Werte, die Kategorien spiegeln, ohne dass diese eine natürliche Reihenfolge oder direkte Rangordnunghaben haben (z.B. präferierte Mediengattung, Geschlecht, Religionszugehörigkeit). Dagegen weisen die Werte bei *ordinalskalierten* Variablen eine hierarchische Ordnung oder Rangfolge zwischen den verschiedenen Kategorien auf, wobei die Abstände zwischen den Kategorien nicht fest definiert und auch nicht unbedingt gleichmäßig sind. Typische Beispiele für ordinalskalierte Variablen sind Noten, Bildungsabschlüsse oder Einkommensklassen.
 
@@ -150,10 +150,10 @@ Wie wir nun sehen, ist unser Wert für Cramér's V mit 0.047 sehr gering. Das de
 Kommen wir nun zur nächsten Analyse-Option: der Analyse von Zusammenhängen zwischen zwei ordinalskalierten Variablen:
 
 # Rangkorrelationen zur Überprüfung von Zusammenhängen zwischen zwei ordinalskalierten Variablen
-Im Gegensatz zu nominalskalierten Variablen, bei denen es nur um die Kategorisierung oder Klassifikation von Daten geht (z.B. Geschlecht), haben ordinalskalierte Variablen eine klar definierte Rangordnung zwischen den Kategorien, jedoch nicht unbedingt einen gleichmäßigen Abstand zwischen den Kategorien. Um den Zusammenhang zwischen zwei ordinalskalierten Variablen zu berechnen, nutzt man *Rangkorrelationen*. Rangkorrelationen kommen auch dann zum Einsatz, wenn Variablen nicht normalverteilt sind. Sie geben an, ob es eine systematische Tendenz gibt, dass höhere Ränge in einer Variable mit höheren Rängen in der anderen Variable zusammenfallen. 
+Im Gegensatz zu nominalskalierten Variablen, bei denen es nur um die Kategorisierung oder Klassifikation von Daten geht (z.B. Geschlecht), haben ordinalskalierte Variablen eine klar definierte Rangordnung zwischen den Kategorien, jedoch nicht unbedingt einen gleichmäßigen Abstand zwischen den Kategorien. Um den linearen Zusammenhang zwischen zwei ordinalskalierten Variablen zu berechnen, nutzt man *Rangkorrelationen*. Rangkorrelationen kommen auch dann zum Einsatz, wenn Variablen nicht normalverteilt sind. Sie geben an, ob es eine systematische Tendenz gibt, dass höhere Ränge in einer Variable mit höheren Rängen in der anderen Variable zusammenfallen. 
 
-Zwei häufig verwendete Verfahren bzw. Arten der Rangkorrelation sind *Spearman's Rho* und *Kendall's Tau*. Grundsätzlich sind Spearman's Rho und Kendall's Tau zwei ähnliche Maße für Rangkorrelationen - wenn die Daten ordinal oder kategorial sind, sind sowohl Spearman's Rho als auch Kendall's Tau geeignete Maße. Allerdings weisen sie auch ein paar Unterschiede auf:
-- Bei *Spearman's Rho* werden die Daten in Ränge umgewandelt, und dann wird der Pearson-Korrelationskoeffizient auf den Rängen berechnet. Spearman's Rho ist besonders robust gegenüber Ausreißern (auch etwas mehr als Kendall's Tau). Spearman's Rho  berücksichtigt die genauen Abstände zwischen den Rängen und kann subtilere Beziehungen zwischen den Variablen erkennen.
+Zwei häufig verwendete Verfahren bzw. Arten der Rangkorrelation sind *Spearman's Rho* und *Kendall's Tau*. Grundsätzlich sind Spearman's Rho und Kendall's Tau zwei ähnliche Maße für Rangkorrelationen - wenn die Daten ordinal oder kategorial sind, sind sowohl Spearman's Rho als auch Kendall's Tau geeignet. Allerdings weisen sie auch ein paar Unterschiede auf:
+- Bei *Spearman's Rho* (auch als *Rangkorrelation nach Pearson* bezeichnet) werden die Daten in Ränge umgewandelt, und dann wird der Pearson-Korrelationskoeffizient auf den Rängen berechnet. Spearman's Rho ist besonders robust gegenüber Ausreißern (auch etwas mehr als Kendall's Tau). Spearman's Rho  berücksichtigt die genauen Abstände zwischen den Rängen und kann subtilere Beziehungen zwischen den Variablen erkennen.
 - Zur Ermittlung von *Kendall's Tau* wird der Grad der Übereinstimmung zwischen den Rängen der beiden Variablen berwertet. Kendall's Tau ist auch wenig anfällig für Ausreißer; das Verfahren ist besonders gut geeignet, wenn die relative Rangreihenfolge der Daten wichtiger ist als die genaue Distanz zwischen den Rängen. 
 
 Beide Werte lassen sich leicht mit Hilfe der Funktion cor.test() berechnen. Denn diese Funktion ermöglicht es, verschiedene Arten von Korrelationskoeffizienten zu berechnen, einschließlich der Rangkorrelation nach Spearman's Rho und Kendall's Tau. Oft ist es ratsam, beide Maße zu berechnen und zu vergleichen, um sicherzustellen, dass die Ergebnisse konsistent sind.
