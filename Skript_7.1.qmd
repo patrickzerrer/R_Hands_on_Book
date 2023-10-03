@@ -30,27 +30,33 @@ GRAFIK LINEARER ZUSAMMENHANG
 
 Im Werbespot-Beispiel vermuten wir einen Zusammenhang zwischen zwei kontinuierlichen bzw. metrischen Variablen. Lineare Zusammenhänge zwischen kontinuierlichen bzw. metrischen Variablen werden oft durch *Korrelationskoeffizienten* und *lineare Regression* untersucht.
 
-Häufig gibt es aber auch den Fall, dass man den Zusammenhang zwischen zwei nominalskalierten oder ordinalskalierten Variablen Variablen untersuchen möchte. Zur Erinnerung: Nominalskalierte Variablen haben Werte, die Kategorien spiegeln, ohne dass diese eine natürliche Reihenfolge oder direkte Rangordnunghaben haben (z.B. präferierte Mediengattung, Geschlecht). Dagegen weisen die Werte bei ordinalskalierten Variablen eine hierarchische Ordnung oder Rangfolge zwischen den verschiedenen Kategorien auf, wobei die Abstände zwischen den Kategorien nicht fest definiert und auch nicht unbedingt gleichmäßig sind. Typische Beispiele für ordinalskalierte Variablen sind Noten, Bildungsabschlüsse oder Einkommensklassen.
+Häufig gibt es aber auch den Fall, dass man den Zusammenhang zwischen Variablen mit niedrigerem Skalenniveau untersuchen möchte, z.B. zwei nominalskalierten oder ordinalskalierten Variablen. Zur Erinnerung: *Nominalskalierte* Variablen haben Werte, die Kategorien spiegeln, ohne dass diese eine natürliche Reihenfolge oder direkte Rangordnunghaben haben (z.B. präferierte Mediengattung, Geschlecht, Religionszugehörigkeit). Dagegen weisen die Werte bei *ordinalskalierten* Variablen eine hierarchische Ordnung oder Rangfolge zwischen den verschiedenen Kategorien auf, wobei die Abstände zwischen den Kategorien nicht fest definiert und auch nicht unbedingt gleichmäßig sind. Typische Beispiele für ordinalskalierte Variablen sind Noten, Bildungsabschlüsse oder Einkommensklassen.
 
-Auf beide Variablentypen sind Methoden, die auf ordinalen oder metrischen Daten basieren, nicht anwendbar. Daher nutzen wir spezifische Tests für nominalskalierte Variablen, zum Beispiel den *Pearson Chi-Quadrat*-Test. Mit diesem Verfahren starten wir nun...
+Auf beide Variablentypen sind Methoden, metrische Daten voraussetzen, nicht anwendbar. Daher nutzen wir spezifische Tests: Den *Pearson Chi-Quadrat*-Test (für nominal- bis ordinalskalierten Variablen) sowie die *Rangkorrelation* nach Spearman oder Kendall's Tau (für ordinalskalierte Variablen). Wir starten nun mit dem Pearson Chi-Quadrat-Test: 
 
-# Das Überprüfen von Zusammenhängen bei zwei nominalskalierten Variablen
+# Das Überprüfen von Zusammenhängen bei zwei nominalskalierten (bis ordinalskalierten) Variablen
 
-Der *Pearson Chi-Quadrat Test* ist ein statistisches Verfahren, das verwendet wird, um zu überprüfen, ob es einen statistisch signifikanten Zusammenhang zwischen zwei *nominalskalierten* (kategorialen) Variablen gibt. Er testet die Nullhypothese, dass die beiden Variablen uabhängig voneinander sind. Beispiel: Wenn wir untersuchen möchten, ob es einen Zusammenhang zwischen Geschlecht und der Religionszugehörigkeit gibt, könnten wir einen Chi-Quadrat-Test durchführen.
+Der *Pearson Chi-Quadrat Test* ist ein statistisches Verfahren, das verwendet wird, um zu überprüfen, ob es einen statistisch signifikanten Zusammenhang zwischen zwei *nominalskalierten* Variablen gibt; er kann auch bei *ordinalskalierten* Variablen angewendet werden. Der Chi-Quadrat-Tests testet die Nullhypothese, dass die beiden Variablen unabhängig voneinander sind. Mit dem Chi-Quadrat-Test wird dazu der Chi-Quadrat-Wert berechnet, indem die beiden untersuchten Variablen in einer sogenannten "Kreuztabelle" gegenüber gestellt und dann die beobachteten Häufigkeiten mit den erwarteten Häufigkeiten verglichen werden. 
 
-Mit dem Chi-Quadrat-Test wird der Chi-Quadrat-Wert berechnet, indem die beobachteten Häufigkeiten mit den erwarteten Häufigkeiten verglichen werden. In R kann der Pearson Chi-Quadrat Test mit der Funktion chisq.test() durchgeführt werden. Zuerst müssen wir dazu aber erst einmal die benötigen Pakete und Daten laden...
+Ein Beispiel für eine Zusammenhangshypothese zwischen zwei nominalskalierten Variablen, ist die Annahme, dass es einen Zusammenhang zwischen dem Geschlecht und der Religionszugehörigkeit gibt: Es gibt einen Zusammenhang zwischen dem Geschlecht der Befragten (sex) und der Konfessionszugehörigkeit (rd01). Diese Annahme können wir mit einem Chi-Quadrat-Test überprüfen.
+
+In R kann der Pearson Chi-Quadrat Test mit der Funktion chisq.test() durchgeführt werden. Zuerst müssen wir dazu aber erst einmal die benötigen Pakete und Daten laden...
 
 # Laden der Pakete und des Datensatzes
 ```{r}
 # Setze einen Paketmirror (CRAN)
 # chooseCRANmirror(39)
-install.packages("haven", repos = "https://cloud.r-project.org/")
-#install.packages("haven")
+# install.packages("haven", repos = "https://cloud.r-project.org/")
+install.packages("haven")
 install.packages("tidyverse")
 install.packages("vcd")
+install.packages("devtools")
 library(tidyverse)
 library(haven)
 library(vcd)
+library(conflicted)
+library(dplyr)
+conflicts_prefer(dplyr::filter)
 ```
 
 # Laden des Datensatzes
@@ -58,7 +64,7 @@ library(vcd)
 daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
-... und wir sollten die Hypothese, die den Zusammenhang zwischen den beiden Variablen annimmt, konkret formulieren: Es gibt einen Zusammenhang zwischen dem Geschlecht der Befragten (sex) und der Konfessionszugehörigkeit (rd01). Die Variable Konfessionszugehörigkeit ist im Allbus-Datensatz mit dem Namen "rd01" benannt; wie benennen sie in "Konfession" um; außerdem filtern wir die für uns relevanten Fälle der Variablen heraus (und ignorieren damit die irrelevanten, z.B. -9=Keine Angabe):
+Die Variable Konfessionszugehörigkeit ist im Allbus-Datensatz mit dem Namen "rd01" benannt; wie benennen sie in "Konfession" um; außerdem filtern wir die für uns relevanten Fälle der Variablen heraus (und ignorieren damit die irrelevanten Fälle, z.B. -9=Keine Angabe):
 
 # Umbenennen der Variablen
 ```{r}
@@ -118,10 +124,9 @@ Allerdings ist der Chi-Quadrat-Test empfindlich gegenüber der Stichprobengröß
 
 # Berechnung der Effektstärke Cramér's V
 ```{r}
-library(vcd)
-
-cramers_v <- CramerV(kreuztabelle)
-print(cramers_v)
+#library(vcd)
+#cramers_v <- CramerV(kreuztabelle)
+#print(cramers_v)
 ```
 Zuerst extrahieren wir den beobachteten Chi-Quadrat-Wert und speichern ihn in einem Datenobjekt "chi_square" ab. Dann berechnen wir die Effektstärke nach der Formel für Cramér's V:
 
@@ -145,23 +150,18 @@ Wie wir nun sehen, ist unser Wert für Cramér's V mit 0.047 sehr gering. Das de
 Kommen wir nun zur nächsten Analyse-Option: der Analyse von Zusammenhängen zwischen zwei ordinalskalierten Variablen:
 
 # Rangkorrelationen zur Überprüfung von Zusammenhängen zwischen zwei ordinalskalierten Variablen
-Im Gegensatz zu nominalskalierten Variablen, bei denen es nur um die Kategorisierung oder Klassifikation von Daten geht (z.B. Geschlecht), haben ordinalskalierte Variablen eine klar definierte Rangordnung zwischen den Kategorien, jedoch nicht unbedingt einen gleichmäßigen Abstand zwischen den Kategorien. Um den Zusammenhang zwischen zwei ordinalskalierten Variablen zu berechnen, nutzt man 
-*Rangkorrelationen*. Rangkorrelationen kommen auch dann zum Einsatz, wenn Variablen nicht normalverteilt sind. Sie geben an, ob es eine systematische Tendenz gibt, dass höhere Ränge in einer Variable mit höheren Rängen in der anderen Variable zusammenfallen. 
+Im Gegensatz zu nominalskalierten Variablen, bei denen es nur um die Kategorisierung oder Klassifikation von Daten geht (z.B. Geschlecht), haben ordinalskalierte Variablen eine klar definierte Rangordnung zwischen den Kategorien, jedoch nicht unbedingt einen gleichmäßigen Abstand zwischen den Kategorien. Um den Zusammenhang zwischen zwei ordinalskalierten Variablen zu berechnen, nutzt man *Rangkorrelationen*. Rangkorrelationen kommen auch dann zum Einsatz, wenn Variablen nicht normalverteilt sind. Sie geben an, ob es eine systematische Tendenz gibt, dass höhere Ränge in einer Variable mit höheren Rängen in der anderen Variable zusammenfallen. 
 
-Rangkorrelationen sind statistische Maße, die verwendet werden, um den Zusammenhang zwischen zwei Variablen zu bewerten, wenn die Daten ordinal oder nicht normalverteilt sind. Zwei häufig verwendete Verfahren bzw. Arten der Rangkorrelation sind *Spearman's Rho* und *Kendall's Tau*. Grundsätzlich sind Spearman's Rho und Kendall's Tau zwei ähnliche Maße für Rangkorrelationen - wenn die Daten ordinal oder kategorial sind, sind sowohl Spearman's Rho als auch Kendall's Tau geeignete Maße. Allerdings weisen sie auch ein paar Unterschiede auf:
-
-Bei *Spearman's Rho* werden die Daten in Ränge umgewandelt, und dann wird der Pearson-Korrelationskoeffizient auf den Rängen berechnet. Spearman's Rho ist besonders robust gegenüber Ausreißern (auch etwas mehr als Kendall's Tau). Spearman's Rho  berücksichtigt die genauen Abstände zwischen den Rängen und kann subtilere Beziehungen zwischen den Variablen erkennen.
-
-Zur Ermittlung von *Kendall's Tau* wird der Grad der Übereinstimmung zwischen den Rängen der beiden Variablen berwertet. Kendall's Tau ist auch wenig anfällig für Ausreißer; das Verfahren ist besonders gut geeignet, wenn die relative Rangreihenfolge der Daten wichtiger ist als die genaue Distanz zwischen den Rängen. 
+Zwei häufig verwendete Verfahren bzw. Arten der Rangkorrelation sind *Spearman's Rho* und *Kendall's Tau*. Grundsätzlich sind Spearman's Rho und Kendall's Tau zwei ähnliche Maße für Rangkorrelationen - wenn die Daten ordinal oder kategorial sind, sind sowohl Spearman's Rho als auch Kendall's Tau geeignete Maße. Allerdings weisen sie auch ein paar Unterschiede auf:
+- Bei *Spearman's Rho* werden die Daten in Ränge umgewandelt, und dann wird der Pearson-Korrelationskoeffizient auf den Rängen berechnet. Spearman's Rho ist besonders robust gegenüber Ausreißern (auch etwas mehr als Kendall's Tau). Spearman's Rho  berücksichtigt die genauen Abstände zwischen den Rängen und kann subtilere Beziehungen zwischen den Variablen erkennen.
+- Zur Ermittlung von *Kendall's Tau* wird der Grad der Übereinstimmung zwischen den Rängen der beiden Variablen berwertet. Kendall's Tau ist auch wenig anfällig für Ausreißer; das Verfahren ist besonders gut geeignet, wenn die relative Rangreihenfolge der Daten wichtiger ist als die genaue Distanz zwischen den Rängen. 
 
 Beide Werte lassen sich leicht mit Hilfe der Funktion cor.test() berechnen. Denn diese Funktion ermöglicht es, verschiedene Arten von Korrelationskoeffizienten zu berechnen, einschließlich der Rangkorrelation nach Spearman's Rho und Kendall's Tau. Oft ist es ratsam, beide Maße zu berechnen und zu vergleichen, um sicherzustellen, dass die Ergebnisse konsistent sind.
 
 # Die Analyse von Zusammenhängen zwischen zwei ordinalskalierten Variablen
-Nun wollen wir das an einem Beispiel untersuchen: Wir testen, ob es einen Zusammenhang zwischen den ordinalskalierten Variablen Schulabsabschluss und der Einkommensgruppe gibt - bei beiden Variablen spiegelt der Wert eine zu Grunde liegende Rangordnung wider (z.B. Bildung: 1=ohne Abschluss; 3=Mittlere Reife; 5=Abitur; Einkommensgruppe: 1=bis unter 200 Euro; 2= 200 bis unter 300 Euro; 25=7.500 bis unter 10.000 Euro).
+Nun wollen wir das an einem Beispiel untersuchen: Wir testen, ob es einen Zusammenhang zwischen den beiden ordinalskalierten Variablen Schulabsabschluss und der Einkommensgruppe gibt - bei beiden Variablen spiegelt der Wert eine zu Grunde liegende Rangordnung wider (z.B. Bildung: 1=ohne Abschluss; 3=Mittlere Reife; 5=Abitur; Einkommensgruppe: 1=bis unter 200 Euro; 2= 200 bis unter 300 Euro; 25=7.500 bis unter 10.000 Euro).
 
-Um den Zusammenhang zu analysieren, müssen wir zuerst unsere Daten aufbereiten: 
-
-Die Variable Einkommensgruppe ist im Datensatz mit dem Namen "di02a" benannt, die benenen wir in "Einkommensgruppe" um; außerdem filtern wir die für uns relevanten Fälle der Variablen (Einkommensgruppe 1 bis 25, ohne missings, z.B. -9=Keine Angabe; -8=Weiß nicht) heraus. Die Variable Bildungsabschluss ist im Datensatz mit dem Namen "educ" benannt, die benenen wir in "Bildung" um; auch hier filtern wir die für uns relevanten Fälle der Variablen (Bildung 1 bis 5, ohne missings, z.B. -9=Keine Angabe) heraus.  
+Um den Zusammenhang zu analysieren, müssen wir wieder zuerst unsere Daten aufbereiten: Die Variable Einkommensgruppe ist im Datensatz mit dem Namen "di02a" benannt, die benenen wir in "Einkommensgruppe" um; außerdem filtern wir die für uns relevanten Fälle der Variable heraus (Einkommensgruppe 1 bis 25, ohne missings, z.B. -9=Keine Angabe; -8=Weiß nicht). Die Variable Bildungsabschluss ist im Datensatz mit dem Namen "educ" benannt, die benenen wir in "Bildung" um; auch hier filtern wir die für uns relevanten Fälle der Variable heraus (Bildung 1 bis 5, ohne missings, z.B. -9=Keine Angabe).  
 
 # Umbenennen der Variablen
 ```{r}
@@ -175,38 +175,36 @@ daten <- daten %>%
 Nun nutzen wir die Funktion cor.test() und spezifizieren bei "method" den Korrelationskoeefizienten, zuerst "spearman", dann zum Vergleich auch "kendall":
 
 # Berechnung der Rangkorrelation nach Spearman's Rho und Ausgabe der Werte
-
 ```{r}
 result_spearman <- cor.test(daten$Einkommensgruppe, daten$Bildung, method = "spearman")
 print(result_spearman)
 ```
 
-Der Wert *rho* gibt den berechneten Korrelationskoeffizienten wieder. Der Wert von 0,28 deutet darauf hin, dass es einen positiven Zusammenhang zwischen den beiden Variablen Bildungsabschluss und Einkommensgruppe gibt.
+Schauen wir uns nun den Output an: Der Wert *rho* gibt den berechneten Korrelationskoeffizienten wieder. Der Wert von 0,28 deutet darauf hin, dass es einen positiven Zusammenhang zwischen den beiden Variablen Bildungsabschluss und Einkommensgruppe gibt.
 
-Der sehr kleine *p-Wert* (kleiner als 2.2e-16, was nahezu null ist), zeigt an, dass der beobachtete Zusammenhang zwischen den Variablen auch statistisch signifikant ist.
+Der sehr kleine *p-Wert* (kleiner als 2.2e-16, was nahezu null ist), zeigt an, dass der beobachtete Zusammenhang zwischen den Variablen statistisch höchst signifikant ist.
 
 Der *S-Wert* (3725893693) repräsentiert die Summe der quadrierten Unterschiede zwischen den Rängen der beiden Variablen. Er ist Teil der Berechnung des Spearman's Rho und wird für die Interpretation eigentlich nicht unbedingt benötigt.
 
 Schauen wir uns nun zum Vergleich das Ergebnis mit Kendall's Tau an:
 
 # Berechnung der Rangkorrelation nach Kendall's Tau und Ausgabe der Werte
-
 ```{r}
 result_kendall <- cor.test(daten$Einkommensgruppe, daten$Bildung, method = "kendall")
 print(result_kendall)
 ```
 
-Schauen wir uns die Ausgabe an: Der z-Wert gibt an, wie viele Standardabweichungen die beobachtete Korrelation von der erwarteten Korrelation entfernt ist. Ein höherer z-Wert deutet darauf hin, dass die beobachtete Korrelation signifikant von Null abweicht. In unserem Fall ist der z-Wert sehr hoch (16.343), was darauf hindeutet, dass die beobachtete Korrelation sehr weit von Null entfernt ist.
+Der *z-Wert* gibt an, wie viele Standardabweichungen die beobachtete Korrelation von der erwarteten Korrelation entfernt ist. Ein höherer z-Wert deutet darauf hin, dass die beobachtete Korrelation signifikant von Null abweicht. In unserem Fall ist der z-Wert sehr hoch (16.343), was darauf hindeutet, dass die beobachtete Korrelation sehr weit von Null entfernt ist.
 
-Der p-Wert ist die Wahrscheinlichkeit mit der die beobachtete Korrelation zufällig ist. Ein kleiner p-Wert deutet darauf hin, dass die beobachtete Korrelation sehr unwahrscheinlich ist, wenn kein Zusammenhang bestehen würde. Da unser p-Wert extrem klein ist (< 2.2e-16), können wir von einem Zusammenhang ausgehen. Beide Rangkorrelationskoeffizienten liefern uns also ein ähnliches Ergebnis und zeigen einen (positiven) Zusammenhang zwischen dem Bildungsabschluss und der Einkommensgruppe.
+Der *p-Wert* ist die Wahrscheinlichkeit mit der die beobachtete Korrelation zufällig ist. Ein kleiner p-Wert deutet darauf hin, dass die beobachtete Korrelation sehr unwahrscheinlich ist, wenn kein Zusammenhang bestehen würde. Da unser p-Wert extrem klein ist (< 2.2e-16), können wir von einem Zusammenhang ausgehen. Beide Rangkorrelationskoeffizienten liefern uns also ein ähnliches Ergebnis und zeigen einen (positiven) Zusammenhang zwischen dem Bildungsabschluss und der Einkommensgruppe.
 
 
-# Das Überprüfen von Zusammenhängen zwischen einer kategorialen und einer ordinalen Variable mittels Rangkorrelation nach Spearman's Rho
-Häufig kommt es vor, dass wir einen Zusammenhang zwischen Variablen untersuchen möchten, die ein unterschiedliches Skalenniveau aufweisen, etwa wenn der Zusammenhang zwischen Geschlecht (als kategoriale Variable) und der Einkommensgruppe (als ordinale Variable) untersucht werden soll. Dann bietet sich die Anwendung der Rangkorrelation nach *Spearman's Rho* an, denn dieser Korrelationskoeffizient wurde (u.a.) speziell für die Analyse des Zusammenhang zwischen ordinalen und nicht-stetigen Variablen entwickelt.
+# Das Überprüfen von Zusammenhängen zwischen einer nominalen und einer ordinalen Variable 
+Oben haben wir den Pearson Chi-Quadrat Test genutzt, um einen Zusammenhang zwischen zwei *nominalskalierten* Variablen zu untersuchen (Geschlecht und Konfessionszugehörigkeit). Dann haben wir die Rangkorrelation verwendet, um einen Zusammenhang zwischen zwei *ordinalen* Variablen zu prüfen. Häufig kommt es vor, dass wir einen Zusammenhang zwischen Variablen untersuchen möchten, die ein unterschiedliches Skalenniveau aufweisen, etwa wenn der Zusammenhang zwischen Geschlecht (als kategoriale Variable) und der Einkommensgruppe (als ordinale Variable) untersucht werden soll. Dazu können wir wieder den Chi-Quadrat Test nutzen, denn er kann auch angewendet werden, wenn eine Variable nominal und eine ordinalskaliert ist - oder beide ordinalskaliert sind. Hier testen wir mit dem Pearson Chi-Quadrat Test nun, ob es einen Zusammenhang zwischen dem Geschlecht und der Einkommensklasse gibt.
 
-Betrachten wir dies an einem Beispiel. Wir haben folgende Zusammenhangshypothese aufgestellt: Es gibt einen Zusammenhang zwischen dem Geschlecht der Befragten (sex) und der Einkommensgruppe (di02a = Haushaltsnetto-Einkommen ordinalskaliert abgefragt). 
+Dazu haben wir folgende Zusammenhangshypothese aufgestellt: Es gibt einen Zusammenhang zwischen dem Geschlecht der Befragten (sex) und der Einkommensgruppe (di02a = Haushaltsnetto-Einkommen ordinalskaliert abgefragt). 
 
-Um diese Hypothese zu testen, müssen wir zunächst unsere Daten vorbereiten: Die Variable Einkommensgruppe ist im Datensatz mit dem Namen "di02a" benannt, die benennen wir in "Einkommensgruppe" um. Dann filtern wir die für uns relevanten Fälle der Variablen heraus (Einkommensgruppe 1 bis 25, ohne missings, z.B. -9=Keine Angabe; -8=Weiß nicht). Die Variable Geschlecht stellt einen Faktor dar - um keine Fehlermeldung zu bekommen, müssen wir sie dem as.numeric-Befehl als numerische Variable behandeln. Auch bei Geschlecht selektieren wir die Missungs aus (z.B. -9=Keine Angabe):
+Um diese Hypothese zu testen, müssen wir zunächst unsere Daten vorbereiten: Die Variable Einkommensgruppe ist im Datensatz mit dem Namen "di02a" benannt, die benennen wir in "Einkommensgruppe" um. Dann filtern wir die für uns relevanten Fälle der Variablen heraus (Einkommensgruppe 1 bis 25, ohne missings, z.B. -9=Keine Angabe; -8=Weiß nicht). Die Variable Geschlecht stellt einen Faktor dar - um keine Fehlermeldung zu bekommen, müssen wir sie mittels as.numeric-Befehl als numerische Variable behandeln. Auch bei Geschlecht selektieren wir die Missungs aus (z.B. -9=Keine Angabe):
 
 # Umbenennen und Filtern der Variablen
 ```{r}
@@ -216,18 +214,15 @@ daten_neu <- daten %>%
   filter(between(sex, 1, 3))
 ```
 
-Wieder können wir nun die Funktion cor.test() nutzen, wenn wir bei "method" den Korrelationskoeefizienten "spearman" spezifizieren.
+Nun erstellen wir wieder eine Kreuztabelle, um die Häufigkeiten der verschiedenen Kombinationen von Kategorien beider Variablen anzuzeigen. Damit erhalten wir einen ersten Überblick über die Verteilung der Daten entlang der Vergleichskategorie:
 
-# Berechnung der Rangkorrelation 
+# Erstellen und Ausgeben einer Kreuztabelle
 ```{r}
-result_spearman <- cor.test(daten_neu$sex, daten_neu$Einkommensgruppe, method = "spearman")
-print(result_spearman)
-      
+kreuztabelle_2 <- table(daten_neu$sex, daten_neu$Einkommensgruppe)
+print(kreuztabelle_2)
 ```
 
-Schauen wir uns das Ergebnis an: Zunächst sehen wir den geschätzten Spearman's Rangkorrelationskoeffizient -0.2975236. Gleichzeitig sehen wir einen sehr kleinen p-Wert (kleiner als 2.2e-16) - das deutet darauf hin, dass der beobachtete Rangkorrelationskoeffizient höchst signifikant ist.
-
-Wir können daher davon ausgehen, dass es einen signifikanten negativen Rangkorrelationszusammenhang zwischen den Variablen "sex" und "Einkommensgruppe" gibt. Der geschätzte Korrelationskoeffizient von -0.2975236 deutet darauf hin, dass höhere Werte in der "Einkommensgruppe" tendenziell mit niedrigeren Werten in der Variable "sex" korrelieren, und umgekehrt. Da "männlich" im Datensatz mit 1 codiert ist (2=weiblih, 3=divers), können wir daraus schließen, dass Männer eher in höheren Einkommensgruppen zu finden sind als Frauen oder diverse Personen.
+Im Datensatz entsprechen höhere Werte bei der variable Einkommensgruppe einem höheren Einkommen (1=bis unter 200 Euro; 2= 200 bis unter 300 Euro; 25=7.500 bis unter 10.000 Euro). Wenn wir uns nun die Kreuztabelle anschauen, können wir schon einen ersten Trend erkennen: Offenbar sind mehr Männer in höheren Einkommensgruppen als Frauen; dafür sind weniger Männer in niedrigen Einkommensgruppen. Hier deutet sich also an, dass Geschlecht und Einkommensgruppe einen Zusammenhang aufweisen.
 
 Mit einem gestapelten Balkendiagramm können wir diese Tendenz auch visualisieren:
 
@@ -247,5 +242,37 @@ ggplot(daten_neu, aes(x = Einkommensgruppe, fill = sex)) +
        x = "Einkommensgruppe", y = "Anteil") +
   scale_fill_manual(values = c("blue", "red", "green")) # Farben anpassen
 ```
-Diese Visualisierung zeigt sehr schön, was wir auch schon anhand der Spearman's Rank Correlation ablesen konnten: Es sind mehr Frauen als Männer in den unteren Einkommensgruppen zu finden; es sind mehr Männer als Frauen in höheren Einkommensgruppen zu finden.
+Diese Visualisierung zeigt sehr schön, was wir auch schon anhand der Kreuztabelle ablesen konnten: Es sind mehr Frauen als Männer in den unteren Einkommensgruppen zu finden; es sind mehr Männer als Frauen in höheren Einkommensgruppen zu finden.
+
+Nun prüfen wir mit einem Chi-Quadrat Test, ob der beobachtete Zusammenhang auch statistisch signifikant ist. Dazu nutzen wir wieder die chisq.test-Funktion, die wir auf unsere Kreuztabelle anwenden:
+
+# Überprüfung des Zusammenhangs mit dem Chi-Quadrat Test
+```{r}
+chisq.test(kreuztabelle_2)
+```
+
+Schauen wir uns nun den R-Output an: Der *Chi-Quadrat-Wert* (X² oder X-squared) gibt uns an, wie gut die beobachteten Häufigkeiten mit den erwarteten Häufigkeiten übereinstimmen. Ein höherer X²-Wert deutet auf eine größere Abweichung hin. Der Chi-Quadrat-Statistikwert von 299.01 ist also weit von dem erwarteten Wert entfernt.
+
+*df* zeigt die Anzahl der Freiheitsgrade (Degrees of Freedom) des Chi-Quadrat-Tests an. Sie hängt von der Anzahl der Kategorien in den Variablen ab und beeinflusst die Verteilung des Chi-Quadrat-Werts.
+
+Der *p-Wert* gibt die Wahrscheinlichkeit an, den beobachteten Chi-Quadrat-Wert zu erhalten, wenn die Nullhypothese wahr ist (d.h. wenn es keinen Zusammenhang zwischen den Variablen gibt). Der hier beobachtete p-Wert (< 2.2e-16) ist extrem klein und damit höchst signifikant. Das deutet darauf hin, dass der beobachtete Effekt überzufällig ist - Geschlecht und Konfessionszugehörigkeit hängen also auch statistisch zusammen.
+
+Da der Chi-Quadrat-Test empfindlich gegenüber der Stichprobengröße ist, berechnen wir nun noch die Effektstärke mittels Cramér's V. Hier gilt ein Wert von 0,1 als klein, einer von 0,3 als mittel und ein Wert von 0,5 als groß. 
+
+```{r}
+# Schritt 1: Extrahieren des beobachteten Chi-Quadrat-Werts
+chi_square <- chisq.test(kreuztabelle_2)$statistic
+
+# Schritt 2: Berechnen der Effektstärke (Cramér's V)
+n <- sum(kreuztabelle_2)  # Gesamtanzahl der Beobachtungen
+k <- nrow(kreuztabelle_2)  # Anzahl der Kategorien in 'sex'
+r <- ncol(kreuztabelle_2)  # Anzahl der Kategorien in 'Konfession'
+
+V <- sqrt(chi_square / (n * min(k-1, r-1)))
+
+# Schritt 3: Ausgabe der beobachteten Chi-Quadrat-Wert und Cramér's V 
+cat("Beobachteter Chi-Quadrat-Wert:", chi_square, "\n")
+cat("Cramér's V:", V, "\n")
+```
+Mit Cramér's V können wir nun also zusätzlich noch aussagen, dass der Effekt von Geschlecht auf die Einkommensklasse bei 0,3 liegt und damit mittelstark ist. Wir haben es also mit einem signifikanten und substantiellen Einfluss des Geschlechts auf die Einkommensklasse zu tun. Da wir diesen Befund mit Hilfe aktueller ALLBUS-Daten ermittelt haben, haben Sie hiermit einen guten Indikator für die aktuelle Gender Equality in Deutschland vor Augen. ES GIBT NOCH VIEL ZU TUN!
 
