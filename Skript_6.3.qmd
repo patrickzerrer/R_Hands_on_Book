@@ -133,9 +133,6 @@ daten %\>% group_by(UV) %\>% do(tidy(shapiro.test(.\$AV)))
 
 daten %\>% drop_na(UV, AV) %\>% leveneTest(AV\~UV, data = .)
 
-```{r include=F }
-
-```
 :::
 
 ## Durchführung des t-Tests
