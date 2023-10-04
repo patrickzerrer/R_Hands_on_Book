@@ -10,6 +10,56 @@ format:
     code-line-numbers: true
 ---
 
+***** ***Zweites Beispiel***
+Um die Durchführung der linearen Regression an einem zweiten Beispiel nachzuvollziehen, schauen wir uns nun den Zusammenhang zwischen dem täglichen Konsum von Nachrichtensendungen im öffentlich-rechtlichen Fernsehen (lm20) und dem Vertrauen in die Bundesregierung (pt12) an. Dazu vermuten wir: Eine intensive Nachrichtenrezeption erklärt ein hohes Vertrauen in die Bundesregierung.
+
+
+# Erzeugen eines Teildatensatzes & Umbenennen der Variablen
+Für den Teildatensatz bennenen wir die Variablen lm20 und pt12 um und filtern die missings heraus (z.B. -9=Keine Angabe):
+
+```{r}
+daten <- daten %>%
+  rename(Nachrichtenrezeption = lm20)%>%
+  rename(Vertrauen_Bundestag = pt12)%>%
+  filter(between(Nachrichtenrezeption, 0, 7))%>%
+  filter(between(Vertrauen_Bundestag, 1, 7))
+
+#Visualisierungshintergrund der Grafiken in ggplot festlegen
+theme_set(theme_minimal())
+
+# Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
+options(scipen = 999) 
+```
+
+# Visualisierung des Zusammenhangs mit Hilfe eines Streudiagramms
+```{r Zusammenhang von Alter und Internetnutzung plotten}
+ggplot(daten, aes(Nachrichtenrezeption, Vertrauen_Bundestag)) + 
+  geom_point() + 
+  geom_smooth(method = lm, formula = "y ~ x") + 
+  ggtitle("Zusammenhang der Variablen Nachrichtenrezeption und Vertrauen_Bundestag") + 
+  xlab("Vertrauen in den Bundestag") + ylab("Nachrichtennutzung (Häufigkeit)")
+```
+
+Mit Hilfe der Regression wollen wir nun die oben formulierte Annahme prüfen, dass eine intensive Nachrichtenrezeption ein hohes Vertrauen in den Bundestag erklärt.
+
+### Data Management
+
+Damit der Output etwas nachvollziehbarer wird, benenne ich die Variablen mit dem rename-Befehl zunächst einmal um. Dann nutze ich den drop_na-Befehl, um alle Fällen mit fehlenden Werten zu entfernen (in der Klammer spezifiziere ich, auf welche Variablen sich der Befehl beziehen soll). Das alles weise ich einem neuen Datenobjekt zu: daten_mod
+
+Schließlich nutze ich den slice_sample-Befehl, um aus unseren 8432 Fällen ein Zufallssample von n=100 Fällen zu ziehen, weil mir das die visuelle Interpretation erleichtert (diesen Befehl könnten wir hier auch weglassen, dann bekommen wir unten aber sehr sehr viele Datenpunkt in unserem Streudiagramm - probieren Sie es mal aus!)
+
+```{r}
+daten_mod <- daten %>% 
+  rename(alter = agea,
+         internetnutzung = netustm) %>% 
+  drop_na(c(alter, internetnutzung)) %>% 
+slice_sample(n = 100) 
+daten_mod
+```
+**** 
+
+
+
 Das Überprüfen von Zusammenhängen bei mehr als zwei Variablen
 
 # Das Überprüfen von Zusammenhängen bei mehr als zwei intervalskalierten Variablen
