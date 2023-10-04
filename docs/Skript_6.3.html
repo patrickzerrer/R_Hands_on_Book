@@ -366,13 +366,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Einführung</span></a>
+ <span class="menu-text">Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 1: Pearson Chi-Quadrat-Test &amp; *Rangkorrelation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei zwei Variablen mittels Korrelation und Regression</span></a>
+ <span class="menu-text">Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 2: Korrelation &amp; Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -403,6 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#laden-der-daten-und-benötigten-pakete" id="toc-laden-der-daten-und-benötigten-pakete" class="nav-link" data-scroll-target="#laden-der-daten-und-benötigten-pakete"><span class="header-section-number">1.1</span> Laden der Daten und benötigten Pakete</a></li>
   <li><a href="#datenmanagement" id="toc-datenmanagement" class="nav-link" data-scroll-target="#datenmanagement"><span class="header-section-number">1.2</span> Datenmanagement</a></li>
+  <li><a href="#deskriptives" id="toc-deskriptives" class="nav-link" data-scroll-target="#deskriptives"><span class="header-section-number">1.3</span> Deskriptives</a></li>
   </ul></li>
   <li><a href="#t-test-für-einstichproben" id="toc-t-test-für-einstichproben" class="nav-link" data-scroll-target="#t-test-für-einstichproben"><span class="header-section-number">2</span> t-Test für Einstichproben</a>
   <ul class="collapse">
@@ -411,13 +412,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#t-test-für-unabhängige-stichproben" id="toc-t-test-für-unabhängige-stichproben" class="nav-link" data-scroll-target="#t-test-für-unabhängige-stichproben"><span class="header-section-number">3</span> t-Test für unabhängige Stichproben</a>
   <ul class="collapse">
-  <li><a href="#durchführung-des-t-tests-für-verbundene-stichproben" id="toc-durchführung-des-t-tests-für-verbundene-stichproben" class="nav-link" data-scroll-target="#durchführung-des-t-tests-für-verbundene-stichproben"><span class="header-section-number">3.1</span> Durchführung des t-tests für verbundene Stichproben</a></li>
-  <li><a href="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" id="toc-nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" class="nav-link" data-scroll-target="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test"><span class="header-section-number">3.2</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Test</a></li>
+  <li><a href="#durchführung-des-t-tests" id="toc-durchführung-des-t-tests" class="nav-link" data-scroll-target="#durchführung-des-t-tests"><span class="header-section-number">4.4</span> Durchführung des t-Tests</a></li>
+  <li><a href="#interpretation-des-outputs" id="toc-interpretation-des-outputs" class="nav-link" data-scroll-target="#interpretation-des-outputs"><span class="header-section-number">4.5</span> Interpretation des Outputs</a></li>
+  <li><a href="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" id="toc-nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" class="nav-link" data-scroll-target="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test"><span class="header-section-number">4.6</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Test</a></li>
   </ul></li>
-  <li><a href="#t-test-für-verbundene-stichproben" id="toc-t-test-für-verbundene-stichproben" class="nav-link" data-scroll-target="#t-test-für-verbundene-stichproben"><span class="header-section-number">4</span> t-Test für verbundene Stichproben</a>
+  <li><a href="#t-test-für-verbundene-stichproben" id="toc-t-test-für-verbundene-stichproben" class="nav-link" data-scroll-target="#t-test-für-verbundene-stichproben"><span class="header-section-number">5</span> t-Test für verbundene Stichproben</a>
   <ul class="collapse">
-  <li><a href="#durchführung-des-t-tests-für-verbundene-stichproben-1" id="toc-durchführung-des-t-tests-für-verbundene-stichproben-1" class="nav-link" data-scroll-target="#durchführung-des-t-tests-für-verbundene-stichproben-1"><span class="header-section-number">4.1</span> Durchführung des t-tests für verbundene Stichproben</a></li>
-  <li><a href="#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" id="toc-nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" class="nav-link" data-scroll-target="#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest"><span class="header-section-number">4.2</span> Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest</a></li>
+  <li><a href="#durchführung-des-t-tests-für-verbundene-stichproben" id="toc-durchführung-des-t-tests-für-verbundene-stichproben" class="nav-link" data-scroll-target="#durchführung-des-t-tests-für-verbundene-stichproben"><span class="header-section-number">5.1</span> Durchführung des t-tests für verbundene Stichproben</a></li>
+  <li><a href="#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" id="toc-nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" class="nav-link" data-scroll-target="#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest"><span class="header-section-number">5.2</span> Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -457,25 +459,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>t-Test für verbundene Stichprobene (paired test)</li>
 </ul>
 <p><strong>Der Einstichprobentest</strong></p>
-<p>Der Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert.</p>
+<p>Der Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert. Wir können so beispielsweise überprüfen, ob das Einkommen in einer Stichprobe dem deutschlandweiten Mittelwert entspricht, sofern dieser uns vorab bekannt ist.</p>
 <p><strong>t-test für unabhängige Stichproben</strong></p>
+<p>Mit dem t-test für unabhängige Stichproben überprüfen wir, ob sich die Mittelwerte in zwei gemessenen Stichproben unterscheiden. So könnten wir beispielsweise testen, ob sich das Einkommen von Männern und Frauen unterscheidet.</p>
 <p><strong>t-test für verbundene Stichproben</strong></p>
 <section id="laden-der-daten-und-benötigten-pakete" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="laden-der-daten-und-benötigten-pakete"><span class="header-section-number">1.1</span> Laden der Daten und benötigten Pakete</h2>
 <p>Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, mosaic, knitr,effectsize, car, broom)</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-cell="annotated-cell-1" data-code-lines="2">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
+<span data-code-cell="annotated-cell-1" data-code-annotation="1" data-code-lines="2">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-cell="annotated-cell-1" data-code-lines="3">Wir legen allgemein den Hintergrund theme_classic fest.</span>
+<span data-code-cell="annotated-cell-1" data-code-annotation="2" data-code-lines="3">Wir legen allgemein den Hintergrund theme_classic fest.</span>
 </dd>
 </dl>
 </div>
@@ -487,7 +490,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="datenmanagement" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="datenmanagement"><span class="header-section-number">1.2</span> Datenmanagement</h2>
-<p>Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html">für ausführliche Erklärungen siehe hier</a>.</p>
+<p>Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html">für ausführliche Erklärungen siehe hier</a>. Für unseren t-test möchten wir uns anschauen, wie sich das Geschlecht der Befragten auf ihr Vertrauen in XX auswirkt.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dat <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">filter</span>(., sex <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> sex <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span>  <span class="co">#&gt;1</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">rename</span>(., <span class="at">trustpol =</span> pt15) <span class="co">#&gt;2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>Wir filtern die Fälle, sodass alle Befragten entweder 1=männlich oder 2=weiblich sind.</li>
+<li>Die Variable Vertrauen in die Polizei(pt15) benennen wir in trustpol</li>
+</ol>
+</section>
+<section id="deskriptives" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="deskriptives"><span class="header-section-number">1.3</span> Deskriptives</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Deskription der Abhängigen Variablen</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#des_stat &lt;- (favstats(AV ~ UV, data = daten))</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#kable (des_stat,</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#      col.names = c(label_UV,"Minimum", "1.Quartil", </span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#                    "Median", "3.Quartil", </span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#                    "Maximum", "M", "SD", "N",</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#                    "Fehlend"),</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#      digits = 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="t-test-für-einstichproben" class="level1" data-number="2">
@@ -528,23 +553,60 @@ Voraussetzungsprüfung
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-
-</div>
-</div>
-</div>
-<section id="durchführung-des-t-tests-für-verbundene-stichproben" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="durchführung-des-t-tests-für-verbundene-stichproben"><span class="header-section-number">3.1</span> Durchführung des t-tests für verbundene Stichproben</h2>
+<section id="voraussetzungen-überprüfen" class="level1 callout-body-container callout-body" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Voraussetzungen überprüfen</h1>
+<section id="skalierung-der-uv-und-av" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="skalierung-der-uv-und-av"><span class="header-section-number">4.1</span> Skalierung der UV und AV</h2>
+<p>daten %&gt;% select(UV, AV) %&gt;% lapply(class)</p>
 </section>
-<section id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-test"><span class="header-section-number">3.2</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Test</h2>
+<section id="normalverteilung-der-av" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="normalverteilung-der-av"><span class="header-section-number">4.2</span> Normalverteilung der AV</h2>
+<p>daten %&gt;% group_by(UV) %&gt;% do(tidy(shapiro.test(.$AV)))</p>
+</section>
+<section id="varianzhomogenität" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="varianzhomogenität"><span class="header-section-number">4.3</span> Varianzhomogenität</h2>
+<p>daten %&gt;% drop_na(UV, AV) %&gt;% leveneTest(AV~UV, data = .)</p>
+</section>
+</section>
+</div>
+</div>
+<section id="durchführung-des-t-tests" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="durchführung-des-t-tests"><span class="header-section-number">4.4</span> Durchführung des t-Tests</h2>
+</section>
+<section id="interpretation-des-outputs" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="interpretation-des-outputs"><span class="header-section-number">4.5</span> Interpretation des Outputs</h2>
+<ul>
+<li><p>was sehen wir?</p></li>
+<li><p>was bedeutet das?</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Wie gebe ich die Ergebnisse korrekt an?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Ergebnisse des t-tests werden üblicherweise im Text angegeben. Für diese Angabe werden die folgenden Informationen benötigt:</p>
+<p>✅ die Werte des Kaiser-Meyer-Olkin Kritierums (KMO)</p>
+<p>Das Format ist üblicherweise:</p>
+<blockquote class="blockquote">
+<p><strong><em>Beispiel:</em></strong> Zunächst wurde Faktorenanalyse der 15 gemessenen Indikatoren durchgeführt. Das Kaiser-Meyer-Olkin (KMO)-Maß für die Stichprobenadäquanz betrug 0,89. Dies deutet darauf hin, dass die Korrelationsmuster relativ kompakt sind und die Faktorenanalyse eindeutige und zuverlässige Faktoren ergeben sollte. Der Bartlett-Test auf Sphärizität war ebenfalls signifikant (χ2(105) = 33164.76, p &lt; .001). Dies bedeutet, dass es einige Beziehungen zwischen den untersuchten Variablen gibt. Sowohl der KMO-Test als auch der Bartlett-Test bestätigen, dass die Faktorenanalyse angemessen ist.</p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-test"><span class="header-section-number">4.6</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Test</h2>
 <p><a href="http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html">Historie der Testverfahren</a></p>
 </section>
 </section>
-<section id="t-test-für-verbundene-stichproben" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> t-Test für verbundene Stichproben</h1>
+<section id="t-test-für-verbundene-stichproben" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> t-Test für verbundene Stichproben</h1>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -553,17 +615,17 @@ Voraussetzungsprüfung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 
 </div>
 </div>
 </div>
-<section id="durchführung-des-t-tests-für-verbundene-stichproben-1" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="durchführung-des-t-tests-für-verbundene-stichproben-1"><span class="header-section-number">4.1</span> Durchführung des t-tests für verbundene Stichproben</h2>
+<section id="durchführung-des-t-tests-für-verbundene-stichproben" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="durchführung-des-t-tests-für-verbundene-stichproben"><span class="header-section-number">5.1</span> Durchführung des t-tests für verbundene Stichproben</h2>
 </section>
-<section id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest"><span class="header-section-number">4.2</span> Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest</h2>
+<section id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest"><span class="header-section-number">5.2</span> Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest</h2>
 
 
 </section>

@@ -340,7 +340,7 @@
     "href": "Skript_6.3.html",
     "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
     "section": "",
-    "text": "Grundsätzlich unterscheiden wir zwischen drei verschiedenen Arten von t-tests:\n\nEinstichprobentest (one-sample-test),\nt-Test für unabhängige Stichproben (two-paired-test) sowie\nt-Test für verbundene Stichprobene (paired test)\n\nDer Einstichprobentest\nDer Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert.\nt-test für unabhängige Stichproben\nt-test für verbundene Stichproben\n\n\nWir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.\n\nif(!require(\"pacman\")) {install.packages(\"pacman\");library(pacman)}\n1p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)\n2theme_set(theme_classic())\n\n\n1\n\nMittels p_load laden wir alle benötigten Pakete gleichzeitig.\n\n2\n\nWir legen allgemein den Hintergrund theme_classic fest.\n\n\n\n\nAnschließend laden wir die Daten aus dem Allbus:\n\ndaten = haven::read_dta(\"Datensatz/Allbus_2021.dta\")\n\n\n\n\nUm mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements für ausführliche Erklärungen siehe hier."
+    "text": "Grundsätzlich unterscheiden wir zwischen drei verschiedenen Arten von t-tests:\n\nEinstichprobentest (one-sample-test),\nt-Test für unabhängige Stichproben (two-paired-test) sowie\nt-Test für verbundene Stichprobene (paired test)\n\nDer Einstichprobentest\nDer Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert. Wir können so beispielsweise überprüfen, ob das Einkommen in einer Stichprobe dem deutschlandweiten Mittelwert entspricht, sofern dieser uns vorab bekannt ist.\nt-test für unabhängige Stichproben\nMit dem t-test für unabhängige Stichproben überprüfen wir, ob sich die Mittelwerte in zwei gemessenen Stichproben unterscheiden. So könnten wir beispielsweise testen, ob sich das Einkommen von Männern und Frauen unterscheidet.\nt-test für verbundene Stichproben\n\n\nWir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.\n\nif(!require(\"pacman\")) {install.packages(\"pacman\");library(pacman)}\n1p_load(tidyverse, ggplot2, haven, mosaic, knitr,effectsize, car, broom)\n2theme_set(theme_classic())\n\n\n1\n\nMittels p_load laden wir alle benötigten Pakete gleichzeitig.\n\n2\n\nWir legen allgemein den Hintergrund theme_classic fest.\n\n\n\n\nAnschließend laden wir die Daten aus dem Allbus:\n\ndaten = haven::read_dta(\"Datensatz/Allbus_2021.dta\")\n\n\n\n\nUm mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements für ausführliche Erklärungen siehe hier. Für unseren t-test möchten wir uns anschauen, wie sich das Geschlecht der Befragten auf ihr Vertrauen in XX auswirkt.\n\ndat &lt;- daten %&gt;% \n  filter(., sex == 1 | sex == 2) %&gt;%  #&gt;1\n  rename(., trustpol = pt15) #&gt;2\n\n\nWir filtern die Fälle, sodass alle Befragten entweder 1=männlich oder 2=weiblich sind.\nDie Variable Vertrauen in die Polizei(pt15) benennen wir in trustpol\n\n\n\n\n\n# Deskription der Abhängigen Variablen\n#des_stat &lt;- (favstats(AV ~ UV, data = daten))\n#kable (des_stat,\n#      col.names = c(label_UV,\"Minimum\", \"1.Quartil\", \n#                    \"Median\", \"3.Quartil\", \n#                    \"Maximum\", \"M\", \"SD\", \"N\",\n#                    \"Fehlend\"),\n#      digits = 2)"
   },
   {
     "objectID": "Skript_6.3.html#das-testen-von-unterschieden-bei-unabhängigen-stichproben",
@@ -1299,14 +1299,14 @@
     "href": "Skript_6.3.html#laden-der-daten-und-benötigten-pakete",
     "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
     "section": "",
-    "text": "Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.\n\nif(!require(\"pacman\")) {install.packages(\"pacman\");library(pacman)}\n1p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)\n2theme_set(theme_classic())\n\n\n1\n\nMittels p_load laden wir alle benötigten Pakete gleichzeitig.\n\n2\n\nWir legen allgemein den Hintergrund theme_classic fest.\n\n\n\n\nAnschließend laden wir die Daten aus dem Allbus:\n\ndaten = haven::read_dta(\"Datensatz/Allbus_2021.dta\")"
+    "text": "Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.\n\nif(!require(\"pacman\")) {install.packages(\"pacman\");library(pacman)}\n1p_load(tidyverse, ggplot2, haven, mosaic, knitr,effectsize, car, broom)\n2theme_set(theme_classic())\n\n\n1\n\nMittels p_load laden wir alle benötigten Pakete gleichzeitig.\n\n2\n\nWir legen allgemein den Hintergrund theme_classic fest.\n\n\n\n\nAnschließend laden wir die Daten aus dem Allbus:\n\ndaten = haven::read_dta(\"Datensatz/Allbus_2021.dta\")"
   },
   {
     "objectID": "Skript_6.3.html#datenmanagement",
     "href": "Skript_6.3.html#datenmanagement",
     "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
     "section": "",
-    "text": "Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements für ausführliche Erklärungen siehe hier."
+    "text": "Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements für ausführliche Erklärungen siehe hier. Für unseren t-test möchten wir uns anschauen, wie sich das Geschlecht der Befragten auf ihr Vertrauen in XX auswirkt.\n\ndat &lt;- daten %&gt;% \n  filter(., sex == 1 | sex == 2) %&gt;%  #&gt;1\n  rename(., trustpol = pt15) #&gt;2\n\n\nWir filtern die Fälle, sodass alle Befragten entweder 1=männlich oder 2=weiblich sind.\nDie Variable Vertrauen in die Polizei(pt15) benennen wir in trustpol"
   },
   {
     "objectID": "Skript_6.3.html#durchführung-des-t-tests-für-einstichproben",
@@ -1326,15 +1326,15 @@
     "objectID": "Skript_6.3.html#durchführung-des-t-tests-für-verbundene-stichproben",
     "href": "Skript_6.3.html#durchführung-des-t-tests-für-verbundene-stichproben",
     "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
-    "section": "3.1 Durchführung des t-tests für verbundene Stichproben",
-    "text": "3.1 Durchführung des t-tests für verbundene Stichproben"
+    "section": "5.1 Durchführung des t-tests für verbundene Stichproben",
+    "text": "5.1 Durchführung des t-tests für verbundene Stichproben"
   },
   {
     "objectID": "Skript_6.3.html#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test",
     "href": "Skript_6.3.html#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test",
     "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
-    "section": "3.2 Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Test",
-    "text": "3.2 Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Test\nHistorie der Testverfahren"
+    "section": "4.6 Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Test",
+    "text": "4.6 Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Test\nHistorie der Testverfahren"
   },
   {
     "objectID": "Skript_6.3.html#durchführung-des-t-tests-für-verbundene-stichproben-1",
@@ -1347,8 +1347,8 @@
     "objectID": "Skript_6.3.html#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest",
     "href": "Skript_6.3.html#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest",
     "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
-    "section": "4.2 Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest",
-    "text": "4.2 Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest"
+    "section": "5.2 Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest",
+    "text": "5.2 Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest"
   },
   {
     "objectID": "Skript_6.1.html#allgmeines-zu-mittelwertvergleichen",
@@ -1356,5 +1356,47 @@
     "title": "Bivariate Statistik & Mittelwertvergleiche",
     "section": "",
     "text": "Statistische Tests erlauben es uns, auf der Basis von quantitativen Daten eine begründete Entscheidung über die Gültigkeit oder Ungültigkeit einer Hypothese zu treffen.\nBei den hier verwendeten Beispielen geht es darum, Unterschiede zwischen zwei oder mehr Stichproben (oder Teilstichproben) statistisch zu überprüfen.\nEin statistischer Test liefert Aufschluss darüber, wie wahrscheinlich es ist, dass wir die Nullhypothese verwerfen und/oder die alternative Hypothese annehmen können.\nKönnen wir aufgrund des Testausgangs davon ausgehen, dass ein (nicht zufälliger) Unterschied zwischen zwei Stichproben besteht, so sprechen wir von einem signifikanten (überzufälligen) Unterschied."
+  },
+  {
+    "objectID": "Skript_6.3.html#deskriptives",
+    "href": "Skript_6.3.html#deskriptives",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "",
+    "text": "# Deskription der Abhängigen Variablen\n#des_stat &lt;- (favstats(AV ~ UV, data = daten))\n#kable (des_stat,\n#      col.names = c(label_UV,\"Minimum\", \"1.Quartil\", \n#                    \"Median\", \"3.Quartil\", \n#                    \"Maximum\", \"M\", \"SD\", \"N\",\n#                    \"Fehlend\"),\n#      digits = 2)"
+  },
+  {
+    "objectID": "Skript_6.3.html#skalierung-der-uv-und-av",
+    "href": "Skript_6.3.html#skalierung-der-uv-und-av",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "4.1 Skalierung der UV und AV",
+    "text": "4.1 Skalierung der UV und AV\ndaten %&gt;% select(UV, AV) %&gt;% lapply(class)"
+  },
+  {
+    "objectID": "Skript_6.3.html#normalverteilung-der-av",
+    "href": "Skript_6.3.html#normalverteilung-der-av",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "4.2 Normalverteilung der AV",
+    "text": "4.2 Normalverteilung der AV\ndaten %&gt;% group_by(UV) %&gt;% do(tidy(shapiro.test(.$AV)))"
+  },
+  {
+    "objectID": "Skript_6.3.html#varianzhomogenität",
+    "href": "Skript_6.3.html#varianzhomogenität",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "4.3 Varianzhomogenität",
+    "text": "4.3 Varianzhomogenität\ndaten %&gt;% drop_na(UV, AV) %&gt;% leveneTest(AV~UV, data = .)"
+  },
+  {
+    "objectID": "Skript_6.3.html#durchführung-des-t-tests",
+    "href": "Skript_6.3.html#durchführung-des-t-tests",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "4.4 Durchführung des t-Tests",
+    "text": "4.4 Durchführung des t-Tests"
+  },
+  {
+    "objectID": "Skript_6.3.html#interpretation-des-outputs",
+    "href": "Skript_6.3.html#interpretation-des-outputs",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "4.5 Interpretation des Outputs",
+    "text": "4.5 Interpretation des Outputs\n\nwas sehen wir?\nwas bedeutet das?\n\n\n\n\n\n\n\nWie gebe ich die Ergebnisse korrekt an?\n\n\n\nDie Ergebnisse des t-tests werden üblicherweise im Text angegeben. Für diese Angabe werden die folgenden Informationen benötigt:\n✅ die Werte des Kaiser-Meyer-Olkin Kritierums (KMO)\nDas Format ist üblicherweise:\n\nBeispiel: Zunächst wurde Faktorenanalyse der 15 gemessenen Indikatoren durchgeführt. Das Kaiser-Meyer-Olkin (KMO)-Maß für die Stichprobenadäquanz betrug 0,89. Dies deutet darauf hin, dass die Korrelationsmuster relativ kompakt sind und die Faktorenanalyse eindeutige und zuverlässige Faktoren ergeben sollte. Der Bartlett-Test auf Sphärizität war ebenfalls signifikant (χ2(105) = 33164.76, p &lt; .001). Dies bedeutet, dass es einige Beziehungen zwischen den untersuchten Variablen gibt. Sowohl der KMO-Test als auch der Bartlett-Test bestätigen, dass die Faktorenanalyse angemessen ist."
   }
 ]
