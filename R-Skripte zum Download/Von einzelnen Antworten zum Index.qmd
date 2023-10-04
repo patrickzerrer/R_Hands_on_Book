@@ -1,0 +1,272 @@
+---
+title: "Von einzelnen Faktoren zum Index"
+author: "N.N."
+toc: true
+number-sections: true
+highlight-style: pygments
+execute: 
+  warning: false
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    code-annotations: hover
+---
+
+# Durchführen einer Faktorenanalyse in R
+
+```{r Pakete}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) # <1>
+```
+
+1.  Laden der Pakete mit `p_load`
+
+```{r}
+theme_set(theme_classic()) # <1>
+```
+
+1.  Visualisierungshintergrund festlegen
+
+Danach laden wir die Daten aus dem Allbus.
+
+```{r Laden der Daten}
+daten = haven::read_dta("Datensatz/Allbus_2021.dta") # <1>
+```
+
+1.  Laden des Datensatzes
+
+## Teildatensatz mit den benötigten Variablen
+
+```{r Teildatensatz}
+allbus_vertrauen = daten %>%                                              # <1>
+  select(pt01:pt20) %>%                                                   # <2>
+  mutate(across(pt01:pt20, ~ as.numeric(.))) %>%                          # <3>
+  mutate(across(pt01:pt20, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>%    # <4>
+  na.omit()                                                               # <5>
+```
+
+1.  Wir erstellen ein neues Objekt basierend auf dem Datensatz `daten`
+2.  Mit dem Doppelpunkt wählen wir alle Variablen zwischen `pt01` bis `pt20` aus
+3.  Die Kombination aus `mutate` und `across` ermöglicht es uns die Funktion `as.numeric` in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die `~` gibt den Start der anzuwenden Funktion (hier `as.numeric` an), der Punkt innerhalb der Klammer der `as.numeric` Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen
+4.  Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter, mit dem Ausdruck `%in%` prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
+5.  Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+
+```{r Rename}
+allbus_vertrauen = allbus_vertrauen %>% 
+  
+  rename(Ver_Gesundheitswesen = pt01, # <1>
+         Ver_BVerfG = pt02,           # <1>    
+         Ver_Bundestag = pt03,        # <1> 
+         Ver_Verwaltung = pt04,       # <1>
+         Ver_kath_Kirche = pt06,      # <1>
+         Ver_evan_Kirche = pt07,      # <1>
+         Ver_Justiz = pt08,           # <1>
+         Ver_TV = pt09,               # <1>
+         Ver_Zeitung = pt10,          # <1>
+         Ver_Uni = pt11,              # <1>
+         Ver_Regierung = pt12,        # <1>
+         Ver_Polizei = pt14,          # <1>
+         Ver_Parteien = pt15,         # <1>
+         Ver_Kom_EU = pt19,           # <1>
+         Ver_EU_Par = pt20)           # <1>
+
+htmlTable(head(allbus_vertrauen))     # <2>
+```
+
+1.  Mit dem `rename` Befehl können wir die Variablen umbennen
+2.  Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir `htmlTable` für eine schönere Darstellung der Tabelle sowie `head`, um uns die ersten paar Zeilen des Datensatzes `allbus_vertrauen` anzeigen zu lassen
+
+## Deskriptive Statistik für den Teildatensatz
+
+```{r Deskriptive Statistik}
+summary(allbus_vertrauen)  # <1>
+```
+
+1.  Mit dem `summary` Befehl können wir uns die deskritpive Statistik ausgeben lassen
+
+## Suche nach der zugrunde liegenden Variable - Die Faktorenanalyse
+
+```{r Varianz}
+colors = c(rep("darkgreen", 1))                             # <1>
+
+ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen)) +   # <1>
+  geom_histogram(binwidth = 0.5, fill = colors)             # <1>
+```
+
+1.  Visuelle Überprüfung mit einem Histogram für die erste Variable `Ver_Gesundheitswesen`. Die restlichen Variablen sollten auch überprüft werden.
+
+```{r Linearität}
+ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen, y = Ver_BVerfG)) +  # <1>
+  geom_point() +                                                           # <1>
+  geom_abline(linetype = "dashed", color = "darkgreen", size = 1)          # <1>
+```
+
+1.  Visuelle Überprüfung mit einem Streudiagramm für die erste Variable `Ver_Gesundheitswesen` & `Ver_BVerfG`. Die restlichen Variablen sollten auch überprüft werden.
+
+```{r Normalverteilung}
+colors = c(rep("darkgreen", 1))
+
+ggplot(allbus_vertrauen, aes(x = Ver_Gesundheitswesen)) +   # <1>
+  geom_histogram(binwidth = 0.5, fill = colors)             # <1>
+
+shapiro.test(allbus_vertrauen$Ver_Gesundheitswesen)         # <2>
+```
+
+1.  Visuelle Überprüfung mit einem Histogram für die erste Variable `Ver_Gesundheitswesen`
+2.  Statistische Überprüfung mittels Shapiro Wilk Test für die erste Variable `Ver_Gesundheitswesen`. Ein p-Wert unter 0.05 = keine Normalverteilung und ein p-Wert über 0.05 = Normalverteilung
+
+```{r fehlende Werte}
+allbus_vertrauen = allbus_vertrauen %>%   
+  mutate(across(Ver_Gesundheitswesen:Ver_EU_Par, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>%  # <1>
+  na.omit()                                                                                   # <2>
+```
+
+1.  Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter. Während `%in%` angibt, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
+2.  Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+
+```{r Beispiel Boxplot}
+boxplot(allbus_vertrauen) # <1>
+```
+
+1.  Erstellen des Boxpltos
+
+```{r Beispiel für eine Korrelationsmatrix}
+htmlTable(round(cor(allbus_vertrauen), digits = 3)) # <1>
+```
+
+1.  Die `htmlTable` Funktion ermöglicht uns eine schönere Darstellung der Tabelle, `round` rundet die Werte auf die von uns mit `digits = 3` festgelegten drei Nachkommastellen, während wir mit `cor` die Korrelationen für die Werte in unserem Datensatz `allbus_vertrauen` berechnen
+
+```{r Bartlett-Test}
+cortest.bartlett(allbus_vertrauen) # <1>
+```
+
+1.  Wir führen den Bartlett-Test durch
+
+```{r KMO und MSA}
+KMO(allbus_vertrauen) # <1>
+```
+
+1.  Wir lassen uns das KMO berechnen
+
+## Modell der Faktorenanalyse
+
+```{r nfactors}
+nfactors(allbus_vertrauen, rotate = "varimax", fm="mle") # <1>
+```
+
+1.  Mit der `nfactors` Funktion können wir verschiedene Schätzungen durchführen. Hierfür wählen wir ein Rotation mit `rotate` aus, sowie eine Methode der Schätzung mittels `fm`
+
+## Rotation der Faktoren
+
+```{r Modell der Faktorenanalyse für 3 Faktoren}
+fit =  principal(allbus_vertrauen, nfactors = 3, method = "ml", rotate = "varimax") # <1>
+```
+
+1.  Mit der `principal` Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit `nfactors` aus, legen ein Rotation mit `rotate` sowie eine Methode der Schätzung mittels `method` fest
+
+```{r Modell der Faktorenanalyse für 1 Faktoren}
+fit =  principal(allbus_vertrauen, nfactors = 3, method = "ml", rotate = "varimax") # <1>
+```
+
+1.  Mit der `principal` Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit `nfactors` aus, legen ein Rotation mit `rotate` sowie eine Methode der Schätzung mittels `method` fest
+
+## Interpretation der Ergebnisse
+
+```{r Uniqueness}
+print(fit$uniquenesses, digits = 2)
+```
+
+
+# Das Zusammenführen der Variablen zu einem Index
+
+```{r Pakete}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) # <1>
+```
+
+1.  Laden der Pakete mit `p_load`
+
+```{r}
+theme_set(theme_classic()) # <1>
+```
+
+1.  Visualisierungshintergrund festlegen
+
+Danach laden wir die Daten aus dem Allbus.
+
+```{r Laden der Daten}
+daten = haven::read_dta("Datensatz/Allbus_2021.dta") # <1>
+```
+
+1.  Laden des Datensatzes
+
+## Teildatensatz mit den benötigten Index-Variablen
+
+```{r Teildatensatz}
+allbus_vertrauen = daten %>%                                              # <1>
+  select(pt01:pt20) %>%                                                   # <2>
+  mutate(across(pt01:pt20, ~ as.numeric(.))) %>%                          # <3>
+  mutate(across(pt01:pt20, ~ ifelse(.%in% c(-9, -11, -42), NA,.))) %>%    # <4>
+  na.omit()                                                               # <5>
+```
+
+1.  Wir erstellen ein neues Objekt basierend auf dem Datensatz `daten`
+2.  Mit dem Doppelpunkt wählen wir alle Variablen zwischen `pt01` bis `pt20` aus
+3.  Die Kombination aus `mutate` und `across` ermöglicht es uns die Funktion `as.numeric` in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die `~` gibt den Start der anzuwenden Funktion (hier `as.numeric` an), der Punkt innerhalb der Klammer der `as.numeric` Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen
+4.  Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter, mit dem Ausdruck `%in%` prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
+5.  Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+
+```{r Rename}
+allbus_vertrauen = allbus_vertrauen %>% 
+  
+  rename(Ver_Gesundheitswesen = pt01, # <1>
+         Ver_BVerfG = pt02,           # <1>    
+         Ver_Bundestag = pt03,        # <1> 
+         Ver_Verwaltung = pt04,       # <1>
+         Ver_kath_Kirche = pt06,      # <1>
+         Ver_evan_Kirche = pt07,      # <1>
+         Ver_Justiz = pt08,           # <1>
+         Ver_TV = pt09,               # <1>
+         Ver_Zeitung = pt10,          # <1>
+         Ver_Uni = pt11,              # <1>
+         Ver_Regierung = pt12,        # <1>
+         Ver_Polizei = pt14,          # <1>
+         Ver_Parteien = pt15,         # <1>
+         Ver_Kom_EU = pt19,           # <1>
+         Ver_EU_Par = pt20)           # <1>
+
+htmlTable(head(allbus_vertrauen))     # <2>
+```
+
+1.  Mit dem `rename` Befehl können wir die Variablen umbennen
+2.  Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir `htmlTable` für eine schönere Darstellung der Tabelle sowie `head`, um uns die ersten paar Zeilen des Datensatzes `allbus_vertrauen` anzeigen zu lassen
+
+## Berechnen eines Ungewichteten Summenindex
+
+```{r Berechung Index}
+index_vertrauen = allbus_vertrauen %>% 
+  mutate(vertrauen_ges_inst = (Ver_Gesundheitswesen + Ver_BVerfG + Ver_Bundestag + Ver_Verwaltung + Ver_kath_Kirche + Ver_evan_Kirche + Ver_Justiz+ Ver_TV +  Ver_Zeitung + Ver_Uni + Ver_Regierung + Ver_Polizei + Ver_Parteien + Ver_Kom_EU + Ver_EU_Par) / 15)   # <1>
+htmlTable(head(index_vertrauen))   # <2>
+```
+
+1.  Wir bilden mit Hilfe von `mutate` die neue Variable `vertrauen_ges_inst`, welche sich aus der Summe der Indikatoren geteilt durch die Anzahl der Indikatoren zusammensetzt.
+2.  Die `htmlTable` Funktion ermöglicht uns eine schönere Darstellung der Tabelle. Mit `head` wählen wir die ersten paar Fälle aus dem Datensatz `index_vertrauen` aus
+
+```{r statistik}
+summary(index_vertrauen$vertrauen_ges_inst) # <1>
+```
+
+1.  Mit dem `summary` Befehl können wir uns die deskritpive Statistik ausgeben lassen
+
+## Reliabilität des Indizes berechnen
+
+```{r}
+index_vertrauen %>%
+  select(Ver_Gesundheitswesen:Ver_EU_Par) %>%  # <1>
+  psych::alpha(check.keys=TRUE)                # <2>
+```
+
+1.  Wir wählen mit `select` alle Variablen zwischen `Ver_Gesundheitswesen` und `Ver_EU_Par` aus
+2.  Hier rufen wir das Paket `psych` auf, nutzen aus diesem die Funktion `alpha`, um Cronbach's Alpha zu berechnen
+

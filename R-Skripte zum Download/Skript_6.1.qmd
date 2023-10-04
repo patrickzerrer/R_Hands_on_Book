@@ -1,0 +1,33 @@
+---
+title: "Bivariate Statistik & Mittelwertvergleiche"
+author: "tba"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+---
+
+# Einführung in die Bivariate Statistik und Mittelwertvergleiche
+
+## Allgmeines zu Mittelwertvergleichen
+
+Statistische Tests erlauben es uns, auf der Basis von quantitativen Daten
+eine begründete Entscheidung über die Gültigkeit oder Ungültigkeit
+einer Hypothese zu treffen.
+
+Bei den hier verwendeten Beispielen geht es darum, Unterschiede zwischen
+zwei oder mehr Stichproben (oder Teilstichproben) statistisch zu überprüfen.
+
+Ein statistischer Test liefert Aufschluss darüber, wie wahrscheinlich es ist,
+dass wir die Nullhypothese verwerfen und/oder die alternative Hypothese
+annehmen können.
+
+Können wir aufgrund des Testausgangs davon ausgehen, dass ein (nicht
+zufälliger) Unterschied zwischen zwei Stichproben besteht, so sprechen wir
+von einem signifikanten (überzufälligen) Unterschied.
+
+## Augenscheinliche Überprüfung mit Kreuztabellen und Boxplots
+
