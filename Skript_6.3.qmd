@@ -25,7 +25,7 @@ Grundsätzlich unterscheiden wir zwischen drei verschiedenen Arten von t-tests:
 
 **Der Einstichprobentest**
 
-Der Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert.
+Der Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert. Wir können so beispielsweise überprüfen, ob das Einkommen in einer Stichprobe dem deutschlandweiten Mittelwert entspricht. 
 
 **t-test für unabhängige Stichproben**
 
