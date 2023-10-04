@@ -8,6 +8,11 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
+execute:
+  echo: true
+  message: false
+  warning: false
 ---
 
 # Grundlagen der Varianzanalyse
@@ -29,7 +34,6 @@ Anschließend laden wir unseren Datensatz:
 
 ```{r}
 daten = haven::read_dta("Datensatz/Allbus_2021.dta")
-
 theme_set(theme_classic())
 ```
 
@@ -37,55 +41,68 @@ theme_set(theme_classic())
 
 Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements [für ausführliche Erklärungen siehe hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html). Für unsere Varianzanalyse möchten wir uns anschauen, wie sich das Alter (und Geschlecht) der Befragten auf ihr Vertrauen in die Bundesregierung auswirkt. Wir nutzen dazu die folgenden Variablen:
 
-+---------------+----------------------------------+-------------------------------+
-| Variable      | Beschreibung                     | Ausprägungen                  |
-+:=============:+:================================:+:=============================:+
-| eastwest      | Erhebungsgebiet West-Ost         | 1= Alte Bundesländer (Westen) |
-|               |                                  |                               |
-|               |                                  | 2 = Neue Bundesländer (Osten) |
-+---------------+----------------------------------+-------------------------------+
-| agec          | Alter der Befragten (gruppiert)  | -32 = nicht generierbar       |
-|               |                                  |                               |
-|               |                                  | 1 = 18-29 Jahre               |
-|               |                                  |                               |
-|               |                                  | 2 = 30-44 Jahre               |
-|               |                                  |                               |
-|               |                                  | 3 = 45-59 Jahre               |
-|               |                                  |                               |
-|               |                                  | 4 = 60-74 Jahre               |
-|               |                                  |                               |
-|               |                                  | 5 = 75-89 Jahre               |
-|               |                                  |                               |
-|               |                                  | 6 = über 89 Jahre             |
-+---------------+----------------------------------+-------------------------------+
-| sex           | Geschlecht der Befragten         | -9 = keine Angabe             |
-|               |                                  |                               |
-|               |                                  | 1 = Mann                      |
-|               |                                  |                               |
-|               |                                  | 2 = Frau                      |
-|               |                                  |                               |
-|               |                                  | 3 = Divers                    |
-+---------------+----------------------------------+-------------------------------+
-| pt12          | Vertrauen in die Bundesregierung | -42 = Datenfehler             |
-|               |                                  |                               |
-|               |                                  | -11 = TNZ Split               |
-|               |                                  |                               |
-|               |                                  | -9 = Keine Angabe             |
-|               |                                  |                               |
-|               |                                  | 1 = Gar kein Vertrauen        |
-|               |                                  |                               |
-|               |                                  | ...                           |
-|               |                                  |                               |
-|               |                                  | 7 = Großes Vertrauen          |
-+---------------+----------------------------------+-------------------------------+
++---------------+-------------------------------------+-------------------------------+
+| Variable      | Beschreibung                        | Ausprägungen                  |
++:=============:+:===================================:+:=============================:+
+| pn11          | Genereller Stolz, Deutscher zu sein | -42 = Datenfehler             |
+|               |                                     |                               |
+|               |                                     | -11 = TNZ Split               |
+|               |                                     |                               |
+|               |                                     | -10 = TNZ Filter              |
+|               |                                     |                               |
+|               |                                     | -9 = Keine Angabe             |
+|               |                                     |                               |
+|               |                                     | 1 = Sehr Stolz                |
+|               |                                     |                               |
+|               |                                     | 2 = Ziemlich Stolz            |
+|               |                                     |                               |
+|               |                                     | 3 = Nicht sehr stolz          |
+|               |                                     |                               |
+|               |                                     | 4 = Gar nicht stolz           |
++---------------+-------------------------------------+-------------------------------+
+| eastwest      | Erhebungsgebiet West-Ost            | 1= Alte Bundesländer (Westen) |
+|               |                                     |                               |
+|               |                                     | 2 = Neue Bundesländer (Osten) |
++---------------+-------------------------------------+-------------------------------+
+| agec          | Alter der Befragten (gruppiert)     | -32 = nicht generierbar       |
+|               |                                     |                               |
+|               |                                     | 1 = 18-29 Jahre               |
+|               |                                     |                               |
+|               |                                     | 2 = 30-44 Jahre               |
+|               |                                     |                               |
+|               |                                     | 3 = 45-59 Jahre               |
+|               |                                     |                               |
+|               |                                     | 4 = 60-74 Jahre               |
+|               |                                     |                               |
+|               |                                     | 5 = 75-89 Jahre               |
+|               |                                     |                               |
+|               |                                     | 6 = über 89 Jahre             |
++---------------+-------------------------------------+-------------------------------+
+| pt14          | Vertrauen in die Polizei            | -42 = Datenfehler             |
+|               |                                     |                               |
+|               |                                     | -11 = TNZ Split               |
+|               |                                     |                               |
+|               |                                     | -9 = Keine Angabe             |
+|               |                                     |                               |
+|               |                                     | 1 = Gar kein Vertrauen        |
+|               |                                     |                               |
+|               |                                     | ...                           |
+|               |                                     |                               |
+|               |                                     | 7 = Großes Vertrauen          |
++---------------+-------------------------------------+-------------------------------+
 
 Innerhalb unseres Datenmanageements schließen wir fehlerhafte und fehlende Werte der Variablen sex, agec und pt12 aus und benennen falls nötig die Variablen um:
 
 ```{r}
-data <- daten %>%
-  filter(., pt12 > 0) %>% 
-  rename(., trustreg = pt12)
 
+daten <- daten %>%
+  filter(., pn11 > 0 & pt14 > 0 & agec > 0) %>% 
+  rename(., stolzd = pn11,
+            trustpol = pt14) %>% 
+  mutate(stolzd = as.factor(stolzd),
+         eastwest = as.factor(eastwest),
+         agec = as.factor(agec),
+         trustpol = as.numeric(trustpol))
 ```
 
 # Voraussetzungsprüfung für einfaktorielle und mehrfaktorielle Varianzanalyse
@@ -100,75 +117,76 @@ Die meisten Voraussetzungen, die für die Durchführung und Interpretation einer
 
 ## Überprüfung der Normalverteilung
 
-Eine weitere wichtige, leicht vorab zu prüfende Bedingung, die für eine Varianzanalyse erfüllt sein muss, ist die **Normalverteilung der abhängigen Variable**. Diese können wir graphisch überprüfen:
-
-In R nutzen wir das Paket `ggplot2` von Wickham et al. um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket `ggplot2` mit dem Befehl `ggplot()` aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier `Varianzanalyse`) und unter aes unsere Variable (hier `Angst`). Mit einem Plus-Zeichen legen wir die nächste Ebene fest und geben hier mit `geom_histogram` an, dass wir ein Histogramm wünschen. Die Spezifizierungen innerhalb der Klammer geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll `(aes(y = ..count..))`, wir die Außenumrandung schwarz `color = black` und die Füllfarbe grau wünschen (`fill = grey`). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik. Zuletzt legen wir innerhalb der Klammer die Breite unserer Säulen fest. Mit `binwidth = 1` verweisen wir hier auf eine Breite der Balken 1. Nun haben wir ein vollständiges Histogramm. Wir können jedoch für ein verschönertes Aussehen unseres Graphen mit `labs` zusätzlich die Achsen beschriften.
+Eine weitere wichtige, leicht vorab zu prüfende Bedingung, die für eine Varianzanalyse erfüllt sein muss, ist die **Normalverteilung der abhängigen Variable**. Diese können wir graphisch mit einem [Histogrammm](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.4.html#histogramme) überprüfen:
 
 ```{r}
 #Histogramm ausgeben
-ggplot(daten, aes(happy)) +
-  geom_histogram(aes(y = ..count..), 
+ggplot(daten, aes(trustpol)) +
+  geom_histogram(aes(y = after_stat(count)), 
                  color = "black", fill = "grey", 
                  binwidth = 1) +
-  labs(x = "Zufriedenheit", 
+  labs(x = "Vertrauen in die Polizei", 
          y = "")
 ```
 
-Wir sehen an der Grafik, dass die Variable Zufriedenheit rechtssteil ist, also die Teilnehmer der Befragung eher eine höhere Zufriedenheit angegeben haben.
+Wir sehen an der Grafik, dass die Variable Zufriedenheit rechtssteil ist, also die Teilnehmer der Befragung eher ein höheres Vertrauen angegeben haben.
 
-Zusätzliche Gewissheit beuüglich des Vorliegens der Normalverteilung bietet der Kolmogorov-Smirnov-Test oder der Shapiro-Wilk-Test (bei diesem wird jedoch eine Stichprobengröße zwischen 3 und 5000 vorausgesetzt, welche wir hier überschreiten, daher rechnen wir nur den Kolmogorov-Smirnov-Test). In R erhalten wir diese Tests mit dem Befehl `LillieTest()` aus dem Paket `DescTools()` bzw. `shapiro.test()`. Beide Tests testen auf Abweichung von der Normalverteilung, demnach sollte diese nicht signifikant ausfallen (da ein signifikanter Test aussagt, dass eine Abweichung von der Normalverteilung besteht, was wir nicht möchten).
+Zusätzliche Gewissheit bezüglich des Vorliegens der Normalverteilung bietet der Kolmogorov-Smirnov-Test oder der Shapiro-Wilk-Test (welcher für kleinere Stichproben zwischen 3 und 5000 Fällen konzipiert ist). In R erhalten wir diese Tests mit dem Befehl `LillieTest()` aus dem Paket `DescTools()` bzw. `shapiro.test()`. Beide Tests testen auf Abweichung von der Normalverteilung, demnach sollte diese nicht signifikant ausfallen (da ein signifikanter Test aussagt, dass eine Abweichung von der Normalverteilung besteht, was wir nicht möchten).
 
 ```{r}
 #Lilliefors Kolmogorov-Smirnov-Test
-LillieTest(daten$happy)
+LillieTest(daten$trustpol)
 #Shapiro-Wilk Test
-#shapiro.test(daten$happy)
+shapiro.test(daten$trustpol)
 ```
 
-Im vorliegenden Beispiel ist der Test signifikant. Allerdings reagieren beide Tests insbesondere bei großen Stichproben sehr sensibel, sodass bereits leichte Abweichungen von der Normalverteilung (etwa durch Ausreißer) die Tests signifikant werden lassen; in diesen Fällen ist es sinnvoll eher auf die graphische Überprüfung (siehe oben) zu schauen. Sowohl der Kolmogorov-Smirnov-Test als auch die Grafik lassen jedoch nicht auf eine perfekte Normalverteilung unserer abhängigen Variablen schließen. In diesem Fall kann die Varianzanalyse dennoch gerechnet werden, da solange die Verteilung nicht extrem steil ist, das Verfahren einigermaßen robust ist. Bei einer sehr starken Verletzung der Normalverteilung müsste ggf. auf nicht parametrische Tests ausgewichen werden.
+Im vorliegenden Beispiel ist der Test signifikant. Allerdings reagieren beide Tests insbesondere bei großen Stichproben sehr sensibel, sodass bereits leichte Abweichungen von der Normalverteilung (etwa durch Ausreißer) die Tests signifikant werden lassen; in diesen Fällen ist es sinnvoll eher auf die graphische Überprüfung (siehe oben) zu schauen. Sowohl der Kolmogorov-Smirnov-Test als auch die Grafik lassen jedoch nicht auf eine perfekte Normalverteilung unserer abhängigen Variablen schließen. In diesem Fall kann die Varianzanalyse dennoch gerechnet werden, da solange die Verteilung nicht extrem steil ist, das Verfahren einigermaßen robust ist. Bei einer sehr starken Verletzung der Normalverteilung müsste ggf. auf nicht parametrische Tests wie den Kruskal-Wallis Test ausgewichen werden.
 
 ## Überprüfung der Homogenität der Fehlervarianzen
 
-Die letzte Voraussetzung, die für eine Varianzanalyse erfüllt sein muss, ist die Homogenität der Fehlervarianzen. Um diese zu testen, nutzen wir den Levene-Test auf Varianzhomogenität. Hierfür nutzen wir die Funktion `leveneTest()`aus dem Paket `car`. Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (\~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird. Haben wir nur eine abhängige Variable, so geben wir diese an. Haben wir mehrere so können wir diese mit einem \* verbinden. Hier wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.
+Die letzte Voraussetzung, die für eine Varianzanalyse erfüllt sein muss, ist die Homogenität der Fehlervarianzen. Um diese zu testen, nutzen wir den Levene-Test auf Varianzhomogenität. Hierfür nutzen wir die Funktion `leveneTest()`aus dem Paket `car`:
 
 ```{r}
 #Levene-Test für einfaktorielle Varianzanalyse
 daten %>% 
-  leveneTest(happy~cntry, data = ., center = mean)
+  leveneTest(trustpol~stolzd, data = ., center = mean) #<1>
 
 #Levene-Test für mehrfaktorielle Varianzanalyse ausgeben
 daten %>% 
-  leveneTest(happy ~ cntry*gndr, data = ., center = mean)
+  leveneTest(trustpol ~ stolzd*agec*eastwest, data = ., center = mean) #<2>
 ```
 
-Wenn der Levene-Test statistisch signifikant ausfällt, sollte die Hypothese homogener Varianzen abgelehnt werden. Falls der Test wie im vorliegenden Fall signifikant ausfällt (da der `Pr(>F-Wert)` kleiner als 0.05 ist) wurde die Voraussetzung der Homogenität der Fehlervarianzen verletzt. In einem solchen Fall können wir wahlweise auf nicht-parametrische Tests ausweichen, oder die Varianzanalyse dennoch berechnen, wenn wahlweise die deskriptiven Kennwerte keine allzu große Streuung aufweisen, oder wir einen alternativen Posthoc-Test (etwa Tamhame T2) wählen.
+1.  Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (\~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird.
+2.  Bei mehrenen unabhängigen Variablen können wir diese mit einem \* verbinden. Hier wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.
+
+Wenn der Levene-Test statistisch signifikant ausfällt, sollte die Hypothese homogener Varianzen abgelehnt werden. Falls der Test wie im vorliegenden Fall signifikant ausfällt (da der `Pr(>F-Wert)` kleiner als 0.05 ist) wurde die Voraussetzung der Homogenität der Fehlervarianzen verletzt. In einem solchen Fall können wir wahlweise auf nicht-parametrische Tests ausweichen, oder die Varianzanalyse dennoch berechnen, wenn wahlweise die deskriptiven Kennwerte keine allzu große Streuung aufweisen, oder wir einen alternativen Posthoc-Test (etwa `Tamhame T2`) wählen.
 
 # Einfaktorielle Varianzanalyse (ohne Messwiederholung)
 
-Nachdem wir die Voraussetzungen geprüft haben, schauen wir uns die einfaktorielle Varianzanalyse an. Im vorliegenden Beispiel möchten wir gerne überprüfen, inwiefern sich die Nationalität bzw. Länderzugehörigkeit (Variable `cntry`; Deutschland, Schweden, Frankreich und Großbritannien) auf die Lebenszufriedenheit (Variable `happy`) auswirkt.
-
-Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die `group_by`-Funktion in Kombination mit der `summarise`-Funktion. Im nachfolgenden Schritt haben wir mit Hilfe des Befehls `kable()` aus dem Paket `knitr` das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.
+Nachdem wir die Voraussetzungen geprüft haben, schauen wir uns die einfaktorielle Varianzanalyse an. Im vorliegenden Beispiel möchten wir gerne überprüfen, inwiefern sich das Alter (Variable `agec`; ) auf das Vertrauen in die Bundesregierung (Variable `trustreg`) auswirkt.
 
 ```{r}
 daten %>% 
-  group_by(cntry) %>% 
-  summarise(Mittelwert = mean(happy, na.rm = T), 
-            Standardabweichung = sd(happy, na.rm = T)) %>% 
-  kable(digits = 2, col.names = c("Land", "M", "SD"), caption = "Descriptives Lebenszufriedenheit")
+  group_by(stolzd) %>% 
+  summarise(Mittelwert = mean(trustpol, na.rm = T), 
+            Standardabweichung = sd(trustpol, na.rm = T)) %>% 
+  kable(digits = 2, col.names = c("Stolz", "M", "SD"), caption = "Descriptives Vertrauen")
 ```
 
-Anhand der deskriptiven Statistiken sehen wir, dass die Zufriedenheit in Frankreich am geringsten ist und in Schweden am höchsten. Zudem erkennen wir, dass die Standardabweichungen der Ländern sich nicht drastisch unterscheiden, wir demnach trotz der Verletzung der Varianzhomogenität die ANOVA rechnen können.
+Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in die Polizei am höchsten ausgeprägt ist, bei Personen die insbesondere stolz sind, Deutscher zu sein. Zudem erkennen wir, dass die Standardabweichungen der Kategorien sich nicht drastisch unterscheiden, wir demnach trotz der Verletzung der Varianzhomogenität die ANOVA rechnen können.
 
-Anschließend können wir die einfaktorielle ANOVA berechnen.Dafür nutzen wir die Funktion `aov_car` aus dem `afex`-Package, in welcher wir zunächst die abhängige Variable (`happy`) angeben müssen und nach einer Tilde die unabhängige Variabel (`cntry`) Zudem müssen wir den Zusatz `+ Error()` nutzen un in der Klammer die Fallid (hier `idno`) angeben. Da die Variable idno doppelte Fälle hatte müssen wir in dem vorliegenden Beispiel diese ausschließen, da andernfalls der Befehl nicht funktioniert. Dies geschieht mit dem Befehl `distinct` welcher aus der Variablen `idno` alle doppelten Fälle ausschließt. Der Zusatz `.keep_all = T` bedeutet, dass wir alle Variablen des Datensatzes behalten wollen und nur die doppelten Fälle ausgeschlossen werden sollen. Alles speichern wir als Objekt `fit` welches wir anschließend mit `print` aufrufen.
+Anschließend können wir die einfaktorielle ANOVA berechnen.Dafür nutzen wir die Funktion `aov_car` aus dem `afex`-Packag: 
 
 ```{r}
-#Einfaktorielle ANOVA
+
 fit <- daten %>% 
-dplyr::distinct(idno, .keep_all = T) %>% 
-aov_car(happy ~ cntry + Error(idno), data = ., anova_table = "pes")
+dplyr::distinct(respid, .keep_all = T) %>% 
+aov_car(trustpol ~ stolzd + Error(respid), data = ., anova_table = "pes")
 
 print(fit)
 ```
+
+in welcher wir zunächst die abhängige Variable (`happy`) angeben müssen und nach einer Tilde die unabhängige Variabel (`cntry`) Zudem müssen wir den Zusatz `+ Error()` nutzen un in der Klammer die Fallid (hier `idno`) angeben. Da die Variable idno doppelte Fälle hatte müssen wir in dem vorliegenden Beispiel diese ausschließen, da andernfalls der Befehl nicht funktioniert. Dies geschieht mit dem Befehl `distinct` welcher aus der Variablen `idno` alle doppelten Fälle ausschließt. Der Zusatz `.keep_all = T` bedeutet, dass wir alle Variablen des Datensatzes behalten wollen und nur die doppelten Fälle ausgeschlossen werden sollen. Alles speichern wir als Objekt `fit` welches wir anschließend mit `print` aufrufen.
 
 Als Output erhalten wir eine Tabelle mit den folgenden Parametern:
 
@@ -179,13 +197,13 @@ Als Output erhalten wir eine Tabelle mit den folgenden Parametern:
 -   pes: parties Eta-Quadrat (partial eta-quared)
 -   p.value: Signifikanz
 
-**Effect** zeigt die unabhängige Variable des Modells, in diesem Fall die Ländervariable `cntry`. Die drei bedeutet, dass hier insgesamt eine Gruppe mit 3 anderen (= vier Ausprägungen) verglichen wurde. mean-squared errors
+**Effect** zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Stolz ein Deutscher zu sein, `stolzd`. Die drei bedeutet, dass hier insgesamt eine Gruppe mit 3 anderen (= vier Ausprägungen) verglichen wurde.
 
-Über die Werte der zweiten und vierten Spalte, die **Freiheitsgrade** (`df`) und die **F-Werte** (`F`) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte `p.value` die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert \<.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied der Länder im Bezug auf die Lebenszufriedenheit ersichtlich.
+Über die Werte der zweiten und vierten Spalte, die **Freiheitsgrade** (`df`) und die **F-Werte** (`F`) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte `p.value` die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert \<.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Stolzes ein Deutscher zu sein im Bezug auf das Vertrauen in die Polizei ersichtlich.
 
 Die mittlere quadratische Abweichung (MSE) oder Fehlervarianz ist die Summe der Abweichungsquadrate aller Werte vom jeweiligen Gruppenmittelwert. Berechnet wird diese durch die Quadratsummer der Fehlerresiduen geteilt durch die Freiheitsgrade. Sie gibt damit die Varianz innerhalb der einzelnen Gruppen (=nicht erklärte Varianz) wieder.
 
-Die Spalte `pes` steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an -- partiell ist das Eta^2^, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Im Datenbeispiel hat demnach die Länderzugehörigkeit (und damit auch unser Gesamtmodell) eine Erklärkraft von 1.8 Prozent. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.
+Die Spalte `pes` steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an -- partiell ist das Eta^2^, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Im Datenbeispiel hat demnach der Stolz darauf ein Deutscher zu sein (und damit auch unser Gesamtmodell) eine Erklärkraft von 1.3 Prozent. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.
 
 ## PostHocTests
 
@@ -193,16 +211,17 @@ Zuletzt müssen wir die Posthoc-Tests berechnen, welche uns Aufschluss darüber 
 
 ```{r}
 #Tukey Post-Hoc Test
-emmeans::emmeans(fit, specs = "cntry") %>% 
+emmeans::emmeans(fit, specs = "stolzd") %>% 
   pairs()
 
 #Tamhame T2 Test
 daten %>% 
-aov(happy ~ cntry, data = .) %>% 
+aov(trustpol ~ stolzd, data = .) %>% 
   tamhaneT2Test(.)
 ```
 
-Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur dieser angezeigt). Werte unter .05 bedeuten, dass zwischen diesen Gruppen ein signifikanter Mittelwertunterschied besteht. In unserem Beispiel sehen wir Unterschiede zwischen Frankreich und allen weiteren Ländern, sowie einen Unterschied zwischen Großbritannien und Schweden. Wenn wir auf die deskriptiven Statistiken schauen, sehen wir demnach, dass in Frankreich die Lebenszufriedenheit signifikant geringer als in Deutschland, Schweden und Großbritannien ist, sowie die Lebenszufriedenheit in Großbritannien signifikant geringer als in Schweden ausfällt.
+Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur dieser angezeigt). Werte unter .05 bedeuten, dass zwischen diesen Gruppen ein signifikanter Mittelwertunterschied besteht. In unserem Beispiel sehen wir Unterschiede zwischen
+
 
 ## Exkurs: Kruskal Wallis Test
 
@@ -215,20 +234,20 @@ Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick 
 ```{r}
 #Deskriptive Statistiken ausgeben
 daten %>% 
-  group_by(cntry, gndr) %>% 
-  summarise(Mittelwert = mean(happy, na.rm = T), 
-            Standardabweichung = SD(happy, na.rm = T)) %>% 
-  kable(digits = 2, col.names = c("Land", "Geschlecht", "M", "SD"), caption = "Descriptives Lebenszufriedenheit")
+  group_by(stolzd, eastwest) %>% 
+  summarise(Mittelwert = mean(trustpol, na.rm = T), 
+            Standardabweichung = SD(trustpol, na.rm = T)) %>% 
+  kable(digits = 2, col.names = c("Stolz", "Herkunft", "M", "SD"), caption = "Descriptives Vertrauen")
 ```
 
 Zunächst können wir unsere deskriptiven Statistiken betrachten. Hier interessieren uns insbesondere die Mittelwerte für die einzelnen Gruppen. Diese Mittelwerte im Fließtext kurz zu erwähnen, gehört zum „guten Ton" bei der Auswertung einer Varianzanalyse und sollte daher nicht vergessen werden.
 
-Nun können wir unsere ANOVA aufstellen. Es gibt verschiedene Möglichkeiten eine ANOVA zu berechnen, namentlich Type I, II und III. Die einzelnen Typen unterscheiden sich darin, wie die Parameter (insbesondere die Quadratsumme) berechnet wird. Typ I sollte vor allem für ausgeglichene Daten verwendet werden, also Daten bei der für jede Gruppe die gleiche Anzahl an Fällen vorliegen. Ist dies nicht der Fall, sollte Typ II oder Typ III (beispielsweise die Option der Anova in SPSS) verwendet werden. Der typische Befehl für eine Anova in R ist der Befehl `aov()`. Dieser ist jedoch nur für die Typ I Anova ausgelegt, daher nutzen wir hier erneut den Befehl `aov_car()` (sowie den distict-Befehl) aus dem `afex`-Paket welcher standardmäßig die Anova nach Typ III berechnet. Im Prinzip nutzen wir die selbe Syntax wie bei der unifaktoriellen Anova. Wir ergänzen allerdings unsere zweitere unabhängige Variable, beziehungsweise verbinden die beiden unabhängigen Variablen mit einem \*. Dadurch erhalten wir sowohl die Werte für die einzelnen Variablen als auch für den Interaktionsterm, also das Zusammenspiel der Variablen.
+Nun können wir unsere ANOVA aufstellen. Es gibt verschiedene Möglichkeiten eine ANOVA zu berechnen, namentlich Type I, II und III. Die einzelnen Typen unterscheiden sich darin, wie die Parameter (insbesondere die Quadratsumme) berechnet wird. Typ I sollte vor allem für ausgeglichene Daten verwendet werden, also Daten bei der für jede Gruppe die gleiche Anzahl an Fällen vorliegen. Ist dies nicht der Fall, sollte Typ II oder Typ III verwendet werden. Der typische Befehl für eine Anova in R ist der Befehl `aov()`. Dieser ist jedoch nur für die Typ I Anova ausgelegt, daher nutzen wir hier erneut den Befehl `aov_car()` (sowie den distict-Befehl) aus dem `afex`-Paket welcher standardmäßig die Anova nach Typ III berechnet. Im Prinzip nutzen wir die selbe Syntax wie bei der unifaktoriellen Anova. Wir ergänzen allerdings unsere zweitere unabhängige Variable, beziehungsweise verbinden die beiden unabhängigen Variablen mit einem \*. Dadurch erhalten wir sowohl die Werte für die einzelnen Variablen als auch für den Interaktionsterm, also das Zusammenspiel der Variablen.
 
 ```{r}
 fit2 <- daten %>% 
-dplyr::distinct(idno, .keep_all = TRUE) %>% 
-  afex::aov_car(happy ~ cntry * gndr + Error(idno),
+dplyr::distinct(respid, .keep_all = TRUE) %>% 
+  afex::aov_car(trustpol ~ stolzd * eastwest + Error(respid),
                                      data = ., anova_table = "pes")
 print(fit2)
 ```
@@ -241,7 +260,7 @@ Im Anschluss müssen wir, wie in der univariaten ANOVA, die Posthoc-Tests berech
 
 ```{r}
 #Tukey Post-Hoc Test
-emmeans::emmeans(fit2, specs = c("cntry", "gndr")) %>% 
+emmeans::emmeans(fit2, specs = c("stolzd", "eastwest")) %>% 
   pairs()
 ```
 
@@ -251,13 +270,13 @@ Um einen möglichen Interaktionseffekt (auch wenn in unseren Fall der Interkatio
 
 ```{r}
 #Interaktionsplot ausgeben
-emmip(fit2, cntry ~ gndr) + 
-  labs(title = "Geschätzes Randmittel von Lebenszufriedenheit", 
+emmip(fit2, eastwest ~ stolzd) + 
+  labs(title = "Geschätzes Randmittel von Vertrauen in die Polizei", 
        y = "Geschätzte Randmittel",
-       x = "Geschlecht")
+       x = "Stolz, Deutscher zu sein")
 
-emmip(fit2, gndr ~ cntry) + 
-  labs(title = "Geschätzes Randmittel von Lebenszufriedenheit", 
+emmip(fit2, stolzd ~ eastwest) + 
+  labs(title = "Geschätzes Randmittel von Vertrauen in die Polizei", 
        y = "Geschätzte Randmittel",
-       x = "Land")
+       x = "Herkunft (Ost vs West)")
 ```
