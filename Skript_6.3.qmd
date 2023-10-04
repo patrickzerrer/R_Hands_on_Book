@@ -151,24 +151,28 @@ data %>%
          var.equal = T,
          data = .)
 
-
-
-
-table(dat$pt14)
-
-
   
 # Effektstärke cohens d berechnen
-dat %>% 
-  drop_na(sex, trustpol) %>% 
-  cohens_d(trustpol~sex, data = .)
+data %>% 
+  drop_na(eastwest, trustreg) %>% 
+  cohens_d(trustreg~eastwest, data = .)
 ```
 
 ## Interpretation des Outputs
 
--   was sehen wir?
+Der Output des t-tests gibt uns die folgenden Informationen aus:
 
--   was bedeutet das?
+- data
+- t
+- df
+- p-value
+- 95% confidence intervall
+- means in group 1 & 2
+
+
+## Was bedeutet unser Output inhaltlich?
+
+
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
