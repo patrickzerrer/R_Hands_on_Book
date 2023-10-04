@@ -1,5 +1,5 @@
 ---
-title: "Zusammenhänge bei zwei Variablen mittels Korrelation und Regression"
+title: "Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 2: Korrelation & Regression"
 author: "Stephanie Geise"
 toc: true
 number-sections: true
@@ -8,96 +8,213 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+editor_options: 
+  chunk_output_type: inline
 ---
 
-Das Überprüfen von Zusammenhängen bei zwei Variablen
+# Die Analyse von Zusammenhängen bei zwei metrischen Variablen
 
-# Das Überprüfen von Zusammenhängen bei zwei nominalskalierten Variablen
+Zur Analyse von Zusammenhängen bei zwei metrischen Variablen gibt es verschiedene statistische Verfahren. In diesem Teilkapitel schauen wir uns die *Korrelationsanalyse* sowie die *einfache lineare Regression* an.
 
-Pearson Chi-Quadrat ergänzen
+***GRAFIK*** 
 
-# Das Überprüfen von Zusammenhängen bei zwei nominalskalierten Variablen
+# Die Korrelationsanalyse: Analyselogik, Ziel und Einsatzgebiete
+Die Korrelationsanalyse ist eine schnelle und einfache statistische Methode, um den Zusammenhang zwischen zwei oder mehr metrischen Variablen zu untersuchen. Ziel der Korrelationsanalyse ist, die Richtung (positiv oder negativ) und die Stärke eines linearen Zusammenhangs zwischen den Variablen zu bestimmen. Als statistischer Kennwert wird ein *Korrelationskoeffizient*, zum Beispiel der *Pearson-Korrelationskoeffizient* (auch Pearson's r) ermittelt. Der Korrelationskoeffizient gibt an, wie sehr die Werte einer Variable mit den Werten einer anderen Variable zusammenhängen, d.h. *korrelieren*. Er nimmt Werte zwischen -1 und 1 an. Ein *hoher* Korrelationskoeffizient (nahe 1 oder -1) deutet auf einen *starken Zusammenhang* hin, während ein *niedriger* Koeffizient (nahe 0) auf einen *schwachen* oder *keinen Zusammenhang* hindeutet. Zudem deutet ein *positiver* Korrelationskoeffizient auf einen *positiven Zusammenhang* hin, während ein *negativer* Koeffizient auf einen *negativen Zusammenhang* verweist. 
 
-Rangkorrelation
+Der Zusammenhang zwischen den untersuchten Variablen wird dabei analysiert, *ohne* dass eine Richtung spezifiziert wird - es muss also nicht die eine Variable als unabhängig, und die andere als abhängige Variable festgelegt werden. Die Korrelationsanalyse kann vielfältig eingesetzt werden. Sie ist allerdings etwas empfindlich gegenüber Ausreißern und setzt einen linearen Zusammenhang voraus. 
 
-# Das Überprüfen von Zusammenhängen bei zwei intervalskalierten Variablen
+Vorsicht! Lassen Sie sich nicht verwirren: Der *Pearson-Korrelationskoeffizient* und die *Rangkorrelation nach Pearson* sind unterschiedliche Kennwerte, die nur ähnlich klingen. Der *Pearson-Korrelationskoeffizient* misst den linearen Zusammenhang zwischen den tatsächlichen Messwerten, während die *Rangkorrelation nach Pearson* (auch als *Spearman-Korrelationskoeffizient* bezeichnet) den monotonen Zusammenhang zwischen den Rängen der Daten untersucht. Daher ist die Rangkorrelation besser geeignet, wenn der Zusammenhang *nicht-linear* ist oder wenn *Ausreißer in den Daten* vorhanden sind. Nun soll es aber um die Analyse eines *linearen Zusammenhangs* zwischen zwei metrischen Variablen gehen. Dazu widmen wir uns nun der Korrelationsanalyse mittels Pearson-Korrelationskoeffizient.
 
-## Korrelation
+# Die Analyse von Zusammenhängen bei zwei metrischen Variablen mit Hilfe der Korrelationsanalyse
+Mit dieser Methode wollen wir untersuchen, ob es einen Zusammenhang zwischen der metrischen Variable tägliche Fernsehnutzung in Minuten (lm02) sowie der quasi-metrischen Variable Vertrauen ins Fernsehen (pt09) gibt. Wir vermuten, dass es einen positiven Zusammenhang gibt: Wer ein höheres Vertrauen in das Fernsehen hat, schaut auch mehr fern.
 
-## Analyselogik, Ziel und Einsatzgebiete einer Regressionsanalyse
+Um das zu prüfen, müssen wir zunächst wieder unsere Pakete und Allbus-Daten laden und aufbereiten. Los geht's!
 
-In diesem Notebook wird die **einfache lineare Regression** auf Grundlage der ESS-Daten vorgestellt. In der nächsten Sitzung gehen wir näher auf die Prüfung der **Voraussetzungen einer Regressionsanalyse** ein und lernen die **multiple lineare Regression** kennen.
+# Laden der Pakete und des Datensatzes
+```{r}
+install.packages("haven")
+install.packages("tidyverse")
+install.packages("devtools")
+library(tidyverse)
+library(haven)
+library(conflicted)
+library(dplyr)
+conflicts_prefer(dplyr::filter)
+
+daten = haven::read_dta("Datensatz/Allbus_2021.dta")
+```
+
+Dann erzeugen wir einen neuen Teildatensatz, benennen die benötigten Variablen in "TV_Konsum" und "TV_Vertrauen" um und selektieren die fehlende Werte (z.B. -9=Keine Angabe) mittels Filter-Funktion.
+
+# Erzeugen eines Teildatensatzes, Umbenennen der Variablen und Filtern der Fälle
+```{r}
+daten_neu <- daten %>%
+  rename(TV_Konsum = lm02)%>%
+  rename(TV_Vertrauen= pt09)%>%
+  filter(between(TV_Konsum, 0, 1500))%>%
+  filter(between(TV_Vertrauen, 1, 7))
+```
+
+Nun berechnen wir, ob eine Korrelation zwischen beiden Variablen vorliegt. Dazu nutzen wir die Funktion cor(). Mit dem print-Befehl geben wir uns den Wert aus:
+
+```{r}
+korrelation <- daten_neu %>% 
+  summarize(correlation = cor(TV_Konsum, TV_Vertrauen, use = "complete.obs"))
+print(korrelation)
+```
+
+Schauen wir uns den (sehr übersichtlichen) Output an: Wie erhalten einen Korrelationskoeffizient von 0,113903. Das bedeutet, dass zwischen den beiden Variablen TV_Konsum und TV_Vertrauen ein schwacher positiver linearer Zusammenhang besteht. Höhere Werte in einer Variable gehen also tendenziell mit höheren Werten in der anderen Variable einher. Jedoch ist die Korrelation relativ niedrig, was darauf hindeutet, dass der Zusammenhang zwischen den beiden Variablen nicht besonders stark ist.
+
+Um die Korrelation zwischen den Variablen "TV_Konsum" und "TV_Vertrauen" zu visualisieren, können wir mit dem ggplot2-Paket ein
+Scatterplot erstellen:
+
+# Visualisierung der Korrelation mit Hilfe eines Scatterplots
+```{r}
+scatterplot <- ggplot(daten_neu, aes(x = TV_Konsum, y = TV_Vertrauen)) +
+  geom_point(color = "blue") +
+  labs(x = "TV Konsum", y = "TV Vertrauen", title = "Korrelation zwischen TV Konsum und Vertrauen")
+print(scatterplot)
+```
+Hier können wir den oben bereits ermittelten Befund noch einmal grafisch inspizieren. Der leichte positive Zusammenhang zwischen dem Vertrauen in die Insitution Fernsehen und der täglichen Fernsehnutzung zeigt sich ganz schön.
+
+Führen Sie zur Übung nun noch eine Korrelationsanalyse durch, um den Zusammenhang zwischen der täglichen Fernsehnutzung in Minuten (umbenannt in "TV_Konsum") und der quasi-metrisch gemessenen Einschätzung, ob die Entwicklung der Kriminalität in Deutschland zu- oder abgenommen hat (cf03; 1=hat stark zugenommen; 5=hat stark abgenommen). Entsprechend der Kultivierungsforschung können wir vermuten, dass es einen negativen Zusammenhang geben sollte: Mehr Fernsehkonsum sollte mit einer negativen Kriminalitätsprognose korrelieren. Dazu müssen Sie zuerst wieder einen Teildatensatz mit den benötigten Variablen erzeugen, diese ggf. umbennen und filtern. Dann ermitteln Sie die Korrelation beider Variablen. 
+
+# Erzeugen eines Teildatensatzes, Umbenennen der Variablen und Filtern der Fälle
+```{r}
+daten_neu2 <- daten %>%
+  rename(TV_Konsum = lm02)%>%
+  rename(Kriminalitätsprognose= cf03)%>%
+  filter(between(TV_Konsum, 0, 1500))%>%
+  filter(between(Kriminalitätsprognose, 1, 5))
+```
+
+Nun berechnen wir, ob eine Korrelation zwischen beiden Variablen vorliegt. Dazu nutzen wir die Funktion cor(). Mit dem print-Befehl geben wir uns den Wert aus:
+
+# Berechnung und Ausgabe des Korrelationskoeffizienten
+```{r}
+korrelation <- daten_neu2 %>% 
+  summarize(correlation = cor(TV_Konsum, Kriminalitätsprognose, use = "complete.obs"))
+print(korrelation)
+```
+
+Betrachten wir den Output: Der Korrelationskoeffizient von -0,196 deutet auf einen schwachen negativen linearen Zusammenhang zwischen der "täglichen Fernsehnutzung in Minuten" und der Einschätzung zur Entwicklung der Kriminalität in Deutschland hin.
+
+ACHTUNG! Zur Interpretation müssen Sie nun aber auch berücksichtigen, wie die Werte der Variable gelabelt sind: Ein höherer Wert bedeutet, dass man eine Abnahme der Kriminalitätsentwicklung vermutet (1=hat stark zugenommen; 5=hat stark abgenommen). Der negative Korrelationskoeffizient bedeutet dann, dass höhere Werte in der "täglichen Fernsehnutzung in Minuten" tendenziell mit niedrigeren Werten in der Einschätzung zur Kriminalitätsentwicklung korrelieren. Oder anders gesagt: Personen, die mehr Fernsehen schauen, tendieren eher zur Annahme, dass die Kriminalität in Deutschland weniger zugenommen oder sogar abgenommen hat.
+
+So oder so ist zu beachten, dass der Korrelationskoeffizient nur den linearen Zusammenhang erfasst und keine Aussagen zur Kausalitäten des Zusammenhangs macht. Korrelation ist nicht Kausalität!
+
+Zur grafischen Illustration erstellen wir nun wieder ein Scatterplot:
+
+# Visualisierung der Korrelation mit Hilfe eines Scatterplots
+```{r}
+scatterplot <- ggplot(daten_neu2, aes(x = TV_Konsum, y = Kriminalitätsprognose)) +
+  geom_point(color = "red") +
+  labs(x = "TV Konsum", y = "Kriminalitätsprognose", title = "Korrelation zwischen TV Konsum und Kriminalitätsprognose")
+print(scatterplot)
+```
+
+# Die Regressionsanalyse: Analyselogik, Ziel und Einsatzgebiete
 
 ![Picture generated by Midjourney](Bilder/Loffeskater_Correlation_is_not_causation_e993d16d-c1e3-42bc-a3eb-116ae864f87c.png)
 
-### Anwendungsbereich der linearen Regression
+Die *lineare Regression* untersucht den Zusammenhang zwischen einer *abhängigen Variable* und mindestens einer *unabhängigen Variable*. Sie versucht, eine mathematische Beziehung zwischen den Variablen zu modellieren, die durch eine Linie (in einfachen linearen Regressionen) oder eine Ebene (in multiplen linearen Regressionen) repräsentiert wird. Die dahinterliegende "mathematische Idee" der linearen Regression besteht darin, die bestmögliche Anpassung der Daten an das Modell zu erreichen, um die Vorhersage der abhängigen Variable basierend auf den unabhängigen Variablen zu ermöglichen. Dazu wird ein *Regressionskoeffizient* für jede unabhängige Variable geschätzt, um ihren Einfluss auf die abhängige Variable zu quantifizieren.
 
-Die einfache lineare Regressionsanalyse wird angewandt, wenn geprüft werden soll, ob ein (als linear vermuteter) Zusammenhang zwischen zwei metrischen Variablen besteht. Sie wird daher auch als bivariate Regression bezeichnet.
+Ziel der Regressionsanalyse ist es also, die Beziehung zwischen einer *abhängigen Variable* (auch erklärte Variable, Regressand oder Prognosevariable genannt) und einer oder mehreren *unabhängigen Variablen* (oft auch erklärende Variable, Regressor oder Prädiktorvariable) zu analysieren, um Zusammenhänge quantitativ zu beschreiben und zu erklären und/oder Werte der abhängigen Variable mit Hilfe der unabhängige Variable (des Prädiktors) zu prognostizieren. Mit Hilfe der Regressionsanalyse können drei Arten von Fragestellungen untersucht werden: 
+1) Ursachenanalyse: Gibt es einen Zusammenhang zwischen der unabhängigen und der abhängigen Variable? Wie stark ist dieser? 
+2) Wirkungsanalyse: Wie verändert sich die abhängige Variable bei einer Änderung der unabhängigen Variablen? 
+3) Prognose: Können die Messwerte der abhängigen Variable durch die Werte der unabhängigen Variable vorhergesagt werden?
 
-Ziel ist es, die Beziehung zwischen einer abhängigen Variable (auch erklärte Variable, Regressand oder Prognosevariable genannt) und einer oder mehreren unabhängigen Variablen (oft auch erklärende Variable, Regressor oder Prädiktorvariable) zu analysieren, um Zusammenhänge quantitativ zu beschreiben und zu erklären und/oder Werte der abhängigen Variable mit Hilfe der unabhängige Variable (des Prädiktors) zu prognostizieren. Mit Hilfe der Regressionsanalyse können drei Arten von Fragestellungen untersucht werden: 1) Ursachenanalyse: Gibt es einen Zusammenhang zwischen der unabhängigen und der abhängigen Variable? Wie stark ist dieser? 2) Wirkungsanalyse: Wie verändert sich die abhängige Variable bei einer Änderung der unabhängigen Variablen? 3) Prognose: Können die Messwerte der abhängigen Variable durch die Werte der unabhängigen Variable vorhergesagt werden?
+# Die Einfache lineare Regression:
+Die *einfache lineare Regression* wird angewandt, wenn geprüft werden soll, ob ein (als linear vermuteter) Zusammenhang zwischen einer abhängigen metrischen Variable und einer unabhängigen metrischen Variable besteht. Da sie zwei metrische Variablen integriert, wird sie auch als *bivariate Regression* bezeichnet. In diesem Teilkapitel lernen wir die *einfache lineare Regression* auf Grundlage der Allbus-Daten kennen. In der nächsten Sitzung gehen wir dann näher auf die notwendige Prüfung der *Voraussetzungen einer Regressionsanalyse* ein und lernen auch noch die *multiple lineare Regression* kennen.
+
+Um die Durchführung der linearen Regression an einem Beispiel nachzuvollziehen, stellen wir zunächst eine gerichtete Hypothese auf, die den Einfluss einer unabhängigen metrischen Variable auf eine abhängige metrische Variable spezifiziert. Hierzu schauen wir uns den Zusammenhang zwischen dem täglichen Konsum von Nachrichtensendungen im öffentlich-rechtlichen Fernsehen (lm20) und dem Vertrauen in die Bundesregierung (pt12) an. Dazu vermuten wir: Eine intensive Nachrichtenrezeption erklärt ein hohes Vertrauen in die Bundesregierung.
 
 ### Vorbereitung und Laden der Daten
+Wie immer besteht der erste Schritt nun darin, die benötigten Pakete sowie den Datensatz zu laden. Für die lineare Regression kommen zwei neue Pakete hinzu: Wir laden das Paket broom, um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können sowie das Paket performance, dass uns später zusätzlich einige Indikatoren ausgibt. Das Paket "see" kommt außerdem dazu, weil es uns eine toolbox für die Visualisierung der Zusammenhänge bereitstellt.
 
-Zunächst laden wir die Pakete des tidyverse. Weiterhin laden wir das Pakete broom um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket performance, dass uns später zusätzlich einige Indikatoren ausgibt.
-
-Den Datensatz finet ihr [**hier**](https://ess-search.nsd.no/en/study/f8e11f55-0c14-4ab3-abde-96d3f14d3c76).
-
-```{r Laden der notwendigen Pakete}
-
-#Laden der notwendigen Pakete
-#install.packages("lm.beta") 
-#install.packages("broom") 
-#install.packages("performance")
-#install.packages("see")
-
+# Laden der benötigten Pakete
+```{r}
+install.packages("dplyr")
+install.packages("tidyverse")
+install.packages("broom")
+install.packages("lm.beta") 
+install.packages("performance")
+install.packages("see")
+install.packages("haven")
+library(dplyr)
 library(tidyverse)
+library(broom) 
 library(lm.beta)
-library(broom) # hier stecken einige Befehle zur Bereinigung der Daten und der Modelloutputs drin
 library(performance)
 library(see)
+library(haven)
+```
 
-#Daten laden und zum Datenobjekt "daten" zuweisen
-daten <- read_rds("Datensatz/ESS8_vier_laender.rds")
+# Laden des Datensatzes
+```{r}
+daten = haven::read_dta("Datensatz/Allbus_2021.dta")
+```
+
+# Erzeugen eines Teildatensatzes & Umbenennen der Variablen
+Für den Teildatensatz bennenen wir die Variablen lm20 und pt12 um und filtern die missings heraus (z.B. -9=Keine Angabe):
+
+```{r}
+daten <- daten %>%
+  rename(Nachrichtenrezeption = lm20)%>%
+  rename(Vertrauen_Bundestag = pt12)%>%
+  filter(between(Nachrichtenrezeption, 0, 7))%>%
+  filter(between(Vertrauen_Bundestag, 1, 7))
 
 #Visualisierungshintergrund der Grafiken in ggplot festlegen
 theme_set(theme_minimal())
 
 # Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
 options(scipen = 999) 
-
 ```
 
 ### Ziel der Analyse
 
-Mit Hilfe der Regression wollen wir die Annahme prüfen, dass das Alter (agea) der Befragten einen Einfluss auf die Internetnutzung (netustm, in Minuten) hat. Beides sind metrische Variablen und erfüllen damit die Voraussetzung, dass eine Regression gerechnet werden kann. (Achtung: auch kategorische Variablen können bei der Regressionsanalyse eingesetzt werden, sie müssen dann aber durch Dummy-Coding passend gemacht werden).
+Mit Hilfe der Regression wollen wir nun die oben formulierte Annahme prüfen, dass eine intensive Nachrichtenrezeption ein hohes Vertrauen in den Bundestag erklärt. Beides sind metrische Variablen und erfüllen damit die Voraussetzung, dass eine Regression gerechnet werden kann. (Achtung: auch kategorische Variablen können bei der Regressionsanalyse grundsätzlich eingesetzt werden, sie müssen dann aber durch *Dummy-Coding* passend gemacht werden, dazu aber später mehr).
 
-### Data Management
-
-Damit der Output etwas nachvollziehbarer wird, benenne ich die Variablen mit dem rename-Befehl zunächst einmal um. Dann nutze ich den drop_na-Befehl, um alle Fällen mit fehlenden Werten zu entfernen (in der Klammer spezifiziere ich, auf welche Variablen sich der Befehl beziehen soll). Das alles weise ich einem neuen Datenobjekt zu: daten_mod
-
-Schließlich nutze ich den slice_sample-Befehl, um aus unseren 8432 Fällen ein Zufallssample von n=100 Fällen zu ziehen, weil mir das die visuelle Interpretation erleichtert (diesen Befehl könnten wir hier auch weglassen, dann bekommen wir unten aber sehr sehr viele Datenpunkt in unserem Streudiagramm - probieren Sie es mal aus!)
-
-```{r Daten zum Zusammenhang von Alter und Internetnutzung alternativ vorbereiten}
-daten_mod <- daten %>% 
-  rename(alter = agea,
-         internetnutzung = netustm) %>% 
-  drop_na(c(alter, internetnutzung)) %>% 
-slice_sample(n = 100) 
-daten_mod
-```
+Bevor wir die Regressionsanalyse durchführen, verschaffen wir uns zunächst einmal einen Überblick über die Daten - dazu visualisieren wir den Zusammenhang zwischen der Nachrichtenrezeption und dem Vertrauen in den Bundestag. Mit Hilfe der Grafik können wir auch die erste Voraussetzung prüfen, nämlich dass es einen *linearen Zusammenhang* zwischen beiden Variablen gibt.
 
 ### Prüfung der Voraussetzungen 1: Grafische Darstellung des Zusammenhangs der beiden Variablen, um die Annahme von Linearität zu prüfen
 
 ACHTUNG! Für die Regressionsanalyse müssen noch weitere Voraussetzungen geprüft werden (insb. Homoskedastizität der Residuen; Unabhängigkeit der Residuen; Normalverteilung der Residuen; keine Ausreißer in den Daten). An dieser Stelle klammern wir die anderen Voraussetzungsprüfungen aber vorerst aus, und kommen in der nächsten Sitzung darauf zurück (das ist sonst zu viel auf einmal).
 
-Zur visuellen Inspektion, ob der Zusammenhang zwischen unseren beiden Variablen linear ist, erstellen wir nun mit dem Befehl geom_point ein Punktdiagramm mit den Variablen Alter und Internetnutzung. Praktischerweise ist die Regressionsformel schon in ggplot integriert: Der Befehl geom_smooth erzeugt eine Trendlinie nach dem linear model (method = lm), die die Beziehung von y (=Internetznutzung) und x (=Alter) abbildet. Das Ergebnis ist eine Linie nach einer linearen Gleichung, die den Daten so eng wie möglich folgt. Mit dem Befehl ggtitle legen wir dann noch in den Klammern den Titel der Grafik fest, und mit xlab und ylab ergänzen wir die Achsenbeschriftung.
+Zur visuellen Inspektion, ob der Zusammenhang zwischen unseren beiden Variablen linear ist, erstellen wir nun mit dem Befehl geom_point ein Punktdiagramm mit den Variablen Nachrichtenrezeption und Vertrauen in den Bundestag. Praktischerweise ist die Regressionsformel schon in ggplot integriert: Der Befehl geom_smooth erzeugt eine Trendlinie nach dem linear model (method = lm), die die Beziehung von y (=Vertrauen) und x (=Nachrichtenrezeption) abbildet. Das Ergebnis ist eine Linie nach einer linearen Gleichung, die den Daten so eng wie möglich folgt. Mit dem Befehl ggtitle legen wir dann noch in den Klammern den Titel der Grafik fest, und mit xlab und ylab ergänzen wir die Achsenbeschriftung.
 
+# Visualisierung des Zusammenhangs mit Hilfe eines Streudiagramms
 ```{r Zusammenhang von Alter und Internetnutzung plotten}
-ggplot(daten_mod, aes(alter, internetnutzung)) + 
+ggplot(daten, aes(Nachrichtenrezeption, Vertrauen_Bundestag)) + 
   geom_point() + 
   geom_smooth(method = lm, formula = "y ~ x") + 
-  ggtitle("Zusammenhang der Variablen Alter und Internetnutzung") + 
-  xlab("Alter") + ylab("tägliche Internetnutzung (Minuten)")
+  ggtitle("Zusammenhang der Variablen Nachrichtenrezeption und Vertrauen_Bundestag") + 
+  xlab("Vertrauen in den Bundestag") + ylab("Nachrichtennutzung (Häufigkeit)")
+```
+
+```{r}
+daten2 <- daten %>%
+  rename(Alter = age)%>%
+  rename(Vertrauen_Bundestag = pt12)%>%
+  filter(between(Alter, 18, 100))%>%
+  filter(between(Vertrauen_Bundestag, 1, 7))
+
+#Visualisierungshintergrund der Grafiken in ggplot festlegen
+theme_set(theme_minimal())
+
+# Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
+options(scipen = 999) 
+```
+
+
+# Visualisierung des Zusammenhangs mit Hilfe eines Streudiagramms
+```{r Zusammenhang von Alter und Internetnutzung plotten}
+ggplot(daten2, aes(Alter, Vertrauen_Bundestag)) + 
+  geom_point() + 
+  geom_smooth(method = lm, formula = "y ~ x") + 
+  ggtitle("Zusammenhang der Variablen Alter und Vertrauen_Bundestag") + 
+  xlab("Vertrauen in den Bundestag") + ylab("Alter")
 ```
 
 ### Interpretation: Was sehen wir im Streudiagramm?
@@ -105,6 +222,23 @@ ggplot(daten_mod, aes(alter, internetnutzung)) +
 Die grafische Darstellung legt uns einen schwachen negativen (aber linearen!) Zusammenhang zwischen Alter und Internetnutzung nahe: mit zunehmendem Alter sinkt die Nutzungsdauer. Damit scheint eine wichtige Voraussetzung der Regressionsanalyse, dass der Zusammenhang an sich linear ist, erfüllt.
 
 Nicht wundern: Weil wir oben ein Zufallssample gezogen haben, sieht die Grafik bei Ihnen allen etwas anders aus. Sie kann dadurch auch so ausfallen, dass der lineare Zusammenhang nicht (gut) sichtbar ist -- vor allem dann, wenn Ausreißer das Ergebnis massiv verzerren (z.B. wenn ein oder zwei ältere Nutzer mit \[unrealistisch?\] hoher Nutzungsdauer in ihrer Zufallstichprobe gelandet sind).
+
+
+
+### Data Management
+
+Damit der Output etwas nachvollziehbarer wird, benenne ich die Variablen mit dem rename-Befehl zunächst einmal um. Dann nutze ich den drop_na-Befehl, um alle Fällen mit fehlenden Werten zu entfernen (in der Klammer spezifiziere ich, auf welche Variablen sich der Befehl beziehen soll). Das alles weise ich einem neuen Datenobjekt zu: daten_mod
+
+Schließlich nutze ich den slice_sample-Befehl, um aus unseren 8432 Fällen ein Zufallssample von n=100 Fällen zu ziehen, weil mir das die visuelle Interpretation erleichtert (diesen Befehl könnten wir hier auch weglassen, dann bekommen wir unten aber sehr sehr viele Datenpunkt in unserem Streudiagramm - probieren Sie es mal aus!)
+
+```{r}
+daten_mod <- daten %>% 
+  rename(alter = agea,
+         internetnutzung = netustm) %>% 
+  drop_na(c(alter, internetnutzung)) %>% 
+slice_sample(n = 100) 
+daten_mod
+```
 
 ### Durchführung der einfachen linearen Regression über die Funktion lm
 
