@@ -474,11 +474,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="1" data-code-lines="2">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
+<span data-code-lines="2" data-code-cell="annotated-cell-1" data-code-annotation="1">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="2" data-code-lines="3">Wir legen allgemein den Hintergrund theme_classic fest.</span>
+<span data-code-lines="3" data-code-cell="annotated-cell-1" data-code-annotation="2">Wir legen allgemein den Hintergrund theme_classic fest.</span>
 </dd>
 </dl>
 </div>
@@ -492,26 +492,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1.2" class="anchored" data-anchor-id="datenmanagement"><span class="header-section-number">1.2</span> Datenmanagement</h2>
 <p>Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html">für ausführliche Erklärungen siehe hier</a>. Für unseren t-test möchten wir uns anschauen, wie sich das Geschlecht der Befragten auf ihr Vertrauen in XX auswirkt.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dat <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">filter</span>(., sex <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> sex <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span>  <span class="co">#&gt;1</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">rename</span>(., <span class="at">trustpol =</span> pt15) <span class="co">#&gt;2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>dat <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>  <span class="fu">filter</span>(., sex <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> sex <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>  <span class="fu">rename</span>(., <span class="at">trustpol =</span> pt15)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="2" data-code-cell="annotated-cell-3" data-code-annotation="1">Wir filtern die Fälle, sodass alle Befragten entweder 1=männlich oder 2=weiblich sind.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="3" data-code-cell="annotated-cell-3" data-code-annotation="2">Die Variable Vertrauen in die Polizei(pt15) benennen wir in trustpol</span>
+</dd>
+</dl>
 </div>
-<ol type="1">
-<li>Wir filtern die Fälle, sodass alle Befragten entweder 1=männlich oder 2=weiblich sind.</li>
-<li>Die Variable Vertrauen in die Polizei(pt15) benennen wir in trustpol</li>
-</ol>
+</div>
 </section>
 <section id="deskriptives" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="deskriptives"><span class="header-section-number">1.3</span> Deskriptives</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Deskription der Abhängigen Variablen</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#des_stat &lt;- (favstats(AV ~ UV, data = daten))</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#kable (des_stat,</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#      col.names = c(label_UV,"Minimum", "1.Quartil", </span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#                    "Median", "3.Quartil", </span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#                    "Maximum", "M", "SD", "N",</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#                    "Fehlend"),</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#      digits = 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Deskription der Abhängigen Variablen</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#des_stat &lt;- (favstats(AV ~ UV, data = daten))</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#kable (des_stat,</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#      col.names = c(label_UV,"Minimum", "1.Quartil", </span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#                    "Median", "3.Quartil", </span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#                    "Maximum", "M", "SD", "N",</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#                    "Fehlend"),</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#      digits = 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>

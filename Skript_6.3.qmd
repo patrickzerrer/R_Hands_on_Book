@@ -25,14 +25,15 @@ Grundsätzlich unterscheiden wir zwischen drei verschiedenen Arten von t-tests:
 
 **Der Einstichprobentest**
 
-Der Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert. Wir können so beispielsweise überprüfen, ob das Einkommen in einer Stichprobe dem deutschlandweiten Mittelwert entspricht, sofern dieser uns vorab bekannt ist. 
+Der Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert. Wir können so beispielsweise überprüfen, ob das Einkommen in einer Stichprobe dem deutschlandweiten Mittelwert entspricht, sofern dieser uns vorab bekannt ist.
 
 **t-test für unabhängige Stichproben**
 
-Mit dem t-test für unabhängige Stichproben überprüfen wir, ob sich die Mittelwerte in zwei gemessenen Stichproben unterscheiden. So könnten wir beispielsweise testen, ob sich das Einkommen von Männern und Frauen unterscheidet.    
+Mit dem t-test für unabhängige Stichproben überprüfen wir, ob sich die Mittelwerte in zwei gemessenen Stichproben unterscheiden. So könnten wir beispielsweise testen, ob sich das Einkommen von Männern und Frauen unterscheidet. Ein anderes typisches Anwendungsbespiel ist der Vergleich von zwei Gruppen im Rahmen eines Experimentaldesign. 
 
 **t-test für verbundene Stichproben**
 
+Der t-test für verbundene Stichproben wiederum misst, inwwiefern sich Mittelwerte bei denselben Personen oder Fällen verändern. 
 
 ## Laden der Daten und benötigten Pakete
 
@@ -55,31 +56,53 @@ daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 
 ## Datenmanagement
 
-Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements [für ausführliche Erklärungen siehe hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html). Für unseren t-test möchten wir uns anschauen, wie sich das Geschlecht der Befragten auf ihr Vertrauen in XX auswirkt.
+Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements [für ausführliche Erklärungen siehe hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html). Für unseren t-test möchten wir uns anschauen, wie sich der Wohnort der Befragten auf ihr Vertrauen in die Bundesregierung auswirkt. Wir nutzen dazu die folgenden Variablen
+
+
++----------+----------------------------------+-------------------------------+
+| Variable | Beschreibung                     | Ausprägungen                  |
++:========:+:================================:+:=============================:+
+| eastwest | Erhebungsgebiet West-Ost         | 1= Alte Bundesländer (Westen) |
+|          |                                  |                               |
+|          |                                  | 2 = Neue Bundesländer (Osten) |
++----------+----------------------------------+-------------------------------+
+| pt12     | Vertrauen in die Bundesregierung | -42 = Datenfehler             |
+|          |                                  |                               |
+|          |                                  | -11 = TNZ Split               |
+|          |                                  |                               |
+|          |                                  | -9 = Keine Angabe             |
+|          |                                  |                               |
+|          |                                  | 1 = Gar kein Vertrauen        |
+|          |                                  |                               |
+|          |                                  | ...                           |
+|          |                                  |                               |
+|          |                                  | 7 = Großes Vertrauen          |
++----------+----------------------------------+-------------------------------+
+
+Innerhalb unseres Datenmanageements schließen wir fehlerhafte und fehlende Werte der Variablen pt12 aus und benennen diese anschließend um: 
 
 ```{r}
 
-dat <- daten %>% 
-  filter(., sex == 1 | sex == 2) %>%  #>1
-  rename(., trustpol = pt15) #>2
-
+data <- daten %>%
+  filter(., pt12 > 0) %>% 
+  rename(., trustreg = pt12)
 ```
-1. Wir filtern die Fälle, sodass alle Befragten entweder 1=männlich oder 2=weiblich sind.
-2. Die Variable Vertrauen in die Polizei(pt15) benennen wir in trustpol
 
-## Deskriptives
+## Deskriptives der abhängigen Variablen
 
 ```{r}
-# Deskription der Abhängigen Variablen
-#des_stat <- (favstats(AV ~ UV, data = daten))
-#kable (des_stat,
-#      col.names = c(label_UV,"Minimum", "1.Quartil", 
-#                    "Median", "3.Quartil", 
-#                    "Maximum", "M", "SD", "N",
-#                    "Fehlend"),
-#      digits = 2)
-```
 
+
+des_stat <- (favstats(trustreg ~ eastwest, data = data))
+des_stat
+kable(des_stat,
+      col.names = c("Vertrauen in die Bundesregierung","Minimum", "1.Quartil", 
+                    "Median", "3.Quartil", 
+                    "Maximum", "M", "SD", "N",
+                    "Fehlend"),
+      digits = 2)
+
+```
 
 # t-Test für Einstichproben
 
@@ -97,38 +120,43 @@ dat <- daten %>%
 ## Voraussetzungsprüfung
 
 # Voraussetzungen überprüfen
-## Skalierung der UV und AV
-daten %>% 
-  select(UV, AV) %>% 
-  lapply(class)
 
-## Normalverteilung der AV 
-daten %>%
-  group_by(UV) %>% 
-  do(tidy(shapiro.test(.$AV)))
+## Skalierung der UV und AV
+
+daten %\>% select(UV, AV) %\>% lapply(class)
+
+## Normalverteilung der AV
+
+daten %\>% group_by(UV) %\>% do(tidy(shapiro.test(.\$AV)))
 
 ## Varianzhomogenität
-daten %>% 
-  drop_na(UV, AV) %>%
-  leveneTest(AV~UV, data = .)
+
+daten %\>% drop_na(UV, AV) %\>% leveneTest(AV\~UV, data = .)
 
 ```{r include=F }
 
 ```
-
 :::
 
 ## Durchführung des t-Tests
 
-```{r include = F}
+```{r}
 
 # t-Test durchführen
-dat %>% 
-  drop_na(sex, trustpol) %>%
-  t.test(trustpol~sex,
+data %>% 
+  drop_na(eastwest, trustreg) %>%
+  filter(.,trustreg >0) %>% 
+  t.test(trustreg ~ eastwest,
          alternative = "two.sided", 
          var.equal = T,
          data = .)
+
+
+
+
+table(dat$pt14)
+
+
   
 # Effektstärke cohens d berechnen
 dat %>% 
@@ -138,10 +166,9 @@ dat %>%
 
 ## Interpretation des Outputs
 
+-   was sehen wir?
 
-+ was sehen wir?
-
-+ was bedeutet das?
+-   was bedeutet das?
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
@@ -149,7 +176,6 @@ dat %>%
 Die Ergebnisse des t-tests werden üblicherweise im Text angegeben. Für diese Angabe werden die folgenden Informationen benötigt:
 
 ✅ die Werte des Kaiser-Meyer-Olkin Kritierums (KMO)
-
 
 Das Format ist üblicherweise:
 
@@ -160,17 +186,12 @@ Das Format ist üblicherweise:
 
 [Historie der Testverfahren](http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html)
 
-
 # t-Test für verbundene Stichproben
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Voraussetzungsprüfung
 :::
 
-
 ## Durchführung des t-tests für verbundene Stichproben
 
-
 ## Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest
-
-
