@@ -12,6 +12,7 @@ format:
 
 # Einführung in die Bivariate Statistik und Mittelwertvergleiche
 
+## Allgmeines zu Mittelwertvergleichen
 
 Statistische Tests erlauben es uns, auf der Basis von quantitativen Daten
 eine begründete Entscheidung über die Gültigkeit oder Ungültigkeit
@@ -27,3 +28,6 @@ annehmen können.
 Können wir aufgrund des Testausgangs davon ausgehen, dass ein (nicht
 zufälliger) Unterschied zwischen zwei Stichproben besteht, so sprechen wir
 von einem signifikanten (überzufälligen) Unterschied.
+
+## Augenscheinliche Überprüfung mit Kreuztabellen und Boxplots
+

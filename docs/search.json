@@ -326,7 +326,7 @@
     "href": "Skript_6.1.html",
     "title": "Bivariate Statistik & Mittelwertvergleiche",
     "section": "",
-    "text": "1 Einführung in die Bivariate Statistik und Mittelwertvergleiche\nStatistische Tests erlauben es uns, auf der Basis von quantitativen Daten eine begründete Entscheidung über die Gültigkeit oder Ungültigkeit einer Hypothese zu treffen.\nBei den hier verwendeten Beispielen geht es darum, Unterschiede zwischen zwei oder mehr Stichproben (oder Teilstichproben) statistisch zu überprüfen.\nEin statistischer Test liefert Aufschluss darüber, wie wahrscheinlich es ist, dass wir die Nullhypothese verwerfen und/oder die alternative Hypothese annehmen können.\nKönnen wir aufgrund des Testausgangs davon ausgehen, dass ein (nicht zufälliger) Unterschied zwischen zwei Stichproben besteht, so sprechen wir von einem signifikanten (überzufälligen) Unterschied."
+    "text": "Statistische Tests erlauben es uns, auf der Basis von quantitativen Daten eine begründete Entscheidung über die Gültigkeit oder Ungültigkeit einer Hypothese zu treffen.\nBei den hier verwendeten Beispielen geht es darum, Unterschiede zwischen zwei oder mehr Stichproben (oder Teilstichproben) statistisch zu überprüfen.\nEin statistischer Test liefert Aufschluss darüber, wie wahrscheinlich es ist, dass wir die Nullhypothese verwerfen und/oder die alternative Hypothese annehmen können.\nKönnen wir aufgrund des Testausgangs davon ausgehen, dass ein (nicht zufälliger) Unterschied zwischen zwei Stichproben besteht, so sprechen wir von einem signifikanten (überzufälligen) Unterschied."
   },
   {
     "objectID": "Skript_6.2.html",
@@ -338,9 +338,9 @@
   {
     "objectID": "Skript_6.3.html",
     "href": "Skript_6.3.html",
-    "title": "Die Bestimmung der Zentrale Tendenz mit t-Test und Varianzanalyse",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
     "section": "",
-    "text": "Bestimmen von Unterschieden in der zentralen Tendenz"
+    "text": "Grundsätzlich unterscheiden wir zwischen drei verschiedenen Arten von t-tests:\n\nEinstichprobentest (one-sample-test),\nt-Test für unabhängige Stichproben (two-paired-test) sowie\nt-Test für verbundene Stichprobene (paired test)\n\nDer Einstichprobentest\nDer Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert.\nt-test für unabhängige Stichproben\nt-test für verbundene Stichproben\n\n\nWir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.\n\nif(!require(\"pacman\")) {install.packages(\"pacman\");library(pacman)}\n1p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)\n2theme_set(theme_classic())\n\n\n1\n\nMittels p_load laden wir alle benötigten Pakete gleichzeitig.\n\n2\n\nWir legen allgemein den Hintergrund theme_classic fest.\n\n\n\n\nAnschließend laden wir die Daten aus dem Allbus:\n\ndaten = haven::read_dta(\"Datensatz/Allbus_2021.dta\")\n\n\n\n\nUm mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements für ausführliche Erklärungen siehe hier."
   },
   {
     "objectID": "Skript_6.3.html#das-testen-von-unterschieden-bei-unabhängigen-stichproben",
@@ -1286,5 +1286,75 @@
     "title": "Tabellen und Grafiken in R",
     "section": "3.6 Facettierte Plots",
     "text": "3.6 Facettierte Plots\nNeben dem Einsatz unterschiedlicher Farben und Formen kann auch sog. Facettierung zum Einsatz kommen um zusätzliche Informationen darzustellen. In einem weiteren Beispiel nehmen wir den Zusammenhang zwischen soziodemographischen Variablen und der Internetnutzung in den Blick. Dazu fügen wir zunächst eine Variable Altersgruppe ein, welche die einzelnen Altersangaben in Kohorten zusammenfasst.\n\nsocial_media &lt;- sample_gross %&gt;% \n  mutate(altersgruppe = cut(alter, \n                           breaks = c(0, 24, 34, 44, 54, 64, Inf),\n                           labels = c(\"18-24\", \"25-34\", \"35-44\", \"45-54\", \"55-64\", \"65+\")),\n         zufriedenheit_demokratie_zusammengefasst = as_factor(case_when(\n           zufriedenheit_demokratie %in% c(\"SEHR ZUFRIEDEN\", \n                                           \"ZIEMLICH ZUFRIEDEN\", \n                                           \"ETWAS ZUFRIEDEN\") ~ \"eher zufrieden\",\n           zufriedenheit_demokratie %in% c(\"ETWAS UNZUFRIEDEN\",\n                                           \"ZIEML. UNZUFRIEDEN\",\n                                           \"SEHR UNZUFRIEDEN\") ~ \"eher unzufrieden\"))) %&gt;% \n  select(altersgruppe, geschlecht, zufriedenheit_demokratie_zusammengefasst, social_media_nachrichtenquelle)\n\nDann aggregieren wir nach Altersgruppe, Geschlecht und Land und plotten anschließend die Ergebnisse.\n\nsocial_media_aggregiert &lt;- social_media %&gt;% \n  group_by(altersgruppe, geschlecht, zufriedenheit_demokratie_zusammengefasst) %&gt;% \n  summarise(socmedia = median(social_media_nachrichtenquelle)) %&gt;% \n  drop_na()\n\n`summarise()` has grouped output by 'altersgruppe', 'geschlecht'. You can\noverride using the `.groups` argument.\n\n\n\nggplot(social_media_aggregiert, aes(altersgruppe, socmedia, fill = geschlecht)) +\n  geom_bar(stat = \"identity\", position = \"dodge\") +\n  facet_grid(cols = vars(zufriedenheit_demokratie_zusammengefasst)) + \n  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +\n  ggtitle(\"Demokratiezufriedenheit und Social Media-Nutzung nach Alter und Geschlecht\") + \n  xlab(\"Alter\") + ylab(\"Nutzung von Social Media als Nachrichtenquelle\")\n\n\n\n\nSie können Ihr einfaches Diagramm mit Hilfe zusätzlicher Komponenten verfeinern, indem Sie sie dem Diagramm hinzufügen (für ein sehr einfaches “Vokabular” von ggplot2 besuchen Sie diesen Link –&gt; (https://ggplot2.tidyverse.org/reference/).\nAls nächstes schauen wir die Zustimmung zu der Aussafe an, dass der globale Klimawandel größtenteils oder vollständig durch den Menschen verursacht wird.\n\nvertrauen_summiert &lt;- sample_gross %&gt;% \n  rowwise() %&gt;% \n  mutate(vertrauen_gesamt = sum(across(starts_with(\"vertrauen_\")))) %&gt;% \n  select(alter, geschlecht, entwicklung_kriminalitaet, vertrauen_gesamt) %&gt;% \n  ungroup() %&gt;% \n  drop_na()\n\n\nggplot(vertrauen_summiert, aes(entwicklung_kriminalitaet, vertrauen_gesamt)) +\n  geom_boxplot() + geom_jitter(alpha = 0.3) + \n  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +\n  ggtitle(\"Kriminalitätseinschätzung und Vertrauen in gesellschaftliche Institutionen\") + \n  xlab(\"Kriminalitätseinschätzung\") + ylab(\"Vertrauen in gesellschaftliche Institutionen\")\n\n\n\n#ggsave(\"Kriminalität_und_Vertrauen.pdf\")"
+  },
+  {
+    "objectID": "Skript_6.3.html#datenmanagement-und-laden-der-daten",
+    "href": "Skript_6.3.html#datenmanagement-und-laden-der-daten",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "",
+    "text": "Voraussetzungsprüfung"
+  },
+  {
+    "objectID": "Skript_6.3.html#laden-der-daten-und-benötigten-pakete",
+    "href": "Skript_6.3.html#laden-der-daten-und-benötigten-pakete",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "",
+    "text": "Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.\n\nif(!require(\"pacman\")) {install.packages(\"pacman\");library(pacman)}\n1p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)\n2theme_set(theme_classic())\n\n\n1\n\nMittels p_load laden wir alle benötigten Pakete gleichzeitig.\n\n2\n\nWir legen allgemein den Hintergrund theme_classic fest.\n\n\n\n\nAnschließend laden wir die Daten aus dem Allbus:\n\ndaten = haven::read_dta(\"Datensatz/Allbus_2021.dta\")"
+  },
+  {
+    "objectID": "Skript_6.3.html#datenmanagement",
+    "href": "Skript_6.3.html#datenmanagement",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "",
+    "text": "Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements für ausführliche Erklärungen siehe hier."
+  },
+  {
+    "objectID": "Skript_6.3.html#durchführung-des-t-tests-für-einstichproben",
+    "href": "Skript_6.3.html#durchführung-des-t-tests-für-einstichproben",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "2.1 Durchführung des t-tests für Einstichproben",
+    "text": "2.1 Durchführung des t-tests für Einstichproben"
+  },
+  {
+    "objectID": "Skript_6.3.html#nicht-parametrischer-test",
+    "href": "Skript_6.3.html#nicht-parametrischer-test",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "2.2 Nicht-parametrischer Test:",
+    "text": "2.2 Nicht-parametrischer Test:"
+  },
+  {
+    "objectID": "Skript_6.3.html#durchführung-des-t-tests-für-verbundene-stichproben",
+    "href": "Skript_6.3.html#durchführung-des-t-tests-für-verbundene-stichproben",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "3.1 Durchführung des t-tests für verbundene Stichproben",
+    "text": "3.1 Durchführung des t-tests für verbundene Stichproben"
+  },
+  {
+    "objectID": "Skript_6.3.html#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test",
+    "href": "Skript_6.3.html#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "3.2 Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Test",
+    "text": "3.2 Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Test\nHistorie der Testverfahren"
+  },
+  {
+    "objectID": "Skript_6.3.html#durchführung-des-t-tests-für-verbundene-stichproben-1",
+    "href": "Skript_6.3.html#durchführung-des-t-tests-für-verbundene-stichproben-1",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "4.1 Durchführung des t-tests für verbundene Stichproben",
+    "text": "4.1 Durchführung des t-tests für verbundene Stichproben"
+  },
+  {
+    "objectID": "Skript_6.3.html#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest",
+    "href": "Skript_6.3.html#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest",
+    "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
+    "section": "4.2 Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest",
+    "text": "4.2 Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest"
+  },
+  {
+    "objectID": "Skript_6.1.html#allgmeines-zu-mittelwertvergleichen",
+    "href": "Skript_6.1.html#allgmeines-zu-mittelwertvergleichen",
+    "title": "Bivariate Statistik & Mittelwertvergleiche",
+    "section": "",
+    "text": "Statistische Tests erlauben es uns, auf der Basis von quantitativen Daten eine begründete Entscheidung über die Gültigkeit oder Ungültigkeit einer Hypothese zu treffen.\nBei den hier verwendeten Beispielen geht es darum, Unterschiede zwischen zwei oder mehr Stichproben (oder Teilstichproben) statistisch zu überprüfen.\nEin statistischer Test liefert Aufschluss darüber, wie wahrscheinlich es ist, dass wir die Nullhypothese verwerfen und/oder die alternative Hypothese annehmen können.\nKönnen wir aufgrund des Testausgangs davon ausgehen, dass ein (nicht zufälliger) Unterschied zwischen zwei Stichproben besteht, so sprechen wir von einem signifikanten (überzufälligen) Unterschied."
   }
 ]

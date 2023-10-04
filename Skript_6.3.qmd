@@ -8,22 +8,91 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
+execute:
+  echo: true
+  message: false
+  warning: false
 ---
 
+# Grundlagen der t-tests und deren Durchführung in R
+
+Grundsätzlich unterscheiden wir zwischen drei verschiedenen Arten von t-tests:
+
+-   Einstichprobentest (one-sample-test),
+-   t-Test für unabhängige Stichproben (two-paired-test) sowie
+-   t-Test für verbundene Stichprobene (paired test)
+
+**Der Einstichprobentest**
+
+Der Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert.
+
+**t-test für unabhängige Stichproben**
+
+**t-test für verbundene Stichproben**
 
 
-# Was sind unabhängige und verbundene Stichproben?
+## Laden der Daten und benötigten Pakete
 
-# Das Testen von Unterschieden bei unabhängigen Stichproben
+Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.
 
-## t-Test für unabhängige Stichproben
+```{r Pakete}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) # <1>
+theme_set(theme_classic()) # <2>
+```
+
+1.  Mittels p_load laden wir alle benötigten Pakete gleichzeitig.
+2.  Wir legen allgemein den Hintergrund theme_classic fest.
+
+Anschließend laden wir die Daten aus dem Allbus:
+
+```{r Laden der Daten}
+daten = haven::read_dta("Datensatz/Allbus_2021.dta")
+```
+
+## Datenmanagement
+
+Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements [für ausführliche Erklärungen siehe hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html).
+
+```{r}
+
+```
+
+# t-Test für Einstichproben
+
+::: {.callout-note collapse="true" icon="false"}
+## Voraussetzungsprüfung
+:::
+
+## Durchführung des t-tests für Einstichproben
+
+## Nicht-parametrischer Test:
+
+# t-Test für unabhängige Stichproben
+
+::: {.callout-note collapse="true" icon="false"}
+## Voraussetzungsprüfung
+:::
 
 
+## Durchführung des t-tests für verbundene Stichproben
 
-# Das Testen von Unterschieden bei verbundenen Stichproben
 
-## t-Test für verbundene Stichproben
+## Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Test
 
-## Exkurs: nicht parametrische Tests
+[Historie der Testverfahren](http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html)
 
-Mann-Whitney-U & Wilcoxon
+# t-Test für verbundene Stichproben
+
+::: {.callout-note collapse="true" icon="false"}
+## Voraussetzungsprüfung
+:::
+
+
+## Durchführung des t-tests für verbundene Stichproben
+
+
+## Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest
+
+

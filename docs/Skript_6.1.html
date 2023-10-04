@@ -105,11 +105,6 @@ ul.task-list li input[type="checkbox"] {
 </i> 
  <span class="menu-text"></span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/ZeMKI_Bremen" rel="" target=""><i class="bi bi-twitter" role="img">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
 </ul>
             <div class="quarto-navbar-tools">
 </div>
@@ -180,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">klassische Formen von Datensätzen</span></a>
+ <span class="menu-text">Einlesen von Datensätzen in unterschiedlichen Formaten</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -250,13 +245,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Streuungsmaße: Spannweite, Standartabweichung, Varianz</span></a>
+ <span class="menu-text">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Verteilungen und deren Visualisierung</span></a>
+ <span class="menu-text">Berechnung und Interpretation von Verteilungen</span></a>
   </div>
 </li>
       </ul>
@@ -317,6 +312,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Varianzanalyse</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -346,6 +347,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -358,7 +365,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#einführung-in-die-bivariate-statistik-und-mittelwertvergleiche" id="toc-einführung-in-die-bivariate-statistik-und-mittelwertvergleiche" class="nav-link active" data-scroll-target="#einführung-in-die-bivariate-statistik-und-mittelwertvergleiche"><span class="header-section-number">1</span> Einführung in die Bivariate Statistik und Mittelwertvergleiche</a></li>
+  <li><a href="#einführung-in-die-bivariate-statistik-und-mittelwertvergleiche" id="toc-einführung-in-die-bivariate-statistik-und-mittelwertvergleiche" class="nav-link active" data-scroll-target="#einführung-in-die-bivariate-statistik-und-mittelwertvergleiche"><span class="header-section-number">1</span> Einführung in die Bivariate Statistik und Mittelwertvergleiche</a>
+  <ul class="collapse">
+  <li><a href="#allgmeines-zu-mittelwertvergleichen" id="toc-allgmeines-zu-mittelwertvergleichen" class="nav-link" data-scroll-target="#allgmeines-zu-mittelwertvergleichen"><span class="header-section-number">1.1</span> Allgmeines zu Mittelwertvergleichen</a></li>
+  <li><a href="#augenscheinliche-überprüfung-mit-kreuztabellen-und-boxplots" id="toc-augenscheinliche-überprüfung-mit-kreuztabellen-und-boxplots" class="nav-link" data-scroll-target="#augenscheinliche-überprüfung-mit-kreuztabellen-und-boxplots"><span class="header-section-number">1.2</span> Augenscheinliche Überprüfung mit Kreuztabellen und Boxplots</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -390,12 +401,18 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="einführung-in-die-bivariate-statistik-und-mittelwertvergleiche" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Einführung in die Bivariate Statistik und Mittelwertvergleiche</h1>
+<section id="allgmeines-zu-mittelwertvergleichen" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="allgmeines-zu-mittelwertvergleichen"><span class="header-section-number">1.1</span> Allgmeines zu Mittelwertvergleichen</h2>
 <p>Statistische Tests erlauben es uns, auf der Basis von quantitativen Daten eine begründete Entscheidung über die Gültigkeit oder Ungültigkeit einer Hypothese zu treffen.</p>
 <p>Bei den hier verwendeten Beispielen geht es darum, Unterschiede zwischen zwei oder mehr Stichproben (oder Teilstichproben) statistisch zu überprüfen.</p>
 <p>Ein statistischer Test liefert Aufschluss darüber, wie wahrscheinlich es ist, dass wir die Nullhypothese verwerfen und/oder die alternative Hypothese annehmen können.</p>
 <p>Können wir aufgrund des Testausgangs davon ausgehen, dass ein (nicht zufälliger) Unterschied zwischen zwei Stichproben besteht, so sprechen wir von einem signifikanten (überzufälligen) Unterschied.</p>
+</section>
+<section id="augenscheinliche-überprüfung-mit-kreuztabellen-und-boxplots" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="augenscheinliche-überprüfung-mit-kreuztabellen-und-boxplots"><span class="header-section-number">1.2</span> Augenscheinliche Überprüfung mit Kreuztabellen und Boxplots</h2>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

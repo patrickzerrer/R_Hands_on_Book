@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -105,11 +139,6 @@ ul.task-list li input[type="checkbox"] {
 </i> 
  <span class="menu-text"></span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/ZeMKI_Bremen" rel="" target=""><i class="bi bi-twitter" role="img">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
 </ul>
             <div class="quarto-navbar-tools">
 </div>
@@ -180,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">klassische Formen von Datensätzen</span></a>
+ <span class="menu-text">Einlesen von Datensätzen in unterschiedlichen Formaten</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -250,13 +279,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Streuungsmaße: Spannweite, Standartabweichung, Varianz</span></a>
+ <span class="menu-text">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Verteilungen und deren Visualisierung</span></a>
+ <span class="menu-text">Berechnung und Interpretation von Verteilungen</span></a>
   </div>
 </li>
       </ul>
@@ -317,6 +346,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Varianzanalyse</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -346,6 +381,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -358,15 +399,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#was-sind-unabhängige-und-verbundene-stichproben" id="toc-was-sind-unabhängige-und-verbundene-stichproben" class="nav-link active" data-scroll-target="#was-sind-unabhängige-und-verbundene-stichproben"><span class="header-section-number">1</span> Was sind unabhängige und verbundene Stichproben?</a></li>
-  <li><a href="#das-testen-von-unterschieden-bei-unabhängigen-stichproben" id="toc-das-testen-von-unterschieden-bei-unabhängigen-stichproben" class="nav-link" data-scroll-target="#das-testen-von-unterschieden-bei-unabhängigen-stichproben"><span class="header-section-number">2</span> Das Testen von Unterschieden bei unabhängigen Stichproben</a>
+  <li><a href="#grundlagen-der-t-tests-und-deren-durchführung-in-r" id="toc-grundlagen-der-t-tests-und-deren-durchführung-in-r" class="nav-link active" data-scroll-target="#grundlagen-der-t-tests-und-deren-durchführung-in-r"><span class="header-section-number">1</span> Grundlagen der t-tests und deren Durchführung in R</a>
   <ul class="collapse">
-  <li><a href="#t-test-für-unabhängige-stichproben" id="toc-t-test-für-unabhängige-stichproben" class="nav-link" data-scroll-target="#t-test-für-unabhängige-stichproben"><span class="header-section-number">2.1</span> t-Test für unabhängige Stichproben</a></li>
+  <li><a href="#laden-der-daten-und-benötigten-pakete" id="toc-laden-der-daten-und-benötigten-pakete" class="nav-link" data-scroll-target="#laden-der-daten-und-benötigten-pakete"><span class="header-section-number">1.1</span> Laden der Daten und benötigten Pakete</a></li>
+  <li><a href="#datenmanagement" id="toc-datenmanagement" class="nav-link" data-scroll-target="#datenmanagement"><span class="header-section-number">1.2</span> Datenmanagement</a></li>
   </ul></li>
-  <li><a href="#das-testen-von-unterschieden-bei-verbundenen-stichproben" id="toc-das-testen-von-unterschieden-bei-verbundenen-stichproben" class="nav-link" data-scroll-target="#das-testen-von-unterschieden-bei-verbundenen-stichproben"><span class="header-section-number">3</span> Das Testen von Unterschieden bei verbundenen Stichproben</a>
+  <li><a href="#t-test-für-einstichproben" id="toc-t-test-für-einstichproben" class="nav-link" data-scroll-target="#t-test-für-einstichproben"><span class="header-section-number">2</span> t-Test für Einstichproben</a>
   <ul class="collapse">
-  <li><a href="#t-test-für-verbundene-stichproben" id="toc-t-test-für-verbundene-stichproben" class="nav-link" data-scroll-target="#t-test-für-verbundene-stichproben"><span class="header-section-number">3.1</span> t-Test für verbundene Stichproben</a></li>
-  <li><a href="#exkurs-nicht-parametrische-tests" id="toc-exkurs-nicht-parametrische-tests" class="nav-link" data-scroll-target="#exkurs-nicht-parametrische-tests"><span class="header-section-number">3.2</span> Exkurs: nicht parametrische Tests</a></li>
+  <li><a href="#durchführung-des-t-tests-für-einstichproben" id="toc-durchführung-des-t-tests-für-einstichproben" class="nav-link" data-scroll-target="#durchführung-des-t-tests-für-einstichproben"><span class="header-section-number">2.1</span> Durchführung des t-tests für Einstichproben</a></li>
+  <li><a href="#nicht-parametrischer-test" id="toc-nicht-parametrischer-test" class="nav-link" data-scroll-target="#nicht-parametrischer-test"><span class="header-section-number">2.2</span> Nicht-parametrischer Test:</a></li>
+  </ul></li>
+  <li><a href="#t-test-für-unabhängige-stichproben" id="toc-t-test-für-unabhängige-stichproben" class="nav-link" data-scroll-target="#t-test-für-unabhängige-stichproben"><span class="header-section-number">3</span> t-Test für unabhängige Stichproben</a>
+  <ul class="collapse">
+  <li><a href="#durchführung-des-t-tests-für-verbundene-stichproben" id="toc-durchführung-des-t-tests-für-verbundene-stichproben" class="nav-link" data-scroll-target="#durchführung-des-t-tests-für-verbundene-stichproben"><span class="header-section-number">3.1</span> Durchführung des t-tests für verbundene Stichproben</a></li>
+  <li><a href="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" id="toc-nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" class="nav-link" data-scroll-target="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test"><span class="header-section-number">3.2</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Test</a></li>
+  </ul></li>
+  <li><a href="#t-test-für-verbundene-stichproben" id="toc-t-test-für-verbundene-stichproben" class="nav-link" data-scroll-target="#t-test-für-verbundene-stichproben"><span class="header-section-number">4</span> t-Test für verbundene Stichproben</a>
+  <ul class="collapse">
+  <li><a href="#durchführung-des-t-tests-für-verbundene-stichproben-1" id="toc-durchführung-des-t-tests-für-verbundene-stichproben-1" class="nav-link" data-scroll-target="#durchführung-des-t-tests-für-verbundene-stichproben-1"><span class="header-section-number">4.1</span> Durchführung des t-tests für verbundene Stichproben</a></li>
+  <li><a href="#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" id="toc-nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" class="nav-link" data-scroll-target="#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest"><span class="header-section-number">4.2</span> Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -397,23 +448,122 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="was-sind-unabhängige-und-verbundene-stichproben" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Was sind unabhängige und verbundene Stichproben?</h1>
+<section id="grundlagen-der-t-tests-und-deren-durchführung-in-r" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Grundlagen der t-tests und deren Durchführung in R</h1>
+<p>Grundsätzlich unterscheiden wir zwischen drei verschiedenen Arten von t-tests:</p>
+<ul>
+<li>Einstichprobentest (one-sample-test),</li>
+<li>t-Test für unabhängige Stichproben (two-paired-test) sowie</li>
+<li>t-Test für verbundene Stichprobene (paired test)</li>
+</ul>
+<p><strong>Der Einstichprobentest</strong></p>
+<p>Der Einstichprobentest oder auch one-sample-test vergleicht den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert.</p>
+<p><strong>t-test für unabhängige Stichproben</strong></p>
+<p><strong>t-test für verbundene Stichproben</strong></p>
+<section id="laden-der-daten-und-benötigten-pakete" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="laden-der-daten-und-benötigten-pakete"><span class="header-section-number">1.1</span> Laden der Daten und benötigten Pakete</h2>
+<p>Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-annotation="1" data-code-cell="annotated-cell-1" data-code-lines="2">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-annotation="2" data-code-cell="annotated-cell-1" data-code-lines="3">Wir legen allgemein den Hintergrund theme_classic fest.</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Anschließend laden wir die Daten aus dem Allbus:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="das-testen-von-unterschieden-bei-unabhängigen-stichproben" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Das Testen von Unterschieden bei unabhängigen Stichproben</h1>
-<section id="t-test-für-unabhängige-stichproben" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="t-test-für-unabhängige-stichproben"><span class="header-section-number">2.1</span> t-Test für unabhängige Stichproben</h2>
+<section id="datenmanagement" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="datenmanagement"><span class="header-section-number">1.2</span> Datenmanagement</h2>
+<p>Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html">für ausführliche Erklärungen siehe hier</a>.</p>
 </section>
 </section>
-<section id="das-testen-von-unterschieden-bei-verbundenen-stichproben" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Das Testen von Unterschieden bei verbundenen Stichproben</h1>
-<section id="t-test-für-verbundene-stichproben" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="t-test-für-verbundene-stichproben"><span class="header-section-number">3.1</span> t-Test für verbundene Stichproben</h2>
+<section id="t-test-für-einstichproben" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> t-Test für Einstichproben</h1>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Voraussetzungsprüfung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<section id="durchführung-des-t-tests-für-einstichproben" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="durchführung-des-t-tests-für-einstichproben"><span class="header-section-number">2.1</span> Durchführung des t-tests für Einstichproben</h2>
 </section>
-<section id="exkurs-nicht-parametrische-tests" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="exkurs-nicht-parametrische-tests"><span class="header-section-number">3.2</span> Exkurs: nicht parametrische Tests</h2>
-<p>Mann-Whitney-U &amp; Wilcoxon</p>
+<section id="nicht-parametrischer-test" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="nicht-parametrischer-test"><span class="header-section-number">2.2</span> Nicht-parametrischer Test:</h2>
+</section>
+</section>
+<section id="t-test-für-unabhängige-stichproben" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> t-Test für unabhängige Stichproben</h1>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Voraussetzungsprüfung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<section id="durchführung-des-t-tests-für-verbundene-stichproben" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="durchführung-des-t-tests-für-verbundene-stichproben"><span class="header-section-number">3.1</span> Durchführung des t-tests für verbundene Stichproben</h2>
+</section>
+<section id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-test"><span class="header-section-number">3.2</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Test</h2>
+<p><a href="http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html">Historie der Testverfahren</a></p>
+</section>
+</section>
+<section id="t-test-für-verbundene-stichproben" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> t-Test für verbundene Stichproben</h1>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Voraussetzungsprüfung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<section id="durchführung-des-t-tests-für-verbundene-stichproben-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="durchführung-des-t-tests-für-verbundene-stichproben-1"><span class="header-section-number">4.1</span> Durchführung des t-tests für verbundene Stichproben</h2>
+</section>
+<section id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest"><span class="header-section-number">4.2</span> Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest</h2>
 
 
 </section>
@@ -594,25 +744,90 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
+      // Handle positioning of the toggle
+      window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
           }
-        });
+        };
+      }
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
+          }
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;
