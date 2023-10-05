@@ -457,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Wir beginnen zunächst damit die notwendigen Pakete zu laden.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">p_load</span>(knitr,car, tidyverse, ggplot2, DescTools, dplyr,afex, emmeans, PMCMRplus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">p_load</span>(knitr,car, tidyverse, ggplot2, DescTools, dplyr,afex, emmeans, PMCMRplus, sjmisc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Anschließend laden wir unseren Datensatz:</p>
 <div class="cell">
@@ -467,12 +467,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="datenmanagement" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="datenmanagement"><span class="header-section-number">1.2</span> Datenmanagement</h2>
-<p>Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html">für ausführliche Erklärungen siehe hier</a>. Für unsere Varianzanalyse möchten wir uns anschauen, wie sich das Alter (und Geschlecht) der Befragten auf ihr Vertrauen in die Bundesregierung auswirkt. Wir nutzen dazu die folgenden Variablen:</p>
+<p>Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html">für ausführliche Erklärungen siehe hier</a>. Für unsere Varianzanalyse möchten wir uns anschauen, wie sich der Gesundheitszustand (und das Alter) der Befragten auf ihr Vertrauen in das Gesundheitswesen auswirkt. Wir nutzen dazu die folgenden Variablen:</p>
 <table class="table">
 <colgroup>
-<col style="width: 18%">
-<col style="width: 43%">
-<col style="width: 36%">
+<col style="width: 20%">
+<col style="width: 45%">
+<col style="width: 32%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -483,37 +483,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">pn11</td>
-<td style="text-align: center;">Genereller Stolz, Deutscher zu sein</td>
+<td style="text-align: center;">hs01</td>
+<td style="text-align: center;">Gesundheitszustand der Befragten</td>
 <td style="text-align: center;"><p>-42 = Datenfehler</p>
 <p>-11 = TNZ Split</p>
-<p>-10 = TNZ Filter</p>
 <p>-9 = Keine Angabe</p>
-<p>1 = Sehr Stolz</p>
-<p>2 = Ziemlich Stolz</p>
-<p>3 = Nicht sehr stolz</p>
-<p>4 = Gar nicht stolz</p></td>
+<p>1 = Sehr Gut</p>
+<p>2 = Gut</p>
+<p>3 = Zufriedenstellend</p>
+<p>4 = Weniger Gut</p>
+<p>5 = Schlecht</p></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">eastwest</td>
-<td style="text-align: center;">Erhebungsgebiet West-Ost</td>
-<td style="text-align: center;"><p>1= Alte Bundesländer (Westen)</p>
-<p>2 = Neue Bundesländer (Osten)</p></td>
+<td style="text-align: center;">age</td>
+<td style="text-align: center;">Alter der Befragten</td>
+<td style="text-align: center;">-32 = Nicht Generierbar</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">agec</td>
-<td style="text-align: center;">Alter der Befragten (gruppiert)</td>
-<td style="text-align: center;"><p>-32 = nicht generierbar</p>
-<p>1 = 18-29 Jahre</p>
-<p>2 = 30-44 Jahre</p>
-<p>3 = 45-59 Jahre</p>
-<p>4 = 60-74 Jahre</p>
-<p>5 = 75-89 Jahre</p>
-<p>6 = über 89 Jahre</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">pt14</td>
-<td style="text-align: center;">Vertrauen in die Polizei</td>
+<td style="text-align: center;">pt01</td>
+<td style="text-align: center;">Vertrauen in das Gesundheitswesen</td>
 <td style="text-align: center;"><p>-42 = Datenfehler</p>
 <p>-11 = TNZ Split</p>
 <p>-9 = Keine Angabe</p>
@@ -523,16 +511,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>Innerhalb unseres Datenmanageements schließen wir fehlerhafte und fehlende Werte der Variablen sex, agec und pt12 aus und benennen falls nötig die Variablen um:</p>
+<p>Innerhalb unseres Datenmanagements schließen wir fehlerhafte und fehlende Werte der Variablen sex, agef und pt12 aus und benennen falls nötig die Variablen um:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(., pn11 <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> pt14 <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> agec <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">rename</span>(., <span class="at">stolzd =</span> pn11,</span>
-<span id="cb3-4"><a href="#cb3-4"></a>            <span class="at">trustpol =</span> pt14) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">mutate</span>(<span class="at">stolzd =</span> <span class="fu">as.factor</span>(stolzd),</span>
-<span id="cb3-6"><a href="#cb3-6"></a>         <span class="at">eastwest =</span> <span class="fu">as.factor</span>(eastwest),</span>
-<span id="cb3-7"><a href="#cb3-7"></a>         <span class="at">agec =</span> <span class="fu">as.factor</span>(agec),</span>
-<span id="cb3-8"><a href="#cb3-8"></a>         <span class="at">trustpol =</span> <span class="fu">as.numeric</span>(trustpol))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(., hs01 <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> pt01 <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> age <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">rename</span>(., <span class="at">gesund =</span> hs01,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>            <span class="at">trustges =</span> pt01) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">mutate</span>(<span class="at">gesund =</span> <span class="fu">as.factor</span>(gesund),</span>
+<span id="cb3-6"><a href="#cb3-6"></a>         <span class="at">trustges =</span> <span class="fu">as.numeric</span>(trustges),</span>
+<span id="cb3-7"><a href="#cb3-7"></a>         <span class="at">agef =</span> <span class="fu">dicho</span>(age, <span class="at">as.num =</span> T) <span class="sc">%&gt;%</span> <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"jung"</span>, <span class="st">"alt"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -550,11 +537,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Eine weitere wichtige, leicht vorab zu prüfende Bedingung, die für eine Varianzanalyse erfüllt sein muss, ist die <strong>Normalverteilung der abhängigen Variable</strong>. Diese können wir graphisch mit einem <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.4.html#histogramme">Histogrammm</a> überprüfen:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">#Histogramm ausgeben</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(trustpol)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(trustges)) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count)), </span>
 <span id="cb4-4"><a href="#cb4-4"></a>                 <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"grey"</span>, </span>
 <span id="cb4-5"><a href="#cb4-5"></a>                 <span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Vertrauen in die Polizei"</span>, </span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Vertrauen in das Gesundheitswesen"</span>, </span>
 <span id="cb4-7"><a href="#cb4-7"></a>         <span class="at">y =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_6.4_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
@@ -564,22 +551,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Zusätzliche Gewissheit bezüglich des Vorliegens der Normalverteilung bietet der Kolmogorov-Smirnov-Test oder der Shapiro-Wilk-Test (welcher für kleinere Stichproben zwischen 3 und 5000 Fällen konzipiert ist). In R erhalten wir diese Tests mit dem Befehl <code>LillieTest()</code> aus dem Paket <code>DescTools()</code> bzw. <code>shapiro.test()</code>. Beide Tests testen auf Abweichung von der Normalverteilung, demnach sollte diese nicht signifikant ausfallen (da ein signifikanter Test aussagt, dass eine Abweichung von der Normalverteilung besteht, was wir nicht möchten).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">#Lilliefors Kolmogorov-Smirnov-Test</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">LillieTest</span>(daten<span class="sc">$</span>trustpol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">LillieTest</span>(daten<span class="sc">$</span>trustges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
-data:  daten$trustpol
-D = 0.18541, p-value &lt; 2.2e-16</code></pre>
+data:  daten$trustges
+D = 0.18718, p-value &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">#Shapiro-Wilk Test</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">shapiro.test</span>(daten<span class="sc">$</span>trustpol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">shapiro.test</span>(daten<span class="sc">$</span>trustges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
-data:  daten$trustpol
-W = 0.91262, p-value &lt; 2.2e-16</code></pre>
+data:  daten$trustges
+W = 0.92102, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Im vorliegenden Beispiel ist der Test signifikant. Allerdings reagieren beide Tests insbesondere bei großen Stichproben sehr sensibel, sodass bereits leichte Abweichungen von der Normalverteilung (etwa durch Ausreißer) die Tests signifikant werden lassen; in diesen Fällen ist es sinnvoll eher auf die graphische Überprüfung (siehe oben) zu schauen. Sowohl der Kolmogorov-Smirnov-Test als auch die Grafik lassen jedoch nicht auf eine perfekte Normalverteilung unserer abhängigen Variablen schließen. In diesem Fall kann die Varianzanalyse dennoch gerechnet werden, da solange die Verteilung nicht extrem steil ist, das Verfahren einigermaßen robust ist. Bei einer sehr starken Verletzung der Normalverteilung müsste ggf. auf nicht parametrische Tests wie den Kruskal-Wallis Test ausgewichen werden.</p>
@@ -590,34 +577,34 @@ W = 0.91262, p-value &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a><span class="co">#Levene-Test für einfaktorielle Varianzanalyse</span></span>
 <span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a>daten <span class="sc">%&gt;%</span> </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3"></a>  <span class="fu">leveneTest</span>(trustpol<span class="sc">~</span>stolzd, <span class="at">data =</span> ., <span class="at">center =</span> mean)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3"></a>  <span class="fu">leveneTest</span>(trustges<span class="sc">~</span>gesund, <span class="at">data =</span> ., <span class="at">center =</span> mean)</span>
 <span id="annotated-cell-7-4"><a href="#annotated-cell-7-4"></a></span>
 <span id="annotated-cell-7-5"><a href="#annotated-cell-7-5"></a><span class="co">#Levene-Test für mehrfaktorielle Varianzanalyse ausgeben</span></span>
 <span id="annotated-cell-7-6"><a href="#annotated-cell-7-6"></a>daten <span class="sc">%&gt;%</span> </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2">2</button><span id="annotated-cell-7-7" class="code-annotation-target"><a href="#annotated-cell-7-7"></a>  <span class="fu">leveneTest</span>(trustpol <span class="sc">~</span> stolzd<span class="sc">*</span>agec<span class="sc">*</span>eastwest, <span class="at">data =</span> ., <span class="at">center =</span> mean)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2">2</button><span id="annotated-cell-7-7" class="code-annotation-target"><a href="#annotated-cell-7-7"></a>  <span class="fu">leveneTest</span>(trustges <span class="sc">~</span> gesund<span class="sc">*</span>agef, <span class="at">data =</span> ., <span class="at">center =</span> mean)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="1">Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird.</span>
+<span data-code-cell="annotated-cell-7" data-code-annotation="1" data-code-lines="3">Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird.</span>
 </dd>
 <dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="7" data-code-annotation="2">Bei mehrenen unabhängigen Variablen können wir diese mit einem * verbinden. Hier wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.</span>
+<span data-code-cell="annotated-cell-7" data-code-annotation="2" data-code-lines="7">Bei mehrenen unabhängigen Variablen können wir diese mit einem * verbinden. Hier wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.</span>
 </dd>
 </dl>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = mean)
         Df F value    Pr(&gt;F)    
-group    3  6.4136 0.0002568 ***
-      1589                      
+group    4  5.9109 9.738e-05 ***
+      3470                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Levene's Test for Homogeneity of Variance (center = mean)
         Df F value    Pr(&gt;F)    
-group   45  1.8852 0.0004028 ***
-      1547                      
+group    9  5.2437 4.058e-07 ***
+      3465                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -627,19 +614,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </section>
 <section id="einfaktorielle-varianzanalyse-ohne-messwiederholung" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Einfaktorielle Varianzanalyse (ohne Messwiederholung)</h1>
-<p>Nachdem wir die Voraussetzungen geprüft haben, schauen wir uns die einfaktorielle Varianzanalyse an. Im vorliegenden Beispiel möchten wir gerne überprüfen, inwiefern sich das Alter (Variable <code>agec</code>; ) auf das Vertrauen in die Bundesregierung (Variable <code>trustreg</code>) auswirkt.</p>
+<p>Nachdem wir die Voraussetzungen geprüft haben, schauen wir uns die einfaktorielle Varianzanalyse an. Im vorliegenden Beispiel möchten wir gerne überprüfen, inwiefern sich das Alter (Variable <code>agef</code>; ) auf das Vertrauen in die Bundesregierung (Variable <code>trustreg</code>) auswirkt.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>daten <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">group_by</span>(stolzd) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarise</span>(<span class="at">Mittelwert =</span> <span class="fu">mean</span>(trustpol, <span class="at">na.rm =</span> T), </span>
-<span id="cb10-4"><a href="#cb10-4"></a>            <span class="at">Standardabweichung =</span> <span class="fu">sd</span>(trustpol, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Stolz"</span>, <span class="st">"M"</span>, <span class="st">"SD"</span>), <span class="at">caption =</span> <span class="st">"Descriptives Vertrauen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">group_by</span>(gesund) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarise</span>(<span class="at">Mittelwert =</span> <span class="fu">mean</span>(trustges, <span class="at">na.rm =</span> T), </span>
+<span id="cb10-4"><a href="#cb10-4"></a>            <span class="at">Standardabweichung =</span> <span class="fu">sd</span>(trustges, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Gesundheitszustand"</span>, <span class="st">"M"</span>, <span class="st">"SD"</span>), <span class="at">caption =</span> <span class="st">"Descriptives Vertrauen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Descriptives Vertrauen</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Stolz</th>
+<th style="text-align: left;">Gesundheitszustand</th>
 <th style="text-align: right;">M</th>
 <th style="text-align: right;">SD</th>
 </tr>
@@ -647,42 +634,47 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">1</td>
-<td style="text-align: right;">5.19</td>
-<td style="text-align: right;">1.52</td>
+<td style="text-align: right;">5.13</td>
+<td style="text-align: right;">1.45</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2</td>
-<td style="text-align: right;">5.12</td>
-<td style="text-align: right;">1.28</td>
+<td style="text-align: right;">4.99</td>
+<td style="text-align: right;">1.32</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">3</td>
-<td style="text-align: right;">4.73</td>
-<td style="text-align: right;">1.33</td>
+<td style="text-align: right;">4.85</td>
+<td style="text-align: right;">1.37</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">4</td>
-<td style="text-align: right;">4.62</td>
-<td style="text-align: right;">1.45</td>
+<td style="text-align: right;">4.82</td>
+<td style="text-align: right;">1.48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">4.71</td>
+<td style="text-align: right;">1.55</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in die Polizei am höchsten ausgeprägt ist, bei Personen die insbesondere stolz sind, Deutscher zu sein. Zudem erkennen wir, dass die Standardabweichungen der Kategorien sich nicht drastisch unterscheiden, wir demnach trotz der Verletzung der Varianzhomogenität die ANOVA rechnen können.</p>
+<p>Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, bei Personen die einen guten Gesundheitszustand aufweisen.</p>
 <p>Anschließend können wir die einfaktorielle ANOVA berechnen.Dafür nutzen wir die Funktion <code>aov_car</code> aus dem <code>afex</code>-Packag:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>fit <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
 <span id="cb11-2"><a href="#cb11-2"></a>dplyr<span class="sc">::</span><span class="fu">distinct</span>(respid, <span class="at">.keep_all =</span> T) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">aov_car</span>(trustpol <span class="sc">~</span> stolzd <span class="sc">+</span> <span class="fu">Error</span>(respid), <span class="at">data =</span> ., <span class="at">anova_table =</span> <span class="st">"pes"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">aov_car</span>(trustges <span class="sc">~</span> gesund <span class="sc">+</span> <span class="fu">Error</span>(respid), <span class="at">data =</span> ., <span class="at">anova_table =</span> <span class="st">"pes"</span>)</span>
 <span id="cb11-4"><a href="#cb11-4"></a></span>
 <span id="cb11-5"><a href="#cb11-5"></a><span class="fu">print</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type 3 tests)
 
-Response: trustpol
-  Effect      df  MSE         F  pes p.value
-1 stolzd 3, 1589 1.83 13.42 *** .025   &lt;.001
+Response: trustges
+  Effect      df  MSE        F  pes p.value
+1 gesund 4, 3470 1.91 5.46 *** .006   &lt;.001
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 </div>
@@ -697,8 +689,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 <li>pes: parties Eta-Quadrat (partial eta-quared)</li>
 <li>p.value: Signifikanz</li>
 </ul>
-<p><strong>Effect</strong> zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Stolz ein Deutscher zu sein, <code>stolzd</code>. Die drei bedeutet, dass hier insgesamt eine Gruppe mit 3 anderen (= vier Ausprägungen) verglichen wurde.</p>
-<p>Über die Werte der zweiten und vierten Spalte, die <strong>Freiheitsgrade</strong> (<code>df</code>) und die <strong>F-Werte</strong> (<code>F</code>) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte <code>p.value</code> die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert &lt;.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Stolzes ein Deutscher zu sein im Bezug auf das Vertrauen in die Polizei ersichtlich.</p>
+<p><strong>Effect</strong> zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Stolz ein Deutscher zu sein, <code>gesund</code>. Die drei bedeutet, dass hier insgesamt eine Gruppe mit 3 anderen (= vier Ausprägungen) verglichen wurde.</p>
+<p>Über die Werte der zweiten und vierten Spalte, die <strong>Freiheitsgrade</strong> (<code>df</code>) und die <strong>F-Werte</strong> (<code>F</code>) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte <code>p.value</code> die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert &lt;.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Stolzes ein Deutscher zu sein im Bezug auf das Vertrauen in das Gesundheitswesen ersichtlich.</p>
 <p>Die mittlere quadratische Abweichung (MSE) oder Fehlervarianz ist die Summe der Abweichungsquadrate aller Werte vom jeweiligen Gruppenmittelwert. Berechnet wird diese durch die Quadratsummer der Fehlerresiduen geteilt durch die Freiheitsgrade. Sie gibt damit die Varianz innerhalb der einzelnen Gruppen (=nicht erklärte Varianz) wieder.</p>
 <p>Die Spalte <code>pes</code> steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an – partiell ist das Eta<sup>2</sup>, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Im Datenbeispiel hat demnach der Stolz darauf ein Deutscher zu sein (und damit auch unser Gesamtmodell) eine Erklärkraft von 1.3 Prozent. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.</p>
 <section id="posthoctests" class="level2" data-number="3.1">
@@ -706,28 +698,33 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 <p>Zuletzt müssen wir die Posthoc-Tests berechnen, welche uns Aufschluss darüber geben, welche unserer Gruppen sich unterscheiden. Es gibt verschiedene Posthoc-Tests. Grundsätzlich ist der Tukex-Post-Hoc Test zu empfehlen, welche wir über die Funktion <code>emmeans</code>aus dem <code>emmeans</code>-Package aufrufen. Bei fehlender Varianzhomogenität können wir zudem den tamhane-T2 Test nutzen. Dieser basiert allerdings auf einem aov-Objekt, daher geben wir hier mit aov die ANOVA erneut aus. Innerhalb von emmeans können wir hingegen einfach auf unser zuvor spezifiziertes Modell fit verweisen, müssen allerdings noch mit specs= angeben, auf Basis welcher Variablen der Gruppenvergleich durchgeführt werden soll.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#Tukey Post-Hoc Test</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(fit, <span class="at">specs =</span> <span class="st">"stolzd"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(fit, <span class="at">specs =</span> <span class="st">"gesund"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">pairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast          estimate     SE   df t.ratio p.value
- stolzd1 - stolzd2   0.0714 0.0990 1589   0.722  0.8884
- stolzd1 - stolzd3   0.4528 0.1081 1589   4.189  0.0002
- stolzd1 - stolzd4   0.5662 0.1302 1589   4.350  0.0001
- stolzd2 - stolzd3   0.3814 0.0829 1589   4.598  &lt;.0001
- stolzd2 - stolzd4   0.4948 0.1102 1589   4.490  &lt;.0001
- stolzd3 - stolzd4   0.1134 0.1184 1589   0.957  0.7736
+ gesund1 - gesund2   0.1336 0.0696 3470   1.919  0.3075
+ gesund1 - gesund3   0.2749 0.0734 3470   3.746  0.0017
+ gesund1 - gesund4   0.3077 0.0924 3470   3.332  0.0078
+ gesund1 - gesund5   0.4123 0.1474 3470   2.797  0.0414
+ gesund2 - gesund3   0.1413 0.0567 3470   2.490  0.0930
+ gesund2 - gesund4   0.1741 0.0798 3470   2.183  0.1864
+ gesund2 - gesund5   0.2787 0.1398 3470   1.993  0.2696
+ gesund3 - gesund4   0.0328 0.0831 3470   0.395  0.9949
+ gesund3 - gesund5   0.1374 0.1418 3470   0.969  0.8691
+ gesund4 - gesund5   0.1046 0.1524 3470   0.686  0.9595
 
-P value adjustment: tukey method for comparing a family of 4 estimates </code></pre>
+P value adjustment: tukey method for comparing a family of 5 estimates </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">#Tamhame T2 Test</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>daten <span class="sc">%&gt;%</span> </span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">aov</span>(trustpol <span class="sc">~</span> stolzd, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">aov</span>(trustges <span class="sc">~</span> gesund, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">tamhaneT2Test</span>(.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  1       2       3      
-2 0.98531 -       -      
-3 0.00066 1.5e-05 -      
-4 0.00049 0.00014 0.93056</code></pre>
+<pre><code>  1      2      3      4     
+2 0.4692 -      -      -     
+3 0.0029 0.1037 -      -     
+4 0.0174 0.3186 1.0000 -     
+5 0.1230 0.5471 0.9923 0.9996</code></pre>
 </div>
 </div>
 <p>Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur dieser angezeigt). Werte unter .05 bedeuten, dass zwischen diesen Gruppen ein signifikanter Mittelwertunterschied besteht. In unserem Beispiel sehen wir Unterschiede zwischen</p>
@@ -743,9 +740,9 @@ P value adjustment: tukey method for comparing a family of 4 estimates </code></
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">#Deskriptive Statistiken ausgeben</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a>daten <span class="sc">%&gt;%</span> </span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">group_by</span>(stolzd, eastwest) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">summarise</span>(<span class="at">Mittelwert =</span> <span class="fu">mean</span>(trustpol, <span class="at">na.rm =</span> T), </span>
-<span id="cb17-5"><a href="#cb17-5"></a>            <span class="at">Standardabweichung =</span> <span class="fu">SD</span>(trustpol, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">group_by</span>(gesund, eastwest) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">summarise</span>(<span class="at">Mittelwert =</span> <span class="fu">mean</span>(trustges, <span class="at">na.rm =</span> T), </span>
+<span id="cb17-5"><a href="#cb17-5"></a>            <span class="at">Standardabweichung =</span> <span class="fu">SD</span>(trustges, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
 <span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Stolz"</span>, <span class="st">"Herkunft"</span>, <span class="st">"M"</span>, <span class="st">"SD"</span>), <span class="at">caption =</span> <span class="st">"Descriptives Vertrauen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -753,7 +750,7 @@ P value adjustment: tukey method for comparing a family of 4 estimates </code></
 <thead>
 <tr class="header">
 <th style="text-align: left;">Stolz</th>
-<th style="text-align: left;">Herkunft</th>
+<th style="text-align: right;">Herkunft</th>
 <th style="text-align: right;">M</th>
 <th style="text-align: right;">SD</th>
 </tr>
@@ -761,51 +758,63 @@ P value adjustment: tukey method for comparing a family of 4 estimates </code></
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">1</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: right;">5.37</td>
-<td style="text-align: right;">1.35</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.14</td>
+<td style="text-align: right;">1.37</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">1</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">4.93</td>
-<td style="text-align: right;">1.71</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5.08</td>
+<td style="text-align: right;">1.64</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: right;">5.24</td>
-<td style="text-align: right;">1.25</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.96</td>
+<td style="text-align: right;">1.35</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">4.87</td>
-<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5.07</td>
+<td style="text-align: right;">1.26</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">3</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: right;">4.78</td>
-<td style="text-align: right;">1.32</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">1.38</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">3</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">4.64</td>
-<td style="text-align: right;">1.35</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5.07</td>
+<td style="text-align: right;">1.33</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">4</td>
-<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.73</td>
+<td style="text-align: right;">1.51</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4.97</td>
+<td style="text-align: right;">1.43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">4.79</td>
-<td style="text-align: right;">1.45</td>
+<td style="text-align: right;">1.52</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">4.27</td>
-<td style="text-align: right;">1.39</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4.56</td>
+<td style="text-align: right;">1.64</td>
 </tr>
 </tbody>
 </table>
@@ -816,17 +825,17 @@ P value adjustment: tukey method for comparing a family of 4 estimates </code></
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>fit2 <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
 <span id="cb18-2"><a href="#cb18-2"></a>dplyr<span class="sc">::</span><span class="fu">distinct</span>(respid, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-3"><a href="#cb18-3"></a>  afex<span class="sc">::</span><span class="fu">aov_car</span>(trustpol <span class="sc">~</span> stolzd <span class="sc">*</span> eastwest <span class="sc">+</span> <span class="fu">Error</span>(respid),</span>
+<span id="cb18-3"><a href="#cb18-3"></a>  afex<span class="sc">::</span><span class="fu">aov_car</span>(trustges <span class="sc">~</span> gesund <span class="sc">*</span> eastwest <span class="sc">+</span> <span class="fu">Error</span>(respid),</span>
 <span id="cb18-4"><a href="#cb18-4"></a>                                     <span class="at">data =</span> ., <span class="at">anova_table =</span> <span class="st">"pes"</span>)</span>
 <span id="cb18-5"><a href="#cb18-5"></a><span class="fu">print</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type 3 tests)
 
-Response: trustpol
-           Effect      df  MSE         F  pes p.value
-1          stolzd 3, 1585 1.81 12.46 *** .023   &lt;.001
-2        eastwest 1, 1585 1.81 20.71 *** .013   &lt;.001
-3 stolzd:eastwest 3, 1585 1.81      1.07 .002    .359
+Response: trustges
+           Effect      df  MSE       F   pes p.value
+1          gesund 4, 3465 1.90 3.94 **  .005    .003
+2        eastwest 1, 3465 1.90    1.22 &lt;.001    .269
+3 gesund:eastwest 4, 3465 1.90  2.34 +  .003    .052
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 </div>
@@ -837,40 +846,57 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 <h2 data-number="4.1" class="anchored" data-anchor-id="post-hoc-tests"><span class="header-section-number">4.1</span> Post-Hoc Tests</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">#Tukey Post-Hoc Test</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(fit2, <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"stolzd"</span>, <span class="st">"eastwest"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(fit2, <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"gesund"</span>, <span class="st">"eastwest"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">pairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> contrast                              estimate    SE   df t.ratio p.value
- stolzd1 eastwest1 - stolzd2 eastwest1  0.12815 0.127 1585   1.006  0.9737
- stolzd1 eastwest1 - stolzd3 eastwest1  0.59184 0.138 1585   4.298  0.0005
- stolzd1 eastwest1 - stolzd4 eastwest1  0.58335 0.163 1585   3.578  0.0085
- stolzd1 eastwest1 - stolzd1 eastwest2  0.43845 0.172 1585   2.552  0.1746
- stolzd1 eastwest1 - stolzd2 eastwest2  0.49790 0.140 1585   3.561  0.0091
- stolzd1 eastwest1 - stolzd3 eastwest2  0.72956 0.159 1585   4.580  0.0001
- stolzd1 eastwest1 - stolzd4 eastwest2  1.09822 0.204 1585   5.384  &lt;.0001
- stolzd2 eastwest1 - stolzd3 eastwest1  0.46368 0.101 1585   4.575  0.0001
- stolzd2 eastwest1 - stolzd4 eastwest1  0.45520 0.134 1585   3.403  0.0157
- stolzd2 eastwest1 - stolzd1 eastwest2  0.31030 0.144 1585   2.150  0.3829
- stolzd2 eastwest1 - stolzd2 eastwest2  0.36975 0.104 1585   3.548  0.0095
- stolzd2 eastwest1 - stolzd3 eastwest2  0.60140 0.129 1585   4.657  0.0001
- stolzd2 eastwest1 - stolzd4 eastwest2  0.97007 0.181 1585   5.347  &lt;.0001
- stolzd3 eastwest1 - stolzd4 eastwest1 -0.00849 0.144 1585  -0.059  1.0000
- stolzd3 eastwest1 - stolzd1 eastwest2 -0.15339 0.153 1585  -1.000  0.9746
- stolzd3 eastwest1 - stolzd2 eastwest2 -0.09393 0.117 1585  -0.806  0.9928
- stolzd3 eastwest1 - stolzd3 eastwest2  0.13772 0.139 1585   0.989  0.9761
- stolzd3 eastwest1 - stolzd4 eastwest2  0.50638 0.189 1585   2.682  0.1288
- stolzd4 eastwest1 - stolzd1 eastwest2 -0.14490 0.177 1585  -0.821  0.9920
- stolzd4 eastwest1 - stolzd2 eastwest2 -0.08545 0.146 1585  -0.587  0.9990
- stolzd4 eastwest1 - stolzd3 eastwest2  0.14621 0.164 1585   0.889  0.9870
- stolzd4 eastwest1 - stolzd4 eastwest2  0.51487 0.208 1585   2.475  0.2068
- stolzd1 eastwest2 - stolzd2 eastwest2  0.05945 0.155 1585   0.383  0.9999
- stolzd1 eastwest2 - stolzd3 eastwest2  0.29111 0.173 1585   1.682  0.6991
- stolzd1 eastwest2 - stolzd4 eastwest2  0.65977 0.215 1585   3.070  0.0451
- stolzd2 eastwest2 - stolzd3 eastwest2  0.23165 0.141 1585   1.638  0.7269
- stolzd2 eastwest2 - stolzd4 eastwest2  0.60032 0.190 1585   3.154  0.0350
- stolzd3 eastwest2 - stolzd4 eastwest2  0.36866 0.205 1585   1.798  0.6217
+<pre><code> contrast                              estimate     SE   df t.ratio p.value
+ gesund1 eastwest1 - gesund2 eastwest1  0.18741 0.0821 3465   2.283  0.4006
+ gesund1 eastwest1 - gesund3 eastwest1  0.42082 0.0882 3465   4.769  0.0001
+ gesund1 eastwest1 - gesund4 eastwest1  0.41672 0.1137 3465   3.666  0.0094
+ gesund1 eastwest1 - gesund5 eastwest1  0.35448 0.1778 3465   1.994  0.6033
+ gesund1 eastwest1 - gesund1 eastwest2  0.06158 0.1332 3465   0.462  1.0000
+ gesund1 eastwest1 - gesund2 eastwest2  0.07037 0.0948 3465   0.742  0.9992
+ gesund1 eastwest1 - gesund3 eastwest2  0.07811 0.0987 3465   0.791  0.9987
+ gesund1 eastwest1 - gesund4 eastwest2  0.17723 0.1332 3465   1.331  0.9467
+ gesund1 eastwest1 - gesund5 eastwest2  0.58439 0.2465 3465   2.370  0.3441
+ gesund2 eastwest1 - gesund3 eastwest1  0.23341 0.0704 3465   3.314  0.0315
+ gesund2 eastwest1 - gesund4 eastwest1  0.22931 0.1005 3465   2.282  0.4007
+ gesund2 eastwest1 - gesund5 eastwest1  0.16707 0.1696 3465   0.985  0.9931
+ gesund2 eastwest1 - gesund1 eastwest2 -0.12583 0.1221 3465  -1.030  0.9904
+ gesund2 eastwest1 - gesund2 eastwest2 -0.11704 0.0785 3465  -1.491  0.8960
+ gesund2 eastwest1 - gesund3 eastwest2 -0.10930 0.0832 3465  -1.314  0.9506
+ gesund2 eastwest1 - gesund4 eastwest2 -0.01018 0.1221 3465  -0.083  1.0000
+ gesund2 eastwest1 - gesund5 eastwest2  0.39698 0.2407 3465   1.649  0.8237
+ gesund3 eastwest1 - gesund4 eastwest1 -0.00410 0.1055 3465  -0.039  1.0000
+ gesund3 eastwest1 - gesund5 eastwest1 -0.06633 0.1727 3465  -0.384  1.0000
+ gesund3 eastwest1 - gesund1 eastwest2 -0.35924 0.1263 3465  -2.844  0.1224
+ gesund3 eastwest1 - gesund2 eastwest2 -0.35045 0.0849 3465  -4.128  0.0015
+ gesund3 eastwest1 - gesund3 eastwest2 -0.34271 0.0892 3465  -3.841  0.0049
+ gesund3 eastwest1 - gesund4 eastwest2 -0.24359 0.1263 3465  -1.928  0.6496
+ gesund3 eastwest1 - gesund5 eastwest2  0.16357 0.2429 3465   0.673  0.9996
+ gesund4 eastwest1 - gesund5 eastwest1 -0.06224 0.1870 3465  -0.333  1.0000
+ gesund4 eastwest1 - gesund1 eastwest2 -0.35514 0.1452 3465  -2.445  0.2991
+ gesund4 eastwest1 - gesund2 eastwest2 -0.34635 0.1111 3465  -3.118  0.0577
+ gesund4 eastwest1 - gesund3 eastwest2 -0.33861 0.1144 3465  -2.959  0.0904
+ gesund4 eastwest1 - gesund4 eastwest2 -0.23949 0.1452 3465  -1.649  0.8237
+ gesund4 eastwest1 - gesund5 eastwest2  0.16767 0.2533 3465   0.662  0.9997
+ gesund5 eastwest1 - gesund1 eastwest2 -0.29290 0.1994 3465  -1.469  0.9045
+ gesund5 eastwest1 - gesund2 eastwest2 -0.28412 0.1761 3465  -1.613  0.8421
+ gesund5 eastwest1 - gesund3 eastwest2 -0.27637 0.1783 3465  -1.550  0.8715
+ gesund5 eastwest1 - gesund4 eastwest2 -0.17725 0.1994 3465  -0.889  0.9968
+ gesund5 eastwest1 - gesund5 eastwest2  0.22991 0.2878 3465   0.799  0.9986
+ gesund1 eastwest2 - gesund2 eastwest2  0.00878 0.1310 3465   0.067  1.0000
+ gesund1 eastwest2 - gesund3 eastwest2  0.01653 0.1338 3465   0.124  1.0000
+ gesund1 eastwest2 - gesund4 eastwest2  0.11565 0.1610 3465   0.719  0.9994
+ gesund1 eastwest2 - gesund5 eastwest2  0.52281 0.2626 3465   1.991  0.6055
+ gesund2 eastwest2 - gesund3 eastwest2  0.00774 0.0957 3465   0.081  1.0000
+ gesund2 eastwest2 - gesund4 eastwest2  0.10686 0.1310 3465   0.816  0.9984
+ gesund2 eastwest2 - gesund5 eastwest2  0.51402 0.2454 3465   2.095  0.5312
+ gesund3 eastwest2 - gesund4 eastwest2  0.09912 0.1338 3465   0.741  0.9992
+ gesund3 eastwest2 - gesund5 eastwest2  0.50628 0.2469 3465   2.051  0.5630
+ gesund4 eastwest2 - gesund5 eastwest2  0.40716 0.2626 3465   1.551  0.8714
 
-P value adjustment: tukey method for comparing a family of 8 estimates </code></pre>
+P value adjustment: tukey method for comparing a family of 10 estimates </code></pre>
 </div>
 </div>
 </section>
@@ -879,15 +905,15 @@ P value adjustment: tukey method for comparing a family of 8 estimates </code></
 <p>Um einen möglichen Interaktionseffekt (auch wenn in unseren Fall der Interkationseffekt nicht signifikant war) auch anschaulich vermitteln bzw. oft auch verstehen zu können, empfiehlt es sich, diesen als Diagramm darzustellen. Hierzu nutzen wir die Pakete <code>emmeans</code> und <code>ggplot2</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">#Interaktionsplot ausgeben</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">emmip</span>(fit2, eastwest <span class="sc">~</span> stolzd) <span class="sc">+</span> </span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Geschätzes Randmittel von Vertrauen in die Polizei"</span>, </span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">emmip</span>(fit2, eastwest <span class="sc">~</span> gesund) <span class="sc">+</span> </span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Geschätzes Randmittel von Vertrauen in das Gesundheitswesen"</span>, </span>
 <span id="cb22-4"><a href="#cb22-4"></a>       <span class="at">y =</span> <span class="st">"Geschätzte Randmittel"</span>,</span>
 <span id="cb22-5"><a href="#cb22-5"></a>       <span class="at">x =</span> <span class="st">"Stolz, Deutscher zu sein"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_6.4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">emmip</span>(fit2, stolzd <span class="sc">~</span> eastwest) <span class="sc">+</span> </span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Geschätzes Randmittel von Vertrauen in die Polizei"</span>, </span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">emmip</span>(fit2, gesund <span class="sc">~</span> eastwest) <span class="sc">+</span> </span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Geschätzes Randmittel von Vertrauen in das Gesundheitswesen"</span>, </span>
 <span id="cb23-3"><a href="#cb23-3"></a>       <span class="at">y =</span> <span class="st">"Geschätzte Randmittel"</span>,</span>
 <span id="cb23-4"><a href="#cb23-4"></a>       <span class="at">x =</span> <span class="st">"Herkunft (Ost vs West)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
