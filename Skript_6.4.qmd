@@ -27,7 +27,7 @@ Wir beginnen zunächst damit die notwendigen Pakete zu laden.
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
-p_load(knitr,car, tidyverse, ggplot2, DescTools, dplyr,afex, emmeans, PMCMRplus)
+p_load(knitr,car, tidyverse, ggplot2, DescTools, dplyr,afex, emmeans, PMCMRplus, sjmisc)
 ```
 
 Anschließend laden wir unseren Datensatz:
@@ -75,20 +75,20 @@ Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des
 |               |                                   | 7 = Großes Vertrauen    |
 +---------------+-----------------------------------+-------------------------+
 
-Innerhalb unseres Datenmanagements schließen wir fehlerhafte und fehlende Werte der Variablen sex, agec und pt12 aus und benennen falls nötig die Variablen um:
+Innerhalb unseres Datenmanagements schließen wir fehlerhafte und fehlende Werte der Variablen sex, agef und pt12 aus und benennen falls nötig die Variablen um:
 
 ```{r}
 
 daten <- daten %>%
-  filter(., pn11 > 0 & pt14 > 0 & agec > 0) %>% 
-  rename(., gesund = pn11,
-            trustges = pt14) %>% 
+  filter(., hs01 > 0 & pt01 > 0 & age > 0) %>% 
+  rename(., gesund = hs01,
+            trustges = pt01) %>% 
   mutate(gesund = as.factor(gesund),
-         eastwest = as.factor(eastwest),
-         trustges = as.numeric(trustges))
+         trustges = as.numeric(trustges),
+         agef = dicho(age, as.num = T) %>% factor(levels = c(0,1), labels = c("jung", "alt")))
+
 ```
 
-Varianzanalye \<- Varianzanalyse %\>% mutate(jung_alt = dicho(Alter, as.num = T) %\>% factor(levels = c(0,1), labels = c("jung", "alt")))
 
 # Voraussetzungsprüfung für einfaktorielle und mehrfaktorielle Varianzanalyse
 
@@ -138,7 +138,7 @@ daten %>%
 
 #Levene-Test für mehrfaktorielle Varianzanalyse ausgeben
 daten %>% 
-  leveneTest(trustges ~ gesund*agec*eastwest, data = ., center = mean) #<2>
+  leveneTest(trustges ~ gesund*agef, data = ., center = mean) #<2>
 ```
 
 1.  Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (\~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird.
@@ -148,21 +148,18 @@ Wenn der Levene-Test statistisch signifikant ausfällt, sollte die Hypothese hom
 
 # Einfaktorielle Varianzanalyse (ohne Messwiederholung)
 
-Nachdem wir die Voraussetzungen geprüft haben, schauen wir uns die einfaktorielle Varianzanalyse an. Im vorliegenden Beispiel möchten wir gerne überprüfen, inwiefern sich das Alter (Variable `agec`; ) auf das Vertrauen in die Bundesregierung (Variable `trustreg`) auswirkt.
+Nachdem wir die Voraussetzungen geprüft haben, schauen wir uns die einfaktorielle Varianzanalyse an. Im vorliegenden Beispiel möchten wir gerne überprüfen, inwiefern sich das Alter (Variable `agef`; ) auf das Vertrauen in die Bundesregierung (Variable `trustreg`) auswirkt.
 
 ```{r}
 
-daten <- daten %>%
-  filter(., pt12 > 0 & dw01a > 0 & work >0 ) 
-
 daten %>% 
-  group_by(educ) %>% 
-  summarise(Mittelwert = mean(pt12, na.rm = T), 
-            Standardabweichung = sd(pt12, na.rm = T)) %>% 
-  kable(digits = 2, col.names = c("Stolz", "M", "SD"), caption = "Descriptives Vertrauen")
+  group_by(gesund) %>% 
+  summarise(Mittelwert = mean(trustges, na.rm = T), 
+            Standardabweichung = sd(trustges, na.rm = T)) %>% 
+  kable(digits = 2, col.names = c("Gesundheitszustand", "M", "SD"), caption = "Descriptives Vertrauen")
 ```
 
-Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in die Polizei am höchsten ausgeprägt ist, bei Personen die insbesondere stolz sind, Deutscher zu sein. Zudem erkennen wir, dass die Standardabweichungen der Kategorien sich nicht drastisch unterscheiden, wir demnach trotz der Verletzung der Varianzhomogenität die ANOVA rechnen können.
+Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, bei Personen die einen guten Gesundheitszustand aufweisen.
 
 Anschließend können wir die einfaktorielle ANOVA berechnen.Dafür nutzen wir die Funktion `aov_car` aus dem `afex`-Packag:
 
@@ -188,7 +185,7 @@ Als Output erhalten wir eine Tabelle mit den folgenden Parametern:
 
 **Effect** zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Stolz ein Deutscher zu sein, `gesund`. Die drei bedeutet, dass hier insgesamt eine Gruppe mit 3 anderen (= vier Ausprägungen) verglichen wurde.
 
-Über die Werte der zweiten und vierten Spalte, die **Freiheitsgrade** (`df`) und die **F-Werte** (`F`) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte `p.value` die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert \<.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Stolzes ein Deutscher zu sein im Bezug auf das Vertrauen in die Polizei ersichtlich.
+Über die Werte der zweiten und vierten Spalte, die **Freiheitsgrade** (`df`) und die **F-Werte** (`F`) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte `p.value` die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert \<.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Stolzes ein Deutscher zu sein im Bezug auf das Vertrauen in das Gesundheitswesen ersichtlich.
 
 Die mittlere quadratische Abweichung (MSE) oder Fehlervarianz ist die Summe der Abweichungsquadrate aller Werte vom jeweiligen Gruppenmittelwert. Berechnet wird diese durch die Quadratsummer der Fehlerresiduen geteilt durch die Freiheitsgrade. Sie gibt damit die Varianz innerhalb der einzelnen Gruppen (=nicht erklärte Varianz) wieder.
 
@@ -259,12 +256,12 @@ Um einen möglichen Interaktionseffekt (auch wenn in unseren Fall der Interkatio
 ```{r}
 #Interaktionsplot ausgeben
 emmip(fit2, eastwest ~ gesund) + 
-  labs(title = "Geschätzes Randmittel von Vertrauen in die Polizei", 
+  labs(title = "Geschätzes Randmittel von Vertrauen in das Gesundheitswesen", 
        y = "Geschätzte Randmittel",
        x = "Stolz, Deutscher zu sein")
 
 emmip(fit2, gesund ~ eastwest) + 
-  labs(title = "Geschätzes Randmittel von Vertrauen in die Polizei", 
+  labs(title = "Geschätzes Randmittel von Vertrauen in das Gesundheitswesen", 
        y = "Geschätzte Randmittel",
        x = "Herkunft (Ost vs West)")
 ```
