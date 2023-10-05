@@ -17,7 +17,15 @@ format:
 
 # Berechnung von Lageparametern
 
-Im Folgenden werden wir aus dem Allbus-2021-Datensatz ein paar Beispiele herausgreifen, um die Berechnung und Visualisierung von Häufigkeiten und Parametern zu demonstrieren. Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem `p_load`-Befehl:
+Im Folgenden werden wir aus dem Allbus-2021-Datensatz ein paar Beispiele herausgreifen, um die Berechnung und Visualisierung von Häufigkeiten und Parametern zu demonstrieren. 
+
+::: {.callout-note collapse="true" icon="false"}
+## Video
+
+{{< video https://www.youtube.com/watch?v=r0_Vtf48MHU >}}
+:::
+
+Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem `p_load`-Befehl:
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}

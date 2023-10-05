@@ -15,7 +15,15 @@ format:
 
 ![Wie groß sind die Kreise?, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_stone_draws_circles_in_the_water_wid_9dd755ad-ddad-4d23-bfab-dcca546e86ab.png)
 
-Im letzten Abschnitt haben wir uns angesehen, mit welchen Maßen sich etwas darüber sagen lässt, um welche Punkte sich die Masse der Messwerte in unserem Datensatz konzentriert. Jetzt wollen wir wissen, wie stark die Messwerte streuen, also wie stark die Messwerte vom Lageparameter abweichen.  Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem `p_load`-Befehl:
+Im letzten Abschnitt haben wir uns angesehen, mit welchen Maßen sich etwas darüber sagen lässt, um welche Punkte sich die Masse der Messwerte in unserem Datensatz konzentriert. Jetzt wollen wir wissen, wie stark die Messwerte streuen, also wie stark die Messwerte vom Lageparameter abweichen.
+
+::: {.callout-note collapse="true" icon="false"}
+## Video
+
+{{< video https://www.youtube.com/watch?v=ZK4kZITHke4 >}}
+:::
+
+Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem `p_load`-Befehl:
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
@@ -44,7 +52,6 @@ colnames(allbus_df) <- c("Geschlecht", "VertrauenBR", "Einkommen") # Umbenennen 
 3.  Die Kombination aus `mutate` und `across` ermöglicht es uns die Funktion `as.numeric` in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die `~` gibt den Start der anzuwenden Funktion (hier `as.numeric` an), der Punkt innerhalb der Klammer der `as.numeric` Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen
 4.  Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter, mit dem Ausdruck `%in%` prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
 5.  Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
-
 
 ## Die Spannweite
 
@@ -85,7 +92,7 @@ Für den Quartilsabstand gibt es eine Funktion in R:
 IQR(allbus_df$VertrauenBR) # <1>
 ```
 
-1. Berechnung mit der vorgefertigten R-Funktion IQR (Interquartile Range)
+1.  Berechnung mit der vorgefertigten R-Funktion IQR (Interquartile Range)
 
 Um den mittleren Quartilsabstand zu ermitteln, kann man das Ergebnis noch durch 2 teilen.
 
