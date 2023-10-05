@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "!ignored-dir/R-Skripte zum Download"
 
 website:
   
