@@ -4,11 +4,16 @@ author: "Michael Linke"
 toc: true
 number-sections: true
 highlight-style: pygments
+execute: 
+  warning: false
 format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 ---
+
+![Die Verteilung der Stadt, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_cyberpunk_skyline_statistic_normal_dis_4473b399-2f60-47d2-8586-65fc6c1e9325.png)
 
 Wir haben jetzt eine Menge verschiedener Methoden kennengelernt, mit denen wir uns einen Eindruck davon machen können, wie unsere Daten verteilt sind. Um den Begriff der Verteilung an sich haben wir dagegen bis hierher einen Bogen gemacht. Dabei spielt die Art der Verteilung für viele weiterführende Anwendungen eine große Rolle. Manche statistische Verfahren setzen spezifische Verteilungen voraus.
 
@@ -22,18 +27,29 @@ Schauen wir uns als Beispiel das Histogramm der Allbus-Einkommensverteilung aus 
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
 p_load(tidyverse, ggplot2, haven, dplyr, fitdistrplus)  
 
-
 theme_set(theme_classic()) 
+```
 
+Dazu laden wir zunächst die Daten und berechnen einige Parameter:
+
+```{r}
 daten = haven::read_dta("Datensatz/Allbus_2021.dta") 
 
-allbus_df = subset(daten, select=c("sex", "pt12", "di01a")) %>%          
-  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%                                     
-  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%          
-  na.omit()   
+allbus_df <- daten %>%   # <1>
+  dplyr::select(c("sex", "pt12", "di01a")) %>%           # <2>
+  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%           # <3>                             
+  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%      # <4>     
+  na.omit()    # <5>
 
 colnames(allbus_df) <- c("Geschlecht", "VertrauenBR", "Einkommen") # Umbenennen der Spaltennamen
 ```
+
+1.  Wir erstellen ein neues Objekt basierend auf dem Datensatz `daten`
+2.  Wir wählen die Variablen aus
+3.  Die Kombination aus `mutate` und `across` ermöglicht es uns die Funktion `as.numeric` in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die `~` gibt den Start der anzuwenden Funktion (hier `as.numeric` an), der Punkt innerhalb der Klammer der `as.numeric` Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen
+4.  Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter, mit dem Ausdruck `%in%` prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
+5.  Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+
 
 ```{r}
 # Funktion zur Berechnung des geometrischen Mittels:
@@ -169,8 +185,6 @@ stat_function(fun=dnorm, args=list(mean=0, sd=1), colour="red")
 
 Aus der Visualisierung der unterschiedlichen Stichprobengrößen sollte ersichtlich geworden sein, warum ausreichend große Stichproben in der Statistik so wichtig sind. Erst ab einer ausreichend großen Anzahl Messwerten kann überhaupt sicher gesagt werden, ob die Daten einer bestimmten Verteilung folgen.
 
-
-
 Wenn man weiß, dass ein bestimmtes Merkmal normalverteilt ist, kann man das nutzen, um mit relativ wenig Aufwand Berechnungen anzustellen. Angenommen, für unsere Einkommensdaten träfe das auch zu, dann könnte man z.B. mithilfe der Normalverteilung ausrechnen, wieviel Prozent der Population theoretisch über maximal 1500 Euro Netto-Einkommen im Monat verfügen. Dazu verwenden wir die Verteilungsfunktion der Normalverteilung, da wir an einem kumulierten Wert interessiert sind, nämlich allen möglichen Einkommenswerten bis maximal 1500 Euro. Wir übergeben der Funktion Mittelwert und Standardabweichung unserer Daten sowie die besagte Einkommensobergrenze:
 
 ```{r}
@@ -233,22 +247,23 @@ qqline(allbus_df$Einkommen) # Einfügen der Linie, auf der die Punkte liegen sol
 
 Wie leicht zu sehen ist, weichen die Daten sehr stark von der Linie ab. Der Bereich unterhalb von ca. 3000 Euro Einkommen scheint zumindest teilweise als normalverteilt interpretierbar zu sein, während für höhere Werte die Ergebnisse massiv abweichen. Allerdings muss auch dazugesagt werden, dass ab 5000 Euro aufwärts die Anzahl an Messwerten deutlich abnimmt.
 
-
-Eine weitere Möglichkeit, auf Normalverteilung zu testen, sind der Kolmogorov-Smirnov-Test und der Shapiro-Wilk-Test. Diese gehen von der Null-Hypothese aus, dass die Daten normalverteilt sind. Wenn der p-Wert also nahe bei 1 liegt, kann man davon ausgehen, dass die Hypothese bestätigt ist. Wenn der p-Wert gegen 0 geht, deutet das darauf hin, dass die Daten nicht normalverteilt sind. Allerdings sind beide Verfahren nicht unproblematisch, da sie mit zunehmender Stichprobengröße immer anfälliger für Ausreißer werden und die Null-Hypothese eher ablehnen. Der Shapiro-Wilk-Test wird vor allem bei kleinen Stichproben (n < 50) eingesetzt. 
+Eine weitere Möglichkeit, auf Normalverteilung zu testen, sind der Kolmogorov-Smirnov-Test und der Shapiro-Wilk-Test. Diese gehen von der Null-Hypothese aus, dass die Daten normalverteilt sind. Wenn der p-Wert also nahe bei 1 liegt, kann man davon ausgehen, dass die Hypothese bestätigt ist. Wenn der p-Wert gegen 0 geht, deutet das darauf hin, dass die Daten nicht normalverteilt sind. Allerdings sind beide Verfahren nicht unproblematisch, da sie mit zunehmender Stichprobengröße immer anfälliger für Ausreißer werden und die Null-Hypothese eher ablehnen. Der Shapiro-Wilk-Test wird vor allem bei kleinen Stichproben (n \< 50) eingesetzt.
 
 Zur Demonstration der R-Funktionalitäten sind die beiden Tests hier aufgeführt, wobei die Größe der Stichprobe eine Ablehnung der Null-Hypothese erwarten lässt. Zunächst der Kolmogorov-Smirnov-Test. Es werden an die Funktion übergeben: Die Stichprobe, die Art der Verteilung, auf die getestet werden soll (hier: die Normalverteilung), der Mittelwert sowie die Standardabweichung der Stichprobe:
 
 ```{r}
 ks.test(allbus_df$Einkommen, "pnorm", mean=mean(allbus_df$Einkommen), sd=sd(allbus_df$Einkommen))
 ```
-Die Warnung macht uns darauf aufmerksam, dass manche Messwerte im Datensatz mehrfach vorkommen. Der p-Wert ist extrem klein, es wird also angenommen, dass die Daten nicht normalverteilt sind. 
 
-Analog dazu der Shapiro-Wilk-Test: 
+Die Warnung macht uns darauf aufmerksam, dass manche Messwerte im Datensatz mehrfach vorkommen. Der p-Wert ist extrem klein, es wird also angenommen, dass die Daten nicht normalverteilt sind.
+
+Analog dazu der Shapiro-Wilk-Test:
 
 ```{r}
 shapiro.test(allbus_df$Einkommen)
 ```
-Auch hier ist der p-Wert extrem klein, weshalb auch hier die Annahme abgelehnt wird, dass die Daten normalverteilt sind. 
+
+Auch hier ist der p-Wert extrem klein, weshalb auch hier die Annahme abgelehnt wird, dass die Daten normalverteilt sind.
 
 Um die Problematik dieser beiden Tests zu demonstrieren, wird im folgenden Code-Beispiel eine kleine zufällige Teil-Stichprobe aus dem Einkommens-Datensatz gezogen. Führen Sie es mehrmals aus und schauen Sie sich an, wie stark der p-Wert schwankt:
 
@@ -280,7 +295,7 @@ Die Formel ähnelt der für die Normalverteilung:
 
 $$
 f(x;\mu,\sigma) = \frac{1}{x \cdot \sigma \sqrt{2\pi}} \cdot e^{-\frac{(\ln(x)-\mu)^2}{2\sigma^2}}
-$$ 
+$$
 
 ### Visualisierung
 
@@ -369,7 +384,7 @@ Diese Verteilung kann vorliegen, wenn die Bedingung der Unabhängigkeit der einz
 
 #### Berechnung
 
-Es wird wieder von zwei Ereignissen ausgegangen, die eintreten können. Angenommen, eine Grundgesamtheit setzt sich zusammen aus $N + M$ Ereignissen, wobei $M$ und $N$ sich gegenseitig ausschließen. Aus dieser Grundgesamtheit wird nun eine Stichprobe der Größe $k$ gezogen. Dann berechnet sich die Wahrscheinlichkeit, dass sich in der Stichprobe $x$ mal das Ereignis $M$ eintritt, folgendermaßen: 
+Es wird wieder von zwei Ereignissen ausgegangen, die eintreten können. Angenommen, eine Grundgesamtheit setzt sich zusammen aus $N + M$ Ereignissen, wobei $M$ und $N$ sich gegenseitig ausschließen. Aus dieser Grundgesamtheit wird nun eine Stichprobe der Größe $k$ gezogen. Dann berechnet sich die Wahrscheinlichkeit, dass sich in der Stichprobe $x$ mal das Ereignis $M$ eintritt, folgendermaßen:
 
 $$
 f(x, k, M, N) = \frac{\binom{M}{x} \binom{N}{k-x}}{\binom{N + M}{k}}
@@ -394,7 +409,7 @@ Diese Verteilung kann herangezogen werden, wenn es um das durchschnittliche Eint
 
 #### Berechnung
 
-Die Poissonverteilung berechnet sich nach folgender Formel: 
+Die Poissonverteilung berechnet sich nach folgender Formel:
 
 $$
 f(k;\lambda) =  \frac{\lambda^k  }{k!}e^{-\lambda}
@@ -442,7 +457,7 @@ f(k;\lambda) = \begin{cases}
 \lambda e^{-\lambda k}, & k \geq 0 \\
 0, & x < 0
 \end{cases}
-$$ 
+$$
 
 Beispiel: Eine Nachrichtenagentur berichtet durchschnittlich alle 30 Tage über Proteste und Widerstandsaktionen in einem Land X. Wie wahrscheinlich ist es, dass zwischen den Nachrichten plötzlich nur noch maximal 5 Tage liegen?
 

@@ -272,13 +272,17 @@ In unserem Fall greifen wir auf die etablierte Rotationsmethode `varimax` zurüc
 Wir starten mit der durch VSS vorgeschlagenen Anzahl von drei Faktoren.
 
 ```{r Modell der Faktorenanalyse für 3 Faktoren}
-fit =  principal(allbus_vertrauen, nfactors = 3, method = "ml", rotate = "varimax") # <1>
+fit3 =  principal(allbus_vertrauen, nfactors = 3, method = "ml", rotate = "varimax") # <1>
+fit3
 ```
 
 1.  Mit der `principal` Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit `nfactors` aus, legen ein Rotation mit `rotate` sowie eine Methode der Schätzung mittels `method` fest
 
+Das sieht soweit in Ordnung aus, aber wir möchten uns auch noch die Variante mit einem Faktor anschauen.
+
 ```{r Modell der Faktorenanalyse für 1 Faktoren}
-fit =  principal(allbus_vertrauen, nfactors = 3, method = "ml", rotate = "varimax") # <1>
+fit1 =  principal(allbus_vertrauen, nfactors = 1, method = "ml", rotate = "varimax") # <1>
+fit1
 ```
 
 1.  Mit der `principal` Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit `nfactors` aus, legen ein Rotation mit `rotate` sowie eine Methode der Schätzung mittels `method` fest
@@ -296,7 +300,7 @@ Welche der beiden Lösungen besser ist hängt von unserer theoretischen Grundlag
 Zusätzlich zur Interpretation der Faktorladungen ist es auch wichtig, die Uniquenes der Faktoren zu berücksichtigen. Diese zeigen an, wie viel Varianz in den Daten von jedem extrahierten Faktor erklärt wird. In anderen Worten sagt sie also aus, wie gut die Information der Variablen in den Faktoren insgesamt erhalten geblieben ist.
 
 ```{r Uniqueness}
-print(fit$uniquenesses, digits = 2)
+print(fit1$uniquenesses, digits = 2)
 ```
 
 Wenn wir auf die Uniqueness der einzelnen Indikatoren blicken, wird relativ schnell klar, dass wir eine Reihe von Indikatoren mit hohen Uniqueness-Werten haben, deren Varianz zu großen Teilen von der latenten Variable erklären wird und somit stärker als andere Indikatoren zu der latenten Variable "beitragen".

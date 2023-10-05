@@ -1329,7 +1329,8 @@ Statistics by number of factors
 <p>In unserem Fall greifen wir auf die etablierte Rotationsmethode <code>varimax</code> zurück, welches wir entsprechend im R-Code spezifizieren. Zusätzlich geben wir unsere erwartete Anzahl an Faktoren an, welche wir zuvor bestimmt haben (in unserem Fall: 3 und 1).</p>
 <p>Wir starten mit der durch VSS vorgeschlagenen Anzahl von drei Faktoren.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1"></a>fit <span class="ot">=</span>  <span class="fu">principal</span>(allbus_vertrauen, <span class="at">nfactors =</span> <span class="dv">3</span>, <span class="at">method =</span> <span class="st">"ml"</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1"></a>fit3 <span class="ot">=</span>  <span class="fu">principal</span>(allbus_vertrauen, <span class="at">nfactors =</span> <span class="dv">3</span>, <span class="at">method =</span> <span class="st">"ml"</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>)</span>
+<span id="annotated-cell-17-2"><a href="#annotated-cell-17-2"></a>fit3</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
@@ -1338,9 +1339,48 @@ Statistics by number of factors
 </dd>
 </dl>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Principal Components Analysis
+Call: principal(r = allbus_vertrauen, nfactors = 3, rotate = "varimax", 
+    method = "ml")
+Standardized loadings (pattern matrix) based upon correlation matrix
+                      RC1  RC3   RC2   h2   u2 com
+Ver_Gesundheitswesen 0.65 0.14  0.11 0.45 0.55 1.2
+Ver_BVerfG           0.69 0.34 -0.01 0.59 0.41 1.5
+Ver_Bundestag        0.51 0.68  0.13 0.73 0.27 1.9
+Ver_Verwaltung       0.51 0.36  0.24 0.45 0.55 2.3
+Ver_kath_Kirche      0.09 0.15  0.90 0.85 0.15 1.1
+Ver_evan_Kirche      0.18 0.18  0.88 0.83 0.17 1.2
+Ver_Justiz           0.63 0.40  0.10 0.57 0.43 1.8
+Ver_TV               0.60 0.28  0.13 0.46 0.54 1.5
+Ver_Zeitung          0.64 0.30  0.13 0.52 0.48 1.5
+Ver_Uni              0.68 0.23  0.01 0.51 0.49 1.2
+Ver_Regierung        0.49 0.71  0.12 0.76 0.24 1.8
+Ver_Polizei          0.69 0.16  0.17 0.53 0.47 1.2
+Ver_Parteien         0.33 0.76  0.20 0.72 0.28 1.5
+Ver_Kom_EU           0.25 0.89  0.14 0.88 0.12 1.2
+Ver_EU_Par           0.26 0.89  0.14 0.88 0.12 1.2
+
+                       RC1  RC3  RC2
+SS loadings           4.04 3.85 1.84
+Proportion Var        0.27 0.26 0.12
+Cumulative Var        0.27 0.53 0.65
+Proportion Explained  0.41 0.40 0.19
+Cumulative Proportion 0.41 0.81 1.00
+
+Mean item complexity =  1.5
+Test of the hypothesis that 3 components are sufficient.
+
+The root mean square of the residuals (RMSR) is  0.06 
+ with the empirical chi square  2705.49  with prob &lt;  0 
+
+Fit based upon off diagonal values = 0.98</code></pre>
 </div>
+</div>
+<p>Das sieht soweit in Ordnung aus, aber wir möchten uns auch noch die Variante mit einem Faktor anschauen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1">1</button><span id="annotated-cell-18-1" class="code-annotation-target"><a href="#annotated-cell-18-1"></a>fit <span class="ot">=</span>  <span class="fu">principal</span>(allbus_vertrauen, <span class="at">nfactors =</span> <span class="dv">3</span>, <span class="at">method =</span> <span class="st">"ml"</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1">1</button><span id="annotated-cell-18-1" class="code-annotation-target"><a href="#annotated-cell-18-1"></a>fit1 <span class="ot">=</span>  <span class="fu">principal</span>(allbus_vertrauen, <span class="at">nfactors =</span> <span class="dv">1</span>, <span class="at">method =</span> <span class="st">"ml"</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>)</span>
+<span id="annotated-cell-18-2"><a href="#annotated-cell-18-2"></a>fit1</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
@@ -1348,6 +1388,40 @@ Statistics by number of factors
 <span data-code-cell="annotated-cell-18" data-code-annotation="1" data-code-lines="1">Mit der <code>principal</code> Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit <code>nfactors</code> aus, legen ein Rotation mit <code>rotate</code> sowie eine Methode der Schätzung mittels <code>method</code> fest</span>
 </dd>
 </dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Principal Components Analysis
+Call: principal(r = allbus_vertrauen, nfactors = 1, rotate = "varimax", 
+    method = "ml")
+Standardized loadings (pattern matrix) based upon correlation matrix
+                      PC1   h2   u2 com
+Ver_Gesundheitswesen 0.57 0.32 0.68   1
+Ver_BVerfG           0.70 0.49 0.51   1
+Ver_Bundestag        0.84 0.71 0.29   1
+Ver_Verwaltung       0.66 0.43 0.57   1
+Ver_kath_Kirche      0.41 0.17 0.83   1
+Ver_evan_Kirche      0.48 0.23 0.77   1
+Ver_Justiz           0.73 0.53 0.47   1
+Ver_TV               0.64 0.41 0.59   1
+Ver_Zeitung          0.68 0.46 0.54   1
+Ver_Uni              0.62 0.39 0.61   1
+Ver_Regierung        0.85 0.72 0.28   1
+Ver_Polizei          0.63 0.39 0.61   1
+Ver_Parteien         0.79 0.63 0.37   1
+Ver_Kom_EU           0.81 0.66 0.34   1
+Ver_EU_Par           0.81 0.66 0.34   1
+
+                PC1
+SS loadings    7.21
+Proportion Var 0.48
+
+Mean item complexity =  1
+Test of the hypothesis that 1 component is sufficient.
+
+The root mean square of the residuals (RMSR) is  0.09 
+ with the empirical chi square  5969.7  with prob &lt;  0 
+
+Fit based upon off diagonal values = 0.96</code></pre>
 </div>
 </div>
 </section>
@@ -1359,18 +1433,18 @@ Statistics by number of factors
 <p>Welche der beiden Lösungen besser ist hängt von unserer theoretischen Grundlage und unserer Forschungsfrage ab. Entsprechend treffen wir an dieser Stelle keine pauschale Aussage, ob die eine oder andere Lösung grundsätzlich besser ist, sondern plädieren für eine reflektierte Auseinandersetzung und Abwägung zwischen den empirischen Ergebnissen und den theoretischen Annahmen.</p>
 <p>Zusätzlich zur Interpretation der Faktorladungen ist es auch wichtig, die Uniquenes der Faktoren zu berücksichtigen. Diese zeigen an, wie viel Varianz in den Daten von jedem extrahierten Faktor erklärt wird. In anderen Worten sagt sie also aus, wie gut die Information der Variablen in den Faktoren insgesamt erhalten geblieben ist.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">print</span>(fit<span class="sc">$</span>uniquenesses, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">print</span>(fit1<span class="sc">$</span>uniquenesses, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ver_Gesundheitswesen           Ver_BVerfG        Ver_Bundestag 
-                0.55                 0.41                 0.27 
+                0.68                 0.51                 0.29 
       Ver_Verwaltung      Ver_kath_Kirche      Ver_evan_Kirche 
-                0.55                 0.15                 0.17 
+                0.57                 0.83                 0.77 
           Ver_Justiz               Ver_TV          Ver_Zeitung 
-                0.43                 0.54                 0.48 
+                0.47                 0.59                 0.54 
              Ver_Uni        Ver_Regierung          Ver_Polizei 
-                0.49                 0.24                 0.47 
+                0.61                 0.28                 0.61 
         Ver_Parteien           Ver_Kom_EU           Ver_EU_Par 
-                0.28                 0.12                 0.12 </code></pre>
+                0.37                 0.34                 0.34 </code></pre>
 </div>
 </div>
 <p>Wenn wir auf die Uniqueness der einzelnen Indikatoren blicken, wird relativ schnell klar, dass wir eine Reihe von Indikatoren mit hohen Uniqueness-Werten haben, deren Varianz zu großen Teilen von der latenten Variable erklären wird und somit stärker als andere Indikatoren zu der latenten Variable “beitragen”.</p>

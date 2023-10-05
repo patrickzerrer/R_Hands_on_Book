@@ -4,56 +4,56 @@ author: "Michael Linke"
 toc: true
 number-sections: true
 highlight-style: pygments
+execute: 
+  warning: false
 format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 ---
+
+![Die Stadt als Barplot, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_skyline_as_a_barplot_frequencies_num_142385f5-fa6a-4d6c-95ea-8f847faa681a.png)
 
 # Begrifflichkeiten
 
-Zunächst ein paar Begriffserläuterungen: Bei der quantitativen Datenerhebung misst man die Ausprägung eines bestimmten Merkmals. Ein Merkmal kann zum Beispiel das Alter einer Person sein. Die Person ist dann der Merkmalsträger. Die Merkmalsausprägung bzw. der Messwert ist die konkrete Altersangabe, z.B. 23 Jahre. Die Menge aller Merkmalsträger, über die man durch die Untersuchung zu Erkenntnissen kommen will, heißt Grundgesamtheit. Oft kann man aber gar nicht oder nur sehr schwer die ganze Grundgesamtheit heranziehen und muss sich mit einer Teilmenge begnügen: Der Stichprobe. 
-Die Daten sind erhoben, die Arbeitsumgebung ist eingerichtet, wir haben die Datensätze geladen und wissen, wie wir sie bearbeiten und visualisieren können. Nun wird es Zeit, sich einen ersten Eindruck von den statistischen Eigenschaften unserer Daten zu verschaffen. Von diesen Eigenschaften hängt ab, welche Methoden wir auf sie anwenden können und somit, welche Fragen wir mit ihnen überhaupt beantworten können. Dabei interessieren uns zunächst zwei Aspekte, erstens: Welche Methoden passen zur Beschaffenheit der Daten und zweitens: Welche inhaltlichen Eigenschaften können wir darauf aufbauend in den Daten erkennen? Ersteres ist abhängig vom Skalenniveau (nominal, ordinal, kardinal), für letzteres schauen wir uns einige der wichtigsten Maßzahlen (Parameter) an.
+Zunächst ein paar Begriffserläuterungen: Bei der quantitativen Datenerhebung misst man die Ausprägung eines bestimmten Merkmals. Ein Merkmal kann zum Beispiel das Alter einer Person sein. Die Person ist dann der Merkmalsträger. Die Merkmalsausprägung bzw. der Messwert ist die konkrete Altersangabe, z.B. 23 Jahre. Die Menge aller Merkmalsträger, über die man durch die Untersuchung zu Erkenntnissen kommen will, heißt Grundgesamtheit. Oft kann man aber gar nicht oder nur sehr schwer die ganze Grundgesamtheit heranziehen und muss sich mit einer Teilmenge begnügen: Der Stichprobe. Die Daten sind erhoben, die Arbeitsumgebung ist eingerichtet, wir haben die Datensätze geladen und wissen, wie wir sie bearbeiten und visualisieren können. Nun wird es Zeit, sich einen ersten Eindruck von den statistischen Eigenschaften unserer Daten zu verschaffen. Von diesen Eigenschaften hängt ab, welche Methoden wir auf sie anwenden können und somit, welche Fragen wir mit ihnen überhaupt beantworten können. Dabei interessieren uns zunächst zwei Aspekte, erstens: Welche Methoden passen zur Beschaffenheit der Daten und zweitens: Welche inhaltlichen Eigenschaften können wir darauf aufbauend in den Daten erkennen? Ersteres ist abhängig vom Skalenniveau (nominal, ordinal, kardinal), für letzteres schauen wir uns einige der wichtigsten Maßzahlen (Parameter) an.
 
 ## Das Skalenniveau
 
-Durch eine Messung wird bestimmten Eigenschaften eines Merkmalsträgers ein bestimmter Wert zugeordnet. Dazu bedient man sich einer festgelegten Skala, damit alle Ergebnisse miteinander vergleichbar sind. Wir kennen solche Skalen aus unserem Alltag. Manche bestehen aus Zahlen (z.B. Maßbänder, Uhren), andere aus Symbolen (z.B. Vereinslogos). Das Niveau einer Skala hängt von ihrem Informationsgehalt ab. Je höher das Skalenniveau, desto vielfältiger ist die Auswahl an Methoden, die man auf die Daten anwenden kann und desto höher ist ihr Informationsgehalt. Allerdings neigen Methoden, die höhere Skalenniveaus erfordern, oft dazu, anfälliger gegenüber Ausreißern zu sein. 
-Bei der Einschätzung des Skalenniveaus ist es hilfreich zu prüfen, ob ein Merkmal diskret oder kontinuierlich ist. Diskret ist ein Merkmal, wenn es abzählbar viele Ausprägungen annehmen kann, z.B. die Anzahl an Haustieren: Unter 2 Katzen kann sich jeder was vorstellen, bei 1,5 Katzen wird es hingegen schwierig. Dagegen gibt es bei einem kontinuierlichen Merkmal zwischen zwei Ausprägungen unendlich viele weitere, z.B. bei der Körpergröße: Hier sind nicht nur 1, 2 oder 199 cm denkbar, sondern auch jeder beliebig genaue weitere Wert dazwischen. Dafür macht eine Körpergröße von -5 cm wieder keinen Sinn.  
+Durch eine Messung wird bestimmten Eigenschaften eines Merkmalsträgers ein bestimmter Wert zugeordnet. Dazu bedient man sich einer festgelegten Skala, damit alle Ergebnisse miteinander vergleichbar sind. Wir kennen solche Skalen aus unserem Alltag. Manche bestehen aus Zahlen (z.B. Maßbänder, Uhren), andere aus Symbolen (z.B. Vereinslogos). Das Niveau einer Skala hängt von ihrem Informationsgehalt ab. Je höher das Skalenniveau, desto vielfältiger ist die Auswahl an Methoden, die man auf die Daten anwenden kann und desto höher ist ihr Informationsgehalt. Allerdings neigen Methoden, die höhere Skalenniveaus erfordern, oft dazu, anfälliger gegenüber Ausreißern zu sein. Bei der Einschätzung des Skalenniveaus ist es hilfreich zu prüfen, ob ein Merkmal diskret oder kontinuierlich ist. Diskret ist ein Merkmal, wenn es abzählbar viele Ausprägungen annehmen kann, z.B. die Anzahl an Haustieren: Unter 2 Katzen kann sich jeder was vorstellen, bei 1,5 Katzen wird es hingegen schwierig. Dagegen gibt es bei einem kontinuierlichen Merkmal zwischen zwei Ausprägungen unendlich viele weitere, z.B. bei der Körpergröße: Hier sind nicht nur 1, 2 oder 199 cm denkbar, sondern auch jeder beliebig genaue weitere Wert dazwischen. Dafür macht eine Körpergröße von -5 cm wieder keinen Sinn.
 
-### Nominalskala 
-Es kann nur eine Aussage darüber gemacht werden, ob zwei Objekte gleich sind, aber es gibt keine sinnvolle hierarchische Einteilung, d.h. es kann keine Rangfolge im Sinne von "x ist größer/kleiner als y" erstellt werden. Beispiele: Geschlecht, Nationalität. Diese Skala setzt diskrete Merkmale voraus.    
+### Nominalskala
+
+Es kann nur eine Aussage darüber gemacht werden, ob zwei Objekte gleich sind, aber es gibt keine sinnvolle hierarchische Einteilung, d.h. es kann keine Rangfolge im Sinne von "x ist größer/kleiner als y" erstellt werden. Beispiele: Geschlecht, Nationalität. Diese Skala setzt diskrete Merkmale voraus.
 
 ### Ordinalskala
-Es kann nicht nur festgestellt werden, ob sich zwei Objekte gleichen, sondern man kann ihnen Eigenschaften zuordnen, anhand derer sie sich in eine bestimmte Reihenfolge bringen lassen. Sie können also auch sortiert werden. Das kann sowohl diskrete Messwerte beinhalten, die nur nach Rängen geordnet werden können, als auch kontinuierliche Messwerte, bei denen man die Differenz zwischen zwei Werten genau bestimmen kann. Beispiele: Schulnoten, 
 
+Es kann nicht nur festgestellt werden, ob sich zwei Objekte gleichen, sondern man kann ihnen Eigenschaften zuordnen, anhand derer sie sich in eine bestimmte Reihenfolge bringen lassen. Sie können also auch sortiert werden. Das kann sowohl diskrete Messwerte beinhalten, die nur nach Rängen geordnet werden können, als auch kontinuierliche Messwerte, bei denen man die Differenz zwischen zwei Werten genau bestimmen kann. Beispiele: Schulnoten,
 
-### Kardinalskala 
-a) Intervall: Man kann die Abstände zwischen zwei Messwerten genau berechnen. Es gibt allerdings keinen natürlichen Nullpunkt. Beispiele: Temperatur in Grad Celsius (willkürlich festgelegter Nullpunkt).   
+### Kardinalskala
 
-b) Verhältnis: Wie die Intervallskala, aber es gibt einen natürlichen Nullpunkt. Beispiele: Distanz zwischen zwei Orten, Körpergröße. 
+a)  Intervall: Man kann die Abstände zwischen zwei Messwerten genau berechnen. Es gibt allerdings keinen natürlichen Nullpunkt. Beispiele: Temperatur in Grad Celsius (willkürlich festgelegter Nullpunkt).
 
-
+b)  Verhältnis: Wie die Intervallskala, aber es gibt einen natürlichen Nullpunkt. Beispiele: Distanz zwischen zwei Orten, Körpergröße.
 
 ## Häufigkeiten
 
-Zur Beschreibung insbesondere nominaler Merkmale ist der Begriff der Häufigkeit wichtig. 
+Zur Beschreibung insbesondere nominaler Merkmale ist der Begriff der Häufigkeit wichtig.
 
 ### Absolute Häufigkeit
-Die absolute Häufigkeit gibt an, wie oft eine bestimmte Merkmalsausprägung im Datensatz vorkommt. Die absolute Häufigkeit kann folglich nur eine natürliche Zahl sein.   
+
+Die absolute Häufigkeit gibt an, wie oft eine bestimmte Merkmalsausprägung im Datensatz vorkommt. Die absolute Häufigkeit kann folglich nur eine natürliche Zahl sein.
 
 ### Relative Häufigkeit
-Die relative Häufigkeit gibt den Anteil eines bestimmten Messwertes im Datensatz an. Sie berechnet sich, indem man die absolute Häufigkeit des jeweiligen Messwertes durch die Gesamtgröße des Datensatzes teilt. Die relativen Häufigkeiten summieren sich also zu 1 auf. 
 
-
+Die relative Häufigkeit gibt den Anteil eines bestimmten Messwertes im Datensatz an. Sie berechnet sich, indem man die absolute Häufigkeit des jeweiligen Messwertes durch die Gesamtgröße des Datensatzes teilt. Die relativen Häufigkeiten summieren sich also zu 1 auf.
 
 ## Maßzahlen
-Wir werden hier, abhängig vom Skalenniveau, zwei verschiedene Arten von Maßzahlen betrachten. Das ist zum einen das Lagemaß, das uns etwas über die zentrale Tendenz der Daten sagt, also wo sich besonders viele Messwerte häufen bzw. wo der zentrale Punkt ist, um den sich die Messwerte gruppieren. Zum anderen schauen wir uns verschiedene Streuungsparameter an, mit deren Hilfe wir einschätzen können, wie stark unsere Messwerte vom Lageparameter abweichen. 
 
-    
+Wir werden hier, abhängig vom Skalenniveau, zwei verschiedene Arten von Maßzahlen betrachten. Das ist zum einen das Lagemaß, das uns etwas über die zentrale Tendenz der Daten sagt, also wo sich besonders viele Messwerte häufen bzw. wo der zentrale Punkt ist, um den sich die Messwerte gruppieren. Zum anderen schauen wir uns verschiedene Streuungsparameter an, mit deren Hilfe wir einschätzen können, wie stark unsere Messwerte vom Lageparameter abweichen.
 
-
-
-## Zu den Programmierbeispielen 
+## Zu den Programmierbeispielen
 
 Im Folgenden werden wir aus dem Allbus-2021-Datensatz ein paar Beispiele herausgreifen, um die Berechnung und Visualisierung von Häufigkeiten und Parametern zu demonstrieren. Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem `p_load`-Befehl:
 
@@ -62,73 +62,77 @@ if(!require("pacman")) {install.packages("pacman");library(pacman)}
 p_load(tidyverse, ggplot2, haven, dplyr) 
 ```
 
-Dann legen wir den Visualisierungshintergrund fest: 
+Dann legen wir den Visualisierungshintergrund fest:
 
 ```{r}
 theme_set(theme_classic()) 
 ```
 
-
-Nun laden wir den Allbus-Datensatz: 
-
+Nun laden wir den Allbus-Datensatz:
 
 ```{r Laden der Daten}
 daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
-Bei den Häufigkeiten beschränken wir uns auf einen nominal skalierten Datensatz: Das Geschlecht ("sex").  
-Anschließend konvertieren wir die Daten zu Zahlenwerten und entfernen fehlerhafte Daten: 
-
-
-
+Bei den Häufigkeiten beschränken wir uns auf einen nominal skalierten Datensatz: Das Geschlecht ("sex").\
+Anschließend konvertieren wir die Daten zu Zahlenwerten und entfernen fehlerhafte Daten:
 
 ```{r}
-allbus_messniveau_bsp = subset(daten, select=c("sex")) %>%                             # <1>
-  mutate(across(c("sex"), ~ as.numeric(.))) %>%                                         # <2>      
-  mutate(across(c("sex"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%    # <3>
-  na.omit()                                                                             # <4>
+allbus_messniveau_bsp = daten %>%  # <1>
+  select(sex) %>%  # <2>
+  mutate(across(c("sex"), ~ as.numeric(.))) %>%                                         # <3>      
+  mutate(across(c("sex"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%    # <4>
+  na.omit()                                                                             # <5>
 ```
 
-
+1.  Wir erstellen ein neues Objekt basierend auf dem Datensatz `daten`
+2.  Wir wählen die Variable `sex` aus
+3.  Die Kombination aus `mutate` und `across` ermöglicht es uns die Funktion `as.numeric` in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die `~` gibt den Start der anzuwenden Funktion (hier `as.numeric` an), der Punkt innerhalb der Klammer der `as.numeric` Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen
+4.  Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter, mit dem Ausdruck `%in%` prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
+5.  Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
 
 ## Berechnung und Visualisierung von Häufigkeiten
 
- Die absoluten Häufigkeiten lassen sich einfach mit der `table`-Funktion abfragen. 
- Im folgenden Codebeispiel schauen wir uns dazu die Häufigkeiten im Datensatz "sex" an. 
- Uns werden zwei Zeilen ausgegeben: Die erste Zeile enthält den Tabellenkopf (1: männlich, 2: weiblich, 3: divers). 
- Die zweite Zeile enthält zu jeder Merkmalsausprägung die zugehörige Anzahl (= absolute Häufigkeit): 
- 
- 
+Die absoluten Häufigkeiten lassen sich einfach mit der `table`-Funktion abfragen. Im folgenden Codebeispiel schauen wir uns dazu die Häufigkeiten im Datensatz "sex" an. Uns werden zwei Zeilen ausgegeben: Die erste Zeile enthält den Tabellenkopf (1: männlich, 2: weiblich, 3: divers). Die zweite Zeile enthält zu jeder Merkmalsausprägung die zugehörige Anzahl (= absolute Häufigkeit):
+
 ```{r}
 geschlecht_haeufigkeit_abs = table(allbus_messniveau_bsp$sex) 
 stichprobengroesse = length(allbus_messniveau_bsp$sex)
 
-geschlecht_haeufigkeit_abs        # Ausgabe der Tabelle
+geschlecht_haeufigkeit_abs     # <1>   
 ```
 
+1. Ausgabe der Tabelle
 
-Insgesamt summieren sie sich (wie erwartet) zu 5322 Merkmalsträgern auf, was auch der Größe des Datensatzes entspricht: 
- 
+Insgesamt summieren sie sich (wie erwartet) zu 5322 Merkmalsträgern auf, was auch der Größe des Datensatzes entspricht:
 
 ```{r}
-sum(geschlecht_haeufigkeit_abs)   # Ausgabe der Summe der absoluten Häufigkeiten
-stichprobengroesse          # Ausgabe der Gesamtanzahl an Merkmalsträgern im Datensatz
+sum(geschlecht_haeufigkeit_abs)   # <1> 
+stichprobengroesse           # <2> 
 ```
 
+1. Ausgabe der Summe der absoluten Häufigkeiten
+2. Ausgabe der Gesamtanzahl an Merkmalsträgern im Datensatz
 
-Die relativen Häufigkeiten können wir uns ausgeben lassen, indem wir den Inhalt der Tabelle durch die Gesamtanzahl der Merkmalsträger teilen: 
+Die relativen Häufigkeiten können wir uns ausgeben lassen, indem wir den Inhalt der Tabelle durch die Gesamtanzahl der Merkmalsträger teilen:
 
 ```{r}
-geschlecht_haeufigkeit_rel = geschlecht_haeufigkeit_abs / stichprobengroesse # Berechnung der relativen Häufigkeiten
-geschlecht_haeufigkeit_rel        # Ausgabe der Tabelle mit den relativen Häufigkeiten
+geschlecht_haeufigkeit_rel = geschlecht_haeufigkeit_abs / stichprobengroesse  # <1>
+geschlecht_haeufigkeit_rel        # <2> 
 ```
 
-Erwartungsgemäß summieren sich die relativen Häufigkeiten zu 1 auf: 
+1. Berechnung der relativen Häufigkeiten 
+2. Ausgabe der Tabelle mit den relativen Häufigkeiten
+
+Erwartungsgemäß summieren sich die relativen Häufigkeiten zu 1 auf:
+
 ```{r}
-sum(geschlecht_haeufigkeit_rel) # Ausgabe der Summe der relativen Häufigkeiten
+sum(geschlecht_haeufigkeit_rel) # <1>
 ```
 
-Eine Möglichkeit der Darstellung von Häufigkeiten ist das Kuchendiagramm. Zu diesem Zweck erstellen wir einen eigenen Dataframe: 
+1. Ausgabe der Summe der relativen Häufigkeiten
+
+Eine Möglichkeit der Darstellung von Häufigkeiten ist das Kuchendiagramm. Zu diesem Zweck erstellen wir einen eigenen Dataframe:
 
 ```{r}
 
@@ -142,4 +146,4 @@ ggplot(df.sex, aes(x="", y=frequency.Freq, fill=sex)) +
   coord_polar("y")
 ```
 
-Auf den ersten Blick lässt sich so ein generelles Bild des Datensatzes machen: Es sind in etwa so viele Männer wie Frauen im Datensatz, wobei Frauen etwas stärker vertreten sind. Personen, die sich weder als Mann noch als Frau identifizieren, kommen nur in sehr geringer Zahl vor.  
+Auf den ersten Blick lässt sich so ein generelles Bild des Datensatzes machen: Es sind in etwa so viele Männer wie Frauen im Datensatz, wobei Frauen etwas stärker vertreten sind. Personen, die sich weder als Mann noch als Frau identifizieren, kommen nur in sehr geringer Zahl vor.
