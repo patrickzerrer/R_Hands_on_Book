@@ -4,12 +4,18 @@ author: "Michael Linke"
 toc: true
 number-sections: true
 highlight-style: pygments
+execute: 
+  warning: false
 format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 ---
-Im letzten Abschnitt haben wir uns angesehen, mit welchen Maßen sich etwas darüber sagen lässt, um welche Punkte sich die Masse der Messwerte in unserem Datensatz konzentriert. Jetzt wollen wir wissen, wie stark die Messwerte streuen, also wie stark die Messwerte vom Lageparameter abweichen. Zunächst laden wir die benötigten Daten: 
+
+![Wie groß sind die Kreise?, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_stone_draws_circles_in_the_water_wid_9dd755ad-ddad-4d23-bfab-dcca546e86ab.png)
+
+Im letzten Abschnitt haben wir uns angesehen, mit welchen Maßen sich etwas darüber sagen lässt, um welche Punkte sich die Masse der Messwerte in unserem Datensatz konzentriert. Jetzt wollen wir wissen, wie stark die Messwerte streuen, also wie stark die Messwerte vom Lageparameter abweichen.  Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem `p_load`-Befehl:
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
@@ -17,16 +23,28 @@ p_load(tidyverse, ggplot2, haven, dplyr)
 
 
 theme_set(theme_classic()) 
+```
 
+Laden wir zunächst wieder unsere Daten: Da wir uns drei verschiedene Skalenniveaus ansehen wollen, verwenden wir Daten, die jeweils ein solches repräsentieren. Wir laden daher Daten zu Geschlecht ("sex"), Vertrauen in die Bundesregierung ("pt12") und Netto-Einkommen ("di01a").
+
+```{r}
 daten = haven::read_dta("Datensatz/Allbus_2021.dta") 
 
-allbus_df = subset(daten, select=c("sex", "pt12", "di01a")) %>%          
-  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%                                     
-  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%          
-  na.omit()   
+allbus_df <- daten %>%   # <1>
+  select(c("sex", "pt12", "di01a")) %>%           # <2>
+  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%           # <3>                             
+  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%      # <4>     
+  na.omit()    # <5>
 
-colnames(allbus_df) = c("Geschlecht", "VertrauenBR", "Einkommen") # Umbenennen der Spaltennamen
+colnames(allbus_df) <- c("Geschlecht", "VertrauenBR", "Einkommen") # Umbenennen der Spaltennamen
 ```
+
+1.  Wir erstellen ein neues Objekt basierend auf dem Datensatz `daten`
+2.  Wir wählen die Variablen aus
+3.  Die Kombination aus `mutate` und `across` ermöglicht es uns die Funktion `as.numeric` in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die `~` gibt den Start der anzuwenden Funktion (hier `as.numeric` an), der Punkt innerhalb der Klammer der `as.numeric` Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen
+4.  Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter, mit dem Ausdruck `%in%` prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
+5.  Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+
 
 ## Die Spannweite
 
@@ -36,23 +54,22 @@ Die Spannweite (auch Range genannt) gibt den Abstand zwischen der kleinsten und 
 
 $$
 SP = x_{max} - x_{min}  
-$$
-Mit der `range`-Funktion kann man sich in R die beiden Extremwerte als Vektor ausgeben lassen:
+$$ Mit der `range`-Funktion kann man sich in R die beiden Extremwerte als Vektor ausgeben lassen:
 
 ```{r}
 range(allbus_df$Einkommen)
 ```
-Alternativ kann man auch einfach Das Maximum und das Minimum ermitteln und die Differenz berechnen: 
+
+Alternativ kann man auch einfach Das Maximum und das Minimum ermitteln und die Differenz berechnen:
 
 ```{r}
 einkommen_max = max(allbus_df$Einkommen) - min(allbus_df$Einkommen)
 einkommen_max
 ```
 
-
 ## Quantilsabstände
 
-Dieses Maß gibt die Differenz zweier Quantile an. Insbesondere der Quartilsabstand (75%-Quantil - 25%-Quantil) ist hier von Bedeutung. 
+Dieses Maß gibt die Differenz zweier Quantile an. Insbesondere der Quartilsabstand (75%-Quantil - 25%-Quantil) ist hier von Bedeutung.
 
 ### Berechnung
 
@@ -62,15 +79,15 @@ $$
 QA = Q_{o} - Q_{u}
 $$
 
-Für den Quartilsabstand gibt es eine Funktion in R: 
+Für den Quartilsabstand gibt es eine Funktion in R:
 
 ```{r}
-# Berechnung mit der vorgefertigten R-Funktion IQR (Interquartile Range):
-IQR(allbus_df$VertrauenBR)
+IQR(allbus_df$VertrauenBR) # <1>
 ```
 
-Um den mittleren Quartilsabstand zu ermitteln, kann man das Ergebnis noch durch 2 teilen.
+1. Berechnung mit der vorgefertigten R-Funktion IQR (Interquartile Range)
 
+Um den mittleren Quartilsabstand zu ermitteln, kann man das Ergebnis noch durch 2 teilen.
 
 ## Varianz und Standardabweichung
 
@@ -82,12 +99,11 @@ Es wird unterschieden zwischen der Varianz der Grundgesamtheit und der Stichprob
 
 $$
 Var = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2
-$$ 
-Da man wie gesagt meist nur auf eine Stichprobe zurückgreifen kann, kann man den Mittelwert der Grundgesamtheit durch den Mittelwert der Stichprobe nur schätzen. Um die damit verbundene Verzerrung auszugleichen, kann es sinnvoll sein die Summe der quadrierten Abweichungen nicht durch $n$, sondern durch $(n-1)$ zu teilen. So ergibt sich folgende Formel, wobei $n$ hier die Stichprobengröße darstellt:
+$$ Da man wie gesagt meist nur auf eine Stichprobe zurückgreifen kann, kann man den Mittelwert der Grundgesamtheit durch den Mittelwert der Stichprobe nur schätzen. Um die damit verbundene Verzerrung auszugleichen, kann es sinnvoll sein die Summe der quadrierten Abweichungen nicht durch $n$, sondern durch $(n-1)$ zu teilen. So ergibt sich folgende Formel, wobei $n$ hier die Stichprobengröße darstellt:
 
 $$
 Var = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
-$$ 
+$$
 
 In R bekommen wir die Varianz mit der `var`-Funktion, hier am Beispiel des Netto-Einkommens:
 
@@ -99,8 +115,7 @@ Wie wir sehen, ist das Ergebnis sehr groß und auf den ersten Blick nicht leicht
 
 $$
 SD = \sqrt{Var} = s =  \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
-$$ 
-R bietet zur Berechnung der Standardabweichung die `sd`-Funktion an.
+$$ R bietet zur Berechnung der Standardabweichung die `sd`-Funktion an.
 
 ```{r}
 sd(allbus_df$Einkommen)
@@ -116,7 +131,8 @@ summary(allbus_df$Einkommen)
 
 ## Visualisierung der Streuungsparameter
 
-In folgendem Codebeispiel lassen wir uns das Histogramm aus dem letzten Abschnitt ausgeben, allerdings reduziert auf Median (blau, durchgezogene Linie) und das arithmetische Mittel (rot, durchgezogene Linie). Wir ergänzen diese Lageparameter um den Minimal- und den Maximalwert (schwarz, gestrichelt), das untere und obere Quartil (blau, gestrichelt) und die Standardabweichung, hier beiderseits vom Mittelwert aufgetragen(rot, gestrichelt).  
+In folgendem Codebeispiel lassen wir uns das Histogramm aus dem letzten Abschnitt ausgeben, allerdings reduziert auf Median (blau, durchgezogene Linie) und das arithmetische Mittel (rot, durchgezogene Linie). Wir ergänzen diese Lageparameter um den Minimal- und den Maximalwert (schwarz, gestrichelt), das untere und obere Quartil (blau, gestrichelt) und die Standardabweichung, hier beiderseits vom Mittelwert aufgetragen(rot, gestrichelt).
+
 ```{r}
 
 mean_einkommen = mean(allbus_df$Einkommen)
@@ -146,6 +162,3 @@ ggplot(allbus_df, aes(x = Einkommen)) +
 ```
 
 Es ist sehr deutlich zu erkennen, dass die Spannweite (die Distanz zwischen den beiden schwarzen gestrichelten Linien) wenig hilfreich ist, wenn man erfahren will, wo besonders viele Messwerte liegen. Der Interquartilsabstand scheint hier sehr viel aussagekräftiger zu sein, während die Standardabweichung unterhalb des Mittelwerts mehr Messwerte einzuschließen scheint als oberhalb davon. Dieses Ungleichgewicht wird im Abschnitt über Verteilungen noch eine Rolle spielen.
-
-
-
