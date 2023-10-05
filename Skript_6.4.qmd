@@ -83,7 +83,7 @@ daten <- daten %>%
   filter(., hs01 > 0 & pt01 > 0 & age > 0) %>% 
   rename(., gesund = hs01,
             trustges = pt01) %>% 
-  mutate(gesund = as.factor(gesund),
+  mutate(gesund = haven::as_factor(gesund),
          trustges = as.numeric(trustges),
          agef = dicho(age, as.num = T) %>% factor(levels = c(0,1), labels = c("jung", "alt")))
 
@@ -114,7 +114,7 @@ ggplot(daten, aes(trustges)) +
          y = "")
 ```
 
-Wir sehen an der Grafik, dass die Variable Zufriedenheit rechtssteil ist, also die Teilnehmer der Befragung eher ein höheres Vertrauen angegeben haben.
+Wir sehen an der Grafik, dass die Variable Vertrauen in das Gesundheitswesen rechtssteil ist, also die Teilnehmer der Befragung eher ein höheres Vertrauen angegeben haben.
 
 Zusätzliche Gewissheit bezüglich des Vorliegens der Normalverteilung bietet der Kolmogorov-Smirnov-Test oder der Shapiro-Wilk-Test (welcher für kleinere Stichproben zwischen 3 und 5000 Fällen konzipiert ist). In R erhalten wir diese Tests mit dem Befehl `LillieTest()` aus dem Paket `DescTools()` bzw. `shapiro.test()`. Beide Tests testen auf Abweichung von der Normalverteilung, demnach sollte diese nicht signifikant ausfallen (da ein signifikanter Test aussagt, dass eine Abweichung von der Normalverteilung besteht, was wir nicht möchten).
 
@@ -159,20 +159,21 @@ daten %>%
   kable(digits = 2, col.names = c("Gesundheitszustand", "M", "SD"), caption = "Descriptives Vertrauen")
 ```
 
-Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, bei Personen die einen guten Gesundheitszustand aufweisen.
-
-Anschließend können wir die einfaktorielle ANOVA berechnen.Dafür nutzen wir die Funktion `aov_car` aus dem `afex`-Packag:
+Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, bei Personen die einen guten Gesundheitszustand aufweisen. Ob dieser augenscheinliche Unterschied auch statistisch signifikant ist, möchten wir in einem nächsten Schritt mit der einfaktoriellen ANOVA berechnen. Dafür nutzen wir die Funktion `aov_car` aus dem `afex`-Packag:
 
 ```{r}
 
 fit <- daten %>% 
-dplyr::distinct(respid, .keep_all = T) %>% 
 aov_car(trustges ~ gesund + Error(respid), data = ., anova_table = "pes")
 
 print(fit)
 ```
 
-in welcher wir zunächst die abhängige Variable (`happy`) angeben müssen und nach einer Tilde die unabhängige Variabel (`cntry`) Zudem müssen wir den Zusatz `+ Error()` nutzen un in der Klammer die Fallid (hier `idno`) angeben. Da die Variable idno doppelte Fälle hatte müssen wir in dem vorliegenden Beispiel diese ausschließen, da andernfalls der Befehl nicht funktioniert. Dies geschieht mit dem Befehl `distinct` welcher aus der Variablen `idno` alle doppelten Fälle ausschließt. Der Zusatz `.keep_all = T` bedeutet, dass wir alle Variablen des Datensatzes behalten wollen und nur die doppelten Fälle ausgeschlossen werden sollen. Alles speichern wir als Objekt `fit` welches wir anschließend mit `print` aufrufen.
+in welcher wir zunächst die abhängige Variable (`happy`) angeben müssen und nach einer Tilde die unabhängige Variabel (`cntry`) Zudem müssen wir den Zusatz `+ Error()` nutzen un in der Klammer die Fallid (hier `idno`) angeben. 
+
+Alles speichern wir als Objekt `fit` welches wir anschließend mit `print` aufrufen.
+
+## Interpretation des Outputs
 
 Als Output erhalten wir eine Tabelle mit den folgenden Parametern:
 
@@ -183,13 +184,13 @@ Als Output erhalten wir eine Tabelle mit den folgenden Parametern:
 -   pes: parties Eta-Quadrat (partial eta-quared)
 -   p.value: Signifikanz
 
-**Effect** zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Stolz ein Deutscher zu sein, `gesund`. Die drei bedeutet, dass hier insgesamt eine Gruppe mit 3 anderen (= vier Ausprägungen) verglichen wurde.
+**Effect** zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Gesundheitszustand(`gesund`). Die vier bedeutet, dass hier insgesamt eine Gruppe mit 4 anderen (= fünf Ausprägungen) verglichen wurde.
 
 Über die Werte der zweiten und vierten Spalte, die **Freiheitsgrade** (`df`) und die **F-Werte** (`F`) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte `p.value` die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert \<.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Stolzes ein Deutscher zu sein im Bezug auf das Vertrauen in das Gesundheitswesen ersichtlich.
 
 Die mittlere quadratische Abweichung (MSE) oder Fehlervarianz ist die Summe der Abweichungsquadrate aller Werte vom jeweiligen Gruppenmittelwert. Berechnet wird diese durch die Quadratsummer der Fehlerresiduen geteilt durch die Freiheitsgrade. Sie gibt damit die Varianz innerhalb der einzelnen Gruppen (=nicht erklärte Varianz) wieder.
 
-Die Spalte `pes` steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an -- partiell ist das Eta^2^, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Im Datenbeispiel hat demnach der Stolz darauf ein Deutscher zu sein (und damit auch unser Gesamtmodell) eine Erklärkraft von 1.3 Prozent. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.
+Die Spalte `pes` steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an -- partiell ist das Eta^2^, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Im Datenbeispiel hat demnach der Gesundheitszustand (und damit auch unser Gesamtmodell) eine Erklärkraft von 0.6 Prozent für Unterschiede im Vertrauen auf das Gesundheitssystem. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.
 
 ## PostHocTests
 
@@ -205,25 +206,51 @@ daten %>%
 aov(trustges ~ gesund, data = .) %>% 
   tamhaneT2Test(.)
 ```
+## Interpretation der Posthoc-Tests und des Gesamtmodells
 
 Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur dieser angezeigt). Werte unter .05 bedeuten, dass zwischen diesen Gruppen ein signifikanter Mittelwertunterschied besteht. In unserem Beispiel sehen wir Unterschiede zwischen
+
+SEHR GUT - ZUFRIEDENSTELLEND      0.2749 0.0734 3470   3.746  0.0017
+ SEHR GUT - WENIGER GUT            0.3077 0.0924 3470   3.332  0.0078
+ SEHR GUT - SCHLECHT               0.4123 0.1474 3470   2.797  0.0414
+ GUT - ZUFRIEDENSTELLEND  
+
+
+Sehr Gut und Zufriedenstellend /Schlecht
+
+::: callout-tip
+## Wie gebe ich die Ergebnisse korrekt an?
+
+Die Ergebnisse der Varianzanalyse werden zumeist in XX dargestellt. Dafür werden folgende Informationen benötigt:
+
+✅ die Werte des Kaiser-Meyer-Olkin Kritierums (KMO)
+
+✅ das Ergebnis des Barlett-Tests
+
+
+Das Format ist üblicherweise:
+
+> ***Beispiel:*** Zunächst wurde Faktorenanalyse der 15 gemessenen Indikatoren durchgeführt. Das Kaiser-Meyer-Olkin (KMO)-Maß für die Stichprobenadäquanz betrug 0,89. Dies deutet darauf hin, dass die Korrelationsmuster relativ kompakt sind und die Faktorenanalyse eindeutige und zuverlässige Faktoren ergeben sollte. Der Bartlett-Test auf Sphärizität war ebenfalls signifikant (χ2(105) = 33164.76, p \< .001). Dies bedeutet, dass es einige Beziehungen zwischen den untersuchten Variablen gibt. Sowohl der KMO-Test als auch der Bartlett-Test bestätigen, dass die Faktorenanalyse angemessen ist.
+
+:::
 
 ## Exkurs: Kruskal Wallis Test
 
 # Mehrfaktorielle Varianzanalyse
 
-In der mehrfaktoriellen Varianzanalyse können wir unser Modell aus der einfachen Varianzananlyse erweitern. In diesem Beispiel nutzen wir neben der Ländervariablen (`cntry`) zusätzlich die Variable Geschlecht (`gndr`) um die Lebenszufriedenheit (`happy`) vorherzusagen.
+In der mehrfaktoriellen Varianzanalyse können wir unser Modell aus der einfachen Varianzananlyse erweitern. In diesem Beispiel nutzen wir neben der Variablen zum Gesundheitszustand (`gesund`) zusätzlich die Variable Alter (`agef`) um das Vertrauen in das Gesundheitssystem (`trustges`) vorherzusagen.
 
-Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die `group_by`-Funktion in Kombination mit der `summarise`-Funktion. Im nachfolgenden Schritt haben wir mit Hilfe des Befehls `kable()` aus dem Paket `knitr` das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.
+Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. 
 
 ```{r}
 #Deskriptive Statistiken ausgeben
 daten %>% 
-  group_by(gesund, eastwest) %>% 
+  group_by(gesund, agef) %>% 
   summarise(Mittelwert = mean(trustges, na.rm = T), 
             Standardabweichung = SD(trustges, na.rm = T)) %>% 
-  kable(digits = 2, col.names = c("Stolz", "Herkunft", "M", "SD"), caption = "Descriptives Vertrauen")
+  kable(digits = 2, col.names = c("Gesundheitszustand", "Alter", "M", "SD"), caption = "Descriptives Vertrauen")
 ```
+Dafür nutzen wir die `group_by`-Funktion in Kombination mit der `summarise`-Funktion. Im nachfolgenden Schritt haben wir mit Hilfe des Befehls `kable()` aus dem Paket `knitr` das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.
 
 Zunächst können wir unsere deskriptiven Statistiken betrachten. Hier interessieren uns insbesondere die Mittelwerte für die einzelnen Gruppen. Diese Mittelwerte im Fließtext kurz zu erwähnen, gehört zum „guten Ton" bei der Auswertung einer Varianzanalyse und sollte daher nicht vergessen werden.
 
@@ -231,13 +258,13 @@ Nun können wir unsere ANOVA aufstellen. Es gibt verschiedene Möglichkeiten ein
 
 ```{r}
 fit2 <- daten %>% 
-dplyr::distinct(respid, .keep_all = TRUE) %>% 
-  afex::aov_car(trustges ~ gesund * eastwest + Error(respid),
+  afex::aov_car(trustges ~ gesund * agef + Error(respid),
                                      data = ., anova_table = "pes")
 print(fit2)
 ```
+## Interpretation des Outputs
 
-Die Erläuterungen der einzelnen Parameter sind gleich zu den Erläuterungen der unifaktoriellen ANOVA, daher werden diese nicht wiederholt. Es zeigt sich, dass das Land erneut einen signifikanten Einfluss auf die Zufriedenheit hat (welcher im vorliegenden Modell etwas geringer mit 1.7 Prozent erklärter Varianz ausfällt). Keinen signfikanten Einfluss haben hingegen das Geschlecht der Befragten sowie das Zusammenspiel aus Geschlecht und Länderzugehörigkeit (p.value über .05).
+Die Erläuterungen der einzelnen Parameter sind gleich zu den Erläuterungen der unifaktoriellen ANOVA, daher werden diese nicht wiederholt. Es zeigt sich, dass der Gesundheitszustand erneut einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen hat (welcher im vorliegenden Modell etwas höher mit 0.9 Prozent erklärter Varianz ausfällt). Zusätzlich hat neben der Gesundheitszustand auch das Alter der Befragten einen signifikanten, wenngleich geringeren Einfluss auf das Vertrauen in das Gesundheitswesen. Zudem sehen wir einen signifikanten Einfluss der Interaktion von Alter und Gesundheitszustand (`gesund:agef4`). 
 
 Im Anschluss müssen wir, wie in der univariaten ANOVA, die Posthoc-Tests berechnen (im vorliegenden Fall können wir lediglich den Tukey-Test berechnen, das der Tamhame-Test nur für einfaktorielle Designs funktioniert).
 
@@ -245,23 +272,44 @@ Im Anschluss müssen wir, wie in der univariaten ANOVA, die Posthoc-Tests berech
 
 ```{r}
 #Tukey Post-Hoc Test
-emmeans::emmeans(fit2, specs = c("gesund", "eastwest")) %>% 
+emmeans::emmeans(fit2, specs = c("gesund", "agef")) %>% 
   pairs()
 ```
 
 ## Interaktionen visualisieren
 
-Um einen möglichen Interaktionseffekt (auch wenn in unseren Fall der Interkationseffekt nicht signifikant war) auch anschaulich vermitteln bzw. oft auch verstehen zu können, empfiehlt es sich, diesen als Diagramm darzustellen. Hierzu nutzen wir die Pakete `emmeans` und `ggplot2`.
+Um einen möglichen Interaktionseffekt auch anschaulich vermitteln bzw. oft auch verstehen zu können, empfiehlt es sich, diesen als Diagramm darzustellen. Hierzu nutzen wir die Pakete `emmeans` und `ggplot2`.
 
 ```{r}
 #Interaktionsplot ausgeben
-emmip(fit2, eastwest ~ gesund) + 
+emmip(fit2, agef ~ gesund) + 
   labs(title = "Geschätzes Randmittel von Vertrauen in das Gesundheitswesen", 
        y = "Geschätzte Randmittel",
-       x = "Stolz, Deutscher zu sein")
+       x = "Alter der Befragten")
 
-emmip(fit2, gesund ~ eastwest) + 
+emmip(fit2, gesund ~ agef) + 
   labs(title = "Geschätzes Randmittel von Vertrauen in das Gesundheitswesen", 
        y = "Geschätzte Randmittel",
-       x = "Herkunft (Ost vs West)")
+       x = "Gesundheitszustand")
 ```
+## Interpretation der Posthoc-Tests und des Gesamtmodells
+
+
+## Literatur
+
+::: callout-note
+## Literatur und Beispiele aus der Praxis
+
+Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen braucht.
+
+> 📖 Field, Z., Miles, J., & Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. [Link](https://suche.suub.uni-bremen.de/peid=B68436977&LAN=DE&CID=7699632&index=L&Hitnr=1&dtyp=D&rtyp=a&Exemplar=1)
+
+> 📖 Brown T. A. (2015). Confirmatory factor analysis for applied research (2nd ed.). New York, NY: Guilford Press. Watkins, M. W. (2018). Exploratory Factor Analysis: A Guide to Best Practice. Journal of Black Psychology, 44(3), 219--246. [Link](https://doi.org/10.1177/0095798418771807)
+
+> 📖 Fabrigar, L. R., & Wegener, D. T. (2012). Exploratory factor analysis. Oxford University Press.
+
+Hier findet ihr ein Beispiel aus der Forschungspraxis:
+
+> 🔬 Koirala, B. P., Araghi, Y., Kroesen, M., Ghorbani, A., Hakvoort, R. A., & Herder, P. M. (2018). Trust, awareness, and independence: Insights from a socio-psychological factor analysis of citizen knowledge and participation in community energy systems. Energy research & social science, 38, 33-40. [Link](https://www.sciencedirect.com/science/article/pii/S2214629618300641)
+:::
+

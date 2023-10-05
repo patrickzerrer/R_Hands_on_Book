@@ -97,6 +97,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Die Varianzanalyse">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Skript_6.4_files/figure-html/unnamed-chunk-4-1.png">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+<meta name="twitter:title" content="Die Varianzanalyse">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Skript_6.4_files/figure-html/unnamed-chunk-4-1.png">
+<meta name="twitter:image-height" content="960">
+<meta name="twitter:image-width" content="1344">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -411,13 +422,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#einfaktorielle-varianzanalyse-ohne-messwiederholung" id="toc-einfaktorielle-varianzanalyse-ohne-messwiederholung" class="nav-link" data-scroll-target="#einfaktorielle-varianzanalyse-ohne-messwiederholung"><span class="header-section-number">3</span> Einfaktorielle Varianzanalyse (ohne Messwiederholung)</a>
   <ul class="collapse">
-  <li><a href="#posthoctests" id="toc-posthoctests" class="nav-link" data-scroll-target="#posthoctests"><span class="header-section-number">3.1</span> PostHocTests</a></li>
-  <li><a href="#exkurs-kruskal-wallis-test" id="toc-exkurs-kruskal-wallis-test" class="nav-link" data-scroll-target="#exkurs-kruskal-wallis-test"><span class="header-section-number">3.2</span> Exkurs: Kruskal Wallis Test</a></li>
+  <li><a href="#interpretation-des-outputs" id="toc-interpretation-des-outputs" class="nav-link" data-scroll-target="#interpretation-des-outputs"><span class="header-section-number">3.1</span> Interpretation des Outputs</a></li>
+  <li><a href="#posthoctests" id="toc-posthoctests" class="nav-link" data-scroll-target="#posthoctests"><span class="header-section-number">3.2</span> PostHocTests</a></li>
+  <li><a href="#interpretation-der-posthoc-tests-und-des-gesamtmodells" id="toc-interpretation-der-posthoc-tests-und-des-gesamtmodells" class="nav-link" data-scroll-target="#interpretation-der-posthoc-tests-und-des-gesamtmodells"><span class="header-section-number">3.3</span> Interpretation der Posthoc-Tests und des Gesamtmodells</a></li>
+  <li><a href="#exkurs-kruskal-wallis-test" id="toc-exkurs-kruskal-wallis-test" class="nav-link" data-scroll-target="#exkurs-kruskal-wallis-test"><span class="header-section-number">3.4</span> Exkurs: Kruskal Wallis Test</a></li>
   </ul></li>
   <li><a href="#mehrfaktorielle-varianzanalyse" id="toc-mehrfaktorielle-varianzanalyse" class="nav-link" data-scroll-target="#mehrfaktorielle-varianzanalyse"><span class="header-section-number">4</span> Mehrfaktorielle Varianzanalyse</a>
   <ul class="collapse">
-  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests"><span class="header-section-number">4.1</span> Post-Hoc Tests</a></li>
-  <li><a href="#interaktionen-visualisieren" id="toc-interaktionen-visualisieren" class="nav-link" data-scroll-target="#interaktionen-visualisieren"><span class="header-section-number">4.2</span> Interaktionen visualisieren</a></li>
+  <li><a href="#interpretation-des-outputs-1" id="toc-interpretation-des-outputs-1" class="nav-link" data-scroll-target="#interpretation-des-outputs-1"><span class="header-section-number">4.1</span> Interpretation des Outputs</a></li>
+  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests"><span class="header-section-number">4.2</span> Post-Hoc Tests</a></li>
+  <li><a href="#interaktionen-visualisieren" id="toc-interaktionen-visualisieren" class="nav-link" data-scroll-target="#interaktionen-visualisieren"><span class="header-section-number">4.3</span> Interaktionen visualisieren</a></li>
+  <li><a href="#interpretation-der-posthoc-tests-und-des-gesamtmodells-1" id="toc-interpretation-der-posthoc-tests-und-des-gesamtmodells-1" class="nav-link" data-scroll-target="#interpretation-der-posthoc-tests-und-des-gesamtmodells-1"><span class="header-section-number">4.4</span> Interpretation der Posthoc-Tests und des Gesamtmodells</a></li>
+  <li><a href="#literatur" id="toc-literatur" class="nav-link" data-scroll-target="#literatur"><span class="header-section-number">4.5</span> Literatur</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -517,7 +533,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(., hs01 <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> pt01 <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> age <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">rename</span>(., <span class="at">gesund =</span> hs01,</span>
 <span id="cb3-4"><a href="#cb3-4"></a>            <span class="at">trustges =</span> pt01) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">mutate</span>(<span class="at">gesund =</span> <span class="fu">as.factor</span>(gesund),</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">mutate</span>(<span class="at">gesund =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(gesund),</span>
 <span id="cb3-6"><a href="#cb3-6"></a>         <span class="at">trustges =</span> <span class="fu">as.numeric</span>(trustges),</span>
 <span id="cb3-7"><a href="#cb3-7"></a>         <span class="at">agef =</span> <span class="fu">dicho</span>(age, <span class="at">as.num =</span> T) <span class="sc">%&gt;%</span> <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"jung"</span>, <span class="st">"alt"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -547,7 +563,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="Skript_6.4_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Wir sehen an der Grafik, dass die Variable Zufriedenheit rechtssteil ist, also die Teilnehmer der Befragung eher ein höheres Vertrauen angegeben haben.</p>
+<p>Wir sehen an der Grafik, dass die Variable Vertrauen in das Gesundheitswesen rechtssteil ist, also die Teilnehmer der Befragung eher ein höheres Vertrauen angegeben haben.</p>
 <p>Zusätzliche Gewissheit bezüglich des Vorliegens der Normalverteilung bietet der Kolmogorov-Smirnov-Test oder der Shapiro-Wilk-Test (welcher für kleinere Stichproben zwischen 3 und 5000 Fällen konzipiert ist). In R erhalten wir diese Tests mit dem Befehl <code>LillieTest()</code> aus dem Paket <code>DescTools()</code> bzw. <code>shapiro.test()</code>. Beide Tests testen auf Abweichung von der Normalverteilung, demnach sollte diese nicht signifikant ausfallen (da ein signifikanter Test aussagt, dass eine Abweichung von der Normalverteilung besteht, was wir nicht möchten).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">#Lilliefors Kolmogorov-Smirnov-Test</span></span>
@@ -586,11 +602,11 @@ W = 0.92102, p-value &lt; 2.2e-16</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-annotation="1" data-code-lines="3">Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird.</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="1">Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird.</span>
 </dd>
 <dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-annotation="2" data-code-lines="7">Bei mehrenen unabhängigen Variablen können wir diese mit einem * verbinden. Hier wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="7" data-code-annotation="2">Bei mehrenen unabhängigen Variablen können wir diese mit einem * verbinden. Hier wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.</span>
 </dd>
 </dl>
 </div>
@@ -633,27 +649,27 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">1</td>
+<td style="text-align: left;">SEHR GUT</td>
 <td style="text-align: right;">5.13</td>
 <td style="text-align: right;">1.45</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2</td>
+<td style="text-align: left;">GUT</td>
 <td style="text-align: right;">4.99</td>
 <td style="text-align: right;">1.32</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">3</td>
+<td style="text-align: left;">ZUFRIEDENSTELLEND</td>
 <td style="text-align: right;">4.85</td>
 <td style="text-align: right;">1.37</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">4</td>
+<td style="text-align: left;">WENIGER GUT</td>
 <td style="text-align: right;">4.82</td>
 <td style="text-align: right;">1.48</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">5</td>
+<td style="text-align: left;">SCHLECHT</td>
 <td style="text-align: right;">4.71</td>
 <td style="text-align: right;">1.55</td>
 </tr>
@@ -661,14 +677,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </table>
 </div>
 </div>
-<p>Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, bei Personen die einen guten Gesundheitszustand aufweisen.</p>
-<p>Anschließend können wir die einfaktorielle ANOVA berechnen.Dafür nutzen wir die Funktion <code>aov_car</code> aus dem <code>afex</code>-Packag:</p>
+<p>Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, bei Personen die einen guten Gesundheitszustand aufweisen. Ob dieser augenscheinliche Unterschied auch statistisch signifikant ist, möchten wir in einem nächsten Schritt mit der einfaktoriellen ANOVA berechnen. Dafür nutzen wir die Funktion <code>aov_car</code> aus dem <code>afex</code>-Packag:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>fit <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2"></a>dplyr<span class="sc">::</span><span class="fu">distinct</span>(respid, <span class="at">.keep_all =</span> T) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">aov_car</span>(trustges <span class="sc">~</span> gesund <span class="sc">+</span> <span class="fu">Error</span>(respid), <span class="at">data =</span> ., <span class="at">anova_table =</span> <span class="st">"pes"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="fu">print</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">aov_car</span>(trustges <span class="sc">~</span> gesund <span class="sc">+</span> <span class="fu">Error</span>(respid), <span class="at">data =</span> ., <span class="at">anova_table =</span> <span class="st">"pes"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="fu">print</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type 3 tests)
 
@@ -679,7 +693,10 @@ Response: trustges
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>in welcher wir zunächst die abhängige Variable (<code>happy</code>) angeben müssen und nach einer Tilde die unabhängige Variabel (<code>cntry</code>) Zudem müssen wir den Zusatz <code>+ Error()</code> nutzen un in der Klammer die Fallid (hier <code>idno</code>) angeben. Da die Variable idno doppelte Fälle hatte müssen wir in dem vorliegenden Beispiel diese ausschließen, da andernfalls der Befehl nicht funktioniert. Dies geschieht mit dem Befehl <code>distinct</code> welcher aus der Variablen <code>idno</code> alle doppelten Fälle ausschließt. Der Zusatz <code>.keep_all = T</code> bedeutet, dass wir alle Variablen des Datensatzes behalten wollen und nur die doppelten Fälle ausgeschlossen werden sollen. Alles speichern wir als Objekt <code>fit</code> welches wir anschließend mit <code>print</code> aufrufen.</p>
+<p>in welcher wir zunächst die abhängige Variable (<code>happy</code>) angeben müssen und nach einer Tilde die unabhängige Variabel (<code>cntry</code>) Zudem müssen wir den Zusatz <code>+ Error()</code> nutzen un in der Klammer die Fallid (hier <code>idno</code>) angeben.</p>
+<p>Alles speichern wir als Objekt <code>fit</code> welches wir anschließend mit <code>print</code> aufrufen.</p>
+<section id="interpretation-des-outputs" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="interpretation-des-outputs"><span class="header-section-number">3.1</span> Interpretation des Outputs</h2>
 <p>Als Output erhalten wir eine Tabelle mit den folgenden Parametern:</p>
 <ul>
 <li>Effect: unabhängige Variable</li>
@@ -689,29 +706,30 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 <li>pes: parties Eta-Quadrat (partial eta-quared)</li>
 <li>p.value: Signifikanz</li>
 </ul>
-<p><strong>Effect</strong> zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Stolz ein Deutscher zu sein, <code>gesund</code>. Die drei bedeutet, dass hier insgesamt eine Gruppe mit 3 anderen (= vier Ausprägungen) verglichen wurde.</p>
+<p><strong>Effect</strong> zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Gesundheitszustand(<code>gesund</code>). Die vier bedeutet, dass hier insgesamt eine Gruppe mit 4 anderen (= fünf Ausprägungen) verglichen wurde.</p>
 <p>Über die Werte der zweiten und vierten Spalte, die <strong>Freiheitsgrade</strong> (<code>df</code>) und die <strong>F-Werte</strong> (<code>F</code>) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte <code>p.value</code> die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert &lt;.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Stolzes ein Deutscher zu sein im Bezug auf das Vertrauen in das Gesundheitswesen ersichtlich.</p>
 <p>Die mittlere quadratische Abweichung (MSE) oder Fehlervarianz ist die Summe der Abweichungsquadrate aller Werte vom jeweiligen Gruppenmittelwert. Berechnet wird diese durch die Quadratsummer der Fehlerresiduen geteilt durch die Freiheitsgrade. Sie gibt damit die Varianz innerhalb der einzelnen Gruppen (=nicht erklärte Varianz) wieder.</p>
-<p>Die Spalte <code>pes</code> steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an – partiell ist das Eta<sup>2</sup>, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Im Datenbeispiel hat demnach der Stolz darauf ein Deutscher zu sein (und damit auch unser Gesamtmodell) eine Erklärkraft von 1.3 Prozent. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.</p>
-<section id="posthoctests" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="posthoctests"><span class="header-section-number">3.1</span> PostHocTests</h2>
+<p>Die Spalte <code>pes</code> steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an – partiell ist das Eta<sup>2</sup>, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Im Datenbeispiel hat demnach der Gesundheitszustand (und damit auch unser Gesamtmodell) eine Erklärkraft von 0.6 Prozent für Unterschiede im Vertrauen auf das Gesundheitssystem. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.</p>
+</section>
+<section id="posthoctests" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="posthoctests"><span class="header-section-number">3.2</span> PostHocTests</h2>
 <p>Zuletzt müssen wir die Posthoc-Tests berechnen, welche uns Aufschluss darüber geben, welche unserer Gruppen sich unterscheiden. Es gibt verschiedene Posthoc-Tests. Grundsätzlich ist der Tukex-Post-Hoc Test zu empfehlen, welche wir über die Funktion <code>emmeans</code>aus dem <code>emmeans</code>-Package aufrufen. Bei fehlender Varianzhomogenität können wir zudem den tamhane-T2 Test nutzen. Dieser basiert allerdings auf einem aov-Objekt, daher geben wir hier mit aov die ANOVA erneut aus. Innerhalb von emmeans können wir hingegen einfach auf unser zuvor spezifiziertes Modell fit verweisen, müssen allerdings noch mit specs= angeben, auf Basis welcher Variablen der Gruppenvergleich durchgeführt werden soll.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#Tukey Post-Hoc Test</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(fit, <span class="at">specs =</span> <span class="st">"gesund"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">pairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> contrast          estimate     SE   df t.ratio p.value
- gesund1 - gesund2   0.1336 0.0696 3470   1.919  0.3075
- gesund1 - gesund3   0.2749 0.0734 3470   3.746  0.0017
- gesund1 - gesund4   0.3077 0.0924 3470   3.332  0.0078
- gesund1 - gesund5   0.4123 0.1474 3470   2.797  0.0414
- gesund2 - gesund3   0.1413 0.0567 3470   2.490  0.0930
- gesund2 - gesund4   0.1741 0.0798 3470   2.183  0.1864
- gesund2 - gesund5   0.2787 0.1398 3470   1.993  0.2696
- gesund3 - gesund4   0.0328 0.0831 3470   0.395  0.9949
- gesund3 - gesund5   0.1374 0.1418 3470   0.969  0.8691
- gesund4 - gesund5   0.1046 0.1524 3470   0.686  0.9595
+<pre><code> contrast                        estimate     SE   df t.ratio p.value
+ SEHR GUT - GUT                    0.1336 0.0696 3470   1.919  0.3075
+ SEHR GUT - ZUFRIEDENSTELLEND      0.2749 0.0734 3470   3.746  0.0017
+ SEHR GUT - WENIGER GUT            0.3077 0.0924 3470   3.332  0.0078
+ SEHR GUT - SCHLECHT               0.4123 0.1474 3470   2.797  0.0414
+ GUT - ZUFRIEDENSTELLEND           0.1413 0.0567 3470   2.490  0.0930
+ GUT - WENIGER GUT                 0.1741 0.0798 3470   2.183  0.1864
+ GUT - SCHLECHT                    0.2787 0.1398 3470   1.993  0.2696
+ ZUFRIEDENSTELLEND - WENIGER GUT   0.0328 0.0831 3470   0.395  0.9949
+ ZUFRIEDENSTELLEND - SCHLECHT      0.1374 0.1418 3470   0.969  0.8691
+ WENIGER GUT - SCHLECHT            0.1046 0.1524 3470   0.686  0.9595
 
 P value adjustment: tukey method for comparing a family of 5 estimates </code></pre>
 </div>
@@ -720,204 +738,309 @@ P value adjustment: tukey method for comparing a family of 5 estimates </code></
 <span id="cb15-3"><a href="#cb15-3"></a><span class="fu">aov</span>(trustges <span class="sc">~</span> gesund, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">tamhaneT2Test</span>(.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  1      2      3      4     
-2 0.4692 -      -      -     
-3 0.0029 0.1037 -      -     
-4 0.0174 0.3186 1.0000 -     
-5 0.1230 0.5471 0.9923 0.9996</code></pre>
+<pre><code>                  SEHR GUT GUT    ZUFRIEDENSTELLEND WENIGER GUT
+GUT               0.4692   -      -                 -          
+ZUFRIEDENSTELLEND 0.0029   0.1037 -                 -          
+WENIGER GUT       0.0174   0.3186 1.0000            -          
+SCHLECHT          0.1230   0.5471 0.9923            0.9996     </code></pre>
 </div>
 </div>
-<p>Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur dieser angezeigt). Werte unter .05 bedeuten, dass zwischen diesen Gruppen ein signifikanter Mittelwertunterschied besteht. In unserem Beispiel sehen wir Unterschiede zwischen</p>
 </section>
-<section id="exkurs-kruskal-wallis-test" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="exkurs-kruskal-wallis-test"><span class="header-section-number">3.2</span> Exkurs: Kruskal Wallis Test</h2>
+<section id="interpretation-der-posthoc-tests-und-des-gesamtmodells" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="interpretation-der-posthoc-tests-und-des-gesamtmodells"><span class="header-section-number">3.3</span> Interpretation der Posthoc-Tests und des Gesamtmodells</h2>
+<p>Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur dieser angezeigt). Werte unter .05 bedeuten, dass zwischen diesen Gruppen ein signifikanter Mittelwertunterschied besteht. In unserem Beispiel sehen wir Unterschiede zwischen</p>
+<p>SEHR GUT - ZUFRIEDENSTELLEND 0.2749 0.0734 3470 3.746 0.0017 SEHR GUT - WENIGER GUT 0.3077 0.0924 3470 3.332 0.0078 SEHR GUT - SCHLECHT 0.4123 0.1474 3470 2.797 0.0414 GUT - ZUFRIEDENSTELLEND</p>
+<p>Sehr Gut und Zufriedenstellend /Schlecht</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Wie gebe ich die Ergebnisse korrekt an?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Ergebnisse der Varianzanalyse werden zumeist in XX dargestellt. Dafür werden folgende Informationen benötigt:</p>
+<p>✅ die Werte des Kaiser-Meyer-Olkin Kritierums (KMO)</p>
+<p>✅ das Ergebnis des Barlett-Tests</p>
+<p>Das Format ist üblicherweise:</p>
+<blockquote class="blockquote">
+<p><strong><em>Beispiel:</em></strong> Zunächst wurde Faktorenanalyse der 15 gemessenen Indikatoren durchgeführt. Das Kaiser-Meyer-Olkin (KMO)-Maß für die Stichprobenadäquanz betrug 0,89. Dies deutet darauf hin, dass die Korrelationsmuster relativ kompakt sind und die Faktorenanalyse eindeutige und zuverlässige Faktoren ergeben sollte. Der Bartlett-Test auf Sphärizität war ebenfalls signifikant (χ2(105) = 33164.76, p &lt; .001). Dies bedeutet, dass es einige Beziehungen zwischen den untersuchten Variablen gibt. Sowohl der KMO-Test als auch der Bartlett-Test bestätigen, dass die Faktorenanalyse angemessen ist.</p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="exkurs-kruskal-wallis-test" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="exkurs-kruskal-wallis-test"><span class="header-section-number">3.4</span> Exkurs: Kruskal Wallis Test</h2>
 </section>
 </section>
 <section id="mehrfaktorielle-varianzanalyse" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Mehrfaktorielle Varianzanalyse</h1>
-<p>In der mehrfaktoriellen Varianzanalyse können wir unser Modell aus der einfachen Varianzananlyse erweitern. In diesem Beispiel nutzen wir neben der Ländervariablen (<code>cntry</code>) zusätzlich die Variable Geschlecht (<code>gndr</code>) um die Lebenszufriedenheit (<code>happy</code>) vorherzusagen.</p>
-<p>Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die <code>group_by</code>-Funktion in Kombination mit der <code>summarise</code>-Funktion. Im nachfolgenden Schritt haben wir mit Hilfe des Befehls <code>kable()</code> aus dem Paket <code>knitr</code> das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.</p>
+<p>In der mehrfaktoriellen Varianzanalyse können wir unser Modell aus der einfachen Varianzananlyse erweitern. In diesem Beispiel nutzen wir neben der Variablen zum Gesundheitszustand (<code>gesund</code>) zusätzlich die Variable Alter (<code>agef</code>) um das Vertrauen in das Gesundheitssystem (<code>trustges</code>) vorherzusagen.</p>
+<p>Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">#Deskriptive Statistiken ausgeben</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a>daten <span class="sc">%&gt;%</span> </span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">group_by</span>(gesund, eastwest) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">group_by</span>(gesund, agef) <span class="sc">%&gt;%</span> </span>
 <span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">summarise</span>(<span class="at">Mittelwert =</span> <span class="fu">mean</span>(trustges, <span class="at">na.rm =</span> T), </span>
 <span id="cb17-5"><a href="#cb17-5"></a>            <span class="at">Standardabweichung =</span> <span class="fu">SD</span>(trustges, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Stolz"</span>, <span class="st">"Herkunft"</span>, <span class="st">"M"</span>, <span class="st">"SD"</span>), <span class="at">caption =</span> <span class="st">"Descriptives Vertrauen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Gesundheitszustand"</span>, <span class="st">"Alter"</span>, <span class="st">"M"</span>, <span class="st">"SD"</span>), <span class="at">caption =</span> <span class="st">"Descriptives Vertrauen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Descriptives Vertrauen</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Stolz</th>
-<th style="text-align: right;">Herkunft</th>
+<th style="text-align: left;">Gesundheitszustand</th>
+<th style="text-align: left;">Alter</th>
 <th style="text-align: right;">M</th>
 <th style="text-align: right;">SD</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">5.14</td>
-<td style="text-align: right;">1.37</td>
+<td style="text-align: left;">SEHR GUT</td>
+<td style="text-align: left;">jung</td>
+<td style="text-align: right;">5.15</td>
+<td style="text-align: right;">1.42</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">5.08</td>
-<td style="text-align: right;">1.64</td>
+<td style="text-align: left;">SEHR GUT</td>
+<td style="text-align: left;">alt</td>
+<td style="text-align: right;">5.05</td>
+<td style="text-align: right;">1.57</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4.96</td>
+<td style="text-align: left;">GUT</td>
+<td style="text-align: left;">jung</td>
+<td style="text-align: right;">4.89</td>
+<td style="text-align: right;">1.30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GUT</td>
+<td style="text-align: left;">alt</td>
+<td style="text-align: right;">5.14</td>
 <td style="text-align: right;">1.35</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;">ZUFRIEDENSTELLEND</td>
+<td style="text-align: left;">jung</td>
+<td style="text-align: right;">4.58</td>
+<td style="text-align: right;">1.42</td>
+</tr>
 <tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">5.07</td>
-<td style="text-align: right;">1.26</td>
+<td style="text-align: left;">ZUFRIEDENSTELLEND</td>
+<td style="text-align: left;">alt</td>
+<td style="text-align: right;">5.01</td>
+<td style="text-align: right;">1.31</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4.72</td>
-<td style="text-align: right;">1.38</td>
+<td style="text-align: left;">WENIGER GUT</td>
+<td style="text-align: left;">jung</td>
+<td style="text-align: right;">4.50</td>
+<td style="text-align: right;">1.60</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">5.07</td>
-<td style="text-align: right;">1.33</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">4</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4.73</td>
-<td style="text-align: right;">1.51</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: left;">WENIGER GUT</td>
+<td style="text-align: left;">alt</td>
 <td style="text-align: right;">4.97</td>
-<td style="text-align: right;">1.43</td>
+<td style="text-align: right;">1.40</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4.79</td>
-<td style="text-align: right;">1.52</td>
+<td style="text-align: left;">SCHLECHT</td>
+<td style="text-align: left;">jung</td>
+<td style="text-align: right;">4.41</td>
+<td style="text-align: right;">1.95</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">5</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">4.56</td>
-<td style="text-align: right;">1.64</td>
+<td style="text-align: left;">SCHLECHT</td>
+<td style="text-align: left;">alt</td>
+<td style="text-align: right;">4.82</td>
+<td style="text-align: right;">1.39</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+<p>Dafür nutzen wir die <code>group_by</code>-Funktion in Kombination mit der <code>summarise</code>-Funktion. Im nachfolgenden Schritt haben wir mit Hilfe des Befehls <code>kable()</code> aus dem Paket <code>knitr</code> das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.</p>
 <p>Zunächst können wir unsere deskriptiven Statistiken betrachten. Hier interessieren uns insbesondere die Mittelwerte für die einzelnen Gruppen. Diese Mittelwerte im Fließtext kurz zu erwähnen, gehört zum „guten Ton” bei der Auswertung einer Varianzanalyse und sollte daher nicht vergessen werden.</p>
 <p>Nun können wir unsere ANOVA aufstellen. Es gibt verschiedene Möglichkeiten eine ANOVA zu berechnen, namentlich Type I, II und III. Die einzelnen Typen unterscheiden sich darin, wie die Parameter (insbesondere die Quadratsumme) berechnet wird. Typ I sollte vor allem für ausgeglichene Daten verwendet werden, also Daten bei der für jede Gruppe die gleiche Anzahl an Fällen vorliegen. Ist dies nicht der Fall, sollte Typ II oder Typ III verwendet werden. Der typische Befehl für eine Anova in R ist der Befehl <code>aov()</code>. Dieser ist jedoch nur für die Typ I Anova ausgelegt, daher nutzen wir hier erneut den Befehl <code>aov_car()</code> (sowie den distict-Befehl) aus dem <code>afex</code>-Paket welcher standardmäßig die Anova nach Typ III berechnet. Im Prinzip nutzen wir die selbe Syntax wie bei der unifaktoriellen Anova. Wir ergänzen allerdings unsere zweitere unabhängige Variable, beziehungsweise verbinden die beiden unabhängigen Variablen mit einem *. Dadurch erhalten wir sowohl die Werte für die einzelnen Variablen als auch für den Interaktionsterm, also das Zusammenspiel der Variablen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>fit2 <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href="#cb18-2"></a>dplyr<span class="sc">::</span><span class="fu">distinct</span>(respid, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-3"><a href="#cb18-3"></a>  afex<span class="sc">::</span><span class="fu">aov_car</span>(trustges <span class="sc">~</span> gesund <span class="sc">*</span> eastwest <span class="sc">+</span> <span class="fu">Error</span>(respid),</span>
-<span id="cb18-4"><a href="#cb18-4"></a>                                     <span class="at">data =</span> ., <span class="at">anova_table =</span> <span class="st">"pes"</span>)</span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">print</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-2"><a href="#cb18-2"></a>  afex<span class="sc">::</span><span class="fu">aov_car</span>(trustges <span class="sc">~</span> gesund <span class="sc">*</span> agef <span class="sc">+</span> <span class="fu">Error</span>(respid),</span>
+<span id="cb18-3"><a href="#cb18-3"></a>                                     <span class="at">data =</span> ., <span class="at">anova_table =</span> <span class="st">"pes"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="fu">print</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type 3 tests)
 
 Response: trustges
-           Effect      df  MSE       F   pes p.value
-1          gesund 4, 3465 1.90 3.94 **  .005    .003
-2        eastwest 1, 3465 1.90    1.22 &lt;.001    .269
-3 gesund:eastwest 4, 3465 1.90  2.34 +  .003    .052
+       Effect      df  MSE         F  pes p.value
+1      gesund 4, 3465 1.89  7.66 *** .009   &lt;.001
+2        agef 1, 3465 1.89 14.63 *** .004   &lt;.001
+3 gesund:agef 4, 3465 1.89    2.93 * .003    .020
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Die Erläuterungen der einzelnen Parameter sind gleich zu den Erläuterungen der unifaktoriellen ANOVA, daher werden diese nicht wiederholt. Es zeigt sich, dass das Land erneut einen signifikanten Einfluss auf die Zufriedenheit hat (welcher im vorliegenden Modell etwas geringer mit 1.7 Prozent erklärter Varianz ausfällt). Keinen signfikanten Einfluss haben hingegen das Geschlecht der Befragten sowie das Zusammenspiel aus Geschlecht und Länderzugehörigkeit (p.value über .05).</p>
+<section id="interpretation-des-outputs-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="interpretation-des-outputs-1"><span class="header-section-number">4.1</span> Interpretation des Outputs</h2>
+<p>Die Erläuterungen der einzelnen Parameter sind gleich zu den Erläuterungen der unifaktoriellen ANOVA, daher werden diese nicht wiederholt. Es zeigt sich, dass der Gesundheitszustand erneut einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen hat (welcher im vorliegenden Modell etwas höher mit 0.9 Prozent erklärter Varianz ausfällt). Zusätzlich hat neben der Gesundheitszustand auch das Alter der Befragten einen signifikanten, wenngleich geringeren Einfluss auf das Vertrauen in das Gesundheitswesen. Zudem sehen wir einen signifikanten Einfluss der Interaktion von Alter und Gesundheitszustand (<code>gesund:agef4</code>).</p>
 <p>Im Anschluss müssen wir, wie in der univariaten ANOVA, die Posthoc-Tests berechnen (im vorliegenden Fall können wir lediglich den Tukey-Test berechnen, das der Tamhame-Test nur für einfaktorielle Designs funktioniert).</p>
-<section id="post-hoc-tests" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="post-hoc-tests"><span class="header-section-number">4.1</span> Post-Hoc Tests</h2>
+</section>
+<section id="post-hoc-tests" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="post-hoc-tests"><span class="header-section-number">4.2</span> Post-Hoc Tests</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">#Tukey Post-Hoc Test</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(fit2, <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"gesund"</span>, <span class="st">"eastwest"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(fit2, <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"gesund"</span>, <span class="st">"agef"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">pairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> contrast                              estimate     SE   df t.ratio p.value
- gesund1 eastwest1 - gesund2 eastwest1  0.18741 0.0821 3465   2.283  0.4006
- gesund1 eastwest1 - gesund3 eastwest1  0.42082 0.0882 3465   4.769  0.0001
- gesund1 eastwest1 - gesund4 eastwest1  0.41672 0.1137 3465   3.666  0.0094
- gesund1 eastwest1 - gesund5 eastwest1  0.35448 0.1778 3465   1.994  0.6033
- gesund1 eastwest1 - gesund1 eastwest2  0.06158 0.1332 3465   0.462  1.0000
- gesund1 eastwest1 - gesund2 eastwest2  0.07037 0.0948 3465   0.742  0.9992
- gesund1 eastwest1 - gesund3 eastwest2  0.07811 0.0987 3465   0.791  0.9987
- gesund1 eastwest1 - gesund4 eastwest2  0.17723 0.1332 3465   1.331  0.9467
- gesund1 eastwest1 - gesund5 eastwest2  0.58439 0.2465 3465   2.370  0.3441
- gesund2 eastwest1 - gesund3 eastwest1  0.23341 0.0704 3465   3.314  0.0315
- gesund2 eastwest1 - gesund4 eastwest1  0.22931 0.1005 3465   2.282  0.4007
- gesund2 eastwest1 - gesund5 eastwest1  0.16707 0.1696 3465   0.985  0.9931
- gesund2 eastwest1 - gesund1 eastwest2 -0.12583 0.1221 3465  -1.030  0.9904
- gesund2 eastwest1 - gesund2 eastwest2 -0.11704 0.0785 3465  -1.491  0.8960
- gesund2 eastwest1 - gesund3 eastwest2 -0.10930 0.0832 3465  -1.314  0.9506
- gesund2 eastwest1 - gesund4 eastwest2 -0.01018 0.1221 3465  -0.083  1.0000
- gesund2 eastwest1 - gesund5 eastwest2  0.39698 0.2407 3465   1.649  0.8237
- gesund3 eastwest1 - gesund4 eastwest1 -0.00410 0.1055 3465  -0.039  1.0000
- gesund3 eastwest1 - gesund5 eastwest1 -0.06633 0.1727 3465  -0.384  1.0000
- gesund3 eastwest1 - gesund1 eastwest2 -0.35924 0.1263 3465  -2.844  0.1224
- gesund3 eastwest1 - gesund2 eastwest2 -0.35045 0.0849 3465  -4.128  0.0015
- gesund3 eastwest1 - gesund3 eastwest2 -0.34271 0.0892 3465  -3.841  0.0049
- gesund3 eastwest1 - gesund4 eastwest2 -0.24359 0.1263 3465  -1.928  0.6496
- gesund3 eastwest1 - gesund5 eastwest2  0.16357 0.2429 3465   0.673  0.9996
- gesund4 eastwest1 - gesund5 eastwest1 -0.06224 0.1870 3465  -0.333  1.0000
- gesund4 eastwest1 - gesund1 eastwest2 -0.35514 0.1452 3465  -2.445  0.2991
- gesund4 eastwest1 - gesund2 eastwest2 -0.34635 0.1111 3465  -3.118  0.0577
- gesund4 eastwest1 - gesund3 eastwest2 -0.33861 0.1144 3465  -2.959  0.0904
- gesund4 eastwest1 - gesund4 eastwest2 -0.23949 0.1452 3465  -1.649  0.8237
- gesund4 eastwest1 - gesund5 eastwest2  0.16767 0.2533 3465   0.662  0.9997
- gesund5 eastwest1 - gesund1 eastwest2 -0.29290 0.1994 3465  -1.469  0.9045
- gesund5 eastwest1 - gesund2 eastwest2 -0.28412 0.1761 3465  -1.613  0.8421
- gesund5 eastwest1 - gesund3 eastwest2 -0.27637 0.1783 3465  -1.550  0.8715
- gesund5 eastwest1 - gesund4 eastwest2 -0.17725 0.1994 3465  -0.889  0.9968
- gesund5 eastwest1 - gesund5 eastwest2  0.22991 0.2878 3465   0.799  0.9986
- gesund1 eastwest2 - gesund2 eastwest2  0.00878 0.1310 3465   0.067  1.0000
- gesund1 eastwest2 - gesund3 eastwest2  0.01653 0.1338 3465   0.124  1.0000
- gesund1 eastwest2 - gesund4 eastwest2  0.11565 0.1610 3465   0.719  0.9994
- gesund1 eastwest2 - gesund5 eastwest2  0.52281 0.2626 3465   1.991  0.6055
- gesund2 eastwest2 - gesund3 eastwest2  0.00774 0.0957 3465   0.081  1.0000
- gesund2 eastwest2 - gesund4 eastwest2  0.10686 0.1310 3465   0.816  0.9984
- gesund2 eastwest2 - gesund5 eastwest2  0.51402 0.2454 3465   2.095  0.5312
- gesund3 eastwest2 - gesund4 eastwest2  0.09912 0.1338 3465   0.741  0.9992
- gesund3 eastwest2 - gesund5 eastwest2  0.50628 0.2469 3465   2.051  0.5630
- gesund4 eastwest2 - gesund5 eastwest2  0.40716 0.2626 3465   1.551  0.8714
+<pre><code> contrast                                       estimate     SE   df t.ratio
+ SEHR GUT jung - GUT jung                        0.26152 0.0818 3465   3.198
+ SEHR GUT jung - ZUFRIEDENSTELLEND jung          0.56895 0.0971 3465   5.861
+ SEHR GUT jung - WENIGER GUT jung                0.65126 0.1406 3465   4.632
+ SEHR GUT jung - SCHLECHT jung                   0.73979 0.2727 3465   2.713
+ SEHR GUT jung - SEHR GUT alt                    0.09591 0.1434 3465   0.669
+ SEHR GUT jung - GUT alt                         0.00434 0.0871 3465   0.050
+ SEHR GUT jung - ZUFRIEDENSTELLEND alt           0.13472 0.0858 3465   1.570
+ SEHR GUT jung - WENIGER GUT alt                 0.17433 0.1083 3465   1.609
+ SEHR GUT jung - SCHLECHT alt                    0.32668 0.1692 3465   1.931
+ GUT jung - ZUFRIEDENSTELLEND jung               0.30743 0.0853 3465   3.602
+ GUT jung - WENIGER GUT jung                     0.38974 0.1328 3465   2.935
+ GUT jung - SCHLECHT jung                        0.47827 0.2688 3465   1.779
+ GUT jung - SEHR GUT alt                        -0.16560 0.1357 3465  -1.220
+ GUT jung - GUT alt                             -0.25718 0.0738 3465  -3.484
+ GUT jung - ZUFRIEDENSTELLEND alt               -0.12680 0.0723 3465  -1.755
+ GUT jung - WENIGER GUT alt                     -0.08719 0.0980 3465  -0.890
+ GUT jung - SCHLECHT alt                         0.06517 0.1628 3465   0.400
+ ZUFRIEDENSTELLEND jung - WENIGER GUT jung       0.08231 0.1427 3465   0.577
+ ZUFRIEDENSTELLEND jung - SCHLECHT jung          0.17084 0.2738 3465   0.624
+ ZUFRIEDENSTELLEND jung - SEHR GUT alt          -0.47303 0.1455 3465  -3.252
+ ZUFRIEDENSTELLEND jung - GUT alt               -0.56461 0.0905 3465  -6.240
+ ZUFRIEDENSTELLEND jung - ZUFRIEDENSTELLEND alt -0.43423 0.0892 3465  -4.868
+ ZUFRIEDENSTELLEND jung - WENIGER GUT alt       -0.39462 0.1111 3465  -3.553
+ ZUFRIEDENSTELLEND jung - SCHLECHT alt          -0.24226 0.1710 3465  -1.417
+ WENIGER GUT jung - SCHLECHT jung                0.08853 0.2921 3465   0.303
+ WENIGER GUT jung - SEHR GUT alt                -0.55535 0.1775 3465  -3.129
+ WENIGER GUT jung - GUT alt                     -0.64692 0.1361 3465  -4.752
+ WENIGER GUT jung - ZUFRIEDENSTELLEND alt       -0.51655 0.1353 3465  -3.818
+ WENIGER GUT jung - WENIGER GUT alt             -0.47693 0.1506 3465  -3.167
+ WENIGER GUT jung - SCHLECHT alt                -0.32458 0.1989 3465  -1.632
+ SCHLECHT jung - SEHR GUT alt                   -0.64387 0.2935 3465  -2.194
+ SCHLECHT jung - GUT alt                        -0.73545 0.2704 3465  -2.719
+ SCHLECHT jung - ZUFRIEDENSTELLEND alt          -0.60507 0.2700 3465  -2.241
+ SCHLECHT jung - WENIGER GUT alt                -0.56546 0.2780 3465  -2.034
+ SCHLECHT jung - SCHLECHT alt                   -0.41311 0.3069 3465  -1.346
+ SEHR GUT alt - GUT alt                         -0.09158 0.1390 3465  -0.659
+ SEHR GUT alt - ZUFRIEDENSTELLEND alt            0.03880 0.1382 3465   0.281
+ SEHR GUT alt - WENIGER GUT alt                  0.07841 0.1532 3465   0.512
+ SEHR GUT alt - SCHLECHT alt                     0.23077 0.2009 3465   1.149
+ GUT alt - ZUFRIEDENSTELLEND alt                 0.13038 0.0782 3465   1.666
+ GUT alt - WENIGER GUT alt                       0.16999 0.1025 3465   1.659
+ GUT alt - SCHLECHT alt                          0.32234 0.1655 3465   1.948
+ ZUFRIEDENSTELLEND alt - WENIGER GUT alt         0.03961 0.1013 3465   0.391
+ ZUFRIEDENSTELLEND alt - SCHLECHT alt            0.19197 0.1648 3465   1.165
+ WENIGER GUT alt - SCHLECHT alt                  0.15236 0.1776 3465   0.858
+ p.value
+  0.0453
+  &lt;.0001
+  0.0002
+  0.1688
+  0.9997
+  1.0000
+  0.8626
+  0.8440
+  0.6480
+  0.0119
+  0.0964
+  0.7484
+  0.9693
+  0.0179
+  0.7635
+  0.9968
+  1.0000
+  0.9999
+  0.9998
+  0.0384
+  &lt;.0001
+  0.0001
+  0.0141
+  0.9222
+  1.0000
+  0.0558
+  0.0001
+  0.0053
+  0.0498
+  0.8328
+  0.4609
+  0.1661
+  0.4288
+  0.5748
+  0.9428
+  0.9997
+  1.0000
+  1.0000
+  0.9795
+  0.8145
+  0.8183
+  0.6362
+  1.0000
+  0.9775
+  0.9976
 
 P value adjustment: tukey method for comparing a family of 10 estimates </code></pre>
 </div>
 </div>
 </section>
-<section id="interaktionen-visualisieren" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="interaktionen-visualisieren"><span class="header-section-number">4.2</span> Interaktionen visualisieren</h2>
-<p>Um einen möglichen Interaktionseffekt (auch wenn in unseren Fall der Interkationseffekt nicht signifikant war) auch anschaulich vermitteln bzw. oft auch verstehen zu können, empfiehlt es sich, diesen als Diagramm darzustellen. Hierzu nutzen wir die Pakete <code>emmeans</code> und <code>ggplot2</code>.</p>
+<section id="interaktionen-visualisieren" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="interaktionen-visualisieren"><span class="header-section-number">4.3</span> Interaktionen visualisieren</h2>
+<p>Um einen möglichen Interaktionseffekt auch anschaulich vermitteln bzw. oft auch verstehen zu können, empfiehlt es sich, diesen als Diagramm darzustellen. Hierzu nutzen wir die Pakete <code>emmeans</code> und <code>ggplot2</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">#Interaktionsplot ausgeben</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">emmip</span>(fit2, eastwest <span class="sc">~</span> gesund) <span class="sc">+</span> </span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">emmip</span>(fit2, agef <span class="sc">~</span> gesund) <span class="sc">+</span> </span>
 <span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Geschätzes Randmittel von Vertrauen in das Gesundheitswesen"</span>, </span>
 <span id="cb22-4"><a href="#cb22-4"></a>       <span class="at">y =</span> <span class="st">"Geschätzte Randmittel"</span>,</span>
-<span id="cb22-5"><a href="#cb22-5"></a>       <span class="at">x =</span> <span class="st">"Stolz, Deutscher zu sein"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-5"><a href="#cb22-5"></a>       <span class="at">x =</span> <span class="st">"Alter der Befragten"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_6.4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">emmip</span>(fit2, gesund <span class="sc">~</span> eastwest) <span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">emmip</span>(fit2, gesund <span class="sc">~</span> agef) <span class="sc">+</span> </span>
 <span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Geschätzes Randmittel von Vertrauen in das Gesundheitswesen"</span>, </span>
 <span id="cb23-3"><a href="#cb23-3"></a>       <span class="at">y =</span> <span class="st">"Geschätzte Randmittel"</span>,</span>
-<span id="cb23-4"><a href="#cb23-4"></a>       <span class="at">x =</span> <span class="st">"Herkunft (Ost vs West)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-4"><a href="#cb23-4"></a>       <span class="at">x =</span> <span class="st">"Gesundheitszustand"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_6.4_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="interpretation-der-posthoc-tests-und-des-gesamtmodells-1" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="interpretation-der-posthoc-tests-und-des-gesamtmodells-1"><span class="header-section-number">4.4</span> Interpretation der Posthoc-Tests und des Gesamtmodells</h2>
+</section>
+<section id="literatur" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="literatur"><span class="header-section-number">4.5</span> Literatur</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Literatur und Beispiele aus der Praxis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen braucht.</p>
+<blockquote class="blockquote">
+<p>📖 Field, Z., Miles, J., &amp; Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. <a href="https://suche.suub.uni-bremen.de/peid=B68436977&amp;LAN=DE&amp;CID=7699632&amp;index=L&amp;Hitnr=1&amp;dtyp=D&amp;rtyp=a&amp;Exemplar=1">Link</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>📖 Brown T. A. (2015). Confirmatory factor analysis for applied research (2nd ed.). New York, NY: Guilford Press. Watkins, M. W. (2018). Exploratory Factor Analysis: A Guide to Best Practice. Journal of Black Psychology, 44(3), 219–246. <a href="https://doi.org/10.1177/0095798418771807">Link</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>📖 Fabrigar, L. R., &amp; Wegener, D. T. (2012). Exploratory factor analysis. Oxford University Press.</p>
+</blockquote>
+<p>Hier findet ihr ein Beispiel aus der Forschungspraxis:</p>
+<blockquote class="blockquote">
+<p>🔬 Koirala, B. P., Araghi, Y., Kroesen, M., Ghorbani, A., Hakvoort, R. A., &amp; Herder, P. M. (2018). Trust, awareness, and independence: Insights from a socio-psychological factor analysis of citizen knowledge and participation in community energy systems. Energy research &amp; social science, 38, 33-40. <a href="https://www.sciencedirect.com/science/article/pii/S2214629618300641">Link</a></p>
+</blockquote>
 </div>
 </div>
 
@@ -1227,13 +1350,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>
-    <div class="nav-footer-right">
+    <div class="nav-footer-left">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>   
+    <div class="nav-footer-center">
       &nbsp;
     </div>
+    <div class="nav-footer-right"><img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
 
