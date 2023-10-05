@@ -13,7 +13,7 @@ sidebar: false
 
 ![Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_factor_analysis_statistics_trust_widef_e7631b78-22da-4267-8a0a-dc0b89c76dd5.png)
 
-Willkommen auf der Startseite unserer Webseite, die Ihnen einen umfassenden Einführungskurs in quantitative Forschungsdesigns mit R bietet. Dieser Kurs ist Teil der Lehrveranstaltung des Bachelors in Kommunikations- und Medienwissenschaften an der Universität Bremen und wird von dem  Zentrum für Medien, Kommunikations- und Informationsforschung angeboten. Wir freuen uns, Ihnen die Neugestaltung dieses Kurses durch die Förderung des SKILL-Projekts der Universität Bremen präsentieren zu können.
+Willkommen auf der Startseite unserer Webseite, die Ihnen einen umfassenden Einführungskurs in quantitative Forschungsdesigns mit R bietet. Dieser Kurs ist Teil der Lehrveranstaltung des Bachelors in Kommunikations- und Medienwissenschaften an der Universität Bremen und wird von dem Zentrum für Medien, Kommunikations- und Informationsforschung angeboten. Wir freuen uns, Ihnen die Neugestaltung dieses Kurses durch die Förderung des SKILL-Projekts der Universität Bremen präsentieren zu können.
 
 In diesem Kurs werden wir Sie schrittweise durch die Grundlagen der quantitativen Forschungsdesigns führen und Ihnen zeigen, wie Sie die Programmiersprache R,für statistische Berechnungen und Datenanalyse, effektiv einsetzen können. Diese Webseite bündelt hierbei das für den Kurs bentötigte Wissen und Materialien. Wir vermitteln Ihnen anhand von Erklärtexten, Beispielen und Erklärvideos die notwendigen Kenntnisse, damit Sie im Rahmen dieses Kurses erfolgreich Ihr eigenes Forschungsprojekt durchführen können. Dabei lassen wir Sie nicht alleine, sondern begleiten Sie durch den Prozess.
 
@@ -21,12 +21,14 @@ In den kommenden Kapiteln werden wir Ihnen die Grundlagen der quantitativen Fors
 
 Unser Ziel ist es, Ihnen das nötige Wissen und die praktischen Fähigkeiten zu vermitteln, um quantitative Forschung durchzuführen und Daten mit R zu analysieren. Wir werden Ihnen Schritt für Schritt erklären, wie Sie Daten in R importieren, explorieren, bereinigen und visualisieren können. Darüber hinaus werden wir auf verschiedene statistische Methoden eingehen, darunter Hypothesentests, Faktorenanalyse, lineare Regression, und vieles mehr. Wir freuen uns darauf, Sie in unserem Kurs begrüßen zu dürfen!
 
-# License
+# Lizenz
 
-Creative Commons License This online work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International. Visit here for more information about the license.
+Creative Commons Lizenz Dieses Online-Werk ist lizenziert unter einer Creative Commons Attribution-ShareAlike 4.0 International. Besuchen Sie hier für weitere Informationen über die Lizenz.
 
-# Acknowledements
+# Danksagung
 
-Vielen Dank an die #rstats-Community!
+Dieses Projekt wurde durch die Unterstützung von [SKILL](https://www.uni-bremen.de/skill/page) und der [Stiftung Hochschullehre](https://stiftung-hochschullehre.de/) möglich gemacht.
 
-This website is built with Quarto, the lovely icons by icons8 & Emojipedia, and none of this would be possible without the tidyverse.
+Ebenso vielen Dank an die #rstats-Community!
+
+Diese Website wurde mit Quarto, den schönen Icons von icons8 & Emojipedia erstellt, und nichts davon wäre ohne tidyverse möglich.

@@ -6,10 +6,15 @@ project:
     - "!R-Skripte zum Download/"
     
 website:
+
+  twitter-card: true
+  site-url: https://github.com/patrickzerrer/R_Hands_on_Book
+  open-graph: true
   
   navbar: 
     title: false
     logo: Bilder/logo_ub_2021.png
+
     background: "#e3dac9"
     foreground: "secondary"
     search: true
@@ -78,13 +83,15 @@ website:
       - Skript_7.3.qmd
       - Skript_7.4.qmd
   
-  page-footer: "Copyright 2023, Design by Katharina Maubach & Patrick Zerrer"
-  
+  page-footer: 
+    left: "Copyright 2023, Design by Katharina Maubach & Patrick Zerrer"
+    right: "![](Bilder/Logo_Stiftung_Hochschullehre_pos.jpg){width=120} ![](Bilder/Skill_UB_Icons_1_quer__blau.jpeg){width=120} "
+    
 format:
   html:
     theme: sandstone
     css: styles.css
     toc: true
-
+    
 editor: visual
 
