@@ -23,11 +23,11 @@ Lasst uns Beginnen und Schritt für Schritt die wichtigsten Punkte durchgehen, d
 
 ## Die R-Studio-Cloud der Universität
 
-Falls ihr an der Universität Bremen studiert könnt ihr den Service des Zentrum für Multimedia in der Lehre nutzen indem ihr euch [hier](https://jupyter.uni-bremen.de) mit eurer Uni-Kennung einloggt. 
+Falls ihr an der Universität Bremen studiert könnt ihr den Service des Zentrum für Multimedia in der Lehre nutzen indem ihr euch [hier](https://jupyter.uni-bremen.de) mit eurer Uni-Kennung einloggt.
 
 Als nächstes habt ihr die Möglichkeit die für euren Kurs vorgesehene Programmierumgebung auszuwählen. In unserem Fall ist das die "Einführung in quantitative Forschungsdesigns und Datenanalyse". Mit der Auswahl wird eure eigenen Programmierumgebung eingerichtet, auf dieser könnt ihr die Schaltfälche `RStudio` auswählen.
 
-![Screenshot RStudio](Bilder/Skript_1_4_Screenshot7.png) 
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot7.png)
 
 Mit dem Klick gelangt ihr in R-Studio.
 
@@ -45,7 +45,7 @@ Im nächsten Schritt wählt ihr dann `Git` aus.
 
 ![Screenshot RStudio](Bilder/Skript_1_4_Screenshot9.png)
 
-Und fügt unter *Respository URL* die folgende Adresse ein: [https://github.com/patrickzerrer/R_Hands_on_Book](https://github.com/patrickzerrer/R_Hands_on_Book).
+Und fügt unter *Respository URL* die folgende Adresse ein: <https://github.com/patrickzerrer/R_Hands_on_Book>.
 
 Mit einem Klick auf den Button `Create Project` werden alle notwendigen Materialien und Ordner direkt in euer eigenes neugeschaffenens R-Projekt geladen.
 
