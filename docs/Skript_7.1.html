@@ -474,15 +474,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="laden-der-pakete" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Laden der Pakete</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Setze einen Paketmirror (CRAN)</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># chooseCRANmirror(39)</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># install.packages("haven", repos = "https://cloud.r-project.org/")</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#install.packages("haven")</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#install.packages("tidyverse")</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#install.packages("devtools")</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Lade nötiges Paket: pacman</code></pre>
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Paket 'pacman' wurde unter R Version 4.3.1 erstellt</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">p_load</span>(tidyverse, haven, psych, conflicted, dplyr) </span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(conflicted)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>[conflicted] Will prefer dplyr::filter over any other package.</code></pre>
 </div>
@@ -491,25 +505,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="laden-des-datensatzes" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Laden des Datensatzes</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Die Variable Konfessionszugehörigkeit ist im Allbus-Datensatz mit dem Namen “rd01” benannt; wie benennen sie in “Konfession” um; außerdem filtern wir die für uns relevanten Fälle der Variablen heraus (und ignorieren damit die irrelevanten Fälle, z.B. -9=Keine Angabe):</p>
 </section>
 <section id="erzeugen-eines-teildatensatzes-umbenennen-und-filtern-der-variablen" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Erzeugen eines Teildatensatzes, Umbenennen und Filtern der Variablen</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">rename</span>(<span class="at">Konfession =</span> rd01)<span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Konfession, <span class="dv">1</span>, <span class="dv">6</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(sex, <span class="dv">1</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">rename</span>(<span class="at">Konfession =</span> rd01)<span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Konfession, <span class="dv">1</span>, <span class="dv">6</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(sex, <span class="dv">1</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nun erstellen wir eine Kreuztabelle (auch Kontingenztafel genannt), um die Häufigkeiten der verschiedenen Kombinationen von Kategorien beider Variablen anzuzeigen. Das gibt uns einen ersten Überblick darüber, wie oft bestimmte Kombinationen vorkommen.</p>
 </section>
 <section id="erstellen-und-ausgeben-einer-kreuztabelle" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Erstellen und Ausgeben einer Kreuztabelle</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>kreuztabelle <span class="ot">&lt;-</span> <span class="fu">table</span>(daten<span class="sc">$</span>sex, daten<span class="sc">$</span>Konfession)</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">print</span>(kreuztabelle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>kreuztabelle <span class="ot">&lt;-</span> <span class="fu">table</span>(daten<span class="sc">$</span>sex, daten<span class="sc">$</span>Konfession)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">print</span>(kreuztabelle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   
        1    2    3    4    5    6
@@ -529,16 +543,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="erstellen-des-gestapelten-balkendiagramms" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Erstellen des gestapelten Balkendiagramms</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a>daten<span class="sc">$</span>Konfession <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten<span class="sc">$</span>Konfession)</span>
-<span id="cb10-4"><a href="#cb10-4"></a>daten<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten<span class="sc">$</span>sex)</span>
-<span id="cb10-5"><a href="#cb10-5"></a></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(<span class="at">x =</span> Konfession, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Konfessionszugehörigkeit nach Geschlecht"</span>,</span>
-<span id="cb10-9"><a href="#cb10-9"></a>       <span class="at">x =</span> <span class="st">"Einkommensgruppe"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>)) <span class="co"># Farben anpassen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>daten<span class="sc">$</span>Konfession <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten<span class="sc">$</span>Konfession)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>daten<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten<span class="sc">$</span>sex)</span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(<span class="at">x =</span> Konfession, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Konfessionszugehörigkeit nach Geschlecht"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9"></a>       <span class="at">x =</span> <span class="st">"Einkommensgruppe"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>)) <span class="co"># Farben anpassen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_7.1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -549,7 +563,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="9"><span class="header-section-number">9</span> Überprüfen des Zusammenhangs mit dem Chi-Quadrat Test</h1>
 <p>Der Chi-Quadrat Test ist ein statistisches Verfahren, das verwendet wird, um festzustellen, ob es einen signifikanten Unterschied zwischen den beobachteten und erwarteten Häufigkeiten in einer Kreuztabelle gibt. Da wir schon eine Kreuztabelle erstellt haben, können wir die Funktion chisq.test auf unsere Kreuztabelle anwenden - das geht ganz einfach:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">chisq.test</span>(kreuztabelle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">chisq.test</span>(kreuztabelle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in chisq.test(kreuztabelle): Chi-Quadrat-Approximation kann inkorrekt
 sein</code></pre>
@@ -570,31 +584,31 @@ X-squared = 22.946, df = 10, p-value = 0.01095</code></pre>
 <section id="berechnen-der-effektstärke-cramérs-v" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Berechnen der Effektstärke Cramér’s V</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">#library(vcd)</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#cramers_v &lt;- CramerV(kreuztabelle)</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#print(cramers_v)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#library(vcd)</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#cramers_v &lt;- CramerV(kreuztabelle)</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#print(cramers_v)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Zuerst extrahieren wir den beobachteten Chi-Quadrat-Wert und speichern ihn in einem Datenobjekt “chi_square” ab. Dann berechnen wir die Effektstärke nach der Formel für Cramér’s V:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Schritt 1: Extrahieren des beobachteten Chi-Quadrat-Werts</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>chi_square <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(kreuztabelle)<span class="sc">$</span>statistic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Schritt 1: Extrahieren des beobachteten Chi-Quadrat-Werts</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>chi_square <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(kreuztabelle)<span class="sc">$</span>statistic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in chisq.test(kreuztabelle): Chi-Quadrat-Approximation kann inkorrekt
 sein</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Schritt 2: Berechnen der Effektstärke (Cramér's V)</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(kreuztabelle)  <span class="co"># Gesamtanzahl der Beobachtungen</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>k <span class="ot">&lt;-</span> <span class="fu">nrow</span>(kreuztabelle)  <span class="co"># Anzahl der Kategorien in 'sex'</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>r <span class="ot">&lt;-</span> <span class="fu">ncol</span>(kreuztabelle)  <span class="co"># Anzahl der Kategorien in 'Konfession'</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a></span>
-<span id="cb17-6"><a href="#cb17-6"></a>V <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(chi_square <span class="sc">/</span> (n <span class="sc">*</span> <span class="fu">min</span>(k<span class="dv">-1</span>, r<span class="dv">-1</span>)))</span>
-<span id="cb17-7"><a href="#cb17-7"></a></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="co"># Schritt 3: Ausgabe der beobachteten Chi-Quadrat-Wert und Cramér's V </span></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="fu">cat</span>(<span class="st">"Beobachteter Chi-Quadrat-Wert:"</span>, chi_square, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Schritt 2: Berechnen der Effektstärke (Cramér's V)</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(kreuztabelle)  <span class="co"># Gesamtanzahl der Beobachtungen</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>k <span class="ot">&lt;-</span> <span class="fu">nrow</span>(kreuztabelle)  <span class="co"># Anzahl der Kategorien in 'sex'</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>r <span class="ot">&lt;-</span> <span class="fu">ncol</span>(kreuztabelle)  <span class="co"># Anzahl der Kategorien in 'Konfession'</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a></span>
+<span id="cb16-6"><a href="#cb16-6"></a>V <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(chi_square <span class="sc">/</span> (n <span class="sc">*</span> <span class="fu">min</span>(k<span class="dv">-1</span>, r<span class="dv">-1</span>)))</span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co"># Schritt 3: Ausgabe der beobachteten Chi-Quadrat-Wert und Cramér's V </span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="fu">cat</span>(<span class="st">"Beobachteter Chi-Quadrat-Wert:"</span>, chi_square, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Beobachteter Chi-Quadrat-Wert: 22.94556 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">cat</span>(<span class="st">"Cramér's V:"</span>, V, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">cat</span>(<span class="st">"Cramér's V:"</span>, V, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cramér's V: 0.04716673 </code></pre>
 </div>
@@ -616,23 +630,23 @@ sein</code></pre>
 <section id="erzeugen-eines-teildatensatzes-umbenennen-und-filtern-der-variablen-1" class="level1" data-number="13">
 <h1 data-number="13"><span class="header-section-number">13</span> Erzeugen eines Teildatensatzes, Umbenennen und Filtern der Variablen</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">rename</span>(<span class="at">Einkommensgruppe =</span> di02a)<span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">rename</span>(<span class="at">Bildung =</span> educ)<span class="sc">%&gt;%</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Einkommensgruppe, <span class="dv">1</span>, <span class="dv">25</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Bildung, <span class="dv">1</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">rename</span>(<span class="at">Einkommensgruppe =</span> di02a)<span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">rename</span>(<span class="at">Bildung =</span> educ)<span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Einkommensgruppe, <span class="dv">1</span>, <span class="dv">25</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Bildung, <span class="dv">1</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nun nutzen wir die Funktion cor.test() und spezifizieren bei “method” den Korrelationskoeefizienten, zuerst “spearman”, dann zum Vergleich auch “kendall”:</p>
 </section>
 <section id="berechnung-der-rangkorrelation-nach-spearmans-rho-und-ausgabe-der-werte" class="level1" data-number="14">
 <h1 data-number="14"><span class="header-section-number">14</span> Berechnung der Rangkorrelation nach Spearman’s Rho und Ausgabe der Werte</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>result_spearman <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(daten<span class="sc">$</span>Einkommensgruppe, daten<span class="sc">$</span>Bildung, <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>result_spearman <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(daten<span class="sc">$</span>Einkommensgruppe, daten<span class="sc">$</span>Bildung, <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in cor.test.default(daten$Einkommensgruppe, daten$Bildung, method =
 "spearman"): Kann exakten p-Wert bei Bindungen nicht berechnen</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">print</span>(result_spearman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">print</span>(result_spearman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Spearman's rank correlation rho
@@ -653,8 +667,8 @@ sample estimates:
 <section id="berechnung-der-rangkorrelation-nach-kendalls-tau-und-ausgabe-der-werte" class="level1" data-number="15">
 <h1 data-number="15"><span class="header-section-number">15</span> Berechnung der Rangkorrelation nach Kendall’s Tau und Ausgabe der Werte</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>result_kendall <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(daten<span class="sc">$</span>Einkommensgruppe, daten<span class="sc">$</span>Bildung, <span class="at">method =</span> <span class="st">"kendall"</span>)</span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">print</span>(result_kendall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>result_kendall <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(daten<span class="sc">$</span>Einkommensgruppe, daten<span class="sc">$</span>Bildung, <span class="at">method =</span> <span class="st">"kendall"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">print</span>(result_kendall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kendall's rank correlation tau
@@ -679,18 +693,18 @@ sample estimates:
 <section id="erzeugen-eines-teildatensatzes-umbenennen-und-filtern-der-variablen-2" class="level1" data-number="17">
 <h1 data-number="17"><span class="header-section-number">17</span> Erzeugen eines Teildatensatzes, Umbenennen und Filtern der Variablen</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>daten_neu <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Einkommensgruppe, <span class="dv">1</span>, <span class="dv">25</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as.numeric</span>(sex)) <span class="sc">%&gt;%</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(sex, <span class="dv">1</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>daten_neu <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Einkommensgruppe, <span class="dv">1</span>, <span class="dv">25</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as.numeric</span>(sex)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(sex, <span class="dv">1</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nun erstellen wir wieder eine Kreuztabelle, um die Häufigkeiten der verschiedenen Kombinationen von Kategorien beider Variablen anzuzeigen. Damit erhalten wir einen ersten Überblick über die Verteilung der Daten entlang der Vergleichskategorie:</p>
 </section>
 <section id="erstellen-und-ausgeben-einer-kreuztabelle-1" class="level1" data-number="18">
 <h1 data-number="18"><span class="header-section-number">18</span> Erstellen und Ausgeben einer Kreuztabelle</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>kreuztabelle_2 <span class="ot">&lt;-</span> <span class="fu">table</span>(daten_neu<span class="sc">$</span>sex, daten_neu<span class="sc">$</span>Einkommensgruppe)</span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">print</span>(kreuztabelle_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>kreuztabelle_2 <span class="ot">&lt;-</span> <span class="fu">table</span>(daten_neu<span class="sc">$</span>sex, daten_neu<span class="sc">$</span>Einkommensgruppe)</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">print</span>(kreuztabelle_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   
       1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19
@@ -712,16 +726,16 @@ sample estimates:
 <section id="erstellen-des-gestapelten-balkendiagramms-1" class="level1" data-number="20">
 <h1 data-number="20"><span class="header-section-number">20</span> Erstellen des gestapelten Balkendiagramms</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb31-2"><a href="#cb31-2"></a></span>
-<span id="cb31-3"><a href="#cb31-3"></a>daten_neu<span class="sc">$</span>Einkommensgruppe <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten_neu<span class="sc">$</span>Einkommensgruppe)</span>
-<span id="cb31-4"><a href="#cb31-4"></a>daten_neu<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten<span class="sc">$</span>sex)</span>
-<span id="cb31-5"><a href="#cb31-5"></a></span>
-<span id="cb31-6"><a href="#cb31-6"></a><span class="fu">ggplot</span>(daten_neu, <span class="fu">aes</span>(<span class="at">x =</span> Einkommensgruppe, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb31-7"><a href="#cb31-7"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb31-8"><a href="#cb31-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Einkommensgruppe nach Geschlecht"</span>,</span>
-<span id="cb31-9"><a href="#cb31-9"></a>       <span class="at">x =</span> <span class="st">"Einkommensgruppe"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
-<span id="cb31-10"><a href="#cb31-10"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>)) <span class="co"># Farben anpassen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb30-2"><a href="#cb30-2"></a></span>
+<span id="cb30-3"><a href="#cb30-3"></a>daten_neu<span class="sc">$</span>Einkommensgruppe <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten_neu<span class="sc">$</span>Einkommensgruppe)</span>
+<span id="cb30-4"><a href="#cb30-4"></a>daten_neu<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten<span class="sc">$</span>sex)</span>
+<span id="cb30-5"><a href="#cb30-5"></a></span>
+<span id="cb30-6"><a href="#cb30-6"></a><span class="fu">ggplot</span>(daten_neu, <span class="fu">aes</span>(<span class="at">x =</span> Einkommensgruppe, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Einkommensgruppe nach Geschlecht"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9"></a>       <span class="at">x =</span> <span class="st">"Einkommensgruppe"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
+<span id="cb30-10"><a href="#cb30-10"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>)) <span class="co"># Farben anpassen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_7.1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -732,7 +746,7 @@ sample estimates:
 <section id="überprüfung-des-zusammenhangs-mit-dem-chi-quadrat-test" class="level1" data-number="21">
 <h1 data-number="21"><span class="header-section-number">21</span> Überprüfung des Zusammenhangs mit dem Chi-Quadrat Test</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">chisq.test</span>(kreuztabelle_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">chisq.test</span>(kreuztabelle_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -746,22 +760,22 @@ X-squared = 299.01, df = 24, p-value &lt; 2.2e-16</code></pre>
 <p>Der <em>p-Wert</em> gibt die Wahrscheinlichkeit an, den beobachteten Chi-Quadrat-Wert zu erhalten, wenn die Nullhypothese wahr ist (d.h. wenn es keinen Zusammenhang zwischen den Variablen gibt). Der hier beobachtete p-Wert (&lt; 2.2e-16) ist extrem klein und damit höchst signifikant. Das deutet darauf hin, dass der beobachtete Effekt überzufällig ist - Geschlecht und Konfessionszugehörigkeit hängen also auch statistisch zusammen.</p>
 <p>Da der Chi-Quadrat-Test empfindlich gegenüber der Stichprobengröße ist, berechnen wir nun noch die Effektstärke mittels Cramér’s V. Hier gilt ein Wert von 0,1 als klein, einer von 0,3 als mittel und ein Wert von 0,5 als groß.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Schritt 1: Extrahieren des beobachteten Chi-Quadrat-Werts</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>chi_square <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(kreuztabelle_2)<span class="sc">$</span>statistic</span>
-<span id="cb34-3"><a href="#cb34-3"></a></span>
-<span id="cb34-4"><a href="#cb34-4"></a><span class="co"># Schritt 2: Berechnen der Effektstärke (Cramér's V)</span></span>
-<span id="cb34-5"><a href="#cb34-5"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(kreuztabelle_2)  <span class="co"># Gesamtanzahl der Beobachtungen</span></span>
-<span id="cb34-6"><a href="#cb34-6"></a>k <span class="ot">&lt;-</span> <span class="fu">nrow</span>(kreuztabelle_2)  <span class="co"># Anzahl der Kategorien in 'sex'</span></span>
-<span id="cb34-7"><a href="#cb34-7"></a>r <span class="ot">&lt;-</span> <span class="fu">ncol</span>(kreuztabelle_2)  <span class="co"># Anzahl der Kategorien in 'Konfession'</span></span>
-<span id="cb34-8"><a href="#cb34-8"></a></span>
-<span id="cb34-9"><a href="#cb34-9"></a>V <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(chi_square <span class="sc">/</span> (n <span class="sc">*</span> <span class="fu">min</span>(k<span class="dv">-1</span>, r<span class="dv">-1</span>)))</span>
-<span id="cb34-10"><a href="#cb34-10"></a></span>
-<span id="cb34-11"><a href="#cb34-11"></a><span class="co"># Schritt 3: Ausgabe der beobachteten Chi-Quadrat-Wert und Cramér's V </span></span>
-<span id="cb34-12"><a href="#cb34-12"></a><span class="fu">cat</span>(<span class="st">"Beobachteter Chi-Quadrat-Wert:"</span>, chi_square, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># Schritt 1: Extrahieren des beobachteten Chi-Quadrat-Werts</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>chi_square <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(kreuztabelle_2)<span class="sc">$</span>statistic</span>
+<span id="cb33-3"><a href="#cb33-3"></a></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="co"># Schritt 2: Berechnen der Effektstärke (Cramér's V)</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(kreuztabelle_2)  <span class="co"># Gesamtanzahl der Beobachtungen</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>k <span class="ot">&lt;-</span> <span class="fu">nrow</span>(kreuztabelle_2)  <span class="co"># Anzahl der Kategorien in 'sex'</span></span>
+<span id="cb33-7"><a href="#cb33-7"></a>r <span class="ot">&lt;-</span> <span class="fu">ncol</span>(kreuztabelle_2)  <span class="co"># Anzahl der Kategorien in 'Konfession'</span></span>
+<span id="cb33-8"><a href="#cb33-8"></a></span>
+<span id="cb33-9"><a href="#cb33-9"></a>V <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(chi_square <span class="sc">/</span> (n <span class="sc">*</span> <span class="fu">min</span>(k<span class="dv">-1</span>, r<span class="dv">-1</span>)))</span>
+<span id="cb33-10"><a href="#cb33-10"></a></span>
+<span id="cb33-11"><a href="#cb33-11"></a><span class="co"># Schritt 3: Ausgabe der beobachteten Chi-Quadrat-Wert und Cramér's V </span></span>
+<span id="cb33-12"><a href="#cb33-12"></a><span class="fu">cat</span>(<span class="st">"Beobachteter Chi-Quadrat-Wert:"</span>, chi_square, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Beobachteter Chi-Quadrat-Wert: 299.0143 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">cat</span>(<span class="st">"Cramér's V:"</span>, V, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">cat</span>(<span class="st">"Cramér's V:"</span>, V, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cramér's V: 0.3084422 </code></pre>
 </div>
