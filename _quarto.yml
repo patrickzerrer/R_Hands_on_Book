@@ -2,8 +2,9 @@ project:
   type: website
   output-dir: docs
   render:
-    - "!ignored-dir/R-Skripte zum Download"
-
+    - "*.qmd"
+    - "!R-Skripte zum Download/"
+    
 website:
   
   navbar: 
@@ -78,7 +79,7 @@ website:
       - Skript_7.4.qmd
   
   page-footer: "Copyright 2023, Design by Katharina Maubach & Patrick Zerrer"
-
+  
 format:
   html:
     theme: sandstone
