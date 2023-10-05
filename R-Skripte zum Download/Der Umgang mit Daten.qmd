@@ -57,7 +57,6 @@ factor_verkehrsmittel <- factor(verkehrsmittel, labels=c("bus","zug","fahrrad","
 class(factor_verkehrsmittel)
 ```
 
-
 ```{r}
 verkehrsmittel
 factor_verkehrsmittel
@@ -100,7 +99,6 @@ studierendendaten <- data.frame(name,alter,note)
 studierendendaten
 ```
 
-
 # Selektion, Manipulation und Transformation von Daten
 
 Pakete laden
@@ -112,7 +110,6 @@ daten <- read_dta("Datensatz/Allbus_2021.dta")
 ```
 
 ## Auswahl von Spalten
-
 
 ```{r}
 vertrauen_institutionen <- daten %>% 
@@ -457,4 +454,3 @@ ggplot(vertrauen_summiert, aes(entwicklung_kriminalitaet, vertrauen_gesamt)) +
 
 #ggsave("Kriminalität_und_Vertrauen.pdf")
 ```
-
