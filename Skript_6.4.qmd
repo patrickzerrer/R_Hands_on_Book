@@ -133,12 +133,12 @@ Die letzte Voraussetzung, die für eine Varianzanalyse erfüllt sein muss, ist d
 
 ```{r}
 #Levene-Test für einfaktorielle Varianzanalyse
-daten %>% 
-  leveneTest(trustges~gesund, data = ., center = mean) #<1>
+#daten %>% 
+#  leveneTest(trustges~gesund, data = ., center = mean) #<1>
 
 #Levene-Test für mehrfaktorielle Varianzanalyse ausgeben
-daten %>% 
-  leveneTest(trustges ~ gesund*agec*eastwest, data = ., center = mean) #<2>
+#daten %>% 
+#  leveneTest(trustges ~ gesund*agec*eastwest, data = ., center = mean) #<2>
 ```
 
 1.  Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (\~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird.
