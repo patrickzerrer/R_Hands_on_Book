@@ -707,7 +707,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 <li>p.value: Signifikanz</li>
 </ul>
 <p><strong>Effect</strong> zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Gesundheitszustand(<code>gesund</code>). Die vier bedeutet, dass hier insgesamt eine Gruppe mit 4 anderen (= fünf Ausprägungen) verglichen wurde.</p>
-<p>Über die Werte der zweiten und vierten Spalte, die <strong>Freiheitsgrade</strong> (<code>df</code>) und die <strong>F-Werte</strong> (<code>F</code>) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte <code>p.value</code> die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert &lt;.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Stolzes ein Deutscher zu sein im Bezug auf das Vertrauen in das Gesundheitswesen ersichtlich.</p>
+<p>Über die Werte der zweiten und vierten Spalte, die <strong>Freiheitsgrade</strong> (<code>df</code>) und die <strong>F-Werte</strong> (<code>F</code>) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte <code>p.value</code> die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert &lt;.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Gesundheitszustandes im Bezug auf das Vertrauen in das Gesundheitswesen ersichtlich.</p>
 <p>Die mittlere quadratische Abweichung (MSE) oder Fehlervarianz ist die Summe der Abweichungsquadrate aller Werte vom jeweiligen Gruppenmittelwert. Berechnet wird diese durch die Quadratsummer der Fehlerresiduen geteilt durch die Freiheitsgrade. Sie gibt damit die Varianz innerhalb der einzelnen Gruppen (=nicht erklärte Varianz) wieder.</p>
 <p>Die Spalte <code>pes</code> steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an – partiell ist das Eta<sup>2</sup>, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Im Datenbeispiel hat demnach der Gesundheitszustand (und damit auch unser Gesamtmodell) eine Erklärkraft von 0.6 Prozent für Unterschiede im Vertrauen auf das Gesundheitssystem. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.</p>
 </section>
@@ -762,11 +762,11 @@ Wie gebe ich die Ergebnisse korrekt an?
 </div>
 <div class="callout-body-container callout-body">
 <p>Die Ergebnisse der Varianzanalyse werden zumeist in XX dargestellt. Dafür werden folgende Informationen benötigt:</p>
-<p>✅ die Werte des Kaiser-Meyer-Olkin Kritierums (KMO)</p>
-<p>✅ das Ergebnis des Barlett-Tests</p>
+<p>✅</p>
+<p>✅</p>
 <p>Das Format ist üblicherweise:</p>
 <blockquote class="blockquote">
-<p><strong><em>Beispiel:</em></strong> Zunächst wurde Faktorenanalyse der 15 gemessenen Indikatoren durchgeführt. Das Kaiser-Meyer-Olkin (KMO)-Maß für die Stichprobenadäquanz betrug 0,89. Dies deutet darauf hin, dass die Korrelationsmuster relativ kompakt sind und die Faktorenanalyse eindeutige und zuverlässige Faktoren ergeben sollte. Der Bartlett-Test auf Sphärizität war ebenfalls signifikant (χ2(105) = 33164.76, p &lt; .001). Dies bedeutet, dass es einige Beziehungen zwischen den untersuchten Variablen gibt. Sowohl der KMO-Test als auch der Bartlett-Test bestätigen, dass die Faktorenanalyse angemessen ist.</p>
+<p><strong><em>Beispiel:</em></strong> Work in Progress</p>
 </blockquote>
 </div>
 </div>
@@ -1031,15 +1031,9 @@ Literatur und Beispiele aus der Praxis
 <blockquote class="blockquote">
 <p>📖 Field, Z., Miles, J., &amp; Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. <a href="https://suche.suub.uni-bremen.de/peid=B68436977&amp;LAN=DE&amp;CID=7699632&amp;index=L&amp;Hitnr=1&amp;dtyp=D&amp;rtyp=a&amp;Exemplar=1">Link</a></p>
 </blockquote>
-<blockquote class="blockquote">
-<p>📖 Brown T. A. (2015). Confirmatory factor analysis for applied research (2nd ed.). New York, NY: Guilford Press. Watkins, M. W. (2018). Exploratory Factor Analysis: A Guide to Best Practice. Journal of Black Psychology, 44(3), 219–246. <a href="https://doi.org/10.1177/0095798418771807">Link</a></p>
-</blockquote>
-<blockquote class="blockquote">
-<p>📖 Fabrigar, L. R., &amp; Wegener, D. T. (2012). Exploratory factor analysis. Oxford University Press.</p>
-</blockquote>
 <p>Hier findet ihr ein Beispiel aus der Forschungspraxis:</p>
 <blockquote class="blockquote">
-<p>🔬 Koirala, B. P., Araghi, Y., Kroesen, M., Ghorbani, A., Hakvoort, R. A., &amp; Herder, P. M. (2018). Trust, awareness, and independence: Insights from a socio-psychological factor analysis of citizen knowledge and participation in community energy systems. Energy research &amp; social science, 38, 33-40. <a href="https://www.sciencedirect.com/science/article/pii/S2214629618300641">Link</a></p>
+<p>🔬 wird noch ergänzt.</p>
 </blockquote>
 </div>
 </div>

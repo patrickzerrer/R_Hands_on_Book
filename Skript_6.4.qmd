@@ -186,7 +186,7 @@ Als Output erhalten wir eine Tabelle mit den folgenden Parametern:
 
 **Effect** zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Gesundheitszustand(`gesund`). Die vier bedeutet, dass hier insgesamt eine Gruppe mit 4 anderen (= fünf Ausprägungen) verglichen wurde.
 
-Über die Werte der zweiten und vierten Spalte, die **Freiheitsgrade** (`df`) und die **F-Werte** (`F`) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte `p.value` die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert \<.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Stolzes ein Deutscher zu sein im Bezug auf das Vertrauen in das Gesundheitswesen ersichtlich.
+Über die Werte der zweiten und vierten Spalte, die **Freiheitsgrade** (`df`) und die **F-Werte** (`F`) ließe sich, wenn man es wollte, der emprische F-Wert in der F-Tabelle, mit dem kritischen Wert (theoretischen F-Wert) vergleichen, um zu prüfen, ob die Nullhypothese, dass keine Unterschiede zwischen den durch die jeweilige Variable definierten Gruppen bestehen, verworfen werden darf. Diesen Aufwand kann man sich allerdings sparen, da R in der Spalte `p.value` die umgekehrte Aussage macht, dass die Nullhypothese mit der dort berichteten Fehlerwahrscheinlichkeit verworfen werden kann. Beim per Konvention in den Sozialwissenschaften mindestens geltenden Konfidenz-Niveau von 95%, dürfen im Umkehrschluss also für alle Modellterme signifikante Unterschiede in der Grundgesamtheit angenommen werden, die hier einen Wert \<.05 aufweisen. Die Spalte ist damit die wichtigste der gesamten Tabelle! Im vorliegenden Datenbeispiel ist demnach ein signifikanter Unterschied des Gesundheitszustandes im Bezug auf das Vertrauen in das Gesundheitswesen ersichtlich.
 
 Die mittlere quadratische Abweichung (MSE) oder Fehlervarianz ist die Summe der Abweichungsquadrate aller Werte vom jeweiligen Gruppenmittelwert. Berechnet wird diese durch die Quadratsummer der Fehlerresiduen geteilt durch die Freiheitsgrade. Sie gibt damit die Varianz innerhalb der einzelnen Gruppen (=nicht erklärte Varianz) wieder.
 
@@ -223,14 +223,14 @@ Sehr Gut und Zufriedenstellend /Schlecht
 
 Die Ergebnisse der Varianzanalyse werden zumeist in XX dargestellt. Dafür werden folgende Informationen benötigt:
 
-✅ die Werte des Kaiser-Meyer-Olkin Kritierums (KMO)
+✅ 
 
-✅ das Ergebnis des Barlett-Tests
+✅ 
 
 
 Das Format ist üblicherweise:
 
-> ***Beispiel:*** Zunächst wurde Faktorenanalyse der 15 gemessenen Indikatoren durchgeführt. Das Kaiser-Meyer-Olkin (KMO)-Maß für die Stichprobenadäquanz betrug 0,89. Dies deutet darauf hin, dass die Korrelationsmuster relativ kompakt sind und die Faktorenanalyse eindeutige und zuverlässige Faktoren ergeben sollte. Der Bartlett-Test auf Sphärizität war ebenfalls signifikant (χ2(105) = 33164.76, p \< .001). Dies bedeutet, dass es einige Beziehungen zwischen den untersuchten Variablen gibt. Sowohl der KMO-Test als auch der Bartlett-Test bestätigen, dass die Faktorenanalyse angemessen ist.
+> ***Beispiel:*** Work in Progress
 
 :::
 
@@ -304,12 +304,9 @@ Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen
 
 > 📖 Field, Z., Miles, J., & Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. [Link](https://suche.suub.uni-bremen.de/peid=B68436977&LAN=DE&CID=7699632&index=L&Hitnr=1&dtyp=D&rtyp=a&Exemplar=1)
 
-> 📖 Brown T. A. (2015). Confirmatory factor analysis for applied research (2nd ed.). New York, NY: Guilford Press. Watkins, M. W. (2018). Exploratory Factor Analysis: A Guide to Best Practice. Journal of Black Psychology, 44(3), 219--246. [Link](https://doi.org/10.1177/0095798418771807)
-
-> 📖 Fabrigar, L. R., & Wegener, D. T. (2012). Exploratory factor analysis. Oxford University Press.
 
 Hier findet ihr ein Beispiel aus der Forschungspraxis:
 
-> 🔬 Koirala, B. P., Araghi, Y., Kroesen, M., Ghorbani, A., Hakvoort, R. A., & Herder, P. M. (2018). Trust, awareness, and independence: Insights from a socio-psychological factor analysis of citizen knowledge and participation in community energy systems. Energy research & social science, 38, 33-40. [Link](https://www.sciencedirect.com/science/article/pii/S2214629618300641)
+> 🔬 wird noch ergänzt.
 :::
 
