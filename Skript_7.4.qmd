@@ -16,7 +16,7 @@ Das Überprüfen von Zusammenhängen bei mehr als zwei Variablen
 
 ## Analyselogik, Ziel und Einsatzgebiete einer multiplen Regressionsanalyse
 
-In diesem Teilkapitel lernen wir nun - wie angekündigt - die **multiple lineare Regression** kennen, die es erlaubt, Zusammenhänge zwischen *mehreren x-Variablen* und einer y-Variablen zu analysieren.
+In diesem Teilkapitel lernen wir nun - wie angekündigt - die *multiple lineare Regression* kennen, die es erlaubt, Zusammenhänge zwischen *mehreren x-Variablen* und einer y-Variablen zu analysieren.
 
 ## Vorbereitung und Laden der Daten
 
