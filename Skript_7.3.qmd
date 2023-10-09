@@ -1,5 +1,5 @@
 ---
-title: "Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression"
+title: "Prüfung der Voraussetzungn bei der linearen Regression"
 author: "Stephanie Geise"
 toc: true
 number-sections: true
@@ -8,7 +8,168 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+editor_options: 
+  chunk_output_type: inline
 ---
+
+In diesem Teilkapitel gehen wir (wie angekündigt) näher auf die Prüfung der *Voraussetzungen einer Regressionsanalyse* ein. Im folgenden Teilkapitel lernen wir dann die *multiple lineare Regression* kennen, die es erlaubt, Zusammenhänge zwischen *mehreren* x-Variablen und einer y-Variablen zu analysieren.
+
+## Laden der notwendigen Pakete und der Daten
+
+Zunächst laden wir wieder die Pakete des tidyverse und das Pakete broom, um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket performance, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete lmtest und sandwich, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten). Die Regression rechnen wir wieder auf Basis des ALLBUS-Datensatzes, die wir im letzten Schritt laden. 
+
+```{r}
+
+#Laden der notwendigen Pakete
+install.packages("lm.beta")
+install.packages("lmtest")
+install.packages("broom") 
+install.packages("performance")
+install.packages("see")
+install.packages("sandwich")
+
+library(tidyverse)
+library(lm.beta)
+library(broom) # hier stecken einige Befehle zur Bereinigung der Daten und der Modelloutputs drin
+library(performance)
+library(see)
+library(lmtest)
+library(sandwich)
+library(haven)
+
+#Daten laden und zum Datenobjekt "daten" zuweisen
+daten = haven::read_dta("Desktop/Allbus_2021.dta")
+
+#Visualisierungshintergrund der Grafiken in ggplot festlegen
+theme_set(theme_minimal())
+
+# Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
+options(scipen = 999) 
+```
+
+
+## Erinnerung: Einfache lineare Regression mit Alter als UV und TV-Nutzung als AV mit lm (=linear models)
+
+# Erzeugen eines Teildatensatzes & Umbenennen der Variablen
+Für den Teildatensatz bennenen wir die Variablen lm02 und age um und filtern die missings heraus (z.B. -9=Keine Angabe):
+```{r}
+daten <- daten %>%
+  rename(Alter = age)%>%
+  rename(TV_Konsum = lm02)%>%
+  filter(between(Alter, 18, 100))%>%
+  filter(between(TV_Konsum, 0, 1500))
+```
+
+# Modellierung der linearen Regression:
+Dann erstellen wir das linear model:
+```{r}
+model <- lm(TV_Konsum ~ Alter, data = daten) 
+summary(model) # klassischer Output mit relevanten Kennzahlen
+summary(lm.beta(model)) # klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten
+```
+Mit diesem Regressionsmodell haben wir übeprüft, ob das Alter die Fernsehnutzung erklären kann. Im Output sehen wir, dass das Alter einen signifikanten positiven Einfluss auf die Internetnutzung. Je älter eine Person ist, desto mehr nutzt er/sie das Fernsehen. Die Regressionsanalyse lässt dabei auch eine Quantifizierung dieses Zusammenhangs zu: Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable TV-Nutzung um "den Estimate-Wert" in Messeinheiten (hier: -2.19 Minuten) zu. Dieser Zusammenhang ist mit p >.05 statistisch signifikant.
+
+Soweit die Wiederholung. Beginnen wir nun mit der Prüfung der *Voraussetzungen einer Regressionsanalyse*. Vielleicht wundern Sie sich, warum wir die Voraussetzungen erst im zweiten Schritt prüfen? Sie haben Recht: Eigentlich müssten wir erst die Voraussetzungen prüfen, dann erst das Modell schätzen. Wenn wir unser Modell aber schon geschätzt haben, können wir Funktionen zur Prüfung der Voraussetzungen auf unser gesamtes Modell anwenden (bzw. auf das entsprechende Datenobjekt "model") - und das erspart uns eine Menge "Handarbeit" mit vielen kleinen Zwischenschritten. Zum Beispiel müssten wir für die Prüfung der Voraussetzungen, die die Residuen betreffen, diese erst einmal berechnen und in einer neuen Variable abspeichern. Es ist also weniger Aufwand, die Voraussetzungen ex post zu prüfen.
+
+## Erinnerung: Voraussetzungen der einfachen linearen Regression:
+
+Bevor wir zum statistischen Teil kommen, lassen Sie uns noch einmal Revue passieren, was die wichtigsten Voraussetzungen der einfachen linearen Regression sind: 
+1) (quasi-)metrisches Skalenniveau 
+2) Linearität des Zusammenhangs zwischen x und y 
+3) Homoskedastizität der Residuen: Varianzen der Residuen der prognostizierten abhängigen Variablen sind gleich 4) Unabhängigkeit der Residuen: ansonsten Autokorrelation, die Aussagekraft reduziert 
+5) Normalverteilung der Residuen 
+6) Keine Ausreißer in den Daten, da schon einzelne Ausreißer einen sonst signifikanten Trend zunichte machen können (ggf. also eliminieren)
+
+## Prüfung der Voraussetzungen 1 und 2: metrisches Skalenniveau & Linearität des Zusammenhangs
+
+Ob 1.) die Variablen, die wir in das Regressionsmodell einbeziehen wollen (Alter, Internet-Nutzung) metrisch sind, und ob 2.) ein linearer Zusammenhang besteht, haben wir in der letzten Woche bereits überprüft. Für die Prüfung nach der Linearität des Zusammenhangs zwischen x und y hatten wir ein Streudiagramm mit der geschätzten Regressionsgeraden erzeugt. Hier können Sie noch einmal nachschauen, wie das ging: ***LINK EINFÜGEN***
+
+#### Prüfung der Voraussetzungen 3: Homoskedastizität der Residuen
+
+Lineare Modelle setzen eine *konstante Fehlervarianz* (*Homoskedastizität*) voraus. Eine weitere Bedingung der Regressionanalyse ist also, dass die Varianzen der Residuen der prognostizierten abhängigen Variablen für alle Werte des Prädiktors gleich sind, so dass das Modell gleich gute Vorhersagen über alle Werte machen kann. Liegt Homoskedastizität vor, sind die Abweichungen der vorhergesagten Werte von den gemessenen Werten konstant gleich groß - unabhängig davon, wie hoch oder niedrig der Wert des Prädiktors ist. Das ist eine wichtige Voraussetzung, denn das Gegenteil - *Heterokedastizität der Residuen* - würde zur Ineffizienz unserer Schätzung führen! Denn die Standardfehler der Regressionskoeffizienten werden bei vorhandener Heteroskedastizität nach oben verzerrt geschätzt. Das Ergebnis wäre, dass unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben liegt, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen.
+
+Das klingt kompliziert? Kann sein, aber keine Panik: Mit der Funktionen check_heteroscedasticity() aus dem performance-Package können wir sehr einfach prüfen, ob diese Annahme verletzt wurde. Wir müssen diese Funktion lediglich auf unser geschätzes Regressionsmodell anwenden:
+
+```{r}
+check_heteroscedasticity(model)
+```
+
+Die Interpretation des Outputs ist einfach, weil R hier uns eine sehr konkrete Aussage zur Überpüfung der Annahme macht: Bei grüner Schrift ist das Ergebnis in Ordnung, d.h. die Fehlervarianz scheint homoskedastisch, denn p wäre dann nicht signifikant. Bei roter Schrift - wie im vorliegenden Fall - ist die Fehlervarianz heteroskedastisch und p ist signifikant (p < 0.05). Dann liegt unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen. Das müssen wir dann bei der Interpretation der Daten berücksichtigen. Es ist dann auch unbedingt geboten, diese Limitation anzugeben.
+
+Wie das ganze aussieht, können wir uns auch grafisch über die plot-Funktion anschauen. Dazu erzeugen wir ein Streudiagramm, das die vorhergesagten Werte und die Residuen enthält:
+
+```{r}
+plot(model, 1)
+plot(fitted.values(model), rstandard(model))
+```
+
+## Interpretation: Was sehen wir im Plot?
+
+Zunächst betrachten wir die Streuung der Punkte im Streudiagramm ohne Linie. Hier können wir bereits sehen, dass eine Zunahme der Streuung bei mittleren Werten erkennbar ist, weil wir einen leicht zur Mitte geöffneten Trichter haben. Das zweite Diagramm hilft zusätzlich mit einer roten Linie, die bei Homoskedastizität möglichst gerade wird. Ist sie wellig oder hat sie eine positive oder negative Steigung, können wir von Heteroskedastizität ausgehen. Genauere Auskunft gibt aber der oben gerechnete Test! 
+
+Im Beispiel sehen wir aber auch, dass die Abweichung bei uns zwar vorhanden, aber nicht allzu "dramatisch" ist. Die Voraussetzung ist zwar verletzt, und das müssen wir auch berücksichtgen, aber die Regressionsanalyse ist sehr robust gegen die Verletzung ihrer Voraussetzungen. Wir können den Fehler zudem korrigieren! Und das werden wir nun auch tun :)
+
+## Was tun bei Heteroskedastizität der Residuen? Berechnung von HC-Standard Errors!
+
+Liegt *Heteroskedastizität* vor, müssen Sie nicht verzweifeln: Erstens ist die Regressionsanalyse sehr robuts gegen die Verletzung ihrer Voraussetzungen. Zweitens können wir diesen Konflikt einigermaßen elegant auflösen, indem wir pauschal *robuste Standardfehler* schätzen lassen, so dass die Verletzung nicht mehr zu Schätzfehlern führt. In R gibt es (wie immer) verschiedene Wege Heteroskedastizität zu kontern. Eine einfache Lösung bietet das lmtest-Paket mit der coeftest-Funktion in Kombination mit dem Befehl vcov(), der zur Berechnung von *heteroscedasticity consistent (HC) standard errors* führt. So ermöglichen wir die Berechnung von *heteroskedastizitätskonsistenten bzw. heteroskedastizitätsrobusten Schätzern*. Nutzen wir diese Lösung, werden die Standardfehler nicht mehr verzerrt und damit auch nicht die t-Werte und p-Werte unserer Schätzung.
+
+PS: Zur Berechnung von heteroscedasticity consistent (HC) standard errors gibt es verschiedene HC-Funktionen. Hier nutzen wir zunächst Typ 3, die auch Hayes & Cai empfehlen (Hayes, A. F., & Cai, L. (2007): Using heteroskedasticity-consistent standard error estimators in OLS regression: An introduction and software implementation. Behavior research methods, 39(4), 709-722). HC4 (die zweite Variante) ist dann sinnvoll, wenn die Residuen nicht normalverteilt sind. (Wie wir später sehen werden, ist das bei uns leider auch der Fall)
+
+```{r}
+coeftest(model, vcov = vcovHC(model, type = "HC3"))
+#coeftest(model, vcov = vcovHC(model, type = "HC4")) # diese Variante wählen, wenn Residuen nicht normalverteilt sind 
+```
+
+Nach der Ausführung erhalten wir eine neue Regressionstabelle. Wenn Sie diese Tabelle mit dem obigen Output unseres Regressionsmodells abgleichen, sehen Sie, dass sich die eigentlichen Koeffizienten ("Estimates") nicht verändert haben - aber alle Werte, die rechts davon stehen, also Standardfehler (Std. Error), t-Werte und p-Werte. Diese sind nun um unsere Schätzfehler durch Heteroskedastizität korrigiert.
+
+Also weiter geht's!
+
+## Prüfung der Voraussetzungen 3: Unabhängigkeit der Residuen
+
+Auch die Annahme, dass die *Residuen unabhängig* voneinander sind, ist eine wichtige Voraussetzung der Regressionsanalyse. Unabhängigkeit der Residuen bedeutet inhaltlich: Wenn ich den Fehlerterm für eine bestimmte Beobachtung kenne, darf mir das keine Information über den Fehlerterm für die nächste Beobachtung liefern. Es darf also nichts systematisch zu einer Verzerrung meiner Beobachtungen (bzw. meiner Fehlerterme) führen. Ansonsten läge eine *Autokorrelation der Fehlerterme* vor, die die Aussagekraft des Modells reduzieren würde.
+
+Das performance-package ist einfach soooo cool! Es beinhaltet auch die check_autocorrelation-Funktion, mit der wir diese Annahme sehr einfach prüfen können:
+
+```{r}
+check_autocorrelation(model)
+```
+
+Auch hier ist der Output wieder sehr klar: Die Prüfung ergibt, dass die Residuen unabhängig und nicht autokorreliert sind (p = 0.588) - sonst hätten wir auch hier einen signifikanten p-Wert erhalten. Prima!
+
+## Prüfung der Voraussetzungen 4: Normalverteilung der Residuen
+
+Wenn die Residuuen nicht der Normalverteilungskurve folgen, sondern stattdessen eigene "Muster" in ihrer Verteilung aufweisen, kann dies darauf hindeuten, dass wir nicht alle Prädiktoren im Modell berücksichtigt haben und somit ein Teil der erklärenden Information in die Residuen übergeht, wo sie das erkennbare Muster "verursacht".
+
+Auch die Voraussetzung, dass die Residuen normalverteilt sein sollen, lässt sich mit einer Funktion aus dem performance-Package sehr einfach überprüfen:
+
+```{r}
+check_normality(model)
+```
+
+Auch hier ist das Ergebnis ohne Probleme zu interpretieren, weil R hier eine "direkte Ansage" macht. In unserem Fall ist die Voraussetzung der Normalverteilung verletzt, weil p signifikant wird. Das müssen wir bei der Interpretation der Daten berücksichtigen. Grundsätzlich können wir hier wieder darauf verweisen, dass die Regressionsanalyse robust gegen die Verletzung ihrer Voraussetzungen ist. Eine Alternative ist, dass wir ein *Bootstrapping-Verfahren* auf unsere Daten anwenden. Das aber nur zur Info, wenn Sie hier selbstständig weitermachen wollen - das würde jetzt etwas zu weit führen :) Außerdem werden wir unten bei der zusätzlichen visuellen Inspektion mit der Funktion *check_models* auch noch sehen, dass unsere Annahme nicht allzu schlimm verletzt ist.
+
+## Prüfung der Voraussetzungen 5: Ausreißer im Modell
+
+*Ausreißer* in den Daten sind ein Problem für viele parametrische Verfahren, denn einzelne Ausreißer können einen sonst signifikanten Trend zunichte machen (ggf. also eliminieren). Ob es in unserem Modell Ausreißer gibt, können wir wieder mit einer sehr einfachen Funktion aus dem performance-Package prüfen, die auf das sogenannte "cooks distance" zurückgreift. Der Wert gibt mir Auskunft darüber, welchen Einfluss mögliche Ausreißer auf das Modell haben.
+
+```{r}
+check_outliers(model)
+```
+
+In unserem Fall gibt es keine Ausreißer, die das Modell beinträchtigen - vielleicht hätten wir sonst auch keinen signifikanten Zusammenhang beobachten können.
+
+## Add-on: Visuelle Inspektion der Modellgüte bzw. der Modellannahmen
+
+Es gibt im performance-Package auch eine sehr gehaltvolle Funktion, die uns eine visuelle Inspektion der Modellgüte bzw. verschiedenen Modellannahmen erlaubt (Normalität der Residuen, Normalität der zufälligen Effekte, lineare Beziehung, Homogenität der Varianz, Multikollinearität). Mit der check_model-Funktion können wir uns dazu mehrere Grafiken im Überblick ausgeben lassen. YEAH! :)
+
+```{r}
+check_model(model)
+```
+
+
+
+
+
 
 ***** ***Zweites Beispiel***
 Um die Durchführung der linearen Regression an einem zweiten Beispiel nachzuvollziehen, schauen wir uns nun den Zusammenhang zwischen dem täglichen Konsum von Nachrichtensendungen im öffentlich-rechtlichen Fernsehen (lm20) und dem Vertrauen in die Bundesregierung (pt12) an. Dazu vermuten wir: Eine intensive Nachrichtenrezeption erklärt ein hohes Vertrauen in die Bundesregierung.
@@ -68,160 +229,6 @@ Das Überprüfen von Zusammenhängen bei mehr als zwei Variablen
 
 In diesem Notebook gehen wir (wie angekündigt) zunächst näher auf die Prüfung der **Voraussetzungen einer Regressionsanalyse** ein. Dann lernen wir die **multiple lineare Regression** kennen, die es erlaubt, Zusammenhänge zwischen mehreren x-Variablen und einer y-Variablen zu analysieren.
 
-### Vorbereitung und Laden der Daten
-
-Zunächst laden wir wieder die Pakete des tidyverse und das Pakete broom um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket performance, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete lmtest und sandwich, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten). Die Regression rechnen wir wieder auf Basis des ESS8_vier_laender-Datensatzes, den wir entsprechend einlesen:
-
-```{r Laden der notwendigen Pakete}
-
-#Laden der notwendigen Pakete
-#install.packages("lm.beta")
-#install.packages("lmtest")
-#install.packages("broom") 
-#install.packages("performance")
-#install.packages("see")
-#install.packages("sandwich")
-
-library(tidyverse)
-library(lm.beta)
-library(broom) # hier stecken einige Befehle zur Bereinigung der Daten und der Modelloutputs drin
-library(performance)
-library(see)
-library(lmtest)
-library(sandwich)
-
-#Daten laden und zum Datenobjekt "daten" zuweisen
-daten <- read_rds("Datensatz/ESS8_vier_laender.rds")
-
-#Visualisierungshintergrund der Grafiken in ggplot festlegen
-theme_set(theme_minimal())
-
-# Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
-options(scipen = 999) 
-
-```
-
-### Data Management
-
-Als abhängige Variable nutzen wir für unser Regressionsmodell wieder die Internetnutzung (netustm); als unabhängige Variablen schauen wir uns wie beim letzten Mal das Alter, sowie heute zusätzlich die Rezeptionszeit von politischen Nachrichten (nwspol) sowie das Geschlecht der Befragten (gndr) an. Damit der Output etwas nachvollziehbarer wird, benennen wir diese Variablen mit dem rename-Befehl um.
-
-Dann setzen wir den drop_na-Befehl, um alle Fällen mit fehlenden Werten zu entfernen (in der Klammer spezifizieren wir wieder, auf welche Variablen sich der Befehl beziehen soll). Das modifizierte Datenset weisen wir einem neuen Datenobjekt zu: daten_mod2
-
-Schließlich nutze ich den slice_sample-Befehl, um aus unseren 8432 Fällen ein Zufallssample von n=100 Fällen zu ziehen, weil mir das die visuelle Interpretation erleichtert (diesen Befehl könnten wir hier auch weglassen, dann bekommen wir unten aber sehr sehr viele Datenpunkt in unserem Streudiagramm - probieren Sie es mal aus!)
-
-```{r Daten zum Zusammenhang von Alter und Internetnutzung alternativ vorbereiten}
-daten_mod <- daten %>% 
-  rename(internetnutzung = netustm,
-         alter = agea,
-         politische_Nachrichtenrezeption = nwspol,
-         gender = gndr) %>% 
-  drop_na(c(internetnutzung, alter, politische_Nachrichtenrezeption, gender)) %>% 
-slice_sample(n = 100) 
-daten_mod
-
-```
-
-### Erinnerung: Einfache lineare Regression mit Alter als UV und Internetnutzung als AV mit lm (=linear models)
-
-```{r Empirisches Modell zum Zusammenhang Alter und Internetnutzung berechnen}
-model <- lm(internetnutzung ~ alter, data = daten_mod) 
-summary(model) # klassischer Output mit relevanten Kennzahlen
-#summary(lm.beta(model)) # klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten
-```
-
-Mit diesem Regressionsmodell haben wir übeprüft, ob das Alter die Internetnutzung erklären kann. Im Output sehen wir, dass das Alter einen signifikanten negativen Einfluss auf die Internetnutzung. Je älter ein Nutzer ist, desto weniger nutzt er das Internet. Die Regressionsanalyse lässt dabei auch eine Quantifizierung dieses Zusammenhangs zu: Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable Internetnutzung um "den Estimate-Wert" in Messeinheiten (hier: -4.296 Minuten) ab. Dieser Zusammenhang ist mit p \> .05 statistisch signifikant.
-
-Soweit die Wiederholung. Beginnen wir nun mit dem Teil A dieses Skripts, nämlich der Prüfung der **Voraussetzungen einer Regressionsanalyse**. Vielleicht wundern Sie sich, warum wir die Voraussetzungen erst im zweiten Schritt prüfen? Sie haben Recht: Eigentlich würden wir erst die Voraussetzungen prüfen, dann das Modell schätzen. Wenn wir unser Modell aber schon geschätzt haben, können wir Funktionen zur Prüfung der Voraussetzungen auf unser gesamtes Modell anwenden (bzw. auf das entsprechende Datenobjekt "model") - und das erspart uns eine Menge "Handarbeit" mit vielen kleinen Zwischenschritten. Zum Beispiel müssten wir für die Prüfung der Voraussetzungen, die die Residuen betreffen, diese erst einmal berechnen und in einer neuen Variable abspeichern. Es ist also weniger Aufwand, die Voraussetzungen ex post zu prüfen.
-
-### Erinnerung: Voraussetzungen der einfachen linearen Regression:
-
-Bevor wir zum statistischen Teil kommen, lassen Sie uns noch einmal Revue passieren, was die wichtigsten Voraussetzungen der einfachen linearen Regression sind: 1) (quasi-)metrisches Skalenniveau 2) Linearität des Zusammenhangs zwischen x und y 3) Homoskedastizität der Residuen: Varianzen der Residuen der prognostizierten abhängigen Variablen sind gleich 4) Unabhängigkeit der Residuen: ansonsten Autokorrelation, die Aussagekraft reduziert 5) Normalverteilung der Residuen 6) Keine Ausreißer in den Daten, da schon einzelne Ausreißer einen sonst signifikanten Trend zunichte machen können (ggf. also eliminieren)
-
-### TEIL A: Prüfung der Voraussetzungen einer Regressionsanalyse
-
-#### Prüfung der Voraussetzungen 1 und 2: metrisches Skalenniveau & Linearität des Zusammenhangs
-
-Ob 1.) die Variablen, die wir in das Regressionsmodell einbeziehen wollen (Alter, Internet-Nutzung) metrisch sind, und ob 2.) ein linearer Zusammenhang besteht, haben wir in der letzten Woche bereits überprüft. Für die Prüfung nach der Linearität des Zusammenhangs zwischen x und y hatten wir ein Streudiagramm mit der geschätzten Regressionsgeraden erzeugt.
-
-#### Prüfung der Voraussetzungen 3: Homoskedastizität der Residuen
-
-Lineare Modelle setzen eine konstante Fehlervarianz (Homoskedastizität) voraus. Eine weitere Bedingung der Regressionanalyse ist also, dass die Varianzen der Residuen der prognostizierten abhängigen Variablen für alle Werte des Prädiktors gleich sind, so dass das Modell gleich gute Vorhersagen über alle Werte machen kann. Liegt Homoskedastizität vor, sind die Abweichungen der vorhergesagten Werte von den gemessenen Werten konstant gleich groß -- unabhängig wie hoch oder niedrig der Wert des Prädiktors ist. Das ist eine wichtige Voraussetzung, denn das Gegenteil - Heterokedastizität der Residuen - würde zur Ineffizienz unserer Schätzung führen! Denn die Standardfehler der Regressionskoeffizienten werden bei vorhandener Heteroskedastizität nach oben verzerrt geschätzt. Das Ergebnis wäre, dass unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben liegt, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen.
-
-Das klingt kompliziert? Kann sein, aber keine Panik: Mit der Funktionen *check_heteroscedasticity()* aus dem performance-package können wir sehr einfach prüfen, ob diese Annahme verletzt wurde.
-
-```{r}
-check_heteroscedasticity(model)
-```
-
-Die Interpretation des Outputs ist einfach, weil R hier uns eine sehr konkrete Aussage zur Überpüfung der Annahme macht: Bei grüner Schrift ist das Ergebnis in Ordnung, d.h. die Fehlervarianz scheint homoskedastisch, denn p wäre dann nicht signifikant. Bei roter Schrift ist die Fehlervarianz heteroskedastisch und p ist signifikant (p \< 0.05). In diesem Fall liegt unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen. Das müssen wir dann bei der Interpretation der Daten berücksichtigen.
-
-Wie das ganze aussieht, können wir uns auch grafisch über die plot-Funktion anschauen. Dazu erzeugen wir ein Streudiagramm, das die vorhergesagten Werte und die Residuen enthält:
-
-```{r}
-plot(model, 1)
-plot(fitted.values(model), rstandard(model))
-```
-
-#### Was sehen wir im Plot?
-
-Zunächst betrachten wir die Streuung der Punkte im Streudiagramm ohne Linie. Hier können wir bereits sehen, dass eine Zunahme der Streuung bei höheren Werten erkennbar ist, weil wir einen leicht nach rechts geöffneten Trichter haben. Das zweite Diagramm hilft zusätzlich mit einer roten Linie, die bei Homoskedastizität möglichst gerade wird. Ist sie wellig oder hat sie eine positive oder negative Steigung, können wir von Heteroskedastizität ausgehen. Genauere Auskunft gibt aber der oben gerechnete Test!
-
-#### Was tun bei Heteroskedastizität der Residuen? Berechnung von HC-Standard Errors!
-
-Liegt Heteroskedastizität vor, müssen Sie nicht verzweifeln: Erstens ist die Regressionsanalyse sehr robuts gegen die Verletzung ihrer Voraussetzungen. Zweitens können wir diesen Konflikt einigermaßen elegant auflösen, indem wir pauschal **robuste Standardfehler** schätzen lassen, so dass die Verletzung nicht mehr zu Schätzfehlern führt. In R gibt es (wie immer) verschiedene Wege Heteroskedastizität zu kontern. Eine einfache Lösung bietet das *lmtest-Paket* mit der *coeftest-Funktion* in Kombination mit dem Befehl *vcov()*, der zur Berechnung von heteroscedasticity consistent (HC) standard errors führt. So ermöglichen wir die Berechnung von **heteroskedastizitätskonsistenten bzw. heteroskedastizitätsrobusten Schätzern**. Nutzen wir diese Lösung, werden die Standardfehler nicht mehr verzerrt und damit auch nicht die t-Werte und p-Werte unserer Schätzung.
-
-PS: Zur Berechnung von heteroscedasticity consistent (HC) standard errors gibt es verschiedene HC-Funktionen. Hier nutzen wir zunächst Typ 3, die auch Hayes & Cai empfehlen (Hayes, A. F., & Cai, L. (2007): Using heteroskedasticity-consistent standard error estimators in OLS regression: An introduction and software implementation. Behavior research methods, 39(4), 709-722). HC4 (die zweite Variante) ist dann sinnvoll, wenn die Residuen nicht normalverteilt sind. (Wie wir später sehen werden, ist das bei uns leider auch der Fall)
-
-```{r}
-coeftest(model, vcov = vcovHC(model, type = "HC3"))
-#coeftest(model, vcov = vcovHC(model, type = "HC4")) # diese Variante wählen, wenn Residuen nicht normalverteilt sind 
-```
-
-Nach der Ausführung erhalten wir eine neue Regressionstabelle. Wenn Sie diese Tabelle mit dem obigen Output unseres Regressionsmodells abgleichen, sehen Sie, dass sich die eigentlichen Koeffizienten ("Estimates") nicht verändert haben - aber alle Werte, die rechts davon stehen, also Standardfehler (Std. Error), t-Werte und p-Werte. Diese sind nun um unsere Schätzfehler durch Heteroskedastizität korrigiert.
-
-Also weiter geht's!
-
-#### Prüfung der Voraussetzungen 3: Unabhängigkeit der Residuen
-
-Auch die Annahme, dass die **Residuen unabhängig** voneinander sind, ist eine wichtige Voraussetzung der Regressionsanalyse. Unabhängigkeit der Residuen bedeutet inhaltlich: Wenn ich den Fehlerterm für eine bestimmte Beobachtung kenne, darf mir das keine Information über den Fehlerterm für die nächste Beobachtung liefern. Es darf also nichts systematisch zu einer Verzerrung meiner Beobachtungen (bzw. meiner Fehlerterme) führen. Ansonsten läge eine Autokorrelation der Fehlerterme vor, die die Aussagekraft des Modells reduzieren würde.
-
-Das performance-package ist einfach soooo cool! Es beinhaltet auch die check_autocorrelation-Funktion, mit der wir diese Annahme sehr einfach prüfen können:
-
-```{r}
-check_autocorrelation(model)
-```
-
-Auch hier ist der Output wieder sehr klar: Die Prüfung ergibt, dass die Residuen unabhängig und nicht autokorreliert sind (p = 0,588) - sonst hätten wir auch hier einen signifikanten p-Wert erhalten. Prima!
-
-#### Prüfung der Voraussetzungen 4: Normalverteilung der Residuen
-
-Wenn die Residuuen nicht der Normalverteilungskurve folgen, sondern stattdessen eigene "Muster" in ihrer Verteilung aufweisen, kann dies darauf hindeuten, dass wir nicht alle Prädiktoren im Modell berücksichtigt haben und somit ein Teil der erklärenden Information in die Residuen übergeht, wo sie das erkennbare Muster "verursacht".
-
-Auch die Voraussetzung, dass die Residuen normalverteilt sein sollen, lässt sich mit einer Funktion aus dem performance-Package sehr einfach überprüfen:
-
-```{r Prüfung der Normalverteilung}
-check_normality(model)
-```
-
-Auch hier ist das Ergebnis ohne Probleme zu interpretieren, weil R hier eine "direkte Ansage" macht. In unserem Fall ist die Voraussetzung der Normalverteilung verletzt, weil p signifikant wird. Das müssen wir bei der Interpretation der Daten berücksichtigen. Grundsätzlich können wir hier wieder darauf verweisen, dass die Regressionsanalyse robust gegen die Verletzung ihrer Voraussetzungen ist. Eine Alternative ist, dass wir ein **Bootstrapping-Verfahren** auf unsere Daten anwenden. Das aber nur zur Info, wenn Sie hier selbstständig weitermachen wollen - das würde jetzt etwas zu weit führen :) Außerdem werden wir unten bei der zusätzlichen visuellen Inspektion mit der Funktion *check_models* auch noch sehen, dass unsere Annahme nicht allzu schlimm verletzt ist.
-
-#### Prüfung der Voraussetzungen 5: Ausreißer im Modell
-
-Ausreißer sind ein Problem für viele parametrische Verfahren, denn einzelne Ausreißer können einen sonst signifikanten Trend zunichte machen (ggf. also eliminieren). Ob es in unserem Modell Ausreißer gibt, kann ich wieder mit einer sehr einfachen Funktion aus dem performance-Package prüfen, die auf das sogenannte "cooks distance" zurückgreift. Der Wert gibt mir Auskunft darüber, welchen Einfluss mögliche Ausreißer auf das Modell haben.
-
-```{r}
-check_outliers(model)
-```
-
-In unserem Fall gibt es keine Ausreißer, die das Modell beinträchtigen - vielleicht hätten wir sonst auch keinen signifikanten Zusammenhang beobachten können.
-
-#### Add-on: Visuelle Inspektion der Modellgüte bzw. der Modellannahmen
-
-Es gibt im performance-Package auch eine sehr coole Funktion, die mir eine visuelle Inspektion meiner Modellgüte bzw. verschiedenen Modellannahmen erlaubt (Normalität der Residuen, Normalität der zufälligen Effekte, lineare Beziehung, Homogenität der Varianz, Multikollinearität). Mit der check_model-Funktion kann ich mir dazu mehrere Grafiken im Überblick ausgeben lassen. YEAH! :)
-
-```{r}
-check_model(model)
-```
 
 ### TEIL B: Die multiple lineare Regression
 

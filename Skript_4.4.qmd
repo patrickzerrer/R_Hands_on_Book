@@ -80,12 +80,12 @@ ggplot(allbus_df, aes(x = Einkommen)) +
 
 Zunächst einmal sieht man, dass sich die Messwerte in einem bestimmten Bereich häufen und eine zumindest annähernde Glockenform aufweisen. Der höchste Punkt deckt sich in etwa mit dem Mittelwert, hier vor allem dem Median (blau) und dem arithmetischen Mittel (rot), während der Modus (grün) etwas abseits liegt. Sie verteilen sich nicht gleichmäßig, was bei Einkommensdaten auch nicht zu erwarten gewesen wäre. So ganz symmetrisch sieht die Verteilung aber auch nicht aus, sondern wirkt etwas nach links gequetscht. Man nennt das auch "rechtsschief" bzw. "linkssteil". Ein Indiz hierfür ist auch, dass das arithmetische Mittel größer ist als der Median. Das nach rechts gequetschte Gegenstück hieße "linksschief" bzw. "rechtssteil". Diese Asymmetrie ist auch dadurch bedingt, dass ein erheblicher Teil der Studienteilnehmenden im Datensatz nicht vorkommt. Leute, die keine Angabe gemacht oder angegeben haben, dass sie über kein eigenes Einkommen verfügen, wurden beim Laden herausgefiltert. Die annähernde Glockenform stimmt jedoch hoffnungsvoll, dass der Datensatz mit einer Verteilung zusammenhängt, die in der Statistik von besonderer Bedeutung ist und die wir im Folgenden genauer betrachten werden: Die Normalverteilung.
 
-## Die Normalverteilung
+# Die Normalverteilung
 
 Diese Verteilung ist auch ihrer charakteristischen Form wegen als Glockenkurve oder nach ihrem maßgeblichen Entdecker Carl Friedrich Gauß als Gauß-Verteilung bekannt. Relativ viele andere Verteilungen lassen sich bei ausreichend großer Stichprobengröße mit der Normalverteilung approximieren. Sie ist symmetrisch und der Mittelwert ist ihr Maximum.\
 Ca. 68% der Werte liegen innerhalb einer Standardabweichung vom Mittelwert entfernt, ca. 95% innerhalb von zwei Standardabweichungen und ca. 99,7%, also fast alle, innerhalb von drei Standardabweichungen.
 
-### Berechnung
+## Berechnung
 
 Die Dichtefunktion der Normalverteilung wird folgendermaßen berechnet:
 

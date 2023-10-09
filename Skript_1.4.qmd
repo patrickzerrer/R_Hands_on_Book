@@ -21,12 +21,44 @@ Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten w
 
 Lasst uns Beginnen und Schritt für Schritt die wichtigsten Punkte durchgehen, die ihr zur Vorbereitung eures Analyse-Projekts machen solltet.
 
+<<<<<<< HEAD
+=======
+## Die R-Studio-Cloud der Universität
+
+Falls ihr an der Universität Bremen studiert könnt ihr den Service des Zentrum für Multimedia in der Lehre nutzen indem ihr euch [hier](https://jupyter.uni-bremen.de) mit eurer Uni-Kennung einloggt.
+
+Als nächstes habt ihr die Möglichkeit die für euren Kurs vorgesehene Programmierumgebung auszuwählen. In unserem Fall ist das die "Einführung in quantitative Forschungsdesigns und Datenanalyse". Mit der Auswahl wird eure eigenen Programmierumgebung eingerichtet, auf dieser könnt ihr die Schaltfälche `RStudio` auswählen.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot7.png)
+
+Mit dem Klick gelangt ihr in R-Studio.
+
+>>>>>>> 310757c20b6e67efcb3cca68a7dc8427760383bc
 ## Das Anlegen eines R-Projekts
 
 Starten wir zunächst mit dem Anlegen eines sogenannten R-Projekts. RStudio-Projekte ermöglichen es uns alle mit einem Projekt verbundenen Dateien an einem Ort zu speichern. Das umfasst Datensätze, R-Skripte, Ergebnisse, Abbildungen, Berichte usw. Projekte sind bereits in RStudio integriert.
 
 ![Screenshot RStudio](Bilder/Skript_1_4_Screenshot1.png) Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button `New Project` ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.
 
+<<<<<<< HEAD
+=======
+In eurem Fall könnt ihr euch direkt alle notwendigen Materialen und Skripte für das erfolgreiche Bearbeiten dieses Kurses in R-Studio laden. Hierfür geht ihr in der rechts oberen Ecke des Nutzer:innen Interfaces auf den Button `New Project` und wählt dann `Version Control` aus.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot8.png)
+
+Im nächsten Schritt wählt ihr dann `Git` aus.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot9.png)
+
+Und fügt unter *Respository URL* die folgende Adresse ein: <https://github.com/patrickzerrer/R_Hands_on_Book>.
+
+Mit einem Klick auf den Button `Create Project` werden alle notwendigen Materialien und Ordner direkt in euer eigenes neugeschaffenens R-Projekt geladen.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot10.png)
+
+Ihr habt jetzt alle Materialien und Skripte und könnt mit dem Kurs beginnen.
+
+>>>>>>> 310757c20b6e67efcb3cca68a7dc8427760383bc
 ## Das Working-Dictonary (wd)
 
 Im Allgemeinen ist das Arbeitsverzeichnis (das Working-Dictonary, wd) der Ort, an dem R nach Dateien (vor allem nach Datensätzen) sucht. Wenn ihr kein Projekt verwenden, müsst ihr wahrscheinlich durch die Funktion `setwd` oder das Interface (siehe Screenshot) ein Working-Dictonary setzen, bevor ihr euren R-Code ausführen könnt.

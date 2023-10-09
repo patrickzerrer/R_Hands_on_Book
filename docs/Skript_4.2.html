@@ -443,12 +443,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<<<<<<< HEAD
 <p>Berechnung von Lageparametern</p>
 <p>Laden wir zunächst wieder unsere Daten: Da wir uns drei verschiedene Skalenniveaus ansehen wollen, verwenden wir Daten, die jeweils ein solches repräsentieren. Wir laden daher Daten zu Geschlecht (“sex”), Vertrauen in die Bundesregierung (“pt12”) und Netto-Einkommen (“di01a”).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Lade nötiges Paket: pacman</code></pre>
+=======
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/zemkipatrick_comic_style_mean_descriptive_statistics_cyberpunk__c164805d-f5de-4d11-9526-913cfe6f6013.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Überall Zahlen!, Bild generiert von Midjourney</figcaption>
+</figure>
+</div>
+<section id="berechnung-von-lageparametern" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Berechnung von Lageparametern</h1>
+<p>Im Folgenden werden wir aus dem Allbus-2021-Datensatz ein paar Beispiele herausgreifen, um die Berechnung und Visualisierung von Häufigkeiten und Parametern zu demonstrieren.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/r0_Vtf48MHU" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+</div>
+</div>
+<p>Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem <code>p_load</code>-Befehl:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, dplyr)  </span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Laden wir zunächst wieder unsere Daten: Da wir uns drei verschiedene Skalenniveaus ansehen wollen, verwenden wir Daten, die jeweils ein solches repräsentieren. Wir laden daher Daten zu Geschlecht (“sex”), Vertrauen in die Bundesregierung (“pt12”) und Netto-Einkommen (“di01a”).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>) </span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3"></a>allbus_df <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>)) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>), <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4">4</button><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>), <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">7</span>, <span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">15</span>, <span class="sc">-</span><span class="dv">42</span>, <span class="sc">-</span><span class="dv">50</span> ), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5">5</button><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7"></a>  <span class="fu">na.omit</span>()</span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8"></a></span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9"></a><span class="fu">colnames</span>(allbus_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Geschlecht"</span>, <span class="st">"VertrauenBR"</span>, <span class="st">"Einkommen"</span>) <span class="co"># Umbenennen der Spaltennamen</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-annotation="1" data-code-cell="annotated-cell-2" data-code-lines="3">Wir erstellen ein neues Objekt basierend auf dem Datensatz <code>daten</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-annotation="2" data-code-cell="annotated-cell-2" data-code-lines="4">Wir wählen die Variablen aus</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-annotation="3" data-code-cell="annotated-cell-2" data-code-lines="5">Die Kombination aus <code>mutate</code> und <code>across</code> ermöglicht es uns die Funktion <code>as.numeric</code> in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die <code>~</code> gibt den Start der anzuwenden Funktion (hier <code>as.numeric</code> an), der Punkt innerhalb der Klammer der <code>as.numeric</code> Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-annotation="4" data-code-cell="annotated-cell-2" data-code-lines="6">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter, mit dem Ausdruck <code>%in%</code> prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-annotation="5" data-code-cell="annotated-cell-2" data-code-lines="7">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
+</dd>
+</dl>
+>>>>>>> 310757c20b6e67efcb3cca68a7dc8427760383bc
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, dplyr)  </span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
