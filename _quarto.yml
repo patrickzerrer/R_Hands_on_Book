@@ -80,15 +80,10 @@ website:
       - Skript_7.3.qmd
       - Skript_7.4.qmd
   
-<<<<<<< HEAD
-  page-footer: "Copyright 2023, Design by Katharina Maubach & Patrick Zerrer"
-
-=======
   page-footer: 
     left: "Copyright 2023, Design by Katharina Maubach & Patrick Zerrer"
     right: "![](Bilder/Logo_Stiftung_Hochschullehre_pos.jpg){width=120} ![](Bilder/Skill_UB_Icons_1_quer__blau.jpeg){width=120} "
     
->>>>>>> 310757c20b6e67efcb3cca68a7dc8427760383bc
 format:
   html:
     theme: sandstone
