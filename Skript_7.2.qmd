@@ -32,9 +32,9 @@ Um das zu prüfen, müssen wir zunächst wieder unsere Pakete und Allbus-Daten l
 
 # Laden der Pakete und des Datensatzes
 ```{r}
-install.packages("haven")
-install.packages("tidyverse")
-install.packages("devtools")
+#install.packages("haven")
+#install.packages("tidyverse")
+#install.packages("devtools")
 library(tidyverse)
 library(haven)
 library(conflicted)
@@ -136,13 +136,6 @@ Wie immer besteht der erste Schritt nun darin, die benötigten Pakete sowie den 
 
 # Laden der benötigten Pakete
 ```{r}
-install.packages("dplyr")
-install.packages("tidyverse")
-install.packages("broom")
-install.packages("lm.beta") 
-install.packages("performance")
-install.packages("see")
-install.packages("haven")
 library(dplyr)
 library(tidyverse)
 library(broom) 
@@ -318,15 +311,17 @@ Und dann machen wir eine fancy Grafik, die uns die Abweichung der prognostiziert
 
 ## Beobachtete und vorhergesagte Werte sowie Residuen gemeinsam plotten
 ```{r }
-ggplot(daten, aes(Alter, TV_Konsum)) + 
-  geom_point(aes(color = residuen)) + # Festlegung der Farbmarkierung für die Residuen (Punkte sind tatsächliche Werte, Linien die Residuen, Farbe gibt Größe der Abweichung an)
-  scale_color_gradient2(low = "blue", mid = "white", high = "red") + # Festlegung der Farbe für die Residuen
-  guides(color = "none") + # Unterdrückt eine Legende an der Seite (ist obligatorisch)
-  geom_point(aes(y = vorhersage), shape = 1) + # gibt die vorhergesagten Punkte auf der Regressionsgeraden aus
-  geom_smooth(method = "lm", formula = "y ~ x", se = FALSE, linewidth = 0.5, color = "black") + # gibt die Regressionsgerade als Linie aus 
-  geom_segment(aes(xend = Alter, yend = vorhersage), alpha = .2) + # zeichnet die Linie vom Punkt zur Regressionsgeraden transparent ein 
-  ggtitle("Vorhergesagte Werte und Residuen für Alter und Fernsehnutzung") + # Titel
-  xlab("Alter") + ylab("tägliche Fernsehnutzung (Minuten)") # Achsen-Beschriftung
+# Note: Erzeugt einen Error, hab es fürs rendern erstmal rausgenommen (Patrick)
+
+#ggplot(daten, aes(Alter, TV_Konsum)) + 
+#  geom_point(aes(color = residuen)) + # Festlegung der Farbmarkierung für die Residuen (Punkte sind tatsächliche Werte, Linien die Residuen, Farbe gibt Größe der Abweichung an)
+#  scale_color_gradient2(low = "blue", mid = "white", high = "red") + # Festlegung der Farbe für die Residuen
+#  guides(color = "none") + # Unterdrückt eine Legende an der Seite (ist obligatorisch)
+#  geom_point(aes(y = vorhersage), shape = 1) + # gibt die vorhergesagten Punkte auf der Regressionsgeraden aus
+#  geom_smooth(method = "lm", formula = "y ~ x", se = FALSE, linewidth = 0.5, color = "black") + # gibt die Regressionsgerade als Linie aus 
+#  geom_segment(aes(xend = Alter, yend = vorhersage), alpha = .2) + # zeichnet die Linie vom Punkt zur Regressionsgeraden transparent ein 
+#  ggtitle("Vorhergesagte Werte und Residuen für Alter und Fernsehnutzung") + # Titel
+#  xlab("Alter") + ylab("tägliche Fernsehnutzung (Minuten)") # Achsen-Beschriftung
 ```
 
 

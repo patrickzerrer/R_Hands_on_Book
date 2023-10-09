@@ -21,12 +21,12 @@ Zunächst laden wir wieder die Pakete des tidyverse und das Pakete broom, um die
 ```{r}
 
 #Laden der notwendigen Pakete
-install.packages("lm.beta")
-install.packages("lmtest")
-install.packages("broom") 
-install.packages("performance")
-install.packages("see")
-install.packages("sandwich")
+#install.packages("lm.beta")
+#install.packages("lmtest")
+#install.packages("broom") 
+#install.packages("performance")
+#install.packages("see")
+#install.packages("sandwich")
 
 library(tidyverse)
 library(lm.beta)
@@ -38,7 +38,7 @@ library(sandwich)
 library(haven)
 
 #Daten laden und zum Datenobjekt "daten" zuweisen
-daten = haven::read_dta("Desktop/Allbus_2021.dta")
+daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 
 #Visualisierungshintergrund der Grafiken in ggplot festlegen
 theme_set(theme_minimal())
@@ -163,7 +163,7 @@ In unserem Fall gibt es keine Ausreißer, die das Modell beinträchtigen - viell
 Es gibt im performance-Package auch eine sehr gehaltvolle Funktion, die uns eine visuelle Inspektion der Modellgüte bzw. verschiedenen Modellannahmen erlaubt (Normalität der Residuen, Normalität der zufälligen Effekte, lineare Beziehung, Homogenität der Varianz, Multikollinearität). Mit der check_model-Funktion können wir uns dazu mehrere Grafiken im Überblick ausgeben lassen. YEAH! :)
 
 ```{r}
-check_model(model)
+#check_model(model)
 ```
 
 

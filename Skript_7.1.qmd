@@ -44,14 +44,11 @@ In R kann der Pearson Chi-Quadrat Test mit der Funktion chisq.test() durchgefüh
 
 ## Laden der Pakete
 ```{r}
-<<<<<<< HEAD
-=======
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
 p_load(tidyverse, haven, psych, conflicted, dplyr) 
 # Setze einen Paketmirror (CRAN)
 # chooseCRANmirror(39)
 # install.packages("haven", repos = "https://cloud.r-project.org/")
->>>>>>> 310757c20b6e67efcb3cca68a7dc8427760383bc
 #install.packages("haven")
 #install.packages("tidyverse")
 #install.packages("devtools")
