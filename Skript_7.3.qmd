@@ -19,26 +19,13 @@ In diesem Teilkapitel gehen wir (wie angekündigt) näher auf die Prüfung der *
 Zunächst laden wir wieder die Pakete des tidyverse und das Pakete broom, um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket performance, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete lmtest und sandwich, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten). Die Regression rechnen wir wieder auf Basis des ALLBUS-Datensatzes, die wir im letzten Schritt laden. 
 
 ```{r}
-
 #Laden der notwendigen Pakete
-install.packages("lm.beta")
-install.packages("lmtest")
-install.packages("broom") 
-install.packages("performance")
-install.packages("see")
-install.packages("sandwich")
-
-library(tidyverse)
-library(lm.beta)
-library(broom) # hier stecken einige Befehle zur Bereinigung der Daten und der Modelloutputs drin
-library(performance)
-library(see)
-library(lmtest)
-library(sandwich)
-library(haven)
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, lm.beta, lmtest, performance, easystats, haven, broom, see, haven, sandwich)
+theme_set(theme_classic())
 
 #Daten laden und zum Datenobjekt "daten" zuweisen
-daten = haven::read_dta("Desktop/Allbus_2021.dta")
+daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 
 #Visualisierungshintergrund der Grafiken in ggplot festlegen
 theme_set(theme_minimal())
@@ -46,7 +33,6 @@ theme_set(theme_minimal())
 # Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
 options(scipen = 999) 
 ```
-
 
 ## Erinnerung: Einfache lineare Regression mit Alter als UV und TV-Nutzung als AV mit lm (=linear models)
 
@@ -82,7 +68,10 @@ Bevor wir zum statistischen Teil kommen, lassen Sie uns noch einmal Revue passie
 
 ## Prüfung der Voraussetzungen 1 und 2: metrisches Skalenniveau & Linearität des Zusammenhangs
 
-Ob 1.) die Variablen, die wir in das Regressionsmodell einbeziehen wollen (Alter, Internet-Nutzung) metrisch sind, und ob 2.) ein linearer Zusammenhang besteht, haben wir in der letzten Woche bereits überprüft. Für die Prüfung nach der Linearität des Zusammenhangs zwischen x und y hatten wir ein Streudiagramm mit der geschätzten Regressionsgeraden erzeugt. Hier können Sie noch einmal nachschauen, wie das ging: ***LINK EINFÜGEN***
+Ob 1.) die Variablen, die wir in das Regressionsmodell einbeziehen wollen (Alter, Internet-Nutzung) metrisch sind, und ob 2.) ein linearer Zusammenhang besteht, haben wir in der letzten Woche bereits überprüft. Für die Prüfung nach der Linearität des Zusammenhangs zwischen x und y hatten wir ein Streudiagramm mit der geschätzten Regressionsgeraden erzeugt. Hier können Sie noch einmal nachschauen, wie das ging: 
+
+[Link](XXX)
+***LINK EINFÜGEN***
 
 #### Prüfung der Voraussetzungen 3: Homoskedastizität der Residuen
 
@@ -162,13 +151,13 @@ In unserem Fall gibt es keine Ausreißer, die das Modell beinträchtigen - viell
 
 Es gibt im performance-Package auch eine sehr gehaltvolle Funktion, die uns eine visuelle Inspektion der Modellgüte bzw. verschiedenen Modellannahmen erlaubt (Normalität der Residuen, Normalität der zufälligen Effekte, lineare Beziehung, Homogenität der Varianz, Multikollinearität). Mit der check_model-Funktion können wir uns dazu mehrere Grafiken im Überblick ausgeben lassen. YEAH! :)
 
+Hier der Link zur Dokumentation des Performance-Packages mit weiteren Informationen: 
+[Link](https://easystats.github.io/performance/)
+
 ```{r}
-check_model(model)
+#check_model(model)
+model_performance(model)
 ```
-
-
-
-
 
 
 ***** ***Zweites Beispiel***

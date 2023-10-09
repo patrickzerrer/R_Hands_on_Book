@@ -32,15 +32,8 @@ Um das zu prüfen, müssen wir zunächst wieder unsere Pakete und Allbus-Daten l
 
 # Laden der Pakete und des Datensatzes
 ```{r}
-install.packages("haven")
-install.packages("tidyverse")
-install.packages("devtools")
-library(tidyverse)
-library(haven)
-library(conflicted)
-library(dplyr)
-conflicts_prefer(dplyr::filter)
-
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, haven, dplyr) 
 daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
@@ -136,20 +129,8 @@ Wie immer besteht der erste Schritt nun darin, die benötigten Pakete sowie den 
 
 # Laden der benötigten Pakete
 ```{r}
-install.packages("dplyr")
-install.packages("tidyverse")
-install.packages("broom")
-install.packages("lm.beta") 
-install.packages("performance")
-install.packages("see")
-install.packages("haven")
-library(dplyr)
-library(tidyverse)
-library(broom) 
-library(lm.beta)
-library(performance)
-library(see)
-library(haven)
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, haven, dplyr, broom, lm.beta, performance, see) 
 ```
 
 # Laden des Datensatzes
@@ -197,7 +178,6 @@ ggplot(daten, aes(Alter, TV_Konsum)) +
 
 ## Interpretation: Was sehen wir im Streudiagramm?
 Die grafische Darstellung legt uns einen positiven und linearen Zusammenhang zwischen Alter und Fernsehnutzung nahe: mit zunehmendem Alter steigt die Nutzungsdauer. Damit scheint eine wichtige Voraussetzung der Regressionsanalyse, dass der Zusammenhang an sich linear ist, erfüllt.
-
 
 ## Durchführung der einfachen linearen Regression über die Funktion lm
 Ob diese Beobachtung auch statistisch belastbar ist, wollen wir jetzt mit der *einfachen linearen Regression* prüfen. Dazu nutzen wir die Funktion lm(). Die Funktion lm steht für "linear model". In den Klammern benennen wir zunächst die abhängige Variable (hier: TV_Konsum), dann kommt eine Tilde (d.h. "wird definiert durch") und der Bezug auf unsere unabhängige Variable (hier: Alter). Die Schreibweise y ~ x ist die Formel-Schreibweise in R; in diesem Fall besagt sie, dass y (TV_Konsum) abhängig von x (Alter) ist. Nach dem Komma folgt dann die Benennung des Datensatzes auf den die lm-Funktion angewendet werden soll. Zum Schluss lassen wir uns das Modell ausgeben.
