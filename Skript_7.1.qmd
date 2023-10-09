@@ -1,5 +1,5 @@
 ---
-title: "Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 1: Pearson Chi-Quadrat-Test & *Rangkorrelation"
+title: "Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 1: Pearson Chi-Quadrat-Test & Rangkorrelation"
 author: "Stephanie Geise"
 toc: true
 number-sections: true
@@ -253,6 +253,7 @@ Nun prüfen wir mit einem Chi-Quadrat Test, ob der beobachtete Zusammenhang auch
 ```{r}
 chisq.test(kreuztabelle_2)
 ```
+
 ## Interpretation: Was sehen wir im Output?
 Schauen wir uns nun den R-Output an: Der *Chi-Quadrat-Wert* (X² oder X-squared) gibt uns an, wie gut die beobachteten Häufigkeiten mit den erwarteten Häufigkeiten übereinstimmen. Ein höherer X²-Wert deutet auf eine größere Abweichung hin. Der Chi-Quadrat-Statistikwert von 299.01 ist also weit von dem erwarteten Wert entfernt.
 
@@ -277,6 +278,7 @@ V <- sqrt(chi_square / (n * min(k-1, r-1)))
 cat("Beobachteter Chi-Quadrat-Wert:", chi_square, "\n")
 cat("Cramér's V:", V, "\n")
 ```
+
 ## Interpretation: Was sehen wir im Output?
 Mit Cramér's V können wir nun also zusätzlich noch aussagen, dass der Effekt von Geschlecht auf die Einkommensklasse bei 0,3 liegt und damit mittelstark ist. Wir haben es also mit einem signifikanten und substantiellen Einfluss des Geschlechts auf die Einkommensklasse zu tun. Da wir diesen Befund mit Hilfe aktueller ALLBUS-Daten ermittelt haben, haben Sie hiermit einen guten Indikator für die aktuelle Gender Equality in Deutschland vor Augen. ES GIBT NOCH VIEL ZU TUN!
 
