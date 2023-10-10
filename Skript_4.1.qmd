@@ -8,6 +8,7 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 ---
 
 ![Die Skyline als Barplot, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_skyline_as_a_barplot_frequencies_num_142385f5-fa6a-4d6c-95ea-8f847faa681a.png)

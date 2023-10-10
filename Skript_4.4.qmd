@@ -8,6 +8,7 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 ---
 
 ![Wie ist die Stadt verteilt?, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_cyberpunk_skyline_statistic_normal_dis_4473b399-2f60-47d2-8586-65fc6c1e9325.png)

@@ -1,5 +1,5 @@
 ---
-title: "Prüfung der Voraussetzungn bei der linearen Regression"
+title: "Prüfung der Voraussetzungen bei der linearen Regression"
 author: "Stephanie Geise"
 toc: true
 number-sections: true
@@ -57,9 +57,12 @@ daten <- daten %>%
 Dann erstellen wir das linear model:
 ```{r}
 model <- lm(TV_Konsum ~ Alter, data = daten) 
-summary(model) # klassischer Output mit relevanten Kennzahlen
-summary(lm.beta(model)) # klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten
+summary(model) # <1> 
+summary(lm.beta(model)) # <2> 
 ```
+1. klassischer Output mit relevanten Kennzahlen
+2. klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten
+
 Mit diesem Regressionsmodell haben wir übeprüft, ob das Alter die Fernsehnutzung erklären kann. Im Output sehen wir, dass das Alter einen signifikanten positiven Einfluss auf die Internetnutzung. Je älter eine Person ist, desto mehr nutzt er/sie das Fernsehen. Die Regressionsanalyse lässt dabei auch eine Quantifizierung dieses Zusammenhangs zu: Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable TV-Nutzung um "den Estimate-Wert" in Messeinheiten (hier: -2.19 Minuten) zu. Dieser Zusammenhang ist mit p >.05 statistisch signifikant.
 
 Soweit die Wiederholung. Beginnen wir nun mit der Prüfung der *Voraussetzungen einer Regressionsanalyse*. Vielleicht wundern Sie sich, warum wir die Voraussetzungen erst im zweiten Schritt prüfen? Sie haben Recht: Eigentlich müssten wir erst die Voraussetzungen prüfen, dann erst das Modell schätzen. Wenn wir unser Modell aber schon geschätzt haben, können wir Funktionen zur Prüfung der Voraussetzungen auf unser gesamtes Modell anwenden (bzw. auf das entsprechende Datenobjekt "model") - und das erspart uns eine Menge "Handarbeit" mit vielen kleinen Zwischenschritten. Zum Beispiel müssten wir für die Prüfung der Voraussetzungen, die die Residuen betreffen, diese erst einmal berechnen und in einer neuen Variable abspeichern. Es ist also weniger Aufwand, die Voraussetzungen ex post zu prüfen.
@@ -75,9 +78,7 @@ Bevor wir zum statistischen Teil kommen, lassen Sie uns noch einmal Revue passie
 
 # Prüfung der Voraussetzungen 1 und 2: metrisches Skalenniveau & Linearität des Zusammenhangs
 
-Ob 1.) die Variablen, die wir in das Regressionsmodell einbeziehen wollen (Alter, Internet-Nutzung) metrisch sind, und ob 2.) ein linearer Zusammenhang besteht, haben wir in der letzten Woche bereits überprüft. Für die Prüfung nach der Linearität des Zusammenhangs zwischen x und y hatten wir ein Streudiagramm mit der geschätzten Regressionsgeraden erzeugt. Hier können Sie noch einmal nachschauen, wie das ging: 
-
-[Link](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_7.2.html)
+Ob 1.) die Variablen, die wir in das Regressionsmodell einbeziehen wollen (Alter, Internet-Nutzung) metrisch sind, und ob 2.) ein linearer Zusammenhang besteht, haben wir in der letzten Woche bereits überprüft. Für die Prüfung nach der Linearität des Zusammenhangs zwischen x und y hatten wir ein Streudiagramm mit der geschätzten Regressionsgeraden erzeugt. Hier können Sie noch einmal nachschauen, wie das ging: [Link](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_7.2.html)
 
 # Prüfung der Voraussetzungen 3: Homoskedastizität der Residuen
 

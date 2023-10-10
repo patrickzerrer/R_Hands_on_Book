@@ -8,6 +8,7 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 ---
 
 ![Wie groß sind die Kreise?, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_stone_draws_circles_in_the_water_wid_9dd755ad-ddad-4d23-bfab-dcca546e86ab.png)
@@ -53,23 +54,22 @@ Die Spannweite (auch Range genannt) gibt den Abstand zwischen der kleinsten und 
 
 $$
 SP = x_{max} - x_{min}  
-$$
-Mit der `range`-Funktion kann man sich in R die beiden Extremwerte als Vektor ausgeben lassen:
+$$ Mit der `range`-Funktion kann man sich in R die beiden Extremwerte als Vektor ausgeben lassen:
 
 ```{r}
 range(allbus_df$Einkommen)
 ```
-Alternativ kann man auch einfach Das Maximum und das Minimum ermitteln und die Differenz berechnen: 
+
+Alternativ kann man auch einfach Das Maximum und das Minimum ermitteln und die Differenz berechnen:
 
 ```{r}
 einkommen_max = max(allbus_df$Einkommen) - min(allbus_df$Einkommen)
 einkommen_max
 ```
 
-
 ## Quantilsabstände
 
-Dieses Maß gibt die Differenz zweier Quantile an. Insbesondere der Quartilsabstand (75%-Quantil - 25%-Quantil) ist hier von Bedeutung. 
+Dieses Maß gibt die Differenz zweier Quantile an. Insbesondere der Quartilsabstand (75%-Quantil - 25%-Quantil) ist hier von Bedeutung.
 
 ### Berechnung
 
@@ -79,7 +79,7 @@ $$
 QA = Q_{o} - Q_{u}
 $$
 
-Für den Quartilsabstand gibt es eine Funktion in R: 
+Für den Quartilsabstand gibt es eine Funktion in R:
 
 ```{r}
 # Berechnung mit der vorgefertigten R-Funktion IQR (Interquartile Range):
@@ -89,7 +89,6 @@ IQR(allbus_df$VertrauenBR)
 1.  Berechnung mit der vorgefertigten R-Funktion IQR (Interquartile Range)
 
 Um den mittleren Quartilsabstand zu ermitteln, kann man das Ergebnis noch durch 2 teilen.
-
 
 ## Varianz und Standardabweichung
 
@@ -101,12 +100,11 @@ Es wird unterschieden zwischen der Varianz der Grundgesamtheit und der Stichprob
 
 $$
 Var = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2
-$$ 
-Da man wie gesagt meist nur auf eine Stichprobe zurückgreifen kann, kann man den Mittelwert der Grundgesamtheit durch den Mittelwert der Stichprobe nur schätzen. Um die damit verbundene Verzerrung auszugleichen, kann es sinnvoll sein die Summe der quadrierten Abweichungen nicht durch $n$, sondern durch $(n-1)$ zu teilen. So ergibt sich folgende Formel, wobei $n$ hier die Stichprobengröße darstellt:
+$$ Da man wie gesagt meist nur auf eine Stichprobe zurückgreifen kann, kann man den Mittelwert der Grundgesamtheit durch den Mittelwert der Stichprobe nur schätzen. Um die damit verbundene Verzerrung auszugleichen, kann es sinnvoll sein die Summe der quadrierten Abweichungen nicht durch $n$, sondern durch $(n-1)$ zu teilen. So ergibt sich folgende Formel, wobei $n$ hier die Stichprobengröße darstellt:
 
 $$
 Var = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
-$$ 
+$$
 
 In R bekommen wir die Varianz mit der `var`-Funktion, hier am Beispiel des Netto-Einkommens:
 
@@ -118,8 +116,7 @@ Wie wir sehen, ist das Ergebnis sehr groß und auf den ersten Blick nicht leicht
 
 $$
 SD = \sqrt{Var} = s =  \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
-$$ 
-R bietet zur Berechnung der Standardabweichung die `sd`-Funktion an.
+$$ R bietet zur Berechnung der Standardabweichung die `sd`-Funktion an.
 
 ```{r}
 sd(allbus_df$Einkommen)
@@ -135,7 +132,8 @@ summary(allbus_df$Einkommen)
 
 ## Visualisierung der Streuungsparameter
 
-In folgendem Codebeispiel lassen wir uns das Histogramm aus dem letzten Abschnitt ausgeben, allerdings reduziert auf Median (blau, durchgezogene Linie) und das arithmetische Mittel (rot, durchgezogene Linie). Wir ergänzen diese Lageparameter um den Minimal- und den Maximalwert (schwarz, gestrichelt), das untere und obere Quartil (blau, gestrichelt) und die Standardabweichung, hier beiderseits vom Mittelwert aufgetragen(rot, gestrichelt).  
+In folgendem Codebeispiel lassen wir uns das Histogramm aus dem letzten Abschnitt ausgeben, allerdings reduziert auf Median (blau, durchgezogene Linie) und das arithmetische Mittel (rot, durchgezogene Linie). Wir ergänzen diese Lageparameter um den Minimal- und den Maximalwert (schwarz, gestrichelt), das untere und obere Quartil (blau, gestrichelt) und die Standardabweichung, hier beiderseits vom Mittelwert aufgetragen(rot, gestrichelt).
+
 ```{r}
 
 mean_einkommen = mean(allbus_df$Einkommen)
@@ -165,6 +163,3 @@ ggplot(allbus_df, aes(x = Einkommen)) +
 ```
 
 Es ist sehr deutlich zu erkennen, dass die Spannweite (die Distanz zwischen den beiden schwarzen gestrichelten Linien) wenig hilfreich ist, wenn man erfahren will, wo besonders viele Messwerte liegen. Der Interquartilsabstand scheint hier sehr viel aussagekräftiger zu sein, während die Standardabweichung unterhalb des Mittelwerts mehr Messwerte einzuschließen scheint als oberhalb davon. Dieses Ungleichgewicht wird im Abschnitt über Verteilungen noch eine Rolle spielen.
-
-
-

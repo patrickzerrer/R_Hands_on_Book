@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-
+  favicon: Bilder/favicon-32x32.png
   twitter-card: true
   site-url: https://github.com/patrickzerrer/R_Hands_on_Book
   open-graph: true
