@@ -1,24 +1,25 @@
 ---
-title: "Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression"
+title: "Die multiple Regression"
 author: "Stephanie Geise"
 toc: true
 number-sections: true
 highlight-style: pygments
+execute: 
+  warning: false
 format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
 editor_options: 
   chunk_output_type: inline
 ---
 
-Das Überprüfen von Zusammenhängen bei mehr als zwei Variablen
-
-## Analyselogik, Ziel und Einsatzgebiete einer multiplen Regressionsanalyse
+![Eine Halle voller Maschinen, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_factory_hall_full_of_machines_people_e0656824-d2d4-43ae-bebf-110186024d79.png)
 
 In diesem Teilkapitel lernen wir nun - wie angekündigt - die *multiple lineare Regression* kennen, die es erlaubt, Zusammenhänge zwischen *mehreren x-Variablen* und einer y-Variablen zu analysieren.
 
-## Vorbereitung und Laden der Daten
+#### Vorbereitung und Laden der Daten
 
 Zunächst laden wir wieder die Pakete des tidyverse und das Pakete broom um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket performance, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete lmtest und sandwich, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten). Die Regression rechnen wir wieder auf Basis Allbus-Datensatzes, den wir entsprechend einlesen:
 
@@ -33,7 +34,8 @@ theme_set(theme_minimal())
 options(scipen = 999) 
 ```
 
-## Erzeugen eines Teildatensatzes & Umbenennen der Variablen
+#### Erzeugen eines Teildatensatzes & Umbenennen der Variablen
+
 Als abhängige Variable nutzen wir für unser Regressionsmodell wieder die TV-Nutzung (lm02); als unabhängige Variablen schauen wir uns wie beim letzten Mal das Alter, sowie heute zusätzlich die Variablen Bildung (educ) und Vertrauen ins Fernsehen (pt09). Damit der Output etwas nachvollziehbarer wird, benennen wir diese Variablen mit dem rename-Befehl zunächst wieder um. Außerdem filtern wir auch wieder die missings heraus (z.B. -9=Keine Angabe):
 
 ```{r}
@@ -49,7 +51,8 @@ daten <- daten %>%
 ```
 
 ## Erinnerung: Einfache lineare Regression mit Alter als UV und TV-Nutzung als AV mit lm (=linear models)
-Aus den letzten Sitzungen wissen wir bereits, dass das Alter einen signifikanten, positiven Einfluss auf die TV-Nutzung hat. Wir wissen aber auch, dass die TV-Nutzung nicht alleine über das Alter erklärt werden kann (weil unser R2 recht gering war). 
+
+Aus den letzten Sitzungen wissen wir bereits, dass das Alter einen signifikanten, positiven Einfluss auf die TV-Nutzung hat. Wir wissen aber auch, dass die TV-Nutzung nicht alleine über das Alter erklärt werden kann (weil unser R2 recht gering war).
 
 ```{r}
 model <- lm(TV_Konsum ~ Alter, data = daten) 
@@ -57,6 +60,7 @@ summary(lm.beta(model))
 ```
 
 ## Multiple lineare Regression mit Alter, Bildung sowie Vertrauen ins Fernsehen als UV und TV-Nutzung als AV mit lm (=linear models)
+
 Mit der *multiplen linearen Regression* wollen wir nun prüfen, welche weiteren unabhängigen Variablen die TV-Nutzung erklären könnten. Dazu bringen wir Vertrauen in das Fernsehen als möglicherweise zusätzlichen erklärenden Faktor in unser Regressionsmodell ein.
 
 Als Funktion können wir weiterhin lm nutzen; die zusätzlichen Variablen können wir in der Klammer ganz simpel ergänzen, indem wir sie mit einem "+" hinten anhängen:
@@ -66,22 +70,21 @@ model2 <- lm(TV_Konsum ~ Alter + Bildung + TV_Vertrauen, data = daten)
 summary(lm.beta(model2))
 ```
 
-## Inhaltliche Interpretation des Outputs: Was bedeutet das Ergebnis?
+### Inhaltliche Interpretation des Outputs: Was bedeutet das Ergebnis?
 
 Der Output zeigt uns: Das Alter hat weiterhin einen positiven Einfluss auf die tägliche Fernsehnutzung in Minuten. Je älter ein Nutzer ist, desto mehr nutzt er das Fernsehen. Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable TV-Konsum um 2,08 Messeinheiten (hier: Minuten) zu. Dieser Zusammenhang ist mit p=.000 statistisch höchst signifikant.
 
 Auch die zweite Variable, die wir ins Regressionsmodell eingebracht haben, das Vertrauen in das Fernsehen, hat einen signifikanten, positiven Effekt auf den TV-Konsum der Befragten: Mit jedem Skalenpunkt steigt der TV-Konsum um 5,1 Minuten an. Der Einfluss des TV-Vertrauens ist hoch signifikant.
 
-Schließlich hat auch der Bildungsabschluss einen höchst signifikanten Einfluss auf die Intensität der Fernsehnutzung - dieser ist allerdings negativ, so dass der TV-Konsum mit steigender Messeinheit des Bildungsniveaus sinkt. Um das zu inhaltlich interpretieren, ist es sinnvoll, sich die Skalierung der Variable genauer anzuschauen: Je höher der Wert, desto höher der Abschluss (z.B. Bildung: 1=ohne Abschluss; 3=Mittlere Reife; 5=Abitur). Wie unser Regressionsmodell zeigt, geht also ein höherer Abschluss mit einem niedrigeren TV-Konsum einher. 
+Schließlich hat auch der Bildungsabschluss einen höchst signifikanten Einfluss auf die Intensität der Fernsehnutzung - dieser ist allerdings negativ, so dass der TV-Konsum mit steigender Messeinheit des Bildungsniveaus sinkt. Um das zu inhaltlich interpretieren, ist es sinnvoll, sich die Skalierung der Variable genauer anzuschauen: Je höher der Wert, desto höher der Abschluss (z.B. Bildung: 1=ohne Abschluss; 3=Mittlere Reife; 5=Abitur). Wie unser Regressionsmodell zeigt, geht also ein höherer Abschluss mit einem niedrigeren TV-Konsum einher.
 
 Im Output sehen wir nun auch, dass sich unser R2 (im Vergleich zur einfachen Regression oben) deutlich verbessert hat - es liegt jetzt bei 13,8 Prozent Varianzaufklärung. Das ist schon ordentlich, aber es muss immer noch weitere Faktoren geben, die die TV-Nutzung substantiell erklären können. Welche das sein können, können Sie ja mal selbst ausprobieren. Fügen Sie dazu einfach weitere - theoretisch plausible! - Kandidaten in das Regressionsmodell ein, indem sie sie durch ein "+"-Zeichen in ihre Modellfunktion integrieren (Achtung, vorher müssen Sie die zusätzlichen Variablen natürlich in ihrem Datenobjekt definieren und ggf. aufbereiten).
 
-## Zusätzliche Voraussetzungsprüfung bei der multiplen linearen Regression: Liegt Multikollinearität vor?
+### Zusätzliche Voraussetzungsprüfung bei der multiplen linearen Regression: Liegt Multikollinearität vor?
 
-Die multiple lineare Regression erfordert *alle Voraussetzungen*, die für die einfache Regression auch verlangt sind - wie Sie die Voraussetzungen der Regressionaanalyse prüfen, haben Sie ja in den letzten Teilkapiteln gelernt - hier können Sie das noch einmal nachlesen: 
+Die multiple lineare Regression erfordert *alle Voraussetzungen*, die für die einfache Regression auch verlangt sind - wie Sie die Voraussetzungen der Regressionaanalyse prüfen, haben Sie ja in den letzten Teilkapiteln gelernt - hier können Sie das noch einmal nachlesen:
 
-[Link](XXX)
-***LINK EINFÜGEN***
+[Link](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_7.3.html)
 
 Zusätzlich müssen Sie bei einer multiplen Regresssion allerdings noch prüfen, ob *Multikollinearität* vorliegt. Multikollinearität bedeutet, dass mindestens einer unserer Prädiktoren durch einen oder mehrere der anderen Prädiktoren vorhergesagt werden kann. Die Prädiktoren wären in diesem Fall *nicht unabhängig* voneinander, sondern würden hoch miteinander korrelieren und hätten damit sozusagen *keine selbstständige Erklärungskraft* im Modell.
 
@@ -91,10 +94,9 @@ Ob Multikollinearität vorliegt, können wir durch den *VIF-Wert (variance infla
 check_collinearity(model2)
 ```
 
-### Inhaltliche Interpretation
+#### Inhaltliche Interpretation
 
 Die VIF-Werte liegen zwischen 0 und 5 (sogar alle bei 1); wir können daher davon ausgehen, dass *keine Multikollinearität* vorliegt (grün = "Low Correlation").
-
 
 ### Vorhersage des multivariaten Modells für die tägliche TV-Nutzung durch Alter, Bildung und Vertrauen in das Fernsehen
 
@@ -104,17 +106,15 @@ Auch für die Kombination verschiedener Merkmale bzw. unabhängiger Variablen k�
 predict.lm(model2, data.frame(Alter = c(25, 25), Bildung = c(0,5), TV_Vertrauen = c(7, 1)))
 ```
 
-### Inhaltliche Interpretation: Was bedeutet der Output?
+#### Inhaltliche Interpretation: Was bedeutet der Output?
 
-Eine Person, die 25 Jahre alt ist und keinen Schulabschluss, aber dafür sehr großes Vertrauen in das Fernsehen hat, hat einen prognostizierten täglichen TV-Konsum von 249 Minuten. Eine Person, die ebenfalls 25 Jahre alt ist und Abitur hat, dem Fernsehen aber "überhaupt kein Vertrauen" entgegenbringt, hat einen täglichen prognostizierten Fernsehkonsum von 86 Minuten. 
+Eine Person, die 25 Jahre alt ist und keinen Schulabschluss, aber dafür sehr großes Vertrauen in das Fernsehen hat, hat einen prognostizierten täglichen TV-Konsum von 249 Minuten. Eine Person, die ebenfalls 25 Jahre alt ist und Abitur hat, dem Fernsehen aber "überhaupt kein Vertrauen" entgegenbringt, hat einen täglichen prognostizierten Fernsehkonsum von 86 Minuten.
 
-
-## Multiple Regression mit Dummy-Codierung der kategorialen Variable "sex"
+### Multiple Regression mit Dummy-Codierung der kategorialen Variable "sex"
 
 Eine Besonderheit schauen wir uns nun noch zum Schluss an: Die lineare Regression ist ein Verfahren für *metrische Daten*. Sie untersucht den Zusammenhang zwischen einer metrischen abhängigen Variable und mindestens einer metrischen unabhängigen Variable. In den bisherigen Regressionsanalysen haben wir mit metrischen und quasi-metrischen Variablen gearbeitet, die die Voraussetzung erfüllen, dass eine Regression gerechnet werden kann. Das ist auch der übliche Fall. Es gibt aber die "Ausnahme", dass auch kategorische (v.a. binäre) Variablen bei der Regressionsanalyse grundsätzlich eingesetzt werden können, wenn diese durch eine *Dummy-Coding* passend gemacht werden. Und diesen Fall schauen wir un nun am Beispiel der Variable "Geschlecht" an. Dazu müssen wir die Variable aber als *binär codiert* bzw. *dichotom* betrachten - d.h. wir behandeln sie so, als hätten wir hier nur 2 Ausprägungen.
 
-
-## Vorbereitung der Daten zum Zusammenhang von Alter, Bildung, Vertrauen ins TV, Geschlecht und TV-Konsum
+#### Vorbereitung der Daten zum Zusammenhang von Alter, Bildung, Vertrauen ins TV, Geschlecht und TV-Konsum
 
 Wir wollen das biologische Geschlecht (sex) als unabhängige Variable mit in unser Regressionsmodell aufnehmen. Bei "sex" haben wir aber das Problem, dass diese Variable nicht metrisch skaliert ist. Es handelt sich vielmehr um eine kategoriale Variable (mit 3 Ausprägungen). Dennoch können wir die Variable mit einem "Trick" in die Regressionsanalyse einbringen - Sie müssen diese dann aber durch Dummy-Coding passend machen. Hier wollen uns nun mal anschauen, wie das funktioniert. Dazu müssen wir die Variable mittels mutate-Befehl aber erst einmal umcodieren und dadurch in eine dichotome VAriable verwandeln.
 
@@ -122,7 +122,7 @@ Durch die Dummy-Codierung wird die kategoriale Variable in zwei Gruppen überset
 
 PS: Die Variable als numerischen Wert zu behandeln, ist in unserem Fall etwas kompliziert, weil diese eine Faktorvariable war, die wir zuerst in eine Charaktervariable umwandeln mussten.
 
-## Dummy-Codierung der Variable sex
+#### Dummy-Codierung der Variable sex
 
 ```{r}
 daten <- daten %>%
@@ -130,16 +130,16 @@ daten <- daten %>%
   mutate(sex_d = case_when(sex == 1 ~ 0, sex == 2 ~ 1))
 ```
 
-## Prüfung der Umcodierung zur Dummy-Variablen
+#### Prüfung der Umcodierung zur Dummy-Variablen
 
 ```{r}
 häufigkeitstabelle <- table(daten$sex_d)
 print(häufigkeitstabelle)
 ```
+
 Die Dummy-Codierung war erfolgreich - wir haben nun 1546 Befragte mit der Ausprägung 0 (männlich) sowie 1569 Befragte mit der Ausprägung 2 (weiblich).
 
-
-## Regressionsmodell zum Zusammenhang von Alter, Bildung, TV-Vertrauen, Geschlecht und TV-Konsum spezifizieren und anzeigen lassen
+#### Regressionsmodell zum Zusammenhang von Alter, Bildung, TV-Vertrauen, Geschlecht und TV-Konsum spezifizieren und anzeigen lassen
 
 In die bereits bekannte Regressionsfunktion lm() fügen wir im hinteren Teil (d.h. hinter der Tilde) nun einfach die weitere unabhängige Variable sex_d ein, indem wir sie mit einem + Zeichen anhängen.
 
@@ -148,9 +148,8 @@ model3 <- lm(TV_Konsum ~ Alter + Bildung + TV_Vertrauen + sex_d, data = daten)
 summary(lm.beta(model3))
 ```
 
-## Inhaltliche Interpretation des Outputs: Was bedeutet das Ergebnis?
+#### Inhaltliche Interpretation des Outputs: Was bedeutet das Ergebnis?
 
 Gender hat *keinen* signifikanten Einfluss auf den TV-Konsum. Wenn es einen hätte, wäre der Einfluss geringer als bei Alter und Ausbildungsjahren (ersichtlich an der Größe des standardisierten beta-Koeffizienten). Wichtig: Gender ist als eine Dummy-Variable in 0=männlich und 1=weiblich codiert, deshalb ist der Estimate hier etwas schwieriger zu lesen. Die Frauen sind als 1 codiert und stellen hier die Vergleichsgruppe zur Referenzgruppe der Männer (=0) dar.
 
 Frauen haben eine um (4,6) Minuten höheren TV-Konsum als Männer (wobei dieser Befund statistisch ja nicht signifikant ist). (Nicht wundern, wenn Ihr Ergebnis leicht anders ausfällt: Der Wert variiert entsprechend der gezogenen Zufallsstichprobe.)
-
