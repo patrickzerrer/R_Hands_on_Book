@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Bilder/favicon-32x32.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -97,6 +98,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Vorbereiten der R-Umgebung">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png">
+<meta property="og:image:height" content="597">
+<meta property="og:image:width" content="1065">
+<meta name="twitter:title" content="Vorbereiten der R-Umgebung">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png">
+<meta name="twitter:image-height" content="597">
+<meta name="twitter:image-width" content="1065">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -136,11 +148,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/patrickzerrer/R_Hands_on_Book" rel="" target=""><i class="bi bi-github" role="img">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/ZeMKI_Bremen" rel="" target=""><i class="bi bi-twitter" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -214,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">klassische Formen von Datensätzen</span></a>
+ <span class="menu-text">Einlesen von Datensätzen in unterschiedlichen Formaten</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -284,13 +291,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Streuungsmaße: Spannweite, Standartabweichung, Varianz</span></a>
+ <span class="menu-text">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Verteilungen und deren Visualisierung</span></a>
+ <span class="menu-text">Berechnung und Interpretation von Verteilungen</span></a>
   </div>
 </li>
       </ul>
@@ -371,19 +378,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Einführung</span></a>
+ <span class="menu-text">Pearson Chi-Quadrat-Test &amp; Rangkorrelation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei zwei Variablen mittels Korrelation und Regression</span></a>
+ <span class="menu-text">Korrelation &amp; Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
+ <span class="menu-text">Prüfung der Voraussetzungen bei der linearen Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die multiple Regression</span></a>
   </div>
 </li>
       </ul>
@@ -398,14 +411,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#vorbereitende-schritte" id="toc-vorbereitende-schritte" class="nav-link active" data-scroll-target="#vorbereitende-schritte"><span class="header-section-number">1</span> Vorbereitende Schritte</a>
-  <ul class="collapse">
-  <li><a href="#das-anlegen-eines-r-projekts" id="toc-das-anlegen-eines-r-projekts" class="nav-link" data-scroll-target="#das-anlegen-eines-r-projekts"><span class="header-section-number">1.1</span> Das Anlegen eines R-Projekts</a></li>
-  <li><a href="#das-working-dictonary-wd" id="toc-das-working-dictonary-wd" class="nav-link" data-scroll-target="#das-working-dictonary-wd"><span class="header-section-number">1.2</span> Das Working-Dictonary (wd)</a></li>
-  <li><a href="#das-zugreifen-auf-dateien-und-datensätze" id="toc-das-zugreifen-auf-dateien-und-datensätze" class="nav-link" data-scroll-target="#das-zugreifen-auf-dateien-und-datensätze"><span class="header-section-number">1.3</span> Das Zugreifen auf Dateien und Datensätze</a></li>
-  <li><a href="#die-session" id="toc-die-session" class="nav-link" data-scroll-target="#die-session"><span class="header-section-number">1.4</span> Die Session</a></li>
-  <li><a href="#hilfe-zur-selbsthilfe" id="toc-hilfe-zur-selbsthilfe" class="nav-link" data-scroll-target="#hilfe-zur-selbsthilfe"><span class="header-section-number">1.5</span> Hilfe zur Selbsthilfe</a></li>
-  </ul></li>
+  <li><a href="#die-r-studio-cloud-der-universität" id="toc-die-r-studio-cloud-der-universität" class="nav-link active" data-scroll-target="#die-r-studio-cloud-der-universität"><span class="header-section-number">1</span> Die R-Studio-Cloud der Universität</a></li>
+  <li><a href="#das-anlegen-eines-r-projekts" id="toc-das-anlegen-eines-r-projekts" class="nav-link" data-scroll-target="#das-anlegen-eines-r-projekts"><span class="header-section-number">2</span> Das Anlegen eines R-Projekts</a></li>
+  <li><a href="#das-working-dictonary-wd" id="toc-das-working-dictonary-wd" class="nav-link" data-scroll-target="#das-working-dictonary-wd"><span class="header-section-number">3</span> Das Working-Dictonary (wd)</a></li>
+  <li><a href="#das-zugreifen-auf-dateien-und-datensätze" id="toc-das-zugreifen-auf-dateien-und-datensätze" class="nav-link" data-scroll-target="#das-zugreifen-auf-dateien-und-datensätze"><span class="header-section-number">4</span> Das Zugreifen auf Dateien und Datensätze</a></li>
+  <li><a href="#die-session" id="toc-die-session" class="nav-link" data-scroll-target="#die-session"><span class="header-section-number">5</span> Die Session</a></li>
+  <li><a href="#hilfe-zur-selbsthilfe" id="toc-hilfe-zur-selbsthilfe" class="nav-link" data-scroll-target="#hilfe-zur-selbsthilfe"><span class="header-section-number">6</span> Hilfe zur Selbsthilfe</a></li>
   </ul>
 </nav>
     </div>
@@ -441,17 +452,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Bild generiert von Midjourney</figcaption>
 </figure>
 </div>
-<section id="vorbereitende-schritte" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Vorbereitende Schritte</h1>
-<p>Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten wir uns zunächst einige Grundlagen widmen Wir beschäftigen uns im Folgenden mit einigen fundamentalen Begriffen, deren Funktionsweisen wir kennen sollten - das erleichtert uns zumindest die Arbeit deutlich und vermeidet wahrscheinlich den ein oder anderen Fehler samt dazugehörigen frustrierten Verfluchen des Kurses und R.</p>
+<p>Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten wir uns zunächst einige Grundlagen widmen. Wir beschäftigen uns im Folgenden mit einigen fundamentalen Begriffen, deren Funktionsweisen wir kennen sollten - das erleichtert uns zumindest die Arbeit deutlich und vermeidet wahrscheinlich den ein oder anderen Fehler samt dazugehörigen frustrierten Verfluchen des Kurses und R.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/mDj__dc71yo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+</div>
+</div>
 <p>Lasst uns Beginnen und Schritt für Schritt die wichtigsten Punkte durchgehen, die ihr zur Vorbereitung eures Analyse-Projekts machen solltet.</p>
-<section id="das-anlegen-eines-r-projekts" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="das-anlegen-eines-r-projekts"><span class="header-section-number">1.1</span> Das Anlegen eines R-Projekts</h2>
+<section id="die-r-studio-cloud-der-universität" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Die R-Studio-Cloud der Universität</h1>
+<p>Falls ihr an der Universität Bremen studiert könnt ihr den Service des Zentrum für Multimedia in der Lehre nutzen indem ihr euch <a href="https://jupyter.uni-bremen.de">hier</a> mit eurer Uni-Kennung einloggt.</p>
+<p>Als nächstes habt ihr die Möglichkeit die für euren Kurs vorgesehene Programmierumgebung auszuwählen. In unserem Fall ist das die “Einführung in quantitative Forschungsdesigns und Datenanalyse”. Mit der Auswahl wird eure eigenen Programmierumgebung eingerichtet, auf dieser könnt ihr die Schaltfälche <code>RStudio</code> auswählen.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Skript_1_4_Screenshot7.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Screenshot RStudio</figcaption>
+</figure>
+</div>
+<p>Mit dem Klick gelangt ihr in R-Studio.</p>
+</section>
+<section id="das-anlegen-eines-r-projekts" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Das Anlegen eines R-Projekts</h1>
 <p>Starten wir zunächst mit dem Anlegen eines sogenannten R-Projekts. RStudio-Projekte ermöglichen es uns alle mit einem Projekt verbundenen Dateien an einem Ort zu speichern. Das umfasst Datensätze, R-Skripte, Ergebnisse, Abbildungen, Berichte usw. Projekte sind bereits in RStudio integriert.</p>
 <p><img src="Bilder/Skript_1_4_Screenshot1.png" class="img-fluid" alt="Screenshot RStudio"> Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button <code>New Project</code> ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.</p>
+<p>In eurem Fall könnt ihr euch direkt alle notwendigen Materialen und Skripte für das erfolgreiche Bearbeiten dieses Kurses in R-Studio laden. Hierfür geht ihr in der rechts oberen Ecke des Nutzer:innen Interfaces auf den Button <code>New Project</code> und wählt dann <code>Version Control</code> aus.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Skript_1_4_Screenshot8.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Screenshot RStudio</figcaption>
+</figure>
+</div>
+<p>Im nächsten Schritt wählt ihr dann <code>Git</code> aus.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Skript_1_4_Screenshot9.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Screenshot RStudio</figcaption>
+</figure>
+</div>
+<p>Und fügt unter <em>Respository URL</em> die folgende Adresse ein: <a href="https://github.com/patrickzerrer/R_Hands_on_Book" class="uri">https://github.com/patrickzerrer/R_Hands_on_Book</a>.</p>
+<p>Mit einem Klick auf den Button <code>Create Project</code> werden alle notwendigen Materialien und Ordner direkt in euer eigenes neugeschaffenens R-Projekt geladen.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Skript_1_4_Screenshot10.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Screenshot RStudio</figcaption>
+</figure>
+</div>
+<p>Ihr habt jetzt alle Materialien und Skripte und könnt mit dem Kurs beginnen.</p>
 </section>
-<section id="das-working-dictonary-wd" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="das-working-dictonary-wd"><span class="header-section-number">1.2</span> Das Working-Dictonary (wd)</h2>
+<section id="das-working-dictonary-wd" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Das Working-Dictonary (wd)</h1>
 <p>Im Allgemeinen ist das Arbeitsverzeichnis (das Working-Dictonary, wd) der Ort, an dem R nach Dateien (vor allem nach Datensätzen) sucht. Wenn ihr kein Projekt verwenden, müsst ihr wahrscheinlich durch die Funktion <code>setwd</code> oder das Interface (siehe Screenshot) ein Working-Dictonary setzen, bevor ihr euren R-Code ausführen könnt.</p>
 <p><img src="Bilder/Skript_1_4_Screenshot2.png" class="img-fluid" alt="Screenshot RStudio"> Wenn ihr beispielsweise den Code verwenden möchtet, den wir euch in diesem Kurs zu Verfügung stellen, müsst ihr darauf achten, dass ihr die Dateipfade auf euer Working-Dictonary und Ordnerstruktur anpasst.</p>
 <div class="cell">
@@ -460,15 +520,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-1">Der Bereich in Anführungszeichen gibt den Dateipfad an. Damit sagt ihr R, wo sich die zu ladende Datei befindet.</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">Der Bereich in Anführungszeichen gibt den Dateipfad an. Damit sagt ihr R, wo sich die zu ladende Datei befindet.</span>
 </dd>
 </dl>
 </div>
 </div>
 <p>In dem Beispiel ist im Working-Dictonary des Projekts ein Unterordner mit der zu ladenden Datei. Der Dateipfad befindet sich im R-Code in den Anführungszeichen, also <code>"Datensatz/Allbus_2021.dta"</code>. Der erste Teil <code>"Datensatz/"</code> gibt an, dass sich die Datei in einem Ordner befindet, der Datensatz heißt. Der zweite Teil <code>Allbus_2021.dta"</code> gibt den eigentlichen Dateinamen mit der entsprechend Dateiendung an (also .dta). Wahrscheinlich müsst ihr den R-Code entsprechend anpassen.</p>
 </section>
-<section id="das-zugreifen-auf-dateien-und-datensätze" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="das-zugreifen-auf-dateien-und-datensätze"><span class="header-section-number">1.3</span> Das Zugreifen auf Dateien und Datensätze</h2>
+<section id="das-zugreifen-auf-dateien-und-datensätze" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Das Zugreifen auf Dateien und Datensätze</h1>
 <p>Bevor wir allerdings auf Dateien und Datensätze zugreifen können, müssen wir diese zunächst in unseren Projekt-Ordner (also in das Working-Dictonary) verschieben. Falls ihr für diesen Kurs die Desktop-Version von RStudio nutzt, könnt ihr hier einfach die entsprechenden Datein auf eurem lokalen Rechner in das zuvor von euch festgelegte Working-Dictonary kopieren. Wenn ihr die Cloud-Version von RStudio nutzt, müsst ihr hier die Dateien und Datensätze zunächst in die Cloud laden. Hierfür könnt ihr auf den <code>Upload</code>-Button in der unteren rechten Ecke des Interfaces gehen und in dem sich öffnenden Fenster die entsprechende Datei auswählen.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -478,8 +538,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Sobald ihr durch das Klicken von OK bestätigt habt, wird die Datei hochgeladen und erscheint in dem unteren rechten Fenster im <code>Files</code>-Reiter.</p>
 </section>
-<section id="die-session" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="die-session"><span class="header-section-number">1.4</span> Die Session</h2>
+<section id="die-session" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Die Session</h1>
 <p>Die sogenannte <em>Session</em> wurde bereits mehrmals kurz erwähnt. Bei der <em>Session</em> handelt es sich um eine laufende Instanz des R-Programms, die ihr beenden und neustarten könnt. Das macht insbesondere dann Sinn, wenn ihr die falsche Version eines Pakets installiert habt oder ihr einen sauberen Start für euren R Code haben möchtet. Durch einen Neustart der <em>Session</em> könnt ihr euch sicher sein, dass ihr nicht ausversehen irgendwelche zuvor verwendeten Pakete oder Berechnungen mitnehmt.</p>
 <p>Ihr könnt die <em>Session</em> mit der <code>.rs.restartR</code> Funktion in der Konsole neustarten. Alternativ könnt ihr im R Studio Interface auf <code>Session</code>und <code>Restart R</code> gehen.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -490,8 +550,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Ein kurze Mitteilung in der Konsole gibt euch an, dass die <em>Session</em> neu gestartet wurde.</p>
 </section>
-<section id="hilfe-zur-selbsthilfe" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="hilfe-zur-selbsthilfe"><span class="header-section-number">1.5</span> Hilfe zur Selbsthilfe</h2>
+<section id="hilfe-zur-selbsthilfe" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Hilfe zur Selbsthilfe</h1>
 <p>Ihr werdet im Laufe des Kurses immer wieder mit Fehlermeldungen zu tun haben. Hier ist es wichtig einen kühlen Kopf zu bewahren und möglichst systematisch zu versuchen den Fehler zu finden und zu beheben. Der Umgang mit Fehlern ist ein großer und wichtiger Teil bei jeglicher Programmierung und es gibt hier ein paar Tipps, wie man damit am besten umgeht.</p>
 <ol type="1">
 <li><p><em>Atmen</em>: Bleib ruhig und atme ein paar mal tief durch, gerade wenn es nicht der erste Fehler ist der dir heute begegnet.</p></li>
@@ -505,7 +565,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -810,13 +869,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>
-    <div class="nav-footer-right">
+    <div class="nav-footer-left">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>   
+    <div class="nav-footer-center">
       &nbsp;
     </div>
+    <div class="nav-footer-right"><img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
 

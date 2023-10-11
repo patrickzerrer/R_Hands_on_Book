@@ -1,342 +1,155 @@
 ---
-title: "Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression"
+title: "Die multiple Regression"
 author: "Stephanie Geise"
 toc: true
 number-sections: true
 highlight-style: pygments
+execute: 
+  warning: false
 format:
   html:
     code-fold: false
     code-line-numbers: true
+    code-annotations: hover
+editor_options: 
+  chunk_output_type: inline
 ---
 
-Das Überprüfen von Zusammenhängen bei mehr als zwei Variablen
+![Eine Halle voller Maschinen, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_factory_hall_full_of_machines_people_e0656824-d2d4-43ae-bebf-110186024d79.png)
 
-# Das Überprüfen von Zusammenhängen bei mehr als zwei intervalskalierten Variablen
+In diesem Teilkapitel lernen wir nun - wie angekündigt - die *multiple lineare Regression* kennen, die es erlaubt, Zusammenhänge zwischen *mehreren x-Variablen* und einer y-Variablen zu analysieren.
 
-## Analyselogik, Ziel und Einsatzgebiete einer multiplen Regressionsanalyse
+#### Vorbereitung und Laden der Daten
 
-In diesem Notebook gehen wir (wie angekündigt) zunächst näher auf die Prüfung der **Voraussetzungen einer Regressionsanalyse** ein. Dann lernen wir die **multiple lineare Regression** kennen, die es erlaubt, Zusammenhänge zwischen mehreren x-Variablen und einer y-Variablen zu analysieren.
+Zunächst laden wir wieder die Pakete des tidyverse und das Pakete broom um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket performance, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete lmtest und sandwich, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten). Die Regression rechnen wir wieder auf Basis Allbus-Datensatzes, den wir entsprechend einlesen:
 
-### Vorbereitung und Laden der Daten
+```{r}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(tidyverse, lm.beta, lmtest, performance, easystats, haven, broom, see, haven, sandwich)
+theme_set(theme_classic())
 
-Zunächst laden wir wieder die Pakete des tidyverse und das Pakete broom um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket performance, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete lmtest und sandwich, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten). Die Regression rechnen wir wieder auf Basis des ESS8_vier_laender-Datensatzes, den wir entsprechend einlesen:
+daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 
-```{r Laden der notwendigen Pakete}
-
-#Laden der notwendigen Pakete
-#install.packages("lm.beta")
-#install.packages("lmtest")
-#install.packages("broom") 
-#install.packages("performance")
-#install.packages("see")
-#install.packages("sandwich")
-
-library(tidyverse)
-library(lm.beta)
-library(broom) # hier stecken einige Befehle zur Bereinigung der Daten und der Modelloutputs drin
-library(performance)
-library(see)
-library(lmtest)
-library(sandwich)
-
-#Daten laden und zum Datenobjekt "daten" zuweisen
-daten <- read_rds("Datensatz/ESS8_vier_laender.rds")
-
-#Visualisierungshintergrund der Grafiken in ggplot festlegen
 theme_set(theme_minimal())
-
-# Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
 options(scipen = 999) 
-
 ```
 
-### Data Management
+#### Erzeugen eines Teildatensatzes & Umbenennen der Variablen
 
-Als abhängige Variable nutzen wir für unser Regressionsmodell wieder die Internetnutzung (netustm); als unabhängige Variablen schauen wir uns wie beim letzten Mal das Alter, sowie heute zusätzlich die Rezeptionszeit von politischen Nachrichten (nwspol) sowie das Geschlecht der Befragten (gndr) an. Damit der Output etwas nachvollziehbarer wird, benennen wir diese Variablen mit dem rename-Befehl um.
-
-Dann setzen wir den drop_na-Befehl, um alle Fällen mit fehlenden Werten zu entfernen (in der Klammer spezifizieren wir wieder, auf welche Variablen sich der Befehl beziehen soll). Das modifizierte Datenset weisen wir einem neuen Datenobjekt zu: daten_mod2
-
-Schließlich nutze ich den slice_sample-Befehl, um aus unseren 8432 Fällen ein Zufallssample von n=100 Fällen zu ziehen, weil mir das die visuelle Interpretation erleichtert (diesen Befehl könnten wir hier auch weglassen, dann bekommen wir unten aber sehr sehr viele Datenpunkt in unserem Streudiagramm - probieren Sie es mal aus!)
-
-```{r Daten zum Zusammenhang von Alter und Internetnutzung alternativ vorbereiten}
-daten_mod <- daten %>% 
-  rename(internetnutzung = netustm,
-         alter = agea,
-         politische_Nachrichtenrezeption = nwspol,
-         gender = gndr) %>% 
-  drop_na(c(internetnutzung, alter, politische_Nachrichtenrezeption, gender)) %>% 
-slice_sample(n = 100) 
-daten_mod
-
-```
-
-### Erinnerung: Einfache lineare Regression mit Alter als UV und Internetnutzung als AV mit lm (=linear models)
-
-```{r Empirisches Modell zum Zusammenhang Alter und Internetnutzung berechnen}
-model <- lm(internetnutzung ~ alter, data = daten_mod) 
-summary(model) # klassischer Output mit relevanten Kennzahlen
-#summary(lm.beta(model)) # klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten
-```
-
-Mit diesem Regressionsmodell haben wir übeprüft, ob das Alter die Internetnutzung erklären kann. Im Output sehen wir, dass das Alter einen signifikanten negativen Einfluss auf die Internetnutzung. Je älter ein Nutzer ist, desto weniger nutzt er das Internet. Die Regressionsanalyse lässt dabei auch eine Quantifizierung dieses Zusammenhangs zu: Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable Internetnutzung um "den Estimate-Wert" in Messeinheiten (hier: -4.296 Minuten) ab. Dieser Zusammenhang ist mit p \> .05 statistisch signifikant.
-
-Soweit die Wiederholung. Beginnen wir nun mit dem Teil A dieses Skripts, nämlich der Prüfung der **Voraussetzungen einer Regressionsanalyse**. Vielleicht wundern Sie sich, warum wir die Voraussetzungen erst im zweiten Schritt prüfen? Sie haben Recht: Eigentlich würden wir erst die Voraussetzungen prüfen, dann das Modell schätzen. Wenn wir unser Modell aber schon geschätzt haben, können wir Funktionen zur Prüfung der Voraussetzungen auf unser gesamtes Modell anwenden (bzw. auf das entsprechende Datenobjekt "model") - und das erspart uns eine Menge "Handarbeit" mit vielen kleinen Zwischenschritten. Zum Beispiel müssten wir für die Prüfung der Voraussetzungen, die die Residuen betreffen, diese erst einmal berechnen und in einer neuen Variable abspeichern. Es ist also weniger Aufwand, die Voraussetzungen ex post zu prüfen.
-
-### Erinnerung: Voraussetzungen der einfachen linearen Regression:
-
-Bevor wir zum statistischen Teil kommen, lassen Sie uns noch einmal Revue passieren, was die wichtigsten Voraussetzungen der einfachen linearen Regression sind: 1) (quasi-)metrisches Skalenniveau 2) Linearität des Zusammenhangs zwischen x und y 3) Homoskedastizität der Residuen: Varianzen der Residuen der prognostizierten abhängigen Variablen sind gleich 4) Unabhängigkeit der Residuen: ansonsten Autokorrelation, die Aussagekraft reduziert 5) Normalverteilung der Residuen 6) Keine Ausreißer in den Daten, da schon einzelne Ausreißer einen sonst signifikanten Trend zunichte machen können (ggf. also eliminieren)
-
-### TEIL A: Prüfung der Voraussetzungen einer Regressionsanalyse
-
-#### Prüfung der Voraussetzungen 1 und 2: metrisches Skalenniveau & Linearität des Zusammenhangs
-
-Ob 1.) die Variablen, die wir in das Regressionsmodell einbeziehen wollen (Alter, Internet-Nutzung) metrisch sind, und ob 2.) ein linearer Zusammenhang besteht, haben wir in der letzten Woche bereits überprüft. Für die Prüfung nach der Linearität des Zusammenhangs zwischen x und y hatten wir ein Streudiagramm mit der geschätzten Regressionsgeraden erzeugt.
-
-#### Prüfung der Voraussetzungen 3: Homoskedastizität der Residuen
-
-Lineare Modelle setzen eine konstante Fehlervarianz (Homoskedastizität) voraus. Eine weitere Bedingung der Regressionanalyse ist also, dass die Varianzen der Residuen der prognostizierten abhängigen Variablen für alle Werte des Prädiktors gleich sind, so dass das Modell gleich gute Vorhersagen über alle Werte machen kann. Liegt Homoskedastizität vor, sind die Abweichungen der vorhergesagten Werte von den gemessenen Werten konstant gleich groß -- unabhängig wie hoch oder niedrig der Wert des Prädiktors ist. Das ist eine wichtige Voraussetzung, denn das Gegenteil - Heterokedastizität der Residuen - würde zur Ineffizienz unserer Schätzung führen! Denn die Standardfehler der Regressionskoeffizienten werden bei vorhandener Heteroskedastizität nach oben verzerrt geschätzt. Das Ergebnis wäre, dass unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben liegt, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen.
-
-Das klingt kompliziert? Kann sein, aber keine Panik: Mit der Funktionen *check_heteroscedasticity()* aus dem performance-package können wir sehr einfach prüfen, ob diese Annahme verletzt wurde.
+Als abhängige Variable nutzen wir für unser Regressionsmodell wieder die TV-Nutzung (lm02); als unabhängige Variablen schauen wir uns wie beim letzten Mal das Alter, sowie heute zusätzlich die Variablen Bildung (educ) und Vertrauen ins Fernsehen (pt09). Damit der Output etwas nachvollziehbarer wird, benennen wir diese Variablen mit dem rename-Befehl zunächst wieder um. Außerdem filtern wir auch wieder die missings heraus (z.B. -9=Keine Angabe):
 
 ```{r}
-check_heteroscedasticity(model)
+daten <- daten %>%
+  rename(TV_Konsum = lm02)%>%
+  rename(TV_Vertrauen= pt09)%>%
+  rename(Alter = age)%>%
+  rename(Bildung = educ)%>%
+  filter(between(TV_Konsum, 0, 1500))%>%
+  filter(between(TV_Vertrauen, 1, 7))%>%
+  filter(between(Alter, 18, 100))%>%
+  filter(between(Bildung, 1, 5))
 ```
 
-Die Interpretation des Outputs ist einfach, weil R hier uns eine sehr konkrete Aussage zur Überpüfung der Annahme macht: Bei grüner Schrift ist das Ergebnis in Ordnung, d.h. die Fehlervarianz scheint homoskedastisch, denn p wäre dann nicht signifikant. Bei roter Schrift ist die Fehlervarianz heteroskedastisch und p ist signifikant (p \< 0.05). In diesem Fall liegt unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen. Das müssen wir dann bei der Interpretation der Daten berücksichtigen.
+## Erinnerung: Einfache lineare Regression mit Alter als UV und TV-Nutzung als AV mit lm (=linear models)
 
-Wie das ganze aussieht, können wir uns auch grafisch über die plot-Funktion anschauen. Dazu erzeugen wir ein Streudiagramm, das die vorhergesagten Werte und die Residuen enthält:
+Aus den letzten Sitzungen wissen wir bereits, dass das Alter einen signifikanten, positiven Einfluss auf die TV-Nutzung hat. Wir wissen aber auch, dass die TV-Nutzung nicht alleine über das Alter erklärt werden kann (weil unser R2 recht gering war).
 
 ```{r}
-plot(model, 1)
-plot(fitted.values(model), rstandard(model))
+model <- lm(TV_Konsum ~ Alter, data = daten) 
+summary(lm.beta(model))
 ```
 
-#### Was sehen wir im Plot?
+## Multiple lineare Regression mit Alter, Bildung sowie Vertrauen ins Fernsehen als UV und TV-Nutzung als AV mit lm (=linear models)
 
-Zunächst betrachten wir die Streuung der Punkte im Streudiagramm ohne Linie. Hier können wir bereits sehen, dass eine Zunahme der Streuung bei höheren Werten erkennbar ist, weil wir einen leicht nach rechts geöffneten Trichter haben. Das zweite Diagramm hilft zusätzlich mit einer roten Linie, die bei Homoskedastizität möglichst gerade wird. Ist sie wellig oder hat sie eine positive oder negative Steigung, können wir von Heteroskedastizität ausgehen. Genauere Auskunft gibt aber der oben gerechnete Test!
+Mit der *multiplen linearen Regression* wollen wir nun prüfen, welche weiteren unabhängigen Variablen die TV-Nutzung erklären könnten. Dazu bringen wir Vertrauen in das Fernsehen als möglicherweise zusätzlichen erklärenden Faktor in unser Regressionsmodell ein.
 
-#### Was tun bei Heteroskedastizität der Residuen? Berechnung von HC-Standard Errors!
-
-Liegt Heteroskedastizität vor, müssen Sie nicht verzweifeln: Erstens ist die Regressionsanalyse sehr robuts gegen die Verletzung ihrer Voraussetzungen. Zweitens können wir diesen Konflikt einigermaßen elegant auflösen, indem wir pauschal **robuste Standardfehler** schätzen lassen, so dass die Verletzung nicht mehr zu Schätzfehlern führt. In R gibt es (wie immer) verschiedene Wege Heteroskedastizität zu kontern. Eine einfache Lösung bietet das *lmtest-Paket* mit der *coeftest-Funktion* in Kombination mit dem Befehl *vcov()*, der zur Berechnung von heteroscedasticity consistent (HC) standard errors führt. So ermöglichen wir die Berechnung von **heteroskedastizitätskonsistenten bzw. heteroskedastizitätsrobusten Schätzern**. Nutzen wir diese Lösung, werden die Standardfehler nicht mehr verzerrt und damit auch nicht die t-Werte und p-Werte unserer Schätzung.
-
-PS: Zur Berechnung von heteroscedasticity consistent (HC) standard errors gibt es verschiedene HC-Funktionen. Hier nutzen wir zunächst Typ 3, die auch Hayes & Cai empfehlen (Hayes, A. F., & Cai, L. (2007): Using heteroskedasticity-consistent standard error estimators in OLS regression: An introduction and software implementation. Behavior research methods, 39(4), 709-722). HC4 (die zweite Variante) ist dann sinnvoll, wenn die Residuen nicht normalverteilt sind. (Wie wir später sehen werden, ist das bei uns leider auch der Fall)
+Als Funktion können wir weiterhin lm nutzen; die zusätzlichen Variablen können wir in der Klammer ganz simpel ergänzen, indem wir sie mit einem "+" hinten anhängen:
 
 ```{r}
-coeftest(model, vcov = vcovHC(model, type = "HC3"))
-#coeftest(model, vcov = vcovHC(model, type = "HC4")) # diese Variante wählen, wenn Residuen nicht normalverteilt sind 
+model2 <- lm(TV_Konsum ~ Alter + Bildung + TV_Vertrauen, data = daten) 
+summary(lm.beta(model2))
 ```
 
-Nach der Ausführung erhalten wir eine neue Regressionstabelle. Wenn Sie diese Tabelle mit dem obigen Output unseres Regressionsmodells abgleichen, sehen Sie, dass sich die eigentlichen Koeffizienten ("Estimates") nicht verändert haben - aber alle Werte, die rechts davon stehen, also Standardfehler (Std. Error), t-Werte und p-Werte. Diese sind nun um unsere Schätzfehler durch Heteroskedastizität korrigiert.
+### Inhaltliche Interpretation des Outputs: Was bedeutet das Ergebnis?
 
-Also weiter geht's!
+Der Output zeigt uns: Das Alter hat weiterhin einen positiven Einfluss auf die tägliche Fernsehnutzung in Minuten. Je älter ein Nutzer ist, desto mehr nutzt er das Fernsehen. Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable TV-Konsum um 2,08 Messeinheiten (hier: Minuten) zu. Dieser Zusammenhang ist mit p=.000 statistisch höchst signifikant.
 
-#### Prüfung der Voraussetzungen 3: Unabhängigkeit der Residuen
+Auch die zweite Variable, die wir ins Regressionsmodell eingebracht haben, das Vertrauen in das Fernsehen, hat einen signifikanten, positiven Effekt auf den TV-Konsum der Befragten: Mit jedem Skalenpunkt steigt der TV-Konsum um 5,1 Minuten an. Der Einfluss des TV-Vertrauens ist hoch signifikant.
 
-Auch die Annahme, dass die **Residuen unabhängig** voneinander sind, ist eine wichtige Voraussetzung der Regressionsanalyse. Unabhängigkeit der Residuen bedeutet inhaltlich: Wenn ich den Fehlerterm für eine bestimmte Beobachtung kenne, darf mir das keine Information über den Fehlerterm für die nächste Beobachtung liefern. Es darf also nichts systematisch zu einer Verzerrung meiner Beobachtungen (bzw. meiner Fehlerterme) führen. Ansonsten läge eine Autokorrelation der Fehlerterme vor, die die Aussagekraft des Modells reduzieren würde.
+Schließlich hat auch der Bildungsabschluss einen höchst signifikanten Einfluss auf die Intensität der Fernsehnutzung - dieser ist allerdings negativ, so dass der TV-Konsum mit steigender Messeinheit des Bildungsniveaus sinkt. Um das zu inhaltlich interpretieren, ist es sinnvoll, sich die Skalierung der Variable genauer anzuschauen: Je höher der Wert, desto höher der Abschluss (z.B. Bildung: 1=ohne Abschluss; 3=Mittlere Reife; 5=Abitur). Wie unser Regressionsmodell zeigt, geht also ein höherer Abschluss mit einem niedrigeren TV-Konsum einher.
 
-Das performance-package ist einfach soooo cool! Es beinhaltet auch die check_autocorrelation-Funktion, mit der wir diese Annahme sehr einfach prüfen können:
+Im Output sehen wir nun auch, dass sich unser R2 (im Vergleich zur einfachen Regression oben) deutlich verbessert hat - es liegt jetzt bei 13,8 Prozent Varianzaufklärung. Das ist schon ordentlich, aber es muss immer noch weitere Faktoren geben, die die TV-Nutzung substantiell erklären können. Welche das sein können, können Sie ja mal selbst ausprobieren. Fügen Sie dazu einfach weitere - theoretisch plausible! - Kandidaten in das Regressionsmodell ein, indem sie sie durch ein "+"-Zeichen in ihre Modellfunktion integrieren (Achtung, vorher müssen Sie die zusätzlichen Variablen natürlich in ihrem Datenobjekt definieren und ggf. aufbereiten).
+
+### Zusätzliche Voraussetzungsprüfung bei der multiplen linearen Regression: Liegt Multikollinearität vor?
+
+Die multiple lineare Regression erfordert *alle Voraussetzungen*, die für die einfache Regression auch verlangt sind - wie Sie die Voraussetzungen der Regressionaanalyse prüfen, haben Sie ja in den letzten Teilkapiteln gelernt - hier können Sie das noch einmal nachlesen:
+
+[Link](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_7.3.html)
+
+Zusätzlich müssen Sie bei einer multiplen Regresssion allerdings noch prüfen, ob *Multikollinearität* vorliegt. Multikollinearität bedeutet, dass mindestens einer unserer Prädiktoren durch einen oder mehrere der anderen Prädiktoren vorhergesagt werden kann. Die Prädiktoren wären in diesem Fall *nicht unabhängig* voneinander, sondern würden hoch miteinander korrelieren und hätten damit sozusagen *keine selbstständige Erklärungskraft* im Modell.
+
+Ob Multikollinearität vorliegt, können wir durch den *VIF-Wert (variance inflation factor)* ermitteln. Dieser darf nicht über 10 liegen, idealerweise auch nicht über 5. Um dies zu prüfen, nutzen wir den check_collinearity-Befehl aus dem Performance package:
 
 ```{r}
-check_autocorrelation(model)
+check_collinearity(model2)
 ```
 
-Auch hier ist der Output wieder sehr klar: Die Prüfung ergibt, dass die Residuen unabhängig und nicht autokorreliert sind (p = 0,588) - sonst hätten wir auch hier einen signifikanten p-Wert erhalten. Prima!
+#### Inhaltliche Interpretation
 
-#### Prüfung der Voraussetzungen 4: Normalverteilung der Residuen
+Die VIF-Werte liegen zwischen 0 und 5 (sogar alle bei 1); wir können daher davon ausgehen, dass *keine Multikollinearität* vorliegt (grün = "Low Correlation").
 
-Wenn die Residuuen nicht der Normalverteilungskurve folgen, sondern stattdessen eigene "Muster" in ihrer Verteilung aufweisen, kann dies darauf hindeuten, dass wir nicht alle Prädiktoren im Modell berücksichtigt haben und somit ein Teil der erklärenden Information in die Residuen übergeht, wo sie das erkennbare Muster "verursacht".
+### Vorhersage des multivariaten Modells für die tägliche TV-Nutzung durch Alter, Bildung und Vertrauen in das Fernsehen
 
-Auch die Voraussetzung, dass die Residuen normalverteilt sein sollen, lässt sich mit einer Funktion aus dem performance-Package sehr einfach überprüfen:
-
-```{r Prüfung der Normalverteilung}
-check_normality(model)
-```
-
-Auch hier ist das Ergebnis ohne Probleme zu interpretieren, weil R hier eine "direkte Ansage" macht. In unserem Fall ist die Voraussetzung der Normalverteilung verletzt, weil p signifikant wird. Das müssen wir bei der Interpretation der Daten berücksichtigen. Grundsätzlich können wir hier wieder darauf verweisen, dass die Regressionsanalyse robust gegen die Verletzung ihrer Voraussetzungen ist. Eine Alternative ist, dass wir ein **Bootstrapping-Verfahren** auf unsere Daten anwenden. Das aber nur zur Info, wenn Sie hier selbstständig weitermachen wollen - das würde jetzt etwas zu weit führen :) Außerdem werden wir unten bei der zusätzlichen visuellen Inspektion mit der Funktion *check_models* auch noch sehen, dass unsere Annahme nicht allzu schlimm verletzt ist.
-
-#### Prüfung der Voraussetzungen 5: Ausreißer im Modell
-
-Ausreißer sind ein Problem für viele parametrische Verfahren, denn einzelne Ausreißer können einen sonst signifikanten Trend zunichte machen (ggf. also eliminieren). Ob es in unserem Modell Ausreißer gibt, kann ich wieder mit einer sehr einfachen Funktion aus dem performance-Package prüfen, die auf das sogenannte "cooks distance" zurückgreift. Der Wert gibt mir Auskunft darüber, welchen Einfluss mögliche Ausreißer auf das Modell haben.
+Auch für die Kombination verschiedener Merkmale bzw. unabhängiger Variablen können wir uns über die predict.lm-Funktion Prognosen erstellen lassen. So können wir beispielsweise vergleichen, wie sich der Fernsehkonsum bestimmter "Idealtypen" von Befragten unterscheiden würde:
 
 ```{r}
-check_outliers(model)
+predict.lm(model2, data.frame(Alter = c(25, 25), Bildung = c(0,5), TV_Vertrauen = c(7, 1)))
 ```
 
-In unserem Fall gibt es keine Ausreißer, die das Modell beinträchtigen - vielleicht hätten wir sonst auch keinen signifikanten Zusammenhang beobachten können.
+#### Inhaltliche Interpretation: Was bedeutet der Output?
 
-#### Add-on: Visuelle Inspektion der Modellgüte bzw. der Modellannahmen
+Eine Person, die 25 Jahre alt ist und keinen Schulabschluss, aber dafür sehr großes Vertrauen in das Fernsehen hat, hat einen prognostizierten täglichen TV-Konsum von 249 Minuten. Eine Person, die ebenfalls 25 Jahre alt ist und Abitur hat, dem Fernsehen aber "überhaupt kein Vertrauen" entgegenbringt, hat einen täglichen prognostizierten Fernsehkonsum von 86 Minuten.
 
-Es gibt im performance-Package auch eine sehr coole Funktion, die mir eine visuelle Inspektion meiner Modellgüte bzw. verschiedenen Modellannahmen erlaubt (Normalität der Residuen, Normalität der zufälligen Effekte, lineare Beziehung, Homogenität der Varianz, Multikollinearität). Mit der check_model-Funktion kann ich mir dazu mehrere Grafiken im Überblick ausgeben lassen. YEAH! :)
+### Multiple Regression mit Dummy-Codierung der kategorialen Variable "sex"
 
-```{r}
-check_model(model)
-```
+Eine Besonderheit schauen wir uns nun noch zum Schluss an: Die lineare Regression ist ein Verfahren für *metrische Daten*. Sie untersucht den Zusammenhang zwischen einer metrischen abhängigen Variable und mindestens einer metrischen unabhängigen Variable. In den bisherigen Regressionsanalysen haben wir mit metrischen und quasi-metrischen Variablen gearbeitet, die die Voraussetzung erfüllen, dass eine Regression gerechnet werden kann. Das ist auch der übliche Fall. Es gibt aber die "Ausnahme", dass auch kategorische (v.a. binäre) Variablen bei der Regressionsanalyse grundsätzlich eingesetzt werden können, wenn diese durch eine *Dummy-Coding* passend gemacht werden. Und diesen Fall schauen wir un nun am Beispiel der Variable "Geschlecht" an. Dazu müssen wir die Variable aber als *binär codiert* bzw. *dichotom* betrachten - d.h. wir behandeln sie so, als hätten wir hier nur 2 Ausprägungen.
 
-### TEIL B: Die multiple lineare Regression
+#### Vorbereitung der Daten zum Zusammenhang von Alter, Bildung, Vertrauen ins TV, Geschlecht und TV-Konsum
 
-#### Anwendungsbereich der multiplen linearen Regression
-
-Die **multiple lineare Regressionsanalyse** wird angewandt, wenn geprüft werden soll, ob ein (als linear vermuteter) Zusammenhang zwischen metrischen Variablen besteht. Die multiple lineare Regressionsanalyse hat das Ziel, eine abhängige Variable (y) mittels **mehrerer unabhängigen Variablen** (x1, x2, ...) zu erklären. (Zur Erinnerung: Für nur eine x-Variable nutzen wir die einfache lineare Regression)
-
-Mit Hilfe der Regressionsanalyse können drei Arten von Fragestellungen untersucht werden: 1) Ursachenanalyse: Gibt es einen Zusammenhang zwischen den unabhängigen und der einen abhängigen Variable? Wie stark ist dieser? 2) Wirkungsanalyse: Wie verändert sich die abhängige Variable bei einer Änderung der unabhängigen Variablen? 3) Prognose: Können die Messwerte der abhängigen Variable durch die Werte der unabhängigen Variablen vorhergesagt werden?
-
-Die multiple Regression entspricht in ihrer Analyslogik also der einfachen linearen Regression - nur dass sie mehr als eine unabhängige Variable berücksichtigt.
-
-#### Ziel der Analyse
-
-Mit Hilfe der multiplen Regression wollen wir die Annahme prüfen, dass die Variablen Alter (agea) sowie die Rezeptionszeit von politischen Nachrichten (nwspol) der Befragten einen Einfluss auf die Internetnutzung (netustm, in Minuten) haben bzw. diese erklären und vorhersagen können. Alle Variablen sind metrisch und erfüllen damit die Voraussetzung, dass eine Regression gerechnet werden kann. (Achtung: auch kategorische Variablen können bei der Regressionsanalyse eingesetzt werden, sie müssen dann aber durch Dummy-Coding passend gemacht werden).
-
-#### Modell zum Zusammenhang von Alter, politischer Nachrichtenrezeption und Internetnutzung spezifizieren und anzeigen lassen
-
-Die Berechnung der multiplen Regression unterscheidet sich nicht stark von der Berechnung der einfachen linearen Regression. In die bereits bekannte Regressionsfunktion lm() fügen wir im hinteren Teil (d.h. hinter der Tilde) einfach die zusätzliche unabhängige Variable (politische_Nachrichtenrezeption) ein, indem wir sie mit einem + Zeichen anhängen:
-
-```{r Modell zum Zusammenhang von Alter, Bildung und Internetnutzung}
-model_m <- lm(internetnutzung ~ alter + politische_Nachrichtenrezeption, data = daten_mod)
-summary(lm.beta(model_m))
-```
-
-#### Interpretation des Outputs: Was sehen wir in der Regressionstabelle?
-
-Unter Call wird zunächst noch einmal das Regresssionsmodell beschrieben, das wir hier berechnet haben. In diesem versuchen wir auf Basis des Datensatzes "daten_mod" die abhängige Variable "internetnutzung" durch die unabhängigen Variablen "alter" und "politische_Nachrichtenrezeption" zu erklären.
-
-#### Residuen
-
-Unter Resdiuen erhalten wir Informationen zur Verteilung der Residuen. Diese geben die Abweichung der beobachteten Werte von den durch das Regressionsmodell erwarteten Werten an.
-
-Coefficients: \#### Intercept Das Intercept definiert den Schnittpunkt der Regressionsgeraden mit der y-Achse (theoretischer Wert für y, wenn x den Wert 0 annimmt).
-
-#### Estimate
-
-Die Estimates sind die unstandardisierte b-Werte. Das sind die Werte, die zur Vorhersage in die Regressionsgleichung eingetragen werden (könnten).
-
-#### Standardized
-
-Diese Estimates sind die standardisierte b-Werte. Weil wir diese über die lm.beta-Funktion standardisiert haben, lassen sich die Koeefizienten auch bei unterschiedlicher Skalierung vergleichen.
-
-#### St. error
-
-Hiermit wird der Standard-Fehler der unstandardisierten b-Werte ausgegeben.
-
-#### t-value
-
-Der t-value gibt den t-Wert des Modells an (Koeffizient / Standardfehler)
-
-#### p-value
-
-Der p-value ist für uns von besonderem Interesse - das ist der Signfikanzwert des Modells (unten mit Signfikanzsschwellen) bzw. des statistischen Zusammenhangs
-
-#### R-squared
-
-Auch beide R-Werte (R2, Adjusted R2) sind von zentraler Bedeutung für die Interpretation: R2 gibt uns die erklärte Gesamtvarianz des Modells der abhängigen Variable an, also die "Erklärungskraft" der unabhängigen Variable Alter und politische Nachrichtenrezeption auf die abhängige Internetnutzung. Zur Interpretation bietet es sich an, R2 als Prozentwert mit 100 zu multiplizieren. Wir können hier dann daraus lesen, dass das Alter und die politische Nachrichtenrezeption etwa 20 Prozent der Varianz der Internetnutzung erklärt. Das ist nicht super viel, aber auch nicht nichts. Wir können daraus aber auch ableiten, dass - neben dem Alter - noch andere Einflussfaktoren die Internetnutzung mitbestimmen müssen. Übrigens: Das R2 könnte theoretisch maximal den Wert 1 annehmen, dann hätten wir eine 100% Erklärung der abhängigen Variable durch die unabhängige Variable (=\> das kommt aber in der Realität aber fast nicht vor)
-
-#### Adjusted R2
-
-Wie der Name schon sagt bezeichnet Adjusted R2 die Anpassung des Modells, wobei für die Anzahl der aufgenommenen Variablen korrigiert wird ("Strafterm für viele aufgenommene Variablen"). Das Adjusted R2 ist daher immer schlechter als R2.
-
-#### F-Statistik
-
-Auch die F-Statistik ist wichtig: Sie gibt uns nämlich die Signfikanz des Gesamtmodells an (nicht einzelner Variablen wie bei R2!)
-
-#### Inhaltliche Interpretation: Was bedeutet das jetzt also alles?
-
-Der Output zeigt uns: Das Alter hat einen negativen Einfluss auf die Internetnutzung. Je älter ein Nutzer ist, desto weniger nutzt er das Internet. Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable Internetnutzung um (-4.9169) Messeinheiten (hier: Minuten) ab. Dieser Zusammenhang ist mit p \< .05 statistisch signifikant. Diese Ergebnisse überraschen uns nicht: Den Einfluss des Alters haben wir ja letzte Woche schon überprüft. Mit der Erweiterung zur multiplen Regression können wir nun zusätzlich sagen, dass die politische Nachrichtenrezeption auch einen Einfluss auf die Internet-Nutzung hat, denn der Wert ist ebenfalls signifikant (p \< .05)! Die F-Statistik sagt uns zusätzlich, dass auch unser Gesamtmodell signifikant ist (p-value: 0.00001239, also \< .05).
-
-#### Erinnerung: Zusatzfunktionen zur schöneren Ergebnisdarstellung durch das Paket broom
-
-```{r Modellzusammenfassung als data frame}
-tidy(lm.beta(model_m))
-```
-
-```{r Weitere Modellstatistiken in einem Befehl berechnen}
-glance(model_m)
-```
-
-## Multiple Regression mit Dummy-Codierung
-
-### Vorbereitung der Daten zum Zusammenhang von Alter, Bildung, Geschlecht und Internetnutzung
-
-Nun wollen wir noch Geschlecht (gndr) als unabhängige Variable mit in unser Regressionsmodell aufnehmen. Bei Gender haben wir aber das Problem, dass diese Variable nicht metrisch skaliert ist! Es handelt sich vielmehr um eine kategoriale Variable. Wie Sie schon gelernt haben, können Sie diese mit einem "Trick" ebenfalls in die Regressionsanalyse einbringen - Sie müssen diese dann aber durch Dummy-Coding passend machen. Wir wollen uns hier mal anschauen, wie das funktioniert. Dazu müssen wir die Variable mittels mutate-Befehl erst einmal umcodieren.
+Wir wollen das biologische Geschlecht (sex) als unabhängige Variable mit in unser Regressionsmodell aufnehmen. Bei "sex" haben wir aber das Problem, dass diese Variable nicht metrisch skaliert ist. Es handelt sich vielmehr um eine kategoriale Variable (mit 3 Ausprägungen). Dennoch können wir die Variable mit einem "Trick" in die Regressionsanalyse einbringen - Sie müssen diese dann aber durch Dummy-Coding passend machen. Hier wollen uns nun mal anschauen, wie das funktioniert. Dazu müssen wir die Variable mittels mutate-Befehl aber erst einmal umcodieren und dadurch in eine dichotome VAriable verwandeln.
 
 Durch die Dummy-Codierung wird die kategoriale Variable in zwei Gruppen übersetzt, von denen die eine mit 1 und die andere mit 0 codiert wird. Die Gruppe, der der Wert 0 zugeordnet wird, ist dann die Referenzkategorie. In unserem Beispiel Beispiel machen wir "männlich" zur Referenzkategorie (und codieren es mit 0 um). Der Regressionskoeffizient b gibt dann genau die Menge an, um die sich die Internetnutzung ändert, wenn sich das Geschlecht gegenüber der Referenzkategorie verändert.
 
 PS: Die Variable als numerischen Wert zu behandeln, ist in unserem Fall etwas kompliziert, weil diese eine Faktorvariable war, die wir zuerst in eine Charaktervariable umwandeln mussten.
 
-### Dummy Codierung der Variable Gender
+#### Dummy-Codierung der Variable sex
 
 ```{r}
-daten_mod2 <- daten_mod %>%
-mutate(gender_r  = recode(gender, 'Male'='0', 'Female'='1')) %>% # Recodierung der Var Gender zur Dummy-Variable
-  mutate(gender_r = as.numeric(as.character(gender_r))) # Variable als numerischen Wert behandeln
-daten_mod2
+daten <- daten %>%
+ filter(between(sex, 1, 2)) %>%
+  mutate(sex_d = case_when(sex == 1 ~ 0, sex == 2 ~ 1))
 ```
 
-```{r Prüfung der Umcodierung zur Dummy-Variablen}
-table(daten_mod2$gender_r)
-summary(daten_mod2$gender_r)
-class(daten_mod2$gender_r)
-```
-
-### Regressionsmodell zum Zusammenhang von Alter, Nachrichtenrezeptiion, Geschlecht und Internetnutzung spezifizieren und anzeigen lassen
-
-In die bereits bekannte Regressionsfunktion lm() fügen wir im hinteren Teil (d.h. hinter der Tilde) nun einfach die weitere unabhängige Variable gender_r ein, indem wir sie mit einem + Zeichen anhängen.
-
-```{r Modell zum Zusammenhang von Alter, Bildung, Geschlecht und Internetnutzung}
-model_m2 <- lm(internetnutzung ~ alter + politische_Nachrichtenrezeption + gender_r, data = daten_mod2)
-summary(lm.beta(model_m2))
-```
-
-### Inhaltliche Interpretation
-
-Gender hat hier keinen signifikanten Einfluss auf den Internetkonsum. Wenn es einen hätte, wäre der Einfluss geringer als bei Alter und Ausbildungsjahren (ersichtlich an der Größe des standardisierten beta-Koeffizienten). Wichtig: Gender ist als eine Dummy- Variable in 0=männlich und 1=weiblich codiert, deshalb ist der Estimate hier etwas schwieriger zu lesen. Die Frauen sind als 1 codiert und stellen hier die Vergleichsgruppe zur Referenzgruppe der Männer (=0) dar.
-
-Frauen haben eine um (9,8) Minuten geringeren Internetkonsum als Männer (wobei dieser Befund statistisch ja (nicht) signifikant ist). (Nicht wundern, wenn Ihr Ergebnis leicht anders ausfällt: Der Wert variiert entsprechend der gezogenen Zufallsstichprobe.)
-
-### Vorhersage des multivariaten Modells für die tägliche Internetnutzung durch Alter, Nachrichtenrezeption und Geschlecht
-
-```{r Vorhersage des multivariaten Modells für die tägliche Internetnutzung durch Alter, Ausbildung und Geschlecht}
-predict.lm(model_m2, data.frame(alter = c(25, 75), gender_r = c(0,1), politische_Nachrichtenrezeption = c(5, 10)))
-```
-
-### Inhaltliche Interpretation
-
-Eine männliche Person, die 25 Jahre alt ist und 5 Minuten pro Tag politische Nachrichten rezipiert hat, einen prognostizierten Internetkonsum von 293 Minuten. Eine weibliche Person, die 75 Jahre alt ist und ebenfalls 5 Minuten pro Tag politische Nachrichten rezipiert, hat einen prognostizierten Internetkonsum von 41 Minuten. (Nicht wundern, wenn Ihr Ergebnis leicht anders ausfällt: Der Wert variiert entsprechend der gezogenen Zufallsstichprobe.)
-
-### Zusätzliche Voraussetzungsprüfung bei der multiplen linearen Regression: Liegt Multikollinearität vor?
-
-Die multiple lineare Regression erfordert alle Voraussetzungen, die für die einfache Regression auch verlangt sind - wie Sie diese ausführen, haben Sie ja heute zu Anfang der Sitzung gelernt (siehe oben). Zusätzlich müssen Sie bei einer multiplen Regresssion noch prüfen, ob **Multikollinearität** vorliegt. Multikollinearität bedeutet, dass mindestens einer unserer Prädiktoren durch einen oder mehrere der anderen Prädiktoren vorhergesagt werden kann. Die Prädiktoren wären in diesem Fall nicht unabängig voneinander, sondern würden hoch miteinander korrelieren und hätten damit sozusagen keine selbstständige Erklärungskraft im Modell.
-
-Ob Multikollinearität vorliegt, können wir durch den **VIF-Wert (variance inflation factor)** ermitteln. Dieser darf nicht über 10 liegen, idealerweise auch nicht über 5. Um dies zu prüfen, nutzen wir den check_collinearity-Befehl aus dem Performance package:
+#### Prüfung der Umcodierung zur Dummy-Variablen
 
 ```{r}
-check_collinearity(model_m2)
+häufigkeitstabelle <- table(daten$sex_d)
+print(häufigkeitstabelle)
 ```
 
-### Inhaltliche Interpretation
+Die Dummy-Codierung war erfolgreich - wir haben nun 1546 Befragte mit der Ausprägung 0 (männlich) sowie 1569 Befragte mit der Ausprägung 2 (weiblich).
 
-Die VIF-Werte liegen zwischen 0 und 5; wir können daher davon ausgehen, dass keine Multikollinearität vorliegt (grün = "Low Correlation").
+#### Regressionsmodell zum Zusammenhang von Alter, Bildung, TV-Vertrauen, Geschlecht und TV-Konsum spezifizieren und anzeigen lassen
 
-## Add-On: Weitere Plots zur (vergleichenden) Regressionsanalyse
+In die bereits bekannte Regressionsfunktion lm() fügen wir im hinteren Teil (d.h. hinter der Tilde) nun einfach die weitere unabhängige Variable sex_d ein, indem wir sie mit einem + Zeichen anhängen.
 
-```{r Daten zu Altern und Internetnutzung für vier Länder vorbereiten}
-daten_mod3 <- daten %>% 
-  select(agea, netustm, cntry) %>% 
-  rename(alter = agea,
-         internetnutzung = netustm,
-         land = cntry) %>% 
-  filter(land %in% c("DE", "FR", "IS", "PL")) %>% 
-  drop_na() %>% 
-  group_by(land) %>% 
-  slice_sample(n = 100) %>% 
-  ungroup()
-daten_mod3
+```{r}
+model3 <- lm(TV_Konsum ~ Alter + Bildung + TV_Vertrauen + sex_d, data = daten) 
+summary(lm.beta(model3))
 ```
 
-```{r Lineare Regression für Alter und Internetnutzung (vier Länder) plotten}
-ggplot(daten_mod3, aes(alter, internetnutzung, colour = land)) +
-  geom_jitter(alpha = 0.5) +
-  geom_smooth(method = lm, formula = "y ~ x", se = FALSE) + 
-  scale_colour_brewer(palette = "Set1") + 
-  ggtitle("Lineare Regression für Alter und Internetnutzung (vier Länder)") + 
-  xlab("Alter") + ylab("tägliche Internetnutzung (Minuten)")
-```
+#### Inhaltliche Interpretation des Outputs: Was bedeutet das Ergebnis?
+
+Gender hat *keinen* signifikanten Einfluss auf den TV-Konsum. Wenn es einen hätte, wäre der Einfluss geringer als bei Alter und Ausbildungsjahren (ersichtlich an der Größe des standardisierten beta-Koeffizienten). Wichtig: Gender ist als eine Dummy-Variable in 0=männlich und 1=weiblich codiert, deshalb ist der Estimate hier etwas schwieriger zu lesen. Die Frauen sind als 1 codiert und stellen hier die Vergleichsgruppe zur Referenzgruppe der Männer (=0) dar.
+
+Frauen haben eine um (4,6) Minuten höheren TV-Konsum als Männer (wobei dieser Befund statistisch ja nicht signifikant ist). (Nicht wundern, wenn Ihr Ergebnis leicht anders ausfällt: Der Wert variiert entsprechend der gezogenen Zufallsstichprobe.)

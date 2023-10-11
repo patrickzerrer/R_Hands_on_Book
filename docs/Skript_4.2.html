@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Bilder/favicon-32x32.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -90,7 +91,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -98,6 +100,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Lageparameter: Modus, Median, Mittelwert">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_mean_descriptive_statistics_cyberpunk__c164805d-f5de-4d11-9526-913cfe6f6013.png">
+<meta property="og:image:height" content="816">
+<meta property="og:image:width" content="1456">
+<meta name="twitter:title" content="Lageparameter: Modus, Median, Mittelwert">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_mean_descriptive_statistics_cyberpunk__c164805d-f5de-4d11-9526-913cfe6f6013.png">
+<meta name="twitter:image-height" content="816">
+<meta name="twitter:image-width" content="1456">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -367,19 +380,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Einführung</span></a>
+ <span class="menu-text">Pearson Chi-Quadrat-Test &amp; Rangkorrelation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei zwei Variablen mittels Korrelation und Regression</span></a>
+ <span class="menu-text">Korrelation &amp; Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
+ <span class="menu-text">Prüfung der Voraussetzungen bei der linearen Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die multiple Regression</span></a>
   </div>
 </li>
       </ul>
@@ -394,26 +413,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#der-modus" id="toc-der-modus" class="nav-link active" data-scroll-target="#der-modus"><span class="header-section-number">1</span> Der Modus</a>
+  <li><a href="#berechnung-von-lageparametern" id="toc-berechnung-von-lageparametern" class="nav-link active" data-scroll-target="#berechnung-von-lageparametern"><span class="header-section-number">1</span> Berechnung von Lageparametern</a>
   <ul class="collapse">
-  <li><a href="#berechnung" id="toc-berechnung" class="nav-link" data-scroll-target="#berechnung"><span class="header-section-number">1.1</span> Berechnung</a></li>
-  </ul></li>
-  <li><a href="#der-median" id="toc-der-median" class="nav-link" data-scroll-target="#der-median"><span class="header-section-number">2</span> Der Median</a>
+  <li><a href="#der-modus" id="toc-der-modus" class="nav-link" data-scroll-target="#der-modus"><span class="header-section-number">1.1</span> Der Modus</a>
   <ul class="collapse">
-  <li><a href="#berechnung-1" id="toc-berechnung-1" class="nav-link" data-scroll-target="#berechnung-1"><span class="header-section-number">2.1</span> Berechnung</a></li>
-  <li><a href="#visualisierung" id="toc-visualisierung" class="nav-link" data-scroll-target="#visualisierung"><span class="header-section-number">2.2</span> Visualisierung</a></li>
+  <li><a href="#berechnung" id="toc-berechnung" class="nav-link" data-scroll-target="#berechnung"><span class="header-section-number">1.1.1</span> Berechnung</a></li>
   </ul></li>
-  <li><a href="#quantile" id="toc-quantile" class="nav-link" data-scroll-target="#quantile"><span class="header-section-number">3</span> Quantile</a>
+  <li><a href="#der-median" id="toc-der-median" class="nav-link" data-scroll-target="#der-median"><span class="header-section-number">1.2</span> Der Median</a>
   <ul class="collapse">
-  <li><a href="#berechnung-2" id="toc-berechnung-2" class="nav-link" data-scroll-target="#berechnung-2"><span class="header-section-number">3.1</span> Berechnung</a></li>
-  <li><a href="#visualisierung-1" id="toc-visualisierung-1" class="nav-link" data-scroll-target="#visualisierung-1"><span class="header-section-number">3.2</span> Visualisierung</a></li>
+  <li><a href="#berechnung-1" id="toc-berechnung-1" class="nav-link" data-scroll-target="#berechnung-1"><span class="header-section-number">1.2.1</span> Berechnung</a></li>
+  <li><a href="#visualisierung" id="toc-visualisierung" class="nav-link" data-scroll-target="#visualisierung"><span class="header-section-number">1.2.2</span> Visualisierung</a></li>
   </ul></li>
-  <li><a href="#der-mittelwert" id="toc-der-mittelwert" class="nav-link" data-scroll-target="#der-mittelwert"><span class="header-section-number">4</span> Der Mittelwert</a>
+  <li><a href="#quantile" id="toc-quantile" class="nav-link" data-scroll-target="#quantile"><span class="header-section-number">1.3</span> Quantile</a>
   <ul class="collapse">
-  <li><a href="#berechnung-3" id="toc-berechnung-3" class="nav-link" data-scroll-target="#berechnung-3"><span class="header-section-number">4.1</span> Berechnung</a></li>
-  <li><a href="#visualisierung-2" id="toc-visualisierung-2" class="nav-link" data-scroll-target="#visualisierung-2"><span class="header-section-number">4.2</span> Visualisierung</a></li>
+  <li><a href="#berechnung-2" id="toc-berechnung-2" class="nav-link" data-scroll-target="#berechnung-2"><span class="header-section-number">1.3.1</span> Berechnung</a></li>
+  <li><a href="#visualisierung-1" id="toc-visualisierung-1" class="nav-link" data-scroll-target="#visualisierung-1"><span class="header-section-number">1.3.2</span> Visualisierung</a></li>
   </ul></li>
-  <li><a href="#geometrisches-mittel" id="toc-geometrisches-mittel" class="nav-link" data-scroll-target="#geometrisches-mittel"><span class="header-section-number">5</span> Geometrisches Mittel</a></li>
+  <li><a href="#der-mittelwert" id="toc-der-mittelwert" class="nav-link" data-scroll-target="#der-mittelwert"><span class="header-section-number">1.4</span> Der Mittelwert</a>
+  <ul class="collapse">
+  <li><a href="#berechnung-3" id="toc-berechnung-3" class="nav-link" data-scroll-target="#berechnung-3"><span class="header-section-number">1.4.1</span> Berechnung</a></li>
+  <li><a href="#visualisierung-2" id="toc-visualisierung-2" class="nav-link" data-scroll-target="#visualisierung-2"><span class="header-section-number">1.4.2</span> Visualisierung</a></li>
+  </ul></li>
+  <li><a href="#geometrisches-mittel" id="toc-geometrisches-mittel" class="nav-link" data-scroll-target="#geometrisches-mittel"><span class="header-section-number">1.5</span> Geometrisches Mittel</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -443,62 +465,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Berechnung von Lageparametern</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/zemkipatrick_comic_style_mean_descriptive_statistics_cyberpunk__c164805d-f5de-4d11-9526-913cfe6f6013.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Überall Daten, Bild generiert von Midjourney</figcaption>
+</figure>
+</div>
+<section id="berechnung-von-lageparametern" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Berechnung von Lageparametern</h1>
 <p>Laden wir zunächst wieder unsere Daten: Da wir uns drei verschiedene Skalenniveaus ansehen wollen, verwenden wir Daten, die jeweils ein solches repräsentieren. Wir laden daher Daten zu Geschlecht (“sex”), Vertrauen in die Bundesregierung (“pt12”) und Netto-Einkommen (“di01a”).</p>
+<p>Im Folgenden werden wir aus dem Allbus-2021-Datensatz ein paar Beispiele herausgreifen, um die Berechnung und Visualisierung von Häufigkeiten und Parametern zu demonstrieren.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/r0_Vtf48MHU" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+</div>
+</div>
+<p>Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem <code>p_load</code>-Befehl:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Lade nötiges Paket: pacman</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, dplyr)  </span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>) </span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a>allbus_df <span class="ot">&lt;-</span> <span class="fu">subset</span>(daten, <span class="at">select=</span><span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>)) <span class="sc">%&gt;%</span>          </span>
-<span id="cb3-9"><a href="#cb3-9"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>), <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span>                                     </span>
-<span id="cb3-10"><a href="#cb3-10"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>), <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">7</span>, <span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">15</span>, <span class="sc">-</span><span class="dv">42</span>, <span class="sc">-</span><span class="dv">50</span> ), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span>          </span>
-<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">na.omit</span>()   </span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">colnames</span>(allbus_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Geschlecht"</span>, <span class="st">"VertrauenBR"</span>, <span class="st">"Einkommen"</span>) <span class="co"># Umbenennen der Spaltennamen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'pacman' wurde unter R Version 4.3.1 erstellt</code></pre>
 </div>
-<section id="der-modus" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="der-modus"><span class="header-section-number">1</span> Der Modus</h2>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, dplyr)  </span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>) </span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a>allbus_df <span class="ot">&lt;-</span> <span class="fu">subset</span>(daten, <span class="at">select=</span><span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>)) <span class="sc">%&gt;%</span>          </span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>), <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span>                                     </span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"pt12"</span>, <span class="st">"di01a"</span>), <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">7</span>, <span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">15</span>, <span class="sc">-</span><span class="dv">42</span>, <span class="sc">-</span><span class="dv">50</span> ), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span>          </span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">na.omit</span>()   </span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="fu">colnames</span>(allbus_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Geschlecht"</span>, <span class="st">"VertrauenBR"</span>, <span class="st">"Einkommen"</span>) <span class="co"># Umbenennen der Spaltennamen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="der-modus" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="der-modus"><span class="header-section-number">1.1</span> Der Modus</h2>
 <p>Der Modus, auch Modalwert genannt, gibt an, welche Ausprägung eines gemessenen Merkmals am häufigsten vorkommt.</p>
-<section id="berechnung" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="berechnung"><span class="header-section-number">1.1</span> Berechnung</h3>
+<section id="berechnung" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="berechnung"><span class="header-section-number">1.1.1</span> Berechnung</h3>
 <p>Wir müssen einfach nur zählen, wie oft jede Merkmalsausprägung vorkommt. Diejenige mit dem höchsten Wert (bzw. der größten absoluten Häufigkeit) ist der Modus. In R gibt es keine vorgefertigte Funktion, die diesen Parameter berechnet. Das folgende Code-Beispiel zeigt eine mögliche Lösung speziell für unseren “allbus.df$Geschlecht”-DataFrame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>get.mode <span class="ot">&lt;-</span> <span class="cf">function</span>(vector){</span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="co"># Häufigkeitstabelle erstellen:</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  frequencies <span class="ot">=</span> <span class="fu">table</span>(vector) </span>
-<span id="cb4-5"><a href="#cb4-5"></a>  </span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="co"># Höhe der größten Häufigkeit ermitteln:</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>  max.freq <span class="ot">&lt;-</span> <span class="fu">max</span>(frequencies)  </span>
-<span id="cb4-8"><a href="#cb4-8"></a>  </span>
-<span id="cb4-9"><a href="#cb4-9"></a>  <span class="co"># Teiltabelle erstellen, die nur die Spalten mit der höchsten Häufigkeit enthält:</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>  where.max <span class="ot">&lt;-</span>frequencies <span class="sc">==</span> max.freq </span>
-<span id="cb4-11"><a href="#cb4-11"></a>  </span>
-<span id="cb4-12"><a href="#cb4-12"></a>  <span class="co"># Namen der verbliebenen Spalten (= Modus) ermitteln:</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a>  modus <span class="ot">&lt;-</span> <span class="fu">names</span>(frequencies[where.max]) </span>
-<span id="cb4-14"><a href="#cb4-14"></a>  <span class="fu">return</span>(modus)</span>
-<span id="cb4-15"><a href="#cb4-15"></a>}</span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#Ausgabe des Modus:</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="fu">cat</span>(<span class="st">"Der Modus lautet "</span>, <span class="fu">get.mode</span>(allbus_df<span class="sc">$</span>Geschlecht), <span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>get_mode <span class="ot">=</span> <span class="cf">function</span>(vector){</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="co"># Häufigkeitstabelle erstellen:</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  frequencies <span class="ot">=</span> <span class="fu">table</span>(vector) </span>
+<span id="cb5-5"><a href="#cb5-5"></a>  </span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="co"># Höhe der größten Häufigkeit ermitteln:</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  max_freq <span class="ot">=</span> <span class="fu">max</span>(frequencies)  </span>
+<span id="cb5-8"><a href="#cb5-8"></a>  </span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="co"># Teiltabelle erstellen, die nur die Spalten mit der höchsten Häufigkeit enthält:</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  where_max <span class="ot">=</span>frequencies <span class="sc">==</span> max_freq </span>
+<span id="cb5-11"><a href="#cb5-11"></a>  </span>
+<span id="cb5-12"><a href="#cb5-12"></a>  <span class="co"># Namen der verbliebenen Spalten (= Modus) ermitteln:</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>  modus <span class="ot">=</span> <span class="fu">names</span>(frequencies[where_max]) </span>
+<span id="cb5-14"><a href="#cb5-14"></a>  <span class="fu">return</span>(modus)</span>
+<span id="cb5-15"><a href="#cb5-15"></a>}</span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#Ausgabe des Modus:</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="fu">cat</span>(<span class="st">"Der Modus lautet "</span>, <span class="fu">get_mode</span>(allbus_df<span class="sc">$</span>Geschlecht), <span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Der Modus lautet  1 .</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="der-median" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="der-median"><span class="header-section-number">2</span> Der Median</h2>
+<section id="der-median" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="der-median"><span class="header-section-number">1.2</span> Der Median</h2>
 <p>Für mindestens ordinal skalierte Messwerte empfielt sich neben dem Modus zusätzlich der Median. Einen der Größe nach aufsteigend sortierten Datensatz teilt der Median genau in der Mitte, es liegen also genauso viele Elemente links wie rechts davon.</p>
-<section id="berechnung-1" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="berechnung-1"><span class="header-section-number">2.1</span> Berechnung</h3>
+<section id="berechnung-1" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="berechnung-1"><span class="header-section-number">1.2.1</span> Berechnung</h3>
 <p>Für den Fall, dass die Anzahl an Elementen im Datensatz <span class="math inline">\(n\)</span> ungerade ist, entspricht der Median dem Messwert, der genau in der Mitte liegt:</p>
 <p><span class="math display">\[
 x_{Med} = x_{\frac{n + 1}{2}}
@@ -510,7 +560,7 @@ x_{Med} = \frac{1}{2} (x_{\frac{n}{2}} + x_{\frac{n}{2} + 1})
 <p>R stellt eine Funktion zur Berechnung des Medians bereit. Wir schauen uns als Beispiel das Vertrauen der Allbus-Befragten in die Bundesregierung an: Im Gegensatz zum Geschlecht können wir hier eine Rangfolge festlegen, jedoch nicht die Abstände dazwischen exakt messen. Wir haben es folglich mit ordinalen Daten zu tun.</p>
 <p>Wir verschaffen uns zunächst wieder einen Überblick mit der <code>table</code>-Funktion und sehen sieben verschiedene Werte.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">table</span>(allbus_df<span class="sc">$</span>VertrauenBR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">table</span>(allbus_df<span class="sc">$</span>VertrauenBR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
   1   2   3   4   5   6   7 
@@ -519,104 +569,104 @@ x_{Med} = \frac{1}{2} (x_{\frac{n}{2}} + x_{\frac{n}{2} + 1})
 </div>
 <p>Die Daten sind bereits von “gar nicht” zu “sehr hoch” sortiert. Wir wenden die <code>median</code>-Funktion an und erhalten “4” als Ausgabe:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>median.vertrauen <span class="ot">&lt;-</span> <span class="fu">median</span>(allbus_df<span class="sc">$</span>VertrauenBR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>median_vertrauen <span class="ot">=</span> <span class="fu">median</span>(allbus_df<span class="sc">$</span>VertrauenBR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="visualisierung" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="visualisierung"><span class="header-section-number">2.2</span> Visualisierung</h3>
+<section id="visualisierung" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="visualisierung"><span class="header-section-number">1.2.2</span> Visualisierung</h3>
 <p>Wenn man sich die Daten als Säulendiagramm bzw. Barplot ausgeben lässt und den Median einzeichnet (im folgenden Codebeispiel die rote gestrichelte Linie), kann man erahnen, dass der Median die sieben Klassen so teilt, dass beidseitig gleich viele abgegebene Stimmen liegen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>allbus_df, <span class="fu">aes</span>(<span class="at">x=</span>VertrauenBR)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Vertrauen in die Bundesregierung"</span>, <span class="at">y=</span><span class="st">"Häufigkeit"</span>) <span class="sc">+</span> </span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median.vertrauen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>allbus_df, <span class="fu">aes</span>(<span class="at">x=</span>VertrauenBR)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Vertrauen in die Bundesregierung"</span>, <span class="at">y=</span><span class="st">"Häufigkeit"</span>) <span class="sc">+</span> </span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median_vertrauen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_4.2_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 </section>
-<section id="quantile" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="quantile"><span class="header-section-number">3</span> Quantile</h2>
+<section id="quantile" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="quantile"><span class="header-section-number">1.3</span> Quantile</h2>
 <p>Ein Quantil legt fest, wie viele Werte über bzw. unter einer bestimmten Grenze liegen und teilt den Datensatz damit in zwei Teile. Den bekanntesten Spezialfall haben wir mit dem Median bereits kennengelernt. Die Grenze lag in dem Fall genau in der Mitte, es liegen also 50% unterhalb der Grenze und 50% darüber. Bei einem 31%-Quantil würden hingegen 31% der Werte unter der Grenze liegen und 69% darüber. Wichtige Quantile sind die sogenannten Quartile, zu denen das 25%-Quantil, der Median und das 75%-Quantil zusammengefasst werden. Sie teilen die Gesamtmenge an Messwererten in vier gleich große Teile.</p>
-<section id="berechnung-2" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="berechnung-2"><span class="header-section-number">3.1</span> Berechnung</h3>
+<section id="berechnung-2" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="berechnung-2"><span class="header-section-number">1.3.1</span> Berechnung</h3>
 <p>Das folgende R-Beispiel gibt die drei Quartile des Vertrauens-Datensatzes aus:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>quartile <span class="ot">&lt;-</span> <span class="fu">quantile</span>(allbus_df<span class="sc">$</span>VertrauenBR, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>))</span>
-<span id="cb10-2"><a href="#cb10-2"></a>quartile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>quartile <span class="ot">=</span> <span class="fu">quantile</span>(allbus_df<span class="sc">$</span>VertrauenBR, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>))</span>
+<span id="cb11-2"><a href="#cb11-2"></a>quartile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>25% 50% 75% 
   3   4   5 </code></pre>
 </div>
 </div>
 </section>
-<section id="visualisierung-1" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="visualisierung-1"><span class="header-section-number">3.2</span> Visualisierung</h3>
+<section id="visualisierung-1" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="visualisierung-1"><span class="header-section-number">1.3.2</span> Visualisierung</h3>
 <p>Das folgende Codebeispiel zeichnet neben dem Median (rot) auch das 25%-Quantil (blau) und das 75%-Quantil (grün) in das Säulendiagramm ein:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>quantile25 <span class="ot">&lt;-</span> quartile[<span class="st">"25%"</span>]  <span class="co">#quantile(allbus_df$VertrauenBR, probs=c(0.25)) </span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>quantile75 <span class="ot">&lt;-</span> quartile[<span class="st">"75%"</span>]</span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="fu">ggplot</span>(<span class="at">data=</span>allbus_df, <span class="fu">aes</span>(<span class="at">x=</span>VertrauenBR)) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
-<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Vertrauen in die Bundesregierung"</span>, <span class="at">y=</span><span class="st">"Häufigkeit"</span>) <span class="sc">+</span> </span>
-<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> quantile25, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median.vertrauen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> quantile75, <span class="at">color =</span> <span class="st">"green"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>quantile25 <span class="ot">=</span> quartile[<span class="st">"25%"</span>]  <span class="co">#quantile(allbus_df$VertrauenBR, probs=c(0.25)) </span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>quantile75 <span class="ot">=</span> quartile[<span class="st">"75%"</span>]</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="fu">ggplot</span>(<span class="at">data=</span>allbus_df, <span class="fu">aes</span>(<span class="at">x=</span>VertrauenBR)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Vertrauen in die Bundesregierung"</span>, <span class="at">y=</span><span class="st">"Häufigkeit"</span>) <span class="sc">+</span> </span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> quantile25, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median_vertrauen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> quantile75, <span class="at">color =</span> <span class="st">"green"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_4.2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 </section>
-<section id="der-mittelwert" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="der-mittelwert"><span class="header-section-number">4</span> Der Mittelwert</h2>
+<section id="der-mittelwert" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="der-mittelwert"><span class="header-section-number">1.4</span> Der Mittelwert</h2>
 <p>Der Begriff “Mittelwert” ist etwas ungenau, da es mehrere verschiedene Mittelwerte gibt. Oft ist damit das arithmetische Mittel gemeint. Es lässt sich nur bei mindestens kardinal skalierten Daten anwenden und bezieht die Gewichte der jeweiligen Merkmalsausprägungen mit ein.</p>
-<section id="berechnung-3" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="berechnung-3"><span class="header-section-number">4.1</span> Berechnung</h3>
+<section id="berechnung-3" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="berechnung-3"><span class="header-section-number">1.4.1</span> Berechnung</h3>
 <p>Das arithmetische Mittel erhält man, indem man alle Messwerte addiert und durch die Gesamtzahl an Messwerten teilt:</p>
 <p><span class="math display">\[
 \bar{x} = \frac{x_{1} + x_{2} + \cdots + x_{n}}{n} = \frac{1}{n}  \sum_{i=1}^{n} {x_{i}}
 \]</span> Schauen wir uns das am Beispiel des Netto-Einkommens der Befragten im Allbus-Datensatz an: Wir können dazu die bereits vorhandene Funktion <code>mean</code> nutzen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>mean.einkommen <span class="ot">&lt;-</span> <span class="fu">mean</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
-<span id="cb13-2"><a href="#cb13-2"></a>mean.einkommen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>mean_einkommen <span class="ot">=</span> <span class="fu">mean</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
+<span id="cb14-2"><a href="#cb14-2"></a>mean_einkommen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2445.346</code></pre>
 </div>
 </div>
 </section>
-<section id="visualisierung-2" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="visualisierung-2"><span class="header-section-number">4.2</span> Visualisierung</h3>
+<section id="visualisierung-2" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="visualisierung-2"><span class="header-section-number">1.4.2</span> Visualisierung</h3>
 <p>Vergleichen wir das mit dem Median, fällt auf, dass zwischen beiden Lageparametern über 200 Euro Differenz bestehen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>median.einkommen <span class="ot">&lt;-</span> <span class="fu">median</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
-<span id="cb15-2"><a href="#cb15-2"></a>median.einkommen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>median_einkommen <span class="ot">=</span> <span class="fu">median</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>median_einkommen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2200</code></pre>
 </div>
 </div>
 <p>Der Modus liegt noch weiter weg:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>modus.einkommen <span class="ot">&lt;-</span> <span class="fu">get.mode</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
-<span id="cb17-2"><a href="#cb17-2"></a>modus.einkommen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>modus_einkommen <span class="ot">=</span> <span class="fu">get_mode</span>(allbus_df<span class="sc">$</span>Einkommen)</span>
+<span id="cb18-2"><a href="#cb18-2"></a>modus_einkommen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "3000"</code></pre>
 </div>
 </div>
 <p>Das liegt daran, dass die Einkommensdaten kontinuierlich sind und es keinen homogenen An- und Abstieg der Häufigkeitsverteilung gibt. Der Einkommenswert, den am meisten Personen exakt gleich angegeben haben, ist deshalb wenig aussagekräftig und der Modus macht nur Sinn, nachdem man die Daten in Form von Einkommensklassen diskretisiert hat.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(allbus_df, <span class="fu">aes</span>(<span class="at">x =</span> Einkommen)) <span class="sc">+</span> </span>
-<span id="cb19-2"><a href="#cb19-2"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span>..density..),</span>
-<span id="cb19-3"><a href="#cb19-3"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">0</span>, <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">500</span>), </span>
-<span id="cb19-4"><a href="#cb19-4"></a>    <span class="at">colour =</span> <span class="st">"black"</span>, </span>
-<span id="cb19-5"><a href="#cb19-5"></a>    <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Netto-Einkommen"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean.einkommen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median.einkommen, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.numeric</span>(modus.einkommen), <span class="at">color =</span> <span class="st">"green"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggplot</span>(allbus_df, <span class="fu">aes</span>(<span class="at">x =</span> Einkommen)) <span class="sc">+</span> </span>
+<span id="cb20-2"><a href="#cb20-2"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span>..density..),</span>
+<span id="cb20-3"><a href="#cb20-3"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">0</span>, <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">500</span>), </span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Netto-Einkommen"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean_einkommen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median_einkommen, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.numeric</span>(modus_einkommen), <span class="at">color =</span> <span class="st">"green"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
 ℹ Please use `after_stat(density)` instead.</code></pre>
@@ -626,29 +676,29 @@ x_{Med} = \frac{1}{2} (x_{\frac{n}{2}} + x_{\frac{n}{2} + 1})
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggplot</span>(allbus_df, <span class="fu">aes</span>(<span class="at">x =</span> Einkommen)) <span class="sc">+</span> </span>
-<span id="cb21-2"><a href="#cb21-2"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span><span class="fu">after_stat</span>(density)),</span>
-<span id="cb21-3"><a href="#cb21-3"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">0</span>, <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">500</span>), </span>
-<span id="cb21-4"><a href="#cb21-4"></a>    <span class="at">colour =</span> <span class="st">"black"</span>, </span>
-<span id="cb21-5"><a href="#cb21-5"></a>    <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Einkommen"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean.einkommen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median.einkommen, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.numeric</span>(modus.einkommen), <span class="at">color =</span> <span class="st">"green"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggplot</span>(allbus_df, <span class="fu">aes</span>(<span class="at">x =</span> Einkommen)) <span class="sc">+</span> </span>
+<span id="cb22-2"><a href="#cb22-2"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span><span class="fu">after_stat</span>(density)),</span>
+<span id="cb22-3"><a href="#cb22-3"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">0</span>, <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">500</span>), </span>
+<span id="cb22-4"><a href="#cb22-4"></a>    <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb22-5"><a href="#cb22-5"></a>    <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Einkommen"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean_einkommen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median_einkommen, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.numeric</span>(modus_einkommen), <span class="at">color =</span> <span class="st">"green"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_4.2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 </section>
-<section id="geometrisches-mittel" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="geometrisches-mittel"><span class="header-section-number">5</span> Geometrisches Mittel</h2>
+<section id="geometrisches-mittel" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="geometrisches-mittel"><span class="header-section-number">1.5</span> Geometrisches Mittel</h2>
 <p>Nicht unerwähnt bleiben sollte das geometrische Mittel, das bei der Berechnung des Mittelwerts von prozentualen Veränderungen angewendet wird. Dabei werden die einzelnen Messwerte multipliziert und die n-te Wurzel aus dem Ergebnis gezogen, wobei n die Gesamtzahl an Messwerten ist:</p>
 <p><span class="math display">\[
 x_{Geom} = (x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}}
 \]</span> ### Berechnung</p>
 <p>In R gibt es dafür keine eigenständige Funktion, man kann aber die Gleichung umstellen und mit Hilfe einiger anderer eingebauter Funktionen eine simple Alternative erstellen, indem man einen kleinen Trick mit der Exponentialfunktion und dem natürlichen Logarithmus anwendet:</p>
-$$
+<p>$$</p>
 <span class="math display">\[\begin{aligned}
 x_{Geom}  &amp; = (x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}} \\
           &amp; = e^{ln(x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}}} \\
@@ -658,38 +708,39 @@ x_{Geom}  &amp; = (x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}} \\
 <p>$$</p>
 <p>Auch, wenn die resultierende Formel wenig ansprechend aussieht, kann man bei genauerem Hinsehen das versteckte arithmetische Mittel erkennen und den ganzen Ausdruck in folgenden R-Code umsetzen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>geom.mean <span class="ot">&lt;-</span> <span class="cf">function</span>(vector){</span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">exp</span>(<span class="fu">mean</span>(<span class="fu">log</span>(vector)))</span>
-<span id="cb22-3"><a href="#cb22-3"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>geom_mean <span class="ot">=</span> <span class="cf">function</span>(vector){</span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">exp</span>(<span class="fu">mean</span>(<span class="fu">log</span>(vector)))</span>
+<span id="cb23-3"><a href="#cb23-3"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">min</span>(allbus_df<span class="sc">$</span>Einkommen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">min</span>(allbus_df<span class="sc">$</span>Einkommen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -41</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>geom.einkommen <span class="ot">&lt;-</span> <span class="fu">geom.mean</span>(allbus_df<span class="sc">$</span>Einkommen <span class="sc">+</span> <span class="dv">42</span>) </span>
-<span id="cb25-2"><a href="#cb25-2"></a>geom.einkommen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>geom_einkommen <span class="ot">&lt;-</span> <span class="fu">geom_mean</span>(allbus_df<span class="sc">$</span>Einkommen <span class="sc">+</span> <span class="dv">42</span>) </span>
+<span id="cb26-2"><a href="#cb26-2"></a>geom_einkommen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1996.667</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(allbus_df, <span class="fu">aes</span>(<span class="at">x =</span> Einkommen)) <span class="sc">+</span> </span>
-<span id="cb27-2"><a href="#cb27-2"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span><span class="fu">after_stat</span>(density)),</span>
-<span id="cb27-3"><a href="#cb27-3"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">0</span>, <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">500</span>), </span>
-<span id="cb27-4"><a href="#cb27-4"></a>    <span class="at">colour =</span> <span class="st">"black"</span>, </span>
-<span id="cb27-5"><a href="#cb27-5"></a>    <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
-<span id="cb27-6"><a href="#cb27-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Einkommen"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
-<span id="cb27-7"><a href="#cb27-7"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean.einkommen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb27-8"><a href="#cb27-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median.einkommen, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb27-9"><a href="#cb27-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.numeric</span>(modus.einkommen), <span class="at">color =</span> <span class="st">"green"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb27-10"><a href="#cb27-10"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> geom.einkommen, <span class="at">color =</span> <span class="st">"yellow"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(allbus_df, <span class="fu">aes</span>(<span class="at">x =</span> Einkommen)) <span class="sc">+</span> </span>
+<span id="cb28-2"><a href="#cb28-2"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span><span class="fu">after_stat</span>(density)),</span>
+<span id="cb28-3"><a href="#cb28-3"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">0</span>, <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">500</span>), </span>
+<span id="cb28-4"><a href="#cb28-4"></a>    <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb28-5"><a href="#cb28-5"></a>    <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Einkommen"</span>, <span class="at">y =</span> <span class="st">"Häufigkeit"</span>) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean_einkommen, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> median_einkommen, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.numeric</span>(modus_einkommen), <span class="at">color =</span> <span class="st">"green"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> geom_einkommen, <span class="at">color =</span> <span class="st">"yellow"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_4.2_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -867,25 +918,90 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
+      // Handle positioning of the toggle
+      window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
           }
-        });
+        };
+      }
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
+          }
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;
@@ -929,13 +1045,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>
-    <div class="nav-footer-right">
+    <div class="nav-footer-left">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>   
+    <div class="nav-footer-center">
       &nbsp;
     </div>
+    <div class="nav-footer-right"><img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
 

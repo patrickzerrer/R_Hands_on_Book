@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Bilder/favicon-32x32.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -97,6 +98,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Die Logik von Markdown und Quarto">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/R Markdown Grafik.png">
+<meta property="og:image:height" content="784">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="Die Logik von Markdown und Quarto">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/R Markdown Grafik.png">
+<meta name="twitter:image-height" content="784">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -136,11 +148,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/patrickzerrer/R_Hands_on_Book" rel="" target=""><i class="bi bi-github" role="img">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/ZeMKI_Bremen" rel="" target=""><i class="bi bi-twitter" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -214,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_2.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">klassische Formen von Datensätzen</span></a>
+ <span class="menu-text">Einlesen von Datensätzen in unterschiedlichen Formaten</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -284,13 +291,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Streuungsmaße: Spannweite, Standartabweichung, Varianz</span></a>
+ <span class="menu-text">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Verteilungen und deren Visualisierung</span></a>
+ <span class="menu-text">Berechnung und Interpretation von Verteilungen</span></a>
   </div>
 </li>
       </ul>
@@ -371,19 +378,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Einführung</span></a>
+ <span class="menu-text">Pearson Chi-Quadrat-Test &amp; Rangkorrelation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei zwei Variablen mittels Korrelation und Regression</span></a>
+ <span class="menu-text">Korrelation &amp; Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
+ <span class="menu-text">Prüfung der Voraussetzungen bei der linearen Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die multiple Regression</span></a>
   </div>
 </li>
       </ul>
@@ -445,21 +458,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Artwork by <span class="citation" data-cites="allison_horst">@allison_horst</span></figcaption>
 </figure>
 </div>
-<section id="r-markdown-und-quarto" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="r-markdown-und-quarto"><span class="header-section-number">1</span> R Markdown und Quarto</h2>
+<p>Wir können in R-Studio unterschiedliche Arten von Dokumenten nutzen. In diesem Kurs nutzen wir hauptsächlich <a href="https://quarto.org/">R Quarto</a>. Im folgenden Kapitel gehen wir auf die wichtigsten Funktionsweisen von Quarto ein.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/mDj__dc71yo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+</div>
+</div>
+<section id="r-markdown-und-quarto" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> R Markdown und Quarto</h1>
 <p>In diesem Kurs verwenden wir R Markdown bzw. R Quarto Dokumente. Diese haben den Vorteil, dass wir innerhalb eines Dokumentes Codeteile (sogenannte <em>Code Chunks</em>) und Text kombinieren können. Dies erlaubt die Dokumentation und Reproduzierbarkeit statistischer Auswertungen.</p>
 <p>Bei <a href="https://quarto.org/">Quarto</a> handelt es sich im Prinzip um die neuere Variante von RMarkdown Dokumenten. Diese beinhalten alle Funktionalitäten von Markdown-Dokumenten (sind genauso aufgebaut und lassen sich normal rendern), aber bieten zusätzlich die Möglichkeit weitere Programmiersprachen (wie Python, Julia und Javascript) und interaktive Elemente (Widgets und Shiny-Anwendungen). Markdown-Dokumente weisen die Endung <code>.rmd</code> auf wohingegen Quarto-Dokumente den Endung <code>.qmd</code> haben. Beide Dokumenttypen können für unseren Kurszweck gleichwertig genutzt werden. Lediglich bei der Arbeit mit interaktiven, multimedialen oder mehrsprachigen Dokumenten ist Quarto besser geeignet als Markdown.</p>
 </section>
-<section id="installation-der-programme" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="installation-der-programme"><span class="header-section-number">2</span> Installation der Programme</h2>
+<section id="installation-der-programme" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Installation der Programme</h1>
 <p>Markdown kann innerhalb von R mit dem Befehl <code>install.packages("Rmarkdown")</code> installiert und anschließend geladen werden. Da es sich bei Quarto nicht um ein Package, sondern ein eigenes Interface handelt, muss das Programm extern <a href="https://quarto.org/docs/get-started/">heruntergeladen</a> und auf dem Rechner installiert werden.</p>
 </section>
-<section id="bestehende-dokument-laden" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="bestehende-dokument-laden"><span class="header-section-number">3</span> Bestehende Dokument laden</h2>
+<section id="bestehende-dokument-laden" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Bestehende Dokument laden</h1>
 <p>Zum Laden eines Quarto- oder Markdown Dokumentes könnt ihr dieses einfach auf eurem Rechner doppelklicken. Wahlweise könnt ihr auch über File -&gt; Open File (oder Strg + O) innerhalb von RStudio ein Dokument öffnen.</p>
 </section>
-<section id="neue-dokumente-anlegen" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="neue-dokumente-anlegen"><span class="header-section-number">4</span> Neue Dokumente anlegen</h2>
+<section id="neue-dokumente-anlegen" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Neue Dokumente anlegen</h1>
 <p>Um ein neues Dokument anzulegen, könnt ihr einfach über File -&gt; New File das gewünschte Dokument anlegen. Sowohl bei Markdown, als auch bei Quarto öffnet sich dann das Folgende Fenster:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -469,8 +499,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Dort könnt ihr euer Dokument benennen (<em>Title</em>), die Autoren festlegen (<em>Author</em>) sowie das Output-Format (<em>HTML, PDF oder WORD</em>) festlegen. Zudem könnt ihr bei Quarto angeben, wie ist das Dokument gerendert werden soll (<em>Knitr</em> vs.&nbsp;<em>Jupyter</em>). Hier könnt ihr die Auswahl auf Knitr belassen. Zuletzt könnt ihr festlegen, ob ihr den visual markdown editor oder den source editor nutzen möchtet. All diese Punkte könnt ihr jedoch auch noch nachfolgend im <a href="###yaml-header">YAML-Header</a> oder im <a href="###übergreifende_menüpunkte">Menü</a>) ändern.</p>
 </section>
-<section id="übergreifende-menüpunkte" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="übergreifende-menüpunkte"><span class="header-section-number">5</span> Übergreifende Menüpunkte</h2>
+<section id="übergreifende-menüpunkte" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Übergreifende Menüpunkte</h1>
 <p>Unterhalb der allgemeinen RStudio-Menüleiste findet ihr eine eigene Markdown und Quarto-Dokumentleiste:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -480,11 +510,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Hier könnt ihr euer Dokument speichern (Diskettensymbol), in eurem Dokument suchen und ersetzen (Lupensymbol) oder euer Dokument Rendern (Quarto) oder Knitten (Markdown). Hiermit rendert ihr euer Dokument von R in euer gewünschtes Outputformat (Word, Pdf, oder Html). Zusätzlich könnt ihr mit dem Zahnrad Optionen für den Umgang mit dem gerenderten Dokument und den Codechunks festlegen. Zusätzlich könnt ihr hier neue Codechunks anlegen (+C-Symbol auf der rechten Seite) oder die bestehenden Code-Chunks ausführen (Run-Symbol)</p>
 </section>
-<section id="überblick-über-die-dokumentkomponenten" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="überblick-über-die-dokumentkomponenten"><span class="header-section-number">6</span> Überblick über die Dokumentkomponenten</h2>
+<section id="überblick-über-die-dokumentkomponenten" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Überblick über die Dokumentkomponenten</h1>
 <p>Sowohl Markdown, als auch Quarto-Dokumente bestehen aus drei Bestandteilen: dem YAML-Header, Textbereichen und Codebereichen.</p>
-<section id="yaml-header" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="yaml-header"><span class="header-section-number">6.1</span> YAML-Header</h3>
+<section id="yaml-header" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="yaml-header"><span class="header-section-number">6.1</span> YAML-Header</h2>
 <p>Innerhalb des YAML Headers, welcher jeweils von <code>---</code> umgeben ist, legen wir die Dokumentstruktur fest.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -494,8 +524,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Dies beinhaltet beispielsweise den Titel des Dokumentes <code>title:</code>, die Autoren <code>author</code>, sowie Spezifikationen zur Dokumentstruktur, wie beispielsweise das Outputformat <code>format:</code> oder auch in Quarto Spezifikationen zum Umgang mit den Codechunks <code>execute: echo : true</code> auf Gesamtdokumentebene.</p>
 </section>
-<section id="text" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="text"><span class="header-section-number">6.2</span> Text</h3>
+<section id="text" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="text"><span class="header-section-number">6.2</span> Text</h2>
 <p>In Markdown und Quarto-Dokumenten können wir Text einbinden und diesen beliebig formatieren. Dazu können wir wahlweise die Source-Variante oder die Visual-Variante nutzen. In der Source-Variante variieren wir Text mittels Syntax. Typische Syntaxbefehle sind:</p>
 <ul>
 <li>*<em>kursiv</em>*: jeweils einen Stern vor und nach einem Wort um dieses kursiv zu schreiben</li>
@@ -513,8 +543,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </section>
-<section id="code-chunks" class="level3" data-number="6.3">
-<h3 data-number="6.3" class="anchored" data-anchor-id="code-chunks"><span class="header-section-number">6.3</span> Code Chunks</h3>
+<section id="code-chunks" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="code-chunks"><span class="header-section-number">6.3</span> Code Chunks</h2>
 <p>Innerhalb von Markdown und Quarto können wir Codebefehle direkt in unser Dokument innerhalb von sogenannten Codechunks integrieren. Hier können wir alle Arten von Code schreiben sowie diese mit Hilfe von <code>#</code> direkt kommentieren (alles hinter einer Raute wird dabei nicht ausgeführt). Codechunks beginnen mit drei Backticks und einem <code>r</code> in geschweiften Klammern und enden wieder mit drei Backticks:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="in">```{r}</span></span>
@@ -538,8 +568,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>Achtung</em>: wir nutzen hier <code>:</code> statt <code>=</code> und schreiben <code>true</code> und <code>false</code> statt <code>TRUE</code>/<code>T</code> und <code>FALSE</code>/<code>F</code>.</p>
 </section>
 </section>
-<section id="literatur" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="literatur"><span class="header-section-number">7</span> Literatur</h2>
+<section id="literatur" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Literatur</h1>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -805,13 +835,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>
-    <div class="nav-footer-right">
+    <div class="nav-footer-left">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>   
+    <div class="nav-footer-center">
       &nbsp;
     </div>
+    <div class="nav-footer-right"><img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
 

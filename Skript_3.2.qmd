@@ -15,6 +15,14 @@ format:
 
 ![Bild von Jae Rue auf Pixabay](Bilder/Skript_3.2_Bild_1.jpg)
 
+In unserem alltäglichen Leben haben wir ständig mit unterschiedlichsten Formen von Daten zu tun, meistens ohne uns darüber groß Gedanken zu machen. Beispielsweise haben wir es bei dem Versenden einer Textnachricht mit einer Reihe von unterschiedlichen Formen an Daten zu tun, die Nachricht an sich als auch den/die Empfänger:in - in Form von Text - als auch den Zeitpunkt - in Form von Zahlen bzw. eines Datums. Wenn wir mit diesen Daten arbeiten möchten, benötigen wir etwas Wissen darüber wie verschiedene Datenformate funktionieren.
+
+::: {.callout-note collapse="true" icon="false"}
+## Video
+
+{{< video is in Arbeit >}}
+:::
+
 # Verschiedene Datentypen, Skalenniveaus und Datenstrukturen
 
 Die Welt der Datenanalyse ist reichhaltig und vielfältig. Bevor wir jedoch in die Tiefe der quantitativen Datenanalyse eintauchen, ist es wichtig, die Grundlagen zu verstehen, die uns bei der Arbeit mit Daten leiten. In diesem Kapitel werden wir uns mit den grundlegenden Konzepten der Datentypen, Skalenniveaus und Datenstrukturen vertraut machen.
@@ -84,10 +92,10 @@ c <- c("one","two","three") # <3>
 d <- c(TRUE, FALSE, TRUE, FALSE) # <4> 
 ```
 
-1. numeric
-2. integer
-3. character
-4. logical
+1.  numeric
+2.  integer
+3.  character
+4.  logical
 
 Wir haben nun mit der Funktion `c()` Vektoren erstellt mit verschiedenen Datentypen. Wollen wir einen Vektor des Datentyps numeric erstellen, können wir diesen mit Zahlen befüllen, wie es bei Vektor a der Fall ist. Wollen wir hingegen spezifizieren, dass es sich ausschließlich um ganze Zahlen handelt und der Datentyp des Vektors daher integer ist, müssen wir dies mit einem L hinter den Zahlen angeben, wie wir es für Vektor b gemacht haben. Zur Erstellung eines Vektors des Datentyps character setzen wir die Werte in doppelte oder einfache Anführungszeichen, wie bei Vektor c. Für einen logischen Datentyp, befüllen wir den Vektor mit den Werten TRUE und False, wie in Beispiel d. Wollen wir uns den Datentyp eines Vektors anzeigen lassen, können wir dies mit dem Befehl `class()` machen.
 

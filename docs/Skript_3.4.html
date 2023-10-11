@@ -366,18 +366,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Einführung</span></a>
+ <span class="menu-text">Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 1: Pearson Chi-Quadrat-Test &amp; *Rangkorrelation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei zwei Variablen mittels Korrelation und Regression</span></a>
+ <span class="menu-text">Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 2: Korrelation &amp; Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
   </div>
 </li>
@@ -438,6 +444,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/zemkipatrick_comic_style_cyberpunk_statistics_table_wideformat_a16032f7-613e-4608-b19e-95c97039c779.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Eine Wand voller Tabellen, Bild generiert von Midjourney</figcaption>
+</figure>
+</div>
 <section id="eine-einführung-in-ggplot2" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Eine Einführung in ggplot2</h1>
 <p>Dieses Notebook illustriert verschiedene Möglichkeiten dafür, wie auf Grundlage der ALLBUS-Daten informative Tabellen und Plots erstellt werden können. Tabellen und Datenvisualisierungen (“Plots”) stellen zwei sehr effektive Möglichkeiten dar, sich schnell einen Überblick über komplexe Daten zu verschaffen. Dabei lassen sich oftmals Zusammenhänge zwischen zwei oder mehr Variablen erahnen, die dann später inferenzstatistisch auf die Solidität ihres Zusammenhangs hin überprpüft werden können.</p>
@@ -804,16 +816,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 80 × 4
    alter     geschlecht bildung            einkommen
    &lt;dbl+lbl&gt; &lt;fct&gt;      &lt;fct&gt;              &lt;dbl+lbl&gt;
- 1 24        MANN       HOCHSCHULREIFE     1000     
- 2 41        MANN       FACHHOCHSCHULREIFE 3000     
- 3 80        MANN       HOCHSCHULREIFE     3600     
- 4 59        FRAU       HOCHSCHULREIFE     1900     
- 5 69        MANN       HOCHSCHULREIFE     2800     
- 6 60        MANN       HOCHSCHULREIFE     3500     
- 7 49        MANN       MITTLERE REIFE     2100     
- 8 63        FRAU       FACHHOCHSCHULREIFE 2500     
- 9 30        MANN       FACHHOCHSCHULREIFE 3000     
-10 30        MANN       MITTLERE REIFE      900     
+ 1 42        MANN       MITTLERE REIFE      946     
+ 2 72        MANN       VOLKS-,HAUPTSCHULE 1800     
+ 3 33        MANN       HOCHSCHULREIFE     2500     
+ 4 40        MANN       HOCHSCHULREIFE     5111     
+ 5 32        FRAU       HOCHSCHULREIFE     1100     
+ 6 59        MANN       MITTLERE REIFE     2700     
+ 7 36        MANN       HOCHSCHULREIFE     7000     
+ 8 71        MANN       VOLKS-,HAUPTSCHULE 1120     
+ 9 48        FRAU       HOCHSCHULREIFE     1700     
+10 40        MANN       FACHHOCHSCHULREIFE 2000     
 # ℹ 70 more rows</code></pre>
 </div>
 </div>
