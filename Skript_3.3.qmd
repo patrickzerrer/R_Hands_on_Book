@@ -15,6 +15,8 @@ format:
 
 ![Bild von Gerd Altmann auf Pixabay](Bilder/Skript_3.3_Bild_1.png)
 
+Wenn wir mit Daten arbeiten liegen diese in den seltesten Fällen in der von uns benötigten Form vor. Entsprechend wichtig ist es für uns die Fähigkeit zu besitzen Daten in die für uns gewünschte Form zu bringen. Damit beschäftigen wir uns in diesem Abschnitt.
+
 # Selektion, Manipulation und Transformation von Daten
 
 In diesem Kapitel werden wir uns mit den Schritten der Datenbearbeitung befassen, die essentiell für die quantitative Datenanalyse sind. Wir werden lernen, wie wir Daten gezielt auswählen, verändern und transformieren können, um die für uns relevanten Informationen zu gewinnen. Dabei werden wir das umfassende "tidyverse"-Universum nutzen, insbesondere das leistungsstarke R-Paket "dplyr", das speziell für diese Art von Datenmanipulation entwickelt wurde. Bevor wir mit der Selektion, Manipulation und Transformation unserer Daten starten können, müssen wir die nötogen Pakete und unseren Datensatz lasen. Dazu laden wir zunächst unseren Paketmanager mit dem Befehl `library(pacman)`. Anschließend können wir mit `p_load()` die Libraries laden, die wir in diesem Kapitel benötigen. Diese sind "haven", um unseren Datensatz in dem entsprechenden Dateiformat (Endung .dta) öffnen zu können und "tidyr" und "dplyr", um Daten auszuwählen, zu manipulieren und zu transformieren:

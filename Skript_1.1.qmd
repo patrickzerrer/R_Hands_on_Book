@@ -12,27 +12,35 @@ format:
 
 ![Artwork by @allison_horst](Bilder/Grafik%20R%20Lernen.png)
 
-## Was ist R?
+In diesem Kurs nutzen wir die Programmiersprache R sowie R-Studio als benutzerfreundliche Programmoberfläche. In diesem Kapitel gehen wir die wichtigsten Punkte Schritt für Schritt durch.
+
+::: {.callout-note collapse="true" icon="false"}
+## Video
+
+{{< video https://www.youtube.com/watch?v=mDj__dc71yo >}}
+:::
+
+# Was ist R?
 
 R ist eine freie Programmiersprache die auf allen gängigen Betriebssystemen läuft. In seiner Grundfunktion ist R zunächst eine Konsole, in welcher wir zeilenweise Code eingeben und ausführen können. Dabei kann es sich um einfache Rechnungen oder auch komplexe Modelle handeln. Die meisten arbeiten dabei nicht mit R als solches sondern nutzen verschiedene Umgebungen, etwa RStudio oder Jupyter Hub um mit R zu arbeiten.
 
-## Was ist RStudio?
+# Was ist RStudio?
 
 RStudio ist eine Erweiterung von R und bietete den Nutzer\*innen eine benutzerfreundlichere Programmoberfläche. So ermöglicht RStudio einen direkten Überblick über die geladenen Pakete, Datensätze und im Arbeitsverzeichnis gespeicherten Dateien. Zudem ermöglicht RStudio die Arbeit mit Skripten, Markdown und Quarto Dokumenten.
 
-## Installation von R und RStudio
+# Installation von R und RStudio
 
 Möchtet ihr das Programm lokal auf eurem Rechner nutzen, müsst ihr zunächst die Programme R, RStudio und gegebenfalls RTools installieren. Alle Programme sind kostenlos online verfügbar und lassen sich auf allen gängigen Betriebssystemen installieren. Installiert zunächst [R](https://cran.uni-muenster.de/) und anschließend [RStudio](https://posit.co/download/rstudio-desktop/) und achtet darauf regelmäßig auf die aktuelle Version zu aktualisieren.
 
 Innerhalb unseres Kurse arbeiten wir mit R und RStudio, nutzen die Programme allerdings in der Umgebung von Jupyter.
 
-## Die Programmoberfläche von RStudio
+# Die Programmoberfläche von RStudio
 
-### Schaltflächen
+## Schaltflächen
 
 Innerhalb von RStudio unterscheiden wir 4 Schaltflächen welche sich beliebig via Drag and Drop verschieben oder auch minimieren lassen.
 
-![](Bilder/RStudio_Programmoberfläche.jpg)
+![Bild Programmoberfläche](Bilder/RStudio_Programmoberfläche.jpg)
 
 **1** Ist der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können (siehe auch Markdown und Quarto)
 
@@ -42,11 +50,11 @@ Innerhalb von RStudio unterscheiden wir 4 Schaltflächen welche sich beliebig vi
 
 **4** In diesem Bereich finden sich verschiedene Reiter, welche die Organisation der Arbeit mit R erleichtern. Unter *File* befinden sich alle innerhalb des Ordners oder Projektes befindlichen Dateien. Unter *Plots* kann man sich die in R erstellten Grafiken anzeigen lassen. *Packages* zeigt alle in R installierten Pakete an. Hier lassen sich mittels *install* auch neue Pakete installieren oder über *update* die aktuellen Pakete updaten. Bei *Help* können wir eine Hilfeseite aufrufen. Es kann wahlweise direkt innerhalb der Seite nach Hilfen gesucht werden oder mit dem Befehl `?Name der Funktion` bzw. `??Name des Packages` innerhalb der Konsole. Möchte man nach einem Befehl aus einem Paket suchen nutzt man den Suchbefehle`?Name des Packages::Name der Funktion`. Unter *Viewer* finden sich gerenderte Dokumente (beispielsweise ein gerendertes Markdown oder Quarto Dokument) und unter *Presentation* gerenderte Shiny-Dokumente.
 
-### Menüleiste
+## Menüleiste
 
 Zusätzlich zu den Schaltflächen findet sich oben links eine Menüleiste:
 
-![](Bilder/Menüleiste.jpg)
+![Bild Menüleiste](Bilder/Menüleiste.jpg)
 
 -   Unter *File* können neue Dateien erstellt, geöffnet und gespeichert werden.
 -   *Edit* bietet Möglichkeiten der Dateibearbeitung (bspw. Kopieren, Ausschneiden, Rückgängig etc.) falls ihr keine Short-Cuts nutzen wollt.
@@ -58,7 +66,7 @@ Zusätzlich zu den Schaltflächen findet sich oben links eine Menüleiste:
 -   *Tools* hat viele hilfreiche Funktionen. Hier können unter anderem Pakete installiert und hilfreiche Keyboard Shortcuts ausgegeben werden. Am bedeutsamsten ist hier jedoch der Bereich Global Options, in welchem unter anderem grundlegende Einstellungen zum Speicherort von R und den Paketen, zur Aufteilung und Aussehen von RStudio und zur Funktionalität von R Markdown getroffen werden können.\
 -   Auch der Reiter *Help* kann sehr hilfreich sein. Hier finden sich eine Hilfeseite (siehe auch Reiter Help in Schaltfläche 4), Möglichkeiten der besseren Zugänglichkeit (*Accessibility*), *Cheat Sheets* für die Arbeit mit R und erneut eine Übersicht über Shortcuts für die Arbeit mit R.
 
-## Die Grundlogik von R
+# Die Grundlogik von R
 
 Wie bereits zuvor erwähnt ist R eine Programmiersprache. Das bedeutet, dass alle Schritte in R, vom Datenmanagement bis zu komplizierteren statistischen Analysen, mit Befehlen bzw. Funktionen erfolgen. Grundsätzlich funktionieren Befehle so, dass zunächst der Befehl erfolgt und in Klammern anschließend worauf sich dieser Befehl bezieht.
 
@@ -86,15 +94,15 @@ Hier haben wir auch bereits eine weitere Funktionalität von R kennengelernt, n�
 
 Hier hilf ein Blick in die Hilfeseite, welche wir beispielsweise für den Mittelwert mit dem Befehl `?mean()` aufrufen können. Für jede Funktion stehen - wie oben bereits erwähnt - *Hilfeseiten* zur Verfügung. Diese beinhalten zunächst eine kurze Beschreibung *Description*, anschließend einen Überblick zur Nutzung *Usage* sowie dem *Default* des Befehles. Anschließend finden sich die *Arguments*, dies sind die Möglichkeiten, wie wir die Funktion nutzen können und welche zusätzlichen Optionen zur Verfügung stehen. Oftmals finden sich zudem weitere Erklärungen und Beispiele der Nutzung.
 
-### Kurz-Exkurs: das tidyverse
+## Kurz-Exkurs: das tidyverse
 
 In R selbst findet sich eine Vielzahl von Befehlen. Zusätzlich wird R von den Nutzern immer weiter entwickelt und es kommen neue Funktionen in Form von Paketen hinzu. Eines der meist genutzten Pakete(-universen) stellt dabei das [tidyverse](https://www.tidyverse.org/) dar. Mit den Befehlen und Funktionen dieses Paketes kommt eine etwas andere Programmiersprache, welche uns jedoch die Arbeit mit R erleichtert. Gerade auch bei Fragen des Datenmanagementes ist das tidyverse hilfreich, denn hier kommt ein zweiter Fun-Fact über R:💡 R kann nicht nur manchmal etwas dumm sein (wir erinnern uns, es denkt nicht mit), es ist auch recht vergesslich. Wir haben oben bereits gelernt, dass wir in Befehlen immer den Datensatz und die Variable spezifizieren müssen. Dies stellt kein Problem bei einzelnen Befehlen dar, ist jedoch bei einer Vielzahl von Befehlen etwas nervig. Hier kommt uns die tidyverse Logik zu Nutze, in welcher einmal zu Beginn des Dokumentes der Datensatz spezifziert wird und anschließend alle weiteren Schritte durch eine Pipe `%>%` verbunden werden. Die Pipe (Shortcut Windows: Ctrl + Shift + M; MAC: Cmd + Shift + M) bedeutet so viel wie "und dann". Also im Prinzip sagen wir R, nehme diesen Datensatz und dann mache die folgenden Dinge, wobei wir so viele Schritte wie wir möchten jeweils mit Pipes verbinden können. Wir nutzen in unseren Skripten hauptsächlich die tidyverse-Logik, erklären diese daher grundlegender in Kapitel [3.1](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.1.html), wenn wir uns mit den ersten Schritten des Datenmanagements beschäftigen.
 
-## Pakete
+# Pakete
 
 R-Pakete sind Erweiterungen, die Funktionen, Daten, Code und dessen Dokumentation enthalten und uns damit unsere Arbeit deutlich erleichtern. Diese erweiteren die Funktionen, die bereits in der Standardausführung von R (bekannt als base R) gegeben sind.
 
-### Die Installation von Paketen
+## Die Installation von Paketen
 
 Pakete können wahlweise R-intern über *CRAN* (das steht für *Comprehensive R Archive Network* und ist das zentrale Software-Repository) oder direkt von GitHub (für sehr neue Pakete, welche noch nicht auf CRAN sind) installiert werden. Im Normalfall installieren wir jedoch direkt von CRAN, da hier eine Vielzahl von Paketen und Funktionen vorhanden sind und die Installation sehr simpel ist.
 
@@ -110,7 +118,7 @@ Beim Ausführen des Codes gibt R in der Konsole Auskunft über die verschiedenen
 
 Einige der Pakete, die wir im Rahmen des Kurses verwenden sind bereits in der R Cloud vorinstalliert und müssen nicht mehr von euch eigenhändig installiert werden. Grundsätzlich ist es jedoch immer ratsam, einmal zu checken, ob die Pakete in der aktuellen Version installiert sind, da ansonsten die Funktionen der Pakete nicht funktionieren können.
 
-### Das Laden von Paketen
+## Das Laden von Paketen
 
 Im vorherigen Schritt haben wir bereits die von uns benötigten Pakete installiert, jetzt müssen wir R nur noch sagen, dass wir diese Pakete für die aktuelle Session nutzen möchten. Ihr könnt euch das so vorstellen, dass ihr die benötigten Pakete *aktiv* schaltet. Dies geschieht mit dem `library` Befehl (Achtung, hier benötigen wir im Gegensatz zum `install.packages` Befehl keine Anführungszeichen):
 

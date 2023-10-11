@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Bilder/favicon-32x32.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -462,6 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Bild von Gerd Altmann auf Pixabay</figcaption>
 </figure>
 </div>
+<p>Wenn wir mit Daten arbeiten liegen diese in den seltesten Fällen in der von uns benötigten Form vor. Entsprechend wichtig ist es für uns die Fähigkeit zu besitzen Daten in die für uns gewünschte Form zu bringen. Damit beschäftigen wir uns in diesem Abschnitt.</p>
 <section id="selektion-manipulation-und-transformation-von-daten" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Selektion, Manipulation und Transformation von Daten</h1>
 <p>In diesem Kapitel werden wir uns mit den Schritten der Datenbearbeitung befassen, die essentiell für die quantitative Datenanalyse sind. Wir werden lernen, wie wir Daten gezielt auswählen, verändern und transformieren können, um die für uns relevanten Informationen zu gewinnen. Dabei werden wir das umfassende “tidyverse”-Universum nutzen, insbesondere das leistungsstarke R-Paket “dplyr”, das speziell für diese Art von Datenmanipulation entwickelt wurde. Bevor wir mit der Selektion, Manipulation und Transformation unserer Daten starten können, müssen wir die nötogen Pakete und unseren Datensatz lasen. Dazu laden wir zunächst unseren Paketmanager mit dem Befehl <code>library(pacman)</code>. Anschließend können wir mit <code>p_load()</code> die Libraries laden, die wir in diesem Kapitel benötigen. Diese sind “haven”, um unseren Datensatz in dem entsprechenden Dateiformat (Endung .dta) öffnen zu können und “tidyr” und “dplyr”, um Daten auszuwählen, zu manipulieren und zu transformieren:</p>

@@ -15,13 +15,17 @@ format:
 
 ![Bild generiert von Midjourney](Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png)
 
-# Vorbereitende Schritte
+Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten wir uns zunächst einige Grundlagen widmen. Wir beschäftigen uns im Folgenden mit einigen fundamentalen Begriffen, deren Funktionsweisen wir kennen sollten - das erleichtert uns zumindest die Arbeit deutlich und vermeidet wahrscheinlich den ein oder anderen Fehler samt dazugehörigen frustrierten Verfluchen des Kurses und R.
 
-Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten wir uns zunächst einige Grundlagen widmen Wir beschäftigen uns im Folgenden mit einigen fundamentalen Begriffen, deren Funktionsweisen wir kennen sollten - das erleichtert uns zumindest die Arbeit deutlich und vermeidet wahrscheinlich den ein oder anderen Fehler samt dazugehörigen frustrierten Verfluchen des Kurses und R.
+::: {.callout-note collapse="true" icon="false"}
+## Video
+
+{{< video https://www.youtube.com/watch?v=mDj__dc71yo >}}
+:::
 
 Lasst uns Beginnen und Schritt für Schritt die wichtigsten Punkte durchgehen, die ihr zur Vorbereitung eures Analyse-Projekts machen solltet.
 
-## Die R-Studio-Cloud der Universität
+# Die R-Studio-Cloud der Universität
 
 Falls ihr an der Universität Bremen studiert könnt ihr den Service des Zentrum für Multimedia in der Lehre nutzen indem ihr euch [hier](https://jupyter.uni-bremen.de) mit eurer Uni-Kennung einloggt.
 
@@ -31,7 +35,7 @@ Als nächstes habt ihr die Möglichkeit die für euren Kurs vorgesehene Programm
 
 Mit dem Klick gelangt ihr in R-Studio.
 
-## Das Anlegen eines R-Projekts
+# Das Anlegen eines R-Projekts
 
 Starten wir zunächst mit dem Anlegen eines sogenannten R-Projekts. RStudio-Projekte ermöglichen es uns alle mit einem Projekt verbundenen Dateien an einem Ort zu speichern. Das umfasst Datensätze, R-Skripte, Ergebnisse, Abbildungen, Berichte usw. Projekte sind bereits in RStudio integriert.
 
@@ -53,7 +57,7 @@ Mit einem Klick auf den Button `Create Project` werden alle notwendigen Material
 
 Ihr habt jetzt alle Materialien und Skripte und könnt mit dem Kurs beginnen.
 
-## Das Working-Dictonary (wd)
+# Das Working-Dictonary (wd)
 
 Im Allgemeinen ist das Arbeitsverzeichnis (das Working-Dictonary, wd) der Ort, an dem R nach Dateien (vor allem nach Datensätzen) sucht. Wenn ihr kein Projekt verwenden, müsst ihr wahrscheinlich durch die Funktion `setwd` oder das Interface (siehe Screenshot) ein Working-Dictonary setzen, bevor ihr euren R-Code ausführen könnt.
 
@@ -67,7 +71,7 @@ daten = haven::read_dta("Datensatz/Allbus_2021.dta") # <1>
 
 In dem Beispiel ist im Working-Dictonary des Projekts ein Unterordner mit der zu ladenden Datei. Der Dateipfad befindet sich im R-Code in den Anführungszeichen, also `"Datensatz/Allbus_2021.dta"`. Der erste Teil `"Datensatz/"` gibt an, dass sich die Datei in einem Ordner befindet, der Datensatz heißt. Der zweite Teil `Allbus_2021.dta"` gibt den eigentlichen Dateinamen mit der entsprechend Dateiendung an (also .dta). Wahrscheinlich müsst ihr den R-Code entsprechend anpassen.
 
-## Das Zugreifen auf Dateien und Datensätze
+# Das Zugreifen auf Dateien und Datensätze
 
 Bevor wir allerdings auf Dateien und Datensätze zugreifen können, müssen wir diese zunächst in unseren Projekt-Ordner (also in das Working-Dictonary) verschieben. Falls ihr für diesen Kurs die Desktop-Version von RStudio nutzt, könnt ihr hier einfach die entsprechenden Datein auf eurem lokalen Rechner in das zuvor von euch festgelegte Working-Dictonary kopieren. Wenn ihr die Cloud-Version von RStudio nutzt, müsst ihr hier die Dateien und Datensätze zunächst in die Cloud laden. Hierfür könnt ihr auf den `Upload`-Button in der unteren rechten Ecke des Interfaces gehen und in dem sich öffnenden Fenster die entsprechende Datei auswählen.
 
@@ -75,18 +79,17 @@ Bevor wir allerdings auf Dateien und Datensätze zugreifen können, müssen wir 
 
 Sobald ihr durch das Klicken von OK bestätigt habt, wird die Datei hochgeladen und erscheint in dem unteren rechten Fenster im `Files`-Reiter.
 
-
-## Die Session
+# Die Session
 
 Die sogenannte *Session* wurde bereits mehrmals kurz erwähnt. Bei der *Session* handelt es sich um eine laufende Instanz des R-Programms, die ihr beenden und neustarten könnt. Das macht insbesondere dann Sinn, wenn ihr die falsche Version eines Pakets installiert habt oder ihr einen sauberen Start für euren R Code haben möchtet. Durch einen Neustart der *Session* könnt ihr euch sicher sein, dass ihr nicht ausversehen irgendwelche zuvor verwendeten Pakete oder Berechnungen mitnehmt.
 
 Ihr könnt die *Session* mit der `.rs.restartR` Funktion in der Konsole neustarten. Alternativ könnt ihr im R Studio Interface auf `Session`und `Restart R` gehen.
 
-![Screenshot RStudio](Bilder/Skript_1_4_Screenshot6.png) 
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot6.png)
 
 Ein kurze Mitteilung in der Konsole gibt euch an, dass die *Session* neu gestartet wurde.
 
-## Hilfe zur Selbsthilfe
+# Hilfe zur Selbsthilfe
 
 Ihr werdet im Laufe des Kurses immer wieder mit Fehlermeldungen zu tun haben. Hier ist es wichtig einen kühlen Kopf zu bewahren und möglichst systematisch zu versuchen den Fehler zu finden und zu beheben. Der Umgang mit Fehlern ist ein großer und wichtiger Teil bei jeglicher Programmierung und es gibt hier ein paar Tipps, wie man damit am besten umgeht.
 
