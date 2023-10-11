@@ -26,31 +26,35 @@ Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacm
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
 p_load(tidyverse, ggplot2, haven, dplyr)  
-
-
-theme_set(theme_classic()) 
-
-daten = haven::read_dta("Datensatz/Allbus_2021.dta") 
-
-allbus_df = subset(daten, select=c("sex", "pt12", "di01a")) %>%          
-  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%                                     
-  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%          
-  na.omit()   
-
-colnames(allbus_df) = c("Geschlecht", "VertrauenBR", "Einkommen") # Umbenennen der Spaltennamen
 ```
 
-1.  Wir erstellen ein neues Objekt basierend auf dem Datensatz `daten`
-2.  Wir wählen die Variablen aus
-3.  Die Kombination aus `mutate` und `across` ermöglicht es uns die Funktion `as.numeric` in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die `~` gibt den Start der anzuwenden Funktion (hier `as.numeric` an), der Punkt innerhalb der Klammer der `as.numeric` Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen
-4.  Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter, mit dem Ausdruck `%in%` prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
-5.  Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+Im Anschluss laden wir die benötigten Daten und bereiten diese für die spätere Analyse vor.
 
-## Die Spannweite
+```{r}
+theme_set(theme_classic()) 
+
+daten = haven::read_dta("Datensatz/Allbus_2021.dta") # <1> 
+
+allbus_df = subset(daten, select=c("sex", "pt12", "di01a")) %>%    # <2>       
+  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%      # <3>                                
+  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%        # <4>   
+  na.omit()   # <5> 
+
+colnames(allbus_df) = c("Geschlecht", "VertrauenBR", "Einkommen") # <6>  
+```
+
+1. Wir erstellen ein neues Objekt basierend auf dem Datensatz `daten`
+2. Wir wählen die Variablen aus
+3. Die Kombination aus `mutate` und `across` ermöglicht es uns die Funktion `as.numeric` in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die `~` gibt den Start der anzuwenden Funktion (hier `as.numeric` an), der Punkt innerhalb der Klammer der `as.numeric` Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen
+4. Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion `if_else`zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor `%in%` dient wiederum als Platzhalter, mit dem Ausdruck `%in%` prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch `NA` ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.
+5. Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+6. Umbenennen der Spaltennamen
+
+# Die Spannweite
 
 Die Spannweite (auch Range genannt) gibt den Abstand zwischen der kleinsten und der größten Merkmalsausprägung an. Sie ist das einfachste Streuungsmaß, zugleich aber nur wenig aussagekräftig.
 
-### Berechnung
+## Berechnung
 
 $$
 SP = x_{max} - x_{min}  
@@ -67,11 +71,11 @@ einkommen_max = max(allbus_df$Einkommen) - min(allbus_df$Einkommen)
 einkommen_max
 ```
 
-## Quantilsabstände
+# Quantilsabstände
 
 Dieses Maß gibt die Differenz zweier Quantile an. Insbesondere der Quartilsabstand (75%-Quantil - 25%-Quantil) ist hier von Bedeutung.
 
-### Berechnung
+## Berechnung
 
 Der Quaantilsabstand berechnet sich für das obere Quantil $Q_{o}$ und das untere Quantil $Q_{u}$ folgendermaßen:
 
@@ -90,11 +94,11 @@ IQR(allbus_df$VertrauenBR)
 
 Um den mittleren Quartilsabstand zu ermitteln, kann man das Ergebnis noch durch 2 teilen.
 
-## Varianz und Standardabweichung
+# Varianz und Standardabweichung
 
 Ein nützlicheres Maß dafür, wie die einzelnen Merkmalsausprägungen um den Mittelwert verteilt sind - vorausgesetzt, man hat es mit kardinal skalierten Daten zu tun, kann die Varianz sein.
 
-### Berechnung
+## Berechnung
 
 Es wird unterschieden zwischen der Varianz der Grundgesamtheit und der Stichprobenvarianz. Bei ersterer berechnet man für jede einzelne Merkmalsausprägung ihre Abweichung vom Mittelwert, quadriert die Ergebnisse und summiert diese. Anschließend teilt man durch die Größe der Grundgesamtheit:
 
@@ -122,7 +126,7 @@ $$ R bietet zur Berechnung der Standardabweichung die `sd`-Funktion an.
 sd(allbus_df$Einkommen)
 ```
 
-## Zusammenfassungen ausgeben lassen
+# Zusammenfassungen ausgeben lassen
 
 Wenn man nicht jeden Parameter einzeln abfragen will und kardinal skalierte Daten hat, kann man sich die wichtigsten Lageparameter auch als Zusammenfassung ausgeben lassen:
 
@@ -130,7 +134,7 @@ Wenn man nicht jeden Parameter einzeln abfragen will und kardinal skalierte Date
 summary(allbus_df$Einkommen)
 ```
 
-## Visualisierung der Streuungsparameter
+# Visualisierung der Streuungsparameter
 
 In folgendem Codebeispiel lassen wir uns das Histogramm aus dem letzten Abschnitt ausgeben, allerdings reduziert auf Median (blau, durchgezogene Linie) und das arithmetische Mittel (rot, durchgezogene Linie). Wir ergänzen diese Lageparameter um den Minimal- und den Maximalwert (schwarz, gestrichelt), das untere und obere Quartil (blau, gestrichelt) und die Standardabweichung, hier beiderseits vom Mittelwert aufgetragen(rot, gestrichelt).
 

@@ -186,14 +186,14 @@
     "href": "Skript_4.3.html",
     "title": "Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz",
     "section": "",
-    "text": "Wie groß sind die Kreise?, Bild generiert von Midjourney\nIm letzten Abschnitt haben wir uns angesehen, mit welchen Maßen sich etwas darüber sagen lässt, um welche Punkte sich die Masse der Messwerte in unserem Datensatz konzentriert. Jetzt wollen wir wissen, wie stark die Messwerte streuen, also wie stark die Messwerte vom Lageparameter abweichen.\nDazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem p_load-Befehl:\nif(!require(\"pacman\")) {install.packages(\"pacman\");library(pacman)}\n\nLade nötiges Paket: pacman\n\n\nWarning: Paket 'pacman' wurde unter R Version 4.3.1 erstellt\n\np_load(tidyverse, ggplot2, haven, dplyr)  \n\n\ntheme_set(theme_classic()) \n\ndaten = haven::read_dta(\"Datensatz/Allbus_2021.dta\") \n\nallbus_df = subset(daten, select=c(\"sex\", \"pt12\", \"di01a\")) %&gt;%          \n  mutate(across(c(\"sex\", \"pt12\", \"di01a\"), ~ as.numeric(.))) %&gt;%                                     \n  mutate(across(c(\"sex\", \"pt12\", \"di01a\"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %&gt;%          \n  na.omit()   \n\ncolnames(allbus_df) = c(\"Geschlecht\", \"VertrauenBR\", \"Einkommen\") # Umbenennen der Spaltennamen"
+    "text": "Wie groß sind die Kreise?, Bild generiert von Midjourney\nIm letzten Abschnitt haben wir uns angesehen, mit welchen Maßen sich etwas darüber sagen lässt, um welche Punkte sich die Masse der Messwerte in unserem Datensatz konzentriert. Jetzt wollen wir wissen, wie stark die Messwerte streuen, also wie stark die Messwerte vom Lageparameter abweichen.\nDazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem p_load-Befehl:\nif(!require(\"pacman\")) {install.packages(\"pacman\");library(pacman)}\n\nLade nötiges Paket: pacman\n\n\nWarning: Paket 'pacman' wurde unter R Version 4.3.1 erstellt\n\np_load(tidyverse, ggplot2, haven, dplyr)\nIm Anschluss laden wir die benötigten Daten und bereiten diese für die spätere Analyse vor.\ntheme_set(theme_classic()) \n\n1daten = haven::read_dta(\"Datensatz/Allbus_2021.dta\")\n\n2allbus_df = subset(daten, select=c(\"sex\", \"pt12\", \"di01a\")) %&gt;%\n3  mutate(across(c(\"sex\", \"pt12\", \"di01a\"), ~ as.numeric(.))) %&gt;%\n4  mutate(across(c(\"sex\", \"pt12\", \"di01a\"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %&gt;%\n5  na.omit()\n\n6colnames(allbus_df) = c(\"Geschlecht\", \"VertrauenBR\", \"Einkommen\")\n\n\n1\n\nWir erstellen ein neues Objekt basierend auf dem Datensatz daten\n\n2\n\nWir wählen die Variablen aus\n\n3\n\nDie Kombination aus mutate und across ermöglicht es uns die Funktion as.numeric in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die ~ gibt den Start der anzuwenden Funktion (hier as.numeric an), der Punkt innerhalb der Klammer der as.numeric Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen\n\n4\n\nWir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion if_elsezurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor %in% dient wiederum als Platzhalter, mit dem Ausdruck %in% prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch NA ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.\n\n5\n\nWir entfernen mit der Funktion na.omit fehlende Werte aus dem Datensatz\n\n6\n\nUmbenennen der Spaltennamen"
   },
   {
     "objectID": "Skript_4.3.html#berechnung",
     "href": "Skript_4.3.html#berechnung",
-    "title": "Streuungsmaße: Spannweite, Standartabweichung, Varianz",
+    "title": "Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz",
     "section": "1.1 Berechnung",
-    "text": "1.1 Berechnung"
+    "text": "1.1 Berechnung\n\\[\nSP = x_{max} - x_{min}  \n\\] Mit der range-Funktion kann man sich in R die beiden Extremwerte als Vektor ausgeben lassen:\n\nrange(allbus_df$Einkommen)\n\n[1]   -41 14100\n\n\nAlternativ kann man auch einfach Das Maximum und das Minimum ermitteln und die Differenz berechnen:\n\neinkommen_max = max(allbus_df$Einkommen) - min(allbus_df$Einkommen)\neinkommen_max\n\n[1] 14141"
   },
   {
     "objectID": "Skript_4.3.html#visualisierung",
@@ -212,9 +212,9 @@
   {
     "objectID": "Skript_4.3.html#berechnung-1",
     "href": "Skript_4.3.html#berechnung-1",
-    "title": "Streuungsmaße: Spannweite, Standartabweichung, Varianz",
+    "title": "Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz",
     "section": "2.1 Berechnung",
-    "text": "2.1 Berechnung"
+    "text": "2.1 Berechnung\nDer Quaantilsabstand berechnet sich für das obere Quantil \\(Q_{o}\\) und das untere Quantil \\(Q_{u}\\) folgendermaßen:\n\\[\nQA = Q_{o} - Q_{u}\n\\]\nFür den Quartilsabstand gibt es eine Funktion in R:\n\n# Berechnung mit der vorgefertigten R-Funktion IQR (Interquartile Range):\nIQR(allbus_df$VertrauenBR)\n\n[1] 2\n\n\n\nBerechnung mit der vorgefertigten R-Funktion IQR (Interquartile Range)\n\nUm den mittleren Quartilsabstand zu ermitteln, kann man das Ergebnis noch durch 2 teilen."
   },
   {
     "objectID": "Skript_4.3.html#visualisierung-1",
@@ -233,9 +233,9 @@
   {
     "objectID": "Skript_4.3.html#berechnung-2",
     "href": "Skript_4.3.html#berechnung-2",
-    "title": "Streuungsmaße: Spannweite, Standartabweichung, Varianz",
+    "title": "Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz",
     "section": "3.1 Berechnung",
-    "text": "3.1 Berechnung"
+    "text": "3.1 Berechnung\nEs wird unterschieden zwischen der Varianz der Grundgesamtheit und der Stichprobenvarianz. Bei ersterer berechnet man für jede einzelne Merkmalsausprägung ihre Abweichung vom Mittelwert, quadriert die Ergebnisse und summiert diese. Anschließend teilt man durch die Größe der Grundgesamtheit:\n\\[\nVar = \\frac{1}{n}\\sum_{i=1}^{n}(x_i - \\bar{x})^2\n\\] Da man wie gesagt meist nur auf eine Stichprobe zurückgreifen kann, kann man den Mittelwert der Grundgesamtheit durch den Mittelwert der Stichprobe nur schätzen. Um die damit verbundene Verzerrung auszugleichen, kann es sinnvoll sein die Summe der quadrierten Abweichungen nicht durch \\(n\\), sondern durch \\((n-1)\\) zu teilen. So ergibt sich folgende Formel, wobei \\(n\\) hier die Stichprobengröße darstellt:\n\\[\nVar = \\frac{1}{n-1}\\sum_{i=1}^{n}(x_i - \\bar{x})^2\n\\]\nIn R bekommen wir die Varianz mit der var-Funktion, hier am Beispiel des Netto-Einkommens:\n\nvar(allbus_df$Einkommen)\n\n[1] 2593715\n\n\nWie wir sehen, ist das Ergebnis sehr groß und auf den ersten Blick nicht leicht interpretierbar. Nützlicher ist da die Standardabweichung, die wir einfach dadurch erhalten, dass wir die Quadratwurzel der Varianz ziehen:\n\\[\nSD = \\sqrt{Var} = s =  \\sqrt{\\frac{1}{n-1}\\sum_{i=1}^{n}(x_i - \\bar{x})^2}\n\\] R bietet zur Berechnung der Standardabweichung die sd-Funktion an.\n\nsd(allbus_df$Einkommen)\n\n[1] 1610.501"
   },
   {
     "objectID": "Skript_4.3.html#visualisierung-2",
