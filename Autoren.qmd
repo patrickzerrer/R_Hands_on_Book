@@ -90,3 +90,32 @@ Hannah-Marie Büttner ist als wissenschaftliche Mitarbeiterin der Universität B
 
 ✉️ [E-Mail](habu@uni-bremen.de)
 :::
+
+
+## Michael Linke
+
+**Vita**
+
+::: column-margin
+![Michael Linke](Bilder/Michael_Linke.jpeg)
+:::
+
+Michael Linke ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen und hat einen B.A. in Kunstgeschichte und Politikwissenschaft sowie einen M.Sc. in Informatik für Geistes- und Sozialwissenschaftler. Seine Forschungsinteressen liegen im Bereich Maschinelles Lernen in den Sozialwissenschaften, Netzwerkanalyse und Protestforschung. 
+
+**Forschungsschwerpunkte**
+
+-   Maschinelles Lernen, vor allem Deep Learning
+-   Protest Event Analysis
+-   Politische Kommunikation
+
+::: {.callout-note collapse="true" icon="false"}
+## Kontakt
+
+🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen
+
+🎓 [Webseite](https://www.uni-bremen.de/zemki/das-zemki/personen/profilseite/idm/60192?cHash=74d4993930c79dfaf1bae02f2c4d80e6)
+
+:::
+
+
+
