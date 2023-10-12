@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Bilder/favicon-32x32.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -97,6 +98,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Tabellen und Grafiken in R">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Skript_3.4_files/figure-html/Ein erstes Plot-1.png">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+<meta name="twitter:title" content="Tabellen und Grafiken in R">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Skript_3.4_files/figure-html/Ein erstes Plot-1.png">
+<meta name="twitter:image-height" content="960">
+<meta name="twitter:image-width" content="1344">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -366,25 +378,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 1: Pearson Chi-Quadrat-Test &amp; *Rangkorrelation</span></a>
+ <span class="menu-text">Pearson Chi-Quadrat-Test &amp; Rangkorrelation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 2: Korrelation &amp; Regression</span></a>
+ <span class="menu-text">Korrelation &amp; Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
+ <span class="menu-text">Prüfung der Voraussetzungen bei der linearen Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
+ <span class="menu-text">Die multiple Regression</span></a>
   </div>
 </li>
       </ul>
@@ -399,7 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#eine-einführung-in-ggplot2" id="toc-eine-einführung-in-ggplot2" class="nav-link active" data-scroll-target="#eine-einführung-in-ggplot2"><span class="header-section-number">1</span> Eine Einführung in ggplot2</a></li>
+  <li><a href="#eine-einführung-in-tabellen-und-grafiken-mit-dem-tidyverse" id="toc-eine-einführung-in-tabellen-und-grafiken-mit-dem-tidyverse" class="nav-link active" data-scroll-target="#eine-einführung-in-tabellen-und-grafiken-mit-dem-tidyverse"><span class="header-section-number">1</span> Eine Einführung in Tabellen und Grafiken mit dem tidyverse</a></li>
   <li><a href="#tabellen" id="toc-tabellen" class="nav-link" data-scroll-target="#tabellen"><span class="header-section-number">2</span> Tabellen</a>
   <ul class="collapse">
   <li><a href="#einfache-häufigkeitstabelle" id="toc-einfache-häufigkeitstabelle" class="nav-link" data-scroll-target="#einfache-häufigkeitstabelle"><span class="header-section-number">2.1</span> Einfache Häufigkeitstabelle</a></li>
@@ -413,8 +425,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#dichte-plots" id="toc-dichte-plots" class="nav-link" data-scroll-target="#dichte-plots"><span class="header-section-number">3.3</span> Dichte-Plots</a></li>
   <li><a href="#liniendiagramme" id="toc-liniendiagramme" class="nav-link" data-scroll-target="#liniendiagramme"><span class="header-section-number">3.4</span> Liniendiagramme</a></li>
   <li><a href="#streudiagramme" id="toc-streudiagramme" class="nav-link" data-scroll-target="#streudiagramme"><span class="header-section-number">3.5</span> Streudiagramme</a></li>
-  <li><a href="#facettierte-plots" id="toc-facettierte-plots" class="nav-link" data-scroll-target="#facettierte-plots"><span class="header-section-number">3.6</span> Facettierte Plots</a></li>
+  <li><a href="#boxplots" id="toc-boxplots" class="nav-link" data-scroll-target="#boxplots"><span class="header-section-number">3.6</span> Boxplots</a></li>
+  <li><a href="#facettierte-plots" id="toc-facettierte-plots" class="nav-link" data-scroll-target="#facettierte-plots"><span class="header-section-number">3.7</span> Facettierte Plots</a></li>
   </ul></li>
+  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung"><span class="header-section-number">4</span> Zusammenfassung</a></li>
   </ul>
 </nav>
     </div>
@@ -444,24 +458,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Bilder/zemkipatrick_comic_style_cyberpunk_statistics_table_wideformat_a16032f7-613e-4608-b19e-95c97039c779.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Eine Wand voller Tabellen, Bild generiert von Midjourney</figcaption>
-</figure>
-</div>
-<section id="eine-einführung-in-ggplot2" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Eine Einführung in ggplot2</h1>
+<section id="eine-einführung-in-tabellen-und-grafiken-mit-dem-tidyverse" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Eine Einführung in Tabellen und Grafiken mit dem tidyverse</h1>
 <p>Dieses Notebook illustriert verschiedene Möglichkeiten dafür, wie auf Grundlage der ALLBUS-Daten informative Tabellen und Plots erstellt werden können. Tabellen und Datenvisualisierungen (“Plots”) stellen zwei sehr effektive Möglichkeiten dar, sich schnell einen Überblick über komplexe Daten zu verschaffen. Dabei lassen sich oftmals Zusammenhänge zwischen zwei oder mehr Variablen erahnen, die dann später inferenzstatistisch auf die Solidität ihres Zusammenhangs hin überprpüft werden können.</p>
-<p>Zunächst laden wir die die Pakete des tidyverse. Die Einstellung theme_set hat einen Einfluss auf die Grafiken, die wir später erstellen werden.</p>
+<p>Zunächst laden wir die Pakete des tidyverse. Das Paket ggplot2 ist das zentrale Werkzeug, um informative Plots zu produzieren. Die Einstellung theme_set hat einen Einfluss auf die Grafiken, die wir später erstellen werden.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Paket 'tidyverse' wurde unter R Version 4.3.1 erstellt</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Paket 'tidyr' wurde unter R Version 4.3.1 erstellt</code></pre>
-</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.2     ✔ readr     2.1.4
@@ -474,26 +476,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(naniar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Paket 'naniar' wurde unter R Version 4.3.1 erstellt</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(haven)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Jetzt laden wir den ALLBUS-Datensatz mittels der Stata-Importfunktion read_dta.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>daten <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>daten <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Nun laden wir zudem noch drei kleinere Zufallssamples aus dem Gesamtdatensatz. Diese bestehen aus einer kleineren Anzahl relevanter Variablen und sind daher etwas übersichtlicher als der Hauptdatensatz.</p>
+<p>Nun laden wir zudem noch drei zuvor erstellte Zufallssamples aus dem Gesamtdatensatz. Diese bestehen aus einer kleineren Anzahl relevanter Variablen und sind daher etwas übersichtlicher als der Hauptdatensatz.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>sample_klein <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_klein.rds"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a>sample_mittel <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_mittel.rds"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3"></a>sample_gross <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_gross.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>sample_klein <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_klein.rds"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>sample_mittel <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_mittel.rds"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>sample_gross <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_gross.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Wie sehen die Daten aus?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>sample_klein</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>sample_klein</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 4
    alter geschlecht bildung            fernsehkonsum
@@ -523,15 +522,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="tabellen" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Tabellen</h1>
-<p>Tabellen (und besonder sog. Kontingenz- oder Häufigkeitstabellen) sind ein einfaches und praktisches Mittel, um sich einen Überblick über Daten zu verschaffen.</p>
+<p>Tabellen (und besonders sog. Kontingenz- oder Häufigkeitstabellen) sind ein einfaches und praktisches Mittel, um sich einen Überblick über Daten zu verschaffen. Um solche Tabellen zu erstellen, formen wir in der Regel Data Frames mit den Funktionen des tidyverse (und vor allem mit dem Paket dplyr) so um, dass sie die gewünschten Informationen enthalten. Wir <em>aggregieren</em>.</p>
 <section id="einfache-häufigkeitstabelle" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="einfache-häufigkeitstabelle"><span class="header-section-number">2.1</span> Einfache Häufigkeitstabelle</h2>
-<p>Wir berechnen eine einfache Häufigkeitstabelle für die Variable ‘edubde1’ (höchster Bildungsabschluss).</p>
+<p>Wir berechnen eine einfache Häufigkeitstabelle für die Variable geschlecht. Dies geschieht mit den Funktionen group_by und summarise. Die Funktion n übernimmt das eigentliche Auszählen der Häufigkeit einer Variablenausprägung.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>geschlechterverteilung <span class="ot">&lt;-</span> sample_klein <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">group_by</span>(geschlecht) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>())</span>
-<span id="cb12-4"><a href="#cb12-4"></a>geschlechterverteilung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>geschlechterverteilung <span class="ot">&lt;-</span> sample_klein <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">group_by</span>(geschlecht) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>())</span>
+<span id="cb8-4"><a href="#cb8-4"></a>geschlechterverteilung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   geschlecht anzahl
@@ -540,13 +539,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2 FRAU            5</code></pre>
 </div>
 </div>
-<p>Im nächsten Schritt fügen wir relative Anteile hinzu, um Verhältnisse besser zu verstehen.</p>
+<p>Im nächsten Schritt fügen wir den absoluten Zahlen relative Anteile hinzu, um das Geschlechterverhältnis besser zu verstehen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>geschlechterverteilung <span class="ot">&lt;-</span> sample_klein <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">group_by</span>(geschlecht) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">mutate</span>(<span class="at">anteil =</span> anzahl<span class="sc">/</span><span class="fu">sum</span>(anzahl))</span>
-<span id="cb14-5"><a href="#cb14-5"></a>geschlechterverteilung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>geschlechterverteilung <span class="ot">&lt;-</span> sample_klein <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">group_by</span>(geschlecht) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">mutate</span>(<span class="at">anteil =</span> anzahl<span class="sc">/</span><span class="fu">sum</span>(anzahl))</span>
+<span id="cb10-5"><a href="#cb10-5"></a>geschlechterverteilung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   geschlecht anzahl anteil
@@ -555,14 +554,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2 FRAU            5   0.25</code></pre>
 </div>
 </div>
-<p>Nun fügen wir noch Prozentanteile ein, indem with mit 100 multiplizieren und runden (was in erster Linie kosmetischer Natur ist).</p>
+<p>Nun fügen wir den Anteilen von 1 noch Prozentanteile hinzu, indem with mit 100 multiplizieren und runden (was in erster Linie kosmetischer Natur ist).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>geschlechterverteilung <span class="ot">&lt;-</span> sample_klein <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">group_by</span>(geschlecht) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">mutate</span>(<span class="at">anteil =</span> anzahl<span class="sc">/</span><span class="fu">sum</span>(anzahl),</span>
-<span id="cb16-5"><a href="#cb16-5"></a>         <span class="at">prozent =</span> <span class="fu">round</span>(anteil <span class="sc">*</span> <span class="dv">100</span>))</span>
-<span id="cb16-6"><a href="#cb16-6"></a>geschlechterverteilung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>geschlechterverteilung <span class="ot">&lt;-</span> sample_klein <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">group_by</span>(geschlecht) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">mutate</span>(<span class="at">anteil =</span> anzahl<span class="sc">/</span><span class="fu">sum</span>(anzahl),</span>
+<span id="cb12-5"><a href="#cb12-5"></a>         <span class="at">prozent =</span> <span class="fu">round</span>(anteil <span class="sc">*</span> <span class="dv">100</span>))</span>
+<span id="cb12-6"><a href="#cb12-6"></a>geschlechterverteilung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   geschlecht anzahl anteil prozent
@@ -576,23 +575,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="2.2" class="anchored" data-anchor-id="tabellen-speichern"><span class="header-section-number">2.2</span> Tabellen speichern</h2>
 <p>Jetzt schreiben wir die Daten in eine CSV-Datei, die wir bspw. später mit Excel oder einer anderen Tabellenkalkulation öffnen können.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">write_excel_csv2</span>(geschlechterverteilung, <span class="at">file =</span> <span class="st">"geschlechterverteilung.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">write_excel_csv2</span>(geschlechterverteilung, <span class="at">file =</span> <span class="st">"geschlechterverteilung.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="kreuztabellen" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="kreuztabellen"><span class="header-section-number">2.3</span> Kreuztabellen</h2>
-<p>Was, wenn wir zwei Variablen mit Blick auf ihre Werte in Beziehung setzen wollen? Das bezeichnet man als Kreuz- oder Kontigenztabelle.</p>
+<p>Was, wenn wir <em>zwei</em> Variablen mit Blick auf ihre Werte in Beziehung setzen wollen? Das bezeichnet man als Kreuz- oder Kontigenztabelle. Man erzeugt eine Kreuztabelle mit dplyr, indem man nach mehreren Variablen gruppiert.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>bildung_und_geschlecht <span class="ot">&lt;-</span> sample_klein <span class="sc">%&gt;%</span> </span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">group_by</span>(bildung, geschlecht) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">mutate</span>(<span class="at">anteil =</span> anzahl<span class="sc">/</span><span class="fu">sum</span>(anzahl),</span>
-<span id="cb19-5"><a href="#cb19-5"></a>         <span class="at">prozent =</span> <span class="fu">round</span>(anteil <span class="sc">*</span> <span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>bildung_und_geschlecht <span class="ot">&lt;-</span> sample_klein <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">group_by</span>(bildung, geschlecht) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">mutate</span>(<span class="at">anteil =</span> anzahl<span class="sc">/</span><span class="fu">sum</span>(anzahl),</span>
+<span id="cb15-5"><a href="#cb15-5"></a>         <span class="at">prozent =</span> <span class="fu">round</span>(anteil <span class="sc">*</span> <span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'bildung'. You can override using the
 `.groups` argument.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>bildung_und_geschlecht</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>bildung_und_geschlecht</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 5
 # Groups:   bildung [6]
@@ -611,16 +610,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Möglicherweise möchte ich den Anteil anders berechnen und nicht die relative Geschlechterverteilung <em>innerhalb</em> eines Bildungsabschlusses in den Blick nehmen, sondern etwa die Verteilung der Bildungsabschlüsse jeweils für männliche und weibliche Studienteilnehmer anschauen. Dies lässt sich mit einer Neugruppierung der Daten durch group_by() erreichen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>geschlecht_und_bildung <span class="ot">&lt;-</span> sample_klein <span class="sc">%&gt;%</span> </span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">group_by</span>(geschlecht, bildung) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">mutate</span>(<span class="at">anteil =</span> anzahl<span class="sc">/</span><span class="fu">sum</span>(anzahl),</span>
-<span id="cb23-5"><a href="#cb23-5"></a>         <span class="at">prozent =</span> <span class="fu">round</span>(anteil <span class="sc">*</span> <span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>geschlecht_und_bildung <span class="ot">&lt;-</span> sample_klein <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">group_by</span>(geschlecht, bildung) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">mutate</span>(<span class="at">anteil =</span> anzahl<span class="sc">/</span><span class="fu">sum</span>(anzahl),</span>
+<span id="cb19-5"><a href="#cb19-5"></a>         <span class="at">prozent =</span> <span class="fu">round</span>(anteil <span class="sc">*</span> <span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'geschlecht'. You can override using the
 `.groups` argument.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>geschlecht_und_bildung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>geschlecht_und_bildung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 5
 # Groups:   geschlecht [2]
@@ -637,6 +636,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 9 FRAU       HOCHSCHULREIFE          1 0.2         20</code></pre>
 </div>
 </div>
+<p>Lag also im ersten Anlauf das Geschlecht der Gruppierung zugrunde, ist es in der zweiten Version der Bildungsabschluss.</p>
 </section>
 </section>
 <section id="visualisierung" class="level1" data-number="3">
@@ -644,54 +644,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Beim Erstellen von Grafiken (Plots) mit R kommt eines der populärsten tidyverse-Pakete zum Einsatz: <a href="https://ggplot2.tidyverse.org/">ggplot2</a>. Damit lassen sich sehr vielfältige Grafiken erstellen.</p>
 <section id="balkendiagramme" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="balkendiagramme"><span class="header-section-number">3.1</span> Balkendiagramme</h2>
-<p>Das einfachste Diagramm, das man mit dem ggplot2-Paket erstellen kann, ist ein Balkendiagramm (barplot). Das nachstehende Beispiel zeigt die Häufigkeitsverteilung der Variable gndr (gender = Geschlecht) im Datensatz.</p>
+<p>Das vermutlich einfachste Diagramm, das man mit dem ggplot2-Paket erstellen kann, ist ein Balken- oder Säulendiagramm (barplot). Es zeigt die Häufigkeitsverteilung einer diskreten Variablen, indem es Säulen auf der x-Achse darstellt. Balkendiagramme sind besonders geeignet, um wenige Ausprägungen (bis ca. 15) zu veranschaulichen. Wenn es mehr Kategorien gibt, wird die Anschaulichkeit beeinträchtigt, und es empfiehlt sich, auf Liniendiagramme auszuweichen.</p>
+<p>Das nachstehende Beispiel zeigt die Häufigkeitsverteilung der Variable geschlecht im Datensatz (bzw. dem kleinen Sample).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(sample_klein, <span class="fu">aes</span>(geschlecht)) <span class="sc">+</span> </span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">ggplot</span>(sample_klein, <span class="fu">aes</span>(geschlecht)) <span class="sc">+</span> </span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_3.4_files/figure-html/Ein erstes Plot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>In einem nächsten Schritt fügen wir eine Überschrift hinzu und formatieren die Balken und Achsen so, dass das Plot lesbarer ist.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(sample_klein, <span class="fu">aes</span>(bildung)) <span class="sc">+</span> </span>
-<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Verteilung der Bildungsabschlüsse der Befragten"</span>) <span class="sc">+</span> </span>
-<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">ggplot</span>(sample_klein, <span class="fu">aes</span>(bildung)) <span class="sc">+</span> </span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Verteilung der Bildungsabschlüsse der Befragten"</span>) <span class="sc">+</span> </span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_3.4_files/figure-html/Beschriftungen hinzufügen-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Farben lassen sich in ggplot vielseitig einsetzen, um Kategorienunterschiede anzuzeigen. Dies geschieht mit den Argumenten ‘fill’ bzw. ‘color’.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(sample_klein, <span class="fu">aes</span>(bildung, <span class="at">fill =</span> bildung)) <span class="sc">+</span> </span>
-<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Verteilung der Bildungsabschlüsse der Befragten"</span>) <span class="sc">+</span> </span>
-<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb29-5"><a href="#cb29-5"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(sample_klein, <span class="fu">aes</span>(bildung, <span class="at">fill =</span> bildung)) <span class="sc">+</span> </span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Verteilung der Bildungsabschlüsse der Befragten"</span>) <span class="sc">+</span> </span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_3.4_files/figure-html/Barplot mit Farbpalette-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Es existieren zahlreiche Farbpaletten für ggplot, um unterschiedliche Arten von Beziehungen darzustellen. Das nachstehende Palette unterscheidet verschiedenen Kategorien. Für gradierte Variablen (‘viel’ - ‘wenig’) sind andere Paletten z.T. besser geeignet. Eine gute Auswahl an Palette enthält u.a. das Paket <a href="https://r-graph-gallery.com/38-rcolorbrewers-palettes.html">RColorBrewer</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(sample_klein, <span class="fu">aes</span>(bildung, <span class="at">fill =</span> bildung)) <span class="sc">+</span> </span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span>  </span>
-<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Verteilung der Bildungsabschlüsse der Befragten"</span>) <span class="sc">+</span> </span>
-<span id="cb30-5"><a href="#cb30-5"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">ggplot</span>(sample_klein, <span class="fu">aes</span>(bildung, <span class="at">fill =</span> bildung)) <span class="sc">+</span> </span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span>  </span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Verteilung der Bildungsabschlüsse der Befragten"</span>) <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_3.4_files/figure-html/Barplot mit gradierter Farbpalette-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Schließlich lassen sich auch die Beschriftung und weitere Aspekte eines Plots anpassen (Achsenorientierung, Legende etc).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggplot</span>(sample_klein, <span class="fu">aes</span>(<span class="fu">as_factor</span>(fernsehkonsum))) <span class="sc">+</span> </span>
-<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Fernsehkonsum pro Woche in Tagen"</span>) <span class="sc">+</span> </span>
-<span id="cb31-5"><a href="#cb31-5"></a>  <span class="fu">xlab</span>(<span class="st">"Fernsehkonsum pro Woche in Tagen"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Anzahl der Respondenten"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(sample_klein, <span class="fu">aes</span>(<span class="fu">as_factor</span>(fernsehkonsum))) <span class="sc">+</span> </span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Fernsehkonsum pro Woche in Tagen"</span>) <span class="sc">+</span> </span>
+<span id="cb27-5"><a href="#cb27-5"></a>  <span class="fu">xlab</span>(<span class="st">"Fernsehkonsum pro Woche in Tagen"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Anzahl der Respondenten"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_3.4_files/figure-html/Barplot mit weiteren Anpassungen und Beschriftung-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -699,10 +700,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="histogramme" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="histogramme"><span class="header-section-number">3.2</span> Histogramme</h2>
-<p>Für ein besseres Verständnis einer Verteilung sind oftmals die Häufigkeitsausprägungen einer kontinuierlichen Variable in gleich großen Gruppen interessant (sog. “bins”). Dabei hilft der Visualisierungstyp Histogramm.</p>
+<p>Für ein besseres Verständnis einer Verteilung sind oftmals die Häufigkeitsausprägungen einer kontinuierlichen Variable in gleich großen Gruppen interessant (sog. “bins”). Dabei hilft der Visualisierungstyp Histogramm. Ein Histogramm ist eine grafische Darstellung der Häufigkeitsverteilung kardinal skalierter Merkmale. Dabei werden Daten in Klassen unterteilt, die unterschiedliche Breiten haben können. Rechtecke mit der Breite der Klassen werden nebeneinander gezeichnet, wobei ihre Flächen die (relativen oder absoluten) Klassenhäufigkeiten repräsentieren. Die Höhe jedes Rechtecks zeigt die (relative oder absolute) Häufigkeitsdichte an, also die Häufigkeit geteilt durch die Breite der jeweiligen Klasse.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(sample_mittel, <span class="fu">aes</span>(alter)) <span class="sc">+</span> </span>
-<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(sample_mittel, <span class="fu">aes</span>(alter)) <span class="sc">+</span> </span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
@@ -713,12 +714,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="Skript_3.4_files/figure-html/Ein einfaches Histogramm-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Auch hier lassen sich relevante Aspekte anpassen, etwa die Anzahl und Breite der Balken.</p>
+<p>Auch hier lassen sich relevante Aspekte anpassen, etwa die Anzahl und Breite der Flächen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">ggplot</span>(sample_mittel, <span class="fu">aes</span>(alter)) <span class="sc">+</span> </span>
-<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>) <span class="sc">+</span> </span>
-<span id="cb35-3"><a href="#cb35-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Altersverteilung der Respondenten"</span>) <span class="sc">+</span> </span>
-<span id="cb35-4"><a href="#cb35-4"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Anzahl der Respondenten"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggplot</span>(sample_mittel, <span class="fu">aes</span>(alter)) <span class="sc">+</span> </span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>) <span class="sc">+</span> </span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Altersverteilung der Respondenten"</span>) <span class="sc">+</span> </span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Anzahl der RespondentInnen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 2 rows containing non-finite values (`stat_bin()`).</code></pre>
 </div>
@@ -726,12 +727,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="Skript_3.4_files/figure-html/Histogramm mit angepassten Bins-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Hier können wir erstmalig die Farbe eines Elements gezielt einsetzen, um eine zusätzliche (also nach Vetrauen auf der x-Achse und der Anzahl der Respondenten auf der y-Achse eine dritte Variable) darzustellen, nämlich das Geschlecht der Respondenten.</p>
+<p>Hier können wir erstmalig die Farbe eines Elements gezielt einsetzen, um eine zusätzliche (also nach Vetrauen auf der x-Achse und der Anzahl der Respondenten auf der y-Achse eine dritte Variable) darzustellen, nämlich das Geschlecht der RespondentInnen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ggplot</span>(sample_gross, <span class="fu">aes</span>(vertrauen_polizei, <span class="at">fill =</span> geschlecht)) <span class="sc">+</span> </span>
-<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span> </span>
-<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Vertrauen in die Polizei nach Geschlecht"</span>) <span class="sc">+</span> </span>
-<span id="cb37-4"><a href="#cb37-4"></a>  <span class="fu">xlab</span>(<span class="st">"Vetrauen (1-7)"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Anzahl der Respondenten"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Geschlecht"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(sample_gross, <span class="fu">aes</span>(vertrauen_polizei, <span class="at">fill =</span> geschlecht)) <span class="sc">+</span> </span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span> </span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Vertrauen in die Polizei nach Geschlecht"</span>) <span class="sc">+</span> </span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">xlab</span>(<span class="st">"Vetrauen (1-7)"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Anzahl der RespondentInnen"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Geschlecht"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 177 rows containing non-finite values (`stat_bin()`).</code></pre>
 </div>
@@ -739,16 +740,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="Skript_3.4_files/figure-html/Histogramm mit Gruppierung und Farbe nach Geschlecht-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Neben Balken beherrscht ggplot auch zahlreiche weitere Darstellungsformen (sog. geoms). Eine interessante Alternative zum klassischen Histogramm ist etwa das Dichte-Plot (density plot). Nachstehend verwenden wir zwei Flächen und einen Trasparenz-Effekt für die Darstellung.</p>
+<p>Neben Blaken und Flächen beherrscht ggplot auch zahlreiche weitere Darstellungsformen (sog. geoms). Eine interessante Alternative zum klassischen Histogramm ist etwa das Dichte-Plot (density plot). Nachstehend verwenden wir zwei Flächen und einen Trasparenz-Effekt für die Darstellung.</p>
 </section>
 <section id="dichte-plots" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="dichte-plots"><span class="header-section-number">3.3</span> Dichte-Plots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>polizei <span class="ot">&lt;-</span> sample_gross <span class="sc">%&gt;%</span> <span class="fu">select</span>(vertrauen_polizei, geschlecht) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(geschlecht))</span>
-<span id="cb39-2"><a href="#cb39-2"></a><span class="fu">ggplot</span>(polizei, <span class="fu">aes</span>(vertrauen_polizei, <span class="at">fill =</span> geschlecht)) <span class="sc">+</span> </span>
-<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb39-4"><a href="#cb39-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Vertrauen in die Polizei nach Geschlecht"</span>) <span class="sc">+</span> </span>
-<span id="cb39-5"><a href="#cb39-5"></a>  <span class="fu">xlab</span>(<span class="st">"Vetrauen (1-7)"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Anteil der Respondenten"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Geschlecht"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>polizei <span class="ot">&lt;-</span> sample_gross <span class="sc">%&gt;%</span> <span class="fu">select</span>(vertrauen_polizei, geschlecht) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(geschlecht))</span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="fu">ggplot</span>(polizei, <span class="fu">aes</span>(vertrauen_polizei, <span class="at">fill =</span> geschlecht)) <span class="sc">+</span> </span>
+<span id="cb35-3"><a href="#cb35-3"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb35-4"><a href="#cb35-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Vertrauen in die Polizei nach Geschlecht"</span>) <span class="sc">+</span> </span>
+<span id="cb35-5"><a href="#cb35-5"></a>  <span class="fu">xlab</span>(<span class="st">"Vetrauen (1-7)"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Anteil der Respondenten"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Geschlecht"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 177 rows containing non-finite values (`stat_density()`).</code></pre>
 </div>
@@ -767,30 +768,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="liniendiagramme" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="liniendiagramme"><span class="header-section-number">3.4</span> Liniendiagramme</h2>
 <p>Zu den klassischen Plot-Typen gehören neben Barplots und Histogrammen auch Linien-, Punkt- und Streudiagramme, sowie Boxplots.</p>
+<p>Liniendiagramme zeigen den Zusammenhang von zwei Variablen, in diesem Beispiel einer nominalen und einer ordinalen (oder, wenn wir großzügig sind [pseudo]metrischen) Variable, nämlich Wahlabsicht nach Partei und Vertrauen in die Presse.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>vertrauen_nach_partei <span class="ot">&lt;-</span> sample_gross <span class="sc">%&gt;%</span> </span>
-<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">rename</span>(<span class="at">Partei =</span> wahlabsicht_partei) <span class="sc">%&gt;%</span> </span>
-<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">group_by</span>(Partei) <span class="sc">%&gt;%</span> </span>
-<span id="cb43-4"><a href="#cb43-4"></a>  <span class="fu">summarise</span>(Vertrauenswürdigkeit <span class="ot">=</span> <span class="fu">mean</span>(vertrauen_zeitungswesen, <span class="at">na.rm =</span> T))</span>
-<span id="cb43-5"><a href="#cb43-5"></a></span>
-<span id="cb43-6"><a href="#cb43-6"></a><span class="fu">ggplot</span>(vertrauen_nach_partei, <span class="fu">aes</span>(Partei, Vertrauenswürdigkeit, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb43-7"><a href="#cb43-7"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb43-8"><a href="#cb43-8"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb43-9"><a href="#cb43-9"></a>  <span class="fu">ggtitle</span>(<span class="st">"Vertrauen in die Presse nach Partei"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>vertrauen_nach_partei <span class="ot">&lt;-</span> sample_gross <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">rename</span>(<span class="at">Partei =</span> wahlabsicht_partei) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">group_by</span>(Partei) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-4"><a href="#cb39-4"></a>  <span class="fu">summarise</span>(Vertrauenswürdigkeit <span class="ot">=</span> <span class="fu">mean</span>(vertrauen_zeitungswesen, <span class="at">na.rm =</span> T))</span>
+<span id="cb39-5"><a href="#cb39-5"></a></span>
+<span id="cb39-6"><a href="#cb39-6"></a><span class="fu">ggplot</span>(vertrauen_nach_partei, <span class="fu">aes</span>(Partei, Vertrauenswürdigkeit, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb39-7"><a href="#cb39-7"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb39-8"><a href="#cb39-8"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb39-9"><a href="#cb39-9"></a>  <span class="fu">ggtitle</span>(<span class="st">"Vertrauen in die Presse nach Partei"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_3.4_files/figure-html/Ein Liniendiagramm-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Es lassen sich auch problemlos mehrere Geoms kominieren (hier: Linie und Punkte). Im folgenden Beispiel lässt sich durch eine absteigende Sortierung der Ergebnisse ein klareres Resultat erzielen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>vertrauen_nach_partei_sortiert <span class="ot">&lt;-</span> vertrauen_nach_partei <span class="sc">%&gt;%</span> </span>
-<span id="cb44-2"><a href="#cb44-2"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Vertrauenswürdigkeit)) <span class="sc">%&gt;%</span> </span>
-<span id="cb44-3"><a href="#cb44-3"></a>  <span class="fu">mutate</span>(<span class="at">Rang =</span> <span class="fu">row_number</span>())</span>
-<span id="cb44-4"><a href="#cb44-4"></a></span>
-<span id="cb44-5"><a href="#cb44-5"></a><span class="fu">ggplot</span>(vertrauen_nach_partei_sortiert, <span class="fu">aes</span>(<span class="fu">reorder</span>(Partei, Rang), Vertrauenswürdigkeit, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb44-6"><a href="#cb44-6"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb44-7"><a href="#cb44-7"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb44-8"><a href="#cb44-8"></a>  <span class="fu">ggtitle</span>(<span class="st">"Verrauen in die Presse nach Partei"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>vertrauen_nach_partei_sortiert <span class="ot">&lt;-</span> vertrauen_nach_partei <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Vertrauenswürdigkeit)) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">mutate</span>(<span class="at">Rang =</span> <span class="fu">row_number</span>())</span>
+<span id="cb40-4"><a href="#cb40-4"></a></span>
+<span id="cb40-5"><a href="#cb40-5"></a><span class="fu">ggplot</span>(vertrauen_nach_partei_sortiert, <span class="fu">aes</span>(<span class="fu">reorder</span>(Partei, Rang), Vertrauenswürdigkeit, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb40-6"><a href="#cb40-6"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb40-7"><a href="#cb40-7"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb40-8"><a href="#cb40-8"></a>  <span class="fu">ggtitle</span>(<span class="st">"Verrauen in die Presse nach Partei"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_3.4_files/figure-html/Linien- und Punktediagramm sortiert-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -798,134 +800,153 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="streudiagramme" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="streudiagramme"><span class="header-section-number">3.5</span> Streudiagramme</h2>
-<p>Eine weiterer Diagrammtyp, der häufig zum Einsatz kommt, ist das Streudiagramm (scatter plot). Mit diesem Plottypen lassen sich die Beziehung mehrerer Variablen (i.d.R. zwei, jeweils auf der x/y-Achse) darstellen.</p>
+<p>Ein weiterer Diagrammtyp, der häufig zum Einsatz kommt, ist das sog. Streudiagramm (scatter plot). Ein Streudiagramm, auch als Punktwolkebekannt, ist eine visuelle Darstellung von beobachteten Wertepaaren zweier statistischer Merkmale. Diese Wertepaare werden in ein kartesisches Koordinatensystem eingetragen, was eine Ansammlung von Punkten ergibt. Die Darstellung der Punkte kann mit verschiedenen Symbolen erfolgen.</p>
+<p>Mit diesem Plottypen lassen sich die Beziehung mehrerer Variablen (i.d.R. zwei, jeweils auf der x/y-Achse) anschaulich darstellen und sowohl (lineare oder nicht-lineare) Zusammenhänge indetifizieren als auch Cluster bilder.</p>
+<p>Wir erzeugen zunächst einen Data Frame, der Informationen zu Geschlecht, Alter, Einkommen und Bildung der StudienteilnehmerInnen enthält.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>einkommen <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
-<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">select</span>(age, sex, educ, di01a) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">rename</span>(<span class="at">alter =</span> age,</span>
-<span id="cb45-4"><a href="#cb45-4"></a>         <span class="at">geschlecht =</span> sex,</span>
-<span id="cb45-5"><a href="#cb45-5"></a>         <span class="at">bildung =</span> educ,</span>
-<span id="cb45-6"><a href="#cb45-6"></a>         <span class="at">einkommen =</span> di01a) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-7"><a href="#cb45-7"></a>  <span class="fu">replace_with_na_all</span>(<span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-8"><a href="#cb45-8"></a>  <span class="fu">mutate</span>(<span class="at">geschlecht =</span> <span class="fu">as_factor</span>(geschlecht),</span>
-<span id="cb45-9"><a href="#cb45-9"></a>         <span class="at">bildung =</span> <span class="fu">as_factor</span>(bildung)) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-10"><a href="#cb45-10"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb45-11"><a href="#cb45-11"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">80</span>)</span>
-<span id="cb45-12"><a href="#cb45-12"></a>einkommen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>einkommen <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">select</span>(age, sex, educ, di01a) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">rename</span>(<span class="at">alter =</span> age,</span>
+<span id="cb41-4"><a href="#cb41-4"></a>         <span class="at">geschlecht =</span> sex,</span>
+<span id="cb41-5"><a href="#cb41-5"></a>         <span class="at">bildung =</span> educ,</span>
+<span id="cb41-6"><a href="#cb41-6"></a>         <span class="at">einkommen =</span> di01a) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-7"><a href="#cb41-7"></a>  <span class="fu">replace_with_na_all</span>(<span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-8"><a href="#cb41-8"></a>  <span class="fu">mutate</span>(<span class="at">geschlecht =</span> <span class="fu">as_factor</span>(geschlecht),</span>
+<span id="cb41-9"><a href="#cb41-9"></a>         <span class="at">bildung =</span> <span class="fu">as_factor</span>(bildung)) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-10"><a href="#cb41-10"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb41-11"><a href="#cb41-11"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">80</span>)</span>
+<span id="cb41-12"><a href="#cb41-12"></a>einkommen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 80 × 4
    alter     geschlecht bildung            einkommen
    &lt;dbl+lbl&gt; &lt;fct&gt;      &lt;fct&gt;              &lt;dbl+lbl&gt;
- 1 42        MANN       MITTLERE REIFE      946     
- 2 72        MANN       VOLKS-,HAUPTSCHULE 1800     
- 3 33        MANN       HOCHSCHULREIFE     2500     
- 4 40        MANN       HOCHSCHULREIFE     5111     
- 5 32        FRAU       HOCHSCHULREIFE     1100     
- 6 59        MANN       MITTLERE REIFE     2700     
- 7 36        MANN       HOCHSCHULREIFE     7000     
- 8 71        MANN       VOLKS-,HAUPTSCHULE 1120     
- 9 48        FRAU       HOCHSCHULREIFE     1700     
-10 40        MANN       FACHHOCHSCHULREIFE 2000     
+ 1 56        FRAU       HOCHSCHULREIFE     3600     
+ 2 66        MANN       HOCHSCHULREIFE     2600     
+ 3 63        MANN       FACHHOCHSCHULREIFE 4000     
+ 4 67        FRAU       HOCHSCHULREIFE     1000     
+ 5 83        MANN       OHNE ABSCHLUSS      800     
+ 6 39        MANN       HOCHSCHULREIFE     3300     
+ 7 34        MANN       HOCHSCHULREIFE     3500     
+ 8 72        FRAU       VOLKS-,HAUPTSCHULE 1500     
+ 9 65        MANN       MITTLERE REIFE     2500     
+10 57        FRAU       HOCHSCHULREIFE     4900     
 # ℹ 70 more rows</code></pre>
 </div>
 </div>
-<p>Welche Beziehung lässt sich zwischen Alter (x-Achse) und täglicher Internetnutzung in Minuten (y-Achse) feststellen?</p>
+<p>Welche Beziehung lässt sich zwischen Alter (x-Achse) und dem Einkommen (y-Achse) der RespondentInnen feststellen?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">ggplot</span>(einkommen, <span class="fu">aes</span>(alter, einkommen)) <span class="sc">+</span></span>
-<span id="cb47-2"><a href="#cb47-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">ggplot</span>(einkommen, <span class="fu">aes</span>(alter, einkommen)) <span class="sc">+</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_3.4_files/figure-html/Ein einfaches Streudiagramm-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Wir wenden uns jetzt einem etwas ausgefeilteren Beispiel zu, nämlich der Beziehung von politischen Interesse und Nachrichtennutzung.</p>
+<p>Wir entwickeln dieses Beispiel nun noch etwas weiter.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">ggplot</span>(einkommen, <span class="fu">aes</span>(alter, einkommen)) <span class="sc">+</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">5</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb48-3"><a href="#cb48-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="at">formula =</span> <span class="st">'y ~ x'</span>) <span class="sc">+</span> </span>
-<span id="cb48-4"><a href="#cb48-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Zusammenhang zwischen Alter und Nettoeinkommen"</span>) <span class="sc">+</span> </span>
-<span id="cb48-5"><a href="#cb48-5"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Nettoeinkommen in Euro"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">ggplot</span>(einkommen, <span class="fu">aes</span>(alter, einkommen)) <span class="sc">+</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="at">formula =</span> <span class="st">'y ~ x'</span>) <span class="sc">+</span> </span>
+<span id="cb44-4"><a href="#cb44-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Zusammenhang zwischen Alter und Nettoeinkommen"</span>) <span class="sc">+</span> </span>
+<span id="cb44-5"><a href="#cb44-5"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Nettoeinkommen in Euro"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_3.4_files/figure-html/Ein weiteres Beispiel für ein Streudiagramm-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Bei der Linie, die wir mit geom_smooth gezeichnet haben, handelt es sich um eine <a href="https://de.wikipedia.org/wiki/Lineare_Einfachregression">Regressionsgerade</a>. Der graue Bereich um die Gerade zeigt den lokalen Standardfehler an. Auf Regressionmodelle gehen wir zum Abschluss des Moduls noch intensiv ein.</p>
+<p>Bei der Linie, die wir mit dem Befehl geom_smooth gezeichnet haben, handelt es sich um eine <a href="https://de.wikipedia.org/wiki/Lineare_Einfachregression">Regressionsgerade</a>. Der graue Bereich um die Gerade zeigt den lokalen Standardfehler an. Auf Regressionmodelle gehen wir zum Abschluss des Moduls noch intensiv ein. Schon jetzt kann man aber erahnen, was uns die Regressionsgerade illustriert.</p>
 <p>Was, wenn wir mehr als drei Variablen (bzw. unterschiedliche Ausprägungen einer kategorialen Variable) darstellen wollen? Neben der Positionierung auf der x- und y-Achse und der Farbe können wir hier zusätzlich auch noch mit unterschiedlichen Formen arbeiten.</p>
 <p>Das nachstehende Beispiel ist nicht unbedingt besonders informativ, zeigt aber das Prinzip nachvollziehbar auf.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">ggplot</span>(einkommen, <span class="fu">aes</span>(alter, einkommen, <span class="at">color =</span> bildung, <span class="at">shape =</span> geschlecht)) <span class="sc">+</span></span>
-<span id="cb49-2"><a href="#cb49-2"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">5</span>, <span class="at">height =</span> .<span class="dv">5</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb49-3"><a href="#cb49-3"></a>  <span class="co">#geom_smooth(method = 'lm', formula = 'y ~ x', se = FALSE) + </span></span>
-<span id="cb49-4"><a href="#cb49-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Zusammenhang zwischen Alter und Nettoeinkommen "</span>) <span class="sc">+</span> </span>
-<span id="cb49-5"><a href="#cb49-5"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Nettoeinkommen"</span>) <span class="sc">+</span> </span>
-<span id="cb49-6"><a href="#cb49-6"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Bildungsabschluss"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">shape =</span> <span class="st">"Geschlecht"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">ggplot</span>(einkommen, <span class="fu">aes</span>(alter, einkommen, <span class="at">color =</span> bildung, <span class="at">shape =</span> geschlecht)) <span class="sc">+</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">5</span>, <span class="at">height =</span> .<span class="dv">5</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Zusammenhang zwischen Alter und Nettoeinkommen "</span>) <span class="sc">+</span> </span>
+<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Nettoeinkommen"</span>) <span class="sc">+</span> </span>
+<span id="cb45-5"><a href="#cb45-5"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Bildungsabschluss"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">shape =</span> <span class="st">"Geschlecht"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_3.4_files/figure-html/Streudiagramm mit vier Farben und zwei Formen-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="facettierte-plots" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="facettierte-plots"><span class="header-section-number">3.6</span> Facettierte Plots</h2>
-<p>Neben dem Einsatz unterschiedlicher Farben und Formen kann auch sog. Facettierung zum Einsatz kommen um zusätzliche Informationen darzustellen. In einem weiteren Beispiel nehmen wir den Zusammenhang zwischen soziodemographischen Variablen und der Internetnutzung in den Blick. Dazu fügen wir zunächst eine Variable Altersgruppe ein, welche die einzelnen Altersangaben in Kohorten zusammenfasst.</p>
+<section id="boxplots" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="boxplots"><span class="header-section-number">3.6</span> Boxplots</h2>
+<p>Ein Box-Plot, auch als Box-Whisker-Plot oder Kastengrafik bezeichnet, ist ein grafisches Darstellungsinstrument, das verwendet wird, um die Verteilung von mindestens ordinalskalierten Merkmalen übersichtlich darzustellen. Es fasst robuste Streuungs- und Lagemaße in einer einzigen Grafik zusammen. Diese Darstellung bietet auf einen Blick Informationen darüber, wo die Datenwerte liegen und wie sie über diesen Bereich verteilt sind. Dies wird erreicht, indem die sogenannte Fünf-Punkte-Zusammenfassung, bestehend aus dem Median, den beiden Quartilen und den beiden Extremwerten, in einer grafischen Form präsentiert wird.</p>
+<p>Zunächst legen wir noch einen weiteren Data Frame an, der Infortationen zur Demokratiezufriedenheit der RespondentInnen enthält.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>social_media <span class="ot">&lt;-</span> sample_gross <span class="sc">%&gt;%</span> </span>
-<span id="cb50-2"><a href="#cb50-2"></a>  <span class="fu">mutate</span>(<span class="at">altersgruppe =</span> <span class="fu">cut</span>(alter, </span>
-<span id="cb50-3"><a href="#cb50-3"></a>                           <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">24</span>, <span class="dv">34</span>, <span class="dv">44</span>, <span class="dv">54</span>, <span class="dv">64</span>, <span class="cn">Inf</span>),</span>
-<span id="cb50-4"><a href="#cb50-4"></a>                           <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"18-24"</span>, <span class="st">"25-34"</span>, <span class="st">"35-44"</span>, <span class="st">"45-54"</span>, <span class="st">"55-64"</span>, <span class="st">"65+"</span>)),</span>
-<span id="cb50-5"><a href="#cb50-5"></a>         <span class="at">zufriedenheit_demokratie_zusammengefasst =</span> <span class="fu">as_factor</span>(<span class="fu">case_when</span>(</span>
-<span id="cb50-6"><a href="#cb50-6"></a>           zufriedenheit_demokratie <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"SEHR ZUFRIEDEN"</span>, </span>
-<span id="cb50-7"><a href="#cb50-7"></a>                                           <span class="st">"ZIEMLICH ZUFRIEDEN"</span>, </span>
-<span id="cb50-8"><a href="#cb50-8"></a>                                           <span class="st">"ETWAS ZUFRIEDEN"</span>) <span class="sc">~</span> <span class="st">"eher zufrieden"</span>,</span>
-<span id="cb50-9"><a href="#cb50-9"></a>           zufriedenheit_demokratie <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ETWAS UNZUFRIEDEN"</span>,</span>
-<span id="cb50-10"><a href="#cb50-10"></a>                                           <span class="st">"ZIEML. UNZUFRIEDEN"</span>,</span>
-<span id="cb50-11"><a href="#cb50-11"></a>                                           <span class="st">"SEHR UNZUFRIEDEN"</span>) <span class="sc">~</span> <span class="st">"eher unzufrieden"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb50-12"><a href="#cb50-12"></a>  <span class="fu">select</span>(altersgruppe, geschlecht, zufriedenheit_demokratie_zusammengefasst, social_media_nachrichtenquelle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>demokratiezefriedenheit <span class="ot">&lt;-</span> sample_gross <span class="sc">%&gt;%</span> </span>
+<span id="cb46-2"><a href="#cb46-2"></a>  <span class="fu">mutate</span>(<span class="at">altersgruppe =</span> <span class="fu">cut</span>(alter, </span>
+<span id="cb46-3"><a href="#cb46-3"></a>                           <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">24</span>, <span class="dv">34</span>, <span class="dv">44</span>, <span class="dv">54</span>, <span class="dv">64</span>, <span class="cn">Inf</span>),</span>
+<span id="cb46-4"><a href="#cb46-4"></a>                           <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"18-24"</span>, <span class="st">"25-34"</span>, <span class="st">"35-44"</span>, <span class="st">"45-54"</span>, <span class="st">"55-64"</span>, <span class="st">"65+"</span>)),</span>
+<span id="cb46-5"><a href="#cb46-5"></a>         <span class="at">zufriedenheit_demokratie_zusammengefasst =</span> <span class="fu">as_factor</span>(<span class="fu">case_when</span>(</span>
+<span id="cb46-6"><a href="#cb46-6"></a>           zufriedenheit_demokratie <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"SEHR ZUFRIEDEN"</span>, </span>
+<span id="cb46-7"><a href="#cb46-7"></a>                                           <span class="st">"ZIEMLICH ZUFRIEDEN"</span>, </span>
+<span id="cb46-8"><a href="#cb46-8"></a>                                           <span class="st">"ETWAS ZUFRIEDEN"</span>) <span class="sc">~</span> <span class="st">"eher zufrieden"</span>,</span>
+<span id="cb46-9"><a href="#cb46-9"></a>           zufriedenheit_demokratie <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ETWAS UNZUFRIEDEN"</span>,</span>
+<span id="cb46-10"><a href="#cb46-10"></a>                                           <span class="st">"ZIEML. UNZUFRIEDEN"</span>,</span>
+<span id="cb46-11"><a href="#cb46-11"></a>                                           <span class="st">"SEHR UNZUFRIEDEN"</span>) <span class="sc">~</span> <span class="st">"eher unzufrieden"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-12"><a href="#cb46-12"></a>  <span class="fu">select</span>(alter, altersgruppe, geschlecht, zufriedenheit_demokratie_zusammengefasst) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-13"><a href="#cb46-13"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Dann aggregieren wir nach Altersgruppe, Geschlecht und Land und plotten anschließend die Ergebnisse.</p>
+<p>Dann erstellen wir ein einfaches Boxplot, welches das Alter der eher zufriedenen Personen mit dem der eher unzufriedenen vergleicht.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>social_media_aggregiert <span class="ot">&lt;-</span> social_media <span class="sc">%&gt;%</span> </span>
-<span id="cb51-2"><a href="#cb51-2"></a>  <span class="fu">group_by</span>(altersgruppe, geschlecht, zufriedenheit_demokratie_zusammengefasst) <span class="sc">%&gt;%</span> </span>
-<span id="cb51-3"><a href="#cb51-3"></a>  <span class="fu">summarise</span>(<span class="at">socmedia =</span> <span class="fu">median</span>(social_media_nachrichtenquelle)) <span class="sc">%&gt;%</span> </span>
-<span id="cb51-4"><a href="#cb51-4"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">ggplot</span>(demokratiezefriedenheit, <span class="fu">aes</span>(zufriedenheit_demokratie_zusammengefasst, alter)) <span class="sc">+</span> </span>
+<span id="cb47-2"><a href="#cb47-2"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_3.4_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Der Einsatz von Boxplots für den Gruppenverleich bietet sich oftmals an, wenn man verschiedene Lageparameter vergleichen möchte.</p>
+<p>Nun erstellen wir einen anderen Data Frame, jetzt zum Vertrauen in gesellschaftliche Institutionen, um ein weiteres Beispiel für die Verwendung von Boxplots in den Blick zu nehmen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>vertrauen_summiert <span class="ot">&lt;-</span> sample_gross <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="#cb48-2"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb48-3"><a href="#cb48-3"></a>  <span class="fu">mutate</span>(<span class="at">vertrauen_gesamt =</span> <span class="fu">sum</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"vertrauen_"</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-4"><a href="#cb48-4"></a>  <span class="fu">select</span>(alter, geschlecht, entwicklung_kriminalitaet, vertrauen_gesamt) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-5"><a href="#cb48-5"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">ggplot</span>(vertrauen_summiert, <span class="fu">aes</span>(entwicklung_kriminalitaet, vertrauen_gesamt)) <span class="sc">+</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
+<span id="cb49-3"><a href="#cb49-3"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Kriminalitätseinschätzung und Vertrauen in gesellschaftliche Institutionen"</span>) <span class="sc">+</span> </span>
+<span id="cb49-5"><a href="#cb49-5"></a>  <span class="fu">xlab</span>(<span class="st">"Kriminalitätseinschätzung"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Vertrauen in gesellschaftliche Institutionen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Skript_3.4_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Wir speichern unser Plot zudem als PDF.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">ggsave</span>(<span class="st">"Kriminalität_und_Vertrauen.pdf"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'altersgruppe', 'geschlecht'. You can
-override using the `.groups` argument.</code></pre>
+<pre><code>Saving 7 x 5 in image</code></pre>
 </div>
 </div>
+</section>
+<section id="facettierte-plots" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="facettierte-plots"><span class="header-section-number">3.7</span> Facettierte Plots</h2>
+<p>Im letzten Abschnitt behandeln wir eine weitere nützliche Funktion von ggplot, um eine größere Zahl von Variablen zu visualisieren – die sog. Facettierung.</p>
+<p>Dazu zählen wir zunächst wie zu Beginn des Kapitels mehrere Variablen aus, hier die Altersgruppe, das Geschlecht und die zuvor ermittelte Demokratiezufriedenheit als binäre Variable (eher zufrieden/eher unzufrieden).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">ggplot</span>(social_media_aggregiert, <span class="fu">aes</span>(altersgruppe, socmedia, <span class="at">fill =</span> geschlecht)) <span class="sc">+</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>demokratiezefriedenheit_gruppen <span class="ot">&lt;-</span> demokratiezefriedenheit <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href="#cb52-2"></a>  <span class="fu">count</span>(altersgruppe, geschlecht, zufriedenheit_demokratie_zusammengefasst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Das nun folgenden Plot hat die Altersgruppe auf der X-Achse, die Anzahl der RespondentInnen auf der Y-Achse und das Geschlecht als Füllfarbe. Zu diesen drei Variablen kommt noch eine weitere dazu (Demokratiezufriedenheit) nach der facettiert wird.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">ggplot</span>(demokratiezefriedenheit_gruppen, <span class="fu">aes</span>(altersgruppe, n, <span class="at">fill =</span> geschlecht)) <span class="sc">+</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span> </span>
 <span id="cb53-3"><a href="#cb53-3"></a>  <span class="fu">facet_grid</span>(<span class="at">cols =</span> <span class="fu">vars</span>(zufriedenheit_demokratie_zusammengefasst)) <span class="sc">+</span> </span>
 <span id="cb53-4"><a href="#cb53-4"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb53-5"><a href="#cb53-5"></a>  <span class="fu">ggtitle</span>(<span class="st">"Demokratiezufriedenheit und Social Media-Nutzung nach Alter und Geschlecht"</span>) <span class="sc">+</span> </span>
-<span id="cb53-6"><a href="#cb53-6"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Nutzung von Social Media als Nachrichtenquelle"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-5"><a href="#cb53-5"></a>  <span class="fu">ggtitle</span>(<span class="st">"Demokratiezufriedenheit nach Alter und Geschlecht"</span>) <span class="sc">+</span> </span>
+<span id="cb53-6"><a href="#cb53-6"></a>  <span class="fu">xlab</span>(<span class="st">"Altersgruppe"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"StudienteilnehmerInnen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Skript_3.4_files/figure-html/Demokratiezufriedenheit und Social Media-Nutzung nach Alter plotten-1.png" class="img-fluid" width="672"></p>
+<p><img src="Skript_3.4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Sie können Ihr einfaches Diagramm mit Hilfe zusätzlicher Komponenten verfeinern, indem Sie sie dem Diagramm hinzufügen (für ein sehr einfaches “Vokabular” von ggplot2 besuchen Sie diesen Link –&gt; (https://ggplot2.tidyverse.org/reference/).</p>
-<p>Als nächstes schauen wir die Zustimmung zu der Aussafe an, dass der globale Klimawandel größtenteils oder vollständig durch den Menschen verursacht wird.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>vertrauen_summiert <span class="ot">&lt;-</span> sample_gross <span class="sc">%&gt;%</span> </span>
-<span id="cb54-2"><a href="#cb54-2"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb54-3"><a href="#cb54-3"></a>  <span class="fu">mutate</span>(<span class="at">vertrauen_gesamt =</span> <span class="fu">sum</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"vertrauen_"</span>)))) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-4"><a href="#cb54-4"></a>  <span class="fu">select</span>(alter, geschlecht, entwicklung_kriminalitaet, vertrauen_gesamt) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-5"><a href="#cb54-5"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb54-6"><a href="#cb54-6"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">ggplot</span>(vertrauen_summiert, <span class="fu">aes</span>(entwicklung_kriminalitaet, vertrauen_gesamt)) <span class="sc">+</span></span>
-<span id="cb55-2"><a href="#cb55-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
-<span id="cb55-3"><a href="#cb55-3"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb55-4"><a href="#cb55-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Kriminalitätseinschätzung und Vertrauen in gesellschaftliche Institutionen"</span>) <span class="sc">+</span> </span>
-<span id="cb55-5"><a href="#cb55-5"></a>  <span class="fu">xlab</span>(<span class="st">"Kriminalitätseinschätzung"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Vertrauen in gesellschaftliche Institutionen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Skript_3.4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co">#ggsave("Kriminalität_und_Vertrauen.pdf")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-
 </section>
+</section>
+<section id="zusammenfassung" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Zusammenfassung</h1>
+<p>Wie wir sehen, lassen sich Daten mithilfe von Tabellen und Plots sinnvoll beschreiben und so erste Rückschlüsse zu Mustern und Zusammenhängen ziehen, die dann später systematisch mithilfe inferenzstatistischer Verfahren überprüft werden können.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -1165,13 +1186,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>
-    <div class="nav-footer-right">
+    <div class="nav-footer-left">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>   
+    <div class="nav-footer-center">
       &nbsp;
     </div>
+    <div class="nav-footer-right"><img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
 
