@@ -38,4 +38,6 @@ Der Aufbau von Tabellen (bzw. Data Frames) folgt dabei in der Regel einer logisc
 |                              | -   Versuchsdurchlauf in einem Experiment   | -   Messwert in einem Experiment                                     |
 +------------------------------+---------------------------------------------+----------------------------------------------------------------------+
 
+## Zusammenfassung
+
 Im nächsten Kapitel werden wir uns eingehender mit der Behandlung von tabellenstrukturierten Daten in unterschiedlichen Formaten beschäftigen.
