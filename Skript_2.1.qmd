@@ -10,12 +10,32 @@ format:
     code-line-numbers: true
 ---
 
-# Was ist ein Datensatz und wie ist dieser aufgebaut?
+# Was ist ein Datensatz und wie sind Datensätze aufgebaut?
 
-Sozialwissenschaftlichen Daten sind Informationen, die zur Beschreibung und Erklärung der sozialen Welt verwendet werden. Sie können aus einer Vielzahl von Quellen stammen, zum Beispiel aus Umfragen, Experimenten, Interviews und Inhaltsanalysen. Kommunikationswissenschaftliche Daten können quantitativ oder qualitativ sein. Quantitative Daten sind in Zahlen ausgedrückt und können verwendet werden, um Muster und Zusammenhänge zu identifizieren. Qualitative Daten sind in Text oder Bildern ausgedrückt und können verwendet werden, um die Bedeutung von Ereignissen und Erfahrungen zu verstehen.
+Sozialwissenschaftlichen Daten sind Informationen, die zur Beschreibung und Erklärung der sozialen Welt verwendet werden. Sie können aus einer Vielzahl von Quellen stammen, zum Beispiel aus Umfragen, Experimenten, Interviews und Inhaltsanalysen. Kommunikationswissenschaftliche Daten können quantitativ oder qualitativ sein. Quantitative Daten sind in Zahlen ausgedrückt und können verwendet werden, um Muster und (kausale) Zusammenhänge zu identifizieren. Qualitative Daten sind in Text oder (Bewegt)Bildern ausgedrückt und können verwendet werden, um die Bedeutung von Ereignissen und Erfahrungen genauer zu verstehen.
 
-Unter Datensätzen verzehen wir digital zusammengestellte Daten,
+# Strukturierte vs. unstrukturierte Daten
 
-# Klassische Formen von Datensätzen in der Kommunikationswissenschaft
+Unter *strukturiertern Datensätzen* verstehen wir digital zusammengestellte Daten, die bestimmte strukturierende Merkmale aufweise. Häufig lassen sich solche strukturierten Daten als Tabellen darstellen und speichern. Ein konkretes Beispiel wäre eine Sammlung von Zeitungsartikeln. Handelt es sich um einzelne Textdatein, zu deren Inhalt man keine weiteren Informationen besitzt, würde man in der Regel von unstruktukrierten Daten sprechen. Fügt man aber Titel, Publikationsdatum und Quelle hinzu, könnten wir diese Daten als Tabelle abspeichern und von einem strukturierten Datensatz sprechen.
 
-einfach auf Brosius et al oder Springer et al verweisen? Oder der aufbau in R? dazu müsste man ja erst data frames erklären.
+# Data Frames und strukturierte Daten
+
+Nahezu alle strukturierte Daten lassen sich in R als Data Frames speichern. Dies bietet zahlreiche Vorteile, weil sich Data Frames leicht umformen, refaktorieren oder aggregieren lassen. So kann man leicht auszählen, wie viele Artikel zur gleichen Quelle gehören, zu welchem Zeitpunkt wie viele Artikel veröffentlicht wurden, oder (bei einer Befragung) wie viele Stunden die StudienteilnehmerInnen im Mittel wöchentlich fernsehen. Häufig lassen sich zunächst unstrukturierte Daten in ein strukturiertes Format überführen, wenn man relevante Metadaten nutzt, beispielsweise Dateinahmen.
+
+# Beobachtungen und Variablen
+
+Der Aufbau von Tabellen (bzw. Data Frames) folgt dabei in der Regel einer logischen Struktur. Die Zeilen geben die Anazhl der *Beobachtungen* (oder *Fälle*) an, während die Spalten einzelne *Variablen* (oder *Merkmale*) repräsentieren.
+
++------------------------------+---------------------------------------------+----------------------------------------------------------------------+
+| **Einheit**                  | Beobachtung (oder Fall)                     | Variable (oder Merkmal)                                              |
++==============================+=============================================+======================================================================+
+| **Tabellen-Strukturmerkmal** | Zeile                                       | Spalte                                                               |
++------------------------------+---------------------------------------------+----------------------------------------------------------------------+
+| **Beispiele**                | -   Respondent in einer Befragung           | -   Antwort auf eine Frage in einem Fragebogen                       |
+|                              |                                             |                                                                      |
+|                              | -   Zeitungsartikel in einer Inhaltsanalyse | -   Quelle oder Titel eines Zeitungsartikels in einer Inhaltsanalyse |
+|                              |                                             |                                                                      |
+|                              | -   Versuchsdurchlauf in einem Experiment   | -   Messwert in einem Experiment                                     |
++------------------------------+---------------------------------------------+----------------------------------------------------------------------+
+
+Im nächsten Kapitel werden wir uns eingehender mit der Behandlung von tabellenstrukturierten Daten in unterschiedlichen Formaten beschäftigen.
