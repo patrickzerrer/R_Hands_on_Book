@@ -91,7 +91,6 @@ Hannah-Marie Büttner ist als wissenschaftliche Mitarbeiterin der Universität B
 ✉️ [E-Mail](habu@uni-bremen.de)
 :::
 
-
 ## Michael Linke
 
 **Vita**
@@ -100,7 +99,7 @@ Hannah-Marie Büttner ist als wissenschaftliche Mitarbeiterin der Universität B
 ![Michael Linke](Bilder/Michael_Linke.jpeg)
 :::
 
-Michael Linke ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen und hat einen B.A. in Kunstgeschichte und Politikwissenschaft sowie einen M.Sc. in Informatik für Geistes- und Sozialwissenschaftler. Seine Forschungsinteressen liegen im Bereich Maschinelles Lernen in den Sozialwissenschaften, Netzwerkanalyse und Protestforschung. 
+Michael Linke ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen und hat einen B.A. in Kunstgeschichte und Politikwissenschaft sowie einen M.Sc. in Informatik für Geistes- und Sozialwissenschaftler. Seine Forschungsinteressen liegen im Bereich Maschinelles Lernen in den Sozialwissenschaften, Netzwerkanalyse und Protestforschung.
 
 **Forschungsschwerpunkte**
 
@@ -114,8 +113,30 @@ Michael Linke ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommun
 🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen
 
 🎓 [Webseite](https://www.uni-bremen.de/zemki/das-zemki/personen/profilseite/idm/60192?cHash=74d4993930c79dfaf1bae02f2c4d80e6)
-
 :::
 
+## Cornelius Puschmann
 
+**Vita**
 
+::: column-margin
+![Cornelius Puschmann](http://cbpuschmann.net/cp-small.jpg)
+:::
+
+Cornelius Puschmann ist Professor für Kommunikations- und Medienwissenschaft mit dem Schwerpunkt Digitale Kommunikation am ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung. Nach Stationen an der Humboldt Universität zu Berlin, der Zeppelin Universität Friedrichshafen und dem Leibniz-Institut für Medienforschug \| Hans Bredow Institut wurde er 2019 nach Bremen berufen. Gastwissenschaftler war Cornelius Puschmann u.a. am Oxford Internet Institute der University of Oxford und am Berkman Klein Center for Internet and Society der Harvard University, sowie am Department of Media Studies der Universität Amsterdam.
+
+Forschungsschwerpunkte
+
+-   Digitale Mediennutzungsforschung
+
+-   Hate Speech / Desinformation in sozialen Medien
+
+-   Methoden der automatisierten Inhaltsanalyse
+
+::: {.callout-note collapse="true" icon="false"}
+## Kontakt
+
+🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen
+
+🎓 [Webseite](http://cbpuschmann.net/)
+:::
