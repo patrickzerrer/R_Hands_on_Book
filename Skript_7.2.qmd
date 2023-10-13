@@ -29,19 +29,21 @@ Vorsicht! Lassen Sie sich nicht verwirren: Der *Pearson-Korrelationskoeffizient*
 
 Mit dieser Methode wollen wir untersuchen, ob es einen Zusammenhang zwischen der metrischen Variable tägliche Fernsehnutzung in Minuten (lm02) sowie der quasi-metrischen Variable Vertrauen ins Fernsehen (pt09) gibt. Wir vermuten, dass es einen positiven Zusammenhang gibt: Wer ein höheres Vertrauen in das Fernsehen hat, schaut auch mehr fern.
 
-Um das zu prüfen, müssen wir zunächst wieder unsere Pakete und Allbus-Daten laden und aufbereiten. Los geht's!
+## Data Management
 
-## Laden der Pakete und des Datensatzes
+Um das zu prüfen, müssen wir zunächst wieder unsere Pakete und Allbus-Daten laden und aufbereiten. Los geht's!
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
 p_load(tidyverse, haven, dplyr) 
+theme_set(theme_classic())
+```
+
+```{r}
 daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
 Dann erzeugen wir einen neuen Teildatensatz, benennen die benötigten Variablen in "TV_Konsum" und "TV_Vertrauen" um und selektieren die fehlende Werte (z.B. -9=Keine Angabe) mittels Filter-Funktion.
-
-## Erzeugen eines Teildatensatzes, Umbenennen der Variablen und Filtern der Fälle
 
 ```{r}
 daten_neu <- daten %>%
@@ -51,7 +53,10 @@ daten_neu <- daten %>%
   filter(between(TV_Vertrauen, 1, 7))
 ```
 
-Nun berechnen wir, ob eine Korrelation zwischen beiden Variablen vorliegt. Dazu nutzen wir die Funktion cor(). Mit dem print-Befehl geben wir uns den Wert aus:
+
+## Berechnen der Korrelation
+
+Nun berechnen wir, ob eine Korrelation zwischen beiden Variablen vorliegt. Dazu nutzen wir die Funktion `cor()`. Mit dem print-Befehl geben wir uns den Wert aus:
 
 ```{r}
 korrelation <- daten_neu %>% 
@@ -61,22 +66,26 @@ print(korrelation)
 
 Schauen wir uns den (sehr übersichtlichen) Output an: Wie erhalten einen Korrelationskoeffizient von 0,113903. Das bedeutet, dass zwischen den beiden Variablen TV_Konsum und TV_Vertrauen ein schwacher positiver linearer Zusammenhang besteht. Höhere Werte in einer Variable gehen also tendenziell mit höheren Werten in der anderen Variable einher. Jedoch ist die Korrelation relativ niedrig, was darauf hindeutet, dass der Zusammenhang zwischen den beiden Variablen nicht besonders stark ist.
 
-Um die Korrelation zwischen den Variablen "TV_Konsum" und "TV_Vertrauen" zu visualisieren, können wir mit dem ggplot2-Paket ein Scatterplot erstellen:
+## Visualisierung der Korrelation
 
-## Visualisierung der Korrelation mit Hilfe eines Scatterplots
+Um die Korrelation zwischen den Variablen "TV_Konsum" und "TV_Vertrauen" zu visualisieren, können wir mit dem ggplot2-Paket ein Scatterplot erstellen:
 
 ```{r}
 scatterplot <- ggplot(daten_neu, aes(x = TV_Konsum, y = TV_Vertrauen)) +
-  geom_point(color = "blue") +
+  geom_point(color = "darkgreen") +
   labs(x = "TV Konsum", y = "TV Vertrauen", title = "Korrelation zwischen TV Konsum und Vertrauen")
 print(scatterplot)
 ```
 
 Hier können wir den oben bereits ermittelten Befund noch einmal grafisch inspizieren. Der leichte positive Zusammenhang zwischen dem Vertrauen in die Insitution Fernsehen und der täglichen Fernsehnutzung zeigt sich ganz schön.
 
+::: {.callout-note collapse="true" icon="false"}
+
+## Exkurs: Übungsaufgabe Korrelationsanalyse
+
 Führen Sie zur Übung nun noch eine Korrelationsanalyse durch, um den Zusammenhang zwischen der täglichen Fernsehnutzung in Minuten (umbenannt in "TV_Konsum") und der quasi-metrisch gemessenen Einschätzung, ob die Entwicklung der Kriminalität in Deutschland zu- oder abgenommen hat (cf03; 1=hat stark zugenommen; 5=hat stark abgenommen). Entsprechend der Kultivierungsforschung können wir vermuten, dass es einen negativen Zusammenhang geben sollte: Mehr Fernsehkonsum sollte mit einer negativen Kriminalitätsprognose korrelieren. Dazu müssen Sie zuerst wieder einen Teildatensatz mit den benötigten Variablen erzeugen, diese ggf. umbennen und filtern. Dann ermitteln Sie die Korrelation beider Variablen.
 
-## Erzeugen eines Teildatensatzes, Umbenennen der Variablen und Filtern der Fälle
+## Data Management
 
 ```{r}
 daten_neu2 <- daten %>%
@@ -108,45 +117,50 @@ Zur grafischen Illustration erstellen wir nun wieder ein Scatterplot:
 
 ```{r}
 scatterplot <- ggplot(daten_neu2, aes(x = TV_Konsum, y = Kriminalitätsprognose)) +
-  geom_point(color = "red") +
+  geom_point(color = "darkgreen") +
   labs(x = "TV Konsum", y = "Kriminalitätsprognose", title = "Korrelation zwischen TV Konsum und Kriminalitätsprognose")
 print(scatterplot)
 ```
 
-# Die Regressionsanalyse: Analyselogik, Ziel und Einsatzgebiete
+:::
+
+# Die lineare Regressionsanalyse
 
 Die *lineare Regression* untersucht den Zusammenhang zwischen einer *abhängigen Variable* und mindestens einer *unabhängigen Variable*. Sie versucht, eine mathematische Beziehung zwischen den Variablen zu modellieren, die durch eine Linie (in einfachen linearen Regressionen) oder eine Ebene (in multiplen linearen Regressionen) repräsentiert wird. Die dahinterliegende "mathematische Idee" der linearen Regression besteht darin, die bestmögliche Anpassung der Daten an das Modell zu erreichen, um die Vorhersage der abhängigen Variable basierend auf den unabhängigen Variablen zu ermöglichen. Dazu wird ein *Regressionskoeffizient* für jede unabhängige Variable geschätzt, um ihren Einfluss auf die abhängige Variable zu quantifizieren.
 
 Ziel der Regressionsanalyse ist es also, die Beziehung zwischen einer *abhängigen Variable* (auch erklärte Variable, Regressand oder Prognosevariable genannt) und einer oder mehreren *unabhängigen Variablen* (oft auch erklärende Variable, Regressor oder Prädiktorvariable) zu analysieren, um Zusammenhänge quantitativ zu beschreiben und zu erklären und/oder Werte der abhängigen Variable mit Hilfe der unabhängige Variable (des Prädiktors) zu prognostizieren. Mit Hilfe der Regressionsanalyse können drei Arten von Fragestellungen untersucht werden: 1) Ursachenanalyse: Gibt es einen Zusammenhang zwischen der unabhängigen und der abhängigen Variable? Wie stark ist dieser? 2) Wirkungsanalyse: Wie verändert sich die abhängige Variable bei einer Änderung der unabhängigen Variablen? 3) Prognose: Können die Messwerte der abhängigen Variable durch die Werte der unabhängigen Variable vorhergesagt werden?
 
-# Die Einfache lineare Regression
-
 Die *einfache lineare Regression* wird angewandt, wenn geprüft werden soll, ob ein (als linear vermuteter) Zusammenhang zwischen einer abhängigen metrischen Variable und einer unabhängigen metrischen Variable besteht. Da sie zwei metrische Variablen integriert, wird sie auch als *bivariate Regression* bezeichnet. In diesem Teilkapitel lernen wir die *einfache lineare Regression* auf Grundlage der Allbus-Daten kennen. In der nächsten Sitzung gehen wir dann näher auf die notwendige Prüfung der *Voraussetzungen einer Regressionsanalyse* ein und lernen auch noch die *multiple lineare Regression* kennen.
 
 Um die Durchführung der linearen Regression an einem Beispiel nachzuvollziehen, stellen wir zunächst eine gerichtete Hypothese auf, die den Einfluss einer unabhängigen metrischen Variable auf eine abhängige metrische Variable spezifiziert. Hierzu schauen wir uns den Zusammenhang zwischen dem Alter (age) sowie der täglichen Fernsehnutzung in Minuten (lm02) an. Dazu vermuten wir: Das Alter erklärt die Intensität der täglichen Fernsehnutzung in Minuten.
 
+Mit Hilfe der Regression wollen wir nun die oben formulierte Annahme prüfen, dass das Alter die täglichen Fernsehnutzung in Minuten (umbenannt in TV_Konsum) erklären kann. Beides sind metrische Variablen und erfüllen damit die Voraussetzung, dass eine Regression gerechnet werden kann. (Achtung: auch kategorische Variablen können bei der Regressionsanalyse grundsätzlich eingesetzt werden, sie müssen dann aber durch *Dummy-Coding* passend gemacht werden, dazu aber später mehr).
+
 ![Grafik: Kann das Alter die Fernsehnutzung erklären? (Picture generated by midjourney)](Bilder/zemkipatrick_comic_style_young_and_old_people_watching_tv_widef_92db5ce1-7d64-4c5b-b05c-8257c92de958.png)
 
-## Vorbereitung und Laden der Daten
+## Data Management
 
-Wie immer besteht der erste Schritt nun darin, die benötigten Pakete sowie den Datensatz zu laden. Für die lineare Regression kommen zwei neue Pakete hinzu: Wir laden das Paket broom, um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können sowie das Paket performance, dass uns später zusätzlich einige Indikatoren ausgibt. Das Paket "see" kommt außerdem dazu, weil es uns eine toolbox für die Visualisierung der Zusammenhänge bereitstellt.
+Wie immer besteht der erste Schritt nun darin, die benötigten Pakete sowie den Datensatz zu laden. Für die lineare Regression kommen zwei neue Pakete hinzu: Wir laden das Paket `broom`, um die normale Ausgabe der Funktion `lm` (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können sowie das Paket `performance`, dass uns später zusätzlich einige Indikatoren ausgibt. Das Paket `see` kommt außerdem dazu, weil es uns eine toolbox für die Visualisierung der Zusammenhänge bereitstellt.
 
-### Laden der benötigten Pakete
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
 p_load(tidyverse, haven, dplyr, broom, lm.beta, performance, see) 
+
+theme_set(theme_minimal()) # <1>
+options(scipen = 999)  # <2>
 ```
 
-### Laden des Datensatzes
+1.  Visualisierungshintergrund der Grafiken in ggplot festlegen
+2.  Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
+
+Anschließend laden wir unseren Datensatz.
 
 ```{r}
 daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
-### Erzeugen eines Teildatensatzes & Umbenennen der Variablen
-
-Für den Teildatensatz bennenen wir die Variablen lm02 und age um und filtern die missings heraus (z.B. -9=Keine Angabe):
+Für den Teildatensatz bennenen wir die Variablen `lm02` und `age` um und filtern die missings heraus (z.B. -9=Keine Angabe):
 
 ```{r}
 daten <- daten %>%
@@ -154,49 +168,33 @@ daten <- daten %>%
   rename(TV_Konsum = lm02)%>%
   filter(between(Alter, 18, 100))%>%
   filter(between(TV_Konsum, 0, 1500))
-
-
-theme_set(theme_minimal()) # <1>
-
-options(scipen = 999)  # <2>
 ```
 
-1.  Visualisierungshintergrund der Grafiken in ggplot festlegen
-2.  Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
-
-## Ziel der Analyse
-
-Mit Hilfe der Regression wollen wir nun die oben formulierte Annahme prüfen, dass das Alter die täglichen Fernsehnutzung in Minuten (umbenannt in TV_Konsum) erklären kann. Beides sind metrische Variablen und erfüllen damit die Voraussetzung, dass eine Regression gerechnet werden kann. (Achtung: auch kategorische Variablen können bei der Regressionsanalyse grundsätzlich eingesetzt werden, sie müssen dann aber durch *Dummy-Coding* passend gemacht werden, dazu aber später mehr).
-
-Bevor wir die Regressionsanalyse durchführen, verschaffen wir uns zunächst einmal einen Überblick über die Daten - dazu visualisieren wir den Zusammenhang zwischen dem Alter sowie der täglichen Fernsehnutzung. Mit Hilfe der Grafik können wir auch die erste Voraussetzung prüfen, nämlich dass es einen *linearen Zusammenhang* zwischen beiden Variablen gibt.
 
 ## Grafische Prüfung der Voraussetzungen
+
+Bevor wir die Regressionsanalyse durchführen, verschaffen wir uns zunächst einmal einen Überblick über die Daten - dazu visualisieren wir den Zusammenhang zwischen dem Alter sowie der täglichen Fernsehnutzung. Mit Hilfe der Grafik können wir auch die erste Voraussetzung prüfen, nämlich dass es einen *linearen Zusammenhang* zwischen beiden Variablen gibt.
 
 ACHTUNG! Für die Regressionsanalyse müssen noch weitere Voraussetzungen geprüft werden (insb. Homoskedastizität der Residuen; Unabhängigkeit der Residuen; Normalverteilung der Residuen; keine Ausreißer in den Daten). An dieser Stelle klammern wir die anderen Voraussetzungsprüfungen aber vorerst aus, und kommen in der nächsten Sitzung darauf zurück (das ist sonst zu viel auf einmal).
 
 Zur visuellen Inspektion, ob der Zusammenhang zwischen unseren beiden Variablen linear ist, erstellen wir nun mit dem Befehl geom_point ein Punktdiagramm mit den Variablen Alter und TV_Konsum. Praktischerweise ist die Regressionsformel schon in ggplot integriert: Der Befehl geom_smooth erzeugt eine Trendlinie nach dem linear model (method = lm), die die Beziehung von y (=Alter) und x (=TV_Konsum) abbildet. Das Ergebnis ist eine Linie nach einer linearen Gleichung, die den Daten so eng wie möglich folgt. Mit dem Befehl ggtitle legen wir dann noch in den Klammern den Titel der Grafik fest, und mit xlab und ylab ergänzen wir die Achsenbeschriftung.
 
-### Visualisierung des Zusammenhangs mit Hilfe eines Streudiagramms
-
 ```{r }
 ggplot(daten, aes(Alter, TV_Konsum)) + 
   geom_point() + 
-  geom_smooth(method = lm, formula = "y ~ x") + 
+  geom_smooth(method = lm, formula = "y ~ x", color = "lightgreen") + 
   ggtitle("Zusammenhang der Variablen Alter und TV_Konsum") + 
   xlab("TV_Konsum") + ylab("Alter")
 ```
 
-### Interpretation: Was sehen wir im Streudiagramm?
-
 Die grafische Darstellung legt uns einen positiven und linearen Zusammenhang zwischen Alter und Fernsehnutzung nahe: mit zunehmendem Alter steigt die Nutzungsdauer. Damit scheint eine wichtige Voraussetzung der Regressionsanalyse, dass der Zusammenhang an sich linear ist, erfüllt.
 
-## Durchführung der einfachen linearen Regression über die Funktion lm
+## Durchführung der einfachen linearen Regression
 
-Ob diese Beobachtung auch statistisch belastbar ist, wollen wir jetzt mit der *einfachen linearen Regression* prüfen. Dazu nutzen wir die Funktion lm(). Die Funktion lm steht für "linear model". In den Klammern benennen wir zunächst die abhängige Variable (hier: TV_Konsum), dann kommt eine Tilde (d.h. "wird definiert durch") und der Bezug auf unsere unabhängige Variable (hier: Alter). Die Schreibweise y \~ x ist die Formel-Schreibweise in R; in diesem Fall besagt sie, dass y (TV_Konsum) abhängig von x (Alter) ist. Nach dem Komma folgt dann die Benennung des Datensatzes auf den die lm-Funktion angewendet werden soll. Zum Schluss lassen wir uns das Modell ausgeben.
+Ob diese Beobachtung auch statistisch belastbar ist, wollen wir jetzt mit der *einfachen linearen Regression* prüfen. Dazu nutzen wir die Funktion `lm()`. Die Funktion lm steht für "linear model". In den Klammern benennen wir zunächst die abhängige Variable (hier: `TV_Konsum`), dann kommt eine Tilde (d.h. "wird definiert durch") und der Bezug auf unsere unabhängige Variable (hier: `Alter`). Die Schreibweise y \~ x ist die Formel-Schreibweise in R; in diesem Fall besagt sie, dass y (`TV_Konsum`) abhängig von x (`Alter`) ist. Nach dem Komma folgt dann die Benennung des Datensatzes auf den die lm-Funktion angewendet werden soll. Zum Schluss lassen wir uns das Modell ausgeben.
 
 Der Modelloutput von lm ähnelt dem der schon behandelten Hypothesentests; enthält aber noch weitere Eckdaten wie die Effektstärke, das Signifikanzniveau oder die Erklärungsstärke des Modells.
 
-### Einfache lineare Regression mit lm (=linear models)
 
 ```{r}
 model <- lm(TV_Konsum ~ Alter, data = daten) 
@@ -209,7 +207,7 @@ Da dieser Output sehr, sehr sparsam und für uns noch wenig aussagekräftig ist,
 summary(model)
 ```
 
-### Interpretation des Outputs: Was sehen wir in der Ausgabe?
+## Interpretation der Ergebnisse
 
 Unter *Call* wird zunächst noch einmal das Regresssionsmodell beschrieben, das wir hier berechnet haben. In diesem versuchen wir auf Basis des Datensatzes "daten" die abhängige Variable "TV_Konsum" durch die unabhängige Variable "Alter" zu erklären.
 
@@ -231,7 +229,7 @@ Wie der Name schon sagt bezeichnet *Adjusted R2* die Anpassung des Modells, wobe
 
 Auch die *F-Statistik* ist wichtig: Sie gibt uns nämlich die Signfikanz des Gesamtmodells an (nicht einzelner Variablen wie bei R2!)
 
-### Inhaltliche Interpretation des Outputs: Was bedeutet das jetzt also alles?
+## Inhaltliche Interpretation des Outputs: Was bedeutet das jetzt also alles?
 
 Der Output zeigt uns: Das Alter hat einen positiven Einfluss auf die tägliche Fernsehnutzung in Minuten. Je älter ein Nutzer ist, desto mehr nutzt er das Fernsehen. Die Regressionsanalyse lässt dabei auch eine Quantifizierung dieses Zusammenhangs zu: Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable TV-Konsum um 2,19 Messeinheiten (hier: Minuten) zu. Dieser Zusammenhang ist mit p \> .05 statistisch signifikant.
 
@@ -253,13 +251,11 @@ Das Format ist normalerweise:
 > ***Beispiel:*** Das Alter beeinflusst die Dauer der Fernsehnutzung, *R^2^* = .08, *F*(1, 4927) = 474.1, *p* = .000.
 :::
 
-### Vorhersage von Werten auf Basis des Modells
+## Vorhersage von Werten auf Basis des Modells
 
 Da bei der Regression eine lineare Funktion geschätzt wird, können wir anhand der b-Werte und des Intercepts auch Vorhersagen für bestimmte Fälle treffen. Das ist eine der *coolen Superkräfte* der Regressionsanalyse :) (Das gilt aber streng genommen nur, wenn das zu Grunde liegende Sample repräsentativ ist und das Modell sowie die Parameter signifikant sind).
 
 Zur Prognose von erwarteten Werten der abhängigen Variable (TV_Konsum) auf Basis von gegebenen Werten der unabhänigen Variable (Alter) kann man die predict.lm()-Funktion nutzen:
-
-### Beispiel 1: Vorhersage für die tägliche Internetnutzung
 
 Wir lassen uns mit Hilfe unseres Modells zunächst die tägliche Internetnutzung in Minuten bei einem Alter von 25 und 75 vorhersagen.
 
@@ -268,13 +264,9 @@ predict.lm(model, data.frame(Alter = 25))
 predict.lm(model, data.frame(Alter = 75))
 ```
 
-### Interpretation des Outputs: Was sehen wir in der Ausgabe?
-
 Eine Person mit einem Alter von 25 Jahren weist laut Modell eine prognostizierte Internetnutzung von 119 Minuten auf. Eine Person mit einem Alter von 75 Jahren weist laut Modell eine prognostizierte Internetnutzung von 229 Minuten auf.
 
 Das geht natürlich auch kombiniert in einem Befehl, dann müssen wir aber mit c() einen combine-Befehl einfügen:
-
-## Beispiel 2: Vorhersage für die tägliche Internetnutzung
 
 In unserem zweiten Beispiel betrachten wir andere Altersgruppen. Wir lassen uns hier mit Hilfe unseres Modells die tägliche Internetnutzung in Minuten bei einem Alter von 20, 30, 40, 50, 60 und 70 vorhersagen.
 
@@ -282,19 +274,16 @@ In unserem zweiten Beispiel betrachten wir andere Altersgruppen. Wir lassen uns 
 predict.lm(model, data.frame(Alter = c(20, 30, 40, 50, 60, 70)))
 ```
 
-### Vorhersage und Residuen berechnen
 
 Die Prognose-Leistung unseres Regressionsmodels können wir auch auf den gesamten Datensatz anwenden - dann bekommen wir für jeden Fall im Datensatz den prognostizierten Wert der abhängigen Variable TV-Konsum ausgegeben. Dazu können wir den Befehl fitted nutzen. Der Fall Nummer 3 hat also laut Modell (!) einen TV-Konsum von (X) Minuten.
 
 Weil wir im Datensatz aber n=4929 Fälle haben (und die Ausgabe sonst zu unübersichtlich wird), begrenzen ich die Ausgabe auf die ersten 100 Zeilen (Fälle) des Datensatzes, indem ich zusätzlich die Funktion head() verwende, und die Anzahl der gewünschten Fälle in der Klammer mit 100 festlege:
 
-### Vorhersagewerte für jede Beobachtung anzeigen
-
 ```{r }
 head(fitted(model), 100)
 ```
 
-### Interpretation des Outputs: Was sehen wir in der Ausgabe?
+## Interpretation der Ergebnisse
 
 In der Ausgabe kann ich nun die laut Modell prognostizierte Fernsehnutzung für meine Befragten entsprechend ihres Alters sehen - Befragte(r) 10 hat so z.B. eine prognostizierte Fernsehnutzung von 189 Minuten.
 
@@ -304,15 +293,12 @@ Nun haben wir im Rahmen unserer Befragung die TV-Nutzung der Befragten aber ja s
 head(residuals(model), 100)
 ```
 
-### Interpretation des Outputs: Was sehen wir in der Ausgabe?
 
 Für unseren Fall Nummer 65 beträgt die Abweichung der Prognose von der Beobachtung -92 Minuten. Das diese Abweichung sehr groß ist, wundert uns aber nicht, denn wir wissen ja schon, dass wir eine große Spannweite haben und unser R2 mit 8 Prozent nicht besonders groß ist.
 
-### Vorhersage und Residuen grafisch darstellen
+## Vorhersage und Residuen grafisch darstellen
 
 Um das grafisch gegenüberzustellen, speichern wir die obenen ausgegeben Daten zur Vorhersage (aus der predict-Funktion) und die Daten zu den Abweichungen von der Vorhersage (residuals-Funktion) jeweils als neue Variablen "vorhersage" und "residuen" ab.
-
-### Berechnung der Vorhersagewerte und Residuen für zusätzliche Plots
 
 ```{r }
 daten$vorhersage <- predict(model) 
@@ -321,12 +307,10 @@ daten$residuen <- as.numeric(residuals(model))
 
 Und dann machen wir eine fancy Grafik, die uns die Abweichung der prognostizierten Werte nach oben und nach unten visuell nachvollziehen lässt:
 
-### Beobachtete und vorhergesagte Werte sowie Residuen gemeinsam plotten
-
 ```{r }
 ggplot(daten, aes(Alter, TV_Konsum)) + 
   geom_point(aes(color = residuen)) + # <1> 
-  scale_color_gradient2(low = "blue", mid = "white", high = "red") + # <2> 
+  scale_color_gradient2(low = "tan4", mid = "white", high = "darkgreen") + # <2> 
   guides(color = "none") +  # <3> 
   geom_point(aes(y = vorhersage), shape = 1) + # <4> 
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE, linewidth = 0.5, color = "black") + # <5> 
@@ -344,21 +328,7 @@ ggplot(daten, aes(Alter, TV_Konsum)) +
 7.  Titel
 8.  Achsen-Beschriftung
 
-```{r}
-vorhersagen <- predict(model)
-residuen <- residuals(model)
-
-plot(vorhersagen, residuen, # <1> 
-     xlab = "Vorhersagen", ylab = "Residuen", # <1> 
-     main = "Residualplot", pch = 16, col = "blue") # <1> 
-abline(h = 0, col = "red", lty = 2)  # <2> 
-
-```
-
-1.  Residualplot erstellen
-2.  Hinzufügen einer Linie bei y = 0 für Referenz
-
-### Standardisierung der B-Koeffizienten ("beta-Koeffizienten")
+## Standardisierung der B-Koeffizienten ("beta-Koeffizienten")
 
 Neben den normalen Regressionskoeffizienten b kann man auch die *standardisierten Koeffizienten beta* berechnen. Die standardisierten beta-Koeffizienten sind nützlich, weil sie die Skalierung der einzelnen Messwerte "herausrechnet", wodurch unterschiedlich skalierte Variablen vergleichbar werden.
 
@@ -370,25 +340,29 @@ Das ist natürlich vor allem dann spannend, wenn ich den Einfluss mehrerer Varia
 summary(lm.beta(model)) 
 ```
 
-## Und zum Abschluss noch ein paar nützliche Zusatzfunktionen zur schöneren Ergebnisdarstellung durch das Paket broom:
+::: {.callout-note collapse="true" icon="false"}
 
-### Funktion zur Modellzusammenfassung als data frame
+## Exkurs: Zusatzfunktionen zur schöneren Ergebnisdarstellung
+
+Funktion zur Modellzusammenfassung als data frame
 
 ```{r }
 tidy(lm.beta(model))
 ```
 
-### Funktion, um weitere Modellstatistiken in einem Befehl zu berechnen
+Funktion, um weitere Modellstatistiken in einem Befehl zu berechnen
 
 ```{r }
 glance(model)
 ```
 
-### Funktion, um Rohdaten um Modellvorhersagen zu erweitern
+Funktion, um Rohdaten um Modellvorhersagen zu erweitern
 
 ```{r}
 augment(model)
 ```
+
+:::
 
 ::: callout-note
 ## Literatur und Beispiele aus der Praxis

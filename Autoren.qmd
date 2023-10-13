@@ -1,6 +1,5 @@
 ---
 title: "Das Team stellt sich vor"
-author: "Patrick Zerrer"
 toc: true
 number-sections: false
 highlight-style: pygments
@@ -10,6 +9,33 @@ format:
     code-line-numbers: false
 sidebar: false
 ---
+
+## Patrick Zerrer
+
+**Vita**
+
+::: column-margin
+![Patrick Zerrer](Bilder/bild_patrick.png)
+:::
+
+Patrick Zerrer ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen. Er schloss den „B.A. Governance and Public Policy - Staatswissenschaften" an der Universität Passau sowie den „M.A. Öffentliche Kommunikation" an der Friedrich-Schiller-Universität ab. Seine Forschungsinteressen liegen insbesondere im Bereich der politischen Online-Kommunikation, der Nachrichten- und Mediennutzung sowie der politischen Partizipation mit einem Fokus auf (digitalen) Klimaprotest und -bewegungen. Für seine Forschung nutzer er unterschiedliche Methoden, u.a. digitales (mobiles) Tracking, digitale Spurdaten, Umfragen, (automatisierter) Inhaltsanalysen und Interviews.
+
+**Forschungsschwerpunkte**
+
+-   Politische Kommunikation
+-   (mobile) Mediennutzungsforschung
+-   Klimaprotestforschung
+
+::: {.callout-note collapse="true" icon="false"}
+## Kontakt
+
+🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen
+
+🎓 [Webseite](https://www.uni-bremen.de/zemki/das-zemki/personen/profilseite/idm/24668?cHash=3dca3e98ee8a659c9390ae7bcf8178d5)
+
+#️⃣ [Twitter](https://twitter.com/patrick_zerrer)
+:::
+
 
 ## Katharina Maubach
 
@@ -38,30 +64,82 @@ Katharina Maubach ist seit Dezember 2022 als wissenschaftliche Mitarbeiterin am 
 #️⃣ [Twitter](https://twitter.com/k_maubach)
 :::
 
-## Patrick Zerrer
+## Cornelius Puschmann
 
 **Vita**
 
 ::: column-margin
-![Patrick Zerrer](Bilder/bild_patrick.png)
+![Cornelius Puschmann](http://cbpuschmann.net/cp-small.jpg)
 :::
 
-Patrick Zerrer ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen. Er schloss den „B.A. Governance and Public Policy - Staatswissenschaften" an der Universität Passau sowie den „M.A. Öffentliche Kommunikation" an der Friedrich-Schiller-Universität ab. Seine Forschungsinteressen liegen insbesondere im Bereich der politischen Online-Kommunikation, der Nachrichten- und Mediennutzung sowie der politischen Partizipation mit einem Fokus auf (digitalen) Klimaprotest und -bewegungen. Für seine Forschung nutzer er unterschiedliche Methoden, u.a. digitales (mobiles) Tracking, digitale Spurdaten, Umfragen, (automatisierter) Inhaltsanalysen und Interviews.
+Cornelius Puschmann ist Professor für Kommunikations- und Medienwissenschaft mit dem Schwerpunkt Digitale Kommunikation am ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung. Nach Stationen an der Humboldt Universität zu Berlin, der Zeppelin Universität Friedrichshafen und dem Leibniz-Institut für Medienforschug \| Hans Bredow Institut wurde er 2019 nach Bremen berufen. Gastwissenschaftler war Cornelius Puschmann u.a. am Oxford Internet Institute der University of Oxford und am Berkman Klein Center for Internet and Society der Harvard University, sowie am Department of Media Studies der Universität Amsterdam.
 
-**Forschungsschwerpunkte**
+Forschungsschwerpunkte
 
--   Politische Kommunikation
--   (mobile) Mediennutzungsforschung
--   Klimaprotestforschung
+-   Digitale Mediennutzungsforschung
+
+-   Hate Speech / Desinformation in sozialen Medien
+
+-   Methoden der automatisierten Inhaltsanalyse
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
 
 🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen
 
-🎓 [Webseite](https://www.uni-bremen.de/zemki/das-zemki/personen/profilseite/idm/24668?cHash=3dca3e98ee8a659c9390ae7bcf8178d5)
+🎓 [Webseite](http://cbpuschmann.net/)
+:::
 
-#️⃣ [Twitter](https://twitter.com/patrick_zerrer)
+## Stephanie Geise
+
+**Vita**
+
+::: column-margin
+![Stephanie Geise, © B. Köhler](Bilder/Stephanie_Geise.jpeg)
+:::
+
+Prof. Dr. habil. Stephanie Geise ist Professorin für Kommunikations- und Medienwissenschaft am ZeMKI der Universität Bremen und vertritt den Schwerpunkt Politische Kommunikation & Innovative Methoden. Ihre Forschungsschwerpunkte liegen im Bereich der politischen Kommunikation und Medienwirkung, mit einem Fokus auf visuelle und multimodale Kommunikation. Im Fokus steht die Frage, wie sich multimodale Medienbotschaften – z.B. klassische Nachrichten oder Social Media Posts – auf das politische Denken und Handeln auswirken. Zur Analyse nutzt sie häufig Kombinationen aus „klassischen“ standardisierten Methoden (z.B. Befragungen, Experimentaldesigns) und innovativen computerbasierten Beobachtungsverfahren (z.B. Eyetracking, Automated Emotion Detection). Stephanie Geise leitet das von der Deutschen Forschungsgemeinschaft (DFG) geförderte Forschungsprojekt "Remixing Multimodal News Reception" und koordiniert das DFG-gefördertes Netzwerk „Potenziale und Herausforderungen der Computational Communication Science am Beispiel von Online-Protest“,  dass computationale Methoden zur Analyse von Online-Protest reflektiert und weiterentwickelt. Sie leitet das SKILL-Innovation Lab „Digital Data Literacy & Analysis“ am ZeMKI der Universität Bremen und hat die Kapitel zum „Überprüfen von Zusammenhängen“ zum Lehrbuch beigesteuert.
+
+**Forschungsschwerpunkte**
+
+- Politische Kommunikation
+- Rezeptions- und Wirkungsforschung
+- Visuelle und multimodale Kommunikation
+- Innovative Methoden & Methodenkombinationen
+
+::: {.callout-note collapse="true" icon="false"}
+## Kontakt
+
+🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen
+
+🎓 [Webseite](https://www.uni-bremen.de/zemki/das-zemki/personen/profilseite/idm/24976?cHash=f4a4b997f4b46ce3e8924b42ff216496)
+
+#️⃣ [Twitter](https://twitter.com/geise_stephanie)
+:::
+
+
+## Michael Linke
+
+**Vita**
+
+::: column-margin
+![Michael Linke](Bilder/Michael_Linke.jpeg)
+:::
+
+Michael Linke ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen und hat einen B.A. in Kunstgeschichte und Politikwissenschaft sowie einen M.Sc. in Informatik für Geistes- und Sozialwissenschaftler. Seine Forschungsinteressen liegen im Bereich Maschinelles Lernen in den Sozialwissenschaften, Netzwerkanalyse und Protestforschung.
+
+**Forschungsschwerpunkte**
+
+-   Maschinelles Lernen, vor allem Deep Learning
+-   Protest Event Analysis
+-   Politische Kommunikation
+
+::: {.callout-note collapse="true" icon="false"}
+## Kontakt
+
+🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen
+
+🎓 [Webseite](https://www.uni-bremen.de/zemki/das-zemki/personen/profilseite/idm/60192?cHash=74d4993930c79dfaf1bae02f2c4d80e6)
 :::
 
 ## Hannah-Marie Büttner
@@ -91,52 +169,3 @@ Hannah-Marie Büttner ist als wissenschaftliche Mitarbeiterin der Universität B
 ✉️ [E-Mail](habu@uni-bremen.de)
 :::
 
-## Michael Linke
-
-**Vita**
-
-::: column-margin
-![Michael Linke](Bilder/Michael_Linke.jpeg)
-:::
-
-Michael Linke ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommunikations- und Informationsforschung an der Universität Bremen und hat einen B.A. in Kunstgeschichte und Politikwissenschaft sowie einen M.Sc. in Informatik für Geistes- und Sozialwissenschaftler. Seine Forschungsinteressen liegen im Bereich Maschinelles Lernen in den Sozialwissenschaften, Netzwerkanalyse und Protestforschung.
-
-**Forschungsschwerpunkte**
-
--   Maschinelles Lernen, vor allem Deep Learning
--   Protest Event Analysis
--   Politische Kommunikation
-
-::: {.callout-note collapse="true" icon="false"}
-## Kontakt
-
-🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen
-
-🎓 [Webseite](https://www.uni-bremen.de/zemki/das-zemki/personen/profilseite/idm/60192?cHash=74d4993930c79dfaf1bae02f2c4d80e6)
-:::
-
-## Cornelius Puschmann
-
-**Vita**
-
-::: column-margin
-![Cornelius Puschmann](http://cbpuschmann.net/cp-small.jpg)
-:::
-
-Cornelius Puschmann ist Professor für Kommunikations- und Medienwissenschaft mit dem Schwerpunkt Digitale Kommunikation am ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung. Nach Stationen an der Humboldt Universität zu Berlin, der Zeppelin Universität Friedrichshafen und dem Leibniz-Institut für Medienforschug \| Hans Bredow Institut wurde er 2019 nach Bremen berufen. Gastwissenschaftler war Cornelius Puschmann u.a. am Oxford Internet Institute der University of Oxford und am Berkman Klein Center for Internet and Society der Harvard University, sowie am Department of Media Studies der Universität Amsterdam.
-
-Forschungsschwerpunkte
-
--   Digitale Mediennutzungsforschung
-
--   Hate Speech / Desinformation in sozialen Medien
-
--   Methoden der automatisierten Inhaltsanalyse
-
-::: {.callout-note collapse="true" icon="false"}
-## Kontakt
-
-🏠 Universität Bremen; ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung; Linzer Str. 4; 28359 Bremen
-
-🎓 [Webseite](http://cbpuschmann.net/)
-:::

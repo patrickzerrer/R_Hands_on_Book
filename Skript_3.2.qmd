@@ -13,7 +13,7 @@ format:
     code-annotations: hover
 ---
 
-![Bild von Jae Rue auf Pixabay](Bilder/Skript_3.2_Bild_1.jpg)
+![Artwork by @allision_horst](Bilder/Bild_UmgangDaten.png)
 
 In unserem alltäglichen Leben haben wir ständig mit unterschiedlichsten Formen von Daten zu tun, meistens ohne uns darüber groß Gedanken zu machen. Beispielsweise haben wir es bei dem Versenden einer Textnachricht mit einer Reihe von unterschiedlichen Formen an Daten zu tun, die Nachricht an sich als auch den/die Empfänger:in - in Form von Text - als auch den Zeitpunkt - in Form von Zahlen bzw. eines Datums. Wenn wir mit diesen Daten arbeiten möchten, benötigen wir etwas Wissen darüber wie verschiedene Datenformate funktionieren.
 
@@ -83,7 +83,7 @@ In R sind Datenstrukturen essentiell, um Informationen auf organisierte und effi
 
 ### Der Vektor
 
-Der Vektor ist die essentiellste und einfachste Datenstruktur in R. Ein Vektor ist eindimensional und enthält eine geordnete Sammlung von Elementen desselben Datentyps, er kann also entweder aus numerischen Werten, Integers (ganzen Zahlen), logischen Werten oder Characters (Textwerten) bestehen. Vektoren sind fundamental für viele Berechnungen und Operationen in R. Vektoren können in R mithilfe der Funktion c() erstellt werden, die die Elemente durch Kommas trennt. Im folgenden Beispiel erstellen wir für verschiedene Datentypen, die wir im vorherigen Kapitel kennengelernt haben, Beispiel-Vektoren und ordnen diesen Vektoren Namen zu.
+Der Vektor ist die essentiellste und einfachste Datenstruktur in R. Ein Vektor ist eindimensional und enthält eine geordnete Sammlung von Elementen desselben Datentyps, er kann also entweder aus numerischen Werten, Integers (ganzen Zahlen), logischen Werten oder Characters (Textwerten) bestehen. Vektoren sind fundamental für viele Berechnungen und Operationen in R. Vektoren können in R mithilfe der Funktion `c()` erstellt werden, die die Elemente durch Kommas trennt. Im folgenden Beispiel erstellen wir für verschiedene Datentypen, die wir im vorherigen Kapitel kennengelernt haben, Beispiel-Vektoren und ordnen diesen Vektoren Namen zu.
 
 ```{r}
 a <- c(1,2,3,4,6,-4) # <1> 
@@ -97,7 +97,7 @@ d <- c(TRUE, FALSE, TRUE, FALSE) # <4>
 3.  character
 4.  logical
 
-Wir haben nun mit der Funktion `c()` Vektoren erstellt mit verschiedenen Datentypen. Wollen wir einen Vektor des Datentyps numeric erstellen, können wir diesen mit Zahlen befüllen, wie es bei Vektor a der Fall ist. Wollen wir hingegen spezifizieren, dass es sich ausschließlich um ganze Zahlen handelt und der Datentyp des Vektors daher integer ist, müssen wir dies mit einem L hinter den Zahlen angeben, wie wir es für Vektor b gemacht haben. Zur Erstellung eines Vektors des Datentyps character setzen wir die Werte in doppelte oder einfache Anführungszeichen, wie bei Vektor c. Für einen logischen Datentyp, befüllen wir den Vektor mit den Werten TRUE und False, wie in Beispiel d. Wollen wir uns den Datentyp eines Vektors anzeigen lassen, können wir dies mit dem Befehl `class()` machen.
+Wir haben nun mit der Funktion `c()` Vektoren erstellt mit verschiedenen Datentypen. Wollen wir einen Vektor des Datentyps numeric erstellen, können wir diesen mit Zahlen befüllen, wie es bei Vektor a der Fall ist. Wollen wir hingegen spezifizieren, dass es sich ausschließlich um ganze Zahlen handelt und der Datentyp des Vektors daher integer ist, müssen wir dies mit einem `L` hinter den Zahlen angeben, wie wir es für Vektor b gemacht haben. Zur Erstellung eines Vektors des Datentyps character setzen wir die Werte in doppelte oder einfache Anführungszeichen, wie bei Vektor c. Für einen logischen Datentyp, befüllen wir den Vektor mit den Werten `TRUE` und `False`, wie in Beispiel d. Wollen wir uns den Datentyp eines Vektors anzeigen lassen, können wir dies mit dem Befehl `class()` machen.
 
 ```{r}
 class(a)
@@ -138,7 +138,7 @@ Lassen wir uns den zuerst erstellten numerischen Vektor verkehrsmittel anzeigen,
 verkehrsmittel
 ```
 
-Lassen wir uns hingegen den in einen factor umgewandelten Vektor factor_verkehrsmittel anzeigen, bekommen wir die Werte mit ihren entsprechenden Labeln angezeigt. In der letzten Zeile des Outputs sehen wir außerdem, welche möglichen Merkmalsausprägungen vorkommen können (Levels):
+Lassen wir uns hingegen den in einen factor umgewandelten Vektor factor_verkehrsmittel anzeigen, bekommen wir die Werte mit ihren entsprechenden Labeln angezeigt. In der letzten Zeile des Outputs sehen wir außerdem, welche möglichen Merkmalsausprägungen vorkommen können (*siehe Levels*):
 
 ```{r}
 factor_verkehrsmittel
@@ -154,7 +154,7 @@ matrix_1 <- matrix(vec_1)
 matrix_1
 ```
 
-In diesem Beispiel erstellen wir zunächst mit der Funktion `c()` einen numerischen Vektor namens vec_1. Diesen wandeln wir mit der Funktion `matrix()` in eine Matrix um, die wir matrix_1 nennen. Dann lassen wir uns matrix_1 anzeigen. Wir können sehen, dass die erstellte Matrix aus einer Spalte und neun Reihen besteht, die mit den Zahlenwerten des Vektors vec_1 befüllt wurden. Wir können die Anzahl der Spalten und Reihen in der Matrix mit den Argumenten ncol (number of columns = Spaltenanzahl) oder nrow (number of rows = Reihenanzahl) verändern:
+In diesem Beispiel erstellen wir zunächst mit der Funktion `c()` einen numerischen Vektor namens vec_1. Diesen wandeln wir mit der Funktion `matrix()` in eine Matrix um, die wir matrix_1 nennen. Dann lassen wir uns matrix_1 anzeigen. Wir können sehen, dass die erstellte Matrix aus einer Spalte und neun Reihen besteht, die mit den Zahlenwerten des Vektors vec_1 befüllt wurden. Wir können die Anzahl der Spalten und Reihen in der Matrix mit den Argumenten `ncol` (number of columns = Spaltenanzahl) oder `nrow` (number of rows = Reihenanzahl) verändern:
 
 ```{r}
 matrix_2 <- matrix(vec_1,ncol=3)
@@ -175,9 +175,13 @@ matrix_4 <- matrix(vec_1,ncol=3,nrow=2)
 matrix_4
 ```
 
-### Der Datenrahmen
+### Der Datenrahmen bzw. Dataframe
 
-Neben dem eindimensionalen Vektor und der zweidimensionalen Matrix, gibt es noch eine weitere grundlegende Datenstruktur, mit der wir in der quantitativen Datenanalyse arbeiten: der Datenrahmen. Hierbei handelt es sich um eine zweidimensionale Datenstruktur, die ähnlich einer Tabelle aussieht. Im Gegensatz zur Matrix ermöglicht der Datenrahmen die Speicherung unterschiedlicher Datentypen in verschiedenen Spalten, was besonders hilfreich ist, wenn wir mit realen Datensätzen arbeiten. In einem Datenrahmen repräsentiert eine "Variable" eine einzelne Messgröße oder Eigenschaft. Variablen können verschiedene Datentypen aufweisen (numerische Werte, Texte, logische Werte oder kategoriale Merkmale). Jede Variable wird durch eine Spalte im Datenrahmen dargestellt. Eine "Beobachtung" hingegen entspricht einer einzelnen Einheit, von der wir Daten gesammelt haben. Beobachtungen werden als Zeilen im Datenrahmen angeordnet. Jede Zeile enthält die Datenwerte für jede der zugehörigen Variablen. Beispielsweise könnte eine Beobachtung in einem Datenrahmen zur Erfassung von Studierendendaten Informationen wie den Namen, das Alter und die erreichte Note für einen bestimmten Kurs enthalten. Zusammen repräsentieren Variablen und Beobachtungen die Informationen, die wir in einem Datensatz haben. Der Datenrahmen organisiert diese Informationen in einer tabellarischen Struktur, die es uns ermöglicht, Muster, Trends und Beziehungen zwischen den Variablen und Beobachtungen zu identifizieren. Dies ist der Grundstein quantitative Datenanalysen. Um in R einen Datenrahmen zu erstellen, bilden Vektoren wieder die Grundlage. Diese dienen als Variablen, d.h. als Spalten, in unserem Datenrahmen und werden mit dem Befehl `data.frame()` zusammengefügt:
+Neben dem eindimensionalen Vektor und der zweidimensionalen Matrix, gibt es noch eine weitere grundlegende Datenstruktur, mit der wir in der quantitativen Datenanalyse arbeiten: der Datenrahmen. Hierbei handelt es sich um eine zweidimensionale Datenstruktur, die ähnlich einer Tabelle aussieht. Im Gegensatz zur Matrix ermöglicht der Datenrahmen die Speicherung unterschiedlicher Datentypen in verschiedenen Spalten, was besonders hilfreich ist, wenn wir mit realen Datensätzen arbeiten. 
+
+In einem Datenrahmen repräsentiert eine "Variable" eine einzelne Messgröße oder Eigenschaft. Variablen können verschiedene Datentypen aufweisen (numerische Werte, Texte, logische Werte oder kategoriale Merkmale). Jede Variable wird durch eine Spalte im Datenrahmen dargestellt. Eine "Beobachtung" hingegen entspricht einer einzelnen Einheit, von der wir Daten gesammelt haben. Beobachtungen werden als Zeilen im Datenrahmen angeordnet. Jede Zeile enthält die Datenwerte für jede der zugehörigen Variablen. 
+
+Beispielsweise könnte eine Beobachtung in einem Datenrahmen zur Erfassung von Studierendendaten Informationen wie den Namen, das Alter und die erreichte Note für einen bestimmten Kurs enthalten. Zusammen repräsentieren Variablen und Beobachtungen die Informationen, die wir in einem Datensatz haben. Der Datenrahmen organisiert diese Informationen in einer tabellarischen Struktur, die es uns ermöglicht, Muster, Trends und Beziehungen zwischen den Variablen und Beobachtungen zu identifizieren. Dies ist der Grundstein quantitative Datenanalysen. Um in R einen Datenrahmen zu erstellen, bilden Vektoren wieder die Grundlage. Diese dienen als Variablen, d.h. als Spalten, in unserem Datenrahmen und werden mit dem Befehl `data.frame()` zusammengefügt:
 
 ```{r}
 name <- c('Esra','Mara','Adam','Luca')
@@ -187,7 +191,7 @@ note <- c(1.3, 2.0, 1.7, 2.0)
 studierendendaten <- data.frame(name,alter,note)
 ```
 
-In diesem Beispiel erstellen wir zunächst mit der Funktion `c()` die Vektoren (Variablen) name, alter und note mit jeweils vier Werten. Anschließend erstellen wir aus diesen einen Datenrahmen mit dem Befehl `data.frame()`, der die Variablen durch Kommata trennt. Lassen wir uns den erstellten Datenrahmen, den wir studierendendaten genannt haben, anzeigen, sehen wir, dass jede Zeile eine Beobachtung enthält, nämlich den Namen, das Alter und die Note einer Person. Jede Spalte enthält eine der drei Variablen:
+In diesem Beispiel erstellen wir zunächst mit der Funktion `c()` die Vektoren (Variablen) `name`, `alter` und `note` mit jeweils vier Werten. Anschließend erstellen wir aus diesen einen Datenrahmen mit dem Befehl `data.frame()`, der die Variablen durch Kommata trennt. Lassen wir uns den erstellten Datenrahmen, den wir studierendendaten genannt haben, anzeigen, sehen wir, dass jede Zeile eine Beobachtung enthält, nämlich den Namen, das Alter und die Note einer Person. Jede Spalte enthält eine der drei Variablen:
 
 ```{r}
 studierendendaten

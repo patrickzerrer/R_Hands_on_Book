@@ -1,6 +1,6 @@
 ---
 title: "Willkommen zur Einführung in quantitative Forschungsdesigns und Datenanalyse"
-author: "Patrick Zerrer & Katharina Maubach"
+author: "Katharina Maubach & Patrick Zerrer"
 toc: true
 number-sections: false
 highlight-style: pygments

@@ -45,7 +45,7 @@ In R kann der Pearson Chi-Quadrat Test mit der Funktion chisq.test() durchgefüh
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
-p_load(tidyverse, haven, psych, conflicted, dplyr, lsr, ggpubr) 
+p_load(tidyverse, haven, psych, conflicted, dplyr, lsr, ggplot2, ggpubr) 
 theme_set(theme_classic())
 conflicts_prefer(dplyr::filter)
 ```
@@ -58,7 +58,7 @@ Die Variable Konfessionszugehörigkeit ist im Allbus-Datensatz mit dem Namen `rd
 
 ```{r}
 daten <- daten %>%
-  rename(Konfession = rd01)%>%
+  rename(Konfession = rd01) %>%
   filter(between(Konfession, 1, 6))%>%
   filter(between(sex, 1, 3))
 ```
@@ -83,16 +83,17 @@ Mit einem gestapelten Balkendiagramm können wir diese Tendenz auch visualisiere
 Ein gestapeltes Balkendiagramm ist ein Diagramm, dass die Verteilung von verschiedenen Kategorien innerhalb einer Gesamtheit farblich (nach Kategorien) differenziert darstellen kann. Dazu werden mehrere Balken für jede Kategorie (nach Farbe sortiert) "aufeinandergestapelt", wobei die Höhe des gesamten Balkens die Gesamtsumme (je Farbkategorie) repräsentiert. Um das auszuführen, müssen wir die unsere Daten wie Faktoren behandeln, weshalb wir den `as.factor`-Befehl nutzen:
 
 ```{r}
-library(ggplot2)
 
-daten$Konfession <- as.factor(daten$Konfession)
-daten$sex <- as.factor(daten$sex)
+daten <- daten %>% 
+  mutate(Konfession = haven::as_factor(Konfession),
+         sex = haven::as_factor(sex))
 
 ggplot(daten, aes(x = Konfession, fill = sex)) +
   geom_bar(position = "fill") +
   labs(title = "Verteilung der Konfessionszugehörigkeit nach Geschlecht",
-       x = "Einkommensgruppe", y = "Anteil") +
-  scale_fill_manual(values = c("darkgreen", "papayawhip", "tan4")) 
+       x = "Konfession", y = "Anteil") +
+  scale_fill_manual(values = c("darkseagreen","grey", "lightblue")) +
+  rotate_x_text(45)
 
 ```
 
@@ -214,16 +215,15 @@ Mit einem gestapelten Balkendiagramm können wir diese Tendenz auch visualisiere
 Ein gestapeltes Balkendiagramm ist ein Diagramm, dass die Verteilung von verschiedenen Kategorien innerhalb einer Gesamtheit farblich (nach Kategorien) differenziert darstellen kann. Dazu werden mehrere Balken für jede Kategorie (nach Farbe sortiert) "aufeinandergestapelt", wobei die Höhe des gesamten Balkens die Gesamtsumme (je Farbkategorie) repräsentiert. Um das auszuführen, müssen wir die unsere Daten wie Faktoren behandeln, weshalb wir den `as.factor`-Befehl nutzen:
 
 ```{r}
-library(ggplot2)
-
-daten_neu$Einkommensgruppe <- haven::as_factor(daten_neu$Einkommensgruppe)
-daten_neu$sex <- haven::as_factor(daten$sex)
+daten_neu <- daten_neu %>% 
+  mutate(Einkommensgruppe = haven::as_factor(Einkommensgruppe),
+         sex = haven::as_factor(sex))
 
 ggplot(daten_neu, aes(x = Einkommensgruppe, fill = sex)) +
   geom_bar(position = "fill") +
   labs(title = "Verteilung der Einkommensgruppe nach Geschlecht",
        x = "Einkommensgruppe", y = "Anteil") +
-  scale_fill_manual(values = c("darkgreen", "papayawhip", "tan4")) +
+  scale_fill_manual(values = c("darkseagreen","grey", "lightblue")) +
   rotate_x_text(45)
 ```
 

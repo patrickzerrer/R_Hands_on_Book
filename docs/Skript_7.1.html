@@ -101,13 +101,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:title" content="Pearson Chi-Quadrat-Test &amp; Rangkorrelation">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_brutalism_building_with_a_lot_of_sta_e1b0d8db-2845-4d6c-9d1b-f6497c9f5740.png">
-<meta property="og:image:height" content="816">
-<meta property="og:image:width" content="1456">
 <meta name="twitter:title" content="Pearson Chi-Quadrat-Test &amp; Rangkorrelation">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_brutalism_building_with_a_lot_of_sta_e1b0d8db-2845-4d6c-9d1b-f6497c9f5740.png">
-<meta name="twitter:image-height" content="816">
-<meta name="twitter:image-width" content="1456">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -484,24 +480,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Häufig gibt es aber auch den Fall, dass man den Zusammenhang zwischen Variablen mit niedrigerem Skalenniveau untersuchen möchte, z.B. zwei nominalskalierten oder ordinalskalierten Variablen. Zur Erinnerung: <em>Nominalskalierte</em> Variablen haben Werte, die Kategorien spiegeln, ohne dass diese eine natürliche Reihenfolge oder direkte Rangordnunghaben haben (z.B. präferierte Mediengattung, Geschlecht, Religionszugehörigkeit). Dagegen weisen die Werte bei <em>ordinalskalierten</em> Variablen eine hierarchische Ordnung oder Rangfolge zwischen den verschiedenen Kategorien auf, wobei die Abstände zwischen den Kategorien nicht fest definiert und auch nicht unbedingt gleichmäßig sind. Typische Beispiele für ordinalskalierte Variablen sind Noten, Bildungsabschlüsse oder Einkommensklassen.</p>
 <p>Auf beide Variablentypen sind Methoden, metrische Daten voraussetzen, nicht anwendbar. Daher nutzen wir spezifische Tests: Den <em>Pearson Chi-Quadrat</em>-Test (für nominal- bis ordinalskalierten Variablen) sowie die <em>Rangkorrelation</em> nach Spearman oder Kendall’s Tau (für ordinalskalierte Variablen). Wir starten nun mit dem Pearson Chi-Quadrat-Test:</p>
 <p>Der <em>Pearson Chi-Quadrat Test</em> ist ein statistisches Verfahren, das verwendet wird, um zu überprüfen, ob es einen statistisch signifikanten Zusammenhang zwischen zwei <em>nominalskalierten</em> Variablen gibt; er kann auch bei <em>ordinalskalierten</em> Variablen angewendet werden. Der Chi-Quadrat-Tests testet die Nullhypothese, dass die beiden Variablen unabhängig voneinander sind. Mit dem Chi-Quadrat-Test wird dazu der Chi-Quadrat-Wert berechnet, indem die beiden untersuchten Variablen in einer sogenannten “Kreuztabelle” gegenüber gestellt und dann die beobachteten Häufigkeiten mit den erwarteten Häufigkeiten verglichen werden.</p>
-<p>Ein Beispiel für eine Zusammenhangshypothese zwischen zwei nominalskalierten Variablen, ist die Annahme, dass es einen Zusammenhang zwischen dem Geschlecht und der Religionszugehörigkeit gibt: Es gibt einen Zusammenhang zwischen dem Geschlecht der Befragten (sex) und der Konfessionszugehörigkeit (rd01). Diese Annahme können wir mit einem Chi-Quadrat-Test überprüfen.</p>
+<p>Ein Beispiel für eine Zusammenhangshypothese zwischen zwei nominalskalierten Variablen, ist die Annahme, dass es einen Zusammenhang zwischen dem Geschlecht und der Religionszugehörigkeit gibt: Es gibt einen Zusammenhang zwischen dem Geschlecht der Befragten (<code>sex</code>) und der Konfessionszugehörigkeit (rd01). Diese Annahme können wir mit einem Chi-Quadrat-Test überprüfen.</p>
 <p>In R kann der Pearson Chi-Quadrat Test mit der Funktion chisq.test() durchgeführt werden. Zuerst müssen wir dazu aber erst einmal die benötigen Pakete und Daten laden…</p>
 </section>
 <section id="data-management" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Data Management</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">p_load</span>(tidyverse, haven, psych, conflicted, dplyr, lsr) </span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">p_load</span>(tidyverse, haven, psych, conflicted, dplyr, lsr, ggplot2, ggpubr) </span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Die Variable Konfessionszugehörigkeit ist im Allbus-Datensatz mit dem Namen “rd01” benannt; wie benennen sie in “Konfession” um; außerdem filtern wir die für uns relevanten Fälle der Variablen heraus (und ignorieren damit die irrelevanten Fälle, z.B. -9=Keine Angabe):</p>
+<p>Die Variable Konfessionszugehörigkeit ist im Allbus-Datensatz mit dem Namen <code>rd01</code> benannt; wie benennen sie in <code>Konfession</code> um; außerdem filtern wir die für uns relevanten Fälle der Variablen heraus (und ignorieren damit die irrelevanten Fälle, z.B. -9=Keine Angabe):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">rename</span>(<span class="at">Konfession =</span> rd01)<span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">rename</span>(<span class="at">Konfession =</span> rd01) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Konfession, <span class="dv">1</span>, <span class="dv">6</span>))<span class="sc">%&gt;%</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(sex, <span class="dv">1</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -525,27 +521,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Mit einem gestapelten Balkendiagramm können wir diese Tendenz auch visualisieren:</p>
 <section id="visualisieren-des-zusammenhangs" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="visualisieren-des-zusammenhangs"><span class="header-section-number">3.1</span> Visualisieren des Zusammenhangs</h2>
-<p>Ein gestapeltes Balkendiagramm ist ein Diagramm, dass die Verteilung von verschiedenen Kategorien innerhalb einer Gesamtheit farblich (nach Kategorien) differenziert darstellen kann. Dazu werden mehrere Balken für jede Kategorie (nach Farbe sortiert) “aufeinandergestapelt”, wobei die Höhe des gesamten Balkens die Gesamtsumme (je Farbkategorie) repräsentiert. Um das auszuführen, müssen wir die unsere Daten wie Faktoren behandeln, weshalb wir den “as.factor”-Befehl nutzen:</p>
+<p>Ein gestapeltes Balkendiagramm ist ein Diagramm, dass die Verteilung von verschiedenen Kategorien innerhalb einer Gesamtheit farblich (nach Kategorien) differenziert darstellen kann. Dazu werden mehrere Balken für jede Kategorie (nach Farbe sortiert) “aufeinandergestapelt”, wobei die Höhe des gesamten Balkens die Gesamtsumme (je Farbkategorie) repräsentiert. Um das auszuführen, müssen wir die unsere Daten wie Faktoren behandeln, weshalb wir den <code>as.factor</code>-Befehl nutzen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a>daten<span class="sc">$</span>Konfession <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten<span class="sc">$</span>Konfession)</span>
-<span id="cb6-4"><a href="#cb6-4"></a>daten<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten<span class="sc">$</span>sex)</span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(<span class="at">x =</span> Konfession, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Konfessionszugehörigkeit nach Geschlecht"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9"></a>       <span class="at">x =</span> <span class="st">"Einkommensgruppe"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"papayawhip"</span>, <span class="st">"tan4"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(<span class="at">Konfession =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(Konfession),</span>
+<span id="cb6-3"><a href="#cb6-3"></a>         <span class="at">sex =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(sex))</span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(<span class="at">x =</span> Konfession, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Konfessionszugehörigkeit nach Geschlecht"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8"></a>       <span class="at">x =</span> <span class="st">"Konfession"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkseagreen"</span>,<span class="st">"grey"</span>, <span class="st">"lightblue"</span>)) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  <span class="fu">rotate_x_text</span>(<span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_7.1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Diese Visualisierung zeigt sehr schön, was wir auch schon in der Kreuztabelle ablesen konnten: Es gibt keinen deutlich sichtbaren Zusammenhang zwischen der Konfessionszugehörigkeit und dem Geschlecht - allenfalls lässt sich vermuten, dass mehr Frauen als Männer überhaupt einer Konfession angehören. Ob sich der Zusammenhang als statistisch bedeutsam erweist, können wir nun mit dem Chi-Quadrat Test prüfen:</p>
+<p>Diese Visualisierung zeigt sehr schön, was wir auch schon in der Kreuztabelle ablesen konnten: Es gibt keinen deutlich sichtbaren Zusammenhang zwischen der Konfessionszugehörigkeit und dem Geschlecht - allenfalls lässt sich vermuten, dass mehr Frauen als Männer überhaupt einer Konfession angehören. Ob sich der Zusammenhang als statistisch bedeutsam erweist, können wir nun mit dem Chi-Quadrat Test prüfen.</p>
 </section>
 <section id="überprüfen-des-zusammenhangs" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="überprüfen-des-zusammenhangs"><span class="header-section-number">3.2</span> Überprüfen des Zusammenhangs</h2>
-<p>Der Chi-Quadrat Test ist ein statistisches Verfahren, das verwendet wird, um festzustellen, ob es einen signifikanten Unterschied zwischen den beobachteten und erwarteten Häufigkeiten in einer Kreuztabelle gibt. Da wir schon eine Kreuztabelle erstellt haben, können wir die Funktion chisq.test auf unsere Kreuztabelle anwenden - das geht ganz einfach:</p>
+<p>Der Chi-Quadrat Test ist ein statistisches Verfahren, das verwendet wird, um festzustellen, ob es einen signifikanten Unterschied zwischen den beobachteten und erwarteten Häufigkeiten in einer Kreuztabelle gibt. Da wir schon eine Kreuztabelle erstellt haben, können wir die Funktion <code>chisq.test</code> auf unsere Kreuztabelle anwenden - das geht ganz einfach:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">chisq.test</span>(kreuztabelle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -566,7 +562,7 @@ X-squared = 22.946, df = 10, p-value = 0.01095</code></pre>
 </section>
 <section id="berechnen-der-effektstärke-cramérs-v" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="berechnen-der-effektstärke-cramérs-v"><span class="header-section-number">3.4</span> Berechnen der Effektstärke Cramér’s V</h2>
-<p>Zuerst extrahieren wir den beobachteten Chi-Quadrat-Wert und speichern ihn in einem Datenobjekt “chi_square” ab. Dann berechnen wir die Effektstärke nach der Formel für Cramér’s V.</p>
+<p>Zuerst extrahieren wir den beobachteten Chi-Quadrat-Wert und speichern ihn in einem Datenobjekt <code>chi_square</code> ab. Dann berechnen wir die Effektstärke nach der Formel für Cramér’s V.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>cramers_v <span class="ot">&lt;-</span> <span class="fu">cramersV</span>(kreuztabelle)</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="fu">paste0</span>(<span class="st">"Cramér's V: "</span>, cramers_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -582,9 +578,9 @@ X-squared = 22.946, df = 10, p-value = 0.01095</code></pre>
 <h1 data-number="4"><span class="header-section-number">4</span> Zusammenhänge zwischen zwei ordinalskalierten Variablen</h1>
 <p>Im Gegensatz zu nominalskalierten Variablen, bei denen es nur um die Kategorisierung oder Klassifikation von Daten geht (z.B. Geschlecht), haben ordinalskalierte Variablen eine klar definierte Rangordnung zwischen den Kategorien, jedoch nicht unbedingt einen gleichmäßigen Abstand zwischen den Kategorien. Um den linearen Zusammenhang zwischen zwei ordinalskalierten Variablen zu berechnen, nutzt man <em>Rangkorrelationen</em>. Rangkorrelationen kommen auch dann zum Einsatz, wenn Variablen nicht normalverteilt sind. Sie geben an, ob es eine systematische Tendenz gibt, dass höhere Ränge in einer Variable mit höheren Rängen in der anderen Variable zusammenfallen.</p>
 <p>Zwei häufig verwendete Verfahren bzw. Arten der Rangkorrelation sind <em>Spearman’s Rho</em> und <em>Kendall’s Tau</em>. Grundsätzlich sind Spearman’s Rho und Kendall’s Tau zwei ähnliche Maße für Rangkorrelationen - wenn die Daten ordinal oder kategorial sind, sind sowohl Spearman’s Rho als auch Kendall’s Tau geeignet. Allerdings weisen sie auch ein paar Unterschiede auf: - Bei <em>Spearman’s Rho</em> (auch als <em>Rangkorrelation nach Pearson</em> bezeichnet) werden die Daten in Ränge umgewandelt, und dann wird der Pearson-Korrelationskoeffizient auf den Rängen berechnet. Spearman’s Rho ist besonders robust gegenüber Ausreißern (auch etwas mehr als Kendall’s Tau). Spearman’s Rho berücksichtigt die genauen Abstände zwischen den Rängen und kann subtilere Beziehungen zwischen den Variablen erkennen. - Zur Ermittlung von <em>Kendall’s Tau</em> wird der Grad der Übereinstimmung zwischen den Rängen der beiden Variablen berwertet. Kendall’s Tau ist auch wenig anfällig für Ausreißer; das Verfahren ist besonders gut geeignet, wenn die relative Rangreihenfolge der Daten wichtiger ist als die genaue Distanz zwischen den Rängen.</p>
-<p>Beide Werte lassen sich leicht mit Hilfe der Funktion cor.test() berechnen. Denn diese Funktion ermöglicht es, verschiedene Arten von Korrelationskoeffizienten zu berechnen, einschließlich der Rangkorrelation nach Spearman’s Rho und Kendall’s Tau. Oft ist es ratsam, beide Maße zu berechnen und zu vergleichen, um sicherzustellen, dass die Ergebnisse konsistent sind.</p>
+<p>Beide Werte lassen sich leicht mit Hilfe der Funktion <code>cor.test()</code> berechnen. Denn diese Funktion ermöglicht es, verschiedene Arten von Korrelationskoeffizienten zu berechnen, einschließlich der Rangkorrelation nach Spearman’s Rho und Kendall’s Tau. Oft ist es ratsam, beide Maße zu berechnen und zu vergleichen, um sicherzustellen, dass die Ergebnisse konsistent sind.</p>
 <p>Nun wollen wir das an einem Beispiel untersuchen: Wir testen, ob es einen Zusammenhang zwischen den beiden ordinalskalierten Variablen Schulabsabschluss und der Einkommensgruppe gibt - bei beiden Variablen spiegelt der Wert eine zu Grunde liegende Rangordnung wider (z.B. Bildung: 1=ohne Abschluss; 3=Mittlere Reife; 5=Abitur; Einkommensgruppe: 1=bis unter 200 Euro; 2= 200 bis unter 300 Euro; 25=7.500 bis unter 10.000 Euro).</p>
-<p>Um den Zusammenhang zu analysieren, müssen wir wieder zuerst unsere Daten aufbereiten: Die Variable Einkommensgruppe ist im Datensatz mit dem Namen “di02a” benannt, die benenen wir in “Einkommensgruppe” um; außerdem filtern wir die für uns relevanten Fälle der Variable heraus (Einkommensgruppe 1 bis 25, ohne missings, z.B. -9=Keine Angabe; -8=Weiß nicht). Die Variable Bildungsabschluss ist im Datensatz mit dem Namen “educ” benannt, die benenen wir in “Bildung” um; auch hier filtern wir die für uns relevanten Fälle der Variable heraus (Bildung 1 bis 5, ohne missings, z.B. -9=Keine Angabe).</p>
+<p>Um den Zusammenhang zu analysieren, müssen wir wieder zuerst unsere Daten aufbereiten: Die Variable Einkommensgruppe ist im Datensatz mit dem Namen <code>di02a</code> benannt, die benenen wir in “Einkommensgruppe” um; außerdem filtern wir die für uns relevanten Fälle der Variable heraus (Einkommensgruppe 1 bis 25, ohne missings, z.B. -9=Keine Angabe; -8=Weiß nicht). Die Variable Bildungsabschluss ist im Datensatz mit dem Namen <code>educ</code> benannt, die benenen wir in “Bildung” um; auch hier filtern wir die für uns relevanten Fälle der Variable heraus (Bildung 1 bis 5, ohne missings, z.B. -9=Keine Angabe).</p>
 <section id="data-management-1" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="data-management-1"><span class="header-section-number">4.1</span> Data Management</h2>
 <div class="cell">
@@ -594,7 +590,7 @@ X-squared = 22.946, df = 10, p-value = 0.01095</code></pre>
 <span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Einkommensgruppe, <span class="dv">1</span>, <span class="dv">25</span>))<span class="sc">%&gt;%</span></span>
 <span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Bildung, <span class="dv">1</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Nun nutzen wir die Funktion cor.test() und spezifizieren bei “method” den Korrelationskoeefizienten, zuerst “spearman”, dann zum Vergleich auch “kendall”:</p>
+<p>Nun nutzen wir die Funktion <code>cor.test()</code> und spezifizieren bei “method” den Korrelationskoeefizienten, zuerst “spearman”, dann zum Vergleich auch “kendall”:</p>
 </section>
 <section id="berechnung-der-rangkorrelation-nach-spearmans-rho" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="berechnung-der-rangkorrelation-nach-spearmans-rho"><span class="header-section-number">4.2</span> Berechnung der Rangkorrelation nach Spearman’s Rho</h2>
@@ -642,8 +638,8 @@ sample estimates:
 <section id="zusammenhänge-zwischen-einer-nominalen-und-einer-ordinalen-variable" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Zusammenhänge zwischen einer nominalen und einer ordinalen Variable</h1>
 <p>Oben haben wir den Pearson Chi-Quadrat Test genutzt, um einen Zusammenhang zwischen zwei <em>nominalskalierten</em> Variablen zu untersuchen (Geschlecht und Konfessionszugehörigkeit). Dann haben wir die Rangkorrelation verwendet, um einen Zusammenhang zwischen zwei <em>ordinalen</em> Variablen zu prüfen. Häufig kommt es vor, dass wir einen Zusammenhang zwischen Variablen untersuchen möchten, die ein unterschiedliches Skalenniveau aufweisen, etwa wenn der Zusammenhang zwischen Geschlecht (als kategoriale Variable) und der Einkommensgruppe (als ordinale Variable) untersucht werden soll. Dazu können wir wieder den Chi-Quadrat Test nutzen, denn er kann auch angewendet werden, wenn eine Variable nominal und eine ordinalskaliert ist - oder beide ordinalskaliert sind. Hier testen wir mit dem Pearson Chi-Quadrat Test nun, ob es einen Zusammenhang zwischen dem Geschlecht und der Einkommensklasse gibt.</p>
-<p>Dazu haben wir folgende Zusammenhangshypothese aufgestellt: Es gibt einen Zusammenhang zwischen dem Geschlecht der Befragten (sex) und der Einkommensgruppe (di02a = Haushaltsnetto-Einkommen ordinalskaliert abgefragt).</p>
-<p>Um diese Hypothese zu testen, müssen wir zunächst unsere Daten vorbereiten: Die Variable Einkommensgruppe ist im Datensatz mit dem Namen “di02a” benannt, die benennen wir in “Einkommensgruppe” um. Dann filtern wir die für uns relevanten Fälle der Variablen heraus (Einkommensgruppe 1 bis 25, ohne missings, z.B. -9=Keine Angabe; -8=Weiß nicht). Die Variable Geschlecht stellt einen Faktor dar - um keine Fehlermeldung zu bekommen, müssen wir sie mittels as.numeric-Befehl als numerische Variable behandeln. Auch bei Geschlecht selektieren wir die Missungs aus (z.B. -9=Keine Angabe):</p>
+<p>Dazu haben wir folgende Zusammenhangshypothese aufgestellt: Es gibt einen Zusammenhang zwischen dem Geschlecht der Befragten (<code>sex</code>) und der Einkommensgruppe (<code>di02a</code> = Haushaltsnetto-Einkommen ordinalskaliert abgefragt).</p>
+<p>Um diese Hypothese zu testen, müssen wir zunächst unsere Daten vorbereiten: Die Variable Einkommensgruppe ist im Datensatz mit dem Namen <code>di02a</code> benannt, die benennen wir in “Einkommensgruppe” um. Dann filtern wir die für uns relevanten Fälle der Variablen heraus (Einkommensgruppe 1 bis 25, ohne missings, z.B. -9=Keine Angabe; -8=Weiß nicht). Die Variable Geschlecht stellt einen Faktor dar - um keine Fehlermeldung zu bekommen, müssen wir sie mittels as.numeric-Befehl als numerische Variable behandeln. Auch bei Geschlecht selektieren wir die Missungs aus (z.B. -9=Keine Angabe):</p>
 <section id="data-management-2" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="data-management-2"><span class="header-section-number">5.1</span> Data Management</h2>
 <div class="cell">
@@ -662,12 +658,12 @@ sample estimates:
 <div class="cell-output cell-output-stdout">
 <pre><code>   
       1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19
-  1   6   2  10  27  15  22  26  42  64  48  70  68 119 163 154 113  79  71 101
-  2  13  23  36  64  42  82  68 134 127  88 112 111 158 167 159 102  51  47  63
+  2   6   2  10  27  15  22  26  42  64  48  70  68 119 163 154 113  79  71 101
+  3  13  23  36  64  42  82  68 134 127  88 112 111 158 167 159 102  51  47  63
    
      20  21  22  23  24  25
-  1  77  48  35  32  17  16
-  2  27  16  10   7   5   6</code></pre>
+  2  77  48  35  32  17  16
+  3  27  16  10   7   5   6</code></pre>
 </div>
 </div>
 <p>Im Datensatz entsprechen höhere Werte bei der variable Einkommensgruppe einem höheren Einkommen (1=bis unter 200 Euro; 2= 200 bis unter 300 Euro; 25=7.500 bis unter 10.000 Euro). Wenn wir uns nun die Kreuztabelle anschauen, können wir schon einen ersten Trend erkennen: Offenbar sind mehr Männer in höheren Einkommensgruppen als Frauen; dafür sind weniger Männer in niedrigen Einkommensgruppen. Hier deutet sich also an, dass Geschlecht und Einkommensgruppe einen Zusammenhang aufweisen.</p>
@@ -675,24 +671,24 @@ sample estimates:
 </section>
 <section id="visualisieren-des-zusammenhangs-1" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="visualisieren-des-zusammenhangs-1"><span class="header-section-number">5.3</span> Visualisieren des Zusammenhangs</h2>
-<p>Ein gestapeltes Balkendiagramm ist ein Diagramm, dass die Verteilung von verschiedenen Kategorien innerhalb einer Gesamtheit farblich (nach Kategorien) differenziert darstellen kann. Dazu werden mehrere Balken für jede Kategorie (nach Farbe sortiert) “aufeinandergestapelt”, wobei die Höhe des gesamten Balkens die Gesamtsumme (je Farbkategorie) repräsentiert. Um das auszuführen, müssen wir die unsere Daten wie Faktoren behandeln, weshalb wir den “as.factor”-Befehl nutzen:</p>
+<p>Ein gestapeltes Balkendiagramm ist ein Diagramm, dass die Verteilung von verschiedenen Kategorien innerhalb einer Gesamtheit farblich (nach Kategorien) differenziert darstellen kann. Dazu werden mehrere Balken für jede Kategorie (nach Farbe sortiert) “aufeinandergestapelt”, wobei die Höhe des gesamten Balkens die Gesamtsumme (je Farbkategorie) repräsentiert. Um das auszuführen, müssen wir die unsere Daten wie Faktoren behandeln, weshalb wir den <code>as.factor</code>-Befehl nutzen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb19-2"><a href="#cb19-2"></a></span>
-<span id="cb19-3"><a href="#cb19-3"></a>daten_neu<span class="sc">$</span>Einkommensgruppe <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten_neu<span class="sc">$</span>Einkommensgruppe)</span>
-<span id="cb19-4"><a href="#cb19-4"></a>daten_neu<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(daten<span class="sc">$</span>sex)</span>
-<span id="cb19-5"><a href="#cb19-5"></a></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="fu">ggplot</span>(daten_neu, <span class="fu">aes</span>(<span class="at">x =</span> Einkommensgruppe, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Einkommensgruppe nach Geschlecht"</span>,</span>
-<span id="cb19-9"><a href="#cb19-9"></a>       <span class="at">x =</span> <span class="st">"Einkommensgruppe"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"papayawhip"</span>, <span class="st">"tan4"</span>)) <span class="co"># Farben anpassen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>daten_neu <span class="ot">&lt;-</span> daten_neu <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">mutate</span>(<span class="at">Einkommensgruppe =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(Einkommensgruppe),</span>
+<span id="cb19-3"><a href="#cb19-3"></a>         <span class="at">sex =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(sex))</span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="fu">ggplot</span>(daten_neu, <span class="fu">aes</span>(<span class="at">x =</span> Einkommensgruppe, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Einkommensgruppe nach Geschlecht"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8"></a>       <span class="at">x =</span> <span class="st">"Einkommensgruppe"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkseagreen"</span>,<span class="st">"grey"</span>, <span class="st">"lightblue"</span>)) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a>  <span class="fu">rotate_x_text</span>(<span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_7.1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Diese Visualisierung zeigt sehr schön, was wir auch schon anhand der Kreuztabelle ablesen konnten: Es sind mehr Frauen als Männer in den unteren Einkommensgruppen zu finden; es sind mehr Männer als Frauen in höheren Einkommensgruppen zu finden.</p>
-<p>Nun prüfen wir mit einem Chi-Quadrat Test, ob der beobachtete Zusammenhang auch statistisch signifikant ist. Dazu nutzen wir wieder die chisq.test-Funktion, die wir auf unsere Kreuztabelle anwenden:</p>
+<p>Nun prüfen wir mit einem Chi-Quadrat Test, ob der beobachtete Zusammenhang auch statistisch signifikant ist. Dazu nutzen wir wieder die <code>chisq.test</code>-Funktion, die wir auf unsere Kreuztabelle anwenden:</p>
 </section>
 <section id="überprüfung-des-zusammenhangs-mit-dem-chi-quadrat-test" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="überprüfung-des-zusammenhangs-mit-dem-chi-quadrat-test"><span class="header-section-number">5.4</span> Überprüfung des Zusammenhangs mit dem Chi-Quadrat Test</h2>

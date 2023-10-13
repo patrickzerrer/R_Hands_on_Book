@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Bilder/favicon-32x32.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -100,13 +101,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:title" content="Prüfung der Voraussetzungen bei der linearen Regression">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_femal_person_is_supervising_a_machin_5565b4d9-8bdc-43d3-b87e-0f2162bb5460.png">
-<meta property="og:image:height" content="816">
-<meta property="og:image:width" content="1456">
 <meta name="twitter:title" content="Prüfung der Voraussetzungen bei der linearen Regression">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_femal_person_is_supervising_a_machin_5565b4d9-8bdc-43d3-b87e-0f2162bb5460.png">
-<meta name="twitter:image-height" content="816">
-<meta name="twitter:image-width" content="1456">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -410,22 +407,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#erinnerung-einfache-lineare-regression-mit-alter-als-uv-und-tv-nutzung-als-av-mit-lm-linear-models" id="toc-erinnerung-einfache-lineare-regression-mit-alter-als-uv-und-tv-nutzung-als-av-mit-lm-linear-models" class="nav-link active" data-scroll-target="#erinnerung-einfache-lineare-regression-mit-alter-als-uv-und-tv-nutzung-als-av-mit-lm-linear-models"><span class="header-section-number">1</span> Erinnerung: Einfache lineare Regression mit Alter als UV und TV-Nutzung als AV mit lm (=linear models)</a>
+  <li><a href="#data-management" id="toc-data-management" class="nav-link active" data-scroll-target="#data-management"><span class="header-section-number">1</span> Data Management</a></li>
+  <li><a href="#voraussetzungsprüfung-der-linearen-regression" id="toc-voraussetzungsprüfung-der-linearen-regression" class="nav-link" data-scroll-target="#voraussetzungsprüfung-der-linearen-regression"><span class="header-section-number">2</span> Voraussetzungsprüfung der linearen Regression</a>
   <ul class="collapse">
-  <li><a href="#erzeugen-eines-teildatensatzes-umbenennen-der-variablen" id="toc-erzeugen-eines-teildatensatzes-umbenennen-der-variablen" class="nav-link" data-scroll-target="#erzeugen-eines-teildatensatzes-umbenennen-der-variablen"><span class="header-section-number">1.1</span> Erzeugen eines Teildatensatzes &amp; Umbenennen der Variablen</a></li>
-  <li><a href="#modellierung-der-linearen-regression" id="toc-modellierung-der-linearen-regression" class="nav-link" data-scroll-target="#modellierung-der-linearen-regression"><span class="header-section-number">1.2</span> Modellierung der linearen Regression:</a></li>
-  </ul></li>
-  <li><a href="#erinnerung-voraussetzungen-der-einfachen-linearen-regression" id="toc-erinnerung-voraussetzungen-der-einfachen-linearen-regression" class="nav-link" data-scroll-target="#erinnerung-voraussetzungen-der-einfachen-linearen-regression"><span class="header-section-number">2</span> Erinnerung: Voraussetzungen der einfachen linearen Regression:</a></li>
-  <li><a href="#prüfung-der-voraussetzungen-1-und-2-metrisches-skalenniveau-linearität-des-zusammenhangs" id="toc-prüfung-der-voraussetzungen-1-und-2-metrisches-skalenniveau-linearität-des-zusammenhangs" class="nav-link" data-scroll-target="#prüfung-der-voraussetzungen-1-und-2-metrisches-skalenniveau-linearität-des-zusammenhangs"><span class="header-section-number">3</span> Prüfung der Voraussetzungen 1 und 2: metrisches Skalenniveau &amp; Linearität des Zusammenhangs</a></li>
-  <li><a href="#prüfung-der-voraussetzungen-3-homoskedastizität-der-residuen" id="toc-prüfung-der-voraussetzungen-3-homoskedastizität-der-residuen" class="nav-link" data-scroll-target="#prüfung-der-voraussetzungen-3-homoskedastizität-der-residuen"><span class="header-section-number">4</span> Prüfung der Voraussetzungen 3: Homoskedastizität der Residuen</a>
+  <li><a href="#metrisches-skalenniveau-linearität-des-zusammenhangs" id="toc-metrisches-skalenniveau-linearität-des-zusammenhangs" class="nav-link" data-scroll-target="#metrisches-skalenniveau-linearität-des-zusammenhangs"><span class="header-section-number">2.1</span> Metrisches Skalenniveau &amp; Linearität des Zusammenhangs</a></li>
+  <li><a href="#homoskedastizität-der-residuen" id="toc-homoskedastizität-der-residuen" class="nav-link" data-scroll-target="#homoskedastizität-der-residuen"><span class="header-section-number">2.2</span> Homoskedastizität der Residuen</a>
   <ul class="collapse">
-  <li><a href="#interpretation-was-sehen-wir-im-plot" id="toc-interpretation-was-sehen-wir-im-plot" class="nav-link" data-scroll-target="#interpretation-was-sehen-wir-im-plot"><span class="header-section-number">4.1</span> Interpretation: Was sehen wir im Plot?</a></li>
-  <li><a href="#was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors" id="toc-was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors" class="nav-link" data-scroll-target="#was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors"><span class="header-section-number">4.2</span> Was tun bei Heteroskedastizität der Residuen? Berechnung von HC-Standard Errors!</a></li>
+  <li><a href="#was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors" id="toc-was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors" class="nav-link" data-scroll-target="#was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors"><span class="header-section-number">2.2.1</span> Was tun bei Heteroskedastizität der Residuen? Berechnung von HC-Standard Errors!</a></li>
   </ul></li>
-  <li><a href="#prüfung-der-voraussetzungen-3-unabhängigkeit-der-residuen" id="toc-prüfung-der-voraussetzungen-3-unabhängigkeit-der-residuen" class="nav-link" data-scroll-target="#prüfung-der-voraussetzungen-3-unabhängigkeit-der-residuen"><span class="header-section-number">5</span> Prüfung der Voraussetzungen 3: Unabhängigkeit der Residuen</a></li>
-  <li><a href="#prüfung-der-voraussetzungen-4-normalverteilung-der-residuen" id="toc-prüfung-der-voraussetzungen-4-normalverteilung-der-residuen" class="nav-link" data-scroll-target="#prüfung-der-voraussetzungen-4-normalverteilung-der-residuen"><span class="header-section-number">6</span> Prüfung der Voraussetzungen 4: Normalverteilung der Residuen</a></li>
-  <li><a href="#prüfung-der-voraussetzungen-5-ausreißer-im-modell" id="toc-prüfung-der-voraussetzungen-5-ausreißer-im-modell" class="nav-link" data-scroll-target="#prüfung-der-voraussetzungen-5-ausreißer-im-modell"><span class="header-section-number">7</span> Prüfung der Voraussetzungen 5: Ausreißer im Modell</a></li>
-  <li><a href="#add-on-visuelle-inspektion-der-modellgüte-bzw.-der-modellannahmen" id="toc-add-on-visuelle-inspektion-der-modellgüte-bzw.-der-modellannahmen" class="nav-link" data-scroll-target="#add-on-visuelle-inspektion-der-modellgüte-bzw.-der-modellannahmen"><span class="header-section-number">8</span> Add-on: Visuelle Inspektion der Modellgüte bzw. der Modellannahmen</a></li>
+  <li><a href="#unabhängigkeit-der-residuen" id="toc-unabhängigkeit-der-residuen" class="nav-link" data-scroll-target="#unabhängigkeit-der-residuen"><span class="header-section-number">2.3</span> Unabhängigkeit der Residuen</a></li>
+  <li><a href="#normalverteilung-der-residuen" id="toc-normalverteilung-der-residuen" class="nav-link" data-scroll-target="#normalverteilung-der-residuen"><span class="header-section-number">2.4</span> Normalverteilung der Residuen</a></li>
+  <li><a href="#ausreißer-im-modell" id="toc-ausreißer-im-modell" class="nav-link" data-scroll-target="#ausreißer-im-modell"><span class="header-section-number">2.5</span> Ausreißer im Modell</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -462,39 +455,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <p>In diesem Teilkapitel gehen wir (wie angekündigt) näher auf die Prüfung der <em>Voraussetzungen einer Regressionsanalyse</em> ein. Im folgenden Teilkapitel lernen wir dann die <em>multiple lineare Regression</em> kennen, die es erlaubt, Zusammenhänge zwischen <em>mehreren</em> x-Variablen und einer y-Variablen zu analysieren.</p>
-<p>Zunächst laden wir wieder die Pakete des tidyverse und das Pakete broom, um die normale Ausgabe der Funktion lm (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket performance, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete lmtest und sandwich, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten). Die Regression rechnen wir wieder auf Basis des ALLBUS-Datensatzes, die wir im letzten Schritt laden.</p>
+<section id="data-management" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Data Management</h1>
+<p>Zunächst laden wir wieder die Pakete des <code>tidyverse</code> und das Pakete <code>broom</code>, um die normale Ausgabe der Funktion <code>lm</code> (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket <code>performance</code>, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete <code>lmtest</code> und <code>sandwich</code>, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a><span class="fu">p_load</span>(tidyverse, lm.beta, lmtest, performance, easystats, haven, broom, see, haven, sandwich)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-4" class="code-annotation-target"><a href="#annotated-cell-1-4"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span>
-<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-6" class="code-annotation-target"><a href="#annotated-cell-1-6"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-5" class="code-annotation-target"><a href="#annotated-cell-1-5"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1,2" data-code-cell="annotated-cell-1" data-code-annotation="1">Laden der notwendigen Pakete</span>
+<span data-code-annotation="1" data-code-lines="1,2" data-code-cell="annotated-cell-1">Laden der notwendigen Pakete</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="4" data-code-cell="annotated-cell-1" data-code-annotation="2">Visualisierungshintergrund der Grafiken in ggplot festlegen</span>
+<span data-code-annotation="2" data-code-lines="4" data-code-cell="annotated-cell-1">Visualisierungshintergrund der Grafiken in ggplot festlegen</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="6" data-code-cell="annotated-cell-1" data-code-annotation="3">Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span>
+<span data-code-annotation="3" data-code-lines="5" data-code-cell="annotated-cell-1">Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span>
 </dd>
 </dl>
 </div>
 </div>
-<p>Wir laden noch unsere Daten.</p>
+<p>Die Regression rechnen wir wieder auf Basis des ALLBUS-Datensatzes, die wir im letzten Schritt laden.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="erinnerung-einfache-lineare-regression-mit-alter-als-uv-und-tv-nutzung-als-av-mit-lm-linear-models" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Erinnerung: Einfache lineare Regression mit Alter als UV und TV-Nutzung als AV mit lm (=linear models)</h1>
-<section id="erzeugen-eines-teildatensatzes-umbenennen-der-variablen" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="erzeugen-eines-teildatensatzes-umbenennen-der-variablen"><span class="header-section-number">1.1</span> Erzeugen eines Teildatensatzes &amp; Umbenennen der Variablen</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Erinnerung: Einfache lineare Regression
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Wir stellen eine einfache lineare Regression mit den Variablen Alter als UV und TV-Nutzung als AV mit lm (=linear models) auf.</p>
+<section id="data-management-1" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="data-management-1"><span class="header-section-number">1.1</span> Data Management</h2>
 <p>Für den Teildatensatz bennenen wir die Variablen lm02 und age um und filtern die missings heraus (z.B. -9=Keine Angabe):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
@@ -508,18 +513,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1.2" class="anchored" data-anchor-id="modellierung-der-linearen-regression"><span class="header-section-number">1.2</span> Modellierung der linearen Regression:</h2>
 <p>Dann erstellen wir das linear model:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(TV_Konsum <span class="sc">~</span> Alter, <span class="at">data =</span> daten) </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2"></a><span class="fu">summary</span>(model)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3"></a><span class="fu">summary</span>(<span class="fu">lm.beta</span>(model))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(TV_Konsum <span class="sc">~</span> Alter, <span class="at">data =</span> daten) </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2"></a><span class="fu">summary</span>(model)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3"></a><span class="fu">summary</span>(<span class="fu">lm.beta</span>(model))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-cell="annotated-cell-4" data-code-annotation="1">klassischer Output mit relevanten Kennzahlen</span>
+<span data-code-annotation="1" data-code-lines="2" data-code-cell="annotated-cell-2">klassischer Output mit relevanten Kennzahlen</span>
 </dd>
-<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-cell="annotated-cell-4" data-code-annotation="2">klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten</span>
+<span data-code-annotation="2" data-code-lines="3" data-code-cell="annotated-cell-2">klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten</span>
 </dd>
 </dl>
 </div>
@@ -564,21 +569,30 @@ F-statistic: 474.1 on 1 and 4927 DF,  p-value: &lt; 0.00000000000000022</code></
 </div>
 </div>
 <p>Mit diesem Regressionsmodell haben wir übeprüft, ob das Alter die Fernsehnutzung erklären kann. Im Output sehen wir, dass das Alter einen signifikanten positiven Einfluss auf die Internetnutzung. Je älter eine Person ist, desto mehr nutzt er/sie das Fernsehen. Die Regressionsanalyse lässt dabei auch eine Quantifizierung dieses Zusammenhangs zu: Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable TV-Nutzung um “den Estimate-Wert” in Messeinheiten (hier: -2.19 Minuten) zu. Dieser Zusammenhang ist mit p &gt;.05 statistisch signifikant.</p>
-<p>Soweit die Wiederholung. Beginnen wir nun mit der Prüfung der <em>Voraussetzungen einer Regressionsanalyse</em>. Vielleicht wundern Sie sich, warum wir die Voraussetzungen erst im zweiten Schritt prüfen? Sie haben Recht: Eigentlich müssten wir erst die Voraussetzungen prüfen, dann erst das Modell schätzen. Wenn wir unser Modell aber schon geschätzt haben, können wir Funktionen zur Prüfung der Voraussetzungen auf unser gesamtes Modell anwenden (bzw. auf das entsprechende Datenobjekt “model”) - und das erspart uns eine Menge “Handarbeit” mit vielen kleinen Zwischenschritten. Zum Beispiel müssten wir für die Prüfung der Voraussetzungen, die die Residuen betreffen, diese erst einmal berechnen und in einer neuen Variable abspeichern. Es ist also weniger Aufwand, die Voraussetzungen ex post zu prüfen.</p>
+<p>Soweit die Wiederholung. Beginnen wir nun mit der Prüfung der <em>Voraussetzungen einer Regressionsanalyse</em>. Vielleicht wundern ihr euch, warum wir die Voraussetzungen erst im zweiten Schritt prüfen? Da habt ihr Recht: Eigentlich müssten wir erst die Voraussetzungen prüfen, dann erst das Modell schätzen. Wenn wir unser Modell aber schon geschätzt haben, können wir Funktionen zur Prüfung der Voraussetzungen auf unser gesamtes Modell anwenden (bzw. auf das entsprechende Datenobjekt “model”) - und das erspart uns eine Menge “Handarbeit” mit vielen kleinen Zwischenschritten. Zum Beispiel müssten wir für die Prüfung der Voraussetzungen, die die Residuen betreffen, diese erst einmal berechnen und in einer neuen Variable abspeichern. Es ist also weniger Aufwand, die Voraussetzungen ex post zu prüfen.</p>
 </section>
+</div>
+</div>
+</div>
 </section>
-<section id="erinnerung-voraussetzungen-der-einfachen-linearen-regression" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Erinnerung: Voraussetzungen der einfachen linearen Regression:</h1>
-<p>Bevor wir zum statistischen Teil kommen, lassen Sie uns noch einmal Revue passieren, was die wichtigsten Voraussetzungen der einfachen linearen Regression sind: 1) (quasi-)metrisches Skalenniveau 2) Linearität des Zusammenhangs zwischen x und y 3) Homoskedastizität der Residuen: Varianzen der Residuen der prognostizierten abhängigen Variablen sind gleich 4) Unabhängigkeit der Residuen: ansonsten Autokorrelation, die Aussagekraft reduziert 5) Normalverteilung der Residuen 6) Keine Ausreißer in den Daten, da schon einzelne Ausreißer einen sonst signifikanten Trend zunichte machen können (ggf. also eliminieren)</p>
+<section id="voraussetzungsprüfung-der-linearen-regression" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Voraussetzungsprüfung der linearen Regression</h1>
+<p>Bevor wir zum statistischen Teil kommen, wollen wir noch einmal Revue passieren lassen, was die wichtigsten Voraussetzungen der einfachen linearen Regression sind:</p>
+<ul>
+<li>(quasi-)metrisches Skalenniveau</li>
+<li>Linearität des Zusammenhangs zwischen x und y</li>
+<li>Homoskedastizität der Residuen: Varianzen der Residuen der prognostizierten abhängigen Variablen sind gleich - Unabhängigkeit der Residuen: ansonsten Autokorrelation, die Aussagekraft reduziert</li>
+<li>Normalverteilung der Residuen</li>
+<li>Keine Ausreißer in den Daten, da schon einzelne Ausreißer einen sonst signifikanten Trend zunichte machen können (ggf. also eliminieren)</li>
+</ul>
+<section id="metrisches-skalenniveau-linearität-des-zusammenhangs" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="metrisches-skalenniveau-linearität-des-zusammenhangs"><span class="header-section-number">2.1</span> Metrisches Skalenniveau &amp; Linearität des Zusammenhangs</h2>
+<p>Ob 1.) die Variablen, die wir in das Regressionsmodell einbeziehen wollen (Alter, Internet-Nutzung) metrisch sind, und ob 2.) ein linearer Zusammenhang besteht, haben wir in dem letzten Skript bereits überprüft. Für die Prüfung nach der Linearität des Zusammenhangs zwischen x und y hatten wir ein Streudiagramm mit der geschätzten Regressionsgeraden erzeugt. <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_7.2.html">Hier</a> könnt ihr noch einmal nachschauen, wie das geht.</p>
 </section>
-<section id="prüfung-der-voraussetzungen-1-und-2-metrisches-skalenniveau-linearität-des-zusammenhangs" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Prüfung der Voraussetzungen 1 und 2: metrisches Skalenniveau &amp; Linearität des Zusammenhangs</h1>
-<p>Ob 1.) die Variablen, die wir in das Regressionsmodell einbeziehen wollen (Alter, Internet-Nutzung) metrisch sind, und ob 2.) ein linearer Zusammenhang besteht, haben wir in der letzten Woche bereits überprüft. Für die Prüfung nach der Linearität des Zusammenhangs zwischen x und y hatten wir ein Streudiagramm mit der geschätzten Regressionsgeraden erzeugt. Hier können Sie noch einmal nachschauen, wie das ging: <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_7.2.html">Link</a></p>
-</section>
-<section id="prüfung-der-voraussetzungen-3-homoskedastizität-der-residuen" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Prüfung der Voraussetzungen 3: Homoskedastizität der Residuen</h1>
+<section id="homoskedastizität-der-residuen" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="homoskedastizität-der-residuen"><span class="header-section-number">2.2</span> Homoskedastizität der Residuen</h2>
 <p>Lineare Modelle setzen eine <em>konstante Fehlervarianz</em> (<em>Homoskedastizität</em>) voraus. Eine weitere Bedingung der Regressionanalyse ist also, dass die Varianzen der Residuen der prognostizierten abhängigen Variablen für alle Werte des Prädiktors gleich sind, so dass das Modell gleich gute Vorhersagen über alle Werte machen kann. Liegt Homoskedastizität vor, sind die Abweichungen der vorhergesagten Werte von den gemessenen Werten konstant gleich groß - unabhängig davon, wie hoch oder niedrig der Wert des Prädiktors ist. Das ist eine wichtige Voraussetzung, denn das Gegenteil - <em>Heterokedastizität der Residuen</em> - würde zur Ineffizienz unserer Schätzung führen! Denn die Standardfehler der Regressionskoeffizienten werden bei vorhandener Heteroskedastizität nach oben verzerrt geschätzt. Das Ergebnis wäre, dass unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben liegt, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen.</p>
-<p>Das klingt kompliziert? Kann sein, aber keine Panik: Mit der Funktionen check_heteroscedasticity() aus dem performance-Package können wir sehr einfach prüfen, ob diese Annahme verletzt wurde. Wir müssen diese Funktion lediglich auf unser geschätzes Regressionsmodell anwenden:</p>
+<p>Das klingt kompliziert? Kann sein, aber keine Panik: Mit der Funktionen <code>check_heteroscedasticity()</code> aus dem <code>performance</code>-Package können wir sehr einfach prüfen, ob diese Annahme verletzt wurde. Wir müssen diese Funktion lediglich auf unser geschätzes Regressionsmodell anwenden:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">check_heteroscedasticity</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -586,7 +600,7 @@ F-statistic: 474.1 on 1 and 4927 DF,  p-value: &lt; 0.00000000000000022</code></
 </div>
 </div>
 <p>Die Interpretation des Outputs ist einfach, weil R hier uns eine sehr konkrete Aussage zur Überpüfung der Annahme macht: Bei grüner Schrift ist das Ergebnis in Ordnung, d.h. die Fehlervarianz scheint homoskedastisch, denn p wäre dann nicht signifikant. Bei roter Schrift - wie im vorliegenden Fall - ist die Fehlervarianz heteroskedastisch und p ist signifikant (p &lt; 0.05). Dann liegt unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen. Das müssen wir dann bei der Interpretation der Daten berücksichtigen. Es ist dann auch unbedingt geboten, diese Limitation anzugeben.</p>
-<p>Wie das ganze aussieht, können wir uns auch grafisch über die plot-Funktion anschauen. Dazu erzeugen wir ein Streudiagramm, das die vorhergesagten Werte und die Residuen enthält:</p>
+<p>Wie das ganze aussieht, können wir uns auch grafisch über die <code>plot()</code>-Funktion anschauen. Dazu erzeugen wir ein Streudiagramm, das die vorhergesagten Werte und die Residuen enthält:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">plot</span>(model, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -597,15 +611,12 @@ F-statistic: 474.1 on 1 and 4927 DF,  p-value: &lt; 0.00000000000000022</code></
 <p><img src="Skript_7.3_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<section id="interpretation-was-sehen-wir-im-plot" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="interpretation-was-sehen-wir-im-plot"><span class="header-section-number">4.1</span> Interpretation: Was sehen wir im Plot?</h2>
 <p>Zunächst betrachten wir die Streuung der Punkte im Streudiagramm ohne Linie. Hier können wir bereits sehen, dass eine Zunahme der Streuung bei mittleren Werten erkennbar ist, weil wir einen leicht zur Mitte geöffneten Trichter haben. Das zweite Diagramm hilft zusätzlich mit einer roten Linie, die bei Homoskedastizität möglichst gerade wird. Ist sie wellig oder hat sie eine positive oder negative Steigung, können wir von Heteroskedastizität ausgehen. Genauere Auskunft gibt aber der oben gerechnete Test!</p>
 <p>Im Beispiel sehen wir aber auch, dass die Abweichung bei uns zwar vorhanden, aber nicht allzu “dramatisch” ist. Die Voraussetzung ist zwar verletzt, und das müssen wir auch berücksichtgen, aber die Regressionsanalyse ist sehr robust gegen die Verletzung ihrer Voraussetzungen. Wir können den Fehler zudem korrigieren! Und das werden wir nun auch tun :)</p>
-</section>
-<section id="was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors"><span class="header-section-number">4.2</span> Was tun bei Heteroskedastizität der Residuen? Berechnung von HC-Standard Errors!</h2>
-<p>Liegt <em>Heteroskedastizität</em> vor, müssen Sie nicht verzweifeln: Erstens ist die Regressionsanalyse sehr robuts gegen die Verletzung ihrer Voraussetzungen. Zweitens können wir diesen Konflikt einigermaßen elegant auflösen, indem wir pauschal <em>robuste Standardfehler</em> schätzen lassen, so dass die Verletzung nicht mehr zu Schätzfehlern führt. In R gibt es (wie immer) verschiedene Wege Heteroskedastizität zu kontern. Eine einfache Lösung bietet das lmtest-Paket mit der coeftest-Funktion in Kombination mit dem Befehl vcov(), der zur Berechnung von <em>heteroscedasticity consistent (HC) standard errors</em> führt. So ermöglichen wir die Berechnung von <em>heteroskedastizitätskonsistenten bzw. heteroskedastizitätsrobusten Schätzern</em>. Nutzen wir diese Lösung, werden die Standardfehler nicht mehr verzerrt und damit auch nicht die t-Werte und p-Werte unserer Schätzung.</p>
-<p>PS: Zur Berechnung von heteroscedasticity consistent (HC) standard errors gibt es verschiedene HC-Funktionen. Hier nutzen wir zunächst Typ 3, die auch Hayes &amp; Cai empfehlen (Hayes, A. F., &amp; Cai, L. (2007): Using heteroskedasticity-consistent standard error estimators in OLS regression: An introduction and software implementation. Behavior research methods, 39(4), 709-722). HC4 (die zweite Variante) ist dann sinnvoll, wenn die Residuen nicht normalverteilt sind. (Wie wir später sehen werden, ist das bei uns leider auch der Fall)</p>
+<section id="was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="was-tun-bei-heteroskedastizität-der-residuen-berechnung-von-hc-standard-errors"><span class="header-section-number">2.2.1</span> Was tun bei Heteroskedastizität der Residuen? Berechnung von HC-Standard Errors!</h3>
+<p>Liegt <em>Heteroskedastizität</em> vor, müssen wir nicht verzweifeln: Erstens ist die Regressionsanalyse sehr robust gegen die Verletzung ihrer Voraussetzungen. Zweitens können wir diesen Konflikt einigermaßen elegant auflösen, indem wir pauschal <em>robuste Standardfehler</em> schätzen lassen, so dass die Verletzung nicht mehr zu Schätzfehlern führt. In R gibt es (wie immer) verschiedene Wege Heteroskedastizität zu kontern. Eine einfache Lösung bietet das lmtest-Paket mit der coeftest-Funktion in Kombination mit dem Befehl <code>vcov()</code>, der zur Berechnung von <em>heteroscedasticity consistent (HC) standard errors</em> führt. So ermöglichen wir die Berechnung von <em>heteroskedastizitätskonsistenten bzw. heteroskedastizitätsrobusten Schätzern</em>. Nutzen wir diese Lösung, werden die Standardfehler nicht mehr verzerrt und damit auch nicht die t-Werte und p-Werte unserer Schätzung.</p>
+<p>PS: Zur Berechnung von heteroscedasticity consistent (HC) standard errors gibt es verschiedene HC-Funktionen. Hier nutzen wir zunächst Typ 3, die auch Hayes &amp; Cai (2007) empfehlen. HC4 (die zweite Variante) ist dann sinnvoll, wenn die Residuen nicht normalverteilt sind. (Wie wir später sehen werden, ist das bei uns leider auch der Fall)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">coeftest</span>(model, <span class="at">vcov =</span> <span class="fu">vcovHC</span>(model, <span class="at">type =</span> <span class="st">"HC3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -620,24 +631,24 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">#coeftest(model, vcov = vcovHC(model, type = "HC4")) # diese Variante wählen, wenn Residuen nicht normalverteilt sind </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Nach der Ausführung erhalten wir eine neue Regressionstabelle. Wenn Sie diese Tabelle mit dem obigen Output unseres Regressionsmodells abgleichen, sehen Sie, dass sich die eigentlichen Koeffizienten (“Estimates”) nicht verändert haben - aber alle Werte, die rechts davon stehen, also Standardfehler (Std. Error), t-Werte und p-Werte. Diese sind nun um unsere Schätzfehler durch Heteroskedastizität korrigiert.</p>
+<p>Nach der Ausführung erhalten wir eine neue Regressionstabelle. Wenn wir diese Tabelle mit dem obigen Output unseres Regressionsmodells abgleichen, sehen wir, dass sich die eigentlichen Koeffizienten (<em>Estimates</em>) nicht verändert haben - aber alle Werte, die rechts davon stehen, also Standardfehler (<em>Std. Error</em>), t-Werte und p-Werte. Diese sind nun um unsere Schätzfehler durch Heteroskedastizität korrigiert.</p>
 <p>Also weiter geht’s!</p>
 </section>
 </section>
-<section id="prüfung-der-voraussetzungen-3-unabhängigkeit-der-residuen" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Prüfung der Voraussetzungen 3: Unabhängigkeit der Residuen</h1>
+<section id="unabhängigkeit-der-residuen" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="unabhängigkeit-der-residuen"><span class="header-section-number">2.3</span> Unabhängigkeit der Residuen</h2>
 <p>Auch die Annahme, dass die <em>Residuen unabhängig</em> voneinander sind, ist eine wichtige Voraussetzung der Regressionsanalyse. Unabhängigkeit der Residuen bedeutet inhaltlich: Wenn ich den Fehlerterm für eine bestimmte Beobachtung kenne, darf mir das keine Information über den Fehlerterm für die nächste Beobachtung liefern. Es darf also nichts systematisch zu einer Verzerrung meiner Beobachtungen (bzw. meiner Fehlerterme) führen. Ansonsten läge eine <em>Autokorrelation der Fehlerterme</em> vor, die die Aussagekraft des Modells reduzieren würde.</p>
-<p>Das performance-package ist einfach soooo cool! Es beinhaltet auch die check_autocorrelation-Funktion, mit der wir diese Annahme sehr einfach prüfen können:</p>
+<p>Das performance-package ist einfach soooo cool! Es beinhaltet auch die <code>check_autocorrelation()</code>-Funktion, mit der wir diese Annahme sehr einfach prüfen können:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">check_autocorrelation</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>OK: Residuals appear to be independent and not autocorrelated (p = 0.526).</code></pre>
+<pre><code>OK: Residuals appear to be independent and not autocorrelated (p = 0.570).</code></pre>
 </div>
 </div>
 <p>Auch hier ist der Output wieder sehr klar: Die Prüfung ergibt, dass die Residuen unabhängig und nicht autokorreliert sind (p = 0.588) - sonst hätten wir auch hier einen signifikanten p-Wert erhalten. Prima!</p>
 </section>
-<section id="prüfung-der-voraussetzungen-4-normalverteilung-der-residuen" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Prüfung der Voraussetzungen 4: Normalverteilung der Residuen</h1>
+<section id="normalverteilung-der-residuen" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="normalverteilung-der-residuen"><span class="header-section-number">2.4</span> Normalverteilung der Residuen</h2>
 <p>Wenn die Residuuen nicht der Normalverteilungskurve folgen, sondern stattdessen eigene “Muster” in ihrer Verteilung aufweisen, kann dies darauf hindeuten, dass wir nicht alle Prädiktoren im Modell berücksichtigt haben und somit ein Teil der erklärenden Information in die Residuen übergeht, wo sie das erkennbare Muster “verursacht”.</p>
 <p>Auch die Voraussetzung, dass die Residuen normalverteilt sein sollen, lässt sich mit einer Funktion aus dem performance-Package sehr einfach überprüfen:</p>
 <div class="cell">
@@ -646,10 +657,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <pre><code>Warning: Non-normality of residuals detected (p &lt; .001).</code></pre>
 </div>
 </div>
-<p>Auch hier ist das Ergebnis ohne Probleme zu interpretieren, weil R hier eine “direkte Ansage” macht. In unserem Fall ist die Voraussetzung der Normalverteilung verletzt, weil p signifikant wird. Das müssen wir bei der Interpretation der Daten berücksichtigen. Grundsätzlich können wir hier wieder darauf verweisen, dass die Regressionsanalyse robust gegen die Verletzung ihrer Voraussetzungen ist. Eine Alternative ist, dass wir ein <em>Bootstrapping-Verfahren</em> auf unsere Daten anwenden. Das aber nur zur Info, wenn Sie hier selbstständig weitermachen wollen - das würde jetzt etwas zu weit führen :) Außerdem werden wir unten bei der zusätzlichen visuellen Inspektion mit der Funktion <em>check_models</em> auch noch sehen, dass unsere Annahme nicht allzu schlimm verletzt ist.</p>
+<p>Auch hier ist das Ergebnis ohne Probleme zu interpretieren, weil R hier eine “direkte Ansage” macht. In unserem Fall ist die Voraussetzung der Normalverteilung verletzt, weil p signifikant wird. Das müssen wir bei der Interpretation der Daten berücksichtigen. Grundsätzlich können wir hier wieder darauf verweisen, dass die Regressionsanalyse robust gegen die Verletzung ihrer Voraussetzungen ist. Eine Alternative ist, dass wir ein <em>Bootstrapping-Verfahren</em> auf unsere Daten anwenden. Das aber nur zur Info, wenn ihr hier selbstständig weitermachen wollt - das würde jetzt etwas zu weit führen :) Außerdem werden wir unten bei der zusätzlichen visuellen Inspektion mit der Funktion <code>check_models()</code> auch noch sehen, dass unsere Annahme nicht allzu schlimm verletzt ist.</p>
 </section>
-<section id="prüfung-der-voraussetzungen-5-ausreißer-im-modell" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Prüfung der Voraussetzungen 5: Ausreißer im Modell</h1>
+<section id="ausreißer-im-modell" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="ausreißer-im-modell"><span class="header-section-number">2.5</span> Ausreißer im Modell</h2>
 <p><em>Ausreißer</em> in den Daten sind ein Problem für viele parametrische Verfahren, denn einzelne Ausreißer können einen sonst signifikanten Trend zunichte machen (ggf. also eliminieren). Ob es in unserem Modell Ausreißer gibt, können wir wieder mit einer sehr einfachen Funktion aus dem performance-Package prüfen, die auf das sogenannte “cooks distance” zurückgreift. Der Wert gibt mir Auskunft darüber, welchen Einfluss mögliche Ausreißer auf das Modell haben.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">check_outliers</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -660,17 +671,45 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>In unserem Fall gibt es keine Ausreißer, die das Modell beinträchtigen - vielleicht hätten wir sonst auch keinen signifikanten Zusammenhang beobachten können.</p>
-</section>
-<section id="add-on-visuelle-inspektion-der-modellgüte-bzw.-der-modellannahmen" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Add-on: Visuelle Inspektion der Modellgüte bzw. der Modellannahmen</h1>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exkurs Visuelle Inspektion der Modellgüte bzw. der Modellannahmen
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>Es gibt im performance-Package auch eine sehr gehaltvolle Funktion, die uns eine visuelle Inspektion der Modellgüte bzw. verschiedenen Modellannahmen erlaubt (Normalität der Residuen, Normalität der zufälligen Effekte, lineare Beziehung, Homogenität der Varianz, Multikollinearität). Mit der check_model-Funktion können wir uns dazu mehrere Grafiken im Überblick ausgeben lassen. YEAH! :)</p>
 <p>Hier der Link zur Dokumentation des Performance-Packages mit weiteren Informationen: <a href="https://easystats.github.io/performance/">Link</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">#check_model(model)</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="co">#model_performance(model)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Literatur
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p>📖 Hayes, A. F.,&amp; &amp; Cai, L. (2007). Using heteroskedasticity-consistent standard error estimators in OLS regression: An introduction and software implementation. Behavior research methods, 39(4), 709-722</p>
+</blockquote>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
