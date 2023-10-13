@@ -15,28 +15,24 @@ format:
 
 ![Validieren, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_asian_woman_in_the_foreground_Berlin_u_eae02035-7ded-48be-b10f-79acfaad3a38.png)
 
-# Das Zusammenführen der Variablen zu einem Index
-
 Wir haben in den vorangegangenen Kapitel zur Faktorenanalyse festgestellt, dass es einen empirisch messbaren Faktor in unseren Daten gibt, welchen wir unter Rückgriff auf unsere theoretischen Grundlagen als *Vertrauen in gesellschaftliche Institutionen* interpretieren. Wir haben also die beiden ersten Ziele des Kapitels bereits erreicht und müssen nur noch die eigentliche Indexbildung sowie das Prüfen der Qualität des Index vornehmen.
 
 Falls ihr euch immer noch fragt was genau ein Index ist, könnte man etwas vereinfacht sagen, dass wir eine neue Variable (den Index) auf Grundlage der Indikatoren erstellen, welche die Informationen aus den Indikatoren möglichst gut bündelt. Das erleichtert uns die weitere Berechnung von statistischen Tests und Analysen und führt damit zu einer besseren Übersichtlichkeit und leichteren Interpretation der Ergebnisse. Wir müssen dann nur noch mit einer Index-Variable weiter arbeiten statt mit 15 Indikatoren.
 
 Entsprechend möchten wir jetzt eine neue Index-Variable für das *Vertrauen in gesellschaftliche Institutionen* auf Grundlage der Indikatoren bilden.
 
+# Data Management
+
 Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.
 
 ```{r Pakete}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
 p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable) # <1>
+theme_set(theme_classic()) # <2>
 ```
 
 1.  Laden der Pakete mit `p_load`
-
-```{r}
-theme_set(theme_classic()) # <1>
-```
-
-1.  Visualisierungshintergrund festlegen
+2.  Visualisierungshintergrund festlegen
 
 Danach laden wir die Daten aus dem Allbus.
 
@@ -46,7 +42,7 @@ daten = haven::read_dta("Datensatz/Allbus_2021.dta") # <1>
 
 1.  Laden des Datensatzes
 
-## Teildatensatz mit den benötigten Index-Variablen
+## Auswahl der Variablen für die Indexbildung
 
 Wir greifen natürlich auf die gleiche Datengrundlage zurück, welche wir auch für die Faktorenanalyse verwendet haben. Was in unserem Fall bedeutet, dass wir das *Vertrauen in gesellschaftliche Institutionen* untersuchen, entsprechend sollten wir Variablen bzw. Indikatoren auswählen, die die unterschiedlichen Bestandteile der latenten Variable abdecken.
 
@@ -115,19 +111,19 @@ htmlTable(head(allbus_vertrauen))     # <2>
 
 Wir haben nun alle Daten geladen und die Variablen entsprechend vorbereitet. Wir können eigentlich mit der Indexbidlung beginnen, müssen uns allerdings davor noch entscheiden, welche Art von Index wir bilden möchten.
 
-## Verschiedene Arten von Indizes
+# Verschiedene Arten von Indizes
 
 Es gibt eine ganze Reihe von möglichen Arten von Indizes, welche wir theoretisch berechnen könnten.
 
 | Art des Index                       | Bildung (Beispiel)                                   | Beschreibung                                                                                                                            |
-|----------------|----------------|----------------------------------------|
+|-----------------|-----------------|--------------------------------------|
 | Ungewichteter additivier Index      | Index = Indikator_1 + Indikator_2 + Indikator_3      | Die Ausprägungen der Indikatorvariablen werden addiert bzw. zu gemittelt.                                                               |
 | Ungewichteter multiplikativer Index | Index = Indikator_1 \* Indikator_2 \* Indikator_3    | Wenn ein Index Mindestausprägungen auf allen Indikatorvariablen voraussetzt sollte multiplikativ zu einem Gesamtindex verknüpft werden. |
 | Gewichteter additivier Index        | Index = (2\*Indikator_1) + Indikator_2 + Indikator_3 | Gewichtete additive Indizes ermöglichen eine differenzierte Behandlung der einzelnen Indikatoren.                                       |
 
 Die Entscheidung, welche Art der Indexbildung gewählt wird sollte vor dem Hintergrund der Daten, sowie der *latenten Variable* und deren Eigenschaften erfolgen. Beispielsweise würde es für ein Index, welcher die *Zufriedenheit mit einer Bahnreise* widerspiegelt und aus den Inidkatoren *Reisedauer*, *Service während der Reise*, *Komfort während der Fahrt* gebildet wird, Sinn ergeben einen Ungewichteten multiplikativen Index zu bilden, da bei einer *Reisedauer* von Null keine Reise stattgefunden hat und somit auch die anderen beiden Indikatoren nicht von Bedeutung sind.
 
-## Berechnen eines Ungewichteten Summenindex
+# Berechnen eines Ungewichteten Summenindex
 
 Wir haben bereits in Kapitel 5.2 mittels der explorativen Faktorenanalyse statistisch getestet, ob wir einen Index aus den genannten Variablen bilden können. Dies ist der Fall. Wir berechnen nur die einfachste Form eines Index, den ungewichteten Summenindex. Das bedeutet, dass wir die Werte pro befragter Person für die genannten Variablen aufsummieren und KEINE Gewichtungen einbauen. Eine Gewichtung wäre bspw. wenn wir eine Variable doppelt zählen würden.
 
@@ -150,7 +146,7 @@ summary(index_vertrauen$vertrauen_ges_inst) # <1>
 
 1.  Mit dem `summary` Befehl können wir uns die deskritpive Statistik ausgeben lassen
 
-## Reliabilität des Indizes berechnen
+# Reliabilität des Indizes berechnen
 
 Bevor wir diesen Index einsetzen können, müssen wir zunächst noch checken, ob die Variablen auch inhaltlich zusammenpassen. Dazu ermitteln wir Cronbach's Alpha als Maß der Skalenreliabilität:
 
@@ -163,7 +159,7 @@ index_vertrauen %>%
 1.  Wir wählen mit `select` alle Variablen zwischen `Ver_Gesundheitswesen` und `Ver_EU_Par` aus
 2.  Hier rufen wir das Paket `psych` auf, nutzen aus diesem die Funktion `alpha`, um Cronbach's Alpha zu berechnen
 
-## Interpretation von Cronbach's Alpha
+# Interpretation von Cronbach's Alpha
 
 Zur Einordnung der erhaltenen Skalen-Reliabilität, gehen wir von folgenden Cronbachs Alpha-Bereichen und ihrer Beurteilung aus:
 
@@ -172,7 +168,9 @@ Zur Einordnung der erhaltenen Skalen-Reliabilität, gehen wir von folgenden Cron
 -   0,7 bis 0,8: gut, stellenweise auch nur als akzeptabel klassifiziert
 -   0,8 bis 0,9: sehr gut
 
-## Interpretation des Wirksamkeit-Indizes
+[Hier](https://link.springer.com/article/10.1007/BF02310555) findet ihr das auch nocheinmal zum Nachlesen.
+
+# Interpretation des Wirksamkeit-Indizes
 
 Die Werte sind ein gutes Ergebnis. Die Items zeigen eine gute Inter-Item-Korrelation.
 
@@ -207,6 +205,8 @@ Die Struktur und Inhalt dieser Seite orientiert sich an den folgenden Arbeiten. 
 ## Literatur und Beispiele aus der Praxis
 
 Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen braucht.
+
+> 📖 Cronbach, L (1951). Coefficient alpha and the internal structure of tests. [Link](https://link.springer.com/article/10.1007/BF02310555)
 
 > 📖 Field, Z., Miles, J., & Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. [Link](https://suche.suub.uni-bremen.de/peid=B68436977&LAN=DE&CID=7699632&index=L&Hitnr=1&dtyp=D&rtyp=a&Exemplar=1)
 

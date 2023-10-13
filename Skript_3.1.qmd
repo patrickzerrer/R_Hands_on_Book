@@ -10,7 +10,7 @@ format:
     code-line-numbers: true
 ---
 
-![Bild von Mohamed Hassan auf Pixabay](Bilder/Skript_3.1_Bild_1.png)
+![Artwork by @allision_horst](Bilder/38f5ed46-9dcd-4981-9ae0-497fb20aa65c_rw_1200.png)
 
 In einer Ära, in der Daten in nahezu allen Bereichen unseres Lebens eine immer größere Rolle spielen, ist die Fähigkeit, mit Daten effektiv umzugehen, zu einer entscheidenden Kompetenz geworden. Ob in der Wissenschaft, der Wirtschaft oder im Alltag -- die Kunst der Datenanalyse ermöglicht es uns, aus einer Fülle von Informationen wertvolle Erkenntnisse zu gewinnen und informierte Entscheidungen zu treffen.
 

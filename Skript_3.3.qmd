@@ -22,18 +22,18 @@ Wenn wir mit Daten arbeiten liegen diese in den seltesten Fällen in der von uns
 In diesem Kapitel werden wir uns mit den Schritten der Datenbearbeitung befassen, die essentiell für die quantitative Datenanalyse sind. Wir werden lernen, wie wir Daten gezielt auswählen, verändern und transformieren können, um die für uns relevanten Informationen zu gewinnen. Dabei werden wir das umfassende "tidyverse"-Universum nutzen, insbesondere das leistungsstarke R-Paket "dplyr", das speziell für diese Art von Datenmanipulation entwickelt wurde. Bevor wir mit der Selektion, Manipulation und Transformation unserer Daten starten können, müssen wir die nötogen Pakete und unseren Datensatz lasen. Dazu laden wir zunächst unseren Paketmanager mit dem Befehl `library(pacman)`. Anschließend können wir mit `p_load()` die Libraries laden, die wir in diesem Kapitel benötigen. Diese sind "haven", um unseren Datensatz in dem entsprechenden Dateiformat (Endung .dta) öffnen zu können und "tidyr" und "dplyr", um Daten auszuwählen, zu manipulieren und zu transformieren:
 
 ```{r}
-library(pacman)
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
 p_load(haven,tidyr,dplyr)
-daten <- read_dta("Datensatz/Allbus_2021.dta")
+daten <- haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
 ## Die Tidyverse-Schreibweise und der Pipe-Operator %\>%
 
-In der tidyverse-Logik verwenden wir eine bestimmte Schreibweise, die es uns ermöglicht, viele Funktionen zu kombinieren und unseren Code trotzdem einfach verständlich und leserlich zu halten. Dabei ist der Pipe-Operator %\>% eines der markantesten Merkmale des Tidyverse und dient dazu, komplexe Datenverarbeitungsketten auf eine lesbarere und effizientere Weise zu erstellen. Die Pipe ermöglicht es, die Ergebnisse einer vorherigen Operation als Eingabe für die nächste Operation zu verwenden, ohne explizit Zwischenvariablen erstellen zu müssen. Dies fördert nicht nur die Lesbarkeit des Codes, sondern verringert auch die Wahrscheinlichkeit von Fehlerquellen.
+In der tidyverse-Logik verwenden wir eine bestimmte Schreibweise, die es uns ermöglicht, viele Funktionen zu kombinieren und unseren Code trotzdem einfach verständlich und leserlich zu halten. Dabei ist der Pipe-Operator `%\>%` eines der markantesten Merkmale des Tidyverse und dient dazu, komplexe Datenverarbeitungsketten auf eine lesbarere und effizientere Weise zu erstellen. Die Pipe ermöglicht es, die Ergebnisse einer vorherigen Operation als Eingabe für die nächste Operation zu verwenden, ohne explizit Zwischenvariablen erstellen zu müssen. Dies fördert nicht nur die Lesbarkeit des Codes, sondern verringert auch die Wahrscheinlichkeit von Fehlerquellen.
 
-Die grundlegende Logik der Pipe %\>% ist wie folgt:
+Die grundlegende Logik der Pipe `%\>%` ist wie folgt:
 
-daten %\>% operation_1 %\>% operation_2 %\>% operation_3
+`daten %\>% operation_1 %\>% operation_2 %\>% operation_3`
 
 Hier ist daten der Ausgangspunkt (Datensatz oder Objekt), auf dem verschiedene Operationen nacheinander ausgeführt werden. Jede Operation erzeugt eine modifizierte Version des vorherigen Objekts, die dann als Eingabe für die nächste Operation verwendet wird. Dies erzeugt eine Kette von Operationen, die von links nach rechts ausgeführt werden.
 
@@ -56,7 +56,7 @@ In diesem Beispiel generieren wir einen neuen Datenrahmen, dem wir den Namen ver
 View(vertrauen_institutionen)
 ```
 
-Auf eine einzelne Variable in einem Datensatz können wir mit dem Dollar-Zeichen \$ zugreifen:
+Auf eine einzelne Variable in einem Datensatz können wir mit dem Dollar-Zeichen `\$` zugreifen:
 
 ```{r, include=FALSE, echo=FALSE}
 options(max.print = 100) 
@@ -68,14 +68,14 @@ vertrauen_institutionen$age
 
 ### Filtern von Fällen
 
-Neben der Auswahl von Spalten ist es oft auch erforderlich, Fälle bzw. Zeilen basierend auf bestimmten Bedingungen auszuwählen. Hierfür verwenden wir die Funktion `filter()`. Angenommen wir möchten für unser Subset vertrauen_institutionen nur die Daten der Personen auswählen, die sehr großes Vertrauen in das Gesundheitswesen (Variable pt01) haben, können wir dies wie folgt machen - aus dem Codebook können wir ableiten, dass "sehr großes Vertrauen" dem Zahlenwert 7 entspricht:
+Neben der Auswahl von Spalten ist es oft auch erforderlich, Fälle bzw. Zeilen basierend auf bestimmten Bedingungen auszuwählen. Hierfür verwenden wir die Funktion `filter()`. Angenommen wir möchten für unser Subset vertrauen_institutionen nur die Daten der Personen auswählen, die sehr großes Vertrauen in das Gesundheitswesen (Variable `pt01`) haben, können wir dies wie folgt machen - aus dem Codebook können wir ableiten, dass "sehr großes Vertrauen" dem Zahlenwert 7 entspricht:
 
 ```{r}
 vertrauen_institutionen_filter1 <- vertrauen_institutionen %>% 
   filter(pt01 == 7)
 ```
 
-In diesem Beispiel haben wir aus dem Subset vertrauen_institutionen erneut ein Subset gezogen, indem wir mit der Funktion `filter()` nur die Zeilen aus dem ursprünglichen Subset ausgewählt haben, in denen die Variable pt01 (Vertrauen in das Gesundheitswesen) den Wert 7 annimmt. Hier ist es wichtig, ein doppeltes Gleichheitszeichen zu verwenden: pt01 == 7. Wir können auch mehrere Filter gleichzeitig anwenden. Zum Beispiel können wir ein Subset ziehen, dass nur die Daten von Personen enthält, die sehr großes Vertrauen in das Gesundheitswesen haben und gar kein Vertrauen in das Bundesverfassungsgericht (pt02):
+In diesem Beispiel haben wir aus dem Subset vertrauen_institutionen erneut ein Subset gezogen, indem wir mit der Funktion `filter()` nur die Zeilen aus dem ursprünglichen Subset ausgewählt haben, in denen die Variable pt01 (Vertrauen in das Gesundheitswesen) den Wert 7 annimmt. Hier ist es wichtig, ein doppeltes Gleichheitszeichen zu verwenden: `pt01` == 7. Wir können auch mehrere Filter gleichzeitig anwenden. Zum Beispiel können wir ein Subset ziehen, dass nur die Daten von Personen enthält, die sehr großes Vertrauen in das Gesundheitswesen haben und gar kein Vertrauen in das Bundesverfassungsgericht (`pt02`):
 
 ```{r}
 vertrauen_institutionen_filter2 <- vertrauen_institutionen %>% 
@@ -97,14 +97,14 @@ In vielen Datenanalyseprojekten ist es notwendig, Variablen zu bearbeiten, um si
 
 ### Neue Spalten erstellen
 
-Angenommen wir möchten eine neue Variable (Spalte) für unser Subset vertrauen_institutionen erstellen, die den Wert "großes vertrauen" annehmen soll, wenn die Variable pt01 (Vertrauen in das Gesundheitswesen) einen Wert größer vier (\> 4) annimmt und "wenig vertrauen", wenn pt01 einen anderen Wert annimmt, können wir dies folgermaßen erreichen:
+Angenommen wir möchten eine neue Variable (Spalte) für unser Subset vertrauen_institutionen erstellen, die den Wert "großes vertrauen" annehmen soll, wenn die Variable `pt01` (Vertrauen in das Gesundheitswesen) einen Wert größer vier (\> 4) annimmt und "wenig vertrauen", wenn `pt01` einen anderen Wert annimmt, können wir dies folgermaßen erreichen:
 
 ```{r}
 transformierte_daten <- vertrauen_institutionen %>% 
   mutate(vertrauen_gesundheitswesen = ifelse(pt01 > 4, "großes vertrauen", "wenig vertrauen"))
 ```
 
-In diesem Beispiel haben wir einen neuen Datensatz generiert und ihm den Namen transformierte_daten zugewiesen. Mit den Funktionen `mutate()` und `ifelse()` haben wir basierend auf der Variable pt01 eine neue Spalte im Datensatz erstellt mit dem Namen vertrauen_gesundheitswesen. Innerhalb der Funktion `mutate()` haben wir dafür zunächst unseren Datensatz angegeben, in diesem Fall vertrauen_institutionen. Nach einem Komma folgt der Name der neuen Variable (Spalte) mit einem Gleichheitszeichen =. In der Funktion `ifelse()` geben wir erst die Kondition an, die wir testen wollen (pt01 \> 4), gefolgt von einem Komma und dem Wert, den die Variable annehmen soll, sofern die getestete Kondition zutrifft. Dann folgt nach einem erneuten Komma der Wert, den die Variable annehmen soll, falls die Kondition nicht zutrifft.
+In diesem Beispiel haben wir einen neuen Datensatz generiert und ihm den Namen transformierte_daten zugewiesen. Mit den Funktionen `mutate()` und `ifelse()` haben wir basierend auf der Variable `pt01` eine neue Spalte im Datensatz erstellt mit dem Namen vertrauen_gesundheitswesen. Innerhalb der Funktion `mutate()` haben wir dafür zunächst unseren Datensatz angegeben, in diesem Fall vertrauen_institutionen. Nach einem Komma folgt der Name der neuen Variable (Spalte) mit einem Gleichheitszeichen =. In der Funktion `ifelse()` geben wir erst die Kondition an, die wir testen wollen (`pt01` \> 4), gefolgt von einem Komma und dem Wert, den die Variable annehmen soll, sofern die getestete Kondition zutrifft. Dann folgt nach einem erneuten Komma der Wert, den die Variable annehmen soll, falls die Kondition nicht zutrifft.
 
 ### Variablen umbenennen
 
@@ -115,7 +115,7 @@ transformierte_daten <- transformierte_daten %>%
   rename(vertrauen_gesundheit = pt01)
 ```
 
-Hier ändern wir den Namen der Variable pt01 im Datensatz transformierte_daten zu vertrauen_gesundheit.
+Hier ändern wir den Namen der Variable `pt01` im Datensatz transformierte_daten zu vertrauen_gesundheit.
 
 ## Gruppieren von Daten und Aggregation
 
@@ -140,7 +140,7 @@ vertrauen_institutionen_dropna <- transformierte_daten %>%
   drop_na(vertrauen_gesundheit)
 ```
 
-Je nach Datensatz kann die Codierung fehlender Werte aber stark variieren. Im ALLBUS-Datensatz ist die Variable pt01 (vertrauen_gesundheit) zum Beispiel so codiert, dass fehlende Werte mit einer -9 (keine Angabe), -42 (Datenfehler: Mehrfachnennung) oder -11 (keine Teilnhame an Split A oder B) gekennzeichnet sind. Dadurch wurden durch obenstehenden Code, der `drop_na` verwendet keinerlei Zeilen gelöscht und der Datensatz vertrauen_institutionen_dropna entspricht vertrauen_institutionen. In diesem Fall müssen wir die spezifischen fehlenden Werte angeben, die wir herausfiltern wollen:
+Je nach Datensatz kann die Codierung fehlender Werte aber stark variieren. Im ALLBUS-Datensatz ist die Variable `pt01` (vertrauen_gesundheit) zum Beispiel so codiert, dass fehlende Werte mit einer -9 (keine Angabe), -42 (Datenfehler: Mehrfachnennung) oder -11 (keine Teilnhame an Split A oder B) gekennzeichnet sind. Dadurch wurden durch obenstehenden Code, der `drop_na` verwendet keinerlei Zeilen gelöscht und der Datensatz vertrauen_institutionen_dropna entspricht vertrauen_institutionen. In diesem Fall müssen wir die spezifischen fehlenden Werte angeben, die wir herausfiltern wollen:
 
 ```{r}
 missing_codes <- c(-9, -42, -11)
@@ -149,7 +149,7 @@ vertrauen_institutionen_dropna <- transformierte_daten %>%
   filter(!vertrauen_gesundheit %in% missing_codes)
 ```
 
-Hier geben wir zunächst die möglichen Ausprägungen für fehlende Werte an und speichern diese als Vektor missing_codes. Dann wenden wir die Funktion `filter()` auf den Datensatz vertrauen_institutionen so an, dass nur Zeilen ausgewählt werden, in denen die Variable keinen der Werte in missing_codes annimmt. Das Gegenteil einer Kondition errreichen wir mit einem Ausrufezeichen !. vertrauen_gesundheit %in% missing_code würde alle Fälle filtern, die einen der Werte in missing_codes annehmen. Setzen wir ein ! davor, erhalten wir genau den umgekehrten Fall.
+Hier geben wir zunächst die möglichen Ausprägungen für fehlende Werte an und speichern diese als Vektor missing_codes. Dann wenden wir die Funktion `filter()` auf den Datensatz vertrauen_institutionen so an, dass nur Zeilen ausgewählt werden, in denen die Variable keinen der Werte in missing_codes annimmt. Das Gegenteil einer Kondition errreichen wir mit einem Ausrufezeichen `!` . vertrauen_gesundheit `%in%` missing_code würde alle Fälle filtern, die einen der Werte in missing_codes annehmen. Setzen wir ein `!` davor, erhalten wir genau den umgekehrten Fall.
 
 Wir können auch die fehlenden Werte aus allen Vertrauensvariablen löschen:
 
@@ -169,7 +169,7 @@ vertrauen_institutionen_index <- vertrauen_institutionen_dropna %>%
   mutate(index_vertrauen = rowSums(across(vertrauen_gesundheit:pt20)))
 ```
 
-Hier haben wir eine neue Spalte index_vertrauen erstellt, die die Summe der Vertrauensvariablen enthält. Wir verwenden wieder die Funktion `across()`, um Operationen auf mehreren Spalten gleichzeitig durchzuführen. Für jede Zeile haben wir mit dem Befehl `rowSums()` die Werte für alle Variablen von vertrauen_gesundheit bis pt20 addiert und den resultierenden Wert in die neue Spalte geschrieben. Anstatt der Summe können wir auch den Mittelwert der Variablen berechnen und diesen als Index verwenden, dazu teilen wir die Summe, die wir wie im Beispiel zuvor berechnen, durch die Anzahl an Vertrauensvariablen (20):
+Hier haben wir eine neue Spalte index_vertrauen erstellt, die die Summe der Vertrauensvariablen enthält. Wir verwenden wieder die Funktion `across()`, um Operationen auf mehreren Spalten gleichzeitig durchzuführen. Für jede Zeile haben wir mit dem Befehl `rowSums()` die Werte für alle Variablen von vertrauen_gesundheit bis `pt20` addiert und den resultierenden Wert in die neue Spalte geschrieben. Anstatt der Summe können wir auch den Mittelwert der Variablen berechnen und diesen als Index verwenden, dazu teilen wir die Summe, die wir wie im Beispiel zuvor berechnen, durch die Anzahl an Vertrauensvariablen (20):
 
 ```{r}
 vertrauen_institutionen_index_2 <- vertrauen_institutionen_dropna %>%

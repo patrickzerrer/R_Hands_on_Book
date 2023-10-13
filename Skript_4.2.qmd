@@ -9,11 +9,12 @@ format:
     code-fold: false
     code-line-numbers: true
     code-annotations: hover
+execute:
+  message: false
+  warnings: false
 ---
 
 ![Überall Daten, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_mean_descriptive_statistics_cyberpunk__c164805d-f5de-4d11-9526-913cfe6f6013.png)
-
-# Berechnung von Lageparametern
 
 Laden wir zunächst wieder unsere Daten: Da wir uns drei verschiedene Skalenniveaus ansehen wollen, verwenden wir Daten, die jeweils ein solches repräsentieren. Wir laden daher Daten zu Geschlecht ("sex"), Vertrauen in die Bundesregierung ("pt12") und Netto-Einkommen ("di01a").
 
@@ -25,30 +26,33 @@ Im Folgenden werden wir aus dem Allbus-2021-Datensatz ein paar Beispiele herausg
 {{< video https://www.youtube.com/watch?v=r0_Vtf48MHU >}}
 :::
 
+# Data Management
+
 Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem `p_load`-Befehl:
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
 p_load(tidyverse, ggplot2, haven, dplyr)  
-
-
 theme_set(theme_classic()) 
-
-daten = haven::read_dta("Datensatz/Allbus_2021.dta") 
-
-allbus_df <- subset(daten, select=c("sex", "pt12", "di01a")) %>%          
-  mutate(across(c("sex", "pt12", "di01a"), ~ as.numeric(.))) %>%                                     
-  mutate(across(c("sex", "pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%          
-  na.omit()   
-
-colnames(allbus_df) <- c("Geschlecht", "VertrauenBR", "Einkommen") # Umbenennen der Spaltennamen
 ```
 
-## Der Modus
+```{r}
+daten = haven::read_dta("Datensatz/Allbus_2021.dta") 
+```
+
+```{r}
+allbus_df <- daten %>% 
+  select("sex", "pt12", "di01a") %>%          
+  mutate(across(c("pt12", "di01a"), ~ as.numeric(.))) %>%                                     
+  mutate(across(c("pt12", "di01a"), ~ ifelse(.%in% c(-7, -9, -11, -15, -42, -50 ), NA,.))) %>%          
+  na.omit()   
+
+colnames(allbus_df) <- c("Geschlecht", "VertrauenBR", "Einkommen") 
+```
+
+# Der Modus
 
 Der Modus, auch Modalwert genannt, gibt an, welche Ausprägung eines gemessenen Merkmals am häufigsten vorkommt.
-
-### Berechnung
 
 Wir müssen einfach nur zählen, wie oft jede Merkmalsausprägung vorkommt. Diejenige mit dem höchsten Wert (bzw. der größten absoluten Häufigkeit) ist der Modus. In R gibt es keine vorgefertigte Funktion, die diesen Parameter berechnet. Das folgende Code-Beispiel zeigt eine mögliche Lösung speziell für unseren "allbus.df\$Geschlecht"-DataFrame.
 
@@ -72,11 +76,9 @@ get_mode = function(vector){
 cat("Der Modus lautet ", get_mode(allbus_df$Geschlecht), ".")
 ```
 
-## Der Median
+# Der Median
 
 Für mindestens ordinal skalierte Messwerte empfielt sich neben dem Modus zusätzlich der Median. Einen der Größe nach aufsteigend sortierten Datensatz teilt der Median genau in der Mitte, es liegen also genauso viele Elemente links wie rechts davon.
-
-### Berechnung
 
 Für den Fall, dass die Anzahl an Elementen im Datensatz $n$ ungerade ist, entspricht der Median dem Messwert, der genau in der Mitte liegt:
 
@@ -104,8 +106,6 @@ Die Daten sind bereits von "gar nicht" zu "sehr hoch" sortiert. Wir wenden die `
 median_vertrauen = median(allbus_df$VertrauenBR)
 ```
 
-### Visualisierung
-
 Wenn man sich die Daten als Säulendiagramm bzw. Barplot ausgeben lässt und den Median einzeichnet (im folgenden Codebeispiel die rote gestrichelte Linie), kann man erahnen, dass der Median die sieben Klassen so teilt, dass beidseitig gleich viele abgegebene Stimmen liegen:
 
 ```{r}
@@ -115,11 +115,9 @@ ggplot(data=allbus_df, aes(x=VertrauenBR)) +
   geom_vline(xintercept = median_vertrauen, color = "red", linetype = "dashed", linewidth = 1)
 ```
 
-## Quantile
+# Quantile
 
 Ein Quantil legt fest, wie viele Werte über bzw. unter einer bestimmten Grenze liegen und teilt den Datensatz damit in zwei Teile. Den bekanntesten Spezialfall haben wir mit dem Median bereits kennengelernt. Die Grenze lag in dem Fall genau in der Mitte, es liegen also 50% unterhalb der Grenze und 50% darüber. Bei einem 31%-Quantil würden hingegen 31% der Werte unter der Grenze liegen und 69% darüber. Wichtige Quantile sind die sogenannten Quartile, zu denen das 25%-Quantil, der Median und das 75%-Quantil zusammengefasst werden. Sie teilen die Gesamtmenge an Messwererten in vier gleich große Teile.
-
-### Berechnung
 
 Das folgende R-Beispiel gibt die drei Quartile des Vertrauens-Datensatzes aus:
 
@@ -127,8 +125,6 @@ Das folgende R-Beispiel gibt die drei Quartile des Vertrauens-Datensatzes aus:
 quartile = quantile(allbus_df$VertrauenBR, probs = c(0.25, 0.5, 0.75))
 quartile
 ```
-
-### Visualisierung
 
 Das folgende Codebeispiel zeichnet neben dem Median (rot) auch das 25%-Quantil (blau) und das 75%-Quantil (grün) in das Säulendiagramm ein:
 
@@ -146,24 +142,22 @@ ggplot(data=allbus_df, aes(x=VertrauenBR)) +
   geom_vline(xintercept = quantile75, color = "green", linetype = "dashed", linewidth = 1)
 ```
 
-## Der Mittelwert
+# Der Mittelwert
 
 Der Begriff "Mittelwert" ist etwas ungenau, da es mehrere verschiedene Mittelwerte gibt. Oft ist damit das arithmetische Mittel gemeint. Es lässt sich nur bei mindestens kardinal skalierten Daten anwenden und bezieht die Gewichte der jeweiligen Merkmalsausprägungen mit ein.
-
-### Berechnung
 
 Das arithmetische Mittel erhält man, indem man alle Messwerte addiert und durch die Gesamtzahl an Messwerten teilt:
 
 $$
 \bar{x} = \frac{x_{1} + x_{2} + \cdots + x_{n}}{n} = \frac{1}{n}  \sum_{i=1}^{n} {x_{i}}
-$$ Schauen wir uns das am Beispiel des Netto-Einkommens der Befragten im Allbus-Datensatz an: Wir können dazu die bereits vorhandene Funktion `mean` nutzen:
+$$ 
+
+Schauen wir uns das am Beispiel des Netto-Einkommens der Befragten im Allbus-Datensatz an: Wir können dazu die bereits vorhandene Funktion `mean` nutzen:
 
 ```{r}
 mean_einkommen = mean(allbus_df$Einkommen)
 mean_einkommen
 ```
-
-### Visualisierung
 
 Vergleichen wir das mit dem Median, fällt auf, dass zwischen beiden Lageparametern über 200 Euro Differenz bestehen:
 
@@ -181,7 +175,7 @@ modus_einkommen
 
 Das liegt daran, dass die Einkommensdaten kontinuierlich sind und es keinen homogenen An- und Abstieg der Häufigkeitsverteilung gibt. Der Einkommenswert, den am meisten Personen exakt gleich angegeben haben, ist deshalb wenig aussagekräftig und der Modus macht nur Sinn, nachdem man die Daten in Form von Einkommensklassen diskretisiert hat.
 
-```{r}
+```{r, echo=FALSE}
 ggplot(allbus_df, aes(x = Einkommen)) + 
     geom_histogram(aes(y =..density..),
     breaks = seq(-0, 10000, by = 500), 
@@ -194,7 +188,7 @@ ggplot(allbus_df, aes(x = Einkommen)) +
 
 ```
 
-```{r}
+```{r, echo=FALSE}
 ggplot(allbus_df, aes(x = Einkommen)) + 
     geom_histogram(aes(y =after_stat(density)),
     breaks = seq(-0, 10000, by = 500), 
@@ -207,17 +201,15 @@ ggplot(allbus_df, aes(x = Einkommen)) +
 
 ```
 
-## Geometrisches Mittel
+# Geometrisches Mittel
 
 Nicht unerwähnt bleiben sollte das geometrische Mittel, das bei der Berechnung des Mittelwerts von prozentualen Veränderungen angewendet wird. Dabei werden die einzelnen Messwerte multipliziert und die n-te Wurzel aus dem Ergebnis gezogen, wobei n die Gesamtzahl an Messwerten ist:
 
 $$
 x_{Geom} = (x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}}
-$$ \### Berechnung
+$$ 
 
 In R gibt es dafür keine eigenständige Funktion, man kann aber die Gleichung umstellen und mit Hilfe einiger anderer eingebauter Funktionen eine simple Alternative erstellen, indem man einen kleinen Trick mit der Exponentialfunktion und dem natürlichen Logarithmus anwendet:
-
-\$\$
 
 ```{=tex}
 \begin{aligned}
@@ -227,7 +219,6 @@ x_{Geom}  & = (x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}} \\
           & = e^{\frac{1}{n} \sum_{i=1}^{n} ln({x_{i})}  }
 \end{aligned}
 ```
-\$\$
 
 Auch, wenn die resultierende Formel wenig ansprechend aussieht, kann man bei genauerem Hinsehen das versteckte arithmetische Mittel erkennen und den ganzen Ausdruck in folgenden R-Code umsetzen:
 
@@ -243,7 +234,7 @@ geom_einkommen <- geom_mean(allbus_df$Einkommen + 42)
 geom_einkommen
 ```
 
-```{r}
+```{r, echo=FALSE}
 ggplot(allbus_df, aes(x = Einkommen)) + 
     geom_histogram(aes(y =after_stat(density)),
     breaks = seq(-0, 10000, by = 500), 

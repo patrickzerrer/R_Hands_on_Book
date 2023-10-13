@@ -19,7 +19,7 @@ editor_options:
 
 Zur Analyse von Zusammenhängen bei zwei metrischen Variablen gibt es verschiedene statistische Verfahren. In diesem Teilkapitel schauen wir uns die *Korrelationsanalyse* sowie die *einfache lineare Regression* an.
 
-# Die Korrelationsanalyse: Analyselogik, Ziel und Einsatzgebiete
+# Die Korrelationsanalyse
 
 Die Korrelationsanalyse ist eine schnelle und einfache statistische Methode, um den Zusammenhang zwischen zwei oder mehr metrischen Variablen zu untersuchen. Ziel der Korrelationsanalyse ist, die Richtung (positiv oder negativ) und die Stärke eines linearen Zusammenhangs zwischen den Variablen zu bestimmen. Als statistischer Kennwert wird ein *Korrelationskoeffizient*, zum Beispiel der *Pearson-Korrelationskoeffizient* (auch Pearson's r) ermittelt. Der Korrelationskoeffizient gibt an, wie sehr die Werte einer Variable mit den Werten einer anderen Variable zusammenhängen, d.h. *korrelieren*. Er nimmt Werte zwischen -1 und 1 an. Ein *hoher* Korrelationskoeffizient (nahe 1 oder -1) deutet auf einen *starken Zusammenhang* hin, während ein *niedriger* Koeffizient (nahe 0) auf einen *schwachen* oder *keinen Zusammenhang* hindeutet. Zudem deutet ein *positiver* Korrelationskoeffizient auf einen *positiven Zusammenhang* hin, während ein *negativer* Koeffizient auf einen *negativen Zusammenhang* verweist.
 
@@ -170,7 +170,7 @@ Mit Hilfe der Regression wollen wir nun die oben formulierte Annahme prüfen, da
 
 Bevor wir die Regressionsanalyse durchführen, verschaffen wir uns zunächst einmal einen Überblick über die Daten - dazu visualisieren wir den Zusammenhang zwischen dem Alter sowie der täglichen Fernsehnutzung. Mit Hilfe der Grafik können wir auch die erste Voraussetzung prüfen, nämlich dass es einen *linearen Zusammenhang* zwischen beiden Variablen gibt.
 
-## Grafische Prüfung der Voraussetzungen 
+## Grafische Prüfung der Voraussetzungen
 
 ACHTUNG! Für die Regressionsanalyse müssen noch weitere Voraussetzungen geprüft werden (insb. Homoskedastizität der Residuen; Unabhängigkeit der Residuen; Normalverteilung der Residuen; keine Ausreißer in den Daten). An dieser Stelle klammern wir die anderen Voraussetzungsprüfungen aber vorerst aus, und kommen in der nächsten Sitzung darauf zurück (das ist sonst zu viel auf einmal).
 

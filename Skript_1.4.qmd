@@ -13,7 +13,7 @@ format:
     code-annotations: hover
 ---
 
-![Bild generiert von Midjourney](Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png)
+![Unser Schreibtisch, Bild generiert von Midjourney](Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png)
 
 Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten wir uns zunächst einige Grundlagen widmen. Wir beschäftigen uns im Folgenden mit einigen fundamentalen Begriffen, deren Funktionsweisen wir kennen sollten - das erleichtert uns zumindest die Arbeit deutlich und vermeidet wahrscheinlich den ein oder anderen Fehler samt dazugehörigen frustrierten Verfluchen des Kurses und R.
 
@@ -39,7 +39,9 @@ Mit dem Klick gelangt ihr in R-Studio.
 
 Starten wir zunächst mit dem Anlegen eines sogenannten R-Projekts. RStudio-Projekte ermöglichen es uns alle mit einem Projekt verbundenen Dateien an einem Ort zu speichern. Das umfasst Datensätze, R-Skripte, Ergebnisse, Abbildungen, Berichte usw. Projekte sind bereits in RStudio integriert.
 
-![Screenshot RStudio](Bilder/Skript_1_4_Screenshot1.png) Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button `New Project` ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot1.png) 
+
+Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button `New Project` ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.
 
 In eurem Fall könnt ihr euch direkt alle notwendigen Materialen und Skripte für das erfolgreiche Bearbeiten dieses Kurses in R-Studio laden. Hierfür geht ihr in der rechts oberen Ecke des Nutzer:innen Interfaces auf den Button `New Project` und wählt dann `Version Control` aus.
 
@@ -99,12 +101,14 @@ Ihr werdet im Laufe des Kurses immer wieder mit Fehlermeldungen zu tun haben. Hi
 
 3.  *Code überprüfen*: Schaue nach, ob sich ein Warnzeichen am Rand deines R Codes befindet. Dieses Warnzeichen weist dich auf einen Syntaxfehler (bspw. eine vergessene Klammer oder Komma) hin.
 
-4.  *Variablen überprüfen*: Überprüfe kurz, ob du die richtigen Variablen verwendest oder sich ein Tippfehler eingeschlichen hat.
+4.  *Variablen überprüfen*: Überprüfe kurz, ob du die richtigen Variablen verwendest oder sich ein Tippfehler eingeschlichen hat. Achtet auch auf Groß- und Kleinschreibung.
 
 5.  *Informationen suchen*: Rufe eine Vignette (mit dem Befehl `vignette`) oder rufe die Hilfeseite mit einem der Funktion vorgelagerten Fragezeichen auf (mit bspw. `?dpylr()`) auf und lies sie dir durch.
 
 6.  *Sich im Netz Hilfe suchen*: Suche auf [Stack Overflow](https://stackoverflow.com/questions/tagged/r) nach deinem Problem, meistens hat jemand auf der Welt das oder ein ähnliches Problem schon einmal gelöst.
 
-7.  *Die KI fragen*: Nutze ein KI Chatbot, um dir die Fehlermeldung erklären zu lassen und Lösungsvorschläge zu unterbreiten. Beachte hierbei bitte, dass die Antworten nicht immer korrekt sind und meist Kontextwissen von dir benötigt wird, um die Korrektheit der Antworten zu prüfen [Link](https://www.r-bloggers.com/2023/04/tips-for-using-chatgpt-to-learn-r/).
+7. *Frag deine Kommilitonen*: Tauscht euch aus, gemeinsam findet ihr eine Lösung! 
 
-8.  *Frag uns*: Frag dein:e Dozent:in :)
+8.  *Die KI fragen*: Nutze ein KI Chatbot, um dir die Fehlermeldung erklären zu lassen und Lösungsvorschläge zu unterbreiten. Beachte hierbei bitte, dass die Antworten nicht immer korrekt sind und meist Kontextwissen von dir benötigt wird, um die Korrektheit der Antworten zu prüfen [Link](https://www.r-bloggers.com/2023/04/tips-for-using-chatgpt-to-learn-r/).
+
+9.  *Frag uns*: Frag dein:e Dozent:in :)

@@ -20,7 +20,7 @@ In unserem alltäglichen Leben haben wir ständig mit unterschiedlichsten Formen
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video is in Arbeit >}}
+{{< video ist in Arbeit >}}
 :::
 
 # Verschiedene Datentypen, Skalenniveaus und Datenstrukturen

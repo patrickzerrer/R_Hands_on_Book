@@ -141,4 +141,6 @@ Ansonsten habt ihr noch die Möglichkeit die Pakete händisch über das R Studio
 ## Weiterführende Literatur
 
 > 📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. [Link](https://link.springer.com/book/10.1007/978-3-658-34285-2)
+
+> 📖 Julia Niemann-Lenz (2021). R Kompendium für die kommunikationswissenschaftliche Statistik- und Datenanalyse-Ausbildung. [Link](https://xvariable.github.io/r_book/)
 :::

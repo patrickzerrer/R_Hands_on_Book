@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Bilder/favicon-32x32.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -410,23 +411,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#begrifflichkeiten" id="toc-begrifflichkeiten" class="nav-link active" data-scroll-target="#begrifflichkeiten"><span class="header-section-number">1</span> Begrifflichkeiten</a>
+  <li><a href="#häufigkeiten" id="toc-häufigkeiten" class="nav-link active" data-scroll-target="#häufigkeiten"><span class="header-section-number">1</span> Häufigkeiten</a></li>
+  <li><a href="#maßzahlen" id="toc-maßzahlen" class="nav-link" data-scroll-target="#maßzahlen"><span class="header-section-number">2</span> Maßzahlen</a>
   <ul class="collapse">
-  <li><a href="#das-skalenniveau" id="toc-das-skalenniveau" class="nav-link" data-scroll-target="#das-skalenniveau"><span class="header-section-number">1.1</span> Das Skalenniveau</a>
-  <ul class="collapse">
-  <li><a href="#nominalskala" id="toc-nominalskala" class="nav-link" data-scroll-target="#nominalskala"><span class="header-section-number">1.1.1</span> Nominalskala</a></li>
-  <li><a href="#ordinalskala" id="toc-ordinalskala" class="nav-link" data-scroll-target="#ordinalskala"><span class="header-section-number">1.1.2</span> Ordinalskala</a></li>
-  <li><a href="#kardinalskala" id="toc-kardinalskala" class="nav-link" data-scroll-target="#kardinalskala"><span class="header-section-number">1.1.3</span> Kardinalskala</a></li>
+  <li><a href="#data-management" id="toc-data-management" class="nav-link" data-scroll-target="#data-management"><span class="header-section-number">2.1</span> Data Management</a></li>
   </ul></li>
-  <li><a href="#häufigkeiten" id="toc-häufigkeiten" class="nav-link" data-scroll-target="#häufigkeiten"><span class="header-section-number">1.2</span> Häufigkeiten</a>
-  <ul class="collapse">
-  <li><a href="#absolute-häufigkeit" id="toc-absolute-häufigkeit" class="nav-link" data-scroll-target="#absolute-häufigkeit"><span class="header-section-number">1.2.1</span> Absolute Häufigkeit</a></li>
-  <li><a href="#relative-häufigkeit" id="toc-relative-häufigkeit" class="nav-link" data-scroll-target="#relative-häufigkeit"><span class="header-section-number">1.2.2</span> Relative Häufigkeit</a></li>
-  </ul></li>
-  <li><a href="#maßzahlen" id="toc-maßzahlen" class="nav-link" data-scroll-target="#maßzahlen"><span class="header-section-number">1.3</span> Maßzahlen</a></li>
-  <li><a href="#zu-den-programmierbeispielen" id="toc-zu-den-programmierbeispielen" class="nav-link" data-scroll-target="#zu-den-programmierbeispielen"><span class="header-section-number">1.4</span> Zu den Programmierbeispielen</a></li>
-  <li><a href="#berechnung-und-visualisierung-von-häufigkeiten" id="toc-berechnung-und-visualisierung-von-häufigkeiten" class="nav-link" data-scroll-target="#berechnung-und-visualisierung-von-häufigkeiten"><span class="header-section-number">1.5</span> Berechnung und Visualisierung von Häufigkeiten</a></li>
-  </ul></li>
+  <li><a href="#berechnung-und-visualisierung-von-häufigkeiten" id="toc-berechnung-und-visualisierung-von-häufigkeiten" class="nav-link" data-scroll-target="#berechnung-und-visualisierung-von-häufigkeiten"><span class="header-section-number">3</span> Berechnung und Visualisierung von Häufigkeiten</a></li>
   </ul>
 </nav>
     </div>
@@ -462,134 +452,156 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Die Skyline als Barplot, Bild generiert von Midjourney</figcaption>
 </figure>
 </div>
-<section id="begrifflichkeiten" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Begrifflichkeiten</h1>
-<p>Zunächst ein paar Begriffserläuterungen: Bei der quantitativen Datenerhebung misst man die Ausprägung eines bestimmten Merkmals. Ein Merkmal kann zum Beispiel das Alter einer Person sein. Die Person ist dann der Merkmalsträger. Die Merkmalsausprägung bzw. der Messwert ist die konkrete Altersangabe, z.B. 23 Jahre. Die Menge aller Merkmalsträger, über die man durch die Untersuchung zu Erkenntnissen kommen will, heißt Grundgesamtheit. Oft kann man aber gar nicht oder nur sehr schwer die ganze Grundgesamtheit heranziehen und muss sich mit einer Teilmenge begnügen: Der Stichprobe. Die Daten sind erhoben, die Arbeitsumgebung ist eingerichtet, wir haben die Datensätze geladen und wissen, wie wir sie bearbeiten und visualisieren können. Nun wird es Zeit, sich einen ersten Eindruck von den statistischen Eigenschaften unserer Daten zu verschaffen. Von diesen Eigenschaften hängt ab, welche Methoden wir auf sie anwenden können und somit, welche Fragen wir mit ihnen überhaupt beantworten können. Dabei interessieren uns zunächst zwei Aspekte, erstens: Welche Methoden passen zur Beschaffenheit der Daten und zweitens: Welche inhaltlichen Eigenschaften können wir darauf aufbauend in den Daten erkennen? Ersteres ist abhängig vom Skalenniveau (nominal, ordinal, kardinal), für letzteres schauen wir uns einige der wichtigsten Maßzahlen (Parameter) an.</p>
-<section id="das-skalenniveau" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="das-skalenniveau"><span class="header-section-number">1.1</span> Das Skalenniveau</h2>
-<p>Durch eine Messung wird bestimmten Eigenschaften eines Merkmalsträgers ein bestimmter Wert zugeordnet. Dazu bedient man sich einer festgelegten Skala, damit alle Ergebnisse miteinander vergleichbar sind. Wir kennen solche Skalen aus unserem Alltag. Manche bestehen aus Zahlen (z.B. Maßbänder, Uhren), andere aus Symbolen (z.B. Vereinslogos). Das Niveau einer Skala hängt von ihrem Informationsgehalt ab. Je höher das Skalenniveau, desto vielfältiger ist die Auswahl an Methoden, die man auf die Daten anwenden kann und desto höher ist ihr Informationsgehalt. Allerdings neigen Methoden, die höhere Skalenniveaus erfordern, oft dazu, anfälliger gegenüber Ausreißern zu sein. Bei der Einschätzung des Skalenniveaus ist es hilfreich zu prüfen, ob ein Merkmal diskret oder kontinuierlich ist. Diskret ist ein Merkmal, wenn es abzählbar viele Ausprägungen annehmen kann, z.B. die Anzahl an Haustieren: Unter 2 Katzen kann sich jeder was vorstellen, bei 1,5 Katzen wird es hingegen schwierig. Dagegen gibt es bei einem kontinuierlichen Merkmal zwischen zwei Ausprägungen unendlich viele weitere, z.B. bei der Körpergröße: Hier sind nicht nur 1, 2 oder 199 cm denkbar, sondern auch jeder beliebig genaue weitere Wert dazwischen. Dafür macht eine Körpergröße von -5 cm wieder keinen Sinn.</p>
-<section id="nominalskala" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="nominalskala"><span class="header-section-number">1.1.1</span> Nominalskala</h3>
-<p>Es kann nur eine Aussage darüber gemacht werden, ob zwei Objekte gleich sind, aber es gibt keine sinnvolle hierarchische Einteilung, d.h. es kann keine Rangfolge im Sinne von “x ist größer/kleiner als y” erstellt werden. Beispiele: Geschlecht, Nationalität. Diese Skala setzt diskrete Merkmale voraus.</p>
-</section>
-<section id="ordinalskala" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="ordinalskala"><span class="header-section-number">1.1.2</span> Ordinalskala</h3>
-<p>Es kann nicht nur festgestellt werden, ob sich zwei Objekte gleichen, sondern man kann ihnen Eigenschaften zuordnen, anhand derer sie sich in eine bestimmte Reihenfolge bringen lassen. Sie können also auch sortiert werden. Das kann sowohl diskrete Messwerte beinhalten, die nur nach Rängen geordnet werden können, als auch kontinuierliche Messwerte, bei denen man die Differenz zwischen zwei Werten genau bestimmen kann. Beispiele: Schulnoten,</p>
-</section>
-<section id="kardinalskala" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="kardinalskala"><span class="header-section-number">1.1.3</span> Kardinalskala</h3>
-<ol type="a">
-<li><p>Intervall: Man kann die Abstände zwischen zwei Messwerten genau berechnen. Es gibt allerdings keinen natürlichen Nullpunkt. Beispiele: Temperatur in Grad Celsius (willkürlich festgelegter Nullpunkt).</p></li>
-<li><p>Verhältnis: Wie die Intervallskala, aber es gibt einen natürlichen Nullpunkt. Beispiele: Distanz zwischen zwei Orten, Körpergröße.</p></li>
-</ol>
-</section>
-</section>
-<section id="häufigkeiten" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="häufigkeiten"><span class="header-section-number">1.2</span> Häufigkeiten</h2>
+<p>Zunächst ein paar Begriffserläuterungen: Bei der quantitativen Datenerhebung misst man die Ausprägung eines bestimmten Merkmals. Ein Merkmal kann zum Beispiel das Alter einer Person sein. Die Person ist dann der Merkmalsträger. Die Merkmalsausprägung bzw. der Messwert ist die konkrete Altersangabe, z.B. 23 Jahre. Die Menge aller Merkmalsträger, über die man durch die Untersuchung zu Erkenntnissen kommen will, heißt Grundgesamtheit. Oft kann man aber gar nicht oder nur sehr schwer die ganze Grundgesamtheit heranziehen und muss sich mit einer Teilmenge begnügen: Der Stichprobe. Die Daten sind erhoben, die Arbeitsumgebung ist eingerichtet, wir haben die Datensätze geladen und wissen, wie wir sie bearbeiten und visualisieren können. Nun wird es Zeit, sich einen ersten Eindruck von den statistischen Eigenschaften unserer Daten zu verschaffen. Von diesen Eigenschaften hängt ab, welche Methoden wir auf sie anwenden können und somit, welche Fragen wir mit ihnen überhaupt beantworten können. Dabei interessieren uns zunächst zwei Aspekte, erstens: Welche Methoden passen zur Beschaffenheit der Daten und zweitens: Welche inhaltlichen Eigenschaften können wir darauf aufbauend in den Daten erkennen? Ersteres ist abhängig vom <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.2.html">Skalenniveau</a>, für letzteres schauen wir uns einige der wichtigsten Maßzahlen (Parameter) an.</p>
+<section id="häufigkeiten" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Häufigkeiten</h1>
 <p>Zur Beschreibung insbesondere nominaler Merkmale ist der Begriff der Häufigkeit wichtig.</p>
-<section id="absolute-häufigkeit" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="absolute-häufigkeit"><span class="header-section-number">1.2.1</span> Absolute Häufigkeit</h3>
+<p><strong>Absolute Häufigkeit</strong></p>
 <p>Die absolute Häufigkeit gibt an, wie oft eine bestimmte Merkmalsausprägung im Datensatz vorkommt. Die absolute Häufigkeit kann folglich nur eine natürliche Zahl sein.</p>
-</section>
-<section id="relative-häufigkeit" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="relative-häufigkeit"><span class="header-section-number">1.2.2</span> Relative Häufigkeit</h3>
+<p><strong>Relative Häufigkeit</strong></p>
 <p>Die relative Häufigkeit gibt den Anteil eines bestimmten Messwertes im Datensatz an. Sie berechnet sich, indem man die absolute Häufigkeit des jeweiligen Messwertes durch die Gesamtgröße des Datensatzes teilt. Die relativen Häufigkeiten summieren sich also zu 1 auf.</p>
 </section>
-</section>
-<section id="maßzahlen" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="maßzahlen"><span class="header-section-number">1.3</span> Maßzahlen</h2>
+<section id="maßzahlen" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Maßzahlen</h1>
 <p>Wir werden hier, abhängig vom Skalenniveau, zwei verschiedene Arten von Maßzahlen betrachten. Das ist zum einen das Lagemaß, das uns etwas über die zentrale Tendenz der Daten sagt, also wo sich besonders viele Messwerte häufen bzw. wo der zentrale Punkt ist, um den sich die Messwerte gruppieren. Zum anderen schauen wir uns verschiedene Streuungsparameter an, mit deren Hilfe wir einschätzen können, wie stark unsere Messwerte vom Lageparameter abweichen.</p>
-</section>
-<section id="zu-den-programmierbeispielen" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="zu-den-programmierbeispielen"><span class="header-section-number">1.4</span> Zu den Programmierbeispielen</h2>
+<section id="data-management" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="data-management"><span class="header-section-number">2.1</span> Data Management</h2>
 <p>Im Folgenden werden wir aus dem Allbus-2021-Datensatz ein paar Beispiele herausgreifen, um die Berechnung und Visualisierung von Häufigkeiten und Parametern zu demonstrieren. Dazu installieren und laden wir zunächst die nötigen Pakete mit Hilfe von Pacman und dem <code>p_load</code>-Befehl:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Lade nötiges Paket: pacman</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Paket 'pacman' wurde unter R Version 4.3.1 erstellt</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, dplyr) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, dplyr) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Dann legen wir den Visualisierungshintergrund fest:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nun laden wir den Allbus-Datensatz:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Bei den Häufigkeiten beschränken wir uns auf einen nominal skalierten Datensatz: Das Geschlecht (“sex”).<br>
 Anschließend konvertieren wir die Daten zu Zahlenwerten und entfernen fehlerhafte Daten:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a>allbus_messniveau_bsp <span class="ot">=</span> <span class="fu">subset</span>(daten, <span class="at">select=</span><span class="fu">c</span>(<span class="st">"sex"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>), <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span></span>
-<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"sex"</span>), <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">7</span>, <span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">15</span>, <span class="sc">-</span><span class="dv">42</span>, <span class="sc">-</span><span class="dv">50</span> ), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span></span>
-<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1"></a>allbus_messniveau_bsp <span class="ot">=</span> daten <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2"></a>  <span class="fu">select</span>(<span class="st">"sex"</span>) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3">3</button><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(sex))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-4" data-code-annotation="1">Wir erstellen ein neues Objekt basierend auf dem Datensatz <code>allbus_messniveau_bsp</code>,</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="2" data-code-cell="annotated-cell-4" data-code-annotation="2">Mit <code>select</code> wählen wir die Variable <code>sex</code>aus</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-lines="3" data-code-cell="annotated-cell-4" data-code-annotation="3">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-lines="4" data-code-cell="annotated-cell-4" data-code-annotation="4">Wir kodieren die Variable <code>sex</code> als Faktor und übernehmen die Label.</span>
+</dd>
+</dl>
+</div>
 </div>
 </section>
-<section id="berechnung-und-visualisierung-von-häufigkeiten" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="berechnung-und-visualisierung-von-häufigkeiten"><span class="header-section-number">1.5</span> Berechnung und Visualisierung von Häufigkeiten</h2>
+</section>
+<section id="berechnung-und-visualisierung-von-häufigkeiten" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Berechnung und Visualisierung von Häufigkeiten</h1>
 <p>Die absoluten Häufigkeiten lassen sich einfach mit der <code>table</code>-Funktion abfragen. Im folgenden Codebeispiel schauen wir uns dazu die Häufigkeiten im Datensatz “sex” an. Uns werden zwei Zeilen ausgegeben: Die erste Zeile enthält den Tabellenkopf (1: männlich, 2: weiblich, 3: divers). Die zweite Zeile enthält zu jeder Merkmalsausprägung die zugehörige Anzahl (= absolute Häufigkeit):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>geschlecht_haeufigkeit_abs <span class="ot">=</span> <span class="fu">table</span>(allbus_messniveau_bsp<span class="sc">$</span>sex) </span>
-<span id="cb7-2"><a href="#cb7-2"></a>stichprobengroesse <span class="ot">=</span> <span class="fu">length</span>(allbus_messniveau_bsp<span class="sc">$</span>sex)</span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a>geschlecht_haeufigkeit_abs        <span class="co"># Ausgabe der Tabelle</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a>geschlecht_haeufigkeit_abs <span class="ot">=</span> <span class="fu">table</span>(allbus_messniveau_bsp<span class="sc">$</span>sex) </span>
+<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2"></a>stichprobengroesse <span class="ot">=</span> <span class="fu">length</span>(allbus_messniveau_bsp<span class="sc">$</span>sex)</span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-4" class="code-annotation-target"><a href="#annotated-cell-5-4"></a>geschlecht_haeufigkeit_abs</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="4" data-code-cell="annotated-cell-5" data-code-annotation="1">Ausgabe der Tabelle</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-   1    2    3 
-2614 2705    3 </code></pre>
+KEINE ANGABE         MANN         FRAU       DIVERS 
+          20         2614         2705            3 </code></pre>
 </div>
 </div>
 <p>Insgesamt summieren sie sich (wie erwartet) zu 5322 Merkmalsträgern auf, was auch der Größe des Datensatzes entspricht:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">sum</span>(geschlecht_haeufigkeit_abs)   <span class="co"># Ausgabe der Summe der absoluten Häufigkeiten</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5322</code></pre>
+<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1"></a><span class="fu">sum</span>(geschlecht_haeufigkeit_abs)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2">2</button><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2"></a>stichprobengroesse</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-6" data-code-annotation="1">Ausgabe der Summe der absoluten Häufigkeiten</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="2" data-code-cell="annotated-cell-6" data-code-annotation="2">Ausgabe der Gesamtanzahl an Merkmalsträgern im Datensatz</span>
+</dd>
+</dl>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>stichprobengroesse          <span class="co"># Ausgabe der Gesamtanzahl an Merkmalsträgern im Datensatz</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5322</code></pre>
+<pre><code>[1] 5342
+[1] 5342</code></pre>
 </div>
 </div>
 <p>Die relativen Häufigkeiten können wir uns ausgeben lassen, indem wir den Inhalt der Tabelle durch die Gesamtanzahl der Merkmalsträger teilen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>geschlecht_haeufigkeit_rel <span class="ot">=</span> geschlecht_haeufigkeit_abs <span class="sc">/</span> stichprobengroesse <span class="co"># Berechnung der relativen Häufigkeiten</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>geschlecht_haeufigkeit_rel        <span class="co"># Ausgabe der Tabelle mit den relativen Häufigkeiten</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1"></a>geschlecht_haeufigkeit_rel <span class="ot">=</span> geschlecht_haeufigkeit_abs <span class="sc">/</span> stichprobengroesse</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2">2</button><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2"></a>geschlecht_haeufigkeit_rel</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-7" data-code-annotation="1">Berechnung der relativen Häufigkeiten</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="2" data-code-cell="annotated-cell-7" data-code-annotation="2">Ausgabe der Tabelle mit den relativen Häufigkeiten</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-           1            2            3 
-0.4911687336 0.5082675686 0.0005636979 </code></pre>
+KEINE ANGABE         MANN         FRAU       DIVERS 
+0.0037439161 0.4893298390 0.5063646574 0.0005615874 </code></pre>
 </div>
 </div>
 <p>Erwartungsgemäß summieren sich die relativen Häufigkeiten zu 1 auf:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">sum</span>(geschlecht_haeufigkeit_rel) <span class="co"># Ausgabe der Summe der relativen Häufigkeiten</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1"></a><span class="fu">sum</span>(geschlecht_haeufigkeit_rel)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-8" data-code-annotation="1">Ausgabe der Summe der relativen Häufigkeiten</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
 </div>
-<p>Eine Möglichkeit der Darstellung von Häufigkeiten ist das Kuchendiagramm. Zu diesem Zweck erstellen wir einen eigenen Dataframe:</p>
+<p>Eine Möglichkeit der Darstellung von Häufigkeiten ist das Balkendiagramm:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>df.sex <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="at">sex=</span><span class="fu">c</span>(<span class="st">"Mann"</span>, <span class="st">"Frau"</span>, <span class="st">"divers"</span>), </span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="at">frequency=</span>geschlecht_haeufigkeit_abs</span>
-<span id="cb17-4"><a href="#cb17-4"></a>)</span>
-<span id="cb17-5"><a href="#cb17-5"></a></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="fu">ggplot</span>(df.sex, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span>frequency.Freq, <span class="at">fill=</span>sex)) <span class="sc">+</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(allbus_messniveau_bsp, <span class="fu">aes</span>(<span class="at">x=</span>sex)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">xlab</span>(<span class="st">"Geschlecht"</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_4.1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Auf den ersten Blick lässt sich so ein generelles Bild des Datensatzes machen: Es sind in etwa so viele Männer wie Frauen im Datensatz, wobei Frauen etwas stärker vertreten sind. Personen, die sich weder als Mann noch als Frau identifizieren, kommen nur in sehr geringer Zahl vor.</p>
+<p>Auf den ersten Blick lässt sich so ein generelles Bild des Datensatzes machen: Es sind in etwa so viele Männer wie Frauen im Datensatz, wobei Frauen etwas stärker vertreten sind. Personen, die sich weder als Mann noch als Frau identifizieren, kommen nur in sehr geringer Zahl vor (3 Fälle, die leider nicht korrekt angezeigt werden).</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

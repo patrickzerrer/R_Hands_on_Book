@@ -449,7 +449,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Bild generiert von Midjourney</figcaption>
+<figcaption class="figure-caption">Unser Schreibtisch, Bild generiert von Midjourney</figcaption>
 </figure>
 </div>
 <p>Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten wir uns zunächst einige Grundlagen widmen. Wir beschäftigen uns im Folgenden mit einigen fundamentalen Begriffen, deren Funktionsweisen wir kennen sollten - das erleichtert uns zumindest die Arbeit deutlich und vermeidet wahrscheinlich den ein oder anderen Fehler samt dazugehörigen frustrierten Verfluchen des Kurses und R.</p>
@@ -485,7 +485,13 @@ Video
 <section id="das-anlegen-eines-r-projekts" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Das Anlegen eines R-Projekts</h1>
 <p>Starten wir zunächst mit dem Anlegen eines sogenannten R-Projekts. RStudio-Projekte ermöglichen es uns alle mit einem Projekt verbundenen Dateien an einem Ort zu speichern. Das umfasst Datensätze, R-Skripte, Ergebnisse, Abbildungen, Berichte usw. Projekte sind bereits in RStudio integriert.</p>
-<p><img src="Bilder/Skript_1_4_Screenshot1.png" class="img-fluid" alt="Screenshot RStudio"> Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button <code>New Project</code> ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Skript_1_4_Screenshot1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Screenshot RStudio</figcaption>
+</figure>
+</div>
+<p>Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button <code>New Project</code> ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.</p>
 <p>In eurem Fall könnt ihr euch direkt alle notwendigen Materialen und Skripte für das erfolgreiche Bearbeiten dieses Kurses in R-Studio laden. Hierfür geht ihr in der rechts oberen Ecke des Nutzer:innen Interfaces auf den Button <code>New Project</code> und wählt dann <code>Version Control</code> aus.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -520,7 +526,7 @@ Video
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">Der Bereich in Anführungszeichen gibt den Dateipfad an. Damit sagt ihr R, wo sich die zu ladende Datei befindet.</span>
+<span data-code-cell="annotated-cell-1" data-code-annotation="1" data-code-lines="1">Der Bereich in Anführungszeichen gibt den Dateipfad an. Damit sagt ihr R, wo sich die zu ladende Datei befindet.</span>
 </dd>
 </dl>
 </div>
@@ -557,9 +563,10 @@ Video
 <li><p><em>Atmen</em>: Bleib ruhig und atme ein paar mal tief durch, gerade wenn es nicht der erste Fehler ist der dir heute begegnet.</p></li>
 <li><p><em>Lesen</em>: Lies aufmerksam die Fehlermeldung.</p></li>
 <li><p><em>Code überprüfen</em>: Schaue nach, ob sich ein Warnzeichen am Rand deines R Codes befindet. Dieses Warnzeichen weist dich auf einen Syntaxfehler (bspw. eine vergessene Klammer oder Komma) hin.</p></li>
-<li><p><em>Variablen überprüfen</em>: Überprüfe kurz, ob du die richtigen Variablen verwendest oder sich ein Tippfehler eingeschlichen hat.</p></li>
+<li><p><em>Variablen überprüfen</em>: Überprüfe kurz, ob du die richtigen Variablen verwendest oder sich ein Tippfehler eingeschlichen hat. Achtet auch auf Groß- und Kleinschreibung.</p></li>
 <li><p><em>Informationen suchen</em>: Rufe eine Vignette (mit dem Befehl <code>vignette</code>) oder rufe die Hilfeseite mit einem der Funktion vorgelagerten Fragezeichen auf (mit bspw. <code>?dpylr()</code>) auf und lies sie dir durch.</p></li>
 <li><p><em>Sich im Netz Hilfe suchen</em>: Suche auf <a href="https://stackoverflow.com/questions/tagged/r">Stack Overflow</a> nach deinem Problem, meistens hat jemand auf der Welt das oder ein ähnliches Problem schon einmal gelöst.</p></li>
+<li><p><em>Frag deine Kommilitonen</em>: Tauscht euch aus, gemeinsam findet ihr eine Lösung!</p></li>
 <li><p><em>Die KI fragen</em>: Nutze ein KI Chatbot, um dir die Fehlermeldung erklären zu lassen und Lösungsvorschläge zu unterbreiten. Beachte hierbei bitte, dass die Antworten nicht immer korrekt sind und meist Kontextwissen von dir benötigt wird, um die Korrektheit der Antworten zu prüfen <a href="https://www.r-bloggers.com/2023/04/tips-for-using-chatgpt-to-learn-r/">Link</a>.</p></li>
 <li><p><em>Frag uns</em>: Frag dein:e Dozent:in :)</p></li>
 </ol>
