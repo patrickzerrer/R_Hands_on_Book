@@ -10,13 +10,11 @@ format:
     code-line-numbers: true
 ---
 
-![Eine Wand voller Tabellen, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_cyberpunk_statistics_table_wideformat_a16032f7-613e-4608-b19e-95c97039c779.png)
-
-# Eine Einführung in ggplot2
+# Eine Einführung in Tabellen und Grafiken mit dem tidyverse
 
 Dieses Notebook illustriert verschiedene Möglichkeiten dafür, wie auf Grundlage der ALLBUS-Daten informative Tabellen und Plots erstellt werden können. Tabellen und Datenvisualisierungen ("Plots") stellen zwei sehr effektive Möglichkeiten dar, sich schnell einen Überblick über komplexe Daten zu verschaffen. Dabei lassen sich oftmals Zusammenhänge zwischen zwei oder mehr Variablen erahnen, die dann später inferenzstatistisch auf die Solidität ihres Zusammenhangs hin überprpüft werden können.
 
-Zunächst laden wir die die Pakete des tidyverse. Die Einstellung theme_set hat einen Einfluss auf die Grafiken, die wir später erstellen werden.
+Zunächst laden wir die Pakete des tidyverse. Das Paket ggplot2 ist das zentrale Werkzeug, um informative Plots zu produzieren. Die Einstellung theme_set hat einen Einfluss auf die Grafiken, die wir später erstellen werden.
 
 ```{r Laden der notwendigen Pakete}
 library(tidyverse)
@@ -31,7 +29,7 @@ Jetzt laden wir den ALLBUS-Datensatz mittels der Stata-Importfunktion read_dta.
 daten <- read_dta("Datensatz/Allbus_2021.dta")
 ```
 
-Nun laden wir zudem noch drei kleinere Zufallssamples aus dem Gesamtdatensatz. Diese bestehen aus einer kleineren Anzahl relevanter Variablen und sind daher etwas übersichtlicher als der Hauptdatensatz.
+Nun laden wir zudem noch drei zuvor erstellte Zufallssamples aus dem Gesamtdatensatz. Diese bestehen aus einer kleineren Anzahl relevanter Variablen und sind daher etwas übersichtlicher als der Hauptdatensatz.
 
 ```{r Laden von drei kleineren Teilsamples}
 sample_klein <- read_rds("Datensatz/ALLBUS_sample_klein.rds")
@@ -47,11 +45,11 @@ sample_klein
 
 # Tabellen
 
-Tabellen (und besonder sog. Kontingenz- oder Häufigkeitstabellen) sind ein einfaches und praktisches Mittel, um sich einen Überblick über Daten zu verschaffen.
+Tabellen (und besonders sog. Kontingenz- oder Häufigkeitstabellen) sind ein einfaches und praktisches Mittel, um sich einen Überblick über Daten zu verschaffen. Um solche Tabellen zu erstellen, formen wir in der Regel Data Frames mit den Funktionen des tidyverse (und vor allem mit dem Paket dplyr) so um, dass sie die gewünschten Informationen enthalten. Wir *aggregieren*.
 
 ## Einfache Häufigkeitstabelle
 
-Wir berechnen eine einfache Häufigkeitstabelle für die Variable 'edubde1' (höchster Bildungsabschluss).
+Wir berechnen eine einfache Häufigkeitstabelle für die Variable geschlecht. Dies geschieht mit den Funktionen group_by und summarise. Die Funktion n übernimmt das eigentliche Auszählen der Häufigkeit einer Variablenausprägung.
 
 ```{r Einfache Häufigkeitstabelle}
 geschlechterverteilung <- sample_klein %>% 
@@ -60,7 +58,7 @@ geschlechterverteilung <- sample_klein %>%
 geschlechterverteilung
 ```
 
-Im nächsten Schritt fügen wir relative Anteile hinzu, um Verhältnisse besser zu verstehen.
+Im nächsten Schritt fügen wir den absoluten Zahlen relative Anteile hinzu, um das Geschlechterverhältnis besser zu verstehen.
 
 ```{r Häufigkeitstabelle mit Anteilen}
 geschlechterverteilung <- sample_klein %>% 
@@ -70,7 +68,7 @@ geschlechterverteilung <- sample_klein %>%
 geschlechterverteilung
 ```
 
-Nun fügen wir noch Prozentanteile ein, indem with mit 100 multiplizieren und runden (was in erster Linie kosmetischer Natur ist).
+Nun fügen wir den Anteilen von 1 noch Prozentanteile hinzu, indem with mit 100 multiplizieren und runden (was in erster Linie kosmetischer Natur ist).
 
 ```{r Häufigkeitstabelle mit gerundeten Prozentwerten}
 geschlechterverteilung <- sample_klein %>% 
@@ -91,7 +89,7 @@ write_excel_csv2(geschlechterverteilung, file = "geschlechterverteilung.csv")
 
 ## Kreuztabellen
 
-Was, wenn wir zwei Variablen mit Blick auf ihre Werte in Beziehung setzen wollen? Das bezeichnet man als Kreuz- oder Kontigenztabelle.
+Was, wenn wir *zwei* Variablen mit Blick auf ihre Werte in Beziehung setzen wollen? Das bezeichnet man als Kreuz- oder Kontigenztabelle. Man erzeugt eine Kreuztabelle mit dplyr, indem man nach mehreren Variablen gruppiert.
 
 ```{r Kreuztabelle berechnen}
 bildung_und_geschlecht <- sample_klein %>% 
@@ -113,13 +111,17 @@ geschlecht_und_bildung <- sample_klein %>%
 geschlecht_und_bildung
 ```
 
+Lag also im ersten Anlauf das Geschlecht der Gruppierung zugrunde, ist es in der zweiten Version der Bildungsabschluss.
+
 # Visualisierung
 
 Beim Erstellen von Grafiken (Plots) mit R kommt eines der populärsten tidyverse-Pakete zum Einsatz: [ggplot2](https://ggplot2.tidyverse.org/). Damit lassen sich sehr vielfältige Grafiken erstellen.
 
 ## Balkendiagramme
 
-Das einfachste Diagramm, das man mit dem ggplot2-Paket erstellen kann, ist ein Balkendiagramm (barplot). Das nachstehende Beispiel zeigt die Häufigkeitsverteilung der Variable gndr (gender = Geschlecht) im Datensatz.
+Das vermutlich einfachste Diagramm, das man mit dem ggplot2-Paket erstellen kann, ist ein Balken- oder Säulendiagramm (barplot). Es zeigt die Häufigkeitsverteilung einer diskreten Variablen, indem es Säulen auf der x-Achse darstellt. Balkendiagramme sind besonders geeignet, um wenige Ausprägungen (bis ca. 15) zu veranschaulichen. Wenn es mehr Kategorien gibt, wird die Anschaulichkeit beeinträchtigt, und es empfiehlt sich, auf Liniendiagramme auszuweichen.
+
+Das nachstehende Beispiel zeigt die Häufigkeitsverteilung der Variable geschlecht im Datensatz (bzw. dem kleinen Sample).
 
 ```{r Ein erstes Plot}
 ggplot(sample_klein, aes(geschlecht)) + 
@@ -168,32 +170,32 @@ ggplot(sample_klein, aes(as_factor(fernsehkonsum))) +
 
 ## Histogramme
 
-Für ein besseres Verständnis einer Verteilung sind oftmals die Häufigkeitsausprägungen einer kontinuierlichen Variable in gleich großen Gruppen interessant (sog. "bins"). Dabei hilft der Visualisierungstyp Histogramm.
+Für ein besseres Verständnis einer Verteilung sind oftmals die Häufigkeitsausprägungen einer kontinuierlichen Variable in gleich großen Gruppen interessant (sog. "bins"). Dabei hilft der Visualisierungstyp Histogramm. Ein Histogramm ist eine grafische Darstellung der Häufigkeitsverteilung kardinal skalierter Merkmale. Dabei werden Daten in Klassen unterteilt, die unterschiedliche Breiten haben können. Rechtecke mit der Breite der Klassen werden nebeneinander gezeichnet, wobei ihre Flächen die (relativen oder absoluten) Klassenhäufigkeiten repräsentieren. Die Höhe jedes Rechtecks zeigt die (relative oder absolute) Häufigkeitsdichte an, also die Häufigkeit geteilt durch die Breite der jeweiligen Klasse.
 
 ```{r Ein einfaches Histogramm}
 ggplot(sample_mittel, aes(alter)) + 
   geom_histogram()
 ```
 
-Auch hier lassen sich relevante Aspekte anpassen, etwa die Anzahl und Breite der Balken.
+Auch hier lassen sich relevante Aspekte anpassen, etwa die Anzahl und Breite der Flächen.
 
 ```{r Histogramm mit angepassten Bins}
 ggplot(sample_mittel, aes(alter)) + 
   geom_histogram(bins = 40) + 
   ggtitle("Altersverteilung der Respondenten") + 
-  xlab("Alter") + ylab("Anzahl der Respondenten")
+  xlab("Alter") + ylab("Anzahl der RespondentInnen")
 ```
 
-Hier können wir erstmalig die Farbe eines Elements gezielt einsetzen, um eine zusätzliche (also nach Vetrauen auf der x-Achse und der Anzahl der Respondenten auf der y-Achse eine dritte Variable) darzustellen, nämlich das Geschlecht der Respondenten.
+Hier können wir erstmalig die Farbe eines Elements gezielt einsetzen, um eine zusätzliche (also nach Vetrauen auf der x-Achse und der Anzahl der Respondenten auf der y-Achse eine dritte Variable) darzustellen, nämlich das Geschlecht der RespondentInnen.
 
 ```{r Histogramm mit Gruppierung und Farbe nach Geschlecht}
 ggplot(sample_gross, aes(vertrauen_polizei, fill = geschlecht)) + 
   geom_histogram(binwidth = 1, position = "dodge") + 
   ggtitle("Vertrauen in die Polizei nach Geschlecht") + 
-  xlab("Vetrauen (1-7)") + ylab("Anzahl der Respondenten") + labs(fill = "Geschlecht") 
+  xlab("Vetrauen (1-7)") + ylab("Anzahl der RespondentInnen") + labs(fill = "Geschlecht") 
 ```
 
-Neben Balken beherrscht ggplot auch zahlreiche weitere Darstellungsformen (sog. geoms). Eine interessante Alternative zum klassischen Histogramm ist etwa das Dichte-Plot (density plot). Nachstehend verwenden wir zwei Flächen und einen Trasparenz-Effekt für die Darstellung.
+Neben Blaken und Flächen beherrscht ggplot auch zahlreiche weitere Darstellungsformen (sog. geoms). Eine interessante Alternative zum klassischen Histogramm ist etwa das Dichte-Plot (density plot). Nachstehend verwenden wir zwei Flächen und einen Trasparenz-Effekt für die Darstellung.
 
 ## Dichte-Plots
 
@@ -208,6 +210,8 @@ ggplot(polizei, aes(vertrauen_polizei, fill = geschlecht)) +
 ## Liniendiagramme
 
 Zu den klassischen Plot-Typen gehören neben Barplots und Histogrammen auch Linien-, Punkt- und Streudiagramme, sowie Boxplots.
+
+Liniendiagramme zeigen den Zusammenhang von zwei Variablen, in diesem Beispiel einer nominalen und einer ordinalen (oder, wenn wir großzügig sind \[pseudo\]metrischen) Variable, nämlich Wahlabsicht nach Partei und Vertrauen in die Presse.
 
 ```{r Ein Liniendiagramm}
 vertrauen_nach_partei <- sample_gross %>% 
@@ -236,7 +240,11 @@ ggplot(vertrauen_nach_partei_sortiert, aes(reorder(Partei, Rang), Vertrauenswür
 
 ## Streudiagramme
 
-Eine weiterer Diagrammtyp, der häufig zum Einsatz kommt, ist das Streudiagramm (scatter plot). Mit diesem Plottypen lassen sich die Beziehung mehrerer Variablen (i.d.R. zwei, jeweils auf der x/y-Achse) darstellen.
+Ein weiterer Diagrammtyp, der häufig zum Einsatz kommt, ist das sog. Streudiagramm (scatter plot). Ein Streudiagramm, auch als Punktwolkebekannt, ist eine visuelle Darstellung von beobachteten Wertepaaren zweier statistischer Merkmale. Diese Wertepaare werden in ein kartesisches Koordinatensystem eingetragen, was eine Ansammlung von Punkten ergibt. Die Darstellung der Punkte kann mit verschiedenen Symbolen erfolgen.
+
+Mit diesem Plottypen lassen sich die Beziehung mehrerer Variablen (i.d.R. zwei, jeweils auf der x/y-Achse) anschaulich darstellen und sowohl (lineare oder nicht-lineare) Zusammenhänge indetifizieren als auch Cluster bilder.
+
+Wir erzeugen zunächst einen Data Frame, der Informationen zu Geschlecht, Alter, Einkommen und Bildung der StudienteilnehmerInnen enthält.
 
 ```{r Datenauswahl zum Einkommen treffen}
 einkommen <- daten %>% 
@@ -253,24 +261,24 @@ einkommen <- daten %>%
 einkommen
 ```
 
-Welche Beziehung lässt sich zwischen Alter (x-Achse) und täglicher Internetnutzung in Minuten (y-Achse) feststellen?
+Welche Beziehung lässt sich zwischen Alter (x-Achse) und dem Einkommen (y-Achse) der RespondentInnen feststellen?
 
 ```{r Ein einfaches Streudiagramm}
 ggplot(einkommen, aes(alter, einkommen)) +
   geom_point()
 ```
 
-Wir wenden uns jetzt einem etwas ausgefeilteren Beispiel zu, nämlich der Beziehung von politischen Interesse und Nachrichtennutzung.
+Wir entwickeln dieses Beispiel nun noch etwas weiter.
 
 ```{r Ein weiteres Beispiel für ein Streudiagramm}
 ggplot(einkommen, aes(alter, einkommen)) +
-  geom_jitter(width = .5, size = 2) +
+  geom_jitter(width = 1) +
   geom_smooth(method = 'lm', formula = 'y ~ x') + 
   ggtitle("Zusammenhang zwischen Alter und Nettoeinkommen") + 
   xlab("Alter") + ylab("Nettoeinkommen in Euro")
 ```
 
-Bei der Linie, die wir mit geom_smooth gezeichnet haben, handelt es sich um eine [Regressionsgerade](https://de.wikipedia.org/wiki/Lineare_Einfachregression). Der graue Bereich um die Gerade zeigt den lokalen Standardfehler an. Auf Regressionmodelle gehen wir zum Abschluss des Moduls noch intensiv ein.
+Bei der Linie, die wir mit dem Befehl geom_smooth gezeichnet haben, handelt es sich um eine [Regressionsgerade](https://de.wikipedia.org/wiki/Lineare_Einfachregression). Der graue Bereich um die Gerade zeigt den lokalen Standardfehler an. Auf Regressionmodelle gehen wir zum Abschluss des Moduls noch intensiv ein. Schon jetzt kann man aber erahnen, was uns die Regressionsgerade illustriert.
 
 Was, wenn wir mehr als drei Variablen (bzw. unterschiedliche Ausprägungen einer kategorialen Variable) darstellen wollen? Neben der Positionierung auf der x- und y-Achse und der Farbe können wir hier zusätzlich auch noch mit unterschiedlichen Formen arbeiten.
 
@@ -279,18 +287,19 @@ Das nachstehende Beispiel ist nicht unbedingt besonders informativ, zeigt aber d
 ```{r Streudiagramm mit vier Farben und zwei Formen}
 ggplot(einkommen, aes(alter, einkommen, color = bildung, shape = geschlecht)) +
   geom_jitter(width = .5, height = .5, size = 2) +
-  #geom_smooth(method = 'lm', formula = 'y ~ x', se = FALSE) + 
   ggtitle("Zusammenhang zwischen Alter und Nettoeinkommen ") + 
   xlab("Alter") + ylab("Nettoeinkommen") + 
   labs(color = "Bildungsabschluss") + labs(shape = "Geschlecht")
 ```
 
-## Facettierte Plots
+## Boxplots
 
-Neben dem Einsatz unterschiedlicher Farben und Formen kann auch sog. Facettierung zum Einsatz kommen um zusätzliche Informationen darzustellen. In einem weiteren Beispiel nehmen wir den Zusammenhang zwischen soziodemographischen Variablen und der Internetnutzung in den Blick. Dazu fügen wir zunächst eine Variable Altersgruppe ein, welche die einzelnen Altersangaben in Kohorten zusammenfasst.
+Ein Box-Plot, auch als Box-Whisker-Plot oder Kastengrafik bezeichnet, ist ein grafisches Darstellungsinstrument, das verwendet wird, um die Verteilung von mindestens ordinalskalierten Merkmalen übersichtlich darzustellen. Es fasst robuste Streuungs- und Lagemaße in einer einzigen Grafik zusammen. Diese Darstellung bietet auf einen Blick Informationen darüber, wo die Datenwerte liegen und wie sie über diesen Bereich verteilt sind. Dies wird erreicht, indem die sogenannte Fünf-Punkte-Zusammenfassung, bestehend aus dem Median, den beiden Quartilen und den beiden Extremwerten, in einer grafischen Form präsentiert wird.
+
+Zunächst legen wir noch einen weiteren Data Frame an, der Infortationen zur Demokratiezufriedenheit der RespondentInnen enthält.
 
 ```{r}
-social_media <- sample_gross %>% 
+demokratiezefriedenheit <- sample_gross %>% 
   mutate(altersgruppe = cut(alter, 
                            breaks = c(0, 24, 34, 44, 54, 64, Inf),
                            labels = c("18-24", "25-34", "35-44", "45-54", "55-64", "65+")),
@@ -301,38 +310,27 @@ social_media <- sample_gross %>%
            zufriedenheit_demokratie %in% c("ETWAS UNZUFRIEDEN",
                                            "ZIEML. UNZUFRIEDEN",
                                            "SEHR UNZUFRIEDEN") ~ "eher unzufrieden"))) %>% 
-  select(altersgruppe, geschlecht, zufriedenheit_demokratie_zusammengefasst, social_media_nachrichtenquelle)
-```
-
-Dann aggregieren wir nach Altersgruppe, Geschlecht und Land und plotten anschließend die Ergebnisse.
-
-```{r Demokratiezufriedenheit und Social Media-Nutzung als Nachrichtenquelle aggregieren}
-social_media_aggregiert <- social_media %>% 
-  group_by(altersgruppe, geschlecht, zufriedenheit_demokratie_zusammengefasst) %>% 
-  summarise(socmedia = median(social_media_nachrichtenquelle)) %>% 
+  select(alter, altersgruppe, geschlecht, zufriedenheit_demokratie_zusammengefasst) %>% 
   drop_na()
 ```
 
-```{r Demokratiezufriedenheit und Social Media-Nutzung nach Alter plotten}
-ggplot(social_media_aggregiert, aes(altersgruppe, socmedia, fill = geschlecht)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  facet_grid(cols = vars(zufriedenheit_demokratie_zusammengefasst)) + 
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +
-  ggtitle("Demokratiezufriedenheit und Social Media-Nutzung nach Alter und Geschlecht") + 
-  xlab("Alter") + ylab("Nutzung von Social Media als Nachrichtenquelle")
+Dann erstellen wir ein einfaches Boxplot, welches das Alter der eher zufriedenen Personen mit dem der eher unzufriedenen vergleicht.
+
+```{r}
+ggplot(demokratiezefriedenheit, aes(zufriedenheit_demokratie_zusammengefasst, alter)) + 
+  geom_boxplot()
 ```
 
-Sie können Ihr einfaches Diagramm mit Hilfe zusätzlicher Komponenten verfeinern, indem Sie sie dem Diagramm hinzufügen (für ein sehr einfaches "Vokabular" von ggplot2 besuchen Sie diesen Link --\> (https://ggplot2.tidyverse.org/reference/).
+Der Einsatz von Boxplots für den Gruppenverleich bietet sich oftmals an, wenn man verschiedene Lageparameter vergleichen möchte.
 
-Als nächstes schauen wir die Zustimmung zu der Aussafe an, dass der globale Klimawandel größtenteils oder vollständig durch den Menschen verursacht wird.
+Nun erstellen wir einen anderen Data Frame, jetzt zum Vertrauen in gesellschaftliche Institutionen, um ein weiteres Beispiel für die Verwendung von Boxplots in den Blick zu nehmen.
 
 ```{r}
 vertrauen_summiert <- sample_gross %>% 
   rowwise() %>% 
   mutate(vertrauen_gesamt = sum(across(starts_with("vertrauen_")))) %>% 
   select(alter, geschlecht, entwicklung_kriminalitaet, vertrauen_gesamt) %>% 
-  ungroup() %>% 
-  drop_na()
+  ungroup() %>% drop_na()
 ```
 
 ```{r}
@@ -341,6 +339,36 @@ ggplot(vertrauen_summiert, aes(entwicklung_kriminalitaet, vertrauen_gesamt)) +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +
   ggtitle("Kriminalitätseinschätzung und Vertrauen in gesellschaftliche Institutionen") + 
   xlab("Kriminalitätseinschätzung") + ylab("Vertrauen in gesellschaftliche Institutionen")
-
-#ggsave("Kriminalität_und_Vertrauen.pdf")
 ```
+
+Wir speichern unser Plot zudem als PDF.
+
+```{r}
+ggsave("Kriminalität_und_Vertrauen.pdf")
+```
+
+## Facettierte Plots
+
+Im letzten Abschnitt behandeln wir eine weitere nützliche Funktion von ggplot, um eine größere Zahl von Variablen zu visualisieren -- die sog. Facettierung.
+
+Dazu zählen wir zunächst wie zu Beginn des Kapitels mehrere Variablen aus, hier die Altersgruppe, das Geschlecht und die zuvor ermittelte Demokratiezufriedenheit als binäre Variable (eher zufrieden/eher unzufrieden).
+
+```{r}
+demokratiezefriedenheit_gruppen <- demokratiezefriedenheit %>% 
+  count(altersgruppe, geschlecht, zufriedenheit_demokratie_zusammengefasst)
+```
+
+Das nun folgenden Plot hat die Altersgruppe auf der X-Achse, die Anzahl der RespondentInnen auf der Y-Achse und das Geschlecht als Füllfarbe. Zu diesen drei Variablen kommt noch eine weitere dazu (Demokratiezufriedenheit) nach der facettiert wird.
+
+```{r}
+ggplot(demokratiezefriedenheit_gruppen, aes(altersgruppe, n, fill = geschlecht)) +
+  geom_bar(stat = "identity") + 
+  facet_grid(cols = vars(zufriedenheit_demokratie_zusammengefasst)) + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +
+  ggtitle("Demokratiezufriedenheit nach Alter und Geschlecht") + 
+  xlab("Altersgruppe") + ylab("StudienteilnehmerInnen")
+```
+
+# Zusammenfassung
+
+Wie wir sehen, lassen sich Daten mithilfe von Tabellen und Plots sinnvoll beschreiben und so erste Rückschlüsse zu Mustern und Zusammenhängen ziehen, die dann später systematisch mithilfe inferenzstatistischer Verfahren überprüft werden können.

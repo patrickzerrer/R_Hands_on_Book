@@ -33,3 +33,104 @@ Abgefragt werden u.a. Einschätzungen und Einstellungen in den Bereichen:
 \- Freizeitaktivitäten
 
 \- Gesundheit und gesundheitsrelevantes Verhalten
+
+Lesen wir den
+
+```{r Laden der notwendigen Pakete}
+#library(tidyverse)
+#library(naniar)
+library(haven)
+library(readr)
+#theme_set(theme_minimal())
+```
+
+Jetzt laden wir den ALLBUS-Datensatz mittels der Stata-Importfunktion read_dta aus dem Paket haven ein.
+
+```{r Laden der ALLBUS-Daten}
+daten <- read_dta("Datensatz/Allbus_2021.dta")
+```
+
+Nun laden wir zudem noch drei zuvor erstellte Zufallssamples aus dem Gesamtdatensatz. Diese bestehen aus einer kleineren Anzahl relevanter Variablen und sind daher etwas übersichtlicher als der Hauptdatensatz.
+
+```{r Laden von drei kleineren Teilsamples}
+sample_klein <- read_rds("Datensatz/ALLBUS_sample_klein.rds")
+sample_mittel <- read_rds("Datensatz/ALLBUS_sample_mittel.rds")
+sample_gross <- read_rds("Datensatz/ALLBUS_sample_gross.rds")
+```
+
+Wie sehen die Daten aus?
+
+```{r Datensatz anzeigen lassen}
+sample_klein
+```
+
+Der kleine Beispieldatensatz illustriert den grundlegeenden Aufbau des ALLBUS. Dieser folgt (beim ALLBUS, aber auch den meisten anderen Befragungen) den folgenden Prinzipien
+* die Befragung ist ein einzeles Data Frame-Object (= eine große Tabelle)
+* die Zeilen sind die Beobachtungen (= RespondentInnen)
+* die Spalten sind die Variablen (= Antworten auf Survey-Fragen, oder bei der Möglichkeit zur Mehrfachnennung, die einzelnen Antwortoptionen)
+* die Zelleninhalte sind i.d.R. (Dummy)Zahlenwerte (= 1 für wenig Zustimmung und 5 für hohe Zustimmung)
+
+Im Beispieldatensatz sind die Werte der Variablen alter, geschlecht und bildung recht leicht nachvollziebar, wobei sie etwas unterschiedliche Datentypen aufweissen, wie man mit Hilfe der Funktion str ermitteln kann.
+
+```{r}
+str(sample_klein)
+```
+
+Bei Alter handelt es sich schlicht um eine Zahl (num), während geschlecht und bildung sogenannte Faktoren sind. Faktoren nutzt man in R, um wiederholende nicht numerische (typischerweise nominal oder ordinalskalierte) Werte zu speichern. Praktisch jeder Faktor könnte genausogut eine Zeichenkette (chr) sein, aber oftmals sind Faktoren praktischer, weil sie eine festen Reihenfolge haben können (ranked factors), die sich bei Bedarf auch in Zahlen umwandel lassen. Im konkreten Beispiel ist das Geschlecht ein ungerankter Faktor, der Bildungsgrad hat hingegen einen Rang. Der Fernsehkonsum ist schließlich eine Likert-skalierte Variable die wir hier und auch an anderer Stelle als metrische Variable behandeln (und dafür den R-Datentypen numeric verwenden), auch wenn das strikt genommen nicht immer zulässig ist -- zumindest dann nicht, wenn man nur auf Grundlage eines einzelnen Items misst und eine 5- oder 7-Punkt Skala verwendet (vgl etwa  https://doi.org/10.1080/01488376.2017.1329775). 
+
+Wie sehen die anderen Samples aus? Wir sehen uns im nächsten Schritt das große Zufallssample an. 
+
+```{r}
+sample_gross
+```
+
+Da wir es jetzt mit einer größeren Zahl an Beobachtungen and Variablen zu tun haben kann es nützlich sein, sich einen Überblick zu verschaffen.
+
+Zunächst lassen wir uns die Variablennamen (also die Spalten) ausgeben.
+
+```{r}
+colnames(sample_gross)
+```
+
+Eine etwas detailliertere Beschreibung erhalten wir durch die Funktion str. Diese liefert uns auch die Dimensionen (Anzahl der Zeilen und Spalten) des Data Frames, sowie die Variablen, deren Datentyp und die ersten zehn Ausprägungen.
+
+```{r}
+str(sample_gross)
+```
+
+Eine alternative (aber etwas ordentlichere) Ansicht erhält man mit dem Befehl glimpse aus dem Paket tibble (im tidyverse enthalten).
+
+```{r}
+tibble::glimpse(sample_gross)
+```
+
+Schließlich lassen sich mit dem Befehle summary auch noch Eckwerte wie die Ausprägung von Faktorenstufen (bei Faktoren) oder Lageparameter (bei metrischen Variable) ermitteln.
+
+
+```{r}
+summary(sample_gross)
+```
+
+Nun schauen wir uns den ALLBUS selbst -- also den Gesamtdatensatz -- genauer an. 
+
+```{r}
+daten
+```
+
+Es wird schnell klar, das weniger die Anzahl der Beobachtungen als vielmehr die Anzahle der Variablen (544) eine Herausforderung darstellt, zumal diese eher kryptische Namen wie "hp06" haben. Wie sich zurechfinden?
+
+Zum Glück lassen sich die sog. Labels, also die sprechenden Beschriftungen die sowohl Fragen and auch Antwortoptionen im ALLBUS-Stata-Datensatz haben, mittels R extrahieren (dies geschieht mit dem Paket labelled). Wir haben dies bereits vorbereitend gemacht und laden die entsprechenden Tabellen nun nur noch. 
+
+```{r}
+variablen <- read_csv2("Datensatz/ALLBUS_2021_variablen.csv", show_col_types = FALSE)
+variablen_optionen <- read_csv2("Datensatz/ALLBUS_2021_variablen_optionen.csv", show_col_types = FALSE)
+```
+
+Es lohnt sich, beide Objekte mittels View() oder durch eine Klick in RStudio anzuschauen. Interessant sind die Felder variable (der Name der Variable im ALLBUS) und label (eine sprechende Beschreibung).
+
+Suchen wir etwa nach "hp06" finden wie die Label-Beschreibung "EPIDEMIE: STAAT DARF KRANKE ISOLIEREN", die deutlich besser interpretierbar ist. 
+
+Wir können so ebenfalls nach Begriffen suchen, die in den Labels vorkommen. Beispielsweise finden wir mit einer Suche nach dem Begruff 'medien' die Variablen lm35 (Nutzung von sozialen Medien als Nchrichtenquelle) und lm39 (Glaubwürdigkeit sozialer Medien mit Blick auf Kriminalität).
+
+
+
