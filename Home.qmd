@@ -19,7 +19,7 @@ Diese Website ist ein multimediales Online-Lehrbuch und begleitet die Lehrverans
 
 In diesem Kurs führen wir schrittweise durch die Grundlagen der quantitativen Forschungsdesigns. Diese Webseite bündelt hierbei das für den Kurs bentötigte Wissen sowie alle benötigten Kurs-Materialien. Ziel des Kurses ist es, eigenständig ein Forschungsprojekt - vom Einlesen der Daten über das Datenmanagement bis zur statistischen Analyse - durchführen zu können. 
 
-Wir freuen uns darauf, Sie in unserem Kurs begrüßen zu dürfen!
+Wir freuen uns euch in unserem Kurs begrüßen zu dürfen!
 
 ## Inhalte des Online-Lehrbuchs
 
@@ -35,7 +35,7 @@ Des Weiteren enthalten alle Skripte den benötigten Code in farblich abgesetzten
 
 ![](Bilder/Codeerklärungen.png)
 
-Die Codefehler könnt ihr als Ganzes direkt in eure Zwischenablage kopieren. Geht dafür einfach mit der Maus über das Codefeld und klickt anschließend auf das kleine Clipboard. 
+Die Codefelder könnt ihr als Ganzes direkt in eure Zwischenablage kopieren. Geht dafür einfach mit der Maus über das Codefeld und klickt anschließend auf das kleine Clipboard. 
 
 ![](Bilder/Screenshot_Codechunks.png)
 
