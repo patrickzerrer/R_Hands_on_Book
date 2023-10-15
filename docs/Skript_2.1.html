@@ -371,8 +371,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#was-ist-ein-datensatz-und-wie-ist-dieser-aufgebaut" id="toc-was-ist-ein-datensatz-und-wie-ist-dieser-aufgebaut" class="nav-link active" data-scroll-target="#was-ist-ein-datensatz-und-wie-ist-dieser-aufgebaut"><span class="header-section-number">1</span> Was ist ein Datensatz und wie ist dieser aufgebaut?</a></li>
-  <li><a href="#klassische-formen-von-datensätzen-in-der-kommunikationswissenschaft" id="toc-klassische-formen-von-datensätzen-in-der-kommunikationswissenschaft" class="nav-link" data-scroll-target="#klassische-formen-von-datensätzen-in-der-kommunikationswissenschaft"><span class="header-section-number">2</span> Klassische Formen von Datensätzen in der Kommunikationswissenschaft</a></li>
+  <li><a href="#was-ist-ein-datensatz-und-wie-sind-datensätze-aufgebaut" id="toc-was-ist-ein-datensatz-und-wie-sind-datensätze-aufgebaut" class="nav-link active" data-scroll-target="#was-ist-ein-datensatz-und-wie-sind-datensätze-aufgebaut"><span class="header-section-number">1</span> Was ist ein Datensatz und wie sind Datensätze aufgebaut?</a></li>
+  <li><a href="#strukturierte-vs.-unstrukturierte-daten" id="toc-strukturierte-vs.-unstrukturierte-daten" class="nav-link" data-scroll-target="#strukturierte-vs.-unstrukturierte-daten"><span class="header-section-number">2</span> Strukturierte vs.&nbsp;unstrukturierte Daten</a></li>
+  <li><a href="#data-frames-und-strukturierte-daten" id="toc-data-frames-und-strukturierte-daten" class="nav-link" data-scroll-target="#data-frames-und-strukturierte-daten"><span class="header-section-number">3</span> Data Frames und strukturierte Daten</a></li>
+  <li><a href="#beobachtungen-und-variablen" id="toc-beobachtungen-und-variablen" class="nav-link" data-scroll-target="#beobachtungen-und-variablen"><span class="header-section-number">4</span> Beobachtungen und Variablen</a>
+  <ul class="collapse">
+  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung"><span class="header-section-number">4.1</span> Zusammenfassung</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -402,16 +407,61 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="was-ist-ein-datensatz-und-wie-ist-dieser-aufgebaut" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Was ist ein Datensatz und wie ist dieser aufgebaut?</h1>
-<p>Sozialwissenschaftlichen Daten sind Informationen, die zur Beschreibung und Erklärung der sozialen Welt verwendet werden. Sie können aus einer Vielzahl von Quellen stammen, zum Beispiel aus Umfragen, Experimenten, Interviews und Inhaltsanalysen. Kommunikationswissenschaftliche Daten können quantitativ oder qualitativ sein. Quantitative Daten sind in Zahlen ausgedrückt und können verwendet werden, um Muster und Zusammenhänge zu identifizieren. Qualitative Daten sind in Text oder Bildern ausgedrückt und können verwendet werden, um die Bedeutung von Ereignissen und Erfahrungen zu verstehen.</p>
-<p>Unter Datensätzen verzehen wir digital zusammengestellte Daten,</p>
+<section id="was-ist-ein-datensatz-und-wie-sind-datensätze-aufgebaut" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Was ist ein Datensatz und wie sind Datensätze aufgebaut?</h1>
+<p>Sozialwissenschaftlichen Daten sind Informationen, die zur Beschreibung und Erklärung der sozialen Welt verwendet werden. Sie können aus einer Vielzahl von Quellen stammen, zum Beispiel aus Umfragen, Experimenten, Interviews und Inhaltsanalysen. Kommunikationswissenschaftliche Daten können quantitativ oder qualitativ sein. Quantitative Daten sind in Zahlen ausgedrückt und können verwendet werden, um Muster und (kausale) Zusammenhänge zu identifizieren. Qualitative Daten sind in Text oder (Bewegt)Bildern ausgedrückt und können verwendet werden, um die Bedeutung von Ereignissen und Erfahrungen genauer zu verstehen.</p>
 </section>
-<section id="klassische-formen-von-datensätzen-in-der-kommunikationswissenschaft" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Klassische Formen von Datensätzen in der Kommunikationswissenschaft</h1>
-<p>einfach auf Brosius et al oder Springer et al verweisen? Oder der aufbau in R? dazu müsste man ja erst data frames erklären.</p>
+<section id="strukturierte-vs.-unstrukturierte-daten" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Strukturierte vs.&nbsp;unstrukturierte Daten</h1>
+<p>Unter <em>strukturiertern Datensätzen</em> verstehen wir digital zusammengestellte Daten, die bestimmte strukturierende Merkmale aufweise. Häufig lassen sich solche strukturierten Daten als Tabellen darstellen und speichern. Ein konkretes Beispiel wäre eine Sammlung von Zeitungsartikeln. Handelt es sich um einzelne Textdatein, zu deren Inhalt man keine weiteren Informationen besitzt, würde man in der Regel von unstruktukrierten Daten sprechen. Fügt man aber Titel, Publikationsdatum und Quelle hinzu, könnten wir diese Daten als Tabelle abspeichern und von einem strukturierten Datensatz sprechen.</p>
+</section>
+<section id="data-frames-und-strukturierte-daten" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Data Frames und strukturierte Daten</h1>
+<p>Nahezu alle strukturierte Daten lassen sich in R als Data Frames speichern. Dies bietet zahlreiche Vorteile, weil sich Data Frames leicht umformen, refaktorieren oder aggregieren lassen. So kann man leicht auszählen, wie viele Artikel zur gleichen Quelle gehören, zu welchem Zeitpunkt wie viele Artikel veröffentlicht wurden, oder (bei einer Befragung) wie viele Stunden die StudienteilnehmerInnen im Mittel wöchentlich fernsehen. Häufig lassen sich zunächst unstrukturierte Daten in ein strukturiertes Format überführen, wenn man relevante Metadaten nutzt, beispielsweise Dateinahmen.</p>
+</section>
+<section id="beobachtungen-und-variablen" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Beobachtungen und Variablen</h1>
+<p>Der Aufbau von Tabellen (bzw. Data Frames) folgt dabei in der Regel einer logischen Struktur. Die Zeilen geben die Anazhl der <em>Beobachtungen</em> (oder <em>Fälle</em>) an, während die Spalten einzelne <em>Variablen</em> (oder <em>Merkmale</em>) repräsentieren.</p>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 30%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Einheit</strong></th>
+<th>Beobachtung (oder Fall)</th>
+<th>Variable (oder Merkmal)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Tabellen-Strukturmerkmal</strong></td>
+<td>Zeile</td>
+<td>Spalte</td>
+</tr>
+<tr class="even">
+<td><strong>Beispiele</strong></td>
+<td><ul>
+<li><p>Respondent in einer Befragung</p></li>
+<li><p>Zeitungsartikel in einer Inhaltsanalyse</p></li>
+<li><p>Versuchsdurchlauf in einem Experiment</p></li>
+</ul></td>
+<td><ul>
+<li><p>Antwort auf eine Frage in einem Fragebogen</p></li>
+<li><p>Quelle oder Titel eines Zeitungsartikels in einer Inhaltsanalyse</p></li>
+<li><p>Messwert in einem Experiment</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<section id="zusammenfassung" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="zusammenfassung"><span class="header-section-number">4.1</span> Zusammenfassung</h2>
+<p>Im nächsten Kapitel werden wir uns eingehender mit der Behandlung von tabellenstrukturierten Daten in unterschiedlichen Formaten beschäftigen.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

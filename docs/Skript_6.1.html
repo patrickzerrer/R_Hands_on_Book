@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="tba">
+<meta name="author" content="Katharina Maubach">
 
 <title>Bivariate Statistik &amp; Mittelwertvergleiche</title>
 <style>
@@ -31,6 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Bilder/favicon-32x32.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -60,6 +61,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<meta name="mermaid-theme" content="neutral">
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -337,25 +342,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 1: Pearson Chi-Quadrat-Test &amp; Rangkorrelation</span></a>
+ <span class="menu-text">Pearson Chi-Quadrat-Test &amp; Rangkorrelation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Einführung in die Analyse von Zusammenhängen zwischen Variablen - Teil 2: Korrelation &amp; Regression</span></a>
+ <span class="menu-text">Korrelation &amp; Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Prüfung der Voraussetzungn bei der linearen Regression</span></a>
+ <span class="menu-text">Prüfung der Voraussetzungen bei der linearen Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Skript_7.4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Zusammenhänge bei mehr als zwei Variablen mit der multiplen Regression</span></a>
+ <span class="menu-text">Die multiple Regression</span></a>
   </div>
 </li>
       </ul>
@@ -370,7 +375,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#einführung-in-die-bivariate-statistik-und-mittelwertvergleiche" id="toc-einführung-in-die-bivariate-statistik-und-mittelwertvergleiche" class="nav-link active" data-scroll-target="#einführung-in-die-bivariate-statistik-und-mittelwertvergleiche"><span class="header-section-number">1</span> Einführung in die Bivariate Statistik und Mittelwertvergleiche</a></li>
+  <li><a href="#einführung-in-die-bivariate-statistik" id="toc-einführung-in-die-bivariate-statistik" class="nav-link active" data-scroll-target="#einführung-in-die-bivariate-statistik"><span class="header-section-number">1</span> Einführung in die Bivariate Statistik</a></li>
+  <li><a href="#das-überprüfen-von-unterschieden" id="toc-das-überprüfen-von-unterschieden" class="nav-link" data-scroll-target="#das-überprüfen-von-unterschieden"><span class="header-section-number">2</span> Das Überprüfen von Unterschieden</a>
+  <ul class="collapse">
+  <li><a href="#wann-verwende-ich-welches-testverfahren" id="toc-wann-verwende-ich-welches-testverfahren" class="nav-link" data-scroll-target="#wann-verwende-ich-welches-testverfahren"><span class="header-section-number">2.1</span> Wann verwende ich welches Testverfahren?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -389,7 +398,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>tba </p>
+             <p>Katharina Maubach </p>
           </div>
   </div>
     
@@ -400,14 +409,52 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="einführung-in-die-bivariate-statistik-und-mittelwertvergleiche" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Einführung in die Bivariate Statistik und Mittelwertvergleiche</h1>
-<p>Statistische Tests erlauben es uns, auf der Basis von quantitativen Daten eine begründete Entscheidung über die Gültigkeit oder Ungültigkeit einer Hypothese zu treffen.</p>
-<p>Bei den hier verwendeten Beispielen geht es darum, Unterschiede zwischen zwei oder mehr Stichproben (oder Teilstichproben) statistisch zu überprüfen.</p>
-<p>Ein statistischer Test liefert Aufschluss darüber, wie wahrscheinlich es ist, dass wir die Nullhypothese verwerfen und/oder die alternative Hypothese annehmen können.</p>
-<p>Können wir aufgrund des Testausgangs davon ausgehen, dass ein (nicht zufälliger) Unterschied zwischen zwei Stichproben besteht, so sprechen wir von einem signifikanten (überzufälligen) Unterschied.</p>
+<section id="einführung-in-die-bivariate-statistik" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Einführung in die Bivariate Statistik</h1>
+<p>Bei der bivariaten Statistik schauen wir uns nicht Variablen isoliert an, sondern interessieren uns für die Beziehung von zwei Variablen zueinander. Grundsätzlich unterscheiden wir bei bivariaten Analysen in die Überprüfung von (Mittelwert-)Unterschieden und das Prüfen von Zusammenhängen. In diesem Kapitel konzentrieren wir uns auf die Überprüfung von Unterschieden. Die Überprüfung von Zusammenhängen mittels Korrelation und Regression findet sich hingegen im <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_7.1.html">nächsten Kapitel</a>.</p>
+</section>
+<section id="das-überprüfen-von-unterschieden" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Das Überprüfen von Unterschieden</h1>
+<p>Die Überprüfung von möglichen bivariaten Unterschieden sollte zunächst immer deskriptiv über <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.4.html#kreuztabellen">Kreuztabellen</a> oder <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.4.html#balkendiagramme">Grafiken</a> erfolgen.</p>
+<p>Anschließend stehen uns eine Vielzahl an statistischen Testverfahren zur Verfügung. Diese nutzen wir um zu Überprüfen, ob ein eventueller Mittelwertunterschied in den deskriptiven Daten auch statistische Signifikanz aufweist.</p>
+<p>Grundsätzlich unterscheiden wir zwischen Verfahren die eine verbundene Stichprobe und eine unabhängige Stichprobe voraussetzen. Bei einer unabhängigen Stichprobe sind unsere zu vergleichenden Gruppen unabhängig voneinander. Bei einer verbundenen Stichprobe hingegen hängen, wie es der Name schon vermuten lässt, die Stichproben voneinander ab. Ein klassisches Beispiel für eine verbundene Stichprobe ist der Mittelwertvergleich bei denselben Personen zu unterschiedlichen Zeitpunkten.</p>
+<p>In einem nächsten Schritt schauen wir uns an, wie viele verschiedene Gruppen wir miteinander vergleichen. Vergleichen wir lediglich zwei Gruppen so nutzen wir einen t-test. Haben wir hingegen mehr als zwei Gruppen so können wir den t-test nicht mehr anwenden. Dann benötigen wir die Varianzanalyse.</p>
+<p>In einem letzten Schritt müssen wir prüfen, ob unsere Daten für die Testverfahren geeignet sind. Sowohl der t-test als auch die Varianzanalyse stellen einige Voraussetzungen an die Beschaffenheit der Daten. Falls die Daten diese nicht erfüllen können wir auf weniger voraussetzungsreiche sog. nicht-parametrische Tests zurückgreifen.</p>
+<section id="wann-verwende-ich-welches-testverfahren" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="wann-verwende-ich-welches-testverfahren"><span class="header-section-number">2.1</span> Wann verwende ich welches Testverfahren?</h2>
+<p>Die folgende Grafik kann als Orientierung dienen, welches Verfahren für eure spezielle Datenlage Sinn ergibt. Durch einen Klick auf die Verfahren kommt ihr jeweils zum entsprechenden Kapitel.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">
+flowchart LR
+  A&gt;Mittelwertvergleich] --&gt; B(unabhängige Stichprobe)
+  B --&gt; D(2 Faktorstufen)
+  B --&gt; E(mehr als 2 Faktorstufen)
+  D --&gt; F(t-test für unabhängige Stichprobe)
+  D --&gt; G(nicht parametrisch: Mann-Whitney Test)
+  E --&gt; H(Varianzanalyse: ein- und mehrfaktoriell)
+  E --&gt; I(nicht parametrisch: Kruskal-Wallis Test)
+  A --&gt; C(verbundene Stichprobe)
+  C --&gt; J(2 Faktorstufen)
+  C --&gt; K(mehr als 2 Faktorstufen)
+  J --&gt; L(t-test für verbundene Stichproben)
+  J --&gt; M(nicht parametrisch: Wilcoxon-Test)
+  K --&gt; N(einfaktorielle Varianzanalyse mit Messwiederholung)
+  
+click I "https://patrickzerrer.github.io/R_Hands_on_Book/Skript_6.4.html#exkurs-kruskal-wallis-test"
+click H "https://patrickzerrer.github.io/R_Hands_on_Book/Skript_6.4.html"
+click N "https://patrickzerrer.github.io/R_Hands_on_Book/Skript_6.4.html"
+  
+</pre>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
