@@ -422,16 +422,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#interpretation-der-posthoc-tests-und-des-gesamtmodells" id="toc-interpretation-der-posthoc-tests-und-des-gesamtmodells" class="nav-link" data-scroll-target="#interpretation-der-posthoc-tests-und-des-gesamtmodells"><span class="header-section-number">3.5</span> Interpretation der Posthoc-Tests und des Gesamtmodells</a></li>
   <li><a href="#visualisierung-der-gruppenunterschiede-mittels-fehlerbalken" id="toc-visualisierung-der-gruppenunterschiede-mittels-fehlerbalken" class="nav-link" data-scroll-target="#visualisierung-der-gruppenunterschiede-mittels-fehlerbalken"><span class="header-section-number">3.6</span> Visualisierung der Gruppenunterschiede mittels Fehlerbalken</a></li>
   <li><a href="#exkurs-nicht-parametrische-testverfahren" id="toc-exkurs-nicht-parametrische-testverfahren" class="nav-link" data-scroll-target="#exkurs-nicht-parametrische-testverfahren"><span class="header-section-number">3.7</span> Exkurs: nicht parametrische Testverfahren</a></li>
-  <li><a href="#mehrfaktorielle-varianzanalyse" id="toc-mehrfaktorielle-varianzanalyse" class="nav-link" data-scroll-target="#mehrfaktorielle-varianzanalyse"><span class="header-section-number">3.8</span> Mehrfaktorielle Varianzanalyse</a></li>
-  <li><a href="#interpretation-des-outputs-1" id="toc-interpretation-des-outputs-1" class="nav-link" data-scroll-target="#interpretation-des-outputs-1"><span class="header-section-number">3.9</span> Interpretation des Outputs</a>
-  <ul class="collapse">
-  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests"><span class="header-section-number">3.9.1</span> Post-Hoc Tests</a></li>
   </ul></li>
-  <li><a href="#interpretation-der-posthoc-tests-und-des-gesamtmodells-1" id="toc-interpretation-der-posthoc-tests-und-des-gesamtmodells-1" class="nav-link" data-scroll-target="#interpretation-der-posthoc-tests-und-des-gesamtmodells-1"><span class="header-section-number">3.10</span> Interpretation der Posthoc-Tests und des Gesamtmodells</a>
+  <li><a href="#mehrfaktorielle-varianzanalyse" id="toc-mehrfaktorielle-varianzanalyse" class="nav-link" data-scroll-target="#mehrfaktorielle-varianzanalyse"><span class="header-section-number">4</span> Mehrfaktorielle Varianzanalyse</a>
   <ul class="collapse">
-  <li><a href="#visualisierung-der-interaktionen" id="toc-visualisierung-der-interaktionen" class="nav-link" data-scroll-target="#visualisierung-der-interaktionen"><span class="header-section-number">3.10.1</span> ## Visualisierung der Interaktionen</a></li>
+  <li><a href="#interpretation-des-outputs-1" id="toc-interpretation-des-outputs-1" class="nav-link" data-scroll-target="#interpretation-des-outputs-1"><span class="header-section-number">4.1</span> Interpretation des Outputs</a>
+  <ul class="collapse">
+  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests"><span class="header-section-number">4.1.1</span> Post-Hoc Tests</a></li>
   </ul></li>
-  <li><a href="#literatur" id="toc-literatur" class="nav-link" data-scroll-target="#literatur"><span class="header-section-number">3.11</span> Literatur</a></li>
+  <li><a href="#interpretation-der-posthoc-tests-und-des-gesamtmodells-1" id="toc-interpretation-der-posthoc-tests-und-des-gesamtmodells-1" class="nav-link" data-scroll-target="#interpretation-der-posthoc-tests-und-des-gesamtmodells-1"><span class="header-section-number">4.2</span> Interpretation der Posthoc-Tests und des Gesamtmodells</a>
+  <ul class="collapse">
+  <li><a href="#visualisierung-der-interaktionen" id="toc-visualisierung-der-interaktionen" class="nav-link" data-scroll-target="#visualisierung-der-interaktionen"><span class="header-section-number">4.2.1</span> ## Visualisierung der Interaktionen</a></li>
+  </ul></li>
+  <li><a href="#literatur" id="toc-literatur" class="nav-link" data-scroll-target="#literatur"><span class="header-section-number">4.3</span> Literatur</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -483,19 +485,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="1" data-code-lines="2">Lädt alle benötigten Pakete mit dem Befehl <code>p_load()</code></span>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="1">Lädt alle benötigten Pakete mit dem Befehl <code>p_load()</code></span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="2" data-code-lines="4">Setzt einen universalen Hintergund (<code>theme_classic</code>) für unsere Datenvisualisierungen mit ggplot2 fest.</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="4" data-code-annotation="2">Setzt einen universalen Hintergund (<code>theme_classic</code>) für unsere Datenvisualisierungen mit ggplot2 fest.</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="3" data-code-lines="5">Sorgt dafür, dass sehr kleine Zahlen ausgeschrieben werden.</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="5" data-code-annotation="3">Sorgt dafür, dass sehr kleine Zahlen ausgeschrieben werden.</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="4" data-code-lines="6">Sorgt dafür, dass Symbole im Output gedruckt werden.</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="4">Sorgt dafür, dass Symbole im Output gedruckt werden.</span>
 </dd>
 </dl>
 </div>
@@ -561,19 +563,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="1" data-code-lines="2">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="2" data-code-lines="3">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="2">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="3" data-code-lines="5">Wir speichern die Variablen als Faktoren. Wir nutzen dabei die Funktion as_factor aus dem haven Paket um die Bezeichnungen der Faktorstufen direkt zu übernehmen.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="3">Wir speichern die Variablen als Faktoren. Wir nutzen dabei die Funktion as_factor aus dem haven Paket um die Bezeichnungen der Faktorstufen direkt zu übernehmen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="4" data-code-lines="7">Wir kodieren die Variable Alter in eine dichotome Variable (jung und alt) um. Die Aufteilung geschieht anhand des Medians der Verteilung.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="7" data-code-annotation="4">Wir kodieren die Variable Alter in eine dichotome Variable (jung und alt) um. Die Aufteilung geschieht anhand des Medians der Verteilung.</span>
 </dd>
 </dl>
 </div>
@@ -603,19 +605,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="1" data-code-lines="2">In R nutzen wir das Paket <code>ggplot2</code> von Wickham et al.&nbsp;um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket <code>ggplot2</code> mit dem Befehl <code>ggplot()</code> aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier <code>daten</code>) und unter aes unsere Variable (hier <code>trustges</code>).</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="1">In R nutzen wir das Paket <code>ggplot2</code> von Wickham et al.&nbsp;um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket <code>ggplot2</code> mit dem Befehl <code>ggplot()</code> aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier <code>daten</code>) und unter aes unsere Variable (hier <code>trustges</code>).</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="2" data-code-lines="3">Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll <code>(aes(y = after_stat(count))</code>, wir die Außenumrandung schwarz <code>color = black</code> und die Füllfarbe grau wünschen (<code>fill = grey</code>). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="2">Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll <code>(aes(y = after_stat(count))</code>, wir die Außenumrandung schwarz <code>color = black</code> und die Füllfarbe grau wünschen (<code>fill = grey</code>). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="3" data-code-lines="5">Mit <code>binwidth = 1</code> verweisen wir hier auf die Breite der Balken unseres Histogramms.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="3">Mit <code>binwidth = 1</code> verweisen wir hier auf die Breite der Balken unseres Histogramms.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="4" data-code-lines="6">Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl <code>labs</code> um zusätzlich die Achsen zu beschriften.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="6" data-code-annotation="4">Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl <code>labs</code> um zusätzlich die Achsen zu beschriften.</span>
 </dd>
 </dl>
 </div>
@@ -660,11 +662,11 @@ W = 0.92102, p-value &lt; 0.00000000000000022</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-annotation="1" data-code-lines="3">Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird. Haben wir nur eine abhängige Variable, so geben wir diese an.</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="1">Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird. Haben wir nur eine abhängige Variable, so geben wir diese an.</span>
 </dd>
 <dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-annotation="2" data-code-lines="7">Haben wir mehrere unabhängige Variablen so können wir diese mit einem * verbinden. Anschließend wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="7" data-code-annotation="2">Haben wir mehrere unabhängige Variablen so können wir diese mit einem * verbinden. Anschließend wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.</span>
 </dd>
 </dl>
 </div>
@@ -702,11 +704,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-annotation="1" data-code-lines="2,3">Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die <code>group_by</code>-Funktion in Kombination mit der <code>summarise</code>-Funktion.</span>
+<span data-code-cell="annotated-cell-8" data-code-lines="2,3" data-code-annotation="1">Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die <code>group_by</code>-Funktion in Kombination mit der <code>summarise</code>-Funktion.</span>
 </dd>
 <dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-annotation="2" data-code-lines="5">Im nachfolgenden Schritt haben wir mit Hilfe des Befehls <code>kable()</code> aus dem Paket <code>knitr</code> das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.</span>
+<span data-code-cell="annotated-cell-8" data-code-lines="5" data-code-annotation="2">Im nachfolgenden Schritt haben wir mit Hilfe des Befehls <code>kable()</code> aus dem Paket <code>knitr</code> das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.</span>
 </dd>
 </dl>
 </div>
@@ -767,11 +769,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-annotation="1" data-code-lines="3">Innerhalb der Funktion aov_car müssen wir zunächst die abhängige Variable (<code>trustges</code>) angeben und nach einer Tilde die unabhängige Variabel (<code>gesund</code>). Zudem müssen wir den Zusatz <code>+ Error()</code> nutzen un in der Klammer die Fallid (hier <code>respid</code>) angeben. Alles speichern wir als Objekt <code>fit</code> welches wir anschließend mit <code>print</code> aufrufen.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="3" data-code-annotation="1">Innerhalb der Funktion aov_car müssen wir zunächst die abhängige Variable (<code>trustges</code>) angeben und nach einer Tilde die unabhängige Variabel (<code>gesund</code>). Zudem müssen wir den Zusatz <code>+ Error()</code> nutzen un in der Klammer die Fallid (hier <code>respid</code>) angeben. Alles speichern wir als Objekt <code>fit</code> welches wir anschließend mit <code>print</code> aufrufen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-annotation="2" data-code-lines="7">Mit <code>eta_squared</code> können wir zusätzlich die Effektstärke angeben. Diese findet sich für die einfaktorielle Anova auch in der Spalte pes, aber hier erhalten wir zusätzlich ein Konfidenzintervall für den Effekt.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="7" data-code-annotation="2">Mit <code>eta_squared</code> können wir zusätzlich die Effektstärke angeben. Diese findet sich für die einfaktorielle Anova auch in der Spalte pes, aber hier erhalten wir zusätzlich ein Konfidenzintervall für den Effekt.</span>
 </dd>
 </dl>
 </div>
@@ -846,19 +848,19 @@ P value adjustment: tukey method for comparing a family of 5 estimates </code></
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-annotation="1" data-code-lines="2,3">Wir wählen auf der x-Achse die Variable <code>gesund</code> aus und auf der y-Achse die Variable <code>trustges</code>.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="2,3" data-code-annotation="1">Wir wählen auf der x-Achse die Variable <code>gesund</code> aus und auf der y-Achse die Variable <code>trustges</code>.</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-annotation="2" data-code-lines="4">Wir fügen für die jeweiligen Faktorstufen der Variablen <code>gesund</code> die Mittelwerte sowie Konfidenzintervalle hinzu.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="4" data-code-annotation="2">Wir fügen für die jeweiligen Faktorstufen der Variablen <code>gesund</code> die Mittelwerte sowie Konfidenzintervalle hinzu.</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-annotation="3" data-code-lines="5,6,7">Wir bennenen unsere Grafik um.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="5,6,7" data-code-annotation="3">Wir bennenen unsere Grafik um.</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-annotation="4" data-code-lines="8">Da die Labels unserer Faktorstufen sehr lang sind, drehen wir diese um 45 Grad. Dies geschieht mit der Funktion <code>rotate_x_text()</code> aus dem Paket <code>ggpubr</code>.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="8" data-code-annotation="4">Da die Labels unserer Faktorstufen sehr lang sind, drehen wir diese um 45 Grad. Dies geschieht mit der Funktion <code>rotate_x_text()</code> aus dem Paket <code>ggpubr</code>.</span>
 </dd>
 </dl>
 </div>
@@ -940,14 +942,16 @@ Exkurs: Einfaktorielle Varianzanalyse mit Messwiederholung
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<section id="umgang-mit-messwiederholungen" class="level2 callout-body-container callout-body" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="umgang-mit-messwiederholungen"><span class="header-section-number">3.8</span> Umgang mit Messwiederholungen</h2>
 <p>Haben wir mehr als zwei Testzeitpunkte vorliegen, so können wir die ANOVA mit Messwiederholung rechnen. Die ANOVA mit Messwiederholung weitet dabei den Gedanken der t-Test für abhängige Stichproben weiter aus. Solltet ihr euch für dieses Verfahren interessieren, findet ihr <a href="https://bjoernwalther.com/anova-mit-messwiederholung-in-r/">hier</a> weitere Infos dazu.</p>
-</div>
+</section>
 </div>
 </div>
 </section>
-<section id="mehrfaktorielle-varianzanalyse" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="mehrfaktorielle-varianzanalyse"><span class="header-section-number">3.8</span> Mehrfaktorielle Varianzanalyse</h2>
+</section>
+<section id="mehrfaktorielle-varianzanalyse" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Mehrfaktorielle Varianzanalyse</h1>
 <p>In der mehrfaktoriellen Varianzanalyse können wir unser Modell aus der einfachen Varianzananlyse erweitern. In diesem Beispiel nutzen wir neben der Variablen zum Gesundheitszustand (<code>gesund</code>) zusätzlich die Variable Alter (<code>agef</code>) um das Vertrauen in das Gesundheitssystem (<code>trustges</code>) vorherzusagen.</p>
 <p>Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen.</p>
 <div class="cell">
@@ -1052,13 +1056,12 @@ Response: trustges
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-</section>
-<section id="interpretation-des-outputs-1" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="interpretation-des-outputs-1"><span class="header-section-number">3.9</span> Interpretation des Outputs</h2>
+<section id="interpretation-des-outputs-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="interpretation-des-outputs-1"><span class="header-section-number">4.1</span> Interpretation des Outputs</h2>
 <p>Die Erläuterungen der einzelnen Parameter sind gleich zu den Erläuterungen der unifaktoriellen ANOVA, daher werden diese nicht wiederholt. Es zeigt sich, dass der Gesundheitszustand erneut einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen hat (welcher im vorliegenden Modell etwas höher mit 0.9 Prozent erklärter Varianz ausfällt). Zusätzlich hat neben der Gesundheitszustand auch das Alter der Befragten einen signifikanten, wenngleich geringeren Einfluss auf das Vertrauen in das Gesundheitswesen. Zudem sehen wir einen signifikanten Einfluss der Interaktion von Alter und Gesundheitszustand (<code>gesund:agef4</code>).</p>
 <p>Im Anschluss müssen wir, wie in der univariaten ANOVA, die Posthoc-Tests berechnen (im vorliegenden Fall können wir lediglich den Tukey-Test berechnen, das der Tamhame-Test nur für einfaktorielle Designs funktioniert).</p>
-<section id="post-hoc-tests" class="level3" data-number="3.9.1">
-<h3 data-number="3.9.1" class="anchored" data-anchor-id="post-hoc-tests"><span class="header-section-number">3.9.1</span> Post-Hoc Tests</h3>
+<section id="post-hoc-tests" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="post-hoc-tests"><span class="header-section-number">4.1.1</span> Post-Hoc Tests</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">#Tukey Post-Hoc Test</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(fit2, <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"gesund"</span>, <span class="st">"agef"</span>)) <span class="sc">%&gt;%</span> </span>
@@ -1162,10 +1165,10 @@ P value adjustment: tukey method for comparing a family of 10 estimates </code><
 </div>
 </section>
 </section>
-<section id="interpretation-der-posthoc-tests-und-des-gesamtmodells-1" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="interpretation-der-posthoc-tests-und-des-gesamtmodells-1"><span class="header-section-number">3.10</span> Interpretation der Posthoc-Tests und des Gesamtmodells</h2>
-<section id="visualisierung-der-interaktionen" class="level3" data-number="3.10.1">
-<h3 data-number="3.10.1" class="anchored" data-anchor-id="visualisierung-der-interaktionen"><span class="header-section-number">3.10.1</span> ## Visualisierung der Interaktionen</h3>
+<section id="interpretation-der-posthoc-tests-und-des-gesamtmodells-1" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="interpretation-der-posthoc-tests-und-des-gesamtmodells-1"><span class="header-section-number">4.2</span> Interpretation der Posthoc-Tests und des Gesamtmodells</h2>
+<section id="visualisierung-der-interaktionen" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="visualisierung-der-interaktionen"><span class="header-section-number">4.2.1</span> ## Visualisierung der Interaktionen</h3>
 <p>Um einen möglichen Interaktionseffekt auch anschaulich vermitteln bzw. oft auch verstehen zu können, empfiehlt es sich, diesen als Diagramm darzustellen. Hierzu nutzen wir die Pakete <code>emmeans</code> und <code>ggplot2</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">#Interaktionsplot ausgeben</span></span>
@@ -1186,8 +1189,8 @@ P value adjustment: tukey method for comparing a family of 10 estimates </code><
 </div>
 </section>
 </section>
-<section id="literatur" class="level2" data-number="3.11">
-<h2 data-number="3.11" class="anchored" data-anchor-id="literatur"><span class="header-section-number">3.11</span> Literatur</h2>
+<section id="literatur" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="literatur"><span class="header-section-number">4.3</span> Literatur</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
