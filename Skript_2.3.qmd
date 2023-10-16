@@ -8,11 +8,14 @@ format:
   html:
     code-fold: false
     code-line-numbers: true
+execute: 
+  warning: false
+  message: false
 ---
 
 ![Wir haben unsere Daten, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_truck_leaving_a_warehouse_cyberpunk__4c152b14-f4a7-4a08-8222-ce07ba126eaf.png)
 
-Die Allgemeine Bevölkerungsumfrage der Sozialwissenschaften (ALLBUS) ist eine standardisierte Befragung der deutschen Bevölkerung, die seit 1980 regelmäßig durch das GESIS Leibniz Institut für Sozialforschung durchgeführt wird. Im ALLBUS werden in der Regel alle zwei Jahre Daten über Einstellungen, Verhaltensweisen und Sozialstruktur der Bevölkerung in der Bundesrepublik Deutschland gesammelt. Dafür wird in persönlichen Interviews jeweils eine repräsentative Stichprobe aus der Bevölkerung Deutschlands befragt (jeweils ca. 2.800 bis 3.500 Befragte).
+Die Allgemeine Bevölkerungsumfrage der Sozialwissenschaften [(ALLBUS)](https://www.gesis.org/allbus/allbus) ist eine standardisierte Befragung der deutschen Bevölkerung, die seit 1980 regelmäßig durch das GESIS Leibniz Institut für Sozialforschung durchgeführt wird. Im ALLBUS werden in der Regel alle zwei Jahre Daten über Einstellungen, Verhaltensweisen und Sozialstruktur der Bevölkerung in der Bundesrepublik Deutschland gesammelt. Dafür wird in persönlichen Interviews jeweils eine repräsentative Stichprobe aus der Bevölkerung Deutschlands befragt (jeweils ca. 2.800 bis 3.500 Befragte).
 
 Abgefragt werden u.a. Einschätzungen und Einstellungen in den Bereichen:
 

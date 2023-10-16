@@ -116,7 +116,7 @@ Wir haben nun alle Daten geladen und die Variablen entsprechend vorbereitet. Wir
 Es gibt eine ganze Reihe von möglichen Arten von Indizes, welche wir theoretisch berechnen könnten.
 
 | Art des Index                       | Bildung (Beispiel)                                   | Beschreibung                                                                                                                            |
-|-----------------|-----------------|--------------------------------------|
+|------------------|------------------|-------------------------------------|
 | Ungewichteter additivier Index      | Index = Indikator_1 + Indikator_2 + Indikator_3      | Die Ausprägungen der Indikatorvariablen werden addiert bzw. zu gemittelt.                                                               |
 | Ungewichteter multiplikativer Index | Index = Indikator_1 \* Indikator_2 \* Indikator_3    | Wenn ein Index Mindestausprägungen auf allen Indikatorvariablen voraussetzt sollte multiplikativ zu einem Gesamtindex verknüpft werden. |
 | Gewichteter additivier Index        | Index = (2\*Indikator_1) + Indikator_2 + Indikator_3 | Gewichtete additive Indizes ermöglichen eine differenzierte Behandlung der einzelnen Indikatoren.                                       |
@@ -172,11 +172,9 @@ Zur Einordnung der erhaltenen Skalen-Reliabilität, gehen wir von folgenden Cron
 
 # Interpretation des Wirksamkeit-Indizes
 
-Die Werte sind ein gutes Ergebnis. Die Items zeigen eine gute Inter-Item-Korrelation.
+Die Werte sind ein gutes Ergebnis. Die Items zeigen eine gute Inter-Item-Korrelation. Wir können noch nachschauen, ob wir die Skalen-Reliabilität verbessern können, indem wir einzelne Items herauswerfen. Denn der Output von Cronbachs Alpha gibt uns auch hilfreiche Aufschlüsse darüber, welche Items man evtl. ausschließen kann, um Cronbachs Alpha bei ungenügender Höhe noch auf ein mindestens akzeptables Maß zu heben. Diese Information findet sich im Bereich "Reliability if an item is dropped":. In unserem Fall wird die reliabitlitä aber noch schlechter - wir können nichts mehr verbessern.
 
-Wir können noch nachschauen, ob wir die Skalen-Reliabilität verbessern können, indem wir einzelne Items herauswerfen. Denn der Output von Cronbachs Alpha gibt uns auch hilfreiche Aufschlüsse darüber, welche Items man evtl. ausschließen kann, um Cronbachs Alpha bei ungenügender Höhe noch auf ein mindestens akzeptables Maß zu heben. Diese Information findet sich im Bereich "Reliability if an item is dropped":. In unserem Fall wird die reliabitlitä aber noch schlechter - wir können nichts mehr verbessern.
-
-Entsprechend haben wir erfolgreich einen Index für die latente Variable *Vertrauen in gesellschaftliche Institutionen* gebildet. Wir haben eine theoretische Grundlage gefunden, diese empirisch anhand der Daten des Allbus mittels explorativer Faktorenanalyse geprüft und einen Summenindex berechnet, dessen Qualität wir mittels Cronbachs Alpha zeigen konnten.
+Entsprechend haben wir erfolgreich einen Index für die latente Variable *Vertrauen in gesellschaftliche Institutionen* gebildet. Wir haben eine theoretische Grundlage gefunden, diese empirisch anhand der Daten des Allbus mittels konfirmatorischen Faktorenanalyse geprüft und einen Summenindex berechnet, dessen Qualität wir mittels Cronbachs Alpha zeigen konnten.
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
@@ -194,7 +192,7 @@ Das Format ist normalerweise:
 > ***Beispiel:*** Der Summenindex individuelle Identität umfasst fünf Indikatoren (Ziele und Befriedigung, Regeln und Verantwortung, Gefühle oder Emotionen, Verständnis der Welt, individuelle Identität im Allgemeinen; α = 0,84).
 :::
 
-## Danksagung und Literatur
+# Danksagung und Literatur
 
 Die Struktur und Inhalt dieser Seite orientiert sich an den folgenden Arbeiten. Ich möchte mich bei den Autor:innen sehr bedanken!
 

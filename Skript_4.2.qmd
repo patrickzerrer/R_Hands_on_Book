@@ -177,19 +177,6 @@ Das liegt daran, dass die Einkommensdaten kontinuierlich sind und es keinen homo
 
 ```{r, echo=FALSE}
 ggplot(allbus_df, aes(x = Einkommen)) + 
-    geom_histogram(aes(y =..density..),
-    breaks = seq(-0, 10000, by = 500), 
-    colour = "black", 
-    fill = "gray") +
-  labs(x = "Netto-Einkommen", y = "Häufigkeit") +
-  geom_vline(xintercept = mean_einkommen, color = "red", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = median_einkommen, color = "blue", linetype = "dashed", linewidth = 1) +
-  geom_vline(xintercept = as.numeric(modus_einkommen), color = "green", linetype = "dashed", linewidth = 1) 
-
-```
-
-```{r, echo=FALSE}
-ggplot(allbus_df, aes(x = Einkommen)) + 
     geom_histogram(aes(y =after_stat(density)),
     breaks = seq(-0, 10000, by = 500), 
     colour = "black", 

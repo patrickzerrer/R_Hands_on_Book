@@ -669,7 +669,7 @@ W = 0.83575, p-value &lt; 2.2e-16</code></pre>
     Asymptotic one-sample Kolmogorov-Smirnov test
 
 data:  sample_einkommen
-D = 0.19397, p-value = 0.4392
+D = 0.17906, p-value = 0.5429
 alternative hypothesis: two-sided</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">shapiro.test</span>(sample_einkommen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -678,7 +678,7 @@ alternative hypothesis: two-sided</code></pre>
     Shapiro-Wilk normality test
 
 data:  sample_einkommen
-W = 0.80834, p-value = 0.001153</code></pre>
+W = 0.86102, p-value = 0.008202</code></pre>
 </div>
 </div>
 </section>
@@ -898,12 +898,12 @@ f(x;min,max) = \begin{cases}
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># Fünf Zufallszahlen, die im voreingestellten Intervall von 0 bis 1 liegen:</span></span>
 <span id="cb38-2"><a href="#cb38-2"></a><span class="fu">runif</span>(<span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0809188 0.1809884 0.1772007 0.4026479 0.7335103</code></pre>
+<pre><code>[1] 0.96575801 0.65386129 0.10107324 0.08141969 0.60242826</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># Drei Zufallszahlen, die im Intervall von -10 bis 10 liegen:</span></span>
 <span id="cb40-2"><a href="#cb40-2"></a><span class="fu">runif</span>(<span class="dv">3</span>, <span class="at">min=</span><span class="sc">-</span><span class="dv">10</span>, <span class="at">max=</span><span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  7.776149 -3.680223  6.218221</code></pre>
+<pre><code>[1] 1.0716932 9.1883570 0.7733892</code></pre>
 </div>
 </div>
 </div>

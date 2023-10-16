@@ -53,7 +53,6 @@ daten_neu <- daten %>%
   filter(between(TV_Vertrauen, 1, 7))
 ```
 
-
 ## Berechnen der Korrelation
 
 Nun berechnen wir, ob eine Korrelation zwischen beiden Variablen vorliegt. Dazu nutzen wir die Funktion `cor()`. Mit dem `print`-Befehl geben wir uns den Wert aus:
@@ -80,10 +79,9 @@ print(scatterplot)
 Hier können wir den oben bereits ermittelten Befund noch einmal grafisch inspizieren. Der leichte positive Zusammenhang zwischen dem Vertrauen in die Insitution Fernsehen und der täglichen Fernsehnutzung zeigt sich ganz schön.
 
 ::: {.callout-note collapse="true" icon="false"}
-
 ## Exkurs: Übungsaufgabe Korrelationsanalyse
 
-Ihr könnt zur Übung nun noch eine Korrelationsanalyse durchführen, um den Zusammenhang zwischen der täglichen Fernsehnutzung in Minuten (umbenannt in "TV_Konsum") und der quasi-metrisch gemessenen Einschätzung, ob die Entwicklung der Kriminalität in Deutschland zu- oder abgenommen hat (`cf03`; 1=hat stark zugenommen; 5=hat stark abgenommen). Entsprechend der Kultivierungsforschung können wir vermuten, dass es einen negativen Zusammenhang geben sollte: Mehr Fernsehkonsum sollte mit einer negativen Kriminalitätsprognose korrelieren. Dazu müsst ihr zuerst wieder einen Teildatensatz mit den benötigten Variablen erzeugen, diese ggf. umbenennen und filtern. Dann ermittelt ihr die Korrelation beider Variablen.
+Ihr könnt zur Übung noch eine Korrelationsanalyse durchführen, um den Zusammenhang zwischen der täglichen Fernsehnutzung in Minuten (umbenannt in "TV_Konsum") und der quasi-metrisch gemessenen Einschätzung, ob die Entwicklung der Kriminalität in Deutschland zu- oder abgenommen hat (`cf03`; 1=hat stark zugenommen; 5=hat stark abgenommen). Wenn wir der [Kultivierungsthese](https://dorsch.hogrefe.com/stichwort/kultivierungshypothese) folgen, vermuten wir, dass ein erhöhter Fernsehkonsum zu einer stärkeren Wahrnehmung der Kriminalität führt. Entsprechend hätten wir ins unserem Fall (wegen der gegenläufigen Kodierung der Variablen) einen negativen linearen Zusammenhang. Dazu müsst ihr zuerst wieder einen Teildatensatz mit den benötigten Variablen erzeugen, diese ggf. umbenennen und filtern. Dann ermittelt ihr die Korrelation beider Variablen.
 
 ## Data Management
 
@@ -121,7 +119,6 @@ scatterplot <- ggplot(daten_neu2, aes(x = TV_Konsum, y = Kriminalitätsprognose)
   labs(x = "TV Konsum", y = "Kriminalitätsprognose", title = "Korrelation zwischen TV Konsum und Kriminalitätsprognose")
 print(scatterplot)
 ```
-
 :::
 
 # Die lineare Regressionsanalyse
@@ -141,7 +138,6 @@ Mit Hilfe der Regression wollen wir nun die oben formulierte Annahme prüfen, da
 ## Data Management
 
 Wie immer besteht der erste Schritt nun darin, die benötigten Pakete sowie den Datensatz zu laden. Für die lineare Regression kommen zwei neue Pakete hinzu: Wir laden das Paket `broom`, um die normale Ausgabe der Funktion `lm` (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können sowie das Paket `performance`, dass uns später zusätzlich einige Indikatoren ausgibt. Das Paket `see` kommt außerdem dazu, weil es uns eine toolbox für die Visualisierung der Zusammenhänge bereitstellt.
-
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
@@ -170,7 +166,6 @@ daten <- daten %>%
   filter(between(TV_Konsum, 0, 1500))
 ```
 
-
 ## Grafische Prüfung der Voraussetzungen
 
 Bevor wir die Regressionsanalyse durchführen, verschaffen wir uns zunächst einmal einen Überblick über die Daten - dazu visualisieren wir den Zusammenhang zwischen dem Alter sowie der täglichen Fernsehnutzung. Mit Hilfe der Grafik können wir auch die erste Voraussetzung prüfen, nämlich dass es einen *linearen Zusammenhang* zwischen beiden Variablen gibt.
@@ -194,7 +189,6 @@ Die grafische Darstellung legt uns einen positiven und linearen Zusammenhang zwi
 Ob diese Beobachtung auch statistisch belastbar ist, wollen wir jetzt mit der *einfachen linearen Regression* prüfen. Dazu nutzen wir die Funktion `lm()`. Die Funktion lm steht für "linear model". In den Klammern benennen wir zunächst die abhängige Variable (hier: `TV_Konsum`), dann kommt eine Tilde (d.h. "wird definiert durch") und der Bezug auf unsere unabhängige Variable (hier: `Alter`). Die Schreibweise y \~ x ist die Formel-Schreibweise in R; in diesem Fall besagt sie, dass y (`TV_Konsum`) abhängig von x (`Alter`) ist. Nach dem Komma folgt dann die Benennung des Datensatzes auf den die lm-Funktion angewendet werden soll. Zum Schluss lassen wir uns das Modell ausgeben.
 
 Der Modelloutput von `lm` ähnelt dem der schon behandelten Hypothesentests; enthält aber noch weitere Eckdaten wie die Effektstärke, das Signifikanzniveau oder die Erklärungsstärke des Modells.
-
 
 ```{r}
 model <- lm(TV_Konsum ~ Alter, data = daten) 
@@ -296,7 +290,6 @@ Nun haben wir im Rahmen unserer Befragung die TV-Nutzung der Befragten aber ja s
 head(residuals(model), 100)
 ```
 
-
 Für unseren Fall Nummer 65 beträgt die Abweichung der Prognose von der Beobachtung -92 Minuten. Das diese Abweichung sehr groß ist, wundert uns aber nicht, denn wir wissen ja schon, dass wir eine große Spannweite haben und unser R2 mit 8 Prozent nicht besonders groß ist.
 
 ## Vorhersage und Residuen grafisch darstellen
@@ -344,7 +337,6 @@ summary(lm.beta(model))
 ```
 
 ::: {.callout-note collapse="true" icon="false"}
-
 ## Exkurs: Zusatzfunktionen zur schöneren Ergebnisdarstellung
 
 Funktion zur Modellzusammenfassung als data frame
@@ -364,7 +356,6 @@ Funktion, um Rohdaten um Modellvorhersagen zu erweitern
 ```{r}
 augment(model)
 ```
-
 :::
 
 ::: callout-note

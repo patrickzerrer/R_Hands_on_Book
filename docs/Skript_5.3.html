@@ -419,10 +419,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#berechnen-eines-ungewichteten-summenindex" id="toc-berechnen-eines-ungewichteten-summenindex" class="nav-link" data-scroll-target="#berechnen-eines-ungewichteten-summenindex"><span class="header-section-number">3</span> Berechnen eines Ungewichteten Summenindex</a></li>
   <li><a href="#reliabilität-des-indizes-berechnen" id="toc-reliabilität-des-indizes-berechnen" class="nav-link" data-scroll-target="#reliabilität-des-indizes-berechnen"><span class="header-section-number">4</span> Reliabilität des Indizes berechnen</a></li>
   <li><a href="#interpretation-von-cronbachs-alpha" id="toc-interpretation-von-cronbachs-alpha" class="nav-link" data-scroll-target="#interpretation-von-cronbachs-alpha"><span class="header-section-number">5</span> Interpretation von Cronbach’s Alpha</a></li>
-  <li><a href="#interpretation-des-wirksamkeit-indizes" id="toc-interpretation-des-wirksamkeit-indizes" class="nav-link" data-scroll-target="#interpretation-des-wirksamkeit-indizes"><span class="header-section-number">6</span> Interpretation des Wirksamkeit-Indizes</a>
-  <ul class="collapse">
-  <li><a href="#danksagung-und-literatur" id="toc-danksagung-und-literatur" class="nav-link" data-scroll-target="#danksagung-und-literatur"><span class="header-section-number">6.1</span> Danksagung und Literatur</a></li>
-  </ul></li>
+  <li><a href="#interpretation-des-wirksamkeit-indizes" id="toc-interpretation-des-wirksamkeit-indizes" class="nav-link" data-scroll-target="#interpretation-des-wirksamkeit-indizes"><span class="header-section-number">6</span> Interpretation des Wirksamkeit-Indizes</a></li>
+  <li><a href="#danksagung-und-literatur" id="toc-danksagung-und-literatur" class="nav-link" data-scroll-target="#danksagung-und-literatur"><span class="header-section-number">7</span> Danksagung und Literatur</a></li>
   </ul>
 </nav>
     </div>
@@ -472,11 +470,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="1" data-code-lines="2">Laden der Pakete mit <code>p_load</code></span>
+<span data-code-lines="2" data-code-annotation="1" data-code-cell="annotated-cell-1">Laden der Pakete mit <code>p_load</code></span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="2" data-code-lines="3">Visualisierungshintergrund festlegen</span>
+<span data-code-lines="3" data-code-annotation="2" data-code-cell="annotated-cell-1">Visualisierungshintergrund festlegen</span>
 </dd>
 </dl>
 </div>
@@ -488,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-annotation="1" data-code-lines="1">Laden des Datensatzes</span>
+<span data-code-lines="1" data-code-annotation="1" data-code-cell="annotated-cell-2">Laden des Datensatzes</span>
 </dd>
 </dl>
 </div>
@@ -526,23 +524,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="1" data-code-lines="1">Wir erstellen ein neues Objekt basierend auf dem Datensatz <code>daten</code></span>
+<span data-code-lines="1" data-code-annotation="1" data-code-cell="annotated-cell-3">Wir erstellen ein neues Objekt basierend auf dem Datensatz <code>daten</code></span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="2" data-code-lines="2">Mit dem Doppelpunkt wählen wir alle Variablen zwischen <code>pt01</code> bis <code>pt20</code> aus</span>
+<span data-code-lines="2" data-code-annotation="2" data-code-cell="annotated-cell-3">Mit dem Doppelpunkt wählen wir alle Variablen zwischen <code>pt01</code> bis <code>pt20</code> aus</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="3" data-code-lines="3">Die Kombination aus <code>mutate</code> und <code>across</code> ermöglicht es uns die Funktion <code>as.numeric</code> in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die <code>~</code> gibt den Start der anzuwenden Funktion (hier <code>as.numeric</code> an), der Punkt innerhalb der Klammer der <code>as.numeric</code> Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen</span>
+<span data-code-lines="3" data-code-annotation="3" data-code-cell="annotated-cell-3">Die Kombination aus <code>mutate</code> und <code>across</code> ermöglicht es uns die Funktion <code>as.numeric</code> in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die <code>~</code> gibt den Start der anzuwenden Funktion (hier <code>as.numeric</code> an), der Punkt innerhalb der Klammer der <code>as.numeric</code> Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="4" data-code-lines="4">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter, mit dem Ausdruck <code>%in%</code> prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
+<span data-code-lines="4" data-code-annotation="4" data-code-cell="annotated-cell-3">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter, mit dem Ausdruck <code>%in%</code> prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="5" data-code-lines="5">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
+<span data-code-lines="5" data-code-annotation="5" data-code-cell="annotated-cell-3">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
 </dd>
 </dl>
 </div>
@@ -572,11 +570,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="1" data-code-lines="3,4,5,6,7,8,9,10,11,12,13,14,15,16,17">Mit dem <code>rename</code> Befehl können wir die Variablen umbennen</span>
+<span data-code-lines="3,4,5,6,7,8,9,10,11,12,13,14,15,16,17" data-code-annotation="1" data-code-cell="annotated-cell-4">Mit dem <code>rename</code> Befehl können wir die Variablen umbennen</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="2" data-code-lines="19">Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir <code>htmlTable</code> für eine schönere Darstellung der Tabelle sowie <code>head</code>, um uns die ersten paar Zeilen des Datensatzes <code>allbus_vertrauen</code> anzeigen zu lassen</span>
+<span data-code-lines="19" data-code-annotation="2" data-code-cell="annotated-cell-4">Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir <code>htmlTable</code> für eine schönere Darstellung der Tabelle sowie <code>head</code>, um uns die ersten paar Zeilen des Datensatzes <code>allbus_vertrauen</code> anzeigen zu lassen</span>
 </dd>
 </dl>
 </div>
@@ -723,9 +721,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Es gibt eine ganze Reihe von möglichen Arten von Indizes, welche wir theoretisch berechnen könnten.</p>
 <table class="table">
 <colgroup>
-<col style="width: 23%">
-<col style="width: 23%">
-<col style="width: 52%">
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -766,11 +764,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-annotation="1" data-code-lines="2">Wir bilden mit Hilfe von <code>mutate</code> die neue Variable <code>vertrauen_ges_inst</code>, welche sich aus der Summe der Indikatoren geteilt durch die Anzahl der Indikatoren zusammensetzt.</span>
+<span data-code-lines="2" data-code-annotation="1" data-code-cell="annotated-cell-5">Wir bilden mit Hilfe von <code>mutate</code> die neue Variable <code>vertrauen_ges_inst</code>, welche sich aus der Summe der Indikatoren geteilt durch die Anzahl der Indikatoren zusammensetzt.</span>
 </dd>
 <dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-annotation="2" data-code-lines="3">Die <code>htmlTable</code> Funktion ermöglicht uns eine schönere Darstellung der Tabelle. Mit <code>head</code> wählen wir die ersten paar Fälle aus dem Datensatz <code>index_vertrauen</code> aus</span>
+<span data-code-lines="3" data-code-annotation="2" data-code-cell="annotated-cell-5">Die <code>htmlTable</code> Funktion ermöglicht uns eine schönere Darstellung der Tabelle. Mit <code>head</code> wählen wir die ersten paar Fälle aus dem Datensatz <code>index_vertrauen</code> aus</span>
 </dd>
 </dl>
 </div>
@@ -923,7 +921,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-annotation="1" data-code-lines="1">Mit dem <code>summary</code> Befehl können wir uns die deskritpive Statistik ausgeben lassen</span>
+<span data-code-lines="1" data-code-annotation="1" data-code-cell="annotated-cell-6">Mit dem <code>summary</code> Befehl können wir uns die deskritpive Statistik ausgeben lassen</span>
 </dd>
 </dl>
 </div>
@@ -944,11 +942,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-annotation="1" data-code-lines="2">Wir wählen mit <code>select</code> alle Variablen zwischen <code>Ver_Gesundheitswesen</code> und <code>Ver_EU_Par</code> aus</span>
+<span data-code-lines="2" data-code-annotation="1" data-code-cell="annotated-cell-7">Wir wählen mit <code>select</code> alle Variablen zwischen <code>Ver_Gesundheitswesen</code> und <code>Ver_EU_Par</code> aus</span>
 </dd>
 <dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-annotation="2" data-code-lines="3">Hier rufen wir das Paket <code>psych</code> auf, nutzen aus diesem die Funktion <code>alpha</code>, um Cronbach’s Alpha zu berechnen</span>
+<span data-code-lines="3" data-code-annotation="2" data-code-cell="annotated-cell-7">Hier rufen wir das Paket <code>psych</code> auf, nutzen aus diesem die Funktion <code>alpha</code>, um Cronbach’s Alpha zu berechnen</span>
 </dd>
 </dl>
 </div>
@@ -1050,9 +1048,8 @@ Ver_EU_Par           0.13 0.14 0.18 0.25 0.19 0.09 0.02    0</code></pre>
 </section>
 <section id="interpretation-des-wirksamkeit-indizes" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Interpretation des Wirksamkeit-Indizes</h1>
-<p>Die Werte sind ein gutes Ergebnis. Die Items zeigen eine gute Inter-Item-Korrelation.</p>
-<p>Wir können noch nachschauen, ob wir die Skalen-Reliabilität verbessern können, indem wir einzelne Items herauswerfen. Denn der Output von Cronbachs Alpha gibt uns auch hilfreiche Aufschlüsse darüber, welche Items man evtl. ausschließen kann, um Cronbachs Alpha bei ungenügender Höhe noch auf ein mindestens akzeptables Maß zu heben. Diese Information findet sich im Bereich “Reliability if an item is dropped”:. In unserem Fall wird die reliabitlitä aber noch schlechter - wir können nichts mehr verbessern.</p>
-<p>Entsprechend haben wir erfolgreich einen Index für die latente Variable <em>Vertrauen in gesellschaftliche Institutionen</em> gebildet. Wir haben eine theoretische Grundlage gefunden, diese empirisch anhand der Daten des Allbus mittels explorativer Faktorenanalyse geprüft und einen Summenindex berechnet, dessen Qualität wir mittels Cronbachs Alpha zeigen konnten.</p>
+<p>Die Werte sind ein gutes Ergebnis. Die Items zeigen eine gute Inter-Item-Korrelation. Wir können noch nachschauen, ob wir die Skalen-Reliabilität verbessern können, indem wir einzelne Items herauswerfen. Denn der Output von Cronbachs Alpha gibt uns auch hilfreiche Aufschlüsse darüber, welche Items man evtl. ausschließen kann, um Cronbachs Alpha bei ungenügender Höhe noch auf ein mindestens akzeptables Maß zu heben. Diese Information findet sich im Bereich “Reliability if an item is dropped”:. In unserem Fall wird die reliabitlitä aber noch schlechter - wir können nichts mehr verbessern.</p>
+<p>Entsprechend haben wir erfolgreich einen Index für die latente Variable <em>Vertrauen in gesellschaftliche Institutionen</em> gebildet. Wir haben eine theoretische Grundlage gefunden, diese empirisch anhand der Daten des Allbus mittels konfirmatorischen Faktorenanalyse geprüft und einen Summenindex berechnet, dessen Qualität wir mittels Cronbachs Alpha zeigen konnten.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1073,8 +1070,9 @@ Wie gebe ich die Ergebnisse korrekt an?
 </blockquote>
 </div>
 </div>
-<section id="danksagung-und-literatur" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="danksagung-und-literatur"><span class="header-section-number">6.1</span> Danksagung und Literatur</h2>
+</section>
+<section id="danksagung-und-literatur" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Danksagung und Literatur</h1>
 <p>Die Struktur und Inhalt dieser Seite orientiert sich an den folgenden Arbeiten. Ich möchte mich bei den Autor:innen sehr bedanken!</p>
 <ul>
 <li>Daniela Keller <a href="https://www.youtube.com/watch?v=NFPGQcq1fO8">Link</a></li>
@@ -1108,7 +1106,6 @@ Literatur und Beispiele aus der Praxis
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1413,11 +1410,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>   
+    <div class="nav-footer-left"><strong>Copyright</strong> 2023, <strong>Design by</strong> Katharina Maubach &amp; Patrick Zerrer, <strong>Autor:innen:</strong> Stephanie Geise, Cornelius Puschmann, Hannah Marie Büttner, Michael Linke, Katharina Maubach, Patrick Zerrer</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right"><img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
+    <div class="nav-footer-right"><img src="Bilder/logo_zemki.png" class="img-fluid" width="120"> <img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
 

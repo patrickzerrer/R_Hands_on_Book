@@ -26,7 +26,6 @@ Patrick Zerrer ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommu
 -   (mobile) Mediennutzungsforschung
 -   Klimaprotestforschung
 
-**Umsetzung & Design des Lehrbuchs, Autor der Kapitel *Von einzelnen Antworten zum Index* **
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
@@ -55,7 +54,6 @@ Katharina Maubach ist seit Dezember 2022 als wissenschaftliche Mitarbeiterin am 
 -   Klimakommunikation
 -   Statistische Methoden
 
-**Umsetzung & Design des Lehrbuchs, Autorin der Kapitel *Das Überprüfen von Unterschieden* **
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
@@ -85,7 +83,6 @@ Forschungsschwerpunkte
 
 -   Methoden der automatisierten Inhaltsanalyse
 
-**Autor der Kapitel *Data-Bootcamp: Datensätze* & *Data-Bootcamp: Der Umgang mit Daten* **
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
@@ -112,7 +109,6 @@ Prof. Dr. habil. Stephanie Geise ist Professorin für Kommunikations- und Medien
 -   Visuelle und multimodale Kommunikation
 -   Innovative Methoden & Methodenkombinationen
 
-**Autorin des Kapitels *Das Überprüfen von Zusammenhängen* **
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
@@ -140,7 +136,6 @@ Michael Linke ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommun
 -   Protest Event Analysis
 -   Politische Kommunikation
 
-**Autor des Kapitels *Die ersten Schritte bei der Datenanalyse* **
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
@@ -167,7 +162,6 @@ Hannah-Marie Büttner ist als wissenschaftliche Mitarbeiterin der Universität B
 -   Soziale Netzwerkanalyse
 -   Computerbasierte Methoden
 
-**Autorin des Kapitels *Data-Bootcamp: Der Umgang mit Daten* **
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
@@ -178,7 +172,3 @@ Hannah-Marie Büttner ist als wissenschaftliche Mitarbeiterin der Universität B
 
 ✉️ [E-Mail](habu@uni-bremen.de)
 :::
-
-
-
-
