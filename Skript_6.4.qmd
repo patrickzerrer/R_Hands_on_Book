@@ -14,15 +14,13 @@ format:
     code-annotations: hover
 ---
 
-
-
 ![Bild generiert von Midjourney](Bilder/Bild_Varianzanalyse.png)
 
 Die Varianzanalyse weitet den Grundgedanken des t-Tests aus, indem sie den simultanen Vergleich von Gruppenmittelwerten über mehr als zwei Gruppen erlaubt. Die einfaktorielle Varianzanalyse definiert die Gruppen dabei anhand eines Faktors (einer unabhängigen Variable), die mehrfaktorielle Varianzanalyse erlaubt mehrere unabhängige kategoriale Variablen im Modell, ist aber nicht mit der multivariaten Varianzanalyse (MANOVA) zu verwechseln, die auch mehrere metrische abhängige Variablen gleichzeitig zulässt. Wenn die Gruppierungsvariable (also die unabhängige Faktor-Variable) mehr als zwei Gruppen unterscheidet, müssen nach der Anova Post-Hoc Tests durchgeführt werden. Denn sollte die Varianzanalyse insgesamt signifikante Werte liefern, wurde zwar festgestellt, dass es überzufällige Unterschiede zwischen den durch die Faktorstufen definierten Gruppen gibt, bei drei und mehr Faktorstufen bleibt aber noch unklar, auf welchen Gruppenunterschieden dieses Ergebnis beruht. Post hoc-Tests liefern spezifischere Informationen dazu, welche Gruppenmittelwerte signifikant voneinander abweichen.
 
 # Datenmanagement
 
-Wir laden zunächst die für dieses Skript benötigten Pakete und legen unseren Grafikhintegrund sowie die Formatierung von Zahlen fest. 
+Wir laden zunächst die für dieses Skript benötigten Pakete und legen unseren Grafikhintegrund sowie die Formatierung von Zahlen fest.
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
@@ -33,10 +31,10 @@ options(scipen = 999) #<3>
 options(es.use_symbols = TRUE) #<4>
 ```
 
-1. Lädt alle benötigten Pakete mit dem Befehl `p_load()`
-2. Setzt einen universalen Hintergund (`theme_classic`) für unsere Datenvisualisierungen mit ggplot2 fest.
-3. Sorgt dafür, dass sehr kleine Zahlen ausgeschrieben werden. 
-4. Sorgt dafür, dass Symbole im Output gedruckt werden.
+1.  Lädt alle benötigten Pakete mit dem Befehl `p_load()`
+2.  Setzt einen universalen Hintergund (`theme_classic`) für unsere Datenvisualisierungen mit ggplot2 fest.
+3.  Sorgt dafür, dass sehr kleine Zahlen ausgeschrieben werden.
+4.  Sorgt dafür, dass Symbole im Output gedruckt werden.
 
 Anschließend laden wir unseren Datensatz:
 
@@ -45,7 +43,6 @@ daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
 Um mit dem Datensatz arbeiten zu können benötigen wir einige grundlegende Schritte des Datenmanagements [für ausführliche Erklärungen siehe hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html). Für die Varianzanalyse möchten wir uns anschauen, wie sich der Gesundheitszustand (und das Alter) der Befragten auf ihr Vertrauen in das Gesundheitswesen auswirkt. Wir nutzen dazu die folgenden Variablen:
-
 
 +---------------+-----------------------------------+-------------------------+
 | Variable      | Beschreibung                      | Ausprägungen            |
@@ -95,10 +92,10 @@ daten <- daten %>%
 
 ```
 
-1. Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.
-2. Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.
-3. Wir speichern die Variablen als Faktoren. Wir nutzen dabei die Funktion as_factor aus dem haven Paket um die Bezeichnungen der Faktorstufen direkt zu übernehmen.
-4. Wir kodieren die Variable Alter in eine dichotome Variable (jung und alt) um. Die Aufteilung geschieht anhand des Medians der Verteilung. 
+1.  Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.
+2.  Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.
+3.  Wir speichern die Variablen als Faktoren. Wir nutzen dabei die Funktion as_factor aus dem haven Paket um die Bezeichnungen der Faktorstufen direkt zu übernehmen.
+4.  Wir kodieren die Variable Alter in eine dichotome Variable (jung und alt) um. Die Aufteilung geschieht anhand des Medians der Verteilung.
 
 # Voraussetzungsprüfung für einfaktorielle und mehrfaktorielle Varianzanalyse
 
@@ -124,10 +121,10 @@ ggplot(daten, aes(trustges)) + #<1>
          y = "")
 ```
 
-1. In R nutzen wir das Paket `ggplot2` von Wickham et al. um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket `ggplot2` mit dem Befehl `ggplot()` aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier `daten`) und unter aes unsere Variable (hier `trustges`). 
-2. Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll `(aes(y = after_stat(count))`, wir die Außenumrandung schwarz `color = black` und die Füllfarbe grau wünschen (`fill = grey`). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik. 
-3. Mit `binwidth = 1` verweisen wir hier auf die Breite der Balken unseres Histogramms. 
-4. Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl `labs` um zusätzlich die Achsen zu beschriften.
+1.  In R nutzen wir das Paket `ggplot2` von Wickham et al. um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket `ggplot2` mit dem Befehl `ggplot()` aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier `daten`) und unter aes unsere Variable (hier `trustges`).
+2.  Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll `(aes(y = after_stat(count))`, wir die Außenumrandung schwarz `color = black` und die Füllfarbe grau wünschen (`fill = grey`). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik.
+3.  Mit `binwidth = 1` verweisen wir hier auf die Breite der Balken unseres Histogramms.
+4.  Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl `labs` um zusätzlich die Achsen zu beschriften.
 
 Wir sehen an der Grafik, dass die Variable Vertrauen in das Gesundheitswesen rechtssteil ist, also die Teilnehmer der Befragung eher ein höheres Vertrauen angegeben haben.
 
@@ -142,7 +139,7 @@ Im vorliegenden Beispiel sind beide Tests signifikant. Allerdings reagieren beid
 
 ## Überprüfung der Homogenität der Fehlervarianzen
 
-Die letzte Voraussetzung, die für eine Varianzanalyse erfüllt sein muss, ist die Homogenität der Fehlervarianzen. Um diese zu testen, nutzen wir den Levene-Test auf Varianzhomogenität. Hierfür nutzen wir die Funktion `leveneTest()`aus dem Paket `car`. 
+Die letzte Voraussetzung, die für eine Varianzanalyse erfüllt sein muss, ist die Homogenität der Fehlervarianzen. Um diese zu testen, nutzen wir den Levene-Test auf Varianzhomogenität. Hierfür nutzen wir die Funktion `leveneTest()`aus dem Paket `car`.
 
 ```{r}
 #Levene-Test für einfaktorielle Varianzanalyse
@@ -154,9 +151,9 @@ daten %>%
   leveneTest(trustges ~ gesund*agef, data = ., center = mean) #<2>
 
 ```
-1. Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (\~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird. Haben wir nur eine abhängige Variable, so geben wir diese an. 
-2. Haben wir mehrere unabhängige Variablen so können wir diese mit einem \* verbinden. Anschließend wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.
 
+1.  Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (\~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird. Haben wir nur eine abhängige Variable, so geben wir diese an.
+2.  Haben wir mehrere unabhängige Variablen so können wir diese mit einem \* verbinden. Anschließend wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.
 
 Wenn der Levene-Test statistisch signifikant ausfällt, sollte die Hypothese homogener Varianzen abgelehnt werden. Falls der Test wie im vorliegenden Fall signifikant ausfällt (da der `Pr(>F-Wert)` kleiner als 0.05 ist) wurde die Voraussetzung der Homogenität der Fehlervarianzen verletzt. In einem solchen Fall können wir wahlweise auf nicht-parametrische Tests ausweichen, oder die Varianzanalyse dennoch berechnen, wenn wahlweise die deskriptiven Kennwerte keine allzu große Streuung aufweisen, oder wir einen alternativen Posthoc-Test wie Tamhame T2 wählen.
 
@@ -166,7 +163,7 @@ Nachdem wir die Voraussetzungen geprüft haben, schauen wir uns die einfaktoriel
 
 ## Deskriptive Statistiken
 
-Zunächst interessieren uns die deskriptiven Statistiken. Dafür gruppieren wir die Ergebnisse unserer abhängigen Variablen anhand der Ausprägungen unserer unabhängigen Variablen und lassen uns jeweils den Mittelwert und die Standardabweichung ausgeben. 
+Zunächst interessieren uns die deskriptiven Statistiken. Dafür gruppieren wir die Ergebnisse unserer abhängigen Variablen anhand der Ausprägungen unserer unabhängigen Variablen und lassen uns jeweils den Mittelwert und die Standardabweichung ausgeben.
 
 ```{r}
 daten %>% 
@@ -176,10 +173,10 @@ daten %>%
   kable(digits = 2, col.names = c("Gesundheitszustand", "M", "SD"), caption = "Descriptives Vertrauen") #<2>
 ```
 
-1. Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die `group_by`-Funktion in Kombination mit der `summarise`-Funktion. 
-2. Im nachfolgenden Schritt haben wir mit Hilfe des Befehls `kable()` aus dem Paket `knitr` das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.
+1.  Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die `group_by`-Funktion in Kombination mit der `summarise`-Funktion.
+2.  Im nachfolgenden Schritt haben wir mit Hilfe des Befehls `kable()` aus dem Paket `knitr` das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.
 
-Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, bei Personen die einen guten Gesundheitszustand aufweisen. Ob dieser augenscheinliche Unterschied auch statistisch signifikant ist, möchten wir in einem nächsten Schritt mit der einfaktoriellen ANOVA berechnen. 
+Anhand der deskriptiven Statistiken sehen wir, dass das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, bei Personen die einen guten Gesundheitszustand aufweisen. Ob dieser augenscheinliche Unterschied auch statistisch signifikant ist, möchten wir in einem nächsten Schritt mit der einfaktoriellen ANOVA berechnen.
 
 ## Durchführen der Varianzanalyse
 
@@ -195,12 +192,12 @@ print(fit)
 eta_squared(fit, partial = F) #<2>
 ```
 
-1. Innerhalb der Funktion aov_car müssen wir zunächst die abhängige Variable (`trustges`) angeben und nach einer Tilde die unabhängige Variabel (`gesund`). Zudem müssen wir den Zusatz `+ Error()` nutzen un in der Klammer die Fallid (hier `respid`) angeben. Alles speichern wir als Objekt `fit` welches wir anschließend mit `print` aufrufen.
-2. Mit `eta_squared` können wir zusätzlich die Effektstärke angeben. Diese findet sich für die einfaktorielle Anova auch in der Spalte pes, aber hier erhalten wir zusätzlich ein Konfidenzintervall für den Effekt. 
+1.  Innerhalb der Funktion aov_car müssen wir zunächst die abhängige Variable (`trustges`) angeben und nach einer Tilde die unabhängige Variabel (`gesund`). Zudem müssen wir den Zusatz `+ Error()` nutzen un in der Klammer die Fallid (hier `respid`) angeben. Alles speichern wir als Objekt `fit` welches wir anschließend mit `print` aufrufen.
+2.  Mit `eta_squared` können wir zusätzlich die Effektstärke angeben. Diese findet sich für die einfaktorielle Anova auch in der Spalte pes, aber hier erhalten wir zusätzlich ein Konfidenzintervall für den Effekt.
 
 ## Interpretation des Outputs
 
-Als Output erhalten wir eine Tabelle, deren einzelne Bestandteile im Folgenden näher erläutert und interpretiert werden. 
+Als Output erhalten wir eine Tabelle, deren einzelne Bestandteile im Folgenden näher erläutert und interpretiert werden.
 
 *Effect* zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Gesundheitszustand(`gesund`). Die vier bedeutet, dass hier insgesamt eine Gruppe mit 4 anderen (= fünf Ausprägungen) verglichen wurde.
 
@@ -210,24 +207,30 @@ Die *mittlere quadratische Abweichung (MSE)* oder Fehlervarianz ist die Summe de
 
 Die Spalte *pes* steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an -- partiell ist das Eta^2^, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Die Effektstärke beträgt 0.006 und entspricht damit einem sehr kleinen Effekt (Cohen, 1988). Im Datenbeispiel hat demnach der Gesundheitszustand (und damit auch unser Gesamtmodell) eine Erklärkraft von lediglich 0.6 Prozent für Unterschiede im Vertrauen auf das Gesundheitssystem. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.
 
-
 ## PostHocTests
 
-Zuletzt müssen wir die Posthoc-Tests berechnen, welche uns Aufschluss darüber geben, welche unserer Gruppen sich unterscheiden. Es gibt verschiedene Posthoc-Tests. Grundsätzlich ist der Tukex-Post-Hoc Test zu empfehlen, welche wir über die Funktion `emmeans`aus dem `emmeans`-Package aufrufen. Bei fehlender Varianzhomogenität können wir zudem den tamhane-T2 Test nutzen. Dieser basiert allerdings auf einem aov-Objekt, daher geben wir hier mit aov die ANOVA erneut aus. Innerhalb von emmeans können wir hingegen einfach auf unser zuvor spezifiziertes Modell fit verweisen, müssen allerdings noch mit `specs=` angeben, auf Basis welcher Variablen der Gruppenvergleich durchgeführt werden soll.
+Zuletzt müssen wir die Posthoc-Tests berechnen, welche uns Aufschluss darüber geben, welche unserer Gruppen sich unterscheiden. Es gibt verschiedene Posthoc-Tests. Grundsätzlich ist der Tukex-Post-Hoc Test zu empfehlen, welche wir über die Funktion `emmeans`aus dem `emmeans`-Package aufrufen:
 
 ```{r}
-#Tukey Post-Hoc Test
-emmeans::emmeans(fit, specs = "gesund") %>% 
+emmeans::emmeans(fit, specs = "gesund") %>% #<1>
   pairs()
+```
 
+1.  Innerhalb von emmeans können wir einfach auf unser zuvor spezifiziertes Modell fit verweisen, müssen allerdings noch mit `specs=` angeben, auf Basis welcher Variablen der Gruppenvergleich durchgeführt werden soll.
 
+Bei fehlender Varianzhomogenität können wir zudem den tamhane-T2 Test nutzen. Dieser basiert allerdings auf einem aov-Objekt, daher geben wir hier mit aov die ANOVA erneut aus.
+
+```{r}
+daten %>% 
+aov(trustges ~ gesund, data = .) %>% 
+  tamhaneT2Test(.)
 ```
 
 ## Interpretation der Posthoc-Tests und des Gesamtmodells
 
-Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur dieser angezeigt). Werte unter .05 bedeuten, dass zwischen diesen Gruppen ein signifikanter Mittelwertunterschied besteht. 
+Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur dieser angezeigt). Werte unter .05 bedeuten, dass zwischen diesen Gruppen ein signifikanter Mittelwertunterschied besteht.
 
-In unserem Beispiel sehen wir signifikante Unterschiede zwischen Personen die einen sehr guten Gesundheitszustand aufweisen und Personen, denen es gesundheitlich schlechter geht (Kategorien zufriedenstellender Gesundheitszustand, weniger guter Gesundheitszustand und je nach Test schlechter Gesundheitszustand). Dementsprechend ist der Gesundheitszustand ein signifikanter Faktor um das Vertrauen in das Gesundheitswesen vorherzusagen. Hier sind jedoch lediglich gravierende Unterschiede in der eigenen Gesundheitseinschätzung maßgeblich für Unterschiede in das Vertrauen.  
+In unserem Beispiel sehen wir signifikante Unterschiede zwischen Personen die einen sehr guten Gesundheitszustand aufweisen und Personen, denen es gesundheitlich schlechter geht (Kategorien zufriedenstellender Gesundheitszustand, weniger guter Gesundheitszustand und je nach Test schlechter Gesundheitszustand). Dementsprechend ist der Gesundheitszustand ein signifikanter Faktor um das Vertrauen in das Gesundheitswesen vorherzusagen. Hier sind jedoch lediglich gravierende Unterschiede in der eigenen Gesundheitseinschätzung maßgeblich für Unterschiede in das Vertrauen.
 
 ## Visualisierung der Gruppenunterschiede mittels Fehlerbalken
 
@@ -244,86 +247,76 @@ daten %>%
   rotate_x_text(45) #<4>
 ```
 
-1. Wir wählen auf der x-Achse die Variable `gesund` aus und auf der y-Achse die Variable `trustges`. 
-2. Wir fügen für die jeweiligen Faktorstufen der Variablen `gesund` die Mittelwerte sowie Konfidenzintervalle hinzu. 
-3. Wir bennenen unsere Grafik um. 
-4. Da die Labels unserer Faktorstufen sehr lang sind, drehen wir diese um 45 Grad. Dies geschieht mit der Funktion `rotate_x_text()` aus dem Paket `ggpubr`. 
+1.  Wir wählen auf der x-Achse die Variable `gesund` aus und auf der y-Achse die Variable `trustges`.
+2.  Wir fügen für die jeweiligen Faktorstufen der Variablen `gesund` die Mittelwerte sowie Konfidenzintervalle hinzu.
+3.  Wir bennenen unsere Grafik um.
+4.  Da die Labels unserer Faktorstufen sehr lang sind, drehen wir diese um 45 Grad. Dies geschieht mit der Funktion `rotate_x_text()` aus dem Paket `ggpubr`.
 
-Die Punkte in der Grafik visualisieren die Mittelwerte der einzelnen Gesundheitszustände mit Bezug auf die Variable Vertrauen in das Gesundheitswesen. Um die Punkte sind jeweils mit Strichen die Konfidenzintervalle eingezeichnet. Wenn sich die Bereich der Konfidenzintervalle nicht überschneiden, besteht ein signifikanter Mittelwertunterschied. 
+Die Punkte in der Grafik visualisieren die Mittelwerte der einzelnen Gesundheitszustände mit Bezug auf die Variable Vertrauen in das Gesundheitswesen. Um die Punkte sind jeweils mit Strichen die Konfidenzintervalle eingezeichnet. Wenn sich die Bereich der Konfidenzintervalle nicht überschneiden, besteht ein signifikanter Mittelwertunterschied.
 
-Daher können wir anhand der Grafik ablesen, dass das Vertrauen in das Gesundheitswesen am höchsten bei Personen mit einem sehr guten Gesundheitszustand ist und sukkzessive abnimmt, je schlechter der Gesundheitszustand der Befragten ausfällt. Auch die Ergebnisse aus den Posthoc-Tests zeigen sich innerhalb der Grafik: Die Konfidenzintervalle von Personen mit einem sehr guten Gesundheitszustand und einem zufriedenstellenden und weniger guten überschneiden sich nicht. Insofern finden wir bei diesen Gruppen signifikante Mittelwertunterschiede.  
+Daher können wir anhand der Grafik ablesen, dass das Vertrauen in das Gesundheitswesen am höchsten bei Personen mit einem sehr guten Gesundheitszustand ist und sukkzessive abnimmt, je schlechter der Gesundheitszustand der Befragten ausfällt. Auch die Ergebnisse aus den Posthoc-Tests zeigen sich innerhalb der Grafik: Die Konfidenzintervalle von Personen mit einem sehr guten Gesundheitszustand und einem zufriedenstellenden und weniger guten überschneiden sich nicht. Insofern finden wir bei diesen Gruppen signifikante Mittelwertunterschiede.
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
 
 Die Ergebnisse der Varianzanalyse werden zumeist in Textform dargestellt. Dafür werden folgende Informationen benötigt:
 
+✅ die Mittelwerte und Standardabweichung der einzelnen Faktorstufen
 
-✅  die Mittelwerte  und Standardabweichung der einzelnen Faktorstufen
+✅ der df-Wert
 
-✅   der  df-Wert
+✅ der F-Wert
 
-✅  der F-Wert
+✅ der p-Wert
 
-✅  der  p-Wert
+✅ der pes-Wert
 
-✅   der  pes-Wert
-
-✅   die  Posthoc-Test Ergebnisse
+✅ die Posthoc-Test Ergebnisse
 
 Das Format ist üblicherweise:
 
-> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand . Der Gesundheitszustand hat dabei einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen (F3470)=5,46,p<0,001. Die Effektstärke nach Cohen (1992) liegt bei alpha=0,006 und entspricht einem kleinen Effekt. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p<0.029) und weniger gutem (p<0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.
-
+> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand . Der Gesundheitszustand hat dabei einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen (F3470)=5,46,p\<0,001. Die Effektstärke nach Cohen (1992) liegt bei alpha=0,006 und entspricht einem kleinen Effekt. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p\<0.029) und weniger gutem (p\<0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.
 :::
-
-
 
 ## Exkurs: nicht parametrische Testverfahren
 
-Wenn wir die Voraussetzungen der Varianzanalyse nicht erfüllen, können wir statt der Varianzanalyse den Kruskal-Wallis Test rechnen. Hierfür müssen unsere Daten nicht die Voraussetzungen der Normalverteilung sowie der Homogenität der Fehlervarianzen erfüllen. 
+Wenn wir die Voraussetzungen der Varianzanalyse nicht erfüllen, können wir statt der Varianzanalyse den Kruskal-Wallis Test rechnen. Hierfür müssen unsere Daten nicht die Voraussetzungen der Normalverteilung sowie der Homogenität der Fehlervarianzen erfüllen.
 
 Den Kruskal-Wallis-Test rufen wir mit der Funktion `kruskal.test()` auf:
 
 ```{r}
 kruskal.test(trustges ~ gesund, data = daten)
 ```
-Hier interessiert uns insbesondere der p-Wert. Wir sehen, wie auch in der Varianzanalyse, dass sich unsere Gruppen signifikant voneinander unterscheiden. Im Anschluss müssen wir dann erneut die Posthoc Tests durchführen.
 
+Hier interessiert uns insbesondere der p-Wert. Wir sehen, wie auch in der Varianzanalyse, dass sich unsere Gruppen signifikant voneinander unterscheiden. Im Anschluss müssen wir dann erneut die Posthoc Tests durchführen.
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
 
 Die Ergebnisse des Kruskal-Wallis Tests werden simultan zur Varianzanalyse in Textform angegeben. Dafür werden folgende Informationen benötigt:
 
+✅ die Mittelwerte und Standardabweichung der einzelnen Faktorstufen
 
-✅  die Mittelwerte  und Standardabweichung der einzelnen Faktorstufen
+✅ der df-Wert
 
-✅   der  df-Wert
+✅ der chi-squared-Wert
 
-✅  der chi-squared-Wert
+✅ der p-Wert
 
-✅  der  p-Wert
-
-✅   die  Posthoc-Test Ergebnisse
+✅ die Posthoc-Test Ergebnisse
 
 Das Format ist üblicherweise:
 
-> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand . Der Gesundheitszustand hat dabei einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen H(4) = 25.191, p < 0.001. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p<0.029) und weniger gutem (p<0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.
-
+> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand . Der Gesundheitszustand hat dabei einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen H(4) = 25.191, p \< 0.001. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p\<0.029) und weniger gutem (p\<0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.
 :::
 
-
 ::: {.callout-note collapse="true" icon="false"}
-
 ## Exkurs: Einfaktorielle Varianzanalyse mit Messwiederholung
 
 ## Umgang mit Messwiederholungen
 
-Haben wir mehr als zwei Testzeitpunkte vorliegen, so können wir die ANOVA mit Messwiederholung rechnen. Die ANOVA mit Messwiederholung weitet dabei den Gedanken der t-Test für abhängige Stichproben weiter aus. Solltet ihr euch für dieses Verfahren interessieren, findet ihr [hier](https://bjoernwalther.com/anova-mit-messwiederholung-in-r/) weitere Infos dazu. 
-
+Haben wir mehr als zwei Testzeitpunkte vorliegen, so können wir die ANOVA mit Messwiederholung rechnen. Die ANOVA mit Messwiederholung weitet dabei den Gedanken der t-Test für abhängige Stichproben weiter aus. Solltet ihr euch für dieses Verfahren interessieren, findet ihr [hier](https://bjoernwalther.com/anova-mit-messwiederholung-in-r/) weitere Infos dazu.
 :::
-
 
 # Mehrfaktorielle Varianzanalyse
 
@@ -362,36 +355,25 @@ print(fit2)
 
 ## Interpretation des Outputs
 
-Die Erläuterungen der einzelnen Parameter sind gleich zu den Erläuterungen der unifaktoriellen ANOVA, daher werden diese nicht wiederholt. Es zeigt sich, dass der Gesundheitszustand erneut einen signifikanten Einfluss (`p<.001`) auf das Vertrauen in das Gesundheitswesen hat (welcher im vorliegenden Modell etwas höher mit 0.9 Prozent erklärter Varianz ausfällt). Zusätzlich hat neben der Gesundheitszustand auch das Alter der Befragten einen signifikanten (`p<.001`), wenngleich geringeren Einfluss auf das Vertrauen in das Gesundheitswesen. Zudem sehen wir einen signifikanten Einfluss der Interaktion von Alter und Gesundheitszustand (`p = .020`) 
+Die Erläuterungen der einzelnen Parameter sind gleich zu den Erläuterungen der unifaktoriellen ANOVA, daher werden diese nicht wiederholt. Es zeigt sich, dass der Gesundheitszustand erneut einen signifikanten Einfluss (`p<.001`) auf das Vertrauen in das Gesundheitswesen hat (welcher im vorliegenden Modell etwas höher mit 0.9 Prozent erklärter Varianz ausfällt). Zusätzlich hat neben der Gesundheitszustand auch das Alter der Befragten einen signifikanten (`p<.001`), wenngleich geringeren Einfluss auf das Vertrauen in das Gesundheitswesen. Zudem sehen wir einen signifikanten Einfluss der Interaktion von Alter und Gesundheitszustand (`p = .020`).
 
 Im Anschluss müssen wir, wie in der univariaten ANOVA, die Posthoc-Tests berechnen (im vorliegenden Fall können wir lediglich den Tukey-Test berechnen, das der Tamhame-Test nur für einfaktorielle Designs funktioniert).
 
 ### Post-Hoc Tests
 
 ```{r}
-#Tukey Post-Hoc Test
 emmeans::emmeans(fit2, specs = c("gesund", "agef")) %>% 
-  pairs()
+  pairs() 
 ```
 
 ## Interpretation der Posthoc-Tests und des Gesamtmodells
 
-Die Tabelle zu den Posthoc-Tests ist erwartungsgemäß sehr lang, da alle unsere einzelnen Gruppen miteinander verglichen werden müssen. Hier zeigt sich bereits, dass die mehrfaktorielle Varianzanalyse insbesondere Sinn ergibt, wenn wir Variablen einbeziehen, welche nicht zu viele Ausprägungen aufweisen. 
+Die Tabelle zu den Posthoc-Tests ist erwartungsgemäß sehr lang, da alle unsere einzelnen Gruppen miteinander verglichen werden müssen. Hier zeigt sich bereits, dass die mehrfaktorielle Varianzanalyse nur dann Sinn ergibt, wenn unsere Variablen nicht zu viele Ausprägungen aufweisen.
 
- contrast                                       estimate     SE   df t.ratio p.value
-SEHR GUT jung - ZUFRIEDENSTELLEND jung          0.56895 0.0971 3465   5.861  <.0001
- SEHR GUT jung - WENIGER GUT jung                0.65126 0.1406 3465   4.632  0.0002
- GUT jung - ZUFRIEDENSTELLEND jung               0.30743 0.0853 3465   3.602  0.0119
-  GUT jung - GUT alt                             -0.25718 0.0738 3465  -3.484  0.0179
-  ZUFRIEDENSTELLEND jung - SEHR GUT alt          -0.47303 0.1455 3465  -3.252  0.0384
-  ZUFRIEDENSTELLEND jung - SEHR GUT alt          -0.47303 0.1455 3465  -3.252  0.0384
- ZUFRIEDENSTELLEND jung - GUT alt               -0.56461 0.0905 3465  -6.240  <.0001
- ZUFRIEDENSTELLEND jung - ZUFRIEDENSTELLEND alt -0.43423 0.0892 3465  -4.868  0.0001
- ZUFRIEDENSTELLEND jung - WENIGER GUT alt       -0.39462 0.1111 3465  -3.553  0.0141
-   WENIGER GUT jung - GUT alt                     -0.64692 0.1361 3465  -4.752  0.0001
- WENIGER GUT jung - ZUFRIEDENSTELLEND alt       -0.51655 0.1353 3465  -3.818  0.0053
- WENIGER GUT jung - WENIGER GUT alt             -0.47693 0.1506 3465  -3.167  0.0498
-  
+Erneut konzentrieren wir uns vorrangig auf die Signifikanzwerte. Wenn wir uns nur auf die junge Altersgruppe konzentrieren, erkennen wir die bereits bekannten Gruppenunterschieden aus der einfaktoriellen Varianzanalyse (zwischen Personen die einen sehr guten Gesundheitszustand aufweisen und Personen, mit einem zufriedenstellenden und weniger guten Gesundheitszustand) wieder. Des Weiteren zeigen sich signifikante Gruppenunterschiede zwischen jungen und alten Personen, die einen guten Gesundheitszustand aufweisen, sowie jungen Personen die einen zufriedenstellenen oder weniger guten Gesundheitszustand haben und alten Personen die einen sehr guten, guten, zufriedenstellenden oder weniger guten Gesundheitszustand haben. 
+
+Dementsprechend ist das Alter sowie der Gesundheitszustand ein signifikanter Vorhersagefaktor wobei sich eine Vielzahl an Gruppen signifikant unterscheiden. Insbesondere bei solch komplexen Gruppenunterschieden ist es sinnvoll, die Ergebnisse auch einmal zu visualisieren. 
+
 ## Visualisierung der Interaktionen
 
 Um einen möglichen Interaktionseffekt auch anschaulich vermitteln bzw. oft auch verstehen zu können, empfiehlt es sich, diesen als Diagramm darzustellen. Hierzu nutzen wir die Pakete `emmeans` und `ggplot2`.
@@ -406,55 +388,35 @@ emmip(fit2, agef ~ gesund) + #<1>
   rotate_x_text(45) #<4>
 ```
 
-1. Innerhalb von `emmip` geben wir zunächst unser Modell der Varianzanalyse an und spezifizieren anschließend durch eine Tilde getrennt unsere Variablen. Die Reihenfolge der Variablen kann hier gerne variiert werden um anschließend zu schauen, wierum man die Grafik besser interpretieren kann.
-2. Mit `labs` geben die Bezeichnung für den Titel sowie die Achsen der Grafik an. 
-3. Mit `scale_color_manual` legen wir eigene Farben für unseren Plot fest. Mittels `name = "Altersgruppe"` ändern wir den Titel der Plotlegende.  
-4. Wir drehen unsere Grafikbeschriftung der x-Achse um 45 Grad, damit auch lange Labels lesbar sind. 
+1.  Innerhalb von `emmip` geben wir zunächst unser Modell der Varianzanalyse an und spezifizieren anschließend durch eine Tilde getrennt unsere Variablen. Die Reihenfolge der Variablen kann hier gerne variiert werden um anschließend zu schauen, wierum man die Grafik besser interpretieren kann.
+2.  Mit `labs` geben die Bezeichnung für den Titel sowie die Achsen der Grafik an.
+3.  Mit `scale_color_manual` legen wir eigene Farben für unseren Plot fest. Mittels `name = "Altersgruppe"` ändern wir den Titel der Plotlegende.\
+4.  Wir drehen unsere Grafikbeschriftung der x-Achse um 45 Grad, damit auch lange Labels lesbar sind.
 
-Anhand der Grafik wird der Interaktionseffekt noch einmal verdeutlicht: Während bei jungen Menschen 
+Anhand der Grafik werden die Interaktionseffekte sowie die Gruppenunterschiede der Posthoc-Tests noch einmal verdeutlicht: Während bei jungen Personen mit einem sehr guten Gesundheitszustand das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, nimmt dieses anschließend steil ab. Bei älteren Menschen wiederum ist das Vertrauen in das Gesundheitswesen bei Personen mit einem sehr guten Gesundheitszustand zwar geringer als bei jüngeren Personen mit einem sehr guten Gesundheitszustand, nimmt anschließend aber zu und im weiteren Verlauf weit weniger drastisch ab. Daher wird auch deutlich, weswegen wir eine solch hohe Anzahl an signifikanten Gruppenunterschieden zwischen den verschiedenen Gesundheitszuständen bei alten und jungen Leuten finden konnten. 
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
 
-Die Ergebnisse der Varianzanalyse werden zumeist in Textform dargestellt. Dafür werden folgende Informationen benötigt:
+Die Ergebnisse der mehrfaktoriellen Varianzanalyse werden zumeist in Textform dargestellt. Dafür werden folgende Informationen benötigt:
 
+✅ die Mittelwerte und Standardabweichung der einzelnen Faktorstufen
 
-✅  die Mittelwerte  und Standardabweichung der einzelnen Faktorstufen
+✅ der df-Wert
 
-✅   der  df-Wert
+✅ der F-Wert
 
-✅  der F-Wert
+✅ der p-Wert
 
-✅  der  p-Wert
+✅ die jeweiligen pes-Wert
 
-✅   die jeweiligen pes-Wert
-
-✅   die  Posthoc-Test Ergebnisse
+✅ die Posthoc-Test Ergebnisse
 
 Das Format ist üblicherweise:
 
-> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand. Des Weiteren haben ältere Personen ein höheres Vertrauen in das Gesundheitswesen (M = 5.05;SD=1.36) als jüngere Personen (M = 4.85;SD=1.40). Der Gesundheitszustand (F3470)=5,46,p<0,001 ηp2 = , das Alter (F3470)=5,46,p<0,001 ηp2 =  und eine Interaktion auf Gesundheitszustand und Alter (F3470)=5,46,p<0,001, ηp2 =  haben jeweils einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p<0.029) und weniger gutem (p<0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.
-
-
-
-
-Es zeigt sich, dass das Gesamtmodell signifikant ist (F(5,24) = 36.22, p < .001, angepasstes R2 = .859, n = 30). Es zeigt sich, dass das Geschlecht alleine keinen signifikanten Zusammenhang mit der Höhe des Stundenlohnes aufweist (F(1,24) = .76, p = .678). Je nach Berufserfahrung dagegen werden unterschiedliche Löhne berichtet (F(2,24) = 74.53, p < .001, ηp2 = .861). Bonferroni-korrigierte Post-hoc-Tests zeigen, dass sich alle drei Levels der Berufserfahrung signifikant unterscheiden: tiefe Erfahrung (M = 23.5, SD = 1.51), mittlere Erfahrung (M = 26.6, SD = 1.65) und hohe Erfahrung (M = 30.6, SD = 2.37).
-
-Zudem zeigt sich eine signifikante Interaktion von Geschlecht und Berufserfahrung auf den Lohn (F(2,24) = 15.94, p < .001, ηp2 = .571). Dies weist darauf hin, dass sich Berufserfahrung je nach Geschlecht unterschiedlich auswirkt. Bei geringer Erfahrung liegt der Lohn der Frauen (M = 24.6, SD = 1.34) über jenem der Männer (M = 22.4, SD = .55). Dies ist auch bei mittlerer Erfahrung der Fall (Frauen: M = 27.6, SD = 1.82; Männer: M = 25.6, SD = .55). Bei hoher Erfahrung ist es genau umgekehrt: Der Lohn der Männer (M = 32.4, SD = 1.52) liegt deutlich über jenem der Frauen (M = 28.8, SD = 1.48).
-
-Die Effektstärken sind sowohl für den Haupteffekt der Berufserfahrung (f = 2.49) als auch für die Interaktion (f = 1.15) nach Cohen (1992) als stark einzustufen.
-
+> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand. Des Weiteren haben ältere Personen ein höheres Vertrauen in das Gesundheitswesen (M = 5.05;SD=1.36) als jüngere Personen (M = 4.85;SD=1.40). Der Gesundheitszustand (F3465)=7,66,p\<0,001 ηp2 =  und das Alter (F3465)=14,63,p\<0,001 haben jeweils einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen. Post-Hoc Paarvergleiche mit Tukey ergaben, dass sich der Mittelwert für junge Personen mit sehr guten Gesundheitszustand signifikant von jungen Personen mit gutem (p=.045), zufriedenstellendem (p\<0.001) und weniger gutem (p\<0.001) Zustand unterscheidet. Des Weiteren unterscheiden sich junge Personen mit guten Gesundheitszustand von jungen Personen mit zufriedenstellenden Gesundheitszustand (p=.01) sowie von alten Personen mit guten Gesundheitszustand (p=.018). Darüber hinaus unterscheiden sich junge Personen mit einem zufriedenstellenden Gesundheitszustand von alten Personen mit einem sehr guten (p=.03), guten (p\<0.001), zufriedenstellenden (p\<0.001) und weniger guten (p=.01) Gesundheitszustand. Zuletzt unterscheiden sich junge Personen mit einem weniger guten Gesundheitszustand von alten Personen mit einem guten (p\<0.001), zufriedenstellenden (p.005) und weniger guten Gesundheitszustand (p=.0489). Das Ergebnise zeigt zudem eine signifikante Interaktion von Gesundheitszustand und Alter ((F3465)=2,93, p=0,020, ηp2 = .003) auf das Vertrauen in das Gesundheitswesen. Dies weist darauf hin, dass sich der Gesundheitszustand je nach Altersgruppe unterschiedlich auswirkt. Bei einem sehr guten Gesundheitszustand ist das Vertrauen in das Gesundheitswesen bei jungen Menschen (M = 5.15, SD = 1.42) stärker ausgeprägt als bei alten Menschen (M = 5.05, SD = 1.57). Bei allen anderen Gesundheitszuständen ist es genau umgekehrt. Hier haben jeweils ältere Menschen ein höheres Vertrauen in das Gesundheitswesen als jüngere Menschen. 
 
 :::
-
-Response: trustges
-       Effect      df  MSE         F  pes p.value
-1      gesund 4, 3465 1.89  7.66 *** .009   <.001
-2        agef 1, 3465 1.89 14.63 *** .004   <.001
-3 gesund:agef 4, 3465 1.89    2.93 * .003    .020
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘+’ 0.1 ‘ ’ 1
-
 
 
 ## Literatur
@@ -467,7 +429,4 @@ Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen
 > 📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. [Link](https://link.springer.com/book/10.1007/978-3-658-34285-2)
 
 > 📖 Field, Z., Miles, J., & Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. [Link](https://suche.suub.uni-bremen.de/peid=B68436977&LAN=DE&CID=7699632&index=L&Hitnr=1&dtyp=D&rtyp=a&Exemplar=1)
-
-
 :::
-

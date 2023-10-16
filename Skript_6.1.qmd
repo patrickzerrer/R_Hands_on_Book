@@ -30,10 +30,11 @@ In einem letzten Schritt müssen wir prüfen, ob unsere Daten für die Testverfa
 
 ## Wann verwende ich welches Testverfahren?
 
-Die folgende Grafik kann als Orientierung dienen, welches Verfahren für eure spezielle Datenlage Sinn ergibt. Durch einen Klick auf die Verfahren kommt ihr jeweils zum entsprechenden Kapitel. 
+Die folgende Grafik kann als Orientierung dienen, welches Verfahren für eure spezielle Datenlage Sinn ergibt. 
+
+![](Bilder/Übersicht_Mittelwerte.png)
 
 ```{mermaid}
-
 
 flowchart LR
   A>Mittelwertvergleich] --> B(unabhängige Stichprobe)
