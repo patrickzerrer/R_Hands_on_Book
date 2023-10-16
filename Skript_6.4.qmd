@@ -318,12 +318,14 @@ Das Format ist üblicherweise:
 
 ## Exkurs: Einfaktorielle Varianzanalyse mit Messwiederholung
 
+## Umgang mit Messwiederholungen
+
 Haben wir mehr als zwei Testzeitpunkte vorliegen, so können wir die ANOVA mit Messwiederholung rechnen. Die ANOVA mit Messwiederholung weitet dabei den Gedanken der t-Test für abhängige Stichproben weiter aus. Solltet ihr euch für dieses Verfahren interessieren, findet ihr [hier](https://bjoernwalther.com/anova-mit-messwiederholung-in-r/) weitere Infos dazu. 
 
 :::
 
 
-## Mehrfaktorielle Varianzanalyse
+# Mehrfaktorielle Varianzanalyse
 
 In der mehrfaktoriellen Varianzanalyse können wir unser Modell aus der einfachen Varianzananlyse erweitern. In diesem Beispiel nutzen wir neben der Variablen zum Gesundheitszustand (`gesund`) zusätzlich die Variable Alter (`agef`) um das Vertrauen in das Gesundheitssystem (`trustges`) vorherzusagen.
 
@@ -331,6 +333,12 @@ Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick 
 
 ```{r}
 #Deskriptive Statistiken ausgeben
+daten %>% 
+  group_by(agef) %>% 
+  summarise(Mittelwert = mean(trustges, na.rm = T), 
+            Standardabweichung = SD(trustges, na.rm = T)) %>% 
+  kable(digits = 2, col.names = c("Alter", "M", "SD"), caption = "Descriptives Vertrauen")
+
 daten %>% 
   group_by(gesund, agef) %>% 
   summarise(Mittelwert = mean(trustges, na.rm = T), 
@@ -371,20 +379,58 @@ Um einen möglichen Interaktionseffekt auch anschaulich vermitteln bzw. oft auch
 
 ```{r}
 #Interaktionsplot ausgeben
-emmip(fit2, agef ~ gesund) + 
-  labs(title = "Geschätzes Randmittel von Vertrauen in das Gesundheitswesen", 
+emmip(fit2, agef ~ gesund) + #<1>
+  labs(title = "Geschätzes Randmittel von Vertrauen in das Gesundheitswesen", #<2>
        y = "Geschätzte Randmittel",
-       x = "Gesundheitszustand")
-
-emmip(fit2, gesund ~ agef) + 
-  labs(title = "Geschätzes Randmittel von Vertrauen in das Gesundheitswesen", 
-       y = "Geschätzte Randmittel",
-       x = "Alter der Befragten")
+       x = "Gesundheitszustand") +
+  scale_color_manual(values = c("darkgreen", "tan4"), name = "Altersgruppe") #<3>
 ```
 
+1. Innerhalb von `emmip` geben wir zunächst 
+2. Text
+3. Text
+
+::: callout-tip
+## Wie gebe ich die Ergebnisse korrekt an?
+
+Die Ergebnisse der Varianzanalyse werden zumeist in Textform dargestellt. Dafür werden folgende Informationen benötigt:
+
+
+✅  die Mittelwerte  und Standardabweichung der einzelnen Faktorstufen
+
+✅   der  df-Wert
+
+✅  der F-Wert
+
+✅  der  p-Wert
+
+✅   die jeweiligen pes-Wert
+
+✅   die  Posthoc-Test Ergebnisse
+
+Das Format ist üblicherweise:
+
+> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand. Des Weiteren haben ältere Personen ein höheres Vertrauen in das Gesundheitswesen (M = 5.05;SD=1.36) als jüngere Personen (M = 4.85;SD=1.40). Der Gesundheitszustand (F3470)=5,46,p<0,001 ηp2 = , das Alter (F3470)=5,46,p<0,001 ηp2 =  und eine Interaktion auf Gesundheitszustand und Alter (F3470)=5,46,p<0,001, ηp2 =  haben jeweils einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p<0.029) und weniger gutem (p<0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.
 
 
 
+
+Es zeigt sich, dass das Gesamtmodell signifikant ist (F(5,24) = 36.22, p < .001, angepasstes R2 = .859, n = 30). Es zeigt sich, dass das Geschlecht alleine keinen signifikanten Zusammenhang mit der Höhe des Stundenlohnes aufweist (F(1,24) = .76, p = .678). Je nach Berufserfahrung dagegen werden unterschiedliche Löhne berichtet (F(2,24) = 74.53, p < .001, ηp2 = .861). Bonferroni-korrigierte Post-hoc-Tests zeigen, dass sich alle drei Levels der Berufserfahrung signifikant unterscheiden: tiefe Erfahrung (M = 23.5, SD = 1.51), mittlere Erfahrung (M = 26.6, SD = 1.65) und hohe Erfahrung (M = 30.6, SD = 2.37).
+
+Zudem zeigt sich eine signifikante Interaktion von Geschlecht und Berufserfahrung auf den Lohn (F(2,24) = 15.94, p < .001, ηp2 = .571). Dies weist darauf hin, dass sich Berufserfahrung je nach Geschlecht unterschiedlich auswirkt. Bei geringer Erfahrung liegt der Lohn der Frauen (M = 24.6, SD = 1.34) über jenem der Männer (M = 22.4, SD = .55). Dies ist auch bei mittlerer Erfahrung der Fall (Frauen: M = 27.6, SD = 1.82; Männer: M = 25.6, SD = .55). Bei hoher Erfahrung ist es genau umgekehrt: Der Lohn der Männer (M = 32.4, SD = 1.52) liegt deutlich über jenem der Frauen (M = 28.8, SD = 1.48).
+
+Die Effektstärken sind sowohl für den Haupteffekt der Berufserfahrung (f = 2.49) als auch für die Interaktion (f = 1.15) nach Cohen (1992) als stark einzustufen.
+
+
+:::
+
+Response: trustges
+       Effect      df  MSE         F  pes p.value
+1      gesund 4, 3465 1.89  7.66 *** .009   <.001
+2        agef 1, 3465 1.89 14.63 *** .004   <.001
+3 gesund:agef 4, 3465 1.89    2.93 * .003    .020
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘+’ 0.1 ‘ ’ 1
 
 
 
