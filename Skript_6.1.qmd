@@ -12,7 +12,7 @@ format:
       theme: neutral
 ---
 
-# Einführung in die Bivariate Statistik
+![Bild generiert von Midjourney](Bilder/Bivariate_Statistik.png)
 
 Bei der bivariaten Statistik schauen wir uns nicht Variablen isoliert an, sondern interessieren uns für die Beziehung von zwei Variablen zueinander. Grundsätzlich unterscheiden wir bei bivariaten Analysen in die Überprüfung von (Mittelwert-)Unterschieden und das Prüfen von Zusammenhängen. In diesem Kapitel konzentrieren wir uns auf die Überprüfung von Unterschieden. Die Überprüfung von Zusammenhängen mittels Korrelation und Regression findet sich hingegen im [nächsten Kapitel](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_7.1.html). 
 

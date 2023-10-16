@@ -70,9 +70,15 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Bivariate Statistik &amp; Mittelwertvergleiche">
 <meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/Bivariate_Statistik.png">
+<meta property="og:image:height" content="454">
+<meta property="og:image:width" content="810">
 <meta name="twitter:title" content="Bivariate Statistik &amp; Mittelwertvergleiche">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/Bivariate_Statistik.png">
+<meta name="twitter:image-height" content="454">
+<meta name="twitter:image-width" content="810">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -369,10 +375,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#einführung-in-die-bivariate-statistik" id="toc-einführung-in-die-bivariate-statistik" class="nav-link active" data-scroll-target="#einführung-in-die-bivariate-statistik"><span class="header-section-number">1</span> Einführung in die Bivariate Statistik</a></li>
-  <li><a href="#das-überprüfen-von-unterschieden" id="toc-das-überprüfen-von-unterschieden" class="nav-link" data-scroll-target="#das-überprüfen-von-unterschieden"><span class="header-section-number">2</span> Das Überprüfen von Unterschieden</a>
+  <li><a href="#das-überprüfen-von-unterschieden" id="toc-das-überprüfen-von-unterschieden" class="nav-link active" data-scroll-target="#das-überprüfen-von-unterschieden"><span class="header-section-number">1</span> Das Überprüfen von Unterschieden</a>
   <ul class="collapse">
-  <li><a href="#wann-verwende-ich-welches-testverfahren" id="toc-wann-verwende-ich-welches-testverfahren" class="nav-link" data-scroll-target="#wann-verwende-ich-welches-testverfahren"><span class="header-section-number">2.1</span> Wann verwende ich welches Testverfahren?</a></li>
+  <li><a href="#wann-verwende-ich-welches-testverfahren" id="toc-wann-verwende-ich-welches-testverfahren" class="nav-link" data-scroll-target="#wann-verwende-ich-welches-testverfahren"><span class="header-section-number">1.1</span> Wann verwende ich welches Testverfahren?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -403,19 +408,22 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="einführung-in-die-bivariate-statistik" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Einführung in die Bivariate Statistik</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Bivariate_Statistik.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Bild generiert von Midjourney</figcaption>
+</figure>
+</div>
 <p>Bei der bivariaten Statistik schauen wir uns nicht Variablen isoliert an, sondern interessieren uns für die Beziehung von zwei Variablen zueinander. Grundsätzlich unterscheiden wir bei bivariaten Analysen in die Überprüfung von (Mittelwert-)Unterschieden und das Prüfen von Zusammenhängen. In diesem Kapitel konzentrieren wir uns auf die Überprüfung von Unterschieden. Die Überprüfung von Zusammenhängen mittels Korrelation und Regression findet sich hingegen im <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_7.1.html">nächsten Kapitel</a>.</p>
-</section>
-<section id="das-überprüfen-von-unterschieden" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Das Überprüfen von Unterschieden</h1>
+<section id="das-überprüfen-von-unterschieden" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Das Überprüfen von Unterschieden</h1>
 <p>Die Überprüfung von möglichen bivariaten Unterschieden sollte zunächst immer deskriptiv über <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.4.html#kreuztabellen">Kreuztabellen</a> oder <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.4.html#balkendiagramme">Grafiken</a> erfolgen.</p>
 <p>Anschließend stehen uns eine Vielzahl an statistischen Testverfahren zur Verfügung. Diese nutzen wir um zu Überprüfen, ob ein eventueller Mittelwertunterschied in den deskriptiven Daten auch statistische Signifikanz aufweist.</p>
 <p>Grundsätzlich unterscheiden wir zwischen Verfahren die eine verbundene Stichprobe und eine unabhängige Stichprobe voraussetzen. Bei einer unabhängigen Stichprobe sind unsere zu vergleichenden Gruppen unabhängig voneinander. Bei einer verbundenen Stichprobe hingegen hängen, wie es der Name schon vermuten lässt, die Stichproben voneinander ab. Ein klassisches Beispiel für eine verbundene Stichprobe ist der Mittelwertvergleich bei denselben Personen zu unterschiedlichen Zeitpunkten.</p>
 <p>In einem nächsten Schritt schauen wir uns an, wie viele verschiedene Gruppen wir miteinander vergleichen. Vergleichen wir lediglich zwei Gruppen so nutzen wir einen t-test. Haben wir hingegen mehr als zwei Gruppen so können wir den t-test nicht mehr anwenden. Dann benötigen wir die Varianzanalyse.</p>
 <p>In einem letzten Schritt müssen wir prüfen, ob unsere Daten für die Testverfahren geeignet sind. Sowohl der t-test als auch die Varianzanalyse stellen einige Voraussetzungen an die Beschaffenheit der Daten. Falls die Daten diese nicht erfüllen können wir auf weniger voraussetzungsreiche sog. nicht-parametrische Tests zurückgreifen.</p>
-<section id="wann-verwende-ich-welches-testverfahren" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="wann-verwende-ich-welches-testverfahren"><span class="header-section-number">2.1</span> Wann verwende ich welches Testverfahren?</h2>
+<section id="wann-verwende-ich-welches-testverfahren" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="wann-verwende-ich-welches-testverfahren"><span class="header-section-number">1.1</span> Wann verwende ich welches Testverfahren?</h2>
 <p>Die folgende Grafik kann als Orientierung dienen, welches Verfahren für eure spezielle Datenlage Sinn ergibt. Durch einen Klick auf die Verfahren kommt ihr jeweils zum entsprechenden Kapitel.</p>
 <div class="cell">
 <div class="cell-output-display">

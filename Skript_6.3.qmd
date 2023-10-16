@@ -14,7 +14,7 @@ format:
     code-annotations: hover
 ---
 
-![Bild]()
+![Bild generiert von Midjourney](Bilder/Grafik_ttest.png)
 
 Wir nutzen den t-test um Mittelwertunterschiede zwischen zwei Gruppen zu analysieren. Dabei unterscheiden wir grundsätzlich zwei verschiedene Arten von Test:
 

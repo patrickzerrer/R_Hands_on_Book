@@ -16,7 +16,7 @@ format:
 
 
 
-![Bild](Link ergänzen)
+![Bild generiert von Midjourney](Bilder/Bild_Varianzanalyse.png)
 
 Die Varianzanalyse weitet den Grundgedanken des t-Tests aus, indem sie den simultanen Vergleich von Gruppenmittelwerten über mehr als zwei Gruppen erlaubt. Die einfaktorielle Varianzanalyse definiert die Gruppen dabei anhand eines Faktors (einer unabhängigen Variable), die mehrfaktorielle Varianzanalyse erlaubt mehrere unabhängige kategoriale Variablen im Modell, ist aber nicht mit der multivariaten Varianzanalyse (MANOVA) zu verwechseln, die auch mehrere metrische abhängige Variablen gleichzeitig zulässt. Wenn die Gruppierungsvariable (also die unabhängige Faktor-Variable) mehr als zwei Gruppen unterscheidet, müssen nach der Anova Post-Hoc Tests durchgeführt werden. Denn sollte die Varianzanalyse insgesamt signifikante Werte liefern, wurde zwar festgestellt, dass es überzufällige Unterschiede zwischen den durch die Faktorstufen definierten Gruppen gibt, bei drei und mehr Faktorstufen bleibt aber noch unklar, auf welchen Gruppenunterschieden dieses Ergebnis beruht. Post hoc-Tests liefern spezifischere Informationen dazu, welche Gruppenmittelwerte signifikant voneinander abweichen.
 
@@ -327,18 +327,21 @@ Haben wir mehr als zwei Testzeitpunkte vorliegen, so können wir die ANOVA mit M
 
 # Mehrfaktorielle Varianzanalyse
 
-In der mehrfaktoriellen Varianzanalyse können wir unser Modell aus der einfachen Varianzananlyse erweitern. In diesem Beispiel nutzen wir neben der Variablen zum Gesundheitszustand (`gesund`) zusätzlich die Variable Alter (`agef`) um das Vertrauen in das Gesundheitssystem (`trustges`) vorherzusagen.
+In der mehrfaktoriellen Varianzanalyse haben wir eine abhängige Variable und mehrere unabhängige Variablen. Um diese durchzuführen, können wir unser Modell aus der einfachen Varianzananlyse einfach um weitere Variablen erweitern. In diesem Beispiel nutzen wir neben der Variablen zum Gesundheitszustand (`gesund`) zusätzlich die Variable Alter (`agef`) um das Vertrauen in das Gesundheitssystem (`trustges`) vorherzusagen.
 
-Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. 
+Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür schauen wir uns einem ersten Schritt gesondert die Variable Alter an:
 
 ```{r}
-#Deskriptive Statistiken ausgeben
 daten %>% 
   group_by(agef) %>% 
   summarise(Mittelwert = mean(trustges, na.rm = T), 
             Standardabweichung = SD(trustges, na.rm = T)) %>% 
   kable(digits = 2, col.names = c("Alter", "M", "SD"), caption = "Descriptives Vertrauen")
+```
 
+Wir sehen, dass ältere Menschen grundsätzlich ein höheres Vertrauen in das Gesundheitswesen haben, als jüngere Menschen. Anschließend gruppieren wir unsere deskriptiven Statistiken anhand unserer beiden unabhängigen Variablen Alter und Gesundheitszustand:
+
+```{r}
 daten %>% 
   group_by(gesund, agef) %>% 
   summarise(Mittelwert = mean(trustges, na.rm = T), 
@@ -346,7 +349,7 @@ daten %>%
   kable(digits = 2, col.names = c("Gesundheitszustand", "Alter", "M", "SD"), caption = "Descriptives Vertrauen")
 ```
 
-Zunächst können wir unsere deskriptiven Statistiken betrachten. Hier interessieren uns insbesondere die Mittelwerte für die einzelnen Gruppen. Diese Mittelwerte im Fließtext kurz zu erwähnen, gehört zum „guten Ton" bei der Auswertung einer Varianzanalyse und sollte daher nicht vergessen werden.
+In dieser Tabelle sehen wir das Vertrauen in das Gesundheitssystem in Abhängigkeit von dem Gesundheitszustand der Befragten sowie ihrem Alter, wobei insbesondere die Unterchiede in den Mittelwerten von Interesse sind. Diese Mittelwerte im Fließtext kurz zu erwähnen, gehört zum „guten Ton" bei der Auswertung einer Varianzanalyse und sollte daher nicht vergessen werden.
 
 Nun können wir unsere ANOVA aufstellen. Es gibt verschiedene Möglichkeiten eine ANOVA zu berechnen, namentlich Type I, II und III. Die einzelnen Typen unterscheiden sich darin, wie die Parameter (insbesondere die Quadratsumme) berechnet wird. Typ I sollte vor allem für ausgeglichene Daten verwendet werden, also Daten bei der für jede Gruppe die gleiche Anzahl an Fällen vorliegen. Ist dies nicht der Fall, sollte Typ II oder Typ III (beispielsweise die Option der Anova in SPSS) verwendet werden. Der typische Befehl für eine Anova in R ist der Befehl `aov()`. Dieser ist jedoch nur für die Typ I Anova ausgelegt, daher nutzen wir hier erneut den Befehl `aov_car()` (sowie den distict-Befehl) aus dem `afex`-Paket welcher standardmäßig die Anova nach Typ III berechnet. Im Prinzip nutzen wir die selbe Syntax wie bei der unifaktoriellen Anova. Wir ergänzen allerdings unsere zweitere unabhängige Variable, beziehungsweise verbinden die beiden unabhängigen Variablen mit einem \*. Dadurch erhalten wir sowohl die Werte für die einzelnen Variablen als auch für den Interaktionsterm, also das Zusammenspiel der Variablen.
 
@@ -359,7 +362,7 @@ print(fit2)
 
 ## Interpretation des Outputs
 
-Die Erläuterungen der einzelnen Parameter sind gleich zu den Erläuterungen der unifaktoriellen ANOVA, daher werden diese nicht wiederholt. Es zeigt sich, dass der Gesundheitszustand erneut einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen hat (welcher im vorliegenden Modell etwas höher mit 0.9 Prozent erklärter Varianz ausfällt). Zusätzlich hat neben der Gesundheitszustand auch das Alter der Befragten einen signifikanten, wenngleich geringeren Einfluss auf das Vertrauen in das Gesundheitswesen. Zudem sehen wir einen signifikanten Einfluss der Interaktion von Alter und Gesundheitszustand (`gesund:agef4`). 
+Die Erläuterungen der einzelnen Parameter sind gleich zu den Erläuterungen der unifaktoriellen ANOVA, daher werden diese nicht wiederholt. Es zeigt sich, dass der Gesundheitszustand erneut einen signifikanten Einfluss (`p<.001`) auf das Vertrauen in das Gesundheitswesen hat (welcher im vorliegenden Modell etwas höher mit 0.9 Prozent erklärter Varianz ausfällt). Zusätzlich hat neben der Gesundheitszustand auch das Alter der Befragten einen signifikanten (`p<.001`), wenngleich geringeren Einfluss auf das Vertrauen in das Gesundheitswesen. Zudem sehen wir einen signifikanten Einfluss der Interaktion von Alter und Gesundheitszustand (`p = .020`) 
 
 Im Anschluss müssen wir, wie in der univariaten ANOVA, die Posthoc-Tests berechnen (im vorliegenden Fall können wir lediglich den Tukey-Test berechnen, das der Tamhame-Test nur für einfaktorielle Designs funktioniert).
 
@@ -373,7 +376,23 @@ emmeans::emmeans(fit2, specs = c("gesund", "agef")) %>%
 
 ## Interpretation der Posthoc-Tests und des Gesamtmodells
 
-### ## Visualisierung der Interaktionen
+Die Tabelle zu den Posthoc-Tests ist erwartungsgemäß sehr lang, da alle unsere einzelnen Gruppen miteinander verglichen werden müssen. Hier zeigt sich bereits, dass die mehrfaktorielle Varianzanalyse insbesondere Sinn ergibt, wenn wir Variablen einbeziehen, welche nicht zu viele Ausprägungen aufweisen. 
+
+ contrast                                       estimate     SE   df t.ratio p.value
+SEHR GUT jung - ZUFRIEDENSTELLEND jung          0.56895 0.0971 3465   5.861  <.0001
+ SEHR GUT jung - WENIGER GUT jung                0.65126 0.1406 3465   4.632  0.0002
+ GUT jung - ZUFRIEDENSTELLEND jung               0.30743 0.0853 3465   3.602  0.0119
+  GUT jung - GUT alt                             -0.25718 0.0738 3465  -3.484  0.0179
+  ZUFRIEDENSTELLEND jung - SEHR GUT alt          -0.47303 0.1455 3465  -3.252  0.0384
+  ZUFRIEDENSTELLEND jung - SEHR GUT alt          -0.47303 0.1455 3465  -3.252  0.0384
+ ZUFRIEDENSTELLEND jung - GUT alt               -0.56461 0.0905 3465  -6.240  <.0001
+ ZUFRIEDENSTELLEND jung - ZUFRIEDENSTELLEND alt -0.43423 0.0892 3465  -4.868  0.0001
+ ZUFRIEDENSTELLEND jung - WENIGER GUT alt       -0.39462 0.1111 3465  -3.553  0.0141
+   WENIGER GUT jung - GUT alt                     -0.64692 0.1361 3465  -4.752  0.0001
+ WENIGER GUT jung - ZUFRIEDENSTELLEND alt       -0.51655 0.1353 3465  -3.818  0.0053
+ WENIGER GUT jung - WENIGER GUT alt             -0.47693 0.1506 3465  -3.167  0.0498
+  
+## Visualisierung der Interaktionen
 
 Um einen möglichen Interaktionseffekt auch anschaulich vermitteln bzw. oft auch verstehen zu können, empfiehlt es sich, diesen als Diagramm darzustellen. Hierzu nutzen wir die Pakete `emmeans` und `ggplot2`.
 
@@ -383,12 +402,16 @@ emmip(fit2, agef ~ gesund) + #<1>
   labs(title = "Geschätzes Randmittel von Vertrauen in das Gesundheitswesen", #<2>
        y = "Geschätzte Randmittel",
        x = "Gesundheitszustand") +
-  scale_color_manual(values = c("darkgreen", "tan4"), name = "Altersgruppe") #<3>
+  scale_color_manual(values = c("darkgreen", "tan4"), name = "Altersgruppe") + #<3>
+  rotate_x_text(45) #<4>
 ```
 
-1. Innerhalb von `emmip` geben wir zunächst 
-2. Text
-3. Text
+1. Innerhalb von `emmip` geben wir zunächst unser Modell der Varianzanalyse an und spezifizieren anschließend durch eine Tilde getrennt unsere Variablen. Die Reihenfolge der Variablen kann hier gerne variiert werden um anschließend zu schauen, wierum man die Grafik besser interpretieren kann.
+2. Mit `labs` geben die Bezeichnung für den Titel sowie die Achsen der Grafik an. 
+3. Mit `scale_color_manual` legen wir eigene Farben für unseren Plot fest. Mittels `name = "Altersgruppe"` ändern wir den Titel der Plotlegende.  
+4. Wir drehen unsere Grafikbeschriftung der x-Achse um 45 Grad, damit auch lange Labels lesbar sind. 
+
+Anhand der Grafik wird der Interaktionseffekt noch einmal verdeutlicht: Während bei jungen Menschen 
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
@@ -441,9 +464,10 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘+’ 0.1 ‘ ’
 
 Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen braucht.
 
+> 📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. [Link](https://link.springer.com/book/10.1007/978-3-658-34285-2)
+
 > 📖 Field, Z., Miles, J., & Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. [Link](https://suche.suub.uni-bremen.de/peid=B68436977&LAN=DE&CID=7699632&index=L&Hitnr=1&dtyp=D&rtyp=a&Exemplar=1)
 
-> 📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. [Link](https://link.springer.com/book/10.1007/978-3-658-34285-2)
 
 :::
 
