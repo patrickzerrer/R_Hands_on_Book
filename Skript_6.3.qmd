@@ -212,6 +212,14 @@ Das Format ist üblicherweise:
 
 ## Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest
 
+Wilcoxon-Rangsummentest
+
+```{r}
+
+pairwise.wilcox.test(daten$trustges, daten$gesund,
+                 p.adjust.method = "BH")
+```
+
 # t-Test für Einstichproben
 
 ::: {.callout-note collapse="true" icon="false"}

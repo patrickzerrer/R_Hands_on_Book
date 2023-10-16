@@ -26,11 +26,17 @@ Wir laden zunächst die für dieses Skript benötigten Pakete und legen unseren 
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
-p_load(knitr,car, tidyverse, ggplot2, ggpubr, DescTools, dplyr,afex, emmeans, PMCMRplus, sjmisc)
+p_load(knitr,car, tidyverse, ggplot2, ggpubr, effectsize, DescTools, dplyr,afex, emmeans, PMCMRplus, sjmisc) #<1>
 
-theme_set(theme_classic())
-options(scipen = 999) 
+theme_set(theme_classic()) #<2>
+options(scipen = 999) #<3>
+options(es.use_symbols = TRUE) #<4>
 ```
+
+1. Lädt alle benötigten Pakete mit dem Befehl `p_load()`
+2. Setzt einen universalen Hintergund (`theme_classic`) für unsere Datenvisualisierungen mit ggplot2 fest.
+3. Sorgt dafür, dass sehr kleine Zahlen ausgeschrieben werden. 
+4. Sorgt dafür, dass Symbole im Output gedruckt werden.
 
 Anschließend laden wir unseren Datensatz:
 
@@ -132,7 +138,7 @@ LillieTest(daten$trustges)
 shapiro.test(daten$trustges)
 ```
 
-Im vorliegenden Beispiel sind beide Tests signifikant. Allerdings reagieren beide Tests insbesondere bei großen Stichproben sehr sensibel, sodass bereits leichte Abweichungen von der Normalverteilung (etwa durch Ausreißer) die Tests signifikant werden lassen; in diesen Fällen ist es sinnvoll eher auf die graphische Überprüfung (siehe oben) zu schauen. Sowohl der Kolmogorov-Smirnov-Test als auch die Grafik lassen jedoch nicht auf eine perfekte Normalverteilung unserer abhängigen Variablen schließen. In diesem Fall kann die Varianzanalyse dennoch gerechnet werden, da solange die Verteilung nicht extrem steil ist, das Verfahren einigermaßen robust ist. Bei einer sehr starken Verletzung der Normalverteilung müsste ggf. auf [nicht parametrische Tests](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_6.4.html#exkurs-kruskal-wallis-test) ausgewichen werden.
+Im vorliegenden Beispiel sind beide Tests signifikant. Allerdings reagieren beide Tests insbesondere bei großen Stichproben sehr sensibel, sodass bereits leichte Abweichungen von der Normalverteilung (etwa durch Ausreißer) die Tests signifikant werden lassen; in diesen Fällen ist es sinnvoll eher auf die graphische Überprüfung (siehe oben) zu schauen. Sowohl der Kolmogorov-Smirnov-Test als auch die Grafik lassen jedoch nicht auf eine perfekte Normalverteilung unserer abhängigen Variablen schließen. In diesem Fall kann die Varianzanalyse dennoch gerechnet werden, da solange die Verteilung nicht extrem steil ist, das Verfahren einigermaßen robust ist. Bei einer sehr starken Verletzung der Normalverteilung müsste ggf. auf nicht parametrische Tests wie den [Kruskal-Wallis-Test](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_6.4.html#exkurs-kruskal-wallis-test) ausgewichen werden.
 
 ## Überprüfung der Homogenität der Fehlervarianzen
 
@@ -160,6 +166,7 @@ Nachdem wir die Voraussetzungen geprüft haben, schauen wir uns die einfaktoriel
 
 ## Deskriptive Statistiken
 
+Zunächst interessieren uns die deskriptiven Statistiken. Dafür gruppieren wir die Ergebnisse unserer abhängigen Variablen anhand der Ausprägungen unserer unabhängigen Variablen und lassen uns jeweils den Mittelwert und die Standardabweichung ausgeben. 
 
 ```{r}
 daten %>% 
@@ -184,11 +191,16 @@ fit <- daten %>%
 aov_car(trustges ~ gesund + Error(respid), data = ., anova_table = "pes") #<1>
 
 print(fit)
+
+eta_squared(fit, partial = F) #<2>
 ```
 
 1. Innerhalb der Funktion aov_car müssen wir zunächst die abhängige Variable (`trustges`) angeben und nach einer Tilde die unabhängige Variabel (`gesund`). Zudem müssen wir den Zusatz `+ Error()` nutzen un in der Klammer die Fallid (hier `respid`) angeben. Alles speichern wir als Objekt `fit` welches wir anschließend mit `print` aufrufen.
+2. Mit `eta_squared` können wir zusätzlich die Effektstärke angeben. Diese findet sich für die einfaktorielle Anova auch in der Spalte pes, aber hier erhalten wir zusätzlich ein Konfidenzintervall für den Effekt. 
 
 ## Interpretation des Outputs
+
+Als Output erhalten wir eine Tabelle, deren einzelne Bestandteile im Folgenden näher erläutert und interpretiert werden. 
 
 *Effect* zeigt die unabhängige Variable des Modells, in diesem Fall die Variable Gesundheitszustand(`gesund`). Die vier bedeutet, dass hier insgesamt eine Gruppe mit 4 anderen (= fünf Ausprägungen) verglichen wurde.
 
@@ -196,7 +208,7 @@ print(fit)
 
 Die *mittlere quadratische Abweichung (MSE)* oder Fehlervarianz ist die Summe der Abweichungsquadrate aller Werte vom jeweiligen Gruppenmittelwert. Berechnet wird diese durch die Quadratsummer der Fehlerresiduen geteilt durch die Freiheitsgrade. Sie gibt damit die Varianz innerhalb der einzelnen Gruppen (=nicht erklärte Varianz) wieder.
 
-Die Spalte *pes* steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an -- partiell ist das Eta^2^, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Im Datenbeispiel hat demnach der Gesundheitszustand (und damit auch unser Gesamtmodell) eine Erklärkraft von 0.6 Prozent für Unterschiede im Vertrauen auf das Gesundheitssystem. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.
+Die Spalte *pes* steht für das partielle Eta-Quadrat und gibt die Erklärungskraft der einzelnen Faktoren im Hinblick auf die anhängige Variable an -- partiell ist das Eta^2^, da es um die Einflüsse der übrigen Modellgrößen bereinigt ist (für unifaktorielle Analysen wie im vorliegenden Fall ist dies nicht relevant, allerdings für die multifaktorielle ANOVA). Die Effektstärke beträgt 0.006 und entspricht damit einem sehr kleinen Effekt (Cohen, 1988). Im Datenbeispiel hat demnach der Gesundheitszustand (und damit auch unser Gesamtmodell) eine Erklärkraft von lediglich 0.6 Prozent für Unterschiede im Vertrauen auf das Gesundheitssystem. Allerdings wissen wir lediglich, dass sich unsere Gruppen signifikant unterscheiden, nicht jedoch, ob sich alle Gruppen unterscheiden, oder lediglich einzelne. Daher benötigen wir die Posthoc-Tests.
 
 
 ## PostHocTests
@@ -208,17 +220,14 @@ Zuletzt müssen wir die Posthoc-Tests berechnen, welche uns Aufschluss darüber 
 emmeans::emmeans(fit, specs = "gesund") %>% 
   pairs()
 
-#Tamhame T2 Test
-daten %>% 
-aov(trustges ~ gesund, data = .) %>% 
-  tamhaneT2Test(.)
+
 ```
 
 ## Interpretation der Posthoc-Tests und des Gesamtmodells
 
 Hier interessiert uns jeweils der p-value (für den Tamhame T2 Test wird uns nur dieser angezeigt). Werte unter .05 bedeuten, dass zwischen diesen Gruppen ein signifikanter Mittelwertunterschied besteht. 
 
-In unserem Beispiel sehen wir signifikante Unterschiede zwischen Personen die einen sehr guten Gesundheitszustand aufweisen und Personen, denen es gesundheitlich schlechter geht (Kategorien zufriedenstellender Gesundheitszustand, weniger guter Gesundheitszustand und je nach Test schlechter Gesundheitszustand). 
+In unserem Beispiel sehen wir signifikante Unterschiede zwischen Personen die einen sehr guten Gesundheitszustand aufweisen und Personen, denen es gesundheitlich schlechter geht (Kategorien zufriedenstellender Gesundheitszustand, weniger guter Gesundheitszustand und je nach Test schlechter Gesundheitszustand). Dementsprechend ist der Gesundheitszustand ein signifikanter Faktor um das Vertrauen in das Gesundheitswesen vorherzusagen. Hier sind jedoch lediglich gravierende Unterschiede in der eigenen Gesundheitseinschätzung maßgeblich für Unterschiede in das Vertrauen.  
 
 ## Visualisierung der Gruppenunterschiede mittels Fehlerbalken
 
@@ -240,11 +249,15 @@ daten %>%
 3. Wir bennenen unsere Grafik um. 
 4. Da die Labels unserer Faktorstufen sehr lang sind, drehen wir diese um 45 Grad. Dies geschieht mit der Funktion `rotate_x_text()` aus dem Paket `ggpubr`. 
 
+Die Punkte in der Grafik visualisieren die Mittelwerte der einzelnen Gesundheitszustände mit Bezug auf die Variable Vertrauen in das Gesundheitswesen. Um die Punkte sind jeweils mit Strichen die Konfidenzintervalle eingezeichnet. Wenn sich die Bereich der Konfidenzintervalle nicht überschneiden, besteht ein signifikanter Mittelwertunterschied. 
+
+Daher können wir anhand der Grafik ablesen, dass das Vertrauen in das Gesundheitswesen am höchsten bei Personen mit einem sehr guten Gesundheitszustand ist und sukkzessive abnimmt, je schlechter der Gesundheitszustand der Befragten ausfällt. Auch die Ergebnisse aus den Posthoc-Tests zeigen sich innerhalb der Grafik: Die Konfidenzintervalle von Personen mit einem sehr guten Gesundheitszustand und einem zufriedenstellenden und weniger guten überschneiden sich nicht. Insofern finden wir bei diesen Gruppen signifikante Mittelwertunterschiede.  
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
 
 Die Ergebnisse der Varianzanalyse werden zumeist in Textform dargestellt. Dafür werden folgende Informationen benötigt:
+
 
 ✅  die Mittelwerte  und Standardabweichung der einzelnen Faktorstufen
 
@@ -264,10 +277,39 @@ Das Format ist üblicherweise:
 
 :::
 
-::: {.callout-note collapse="true" icon="false"}
 
-## Exkurs: nicht parametrischer Kruskal Wallis Test
 
+## Exkurs: nicht parametrische Testverfahren
+
+Wenn wir die Voraussetzungen der Varianzanalyse nicht erfüllen, können wir statt der Varianzanalyse den Kruskal-Wallis Test rechnen. Hierfür müssen unsere Daten nicht die Voraussetzungen der Normalverteilung sowie der Homogenität der Fehlervarianzen erfüllen. 
+
+Den Kruskal-Wallis-Test rufen wir mit der Funktion `kruskal.test()` auf:
+
+```{r}
+kruskal.test(trustges ~ gesund, data = daten)
+```
+Hier interessiert uns insbesondere der p-Wert. Wir sehen, wie auch in der Varianzanalyse, dass sich unsere Gruppen signifikant voneinander unterscheiden. Im Anschluss müssen wir dann erneut die Posthoc Tests durchführen.
+
+
+::: callout-tip
+## Wie gebe ich die Ergebnisse korrekt an?
+
+Die Ergebnisse des Kruskal-Wallis Tests werden simultan zur Varianzanalyse in Textform angegeben. Dafür werden folgende Informationen benötigt:
+
+
+✅  die Mittelwerte  und Standardabweichung der einzelnen Faktorstufen
+
+✅   der  df-Wert
+
+✅  der chi-squared-Wert
+
+✅  der  p-Wert
+
+✅   die  Posthoc-Test Ergebnisse
+
+Das Format ist üblicherweise:
+
+> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand . Der Gesundheitszustand hat dabei einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen H(4) = 25.191, p < 0.001. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p<0.029) und weniger gutem (p<0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.
 
 :::
 
@@ -275,6 +317,8 @@ Das Format ist üblicherweise:
 ::: {.callout-note collapse="true" icon="false"}
 
 ## Exkurs: Einfaktorielle Varianzanalyse mit Messwiederholung
+
+Haben wir mehr als zwei Testzeitpunkte vorliegen, so können wir die ANOVA mit Messwiederholung rechnen. Die ANOVA mit Messwiederholung weitet dabei den Gedanken der t-Test für abhängige Stichproben weiter aus. Solltet ihr euch für dieses Verfahren interessieren, findet ihr [hier](https://bjoernwalther.com/anova-mit-messwiederholung-in-r/) weitere Infos dazu. 
 
 :::
 
