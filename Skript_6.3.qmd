@@ -18,15 +18,18 @@ format:
 
 Wir nutzen den t-test um Mittelwertunterschiede zwischen zwei Gruppen zu analysieren. Dabei unterscheiden wir grundsätzlich zwei verschiedene Arten von Test:
 
-
 -   der t-Test für unabhängige Stichproben (two-paired-test) sowie
 -   der t-Test für verbundene Stichprobene (paired test)
 
+::: {.callout-note collapse="true" icon="false"}
+## Video
 
+{{< video https://nc.uni-bremen.de/index.php/s/T7brcJ73tLGpCk7/download/%2311%20t-Test.mp4 width="900" height="500">}}
+:::
 
 **t-test für unabhängige Stichproben**
 
-Mit dem t-test für unabhängige Stichproben überprüfen wir, ob sich die Mittelwerte in zwei gemessenen Stichproben unterscheiden. Die Stichproben sind dann unabhängig, wenn sie aus zwei unterschiedlichen Gruppen stammen und daher sich nicht gegenseitig beeinflussen können. Ein solches Beispiel liegt zum Beispiel dann vor, wenn wir schauen ob das Alter (dichotom kodiert in alt vs jung) einen Einfluss auf das Einkommen hat. In diesem Fall kann eine Person zum Untersuchungszeitpunkt nicht gleichzeitig alt und jung sein, sondern fällt in einer der beiden Gruppen. Ein anderes typisches Anwendungsbespiel ist der Vergleich von zwei Gruppen im Rahmen eines Experimentaldesign. Hier kann ein Proband ebenfalls nur einer der Untersuchungsgruppe zugeordnet sein.  
+Mit dem t-test für unabhängige Stichproben überprüfen wir, ob sich die Mittelwerte in zwei gemessenen Stichproben unterscheiden. Die Stichproben sind dann unabhängig, wenn sie aus zwei unterschiedlichen Gruppen stammen und daher sich nicht gegenseitig beeinflussen können. Ein solches Beispiel liegt zum Beispiel dann vor, wenn wir schauen ob das Alter (dichotom kodiert in alt vs jung) einen Einfluss auf das Einkommen hat. In diesem Fall kann eine Person zum Untersuchungszeitpunkt nicht gleichzeitig alt und jung sein, sondern fällt in einer der beiden Gruppen. Ein anderes typisches Anwendungsbespiel ist der Vergleich von zwei Gruppen im Rahmen eines Experimentaldesign. Hier kann ein Proband ebenfalls nur einer der Untersuchungsgruppe zugeordnet sein.
 
 **t-test für verbundene Stichproben**
 
@@ -38,7 +41,7 @@ Zusätzlich gibt es noch den Einstichprobentest oder auch one-sample-test. Hier 
 
 # t-Test für unabhängige Stichproben
 
-Wir schauen uns zunächst den t-Test für unabhängige Stichproben an. 
+Wir schauen uns zunächst den t-Test für unabhängige Stichproben an.
 
 ## Datenmanagement
 
@@ -60,31 +63,29 @@ Anschließend laden wir die Daten aus dem Allbus:
 daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
-
 Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements (für ausführliche Erklärungen siehe [hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html)). Für unseren t-test für unabhängige Stichproben möchten wir uns anschauen, wie sich der Wohnort der Befragten auf ihr Vertrauen in die Bundesregierung auswirkt. Wir nutzen dazu die folgenden Variablen:
 
++--------------+----------------------------------+-------------------------------+
+| Variable     | Beschreibung                     | Ausprägungen                  |
++:============:+:================================:+:=============================:+
+| eastwest     | Erhebungsgebiet West-Ost         | 1= Alte Bundesländer (Westen) |
+|              |                                  |                               |
+|              |                                  | 2 = Neue Bundesländer (Osten) |
++--------------+----------------------------------+-------------------------------+
+| pt12         | Vertrauen in die Bundesregierung | -42 = Datenfehler             |
+|              |                                  |                               |
+|              |                                  | -11 = TNZ Split               |
+|              |                                  |                               |
+|              |                                  | -9 = Keine Angabe             |
+|              |                                  |                               |
+|              |                                  | 1 = Gar kein Vertrauen        |
+|              |                                  |                               |
+|              |                                  | ...                           |
+|              |                                  |                               |
+|              |                                  | 7 = Großes Vertrauen          |
++--------------+----------------------------------+-------------------------------+
 
-+----------+----------------------------------+-------------------------------+
-| Variable | Beschreibung                     | Ausprägungen                  |
-+:========:+:================================:+:=============================:+
-| eastwest | Erhebungsgebiet West-Ost         | 1= Alte Bundesländer (Westen) |
-|          |                                  |                               |
-|          |                                  | 2 = Neue Bundesländer (Osten) |
-+----------+----------------------------------+-------------------------------+
-| pt12     | Vertrauen in die Bundesregierung | -42 = Datenfehler             |
-|          |                                  |                               |
-|          |                                  | -11 = TNZ Split               |
-|          |                                  |                               |
-|          |                                  | -9 = Keine Angabe             |
-|          |                                  |                               |
-|          |                                  | 1 = Gar kein Vertrauen        |
-|          |                                  |                               |
-|          |                                  | ...                           |
-|          |                                  |                               |
-|          |                                  | 7 = Großes Vertrauen          |
-+----------+----------------------------------+-------------------------------+
-
-Innerhalb unseres Datenmanageements schließen wir fehlerhafte und fehlende Werte der Variablen pt12 aus und benennen diese anschließend um: 
+Innerhalb unseres Datenmanageements schließen wir fehlerhafte und fehlende Werte der Variablen pt12 aus und benennen diese anschließend um:
 
 ```{r}
 
@@ -94,12 +95,12 @@ daten <- daten %>%
 
 ```
 
-1. Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.
-2. Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.
+1.  Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.
+2.  Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.
 
 ## Deskriptives der abhängigen Variablen
 
-Als ersten Schritt schauen wir uns die deskriptiven Statistiken unserer abhängigen Variablen Vertrauen in die Regierung für die beiden Faktorstufen unserer unabhängigen Variablen an. 
+Als ersten Schritt schauen wir uns die deskriptiven Statistiken unserer abhängigen Variablen Vertrauen in die Regierung für die beiden Faktorstufen unserer unabhängigen Variablen an.
 
 ```{r}
 des_stat <- (favstats(trustreg ~ eastwest, data = daten))
@@ -107,16 +108,15 @@ rownames(des_stat) <- c("Alte Bundesländer", "Neue Bundesländer")
 kable(des_stat[,2:10], digits = 2)
 ```
 
-Anhand dieser deskriptiven Daten sehen wir, dass das Vertrauen in die Bundesregierung in den alten Bundesländern im Mittelwert mit `4,15` stärker ausgeprägt ist als in den neuen Bundesländern (Mittelwert von `3,86`. Um zu prüfen, ob dieser Unterschied des Mittelwertes statistisch signifikant ist, berechnen wir in einem zweiten Schritt die Teststatistik des t-tests. Zunächst müssen wir jedoch prüfen, ob unsere Daten für die Berechnung geeignet sind. Dazu führen wir eine Voraussetzungsprüfung durch. 
+Anhand dieser deskriptiven Daten sehen wir, dass das Vertrauen in die Bundesregierung in den alten Bundesländern im Mittelwert mit `4,15` stärker ausgeprägt ist als in den neuen Bundesländern (Mittelwert von `3,86`. Um zu prüfen, ob dieser Unterschied des Mittelwertes statistisch signifikant ist, berechnen wir in einem zweiten Schritt die Teststatistik des t-tests. Zunächst müssen wir jedoch prüfen, ob unsere Daten für die Berechnung geeignet sind. Dazu führen wir eine Voraussetzungsprüfung durch.
 
 ## Voraussetzungsprüfung
 
 Bei dem t-test handelt es sich um ein statistisches Verfahren. Um die Güte der Ergebnisse sicherzustellen müssen dabei einige Voraussetzungen beachtet werden.Dies sind im Überblick:
 
-- die korrekte Skalierung der UV (=Faktor) und AV (=numerisch)
-- die Normalverteilung der abhängigen Variablen
-- die Varianzhomogenität
-
+-   die korrekte Skalierung der UV (=Faktor) und AV (=numerisch)
+-   die Normalverteilung der abhängigen Variablen
+-   die Varianzhomogenität
 
 ### Skalierung der UV und AV
 
@@ -167,35 +167,31 @@ daten %>%
 
 Der Output des t-tests gibt uns die folgenden Informationen aus:
 
-- data
-- t
-- df
-- p-value
-- 95% confidence intervall
-- means in group 1 & 2
-
-
-
+-   data
+-   t
+-   df
+-   p-value
+-   95% confidence intervall
+-   means in group 1 & 2
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
 
 Die Ergebnisse des t-tests werden üblicherweise im Text angegeben. Für diese Angabe werden die folgenden Informationen benötigt:
 
+✅ die Mittelwerte und Standardabweichung der einzelnen Vergleichsgruppen
 
-✅  die Mittelwerte  und Standardabweichung der einzelnen Vergleichsgruppen
+✅ der df-Wert
 
-✅   der  df-Wert
+✅ der F-Wert
 
-✅  der F-Wert
+✅ der p-Wert
 
-✅  der  p-Wert
-
-✅   die Effektgröße
+✅ die Effektgröße
 
 Das Format ist üblicherweise:
 
-> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand . Der Gesundheitszustand hat dabei einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen (F3470)=5,46,p<0,001. Die Effektstärke nach Cohen (1992) liegt bei alpha=0,006 und entspricht einem kleinen Effekt. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p<0.029) und weniger gutem (p<0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.
+> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand . Der Gesundheitszustand hat dabei einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen (F3470)=5,46,p\<0,001. Die Effektstärke nach Cohen (1992) liegt bei alpha=0,006 und entspricht einem kleinen Effekt. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p\<0.029) und weniger gutem (p\<0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.
 :::
 
 ## Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Test

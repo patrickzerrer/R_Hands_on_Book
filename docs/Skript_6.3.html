@@ -75,6 +75,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -344,12 +346,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Skript_6.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bestimmen von Unterschieden in der Varianz mit Kreuztabellen und dem Chi-Quadrat Test</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
   </div>
@@ -471,6 +467,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>der t-Test für unabhängige Stichproben (two-paired-test) sowie</li>
 <li>der t-Test für verbundene Stichprobene (paired test)</li>
 </ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="900" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://nc.uni-bremen.de/index.php/s/T7brcJ73tLGpCk7/download/%2311%20t-Test.mp4"></video></div>
+</div>
+</div>
+</div>
 <p><strong>t-test für unabhängige Stichproben</strong></p>
 <p>Mit dem t-test für unabhängige Stichproben überprüfen wir, ob sich die Mittelwerte in zwei gemessenen Stichproben unterscheiden. Die Stichproben sind dann unabhängig, wenn sie aus zwei unterschiedlichen Gruppen stammen und daher sich nicht gegenseitig beeinflussen können. Ein solches Beispiel liegt zum Beispiel dann vor, wenn wir schauen ob das Alter (dichotom kodiert in alt vs jung) einen Einfluss auf das Einkommen hat. In diesem Fall kann eine Person zum Untersuchungszeitpunkt nicht gleichzeitig alt und jung sein, sondern fällt in einer der beiden Gruppen. Ein anderes typisches Anwendungsbespiel ist der Vergleich von zwei Gruppen im Rahmen eines Experimentaldesign. Hier kann ein Proband ebenfalls nur einer der Untersuchungsgruppe zugeordnet sein.</p>
 <p><strong>t-test für verbundene Stichproben</strong></p>
@@ -508,9 +520,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements (für ausführliche Erklärungen siehe <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html">hier</a>). Für unseren t-test für unabhängige Stichproben möchten wir uns anschauen, wie sich der Wohnort der Befragten auf ihr Vertrauen in die Bundesregierung auswirkt. Wir nutzen dazu die folgenden Variablen:</p>
 <table class="table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 44%">
-<col style="width: 40%">
+<col style="width: 18%">
+<col style="width: 42%">
+<col style="width: 38%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -759,7 +771,7 @@ Wie gebe ich die Ergebnisse korrekt an?
 <section id="t-test-für-verbundene-stichproben" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> t-Test für verbundene Stichproben</h1>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -768,7 +780,7 @@ Voraussetzungsprüfung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 
 </div>
@@ -799,7 +811,7 @@ P value adjustment method: BH </code></pre>
 <section id="t-test-für-einstichproben" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> t-Test für Einstichproben</h1>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -808,7 +820,7 @@ Voraussetzungsprüfung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 
 </div>
@@ -1126,13 +1138,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left"><strong>Copyright</strong> 2023, <strong>Design by</strong> Katharina Maubach &amp; Patrick Zerrer, <strong>Autor:innen:</strong> Stephanie Geise, Cornelius Puschmann, Hannah Marie Büttner, Michael Linke, Katharina Maubach, Patrick Zerrer</div>   
+    <div class="nav-footer-left"><strong>Copyright</strong> 2023, <strong>Design by</strong> Katharina Maubach &amp; Patrick Zerrer, <strong>Autor:innen:</strong> Katharina Maubach, Patrick Zerrer, Stephanie Geise, Cornelius Puschmann, Hannah Marie Büttner, Michael Linke</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right"><img src="Bilder/logo_zemki.png" class="img-fluid" width="120"> <img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
+<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 
