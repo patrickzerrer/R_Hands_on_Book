@@ -22,7 +22,7 @@ In diesem Teilkapitel gehen wir (wie angekündigt) näher auf die Prüfung der *
 
 # Data Management
 
-Zunächst laden wir wieder die Pakete des `tidyverse` und das Pakete `broom`, um die normale Ausgabe der Funktion `lm` (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket `performance`, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete `lmtest` und `sandwich`, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten). 
+Zunächst laden wir wieder die Pakete des `tidyverse` und das Pakete `broom`, um die normale Ausgabe der Funktion `lm` (für die Berechnung linearer Modelle) in ein etwas anschaulicheres Format umwandeln zu können. Außerdem laden wir das Paket `performance`, dass wir für die Voraussetzungsprüfung brauchen, sowie die Pakete `lmtest` und `sandwich`, mit der wir fehlende Voraussetzungen korrigieren können (siehe unten).
 
 ```{r}
 if(!require("pacman")) {install.packages("pacman");library(pacman)} # <1>
@@ -32,26 +32,24 @@ theme_set(theme_minimal()) # <2>
 options(scipen = 999) # <3>
 ```
 
-1. Laden der notwendigen Pakete
-2. Visualisierungshintergrund der Grafiken in ggplot festlegen
-3. Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
+1.  Laden der notwendigen Pakete
+2.  Visualisierungshintergrund der Grafiken in ggplot festlegen
+3.  Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen
 
-Die Regression rechnen wir wieder auf Basis des ALLBUS-Datensatzes, die wir im letzten Schritt laden. 
+Die Regression rechnen wir wieder auf Basis des ALLBUS-Datensatzes, die wir im letzten Schritt laden.
 
 ```{r}
 daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 ```
 
-
 ::: {.callout-note collapse="true" icon="false"}
-
 # Erinnerung: Einfache lineare Regression
 
-Wir stellen eine einfache lineare Regression mit den Variablen Alter als UV und TV-Nutzung als AV mit lm (=linear models) auf. 
+Wir stellen eine einfache lineare Regression mit den Variablen Alter als UV und TV-Nutzung als AV mit lm (=linear models) auf.
 
 ## Data Management
 
-Für den Teildatensatz bennenen wir die Variablen lm02 und age um und filtern die missings heraus (z.B. -9=Keine Angabe):
+Für den Teildatensatz bennenen wir die Variablen `lm02` und `age` um und filtern die missings heraus (z.B. -9=Keine Angabe):
 
 ```{r}
 daten <- daten %>%
@@ -70,24 +68,24 @@ model <- lm(TV_Konsum ~ Alter, data = daten)
 summary(model) # <1> 
 summary(lm.beta(model)) # <2> 
 ```
-1. klassischer Output mit relevanten Kennzahlen
-2. klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten
 
-Mit diesem Regressionsmodell haben wir übeprüft, ob das Alter die Fernsehnutzung erklären kann. Im Output sehen wir, dass das Alter einen signifikanten positiven Einfluss auf die Internetnutzung. Je älter eine Person ist, desto mehr nutzt er/sie das Fernsehen. Die Regressionsanalyse lässt dabei auch eine Quantifizierung dieses Zusammenhangs zu: Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable TV-Nutzung um "den Estimate-Wert" in Messeinheiten (hier: -2.19 Minuten) zu. Dieser Zusammenhang ist mit p >.05 statistisch signifikant.
+1.  klassischer Output mit relevanten Kennzahlen
+2.  klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten
+
+Mit diesem Regressionsmodell haben wir übeprüft, ob das Alter die Fernsehnutzung erklären kann. Im Output sehen wir, dass das Alter einen signifikanten positiven Einfluss auf die Internetnutzung. Je älter eine Person ist, desto mehr nutzt er/sie das Fernsehen. Die Regressionsanalyse lässt dabei auch eine Quantifizierung dieses Zusammenhangs zu: Mit jeder Einheit, in der die unabhängige Variable Alter steigt (hier: mit jedem Jahr Alter), nimmt die unabhängige Variable TV-Nutzung um "den Estimate-Wert" in Messeinheiten (hier: -2.19 Minuten) zu. Dieser Zusammenhang ist mit p \>.05 statistisch signifikant.
 
 Soweit die Wiederholung. Beginnen wir nun mit der Prüfung der *Voraussetzungen einer Regressionsanalyse*. Vielleicht wundern ihr euch, warum wir die Voraussetzungen erst im zweiten Schritt prüfen? Da habt ihr Recht: Eigentlich müssten wir erst die Voraussetzungen prüfen, dann erst das Modell schätzen. Wenn wir unser Modell aber schon geschätzt haben, können wir Funktionen zur Prüfung der Voraussetzungen auf unser gesamtes Modell anwenden (bzw. auf das entsprechende Datenobjekt "model") - und das erspart uns eine Menge "Handarbeit" mit vielen kleinen Zwischenschritten. Zum Beispiel müssten wir für die Prüfung der Voraussetzungen, die die Residuen betreffen, diese erst einmal berechnen und in einer neuen Variable abspeichern. Es ist also weniger Aufwand, die Voraussetzungen ex post zu prüfen.
-
 :::
 
 # Voraussetzungsprüfung der linearen Regression
 
-Bevor wir zum statistischen Teil kommen, wollen wir noch einmal Revue passieren lassen, was die wichtigsten Voraussetzungen der einfachen linearen Regression sind: 
+Bevor wir zum statistischen Teil kommen, wollen wir noch einmal Revue passieren lassen, was die wichtigsten Voraussetzungen der einfachen linearen Regression sind:
 
-- (quasi-)metrisches Skalenniveau 
-- Linearität des Zusammenhangs zwischen x und y 
-- Homoskedastizität der Residuen: Varianzen der Residuen der prognostizierten abhängigen Variablen sind gleich - Unabhängigkeit der Residuen: ansonsten Autokorrelation, die Aussagekraft reduziert 
-- Normalverteilung der Residuen 
-- Keine Ausreißer in den Daten, da schon einzelne Ausreißer einen sonst signifikanten Trend zunichte machen können (ggf. also eliminieren)
+-   (quasi-)metrisches Skalenniveau
+-   Linearität des Zusammenhangs zwischen x und y
+-   Homoskedastizität der Residuen: Varianzen der Residuen der prognostizierten abhängigen Variablen sind gleich - Unabhängigkeit der Residuen: ansonsten Autokorrelation, die Aussagekraft reduziert
+-   Normalverteilung der Residuen
+-   Keine Ausreißer in den Daten, da schon einzelne Ausreißer einen sonst signifikanten Trend zunichte machen können (ggf. also eliminieren)
 
 ## Metrisches Skalenniveau & Linearität des Zusammenhangs
 
@@ -103,7 +101,7 @@ Das klingt kompliziert? Kann sein, aber keine Panik: Mit der Funktionen `check_h
 check_heteroscedasticity(model)
 ```
 
-Die Interpretation des Outputs ist einfach, weil R hier uns eine sehr konkrete Aussage zur Überpüfung der Annahme macht: Bei grüner Schrift ist das Ergebnis in Ordnung, d.h. die Fehlervarianz scheint homoskedastisch, denn p wäre dann nicht signifikant. Bei roter Schrift - wie im vorliegenden Fall - ist die Fehlervarianz heteroskedastisch und p ist signifikant (p < 0.05). Dann liegt unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen. Das müssen wir dann bei der Interpretation der Daten berücksichtigen. Es ist dann auch unbedingt geboten, diese Limitation anzugeben.
+Die Interpretation des Outputs ist einfach, weil R hier uns eine sehr konkrete Aussage zur Überpüfung der Annahme macht: Bei grüner Schrift ist das Ergebnis in Ordnung, d.h. die Fehlervarianz scheint homoskedastisch, denn p wäre dann nicht signifikant. Bei roter Schrift - wie im vorliegenden Fall - ist die Fehlervarianz heteroskedastisch und p ist signifikant (p \< 0.05). Dann liegt unser Regressionsmodell mit seiner Vorhersage systematisch umso weiter daneben, je größer der Prädiktorwert ist, für den wir die abhängige Variable schätzen wollen. Das müssen wir dann bei der Interpretation der Daten berücksichtigen. Es ist dann auch unbedingt geboten, diese Limitation anzugeben.
 
 Wie das ganze aussieht, können wir uns auch grafisch über die `plot()`-Funktion anschauen. Dazu erzeugen wir ein Streudiagramm, das die vorhergesagten Werte und die Residuen enthält:
 
@@ -112,7 +110,7 @@ plot(model, 1)
 plot(fitted.values(model), rstandard(model))
 ```
 
-Zunächst betrachten wir die Streuung der Punkte im Streudiagramm ohne Linie. Hier können wir bereits sehen, dass eine Zunahme der Streuung bei mittleren Werten erkennbar ist, weil wir einen leicht zur Mitte geöffneten Trichter haben. Das zweite Diagramm hilft zusätzlich mit einer roten Linie, die bei Homoskedastizität möglichst gerade wird. Ist sie wellig oder hat sie eine positive oder negative Steigung, können wir von Heteroskedastizität ausgehen. Genauere Auskunft gibt aber der oben gerechnete Test! 
+Zunächst betrachten wir die Streuung der Punkte im Streudiagramm ohne Linie. Hier können wir bereits sehen, dass eine Zunahme der Streuung bei mittleren Werten erkennbar ist, weil wir einen leicht zur Mitte geöffneten Trichter haben. Das zweite Diagramm hilft zusätzlich mit einer roten Linie, die bei Homoskedastizität möglichst gerade wird. Ist sie wellig oder hat sie eine positive oder negative Steigung, können wir von Heteroskedastizität ausgehen. Genauere Auskunft gibt aber der oben gerechnete Test!
 
 Im Beispiel sehen wir aber auch, dass die Abweichung bei uns zwar vorhanden, aber nicht allzu "dramatisch" ist. Die Voraussetzung ist zwar verletzt, und das müssen wir auch berücksichtgen, aber die Regressionsanalyse ist sehr robust gegen die Verletzung ihrer Voraussetzungen. Wir können den Fehler zudem korrigieren! Und das werden wir nun auch tun :)
 
@@ -124,7 +122,9 @@ PS: Zur Berechnung von heteroscedasticity consistent (HC) standard errors gibt e
 
 ```{r}
 coeftest(model, vcov = vcovHC(model, type = "HC3"))
-#coeftest(model, vcov = vcovHC(model, type = "HC4")) # diese Variante wählen, wenn Residuen nicht normalverteilt sind 
+
+# diese Variante wählen, wenn Residuen nicht normalverteilt sind 
+#coeftest(model, vcov = vcovHC(model, type = "HC4")) 
 ```
 
 Nach der Ausführung erhalten wir eine neue Regressionstabelle. Wenn wir diese Tabelle mit dem obigen Output unseres Regressionsmodells abgleichen, sehen wir, dass sich die eigentlichen Koeffizienten (*Estimates*) nicht verändert haben - aber alle Werte, die rechts davon stehen, also Standardfehler (*Std. Error*), t-Werte und p-Werte. Diese sind nun um unsere Schätzfehler durch Heteroskedastizität korrigiert.
@@ -166,25 +166,20 @@ check_outliers(model)
 In unserem Fall gibt es keine Ausreißer, die das Modell beinträchtigen - vielleicht hätten wir sonst auch keinen signifikanten Zusammenhang beobachten können.
 
 ::: {.callout-note collapse="true" icon="false"}
-
 ## Exkurs Visuelle Inspektion der Modellgüte bzw. der Modellannahmen
 
 Es gibt im performance-Package auch eine sehr gehaltvolle Funktion, die uns eine visuelle Inspektion der Modellgüte bzw. verschiedenen Modellannahmen erlaubt (Normalität der Residuen, Normalität der zufälligen Effekte, lineare Beziehung, Homogenität der Varianz, Multikollinearität). Mit der check_model-Funktion können wir uns dazu mehrere Grafiken im Überblick ausgeben lassen. YEAH! :)
 
-Hier der Link zur Dokumentation des Performance-Packages mit weiteren Informationen: 
-[Link](https://easystats.github.io/performance/)
+Hier der Link zur Dokumentation des Performance-Packages mit weiteren Informationen: [Link](https://easystats.github.io/performance/)
 
 ```{r}
 #check_model(model)
 #model_performance(model)
 ```
-
 :::
 
 ::: callout-note
 ## Literatur
 
 > 📖 Hayes, A. F.,& & Cai, L. (2007). Using heteroskedasticity-consistent standard error estimators in OLS regression: An introduction and software implementation. Behavior research methods, 39(4), 709-722
-
 :::
-

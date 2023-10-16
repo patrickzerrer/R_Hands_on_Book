@@ -101,9 +101,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:title" content="Prüfung der Voraussetzungen bei der linearen Regression">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_femal_person_is_supervising_a_machin_5565b4d9-8bdc-43d3-b87e-0f2162bb5460.png">
+<meta property="og:image:height" content="816">
+<meta property="og:image:width" content="1456">
 <meta name="twitter:title" content="Prüfung der Voraussetzungen bei der linearen Regression">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_femal_person_is_supervising_a_machin_5565b4d9-8bdc-43d3-b87e-0f2162bb5460.png">
+<meta name="twitter:image-height" content="816">
+<meta name="twitter:image-width" content="1456">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -468,15 +472,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="1,2" data-code-cell="annotated-cell-1">Laden der notwendigen Pakete</span>
+<span data-code-lines="1,2" data-code-annotation="1" data-code-cell="annotated-cell-1">Laden der notwendigen Pakete</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-lines="4" data-code-cell="annotated-cell-1">Visualisierungshintergrund der Grafiken in ggplot festlegen</span>
+<span data-code-lines="4" data-code-annotation="2" data-code-cell="annotated-cell-1">Visualisierungshintergrund der Grafiken in ggplot festlegen</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-annotation="3" data-code-lines="5" data-code-cell="annotated-cell-1">Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span>
+<span data-code-lines="5" data-code-annotation="3" data-code-cell="annotated-cell-1">Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span>
 </dd>
 </dl>
 </div>
@@ -500,7 +504,7 @@ Erinnerung: Einfache lineare Regression
 <p>Wir stellen eine einfache lineare Regression mit den Variablen Alter als UV und TV-Nutzung als AV mit lm (=linear models) auf.</p>
 <section id="data-management-1" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="data-management-1"><span class="header-section-number">1.1</span> Data Management</h2>
-<p>Für den Teildatensatz bennenen wir die Variablen lm02 und age um und filtern die missings heraus (z.B. -9=Keine Angabe):</p>
+<p>Für den Teildatensatz bennenen wir die Variablen <code>lm02</code> und <code>age</code> um und filtern die missings heraus (z.B. -9=Keine Angabe):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">rename</span>(<span class="at">Alter =</span> age)<span class="sc">%&gt;%</span></span>
@@ -520,11 +524,11 @@ Erinnerung: Einfache lineare Regression
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="2" data-code-cell="annotated-cell-2">klassischer Output mit relevanten Kennzahlen</span>
+<span data-code-lines="2" data-code-annotation="1" data-code-cell="annotated-cell-2">klassischer Output mit relevanten Kennzahlen</span>
 </dd>
 <dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-lines="3" data-code-cell="annotated-cell-2">klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten</span>
+<span data-code-lines="3" data-code-annotation="2" data-code-cell="annotated-cell-2">klassischer Output mit relevanten Kennzahlen erweitert um standardisierte beta-Koeffizienten</span>
 </dd>
 </dl>
 </div>
@@ -629,7 +633,8 @@ Alter        2.19279    0.10197  21.504 &lt; 0.00000000000000022 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">#coeftest(model, vcov = vcovHC(model, type = "HC4")) # diese Variante wählen, wenn Residuen nicht normalverteilt sind </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># diese Variante wählen, wenn Residuen nicht normalverteilt sind </span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#coeftest(model, vcov = vcovHC(model, type = "HC4")) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nach der Ausführung erhalten wir eine neue Regressionstabelle. Wenn wir diese Tabelle mit dem obigen Output unseres Regressionsmodells abgleichen, sehen wir, dass sich die eigentlichen Koeffizienten (<em>Estimates</em>) nicht verändert haben - aber alle Werte, die rechts davon stehen, also Standardfehler (<em>Std. Error</em>), t-Werte und p-Werte. Diese sind nun um unsere Schätzfehler durch Heteroskedastizität korrigiert.</p>
 <p>Also weiter geht’s!</p>
@@ -642,7 +647,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">check_autocorrelation</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>OK: Residuals appear to be independent and not autocorrelated (p = 0.570).</code></pre>
+<pre><code>OK: Residuals appear to be independent and not autocorrelated (p = 0.572).</code></pre>
 </div>
 </div>
 <p>Auch hier ist der Output wieder sehr klar: Die Prüfung ergibt, dass die Residuen unabhängig und nicht autokorreliert sind (p = 0.588) - sonst hätten wir auch hier einen signifikanten p-Wert erhalten. Prima!</p>

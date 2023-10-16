@@ -66,9 +66,15 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Der Aufbau von Datensätzen">
 <meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_warehouse_full_with_packages_cyberpu_a4bce7b7-70ef-429d-aeb5-f12af768c1bd.png">
+<meta property="og:image:height" content="644">
+<meta property="og:image:width" content="1149">
 <meta name="twitter:title" content="Der Aufbau von Datensätzen">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_warehouse_full_with_packages_cyberpu_a4bce7b7-70ef-429d-aeb5-f12af768c1bd.png">
+<meta name="twitter:image-height" content="644">
+<meta name="twitter:image-width" content="1149">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -371,12 +377,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#was-ist-ein-datensatz-und-wie-sind-datensätze-aufgebaut" id="toc-was-ist-ein-datensatz-und-wie-sind-datensätze-aufgebaut" class="nav-link active" data-scroll-target="#was-ist-ein-datensatz-und-wie-sind-datensätze-aufgebaut"><span class="header-section-number">1</span> Was ist ein Datensatz und wie sind Datensätze aufgebaut?</a></li>
-  <li><a href="#strukturierte-vs.-unstrukturierte-daten" id="toc-strukturierte-vs.-unstrukturierte-daten" class="nav-link" data-scroll-target="#strukturierte-vs.-unstrukturierte-daten"><span class="header-section-number">2</span> Strukturierte vs.&nbsp;unstrukturierte Daten</a></li>
-  <li><a href="#data-frames-und-strukturierte-daten" id="toc-data-frames-und-strukturierte-daten" class="nav-link" data-scroll-target="#data-frames-und-strukturierte-daten"><span class="header-section-number">3</span> Data Frames und strukturierte Daten</a></li>
-  <li><a href="#beobachtungen-und-variablen" id="toc-beobachtungen-und-variablen" class="nav-link" data-scroll-target="#beobachtungen-und-variablen"><span class="header-section-number">4</span> Beobachtungen und Variablen</a>
+  <li><a href="#strukturierte-vs.-unstrukturierte-daten" id="toc-strukturierte-vs.-unstrukturierte-daten" class="nav-link active" data-scroll-target="#strukturierte-vs.-unstrukturierte-daten"><span class="header-section-number">1</span> Strukturierte vs.&nbsp;unstrukturierte Daten</a></li>
+  <li><a href="#data-frames-und-strukturierte-daten" id="toc-data-frames-und-strukturierte-daten" class="nav-link" data-scroll-target="#data-frames-und-strukturierte-daten"><span class="header-section-number">2</span> Data Frames und strukturierte Daten</a></li>
+  <li><a href="#beobachtungen-und-variablen" id="toc-beobachtungen-und-variablen" class="nav-link" data-scroll-target="#beobachtungen-und-variablen"><span class="header-section-number">3</span> Beobachtungen und Variablen</a>
   <ul class="collapse">
-  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung"><span class="header-section-number">4.1</span> Zusammenfassung</a></li>
+  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung"><span class="header-section-number">3.1</span> Zusammenfassung</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -407,20 +412,23 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="was-ist-ein-datensatz-und-wie-sind-datensätze-aufgebaut" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Was ist ein Datensatz und wie sind Datensätze aufgebaut?</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/zemkipatrick_comic_style_a_warehouse_full_with_packages_cyberpu_a4bce7b7-70ef-429d-aeb5-f12af768c1bd.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Wie soll ich mich hier nur zurecht finden?, Bild generiert von Midjourney</figcaption>
+</figure>
+</div>
 <p>Sozialwissenschaftlichen Daten sind Informationen, die zur Beschreibung und Erklärung der sozialen Welt verwendet werden. Sie können aus einer Vielzahl von Quellen stammen, zum Beispiel aus Umfragen, Experimenten, Interviews und Inhaltsanalysen. Kommunikationswissenschaftliche Daten können quantitativ oder qualitativ sein. Quantitative Daten sind in Zahlen ausgedrückt und können verwendet werden, um Muster und (kausale) Zusammenhänge zu identifizieren. Qualitative Daten sind in Text oder (Bewegt)Bildern ausgedrückt und können verwendet werden, um die Bedeutung von Ereignissen und Erfahrungen genauer zu verstehen.</p>
-</section>
-<section id="strukturierte-vs.-unstrukturierte-daten" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Strukturierte vs.&nbsp;unstrukturierte Daten</h1>
+<section id="strukturierte-vs.-unstrukturierte-daten" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Strukturierte vs.&nbsp;unstrukturierte Daten</h1>
 <p>Unter <em>strukturiertern Datensätzen</em> verstehen wir digital zusammengestellte Daten, die bestimmte strukturierende Merkmale aufweise. Häufig lassen sich solche strukturierten Daten als Tabellen darstellen und speichern. Ein konkretes Beispiel wäre eine Sammlung von Zeitungsartikeln. Handelt es sich um einzelne Textdatein, zu deren Inhalt man keine weiteren Informationen besitzt, würde man in der Regel von unstruktukrierten Daten sprechen. Fügt man aber Titel, Publikationsdatum und Quelle hinzu, könnten wir diese Daten als Tabelle abspeichern und von einem strukturierten Datensatz sprechen.</p>
 </section>
-<section id="data-frames-und-strukturierte-daten" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Data Frames und strukturierte Daten</h1>
+<section id="data-frames-und-strukturierte-daten" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Data Frames und strukturierte Daten</h1>
 <p>Nahezu alle strukturierte Daten lassen sich in R als Data Frames speichern. Dies bietet zahlreiche Vorteile, weil sich Data Frames leicht umformen, refaktorieren oder aggregieren lassen. So kann man leicht auszählen, wie viele Artikel zur gleichen Quelle gehören, zu welchem Zeitpunkt wie viele Artikel veröffentlicht wurden, oder (bei einer Befragung) wie viele Stunden die StudienteilnehmerInnen im Mittel wöchentlich fernsehen. Häufig lassen sich zunächst unstrukturierte Daten in ein strukturiertes Format überführen, wenn man relevante Metadaten nutzt, beispielsweise Dateinahmen.</p>
 </section>
-<section id="beobachtungen-und-variablen" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Beobachtungen und Variablen</h1>
+<section id="beobachtungen-und-variablen" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Beobachtungen und Variablen</h1>
 <p>Der Aufbau von Tabellen (bzw. Data Frames) folgt dabei in der Regel einer logischen Struktur. Die Zeilen geben die Anazhl der <em>Beobachtungen</em> (oder <em>Fälle</em>) an, während die Spalten einzelne <em>Variablen</em> (oder <em>Merkmale</em>) repräsentieren.</p>
 <table class="table">
 <colgroup>
@@ -456,8 +464,8 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<section id="zusammenfassung" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="zusammenfassung"><span class="header-section-number">4.1</span> Zusammenfassung</h2>
+<section id="zusammenfassung" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="zusammenfassung"><span class="header-section-number">3.1</span> Zusammenfassung</h2>
 <p>Im nächsten Kapitel werden wir uns eingehender mit der Behandlung von tabellenstrukturierten Daten in unterschiedlichen Formaten beschäftigen.</p>
 
 

@@ -100,9 +100,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Einlesen von Datensätzen in unterschiedlichen Formaten">
 <meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_crane_lifts_a_crate_from_a_shelf_in__626e40b0-9a41-4ecd-9424-7a48d8847ec2.png">
+<meta property="og:image:height" content="644">
+<meta property="og:image:width" content="1149">
 <meta name="twitter:title" content="Einlesen von Datensätzen in unterschiedlichen Formaten">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_crane_lifts_a_crate_from_a_shelf_in__626e40b0-9a41-4ecd-9424-7a48d8847ec2.png">
+<meta name="twitter:image-height" content="644">
+<meta name="twitter:image-width" content="1149">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -405,15 +411,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#einlesen-von-datensätzen-in-unterschiedlichen-formaten" id="toc-einlesen-von-datensätzen-in-unterschiedlichen-formaten" class="nav-link active" data-scroll-target="#einlesen-von-datensätzen-in-unterschiedlichen-formaten"><span class="header-section-number">1</span> Einlesen von Datensätzen in unterschiedlichen Formaten</a>
-  <ul class="collapse">
-  <li><a href="#csv-dateien" id="toc-csv-dateien" class="nav-link" data-scroll-target="#csv-dateien"><span class="header-section-number">1.1</span> CSV-Dateien</a></li>
-  <li><a href="#excel-dateien" id="toc-excel-dateien" class="nav-link" data-scroll-target="#excel-dateien"><span class="header-section-number">1.2</span> Excel-Dateien</a></li>
-  <li><a href="#spss-dateien" id="toc-spss-dateien" class="nav-link" data-scroll-target="#spss-dateien"><span class="header-section-number">1.3</span> SPSS-Dateien</a></li>
-  <li><a href="#stata-dateien" id="toc-stata-dateien" class="nav-link" data-scroll-target="#stata-dateien"><span class="header-section-number">1.4</span> Stata-Dateien</a></li>
-  <li><a href="#andere-textbasierte-formate" id="toc-andere-textbasierte-formate" class="nav-link" data-scroll-target="#andere-textbasierte-formate"><span class="header-section-number">1.5</span> Andere (textbasierte) Formate</a></li>
-  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung"><span class="header-section-number">1.6</span> Zusammenfassung</a></li>
-  </ul></li>
+  <li><a href="#data-management" id="toc-data-management" class="nav-link active" data-scroll-target="#data-management"><span class="header-section-number">1</span> Data Management</a></li>
+  <li><a href="#csv-dateien" id="toc-csv-dateien" class="nav-link" data-scroll-target="#csv-dateien"><span class="header-section-number">2</span> CSV-Dateien</a></li>
+  <li><a href="#excel-dateien" id="toc-excel-dateien" class="nav-link" data-scroll-target="#excel-dateien"><span class="header-section-number">3</span> Excel-Dateien</a></li>
+  <li><a href="#spss-dateien" id="toc-spss-dateien" class="nav-link" data-scroll-target="#spss-dateien"><span class="header-section-number">4</span> SPSS-Dateien</a></li>
+  <li><a href="#stata-dateien" id="toc-stata-dateien" class="nav-link" data-scroll-target="#stata-dateien"><span class="header-section-number">5</span> Stata-Dateien</a></li>
+  <li><a href="#andere-textbasierte-formate" id="toc-andere-textbasierte-formate" class="nav-link" data-scroll-target="#andere-textbasierte-formate"><span class="header-section-number">6</span> Andere (textbasierte) Formate</a></li>
+  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung"><span class="header-section-number">7</span> Zusammenfassung</a></li>
   </ul>
 </nav>
     </div>
@@ -443,21 +447,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="einlesen-von-datensätzen-in-unterschiedlichen-formaten" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Einlesen von Datensätzen in unterschiedlichen Formaten</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/zemkipatrick_comic_style_a_crane_lifts_a_crate_from_a_shelf_in__626e40b0-9a41-4ecd-9424-7a48d8847ec2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Wie bekomme ich meine Daten?, Bild generiert von Midjourney</figcaption>
+</figure>
+</div>
 <p>Um in R mit größeren Datensätzen arbeiten zu können, müssen diese zunächst eingelesen werden. Um Daten in R einzulesen (d.h. um sie in ein R-Objekt im Arbeitsspeicher ihres Rechners zu überführen), gibt es verschiedene Möglichkeiten. Die gebräuchlichste Methode ist die Verwendung von Funktionen. Zum Glück bietet R eine Reihe nützlicher Funktionen für ganz unterschiedliche Dateiformate, z. B. CSV-, Excel-, SPSS- und STATA-Dateien.</p>
+<section id="data-management" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Data Management</h1>
 <p>Zunächst laden wir die Pakete, die für den Import von Dateien in den o.g. Formaten nützlich sind.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Lade nötiges Paket: pacman</code></pre>
 </div>
-<section id="csv-dateien" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="csv-dateien"><span class="header-section-number">1.1</span> CSV-Dateien</h2>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'pacman' wurde unter R Version 4.3.1 erstellt</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">p_load</span>(readr, readxl, haven)</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="csv-dateien" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> CSV-Dateien</h1>
 <p>CSV-Dateien sind eine sehr einfache Art von Daten, die in R eingelesen werden können. Sie sind als Textdateien gespeichert, wobei die Tabellenspalten durch Kommas (oder manchmal Semikolons oder Tab-Zeichen) getrennt sind. Um eine CSV-Datei in R einzulesen, können Sie die Funktion read_csv (bzw. hier read_csv2) aus dem Paket readr verwenden.</p>
 <p>Dieser Code importiert die Datei geschlechterverteilung.csv in das R-Environment. Die Datei geschlechterverteilung.csv muss im gleichen Verzeichnis wie der R-Code gespeichert sein.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>geschlechterverteilung_csv <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"geschlechterverteilung.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>geschlechterverteilung_csv <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"geschlechterverteilung.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
 </div>
@@ -472,35 +490,35 @@ dbl (3): anzahl, anteil, prozent
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>Die Funktion read_csv2 liefert hier eine Menge zusätzlicher Informationen, etwa dazu, welche Datentypen für die eingelesenen Variablen gewählt wurden. Es wurde hier deshalb nicht read_csv sondern read_csv2 gewählt, weil letztere das Semikolon (;) als Trennzeichen und das Komma (,) als Dezimalzeichen verwendet. Hingegen geht read_csv vom Komma als Trennzeichen und dem Punkt als Dezimalzeichen aus, wie im angelsächsischem Gebrauch üblich. Liest man also mit der falschen Funktion ein, sind die Daten unter Umständen fehlerhaft.</p>
+<p>Die Funktion <code>read_csv2</code> liefert hier eine Menge zusätzlicher Informationen, etwa dazu, welche Datentypen für die eingelesenen Variablen gewählt wurden. Es wurde hier deshalb nicht <code>read_csv</code> sondern <code>read_csv2</code> gewählt, weil letztere das Semikolon (;) als Trennzeichen und das Komma (,) als Dezimalzeichen verwendet. Hingegen geht read_csv vom Komma als Trennzeichen und dem Punkt als Dezimalzeichen aus, wie im angelsächsischem Gebrauch üblich. Liest man also mit der falschen Funktion ein, sind die Daten unter Umständen fehlerhaft.</p>
 </section>
-<section id="excel-dateien" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="excel-dateien"><span class="header-section-number">1.2</span> Excel-Dateien</h2>
-<p>Ebenfalls nützlich ist die Möglichkeit, Daten aus Microsoft Excel in R zu imoportiern. Excel-Dateien können mit der Funktion readxl::read_excel() in R eingelesen werden. Diese Funktion unterstützt alle gängigen Excel-Formate, einschließlich XLSX, XLS und CSV.</p>
+<section id="excel-dateien" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Excel-Dateien</h1>
+<p>Ebenfalls nützlich ist die Möglichkeit, Daten aus Microsoft Excel in R zu imoportiern. Excel-Dateien können mit der Funktion <code>readxl::read_excel()</code> in R eingelesen werden. Diese Funktion unterstützt alle gängigen Excel-Formate, einschließlich XLSX, XLS und CSV.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>geschlechterverteilung_excel <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"geschlechterverteilung.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>geschlechterverteilung_excel <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"geschlechterverteilung.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="spss-dateien" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="spss-dateien"><span class="header-section-number">1.3</span> SPSS-Dateien</h2>
-<p>SPSS ist eine statistische Softwareanwendung, die von er Firma IBM (früher SPSS Inc) für Datenmanagement, inferenzstatistische Analysen und (kommerziell) Business Intelligence entwickelt wurde.SPSS-Dateien können mit der Funktion haven::read.spss() in R eingelesen werden. Diese Funktion unterstützt alle gängigen SPSS-Formate, einschließlich SAV und DSP.</p>
+<section id="spss-dateien" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> SPSS-Dateien</h1>
+<p>SPSS ist eine statistische Softwareanwendung, die von er Firma IBM (früher SPSS Inc) für Datenmanagement, inferenzstatistische Analysen und (kommerziell) Business Intelligence entwickelt wurde.SPSS-Dateien können mit der Funktion <code>haven::read.spss()</code> in R eingelesen werden. Diese Funktion unterstützt alle gängigen SPSS-Formate, einschließlich SAV und DSP.</p>
 <p>Da der ALLBUS im konkreten Fall im Stata-Format verwendet wird, verwenden wir für SPSS ein anderes Beispiel, nämlich die dritte Welle (in 2016 erhoben) des Global Report on Adult Learning and Education (GALE-3) der UNESCO.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>gale3_spss <span class="ot">&lt;-</span> <span class="fu">read_spss</span>(<span class="st">"https://uil.unesco.org/i/doc/adult-education/grale-3/survey-data/grale-3-suquant.sav"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>gale3_spss <span class="ot">&lt;-</span> <span class="fu">read_spss</span>(<span class="st">"https://uil.unesco.org/i/doc/adult-education/grale-3/survey-data/grale-3-suquant.sav"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Das Beispiel zeigts dass wir neben lokal abgespeicherten Datein auch problemlos Web-Adressen als Pfadangabe beim Import von Daten verwenden können, wenn diese direkt auf die relevanten Daten zeigen.</p>
 </section>
-<section id="stata-dateien" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="stata-dateien"><span class="header-section-number">1.4</span> Stata-Dateien</h2>
-<p>Bei STATA handelt es sich um eine weitere kommerzielle Statistik-Software. Mittels Stata analysiert man einfache und komplexe Datenmodelle. Die Software gehört neben SPSS zu den bekanntesten Programmen für die professionelle Datenauswertung. STATA-Dateien können mit der Funktion haven::read_dta() in R eingelesen werden. Diese Funktion unterstützt alle gängigen STATA-Formate, einschließlich DTA und DTB.</p>
+<section id="stata-dateien" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Stata-Dateien</h1>
+<p>Bei STATA handelt es sich um eine weitere kommerzielle Statistik-Software. Mittels Stata analysiert man einfache und komplexe Datenmodelle. Die Software gehört neben SPSS zu den bekanntesten Programmen für die professionelle Datenauswertung. STATA-Dateien können mit der Funktion <code>haven::read_dta()</code> in R eingelesen werden. Diese Funktion unterstützt alle gängigen STATA-Formate, einschließlich DTA und DTB.</p>
 <p>Wir verwnden als Beispiel für den Import von STATA-Daten hier den ALLBUS, da dieser im STATA-Format vorliegt.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>allbus_stata <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>allbus_stata <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="andere-textbasierte-formate" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="andere-textbasierte-formate"><span class="header-section-number">1.5</span> Andere (textbasierte) Formate</h2>
-<p>Für andere Datenformate gibt es in der Regel spezielle Funktionen, die in den entsprechenden Paketen enthalten sind. Zum Beispiel kann die Funktion readr::read_tsv() für das Einlesen von TSV-Dateien (die mit einem Tabulator- oder TAB-Zeichen getrennt sind) verwendet werden. Die meisten Funktionen zum Einlesen von (Text)Daten haben eine Reihe von Optionen, mit denen Sie den Importprozess anpassen können. Zu den häufigsten Optionen gehören:</p>
+<section id="andere-textbasierte-formate" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Andere (textbasierte) Formate</h1>
+<p>Für andere Datenformate gibt es in der Regel spezielle Funktionen, die in den entsprechenden Paketen enthalten sind. Zum Beispiel kann die Funktion <code>readr::read_tsv()</code> für das Einlesen von TSV-Dateien (die mit einem Tabulator- oder TAB-Zeichen getrennt sind) verwendet werden. Die meisten Funktionen zum Einlesen von (Text)Daten haben eine Reihe von Optionen, mit denen Sie den Importprozess anpassen können. Zu den häufigsten Optionen gehören:</p>
 <table class="table">
 <colgroup>
 <col style="width: 31%">
@@ -532,12 +550,11 @@ dbl (3): anzahl, anteil, prozent
 </tbody>
 </table>
 </section>
-<section id="zusammenfassung" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="zusammenfassung"><span class="header-section-number">1.6</span> Zusammenfassung</h2>
+<section id="zusammenfassung" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Zusammenfassung</h1>
 <p>Es gibt verschiedene Möglichkeiten, Daten in R einzulesen. Die gebräuchlichste Methode ist die Verwendung von Funktionen. Für jedes gängige Datenformat gibt es eine entsprechende Funktion.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

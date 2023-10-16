@@ -101,9 +101,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:title" content="Korrelation &amp; Regression">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_barplot_as_city_with_a_regression_cu_aef459c9-87b7-4762-b34b-88abbbbf96ff.png">
+<meta property="og:image:height" content="816">
+<meta property="og:image:width" content="1456">
 <meta name="twitter:title" content="Korrelation &amp; Regression">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_barplot_as_city_with_a_regression_cu_aef459c9-87b7-4762-b34b-88abbbbf96ff.png">
+<meta name="twitter:image-height" content="816">
+<meta name="twitter:image-width" content="1456">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -465,8 +469,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="1"><span class="header-section-number">1</span> Die Korrelationsanalyse</h1>
 <p>Die Korrelationsanalyse ist eine schnelle und einfache statistische Methode, um den Zusammenhang zwischen zwei oder mehr metrischen Variablen zu untersuchen. Ziel der Korrelationsanalyse ist, die Richtung (positiv oder negativ) und die Stärke eines linearen Zusammenhangs zwischen den Variablen zu bestimmen. Als statistischer Kennwert wird ein <em>Korrelationskoeffizient</em>, zum Beispiel der <em>Pearson-Korrelationskoeffizient</em> (auch Pearson’s r) ermittelt. Der Korrelationskoeffizient gibt an, wie sehr die Werte einer Variable mit den Werten einer anderen Variable zusammenhängen, d.h. <em>korrelieren</em>. Er nimmt Werte zwischen -1 und 1 an. Ein <em>hoher</em> Korrelationskoeffizient (nahe 1 oder -1) deutet auf einen <em>starken Zusammenhang</em> hin, während ein <em>niedriger</em> Koeffizient (nahe 0) auf einen <em>schwachen</em> oder <em>keinen Zusammenhang</em> hindeutet. Zudem deutet ein <em>positiver</em> Korrelationskoeffizient auf einen <em>positiven Zusammenhang</em> hin, während ein <em>negativer</em> Koeffizient auf einen <em>negativen Zusammenhang</em> verweist.</p>
 <p>Der Zusammenhang zwischen den untersuchten Variablen wird dabei analysiert, <em>ohne</em> dass eine Richtung spezifiziert wird - es muss also nicht die eine Variable als unabhängig, und die andere als abhängige Variable festgelegt werden. Die Korrelationsanalyse kann vielfältig eingesetzt werden. Sie ist allerdings etwas empfindlich gegenüber Ausreißern und setzt einen linearen Zusammenhang voraus.</p>
-<p>Vorsicht! Lassen Sie sich nicht verwirren: Der <em>Pearson-Korrelationskoeffizient</em> und die <em>Rangkorrelation nach Pearson</em> sind unterschiedliche Kennwerte, die nur ähnlich klingen. Der <em>Pearson-Korrelationskoeffizient</em> misst den linearen Zusammenhang zwischen den tatsächlichen Messwerten, während die <em>Rangkorrelation nach Pearson</em> (auch als <em>Spearman-Korrelationskoeffizient</em> bezeichnet) den monotonen Zusammenhang zwischen den Rängen der Daten untersucht. Daher ist die Rangkorrelation besser geeignet, wenn der Zusammenhang <em>nicht-linear</em> ist oder wenn <em>Ausreißer in den Daten</em> vorhanden sind. Nun soll es aber um die Analyse eines <em>linearen Zusammenhangs</em> zwischen zwei metrischen Variablen gehen. Dazu widmen wir uns nun der Korrelationsanalyse mittels Pearson-Korrelationskoeffizient.</p>
-<p>Mit dieser Methode wollen wir untersuchen, ob es einen Zusammenhang zwischen der metrischen Variable tägliche Fernsehnutzung in Minuten (lm02) sowie der quasi-metrischen Variable Vertrauen ins Fernsehen (pt09) gibt. Wir vermuten, dass es einen positiven Zusammenhang gibt: Wer ein höheres Vertrauen in das Fernsehen hat, schaut auch mehr fern.</p>
+<p>Vorsicht! Lasst euch nicht verwirren: Der <em>Pearson-Korrelationskoeffizient</em> und die <em>Rangkorrelation nach Pearson</em> sind unterschiedliche Kennwerte, die nur ähnlich klingen. Der <em>Pearson-Korrelationskoeffizient</em> misst den linearen Zusammenhang zwischen den tatsächlichen Messwerten, während die <em>Rangkorrelation nach Pearson</em> (auch als <em>Spearman-Korrelationskoeffizient</em> bezeichnet) den monotonen Zusammenhang zwischen den Rängen der Daten untersucht. Daher ist die Rangkorrelation besser geeignet, wenn der Zusammenhang <em>nicht-linear</em> ist oder wenn <em>Ausreißer in den Daten</em> vorhanden sind. Nun soll es aber um die Analyse eines <em>linearen Zusammenhangs</em> zwischen zwei metrischen Variablen gehen. Dazu widmen wir uns nun der Korrelationsanalyse mittels Pearson-Korrelationskoeffizient.</p>
+<p>Mit dieser Methode wollen wir untersuchen, ob es einen Zusammenhang zwischen der metrischen Variable tägliche Fernsehnutzung in Minuten (<code>lm02</code>) sowie der quasi-metrischen Variable Vertrauen ins Fernsehen (<code>pt09</code>) gibt. Wir vermuten, dass es einen positiven Zusammenhang gibt: Wer ein höheres Vertrauen in das Fernsehen hat, schaut auch mehr fern.</p>
 <section id="data-management" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="data-management"><span class="header-section-number">1.1</span> Data Management</h2>
 <p>Um das zu prüfen, müssen wir zunächst wieder unsere Pakete und Allbus-Daten laden und aufbereiten. Los geht’s!</p>
@@ -489,7 +493,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="berechnen-der-korrelation" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="berechnen-der-korrelation"><span class="header-section-number">1.2</span> Berechnen der Korrelation</h2>
-<p>Nun berechnen wir, ob eine Korrelation zwischen beiden Variablen vorliegt. Dazu nutzen wir die Funktion <code>cor()</code>. Mit dem print-Befehl geben wir uns den Wert aus:</p>
+<p>Nun berechnen wir, ob eine Korrelation zwischen beiden Variablen vorliegt. Dazu nutzen wir die Funktion <code>cor()</code>. Mit dem <code>print</code>-Befehl geben wir uns den Wert aus:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>korrelation <span class="ot">&lt;-</span> daten_neu <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">summarize</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(TV_Konsum, TV_Vertrauen, <span class="at">use =</span> <span class="st">"complete.obs"</span>))</span>
@@ -528,7 +532,7 @@ Exkurs: Übungsaufgabe Korrelationsanalyse
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Führen Sie zur Übung nun noch eine Korrelationsanalyse durch, um den Zusammenhang zwischen der täglichen Fernsehnutzung in Minuten (umbenannt in “TV_Konsum”) und der quasi-metrisch gemessenen Einschätzung, ob die Entwicklung der Kriminalität in Deutschland zu- oder abgenommen hat (cf03; 1=hat stark zugenommen; 5=hat stark abgenommen). Entsprechend der Kultivierungsforschung können wir vermuten, dass es einen negativen Zusammenhang geben sollte: Mehr Fernsehkonsum sollte mit einer negativen Kriminalitätsprognose korrelieren. Dazu müssen Sie zuerst wieder einen Teildatensatz mit den benötigten Variablen erzeugen, diese ggf. umbennen und filtern. Dann ermitteln Sie die Korrelation beider Variablen.</p>
+<p>Ihr könnt zur Übung nun noch eine Korrelationsanalyse durchführen, um den Zusammenhang zwischen der täglichen Fernsehnutzung in Minuten (umbenannt in “TV_Konsum”) und der quasi-metrisch gemessenen Einschätzung, ob die Entwicklung der Kriminalität in Deutschland zu- oder abgenommen hat (<code>cf03</code>; 1=hat stark zugenommen; 5=hat stark abgenommen). Entsprechend der Kultivierungsforschung können wir vermuten, dass es einen negativen Zusammenhang geben sollte: Mehr Fernsehkonsum sollte mit einer negativen Kriminalitätsprognose korrelieren. Dazu müsst ihr zuerst wieder einen Teildatensatz mit den benötigten Variablen erzeugen, diese ggf. umbenennen und filtern. Dann ermittelt ihr die Korrelation beider Variablen.</p>
 <section id="data-management-1" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="data-management-1"><span class="header-section-number">1.4</span> Data Management</h2>
 <div class="cell">
@@ -538,7 +542,7 @@ Exkurs: Übungsaufgabe Korrelationsanalyse
 <span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(TV_Konsum, <span class="dv">0</span>, <span class="dv">1500</span>))<span class="sc">%&gt;%</span></span>
 <span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Kriminalitätsprognose, <span class="dv">1</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Nun berechnen wir, ob eine Korrelation zwischen beiden Variablen vorliegt. Dazu nutzen wir die Funktion cor(). Mit dem print-Befehl geben wir uns den Wert aus:</p>
+<p>Nun berechnen wir, ob eine Korrelation zwischen beiden Variablen vorliegt. Dazu nutzen wir die Funktion <code>cor()</code>. Mit dem <code>print</code>-Befehl geben wir uns den Wert aus:</p>
 </section>
 <section id="berechnung-und-ausgabe-des-korrelationskoeffizienten" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="berechnung-und-ausgabe-des-korrelationskoeffizienten"><span class="header-section-number">1.5</span> Berechnung und Ausgabe des Korrelationskoeffizienten</h2>
@@ -580,7 +584,7 @@ Exkurs: Übungsaufgabe Korrelationsanalyse
 <p>Die <em>lineare Regression</em> untersucht den Zusammenhang zwischen einer <em>abhängigen Variable</em> und mindestens einer <em>unabhängigen Variable</em>. Sie versucht, eine mathematische Beziehung zwischen den Variablen zu modellieren, die durch eine Linie (in einfachen linearen Regressionen) oder eine Ebene (in multiplen linearen Regressionen) repräsentiert wird. Die dahinterliegende “mathematische Idee” der linearen Regression besteht darin, die bestmögliche Anpassung der Daten an das Modell zu erreichen, um die Vorhersage der abhängigen Variable basierend auf den unabhängigen Variablen zu ermöglichen. Dazu wird ein <em>Regressionskoeffizient</em> für jede unabhängige Variable geschätzt, um ihren Einfluss auf die abhängige Variable zu quantifizieren.</p>
 <p>Ziel der Regressionsanalyse ist es also, die Beziehung zwischen einer <em>abhängigen Variable</em> (auch erklärte Variable, Regressand oder Prognosevariable genannt) und einer oder mehreren <em>unabhängigen Variablen</em> (oft auch erklärende Variable, Regressor oder Prädiktorvariable) zu analysieren, um Zusammenhänge quantitativ zu beschreiben und zu erklären und/oder Werte der abhängigen Variable mit Hilfe der unabhängige Variable (des Prädiktors) zu prognostizieren. Mit Hilfe der Regressionsanalyse können drei Arten von Fragestellungen untersucht werden: 1) Ursachenanalyse: Gibt es einen Zusammenhang zwischen der unabhängigen und der abhängigen Variable? Wie stark ist dieser? 2) Wirkungsanalyse: Wie verändert sich die abhängige Variable bei einer Änderung der unabhängigen Variablen? 3) Prognose: Können die Messwerte der abhängigen Variable durch die Werte der unabhängigen Variable vorhergesagt werden?</p>
 <p>Die <em>einfache lineare Regression</em> wird angewandt, wenn geprüft werden soll, ob ein (als linear vermuteter) Zusammenhang zwischen einer abhängigen metrischen Variable und einer unabhängigen metrischen Variable besteht. Da sie zwei metrische Variablen integriert, wird sie auch als <em>bivariate Regression</em> bezeichnet. In diesem Teilkapitel lernen wir die <em>einfache lineare Regression</em> auf Grundlage der Allbus-Daten kennen. In der nächsten Sitzung gehen wir dann näher auf die notwendige Prüfung der <em>Voraussetzungen einer Regressionsanalyse</em> ein und lernen auch noch die <em>multiple lineare Regression</em> kennen.</p>
-<p>Um die Durchführung der linearen Regression an einem Beispiel nachzuvollziehen, stellen wir zunächst eine gerichtete Hypothese auf, die den Einfluss einer unabhängigen metrischen Variable auf eine abhängige metrische Variable spezifiziert. Hierzu schauen wir uns den Zusammenhang zwischen dem Alter (age) sowie der täglichen Fernsehnutzung in Minuten (lm02) an. Dazu vermuten wir: Das Alter erklärt die Intensität der täglichen Fernsehnutzung in Minuten.</p>
+<p>Um die Durchführung der linearen Regression an einem Beispiel nachzuvollziehen, stellen wir zunächst eine gerichtete Hypothese auf, die den Einfluss einer unabhängigen metrischen Variable auf eine abhängige metrische Variable spezifiziert. Hierzu schauen wir uns den Zusammenhang zwischen dem Alter (<code>age</code>) sowie der täglichen Fernsehnutzung in Minuten (<code>lm02</code>) an. Dazu vermuten wir: Das Alter erklärt die Intensität der täglichen Fernsehnutzung in Minuten.</p>
 <p>Mit Hilfe der Regression wollen wir nun die oben formulierte Annahme prüfen, dass das Alter die täglichen Fernsehnutzung in Minuten (umbenannt in TV_Konsum) erklären kann. Beides sind metrische Variablen und erfüllen damit die Voraussetzung, dass eine Regression gerechnet werden kann. (Achtung: auch kategorische Variablen können bei der Regressionsanalyse grundsätzlich eingesetzt werden, sie müssen dann aber durch <em>Dummy-Coding</em> passend gemacht werden, dazu aber später mehr).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -601,11 +605,11 @@ Exkurs: Übungsaufgabe Korrelationsanalyse
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-cell="annotated-cell-6" data-code-lines="4">Visualisierungshintergrund der Grafiken in ggplot festlegen</span>
+<span data-code-cell="annotated-cell-6" data-code-annotation="1" data-code-lines="4">Visualisierungshintergrund der Grafiken in ggplot festlegen</span>
 </dd>
 <dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-cell="annotated-cell-6" data-code-lines="5">Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span>
+<span data-code-cell="annotated-cell-6" data-code-annotation="2" data-code-lines="5">Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span>
 </dd>
 </dl>
 </div>
@@ -627,7 +631,7 @@ Exkurs: Übungsaufgabe Korrelationsanalyse
 <h2 data-number="2.2" class="anchored" data-anchor-id="grafische-prüfung-der-voraussetzungen"><span class="header-section-number">2.2</span> Grafische Prüfung der Voraussetzungen</h2>
 <p>Bevor wir die Regressionsanalyse durchführen, verschaffen wir uns zunächst einmal einen Überblick über die Daten - dazu visualisieren wir den Zusammenhang zwischen dem Alter sowie der täglichen Fernsehnutzung. Mit Hilfe der Grafik können wir auch die erste Voraussetzung prüfen, nämlich dass es einen <em>linearen Zusammenhang</em> zwischen beiden Variablen gibt.</p>
 <p>ACHTUNG! Für die Regressionsanalyse müssen noch weitere Voraussetzungen geprüft werden (insb. Homoskedastizität der Residuen; Unabhängigkeit der Residuen; Normalverteilung der Residuen; keine Ausreißer in den Daten). An dieser Stelle klammern wir die anderen Voraussetzungsprüfungen aber vorerst aus, und kommen in der nächsten Sitzung darauf zurück (das ist sonst zu viel auf einmal).</p>
-<p>Zur visuellen Inspektion, ob der Zusammenhang zwischen unseren beiden Variablen linear ist, erstellen wir nun mit dem Befehl geom_point ein Punktdiagramm mit den Variablen Alter und TV_Konsum. Praktischerweise ist die Regressionsformel schon in ggplot integriert: Der Befehl geom_smooth erzeugt eine Trendlinie nach dem linear model (method = lm), die die Beziehung von y (=Alter) und x (=TV_Konsum) abbildet. Das Ergebnis ist eine Linie nach einer linearen Gleichung, die den Daten so eng wie möglich folgt. Mit dem Befehl ggtitle legen wir dann noch in den Klammern den Titel der Grafik fest, und mit xlab und ylab ergänzen wir die Achsenbeschriftung.</p>
+<p>Zur visuellen Inspektion, ob der Zusammenhang zwischen unseren beiden Variablen linear ist, erstellen wir nun mit dem Befehl <code>geom_point</code> ein Punktdiagramm mit den Variablen Alter und TV_Konsum. Praktischerweise ist die Regressionsformel schon in ggplot integriert: Der Befehl <code>geom_smooth</code> erzeugt eine Trendlinie nach dem linear model (method = lm), die die Beziehung von y (=Alter) und x (=TV_Konsum) abbildet. Das Ergebnis ist eine Linie nach einer linearen Gleichung, die den Daten so eng wie möglich folgt. Mit dem Befehl <code>ggtitle</code> legen wir dann noch in den Klammern den Titel der Grafik fest, und mit <code>xlab</code> und <code>ylab</code> ergänzen wir die Achsenbeschriftung.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(Alter, TV_Konsum)) <span class="sc">+</span> </span>
 <span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
@@ -643,7 +647,7 @@ Exkurs: Übungsaufgabe Korrelationsanalyse
 <section id="durchführung-der-einfachen-linearen-regression" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="durchführung-der-einfachen-linearen-regression"><span class="header-section-number">2.3</span> Durchführung der einfachen linearen Regression</h2>
 <p>Ob diese Beobachtung auch statistisch belastbar ist, wollen wir jetzt mit der <em>einfachen linearen Regression</em> prüfen. Dazu nutzen wir die Funktion <code>lm()</code>. Die Funktion lm steht für “linear model”. In den Klammern benennen wir zunächst die abhängige Variable (hier: <code>TV_Konsum</code>), dann kommt eine Tilde (d.h. “wird definiert durch”) und der Bezug auf unsere unabhängige Variable (hier: <code>Alter</code>). Die Schreibweise y ~ x ist die Formel-Schreibweise in R; in diesem Fall besagt sie, dass y (<code>TV_Konsum</code>) abhängig von x (<code>Alter</code>) ist. Nach dem Komma folgt dann die Benennung des Datensatzes auf den die lm-Funktion angewendet werden soll. Zum Schluss lassen wir uns das Modell ausgeben.</p>
-<p>Der Modelloutput von lm ähnelt dem der schon behandelten Hypothesentests; enthält aber noch weitere Eckdaten wie die Effektstärke, das Signifikanzniveau oder die Erklärungsstärke des Modells.</p>
+<p>Der Modelloutput von <code>lm</code> ähnelt dem der schon behandelten Hypothesentests; enthält aber noch weitere Eckdaten wie die Effektstärke, das Signifikanzniveau oder die Erklärungsstärke des Modells.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(TV_Konsum <span class="sc">~</span> Alter, <span class="at">data =</span> daten) </span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="fu">print</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -657,7 +661,7 @@ Coefficients:
      64.644        2.193  </code></pre>
 </div>
 </div>
-<p>Da dieser Output sehr, sehr sparsam und für uns noch wenig aussagekräftig ist, ergänzen wir ihn nun mit dem bekannten summary-Befehl, den wir auf unser Modell anwenden. Die dann erscheinende Ausgabe ist das “Herzstück” unserer Regressionsanalyse (insbesondere, wenn sie um die standardisierten B-Koeffizienten erweitert wird - dazu kommen wir aber unten noch). Jetzt nutzen wir erst einmal die summary-Funktion, und wir erhalten im Output einen guten Überblick über unser Regressionsmodell:</p>
+<p>Da dieser Output sehr, sehr sparsam und für uns noch wenig aussagekräftig ist, ergänzen wir ihn nun mit dem bekannten <code>summary</code>-Befehl, den wir auf unser Modell anwenden. Die dann erscheinende Ausgabe ist das “Herzstück” unserer Regressionsanalyse (insbesondere, wenn sie um die standardisierten B-Koeffizienten erweitert wird - dazu kommen wir aber unten noch). Jetzt nutzen wir erst einmal die <code>summary</code>-Funktion, und wir erhalten im Output einen guten Überblick über unser Regressionsmodell:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -723,7 +727,7 @@ Wie gebe ich die Ergebnisse korrekt an?
 <section id="vorhersage-von-werten-auf-basis-des-modells" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="vorhersage-von-werten-auf-basis-des-modells"><span class="header-section-number">2.6</span> Vorhersage von Werten auf Basis des Modells</h2>
 <p>Da bei der Regression eine lineare Funktion geschätzt wird, können wir anhand der b-Werte und des Intercepts auch Vorhersagen für bestimmte Fälle treffen. Das ist eine der <em>coolen Superkräfte</em> der Regressionsanalyse :) (Das gilt aber streng genommen nur, wenn das zu Grunde liegende Sample repräsentativ ist und das Modell sowie die Parameter signifikant sind).</p>
-<p>Zur Prognose von erwarteten Werten der abhängigen Variable (TV_Konsum) auf Basis von gegebenen Werten der unabhänigen Variable (Alter) kann man die predict.lm()-Funktion nutzen:</p>
+<p>Zur Prognose von erwarteten Werten der abhängigen Variable (TV_Konsum) auf Basis von gegebenen Werten der unabhänigen Variable (Alter) kann man die <code>predict.lm()</code>-Funktion nutzen:</p>
 <p>Wir lassen uns mit Hilfe unseres Modells zunächst die tägliche Internetnutzung in Minuten bei einem Alter von 25 und 75 vorhersagen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">predict.lm</span>(model, <span class="fu">data.frame</span>(<span class="at">Alter =</span> <span class="dv">25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -738,19 +742,26 @@ Wie gebe ich die Ergebnisse korrekt an?
 </div>
 </div>
 <p>Eine Person mit einem Alter von 25 Jahren weist laut Modell eine prognostizierte Internetnutzung von 119 Minuten auf. Eine Person mit einem Alter von 75 Jahren weist laut Modell eine prognostizierte Internetnutzung von 229 Minuten auf.</p>
-<p>Das geht natürlich auch kombiniert in einem Befehl, dann müssen wir aber mit c() einen combine-Befehl einfügen:</p>
+<p>Das geht natürlich auch kombiniert in einem Befehl, dann müssen wir aber mit <code>c()</code> einen combine-Befehl einfügen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">predict.lm</span>(model, <span class="fu">data.frame</span>(<span class="at">Alter =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">75</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1        2 
+119.4635 229.1028 </code></pre>
+</div>
+</div>
 <p>In unserem zweiten Beispiel betrachten wir andere Altersgruppen. Wir lassen uns hier mit Hilfe unseres Modells die tägliche Internetnutzung in Minuten bei einem Alter von 20, 30, 40, 50, 60 und 70 vorhersagen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">predict.lm</span>(model, <span class="fu">data.frame</span>(<span class="at">Alter =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">predict.lm</span>(model, <span class="fu">data.frame</span>(<span class="at">Alter =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5        6 
 108.4996 130.4274 152.3553 174.2832 196.2110 218.1389 </code></pre>
 </div>
 </div>
-<p>Die Prognose-Leistung unseres Regressionsmodels können wir auch auf den gesamten Datensatz anwenden - dann bekommen wir für jeden Fall im Datensatz den prognostizierten Wert der abhängigen Variable TV-Konsum ausgegeben. Dazu können wir den Befehl fitted nutzen. Der Fall Nummer 3 hat also laut Modell (!) einen TV-Konsum von (X) Minuten.</p>
-<p>Weil wir im Datensatz aber n=4929 Fälle haben (und die Ausgabe sonst zu unübersichtlich wird), begrenzen ich die Ausgabe auf die ersten 100 Zeilen (Fälle) des Datensatzes, indem ich zusätzlich die Funktion head() verwende, und die Anzahl der gewünschten Fälle in der Klammer mit 100 festlege:</p>
+<p>Die Prognose-Leistung unseres Regressionsmodels können wir auch auf den gesamten Datensatz anwenden - dann bekommen wir für jeden Fall im Datensatz den prognostizierten Wert der abhängigen Variable TV-Konsum ausgegeben. Dazu können wir den Befehl <code>fitted</code> nutzen. Der Fall Nummer 3 hat also laut Modell (!) einen TV-Konsum von (X) Minuten.</p>
+<p>Weil wir im Datensatz aber n=4929 Fälle haben (und die Ausgabe sonst zu unübersichtlich wird), begrenzen ich die Ausgabe auf die ersten 100 Zeilen (Fälle) des Datensatzes, indem ich zusätzlich die Funktion <code>head()</code> verwende, und die Anzahl der gewünschten Fälle in der Klammer mit 100 festlege:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">head</span>(<span class="fu">fitted</span>(model), <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">head</span>(<span class="fu">fitted</span>(model), <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5        6        7        8 
 183.0543 180.8615 259.8019 237.8740 200.5966 115.0779 132.6202 213.7533 
@@ -784,9 +795,9 @@ Wie gebe ich die Ergebnisse korrekt an?
 <section id="interpretation-der-ergebnisse-1" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="interpretation-der-ergebnisse-1"><span class="header-section-number">2.7</span> Interpretation der Ergebnisse</h2>
 <p>In der Ausgabe kann ich nun die laut Modell prognostizierte Fernsehnutzung für meine Befragten entsprechend ihres Alters sehen - Befragte(r) 10 hat so z.B. eine prognostizierte Fernsehnutzung von 189 Minuten.</p>
-<p>Nun haben wir im Rahmen unserer Befragung die TV-Nutzung der Befragten aber ja schon erhoben. Wozu dient diese Prognose dann? Ganz einfach: Über die Ausgabe der prognostizierten Werte und der Residuen können wir sehen, wie hoch die <em>Abweichung der Modellprognose</em> ist, d.h. wie sehr die empirisch beobachteten Werte unserer Fälle im Datensatz von den laut Modell erwarteten Werten abweichen. Um die Abweichung zu quantifizieren, nutzen wir die residuals.lm-Funktion:</p>
+<p>Nun haben wir im Rahmen unserer Befragung die TV-Nutzung der Befragten aber ja schon erhoben. Wozu dient diese Prognose dann? Ganz einfach: Über die Ausgabe der prognostizierten Werte und der Residuen können wir sehen, wie hoch die <em>Abweichung der Modellprognose</em> ist, d.h. wie sehr die empirisch beobachteten Werte unserer Fälle im Datensatz von den laut Modell erwarteten Werten abweichen. Um die Abweichung zu quantifizieren, nutzen wir die <code>residuals.lm</code>-Funktion:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">head</span>(<span class="fu">residuals</span>(model), <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">head</span>(<span class="fu">residuals</span>(model), <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;labelled&lt;double&gt;[100]&gt;: FERNSEHGESAMTDAUER PRO TAG IN MINUTEN
            1            2            3            4            5            6 
@@ -837,68 +848,68 @@ Labels:
 <h2 data-number="2.8" class="anchored" data-anchor-id="vorhersage-und-residuen-grafisch-darstellen"><span class="header-section-number">2.8</span> Vorhersage und Residuen grafisch darstellen</h2>
 <p>Um das grafisch gegenüberzustellen, speichern wir die obenen ausgegeben Daten zur Vorhersage (aus der predict-Funktion) und die Daten zu den Abweichungen von der Vorhersage (residuals-Funktion) jeweils als neue Variablen “vorhersage” und “residuen” ab.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>daten<span class="sc">$</span>vorhersage <span class="ot">&lt;-</span> <span class="fu">predict</span>(model) </span>
-<span id="cb28-2"><a href="#cb28-2"></a>daten<span class="sc">$</span>residuen <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">residuals</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>daten<span class="sc">$</span>vorhersage <span class="ot">&lt;-</span> <span class="fu">predict</span>(model) </span>
+<span id="cb30-2"><a href="#cb30-2"></a>daten<span class="sc">$</span>residuen <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">residuals</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Und dann machen wir eine fancy Grafik, die uns die Abweichung der prognostizierten Werte nach oben und nach unten visuell nachvollziehen lässt:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-18-1"><a href="#annotated-cell-18-1"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(Alter, TV_Konsum)) <span class="sc">+</span> </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1">1</button><span id="annotated-cell-18-2" class="code-annotation-target"><a href="#annotated-cell-18-2"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> residuen)) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="2">2</button><span id="annotated-cell-18-3" class="code-annotation-target"><a href="#annotated-cell-18-3"></a>  <span class="fu">scale_color_gradient2</span>(<span class="at">low =</span> <span class="st">"tan4"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkgreen"</span>) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="3">3</button><span id="annotated-cell-18-4" class="code-annotation-target"><a href="#annotated-cell-18-4"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="4">4</button><span id="annotated-cell-18-5" class="code-annotation-target"><a href="#annotated-cell-18-5"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> vorhersage), <span class="at">shape =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="5">5</button><span id="annotated-cell-18-6" class="code-annotation-target"><a href="#annotated-cell-18-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="6">6</button><span id="annotated-cell-18-7" class="code-annotation-target"><a href="#annotated-cell-18-7"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> Alter, <span class="at">yend =</span> vorhersage), <span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="7">7</button><span id="annotated-cell-18-8" class="code-annotation-target"><a href="#annotated-cell-18-8"></a>  <span class="fu">ggtitle</span>(<span class="st">"Vorhergesagte Werte und Residuen für Alter und Fernsehnutzung"</span>) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="8">8</button><span id="annotated-cell-18-9" class="code-annotation-target"><a href="#annotated-cell-18-9"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"tägliche Fernsehnutzung (Minuten)"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-19"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-19-1"><a href="#annotated-cell-19-1"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(Alter, TV_Konsum)) <span class="sc">+</span> </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="1">1</button><span id="annotated-cell-19-2" class="code-annotation-target"><a href="#annotated-cell-19-2"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> residuen)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="2">2</button><span id="annotated-cell-19-3" class="code-annotation-target"><a href="#annotated-cell-19-3"></a>  <span class="fu">scale_color_gradient2</span>(<span class="at">low =</span> <span class="st">"tan4"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkgreen"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="3">3</button><span id="annotated-cell-19-4" class="code-annotation-target"><a href="#annotated-cell-19-4"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="4">4</button><span id="annotated-cell-19-5" class="code-annotation-target"><a href="#annotated-cell-19-5"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> vorhersage), <span class="at">shape =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="5">5</button><span id="annotated-cell-19-6" class="code-annotation-target"><a href="#annotated-cell-19-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="6">6</button><span id="annotated-cell-19-7" class="code-annotation-target"><a href="#annotated-cell-19-7"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> Alter, <span class="at">yend =</span> vorhersage), <span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="7">7</button><span id="annotated-cell-19-8" class="code-annotation-target"><a href="#annotated-cell-19-8"></a>  <span class="fu">ggtitle</span>(<span class="st">"Vorhergesagte Werte und Residuen für Alter und Fernsehnutzung"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="8">8</button><span id="annotated-cell-19-9" class="code-annotation-target"><a href="#annotated-cell-19-9"></a>  <span class="fu">xlab</span>(<span class="st">"Alter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"tägliche Fernsehnutzung (Minuten)"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-cell="annotated-cell-18" data-code-lines="2">Festlegung der Farbmarkierung für die Residuen (Punkte sind tatsächliche Werte, Linien die Residuen, Farbe gibt Größe der Abweichung an)</span>
+<span data-code-cell="annotated-cell-19" data-code-annotation="1" data-code-lines="2">Festlegung der Farbmarkierung für die Residuen (Punkte sind tatsächliche Werte, Linien die Residuen, Farbe gibt Größe der Abweichung an)</span>
 </dd>
-<dt data-target-cell="annotated-cell-18" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-cell="annotated-cell-18" data-code-lines="3">Festlegung der Farbe für die Residuen</span>
+<span data-code-cell="annotated-cell-19" data-code-annotation="2" data-code-lines="3">Festlegung der Farbe für die Residuen</span>
 </dd>
-<dt data-target-cell="annotated-cell-18" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-annotation="3" data-code-cell="annotated-cell-18" data-code-lines="4">Unterdrückt eine Legende an der Seite (ist obligatorisch)</span>
+<span data-code-cell="annotated-cell-19" data-code-annotation="3" data-code-lines="4">Unterdrückt eine Legende an der Seite (ist obligatorisch)</span>
 </dd>
-<dt data-target-cell="annotated-cell-18" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-annotation="4" data-code-cell="annotated-cell-18" data-code-lines="5">gibt die vorhergesagten Punkte auf der Regressionsgeraden aus</span>
+<span data-code-cell="annotated-cell-19" data-code-annotation="4" data-code-lines="5">gibt die vorhergesagten Punkte auf der Regressionsgeraden aus</span>
 </dd>
-<dt data-target-cell="annotated-cell-18" data-target-annotation="5">5</dt>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-annotation="5" data-code-cell="annotated-cell-18" data-code-lines="6">gibt die Regressionsgerade als Linie aus</span>
+<span data-code-cell="annotated-cell-19" data-code-annotation="5" data-code-lines="6">gibt die Regressionsgerade als Linie aus</span>
 </dd>
-<dt data-target-cell="annotated-cell-18" data-target-annotation="6">6</dt>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-annotation="6" data-code-cell="annotated-cell-18" data-code-lines="7">zeichnet die Linie vom Punkt zur Regressionsgeraden transparent ein</span>
+<span data-code-cell="annotated-cell-19" data-code-annotation="6" data-code-lines="7">zeichnet die Linie vom Punkt zur Regressionsgeraden transparent ein</span>
 </dd>
-<dt data-target-cell="annotated-cell-18" data-target-annotation="7">7</dt>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="7">7</dt>
 <dd>
-<span data-code-annotation="7" data-code-cell="annotated-cell-18" data-code-lines="8">Titel</span>
+<span data-code-cell="annotated-cell-19" data-code-annotation="7" data-code-lines="8">Titel</span>
 </dd>
-<dt data-target-cell="annotated-cell-18" data-target-annotation="8">8</dt>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-annotation="8" data-code-cell="annotated-cell-18" data-code-lines="9">Achsen-Beschriftung</span>
+<span data-code-cell="annotated-cell-19" data-code-annotation="8" data-code-lines="9">Achsen-Beschriftung</span>
 </dd>
 </dl>
 </div>
 <div class="cell-output-display">
-<p><img src="Skript_7.2_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<p><img src="Skript_7.2_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="standardisierung-der-b-koeffizienten-beta-koeffizienten" class="level2" data-number="2.9">
 <h2 data-number="2.9" class="anchored" data-anchor-id="standardisierung-der-b-koeffizienten-beta-koeffizienten"><span class="header-section-number">2.9</span> Standardisierung der B-Koeffizienten (“beta-Koeffizienten”)</h2>
 <p>Neben den normalen Regressionskoeffizienten b kann man auch die <em>standardisierten Koeffizienten beta</em> berechnen. Die standardisierten beta-Koeffizienten sind nützlich, weil sie die Skalierung der einzelnen Messwerte “herausrechnet”, wodurch unterschiedlich skalierte Variablen vergleichbar werden.</p>
-<p>Um uns die standardisierten beta-Koeffizienten ausgeben zu lassen, können wir auf das Paket lm.beta mit der gleichnamigen Funktion zurückgreifen, die auf ein mit lm() erzeugtes Modell angewendet werden kann. Der nun folgende Befehl ist im Prinzip wie oben, nur in den Klammern ergänzt um die Funktion lm.beta(), die dafür sorgt, dass wir im Output unten eine zusätzliche Spalte erhalten, in der die <em>standardisierten B-Koeffizienten</em> angezeigt werden. Diese sind als standardisierte “Regressionsgewichte” zu interpretieren - je höher der Wert, desto stärker der erklärende Beitrag der Variable.</p>
+<p>Um uns die standardisierten beta-Koeffizienten ausgeben zu lassen, können wir auf das Paket <code>lm.beta</code> mit der gleichnamigen Funktion zurückgreifen, die auf ein mit <code>lm()</code> erzeugtes Modell angewendet werden kann. Der nun folgende Befehl ist im Prinzip wie oben, nur in den Klammern ergänzt um die Funktion <code>lm.beta()</code>, die dafür sorgt, dass wir im Output unten eine zusätzliche Spalte erhalten, in der die <em>standardisierten B-Koeffizienten</em> angezeigt werden. Diese sind als standardisierte “Regressionsgewichte” zu interpretieren - je höher der Wert, desto stärker der erklärende Beitrag der Variable.</p>
 <p>Das ist natürlich vor allem dann spannend, wenn ich den Einfluss mehrerer Variablen vergleichen will. Dabei haben die standardisierten beta-Werte einen wichtigen Vorteil: Sollte man mehrere Prädiktoren in einem Modell haben, die aber auf unterschiedlichen Skalen gemessen wurden (z.B. 1x 5er und 1x 7er Skala), kann man ihren relativen Erklärungsbeitrag untereinander vergleichen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">summary</span>(<span class="fu">lm.beta</span>(model)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">summary</span>(<span class="fu">lm.beta</span>(model)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -934,7 +945,7 @@ Exkurs: Zusatzfunktionen zur schöneren Ergebnisdarstellung
 <div class="callout-body-container callout-body">
 <p>Funktion zur Modellzusammenfassung als data frame</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">tidy</span>(<span class="fu">lm.beta</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">tidy</span>(<span class="fu">lm.beta</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 6
   term        estimate std_estimate std.error statistic   p.value
@@ -945,7 +956,7 @@ Exkurs: Zusatzfunktionen zur schöneren Ergebnisdarstellung
 </div>
 <p>Funktion, um weitere Modellstatistiken in einem Befehl zu berechnen</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">glance</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">glance</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 12
   r.squared adj.r.squared sigma statistic   p.value    df  logLik    AIC    BIC
@@ -956,7 +967,7 @@ Exkurs: Zusatzfunktionen zur schöneren Ergebnisdarstellung
 </div>
 <p>Funktion, um Rohdaten um Modellvorhersagen zu erweitern</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">augment</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">augment</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4,929 × 8
    TV_Konsum Alter     .fitted  .resid     .hat .sigma      .cooksd .std.resid

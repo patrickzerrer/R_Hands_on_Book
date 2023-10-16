@@ -37,9 +37,9 @@ Auf beide Variablentypen sind Methoden, metrische Daten voraussetzen, nicht anwe
 
 Der *Pearson Chi-Quadrat Test* ist ein statistisches Verfahren, das verwendet wird, um zu überprüfen, ob es einen statistisch signifikanten Zusammenhang zwischen zwei *nominalskalierten* Variablen gibt; er kann auch bei *ordinalskalierten* Variablen angewendet werden. Der Chi-Quadrat-Tests testet die Nullhypothese, dass die beiden Variablen unabhängig voneinander sind. Mit dem Chi-Quadrat-Test wird dazu der Chi-Quadrat-Wert berechnet, indem die beiden untersuchten Variablen in einer sogenannten "Kreuztabelle" gegenüber gestellt und dann die beobachteten Häufigkeiten mit den erwarteten Häufigkeiten verglichen werden.
 
-Ein Beispiel für eine Zusammenhangshypothese zwischen zwei nominalskalierten Variablen, ist die Annahme, dass es einen Zusammenhang zwischen dem Geschlecht und der Religionszugehörigkeit gibt: Es gibt einen Zusammenhang zwischen dem Geschlecht der Befragten (`sex`) und der Konfessionszugehörigkeit (rd01). Diese Annahme können wir mit einem Chi-Quadrat-Test überprüfen.
+Ein Beispiel für eine Zusammenhangshypothese zwischen zwei nominalskalierten Variablen, ist die Annahme, dass es einen Zusammenhang zwischen dem Geschlecht und der Religionszugehörigkeit gibt: Es gibt einen Zusammenhang zwischen dem Geschlecht der Befragten (`sex`) und der Konfessionszugehörigkeit (`rd01`). Diese Annahme können wir mit einem Chi-Quadrat-Test überprüfen.
 
-In R kann der Pearson Chi-Quadrat Test mit der Funktion chisq.test() durchgeführt werden. Zuerst müssen wir dazu aber erst einmal die benötigen Pakete und Daten laden...
+In R kann der Pearson Chi-Quadrat Test mit der Funktion `chisq.test()` durchgeführt werden. Zuerst müssen wir dazu aber erst einmal die benötigen Pakete und Daten laden...
 
 # Data Management
 

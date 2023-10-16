@@ -100,9 +100,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Der ALLBUS Datensatz">
 <meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_truck_leaving_a_warehouse_cyberpunk__4c152b14-f4a7-4a08-8222-ce07ba126eaf.png">
+<meta property="og:image:height" content="644">
+<meta property="og:image:width" content="1149">
 <meta name="twitter:title" content="Der ALLBUS Datensatz">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_a_truck_leaving_a_warehouse_cyberpunk__4c152b14-f4a7-4a08-8222-ce07ba126eaf.png">
+<meta name="twitter:image-height" content="644">
+<meta name="twitter:image-width" content="1149">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -405,7 +411,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#der-allbus" id="toc-der-allbus" class="nav-link active" data-scroll-target="#der-allbus"><span class="header-section-number">1</span> Der ALLBUS</a></li>
+  <li><a href="#data-management-einlesen-des-allbus" id="toc-data-management-einlesen-des-allbus" class="nav-link active" data-scroll-target="#data-management-einlesen-des-allbus"><span class="header-section-number">1</span> Data Management &amp; Einlesen des ALLBUS</a></li>
+  <li><a href="#erste-schritte-mit-dem-allbus" id="toc-erste-schritte-mit-dem-allbus" class="nav-link" data-scroll-target="#erste-schritte-mit-dem-allbus"><span class="header-section-number">2</span> Erste Schritte mit dem ALLBUS</a></li>
+  <li><a href="#einen-überblick-über-den-allbus-gewinnen" id="toc-einen-überblick-über-den-allbus-gewinnen" class="nav-link" data-scroll-target="#einen-überblick-über-den-allbus-gewinnen"><span class="header-section-number">3</span> Einen Überblick über den ALLBUS gewinnen</a></li>
+  <li><a href="#die-variablen-des-allbus" id="toc-die-variablen-des-allbus" class="nav-link" data-scroll-target="#die-variablen-des-allbus"><span class="header-section-number">4</span> Die Variablen des ALLBUS</a></li>
+  <li><a href="#bildung-eines-teilsamples" id="toc-bildung-eines-teilsamples" class="nav-link" data-scroll-target="#bildung-eines-teilsamples"><span class="header-section-number">5</span> Bildung eines Teilsamples</a></li>
+  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung"><span class="header-section-number">6</span> Zusammenfassung</a></li>
   </ul>
 </nav>
     </div>
@@ -435,9 +446,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="der-allbus" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Der ALLBUS</h1>
-<p>Die Allgemeine Bevölkerungsumfrage der Sozialwissenschaften (ALLBUS) ist eine Befragung der deutschen Bevölkerung, die seit 1980 regelmäßig durch das GESIS Leibniz Institut für Sozialforschung durchgeführt wird. Im ALLBUS werden in der Regel alle zwei Jahre Daten über Einstellungen, Verhaltensweisen und Sozialstruktur der Bevölkerung in der Bundesrepublik Deutschland gesammelt. Dafür wird in persönlichen Interviews jeweils eine repräsentative Stichprobe aus der Bevölkerung Deutschlands befragt (jeweils ca. 2800 bis 3500 Befragte).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/zemkipatrick_comic_style_a_truck_leaving_a_warehouse_cyberpunk__4c152b14-f4a7-4a08-8222-ce07ba126eaf.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Wir haben unsere Daten, Bild generiert von Midjourney</figcaption>
+</figure>
+</div>
+<p>Die Allgemeine Bevölkerungsumfrage der Sozialwissenschaften (ALLBUS) ist eine standardisierte Befragung der deutschen Bevölkerung, die seit 1980 regelmäßig durch das GESIS Leibniz Institut für Sozialforschung durchgeführt wird. Im ALLBUS werden in der Regel alle zwei Jahre Daten über Einstellungen, Verhaltensweisen und Sozialstruktur der Bevölkerung in der Bundesrepublik Deutschland gesammelt. Dafür wird in persönlichen Interviews jeweils eine repräsentative Stichprobe aus der Bevölkerung Deutschlands befragt (jeweils ca. 2.800 bis 3.500 Befragte).</p>
 <p>Abgefragt werden u.a. Einschätzungen und Einstellungen in den Bereichen:</p>
 <p>- Wirtschaft</p>
 <p>- Umwelt</p>
@@ -448,27 +463,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>- Einstellungen zu und Kontakte mit Behörden</p>
 <p>- Freizeitaktivitäten</p>
 <p>- Gesundheit und gesundheitsrelevantes Verhalten</p>
-<p>Lesen wir den</p>
+<p>Folgend arbeiten wir im Rahmen dieses Moduls durchgängig mit dem ALLBUS, speziell mit der Erhebnungswelle des Jahres 2021.</p>
+<section id="data-management-einlesen-des-allbus" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Data Management &amp; Einlesen des ALLBUS</h1>
+<p>Wir beginnen damit, die notwendigen Pakete zu laden, die wir für die ersten Schritte mit den Daten benötigen. Das sind hier die Pakete haven (für das Einlesen der ALLBUS-Daten im Stata-Format) und das Pakete readr (für das Einlesen einiger Vorab vorbereiteter Samples aus dem Gesamtdatensatz), sowie das Paket dplyr, mit dem wir am Schluss einen Beispielhaften Teildatensatz bilden.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#library(tidyverse)</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co">#library(naniar)</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(haven)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#theme_set(theme_minimal())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Lade nötiges Paket: pacman</code></pre>
 </div>
-<p>Jetzt laden wir den ALLBUS-Datensatz mittels der Stata-Importfunktion read_dta aus dem Paket haven ein.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>daten <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'pacman' wurde unter R Version 4.3.1 erstellt</code></pre>
 </div>
-<p>Nun laden wir zudem noch drei zuvor erstellte Zufallssamples aus dem Gesamtdatensatz. Diese bestehen aus einer kleineren Anzahl relevanter Variablen und sind daher etwas übersichtlicher als der Hauptdatensatz.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>sample_klein <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_klein.rds"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>sample_mittel <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_mittel.rds"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>sample_gross <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_gross.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">p_load</span>(haven, readr, dplyr)</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Wie sehen die Daten aus?</p>
+<p>Nun lesen wir den ALLBUS-Datensatz mittels der Stata-Importfunktion <code>read_dta</code> aus dem Paket <code>haven</code> ein.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>sample_klein</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>daten <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Als nächstes laden wir zudem noch drei zuvor erstellte Zufallssamples im Umfang von 20, 200 und 500 Zeilen aus dem Gesamtdatensatz. Diese enthalten weiterhin eine deutlich kleinere Anzahl relevanter Variablen und sind daher etwas übersichtlicher als der sehr große Hauptdatensatz.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>sample_klein <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_klein.rds"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>sample_mittel <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_mittel.rds"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a>sample_gross <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"Datensatz/ALLBUS_sample_gross.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="erste-schritte-mit-dem-allbus" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Erste Schritte mit dem ALLBUS</h1>
+<p>Zunächst schauen wir uns die Daten an. Dies geschieht entweder daturch, dass man den Objektnamen verwendet (also im folgende Beispiel einfach sample_klein) oder indem man mit einem Klick in RStudio unter dem Reiter Environment oder mit dem Befehl <code>View()</code> aufruft. Bei diesem Vorgehen zeigt RStudio die Daten an, was i.d.R. den praktischsten Zugang darstellt.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>sample_klein</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 4
    alter geschlecht bildung            fernsehkonsum
@@ -495,10 +521,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 20    43 FRAU       MITTLERE REIFE                 7</code></pre>
 </div>
 </div>
-<p>Der kleine Beispieldatensatz illustriert den grundlegeenden Aufbau des ALLBUS. Dieser folgt (beim ALLBUS, aber auch den meisten anderen Befragungen) den folgenden Prinzipien * die Befragung ist ein einzeles Data Frame-Object (= eine große Tabelle) * die Zeilen sind die Beobachtungen (= RespondentInnen) * die Spalten sind die Variablen (= Antworten auf Survey-Fragen, oder bei der Möglichkeit zur Mehrfachnennung, die einzelnen Antwortoptionen) * die Zelleninhalte sind i.d.R. (Dummy)Zahlenwerte (= 1 für wenig Zustimmung und 5 für hohe Zustimmung)</p>
-<p>Im Beispieldatensatz sind die Werte der Variablen alter, geschlecht und bildung recht leicht nachvollziebar, wobei sie etwas unterschiedliche Datentypen aufweissen, wie man mit Hilfe der Funktion str ermitteln kann.</p>
+<p>Der kleine Beispieldatensatz illustriert den grundlegeenden Aufbau des ALLBUS. Dieser folgt (beim ALLBUS, aber auch den meisten anderen Befragungen) den folgenden Prinzipien</p>
+<ul>
+<li><p>jede Befragungswelle ist ein einzeles Data Frame-Objekt (= eine große Tabelle)</p></li>
+<li><p>die Zeilen der Tabelle sind die Beobachtungen (= RespondentInnen)</p></li>
+<li><p>die Spalten der Tabelle sind die Variablen (= Antworten auf Survey-Fragen, oder bei der Möglichkeit zur Mehrfachnennung, die einzelnen Antwort<em>optionen</em>)</p></li>
+<li><p>die Zelleninhalte sind i.d.R. (Dummy)Zahlenwerte (= etwa “1” für wenig Zustimmung und “5” für hohe Zustimmung)</p></li>
+</ul>
+</section>
+<section id="einen-überblick-über-den-allbus-gewinnen" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Einen Überblick über den ALLBUS gewinnen</h1>
+<p>Im Beispieldatensatz sind die Werte der Variablen <em>alter</em>, <em>geschlecht</em> und <em>bildung</em> recht leicht nachvollziebar, wobei sie etwas unterschiedliche Datentypen aufweisen, wie man mit Hilfe der Funktion <code>str</code> ermitteln kann.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">str</span>(sample_klein)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">str</span>(sample_klein)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [20 × 4] (S3: tbl_df/tbl/data.frame)
  $ alter        : num [1:20] 37 38 47 66 47 75 41 18 91 56 ...
@@ -507,10 +542,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  $ fernsehkonsum: num [1:20] 3 7 6 2 7 7 4 7 NA 4 ...</code></pre>
 </div>
 </div>
-<p>Bei Alter handelt es sich schlicht um eine Zahl (num), während geschlecht und bildung sogenannte Faktoren sind. Faktoren nutzt man in R, um wiederholende nicht numerische (typischerweise nominal oder ordinalskalierte) Werte zu speichern. Praktisch jeder Faktor könnte genausogut eine Zeichenkette (chr) sein, aber oftmals sind Faktoren praktischer, weil sie eine festen Reihenfolge haben können (ranked factors), die sich bei Bedarf auch in Zahlen umwandel lassen. Im konkreten Beispiel ist das Geschlecht ein ungerankter Faktor, der Bildungsgrad hat hingegen einen Rang. Der Fernsehkonsum ist schließlich eine Likert-skalierte Variable die wir hier und auch an anderer Stelle als metrische Variable behandeln (und dafür den R-Datentypen numeric verwenden), auch wenn das strikt genommen nicht immer zulässig ist – zumindest dann nicht, wenn man nur auf Grundlage eines einzelnen Items misst und eine 5- oder 7-Punkt Skala verwendet (vgl etwa https://doi.org/10.1080/01488376.2017.1329775).</p>
-<p>Wie sehen die anderen Samples aus? Wir sehen uns im nächsten Schritt das große Zufallssample an.</p>
+<p>Bei der Variable <em>alter</em> handelt es sich schlicht um eine Zahl (num), während <em>geschlecht</em> und <em>bildung</em> sogenannte Faktoren sind. Faktoren nutzt man in R, um wiederholende nicht numerische (typischerweise nominal oder ordinalskalierte) Werte zu speichern. Praktisch jeder Faktor könnte genausogut eine Zeichenkette (chr) sein, aber oftmals sind Faktoren praktischer, weil sie eine festen Reihenfolge haben können (“ranked factors”), die sich bei Bedarf auch in Zahlen umwandel lassen. Im konkreten Beispiel ist das Geschlecht ein ungerankter Faktor, der Bildungsgrad hat hingegen einen Rang. Der Fernsehkonsum ist schließlich eine Likert-skalierte Variable, die wir hier und auch an anderer Stelle als metrische Variable behandeln (und dafür den R-Datentypen numeric verwenden), auch wenn das strikt genommen nicht immer zulässig ist – zumindest dann nicht, wenn man nur auf Grundlage eines einzelnen Items misst und eine 5- oder 7-Punkt Skala verwendet (vgl etwa <a href="https://doi.org/10.1080/01488376.2017.1329775" class="uri">https://doi.org/10.1080/01488376.2017.1329775</a>).</p>
+<p>Wie sehen die anderen Samples aus? Wir sehen uns im nächsten Schritt das große Zufallssample (500 Fälle) an.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>sample_gross</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>sample_gross</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 500 × 29
    alter geschlecht fernsehkonsum politisches_interesse links_rechts_einordnung
@@ -535,9 +570,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Da wir es jetzt mit einer größeren Zahl an Beobachtungen and Variablen zu tun haben kann es nützlich sein, sich einen Überblick zu verschaffen.</p>
-<p>Zunächst lassen wir uns die Variablennamen (also die Spalten) ausgeben.</p>
+<p>Zunächst lassen wir uns die Variablennamen (also die Spalten) ausgeben. Dies geschieht mit der Funktion <code>colnames</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">colnames</span>(sample_gross)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">colnames</span>(sample_gross)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "alter"                              "geschlecht"                        
  [3] "fernsehkonsum"                      "politisches_interesse"             
@@ -556,9 +591,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [29] "vertrauen_eu_parlament"            </code></pre>
 </div>
 </div>
-<p>Eine etwas detailliertere Beschreibung erhalten wir durch die Funktion str. Diese liefert uns auch die Dimensionen (Anzahl der Zeilen und Spalten) des Data Frames, sowie die Variablen, deren Datentyp und die ersten zehn Ausprägungen.</p>
+<p>Eine etwas detailliertere Beschreibung erhalten wir durch die Funktion <code>str</code>. Diese liefert uns auch die Dimensionen (Anzahl der Zeilen und Spalten) des Data Frames, sowie die Variablen, deren Datentyp und die ersten zehn Ausprägungen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">str</span>(sample_gross)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">str</span>(sample_gross)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [500 × 29] (S3: tbl_df/tbl/data.frame)
  $ alter                             : num [1:500] 50 77 64 53 29 44 79 32 36 66 ...
@@ -592,9 +627,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  $ vertrauen_eu_parlament            : num [1:500] 5 5 3 1 3 6 3 NA 4 4 ...</code></pre>
 </div>
 </div>
-<p>Eine alternative (aber etwas ordentlichere) Ansicht erhält man mit dem Befehl glimpse aus dem Paket tibble (im tidyverse enthalten).</p>
+<p>Eine alternative (aber etwas ordentlichere) Ansicht erhält man mit dem Befehl <code>glimpse</code> aus dem Paket <code>tibble</code> (im tidyverse enthalten).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>tibble<span class="sc">::</span><span class="fu">glimpse</span>(sample_gross)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>tibble<span class="sc">::</span><span class="fu">glimpse</span>(sample_gross)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 500
 Columns: 29
@@ -629,9 +664,10 @@ $ vertrauen_eu_kommission            &lt;dbl&gt; 5, 5, 3, 1, 3, 5, 3, NA, 4, 4, 
 $ vertrauen_eu_parlament             &lt;dbl&gt; 5, 5, 3, 1, 3, 6, 3, NA, 4, 4, 2, N…</code></pre>
 </div>
 </div>
-<p>Schließlich lassen sich mit dem Befehle summary auch noch Eckwerte wie die Ausprägung von Faktorenstufen (bei Faktoren) oder Lageparameter (bei metrischen Variable) ermitteln.</p>
+<p>Die hier verwendete Syntax PAKETNAME::FUNKTION ist vielleicht zunächst etwas irritierend. Mit ihr rufen wir ein Paket auf, welches wir nicht vorher geladen haben. Das ist mitunter nützlich und kommt hier zur Anwendung, weil wir das Paket <code>tibble</code> hier ansonsten nicht benutzen.</p>
+<p>Schließlich lassen sich mit dem Befehle <code>summary</code> auch noch Eckwerte wie die Ausprägung von Faktorenstufen (bei Faktoren) oder Lageparameter (bei metrischen Variable) ermitteln.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">summary</span>(sample_gross)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">summary</span>(sample_gross)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     alter              geschlecht  fernsehkonsum        politisches_interesse
  Min.   :18.00   KEINE ANGABE:  0   Min.   :0.000   MITTEL          :231      
@@ -733,7 +769,7 @@ $ vertrauen_eu_parlament             &lt;dbl&gt; 5, 5, 3, 1, 3, 6, 3, NA, 4, 4, 
 </div>
 <p>Nun schauen wir uns den ALLBUS selbst – also den Gesamtdatensatz – genauer an.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>daten</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>daten</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5,342 × 544
    za_nr           doi   version respid substudy mode    splt21  eastwest german
@@ -757,21 +793,96 @@ $ vertrauen_eu_parlament             &lt;dbl&gt; 5, 5, 3, 1, 3, 6, 3, NA, 4, 4, 
 #   lm33 &lt;dbl+lbl&gt;, lm34 &lt;dbl+lbl&gt;, lm35 &lt;dbl+lbl&gt;, lm36 &lt;dbl+lbl&gt;, …</code></pre>
 </div>
 </div>
-<p>Es wird schnell klar, das weniger die Anzahl der Beobachtungen als vielmehr die Anzahle der Variablen (544) eine Herausforderung darstellt, zumal diese eher kryptische Namen wie “hp06” haben. Wie sich zurechfinden?</p>
-<p>Zum Glück lassen sich die sog. Labels, also die sprechenden Beschriftungen die sowohl Fragen and auch Antwortoptionen im ALLBUS-Stata-Datensatz haben, mittels R extrahieren (dies geschieht mit dem Paket labelled). Wir haben dies bereits vorbereitend gemacht und laden die entsprechenden Tabellen nun nur noch.</p>
+<p>Es wird schnell klar, das weniger die Anzahl der Beobachtungen als vielmehr die Anzahle der Variablen (544) eine Herausforderung darstellt, zumal diese eher kryptische Namen wie <code>hp06</code> haben. Wie sich also zurechfinden?</p>
+</section>
+<section id="die-variablen-des-allbus" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Die Variablen des ALLBUS</h1>
+<p>Zum Glück lassen sich die sog. <em>Labels</em>, also die sprechenden Beschriftungen die sowohl Fragen and auch Antwortoptionen im ALLBUS-Stata-Datensatz haben, mittels R extrahieren (dies geschieht mit dem Paket <code>labelled</code>). Wir haben dies bereits vorbereitend für den ALLBUS gemacht und laden die entsprechenden Tabellen nun nur noch.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>variablen <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"Datensatz/ALLBUS_2021_variablen.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>variablen <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"Datensatz/ALLBUS_2021_variablen.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>variablen_optionen <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"Datensatz/ALLBUS_2021_variablen_optionen.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>variablen_optionen <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"Datensatz/ALLBUS_2021_variablen_optionen.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
 </div>
 </div>
-<p>Es lohnt sich, beide Objekte mittels View() oder durch eine Klick in RStudio anzuschauen. Interessant sind die Felder variable (der Name der Variable im ALLBUS) und label (eine sprechende Beschreibung).</p>
-<p>Suchen wir etwa nach “hp06” finden wie die Label-Beschreibung “EPIDEMIE: STAAT DARF KRANKE ISOLIEREN”, die deutlich besser interpretierbar ist.</p>
-<p>Wir können so ebenfalls nach Begriffen suchen, die in den Labels vorkommen. Beispielsweise finden wir mit einer Suche nach dem Begruff ‘medien’ die Variablen lm35 (Nutzung von sozialen Medien als Nchrichtenquelle) und lm39 (Glaubwürdigkeit sozialer Medien mit Blick auf Kriminalität).</p>
+<p>Es lohnt sich, beide Objekte mittels <code>View()</code> oder durch eine Klick ob die beiden Objekte <em>variablen</em> und <em>variablen_optionen</em> in RStudio anzuschauen. Interessant sind die Felder variable (der Name der Variable im ALLBUS) und label (eine sprechende Beschreibung).</p>
+<p>Suchen wir etwa nach <code>hp06</code> finden wie die Label-Beschreibung “EPIDEMIE: STAAT DARF KRANKE ISOLIEREN”, die schon deutlich besser interpretierbar ist als <code>hp06</code>. Eine genaue Dokumentation und (vor allem wichtig) der genaue Fragetext findet sich in den Dokumenten ZA5280_fb_CAWI.pdf (Fragebogen) und ZA5280_cdb.pdf (Variablenreport). Beide sind wie der ALLBUS selbst abgelegt im Ordner Datensatz, werden aber ausserhalb von RStudio geöffnet.</p>
+<p>Der Fragebogen reicht normalerweise aus, um sich einen Überblick zu verschaffen, aber der Variablenreport ist dann nützlich, wenn man den Zusammenhang zwischen einem Dummywert (bspw. “4”) und dessen Bedeutung in Verbindung mit einer bestimmten Variable herausfinden möchte. Die Fragen lauter bei <code>hp06</code></p>
+<p><em>Und was denken Sie über folgende Maßnahmen: Sollte in Deutschland in Zeiten schwerer Epidemien der Staat das Recht haben, Folgendes zu tun?</em></p>
+<p><em>Nachweislich infizierte Personen isolieren</em></p>
+<p>Und der Dummy-Wert “4” steht bei dieser Frage für die Antwort <em>Auf keinen Fall</em>.</p>
+<p>Wenn man die drei kleinen Zufallssamples mit dem Hauptdatensatz vergleicht, fällt schnell auf, dass die Samples ausschließlich (echte) Zahlenfelder für (vor allem) ordinale Likert-skalierte Variablen enthalten. Bei diesen bedeutet ein höherer Wert i.d.R. mehr Zustimmung oder eine ausgeprägtere Verhaltensausprägung gegenüber geringeren Werten. Es gibt aber auch Fälle in denen diese sog. Polarität der Variablenwerte umgedreht ist und geringe Werte “stärker” sind als hohe, order solche, in denen wir es mit nominalen Skalen zu tun haben, die Zahlen also in keinerlei logischem Zusammenhang stehen.</p>
+<p>Was heißt das konkret? Zur Sicherheit sollte man im Rahmen einer eigenen Analyse in den Hauptdatensatz und in die Dokumentatuin schauen um absolut sicher zu sein, dass man keine unzulässigen Umformungen oder Berechnungen vornimmt (und etwa den Mittelwert einer nominalskalierten Variable bestimmt), oder die Ergebnisse misinterpretiert (etwa wenn die Polarität einer Variablen umgedreht codiert wurde). Es gilt immer: <em>know your data</em>.</p>
+<p>Zunächst ist es aber vollkommen legetim, um die Variablenliste oder das Befragungsdokument nach interessanten Variablen zu durckforsten. Wir können in der <code>View()</code>-Ansicht des Objekts variable nach Begriffen suchen, die in den Labels vorkommen. Beispielsweise finden wir mit einer Suche nach dem Begriff ‘medien’ die Variablen <code>lm35</code> (Nutzung von sozialen Medien als Nachrichtenquelle) und <code>lm39</code> (Glaubwürdigkeit sozialer Medien mit Blick auf Kriminalität), die uns vielleicht interessieren.</p>
+</section>
+<section id="bildung-eines-teilsamples" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Bildung eines Teilsamples</h1>
+<p>Ein Schritt, der praktisch für alle Studienprojekte im Verlauf des Semesters relevant sein wird, ist die Bildung eines Teildatensatzes, welcher die Variablen (und ggf. Fälle) enthält, die für Ihre Analyse relevant sind.</p>
+<p>Technisch gesehen ist das gar nicht unbedingt notwendig – wir können jeder Zeit Berechnungen am Gesamtdatensatz anstellen. Aber oft ist ein Teildatensatz übersichtlicher und ermöglicht ein besseres Verständnis der Daten.</p>
+<p>Wie bildet man ein solches Teilsample? Entscheidend ist hier die Funktion <code>select</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>fernsehkonsum <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">select</span>(age, sex, lm02)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Wir extrahieren hier mittels select drei Variablen, nämlich Alter (<code>age</code>), Geschlecht (<code>sex</code>) und den Fernsehkonsum in Minuten (<code>lm02</code>).</p>
+<p>Das Ergegnis ist ein Datensatz, der weiterhin alle 5.342 Fälle, aber nur drei (statt 544) Variablen enthält.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>fernsehkonsum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5,342 × 3
+   age       sex       lm02              
+   &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;         
+ 1 54        2 [FRAU]  210               
+ 2 53        1 [MANN]   90               
+ 3 89        2 [FRAU]  135               
+ 4 79        1 [MANN]   60               
+ 5 62        2 [FRAU]  180               
+ 6 23        1 [MANN]   45               
+ 7 31        2 [FRAU]   30               
+ 8 57        2 [FRAU]   -9 [KEINE ANGABE]
+ 9 68        1 [MANN]  180               
+10 51        2 [FRAU]  180               
+# ℹ 5,332 more rows</code></pre>
+</div>
+</div>
+<p>Eine gewisse Komplikation ist allerdings die Tatsache, dass in diesem Ausschnitt die Variablen <code>sex</code> noch eine Dummy-Zahl ist (1 = männlich, 2 = weiblich, 3 = divers) und zudem die Variable <code>lm02</code> negative Werte enthät. Diese zeigen keinen negativen Fernsehkonsum an, sondern werden für Spezialwerte verwendet (“keine Angabe”, “durch Filterbedingung weggefallen”). Als Faustregel gilt: <u><strong>Negative Werte im ALLBUS sollten praktisch immer durch NAs ersetzt werden</strong></u>. Das ist unbedingt von “0” als Wert zu unterscheiden. Mit einer “echten” Null kann ebenso wie mit “echten” Negtivwerten gerechnet werden, dies führt aber zu substantiellen Verzerrungen, wenn es sich um Dummy-Werte handelt.</p>
+<p>Der folgenden Codeblock bereinigt die Daten zum Fernsehkomsum. Dazu benennte er die drei Variablen znnächst in transparentere Were um. Anschlißend werden negative Werte in NAs umgewandelt (hier mit der Funktion replace_with_na_all aus dem Paket naniar). Dann wird das Geschlecht faktorisiert, was die Zahlen durch das Label (also MANN / FRAU / DIVERS) ersetzt. Und schließlich werden die Labels und Attribute entfernt, die nun nicht mehr benötigt werden.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>fernsehkonsum_bereinigt <span class="ot">&lt;-</span> fernsehkonsum <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">rename</span>(<span class="at">alter =</span> age,</span>
+<span id="cb30-3"><a href="#cb30-3"></a>         <span class="at">geschlecht =</span> sex,</span>
+<span id="cb30-4"><a href="#cb30-4"></a>         <span class="at">fernsehkonsum_minuten =</span> lm02) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-5"><a href="#cb30-5"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na_all</span>(<span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">mutate</span>(<span class="at">geschlecht =</span> <span class="fu">as_factor</span>(geschlecht)) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-7"><a href="#cb30-7"></a>  labelled<span class="sc">::</span><span class="fu">remove_labels</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>  labelled<span class="sc">::</span><span class="fu">remove_attributes</span>(<span class="st">"format.stata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>fernsehkonsum_bereinigt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5,342 × 3
+   alter geschlecht fernsehkonsum_minuten
+   &lt;dbl&gt; &lt;fct&gt;                      &lt;dbl&gt;
+ 1    54 FRAU                         210
+ 2    53 MANN                          90
+ 3    89 FRAU                         135
+ 4    79 MANN                          60
+ 5    62 FRAU                         180
+ 6    23 MANN                          45
+ 7    31 FRAU                          30
+ 8    57 FRAU                          NA
+ 9    68 MANN                         180
+10    51 FRAU                         180
+# ℹ 5,332 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="zusammenfassung" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Zusammenfassung</h1>
+<p>Wir sind jetzt in einer guten Position, um mit der praktischen Arbeit am ALLBUS zu beginnnen, also der Analyse und Interpretation konkreter Daten.</p>
 
 
 </section>
@@ -1013,7 +1124,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>   
+    <div class="nav-footer-left"><strong>Copyright</strong> 2023, <strong>Design by</strong> Katharina Maubach &amp; Patrick Zerrer, <strong>Autor:innen:</strong> Stephanie Geise, Cornelius Puschmann, Hannah Marie Büttner, Michael Linke, Katharina Maubach, Patrick Zerrer</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>

@@ -10,7 +10,7 @@ format:
     code-line-numbers: true
 ---
 
-# Was ist ein Datensatz und wie sind Datensätze aufgebaut?
+![Wie soll ich mich hier nur zurecht finden?, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_warehouse_full_with_packages_cyberpu_a4bce7b7-70ef-429d-aeb5-f12af768c1bd.png)
 
 Sozialwissenschaftlichen Daten sind Informationen, die zur Beschreibung und Erklärung der sozialen Welt verwendet werden. Sie können aus einer Vielzahl von Quellen stammen, zum Beispiel aus Umfragen, Experimenten, Interviews und Inhaltsanalysen. Kommunikationswissenschaftliche Daten können quantitativ oder qualitativ sein. Quantitative Daten sind in Zahlen ausgedrückt und können verwendet werden, um Muster und (kausale) Zusammenhänge zu identifizieren. Qualitative Daten sind in Text oder (Bewegt)Bildern ausgedrückt und können verwendet werden, um die Bedeutung von Ereignissen und Erfahrungen genauer zu verstehen.
 
