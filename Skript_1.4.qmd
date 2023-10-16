@@ -20,7 +20,7 @@ Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten w
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://nc.uni-bremen.de/index.php/s/DJGAeBcNing9dQZ/download/%231%20Einf%C3%BChrung%20R.mp4 >}}
+{{< video https://nc.uni-bremen.de/index.php/s/DJGAeBcNing9dQZ/download/%231%20Einf%C3%BChrung%20R.mp4 width="900" height="500">}}
 :::
 
 Lasst uns Beginnen und Schritt für Schritt die wichtigsten Punkte durchgehen, die ihr zur Vorbereitung eures Analyse-Projekts machen solltet.

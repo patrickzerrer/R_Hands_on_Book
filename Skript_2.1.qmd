@@ -17,7 +17,7 @@ Sozialwissenschaftlichen Daten sind Informationen, die zur Beschreibung und Erkl
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://nc.uni-bremen.de/index.php/s/875rxixCks7TKP5/download/%232%20Logik%20von%20Dataframes.mp4 >}}
+{{< video https://nc.uni-bremen.de/index.php/s/875rxixCks7TKP5/download/%232%20Logik%20von%20Dataframes.mp4 width="900" height="500">}}
 :::
 
 # Strukturierte vs. unstrukturierte Daten

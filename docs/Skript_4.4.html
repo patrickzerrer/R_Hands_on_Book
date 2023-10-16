@@ -475,7 +475,7 @@ Video
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://nc.uni-bremen.de/index.php/s/65GpYm2oHYJazs2/download/%238%20Normalverteilung.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="900" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://nc.uni-bremen.de/index.php/s/65GpYm2oHYJazs2/download/%238%20Normalverteilung.mp4"></video></div>
 </div>
 </div>
 </div>
@@ -669,7 +669,7 @@ W = 0.83575, p-value &lt; 2.2e-16</code></pre>
     Asymptotic one-sample Kolmogorov-Smirnov test
 
 data:  sample_einkommen
-D = 0.16454, p-value = 0.6511
+D = 0.19397, p-value = 0.4392
 alternative hypothesis: two-sided</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">shapiro.test</span>(sample_einkommen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -678,7 +678,7 @@ alternative hypothesis: two-sided</code></pre>
     Shapiro-Wilk normality test
 
 data:  sample_einkommen
-W = 0.88854, p-value = 0.02529</code></pre>
+W = 0.80834, p-value = 0.001153</code></pre>
 </div>
 </div>
 </section>
@@ -898,12 +898,12 @@ f(x;min,max) = \begin{cases}
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># Fünf Zufallszahlen, die im voreingestellten Intervall von 0 bis 1 liegen:</span></span>
 <span id="cb38-2"><a href="#cb38-2"></a><span class="fu">runif</span>(<span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3346544 0.6763150 0.5190809 0.6760977 0.8198408</code></pre>
+<pre><code>[1] 0.0809188 0.1809884 0.1772007 0.4026479 0.7335103</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># Drei Zufallszahlen, die im Intervall von -10 bis 10 liegen:</span></span>
 <span id="cb40-2"><a href="#cb40-2"></a><span class="fu">runif</span>(<span class="dv">3</span>, <span class="at">min=</span><span class="sc">-</span><span class="dv">10</span>, <span class="at">max=</span><span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.2582966  6.0276396 -1.1334602</code></pre>
+<pre><code>[1]  7.776149 -3.680223  6.218221</code></pre>
 </div>
 </div>
 </div>

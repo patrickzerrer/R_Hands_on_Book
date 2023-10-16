@@ -20,7 +20,7 @@ In unserem alltäglichen Leben haben wir ständig mit unterschiedlichsten Formen
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://nc.uni-bremen.de/index.php/s/aropEb6L3Woc4bB/download/%233%20Datentypen%20und%20Strukturen.mp4 >}}
+{{< video https://nc.uni-bremen.de/index.php/s/aropEb6L3Woc4bB/download/%233%20Datentypen%20und%20Strukturen.mp4 width="900" height="500">}}
 :::
 
 # Verschiedene Datentypen, Skalenniveaus und Datenstrukturen

@@ -25,7 +25,7 @@ Wir hätten also gerne eine Funktion, die es uns ermöglicht, alle denkbaren Sti
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://nc.uni-bremen.de/index.php/s/65GpYm2oHYJazs2/download/%238%20Normalverteilung.mp4 >}}
+{{< video https://nc.uni-bremen.de/index.php/s/65GpYm2oHYJazs2/download/%238%20Normalverteilung.mp4 width="900" height="500">}}
 :::
 
 Schauen wir uns als Beispiel das Histogramm der Allbus-Einkommensverteilung aus den vorherigen Abschnitten an.

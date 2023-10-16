@@ -23,7 +23,7 @@ Im Folgenden werden wir aus dem Allbus-2021-Datensatz ein paar Beispiele herausg
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://nc.uni-bremen.de/index.php/s/jYBQrNFKZwPWzGX/download/%236%20Lageparameter.mp4 >}}
+{{< video https://nc.uni-bremen.de/index.php/s/jYBQrNFKZwPWzGX/download/%236%20Lageparameter.mp4 width="900" height="500">}}
 :::
 
 # Data Management

@@ -19,7 +19,7 @@ Wir können in R-Studio unterschiedliche Arten von Dokumenten nutzen. In diesem 
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://nc.uni-bremen.de/index.php/s/DJGAeBcNing9dQZ/download/%231%20Einf%C3%BChrung%20R.mp4 >}}
+{{< video https://nc.uni-bremen.de/index.php/s/DJGAeBcNing9dQZ/download/%231%20Einf%C3%BChrung%20R.mp4 width="900" height="500">}}
 :::
 
 # R Markdown und Quarto

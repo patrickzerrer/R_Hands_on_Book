@@ -17,7 +17,7 @@ In der Kommunikationswissenschaft, beziehungsweise in den Sozialwissenschaften a
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://nc.uni-bremen.de/index.php/s/dLwGPyHHYtnMgrB/download/%239%20Latente%20Variablen.mp4 >}}
+{{< video https://nc.uni-bremen.de/index.php/s/dLwGPyHHYtnMgrB/download/%239%20Latente%20Variablen.mp4 width="900" height="500">}}
 :::
 
 Wenn wir uns jetzt ganz konkret mit dem Vertrauen in gesellschaftliche Institutionen beschäftigen, ist *Vertrauen* eine latente Variable. Wir können *Vertrauen in gesellschaftliche Institutionen* nicht direkt beobachten, wir sehen beispielsweise einem Menschen nicht an, ob er oder sie dem Bundesverfassungsgericht als eine von mehreren gesellschaftlichen Institutionen stark oder nicht so stark vertraut. Wenn wir uns als Forscher:innen fragen, inwieweit die Menschen in Deutschland den gesellschaftlichen Institutionen vertrauen, müssen wir zunächst theoretisch klären was wir unter dem *Vertrauen in gesellschaftliche Institutionen* verstehen.
