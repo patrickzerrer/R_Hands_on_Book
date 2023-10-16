@@ -23,7 +23,7 @@ Im Folgenden werden wir aus dem Allbus-2021-Datensatz ein paar Beispiele herausg
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://www.youtube.com/watch?v=r0_Vtf48MHU >}}
+{{< video https://nc.uni-bremen.de/index.php/s/jYBQrNFKZwPWzGX/download/%236%20Lageparameter.mp4 >}}
 :::
 
 # Data Management
@@ -150,7 +150,7 @@ Das arithmetische Mittel erhält man, indem man alle Messwerte addiert und durch
 
 $$
 \bar{x} = \frac{x_{1} + x_{2} + \cdots + x_{n}}{n} = \frac{1}{n}  \sum_{i=1}^{n} {x_{i}}
-$$ 
+$$
 
 Schauen wir uns das am Beispiel des Netto-Einkommens der Befragten im Allbus-Datensatz an: Wir können dazu die bereits vorhandene Funktion `mean` nutzen:
 
@@ -207,7 +207,7 @@ Nicht unerwähnt bleiben sollte das geometrische Mittel, das bei der Berechnung 
 
 $$
 x_{Geom} = (x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}}
-$$ 
+$$
 
 In R gibt es dafür keine eigenständige Funktion, man kann aber die Gleichung umstellen und mit Hilfe einiger anderer eingebauter Funktionen eine simple Alternative erstellen, indem man einen kleinen Trick mit der Exponentialfunktion und dem natürlichen Logarithmus anwendet:
 
@@ -219,7 +219,6 @@ x_{Geom}  & = (x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}} \\
           & = e^{\frac{1}{n} \sum_{i=1}^{n} ln({x_{i})}  }
 \end{aligned}
 ```
-
 Auch, wenn die resultierende Formel wenig ansprechend aussieht, kann man bei genauerem Hinsehen das versteckte arithmetische Mittel erkennen und den ganzen Ausdruck in folgenden R-Code umsetzen:
 
 ```{r}

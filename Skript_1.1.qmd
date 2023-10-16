@@ -17,7 +17,7 @@ In diesem Kurs nutzen wir die Programmiersprache R sowie R-Studio als benutzerfr
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://www.youtube.com/watch?v=mDj__dc71yo >}}
+{{< video https://nc.uni-bremen.de/index.php/s/DJGAeBcNing9dQZ/download/%231%20Einf%C3%BChrung%20R.mp4 >}}
 :::
 
 # Was ist R?

@@ -20,7 +20,7 @@ Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten w
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://www.youtube.com/watch?v=mDj__dc71yo >}}
+{{< video https://nc.uni-bremen.de/index.php/s/DJGAeBcNing9dQZ/download/%231%20Einf%C3%BChrung%20R.mp4 >}}
 :::
 
 Lasst uns Beginnen und Schritt für Schritt die wichtigsten Punkte durchgehen, die ihr zur Vorbereitung eures Analyse-Projekts machen solltet.
@@ -39,7 +39,7 @@ Mit dem Klick gelangt ihr in R-Studio.
 
 Starten wir zunächst mit dem Anlegen eines sogenannten R-Projekts. RStudio-Projekte ermöglichen es uns alle mit einem Projekt verbundenen Dateien an einem Ort zu speichern. Das umfasst Datensätze, R-Skripte, Ergebnisse, Abbildungen, Berichte usw. Projekte sind bereits in RStudio integriert.
 
-![Screenshot RStudio](Bilder/Skript_1_4_Screenshot1.png) 
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot1.png)
 
 Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button `New Project` ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.
 
@@ -107,7 +107,7 @@ Ihr werdet im Laufe des Kurses immer wieder mit Fehlermeldungen zu tun haben. Hi
 
 6.  *Sich im Netz Hilfe suchen*: Suche auf [Stack Overflow](https://stackoverflow.com/questions/tagged/r) nach deinem Problem, meistens hat jemand auf der Welt das oder ein ähnliches Problem schon einmal gelöst.
 
-7. *Frag deine Kommilitonen*: Tauscht euch aus, gemeinsam findet ihr eine Lösung! 
+7.  *Frag deine Kommilitonen*: Tauscht euch aus, gemeinsam findet ihr eine Lösung!
 
 8.  *Die KI fragen*: Nutze ein KI Chatbot, um dir die Fehlermeldung erklären zu lassen und Lösungsvorschläge zu unterbreiten. Beachte hierbei bitte, dass die Antworten nicht immer korrekt sind und meist Kontextwissen von dir benötigt wird, um die Korrektheit der Antworten zu prüfen [Link](https://www.r-bloggers.com/2023/04/tips-for-using-chatgpt-to-learn-r/).
 

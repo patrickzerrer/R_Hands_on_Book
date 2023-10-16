@@ -14,6 +14,12 @@ format:
 
 In der Kommunikationswissenschaft, beziehungsweise in den Sozialwissenschaften allgemein, bezieht sich der Begriff *latente Variable* auf eine *nicht direkt beobachtbare Eigenschaft* oder einen *nicht direkt messbaren Faktor*, der sich jedoch durch mehrere beobachtbare Variablen (teilweise auch als Indikatoren bezeichnet) manifestiert. Latente Variablen sind theoretische Konstrukte, die nicht direkt gemessen werden können. Als Wissenschaftler:innen gehen wir allerdings davon aus, dass diese Konstrukte existieren und wir somit komplexe gesellschaftliche Phänomene mit der Hilfe von *latenten Variablen* besser verstehen können.
 
+::: {.callout-note collapse="true" icon="false"}
+## Video
+
+{{< video https://nc.uni-bremen.de/index.php/s/dLwGPyHHYtnMgrB/download/%239%20Latente%20Variablen.mp4 >}}
+:::
+
 Wenn wir uns jetzt ganz konkret mit dem Vertrauen in gesellschaftliche Institutionen beschäftigen, ist *Vertrauen* eine latente Variable. Wir können *Vertrauen in gesellschaftliche Institutionen* nicht direkt beobachten, wir sehen beispielsweise einem Menschen nicht an, ob er oder sie dem Bundesverfassungsgericht als eine von mehreren gesellschaftlichen Institutionen stark oder nicht so stark vertraut. Wenn wir uns als Forscher:innen fragen, inwieweit die Menschen in Deutschland den gesellschaftlichen Institutionen vertrauen, müssen wir zunächst theoretisch klären was wir unter dem *Vertrauen in gesellschaftliche Institutionen* verstehen.
 
 Das *Vertrauen in gesellschaftliche Institutionen* ist ein abstraktes und komplexes theoretisches Konstrukt, das sich aus verschiedenen Bestandteilen zusammensetzt. Diese einzelnen Bestandteile (Vertrauen in das Bundesverfassungsgericht, Vertrauen in den Bundestag, etc.) können wir durch sogenannte Indikatoren beobachten und damit messbar machen (in einer Befragung wäre das bspw. die Frage nach dem Vertrauen in das Bundesverfassungsgericht). Auf der Grundlage dieser Indikatoren versuchen wir dann auf das *Vertrauen in gesellschaftliche Institutionen* zu schließen.

@@ -21,7 +21,7 @@ Im letzten Abschnitt haben wir uns angesehen, mit welchen Ma√üen sich etwas dar√
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://www.youtube.com/watch?v=ZK4kZITHke4 >}}
+{{< video https://nc.uni-bremen.de/index.php/s/wdc35NxGjSxcT9s/download/%237%20Streuungsma%C3%9Fe.mp4 >}}
 :::
 
 # Data Management

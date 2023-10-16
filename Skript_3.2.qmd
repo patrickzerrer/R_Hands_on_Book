@@ -20,7 +20,7 @@ In unserem alltäglichen Leben haben wir ständig mit unterschiedlichsten Formen
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video ist in Arbeit >}}
+{{< video https://nc.uni-bremen.de/index.php/s/aropEb6L3Woc4bB/download/%233%20Datentypen%20und%20Strukturen.mp4 >}}
 :::
 
 # Verschiedene Datentypen, Skalenniveaus und Datenstrukturen
@@ -177,9 +177,9 @@ matrix_4
 
 ### Der Datenrahmen bzw. Dataframe
 
-Neben dem eindimensionalen Vektor und der zweidimensionalen Matrix, gibt es noch eine weitere grundlegende Datenstruktur, mit der wir in der quantitativen Datenanalyse arbeiten: der Datenrahmen. Hierbei handelt es sich um eine zweidimensionale Datenstruktur, die ähnlich einer Tabelle aussieht. Im Gegensatz zur Matrix ermöglicht der Datenrahmen die Speicherung unterschiedlicher Datentypen in verschiedenen Spalten, was besonders hilfreich ist, wenn wir mit realen Datensätzen arbeiten. 
+Neben dem eindimensionalen Vektor und der zweidimensionalen Matrix, gibt es noch eine weitere grundlegende Datenstruktur, mit der wir in der quantitativen Datenanalyse arbeiten: der Datenrahmen. Hierbei handelt es sich um eine zweidimensionale Datenstruktur, die ähnlich einer Tabelle aussieht. Im Gegensatz zur Matrix ermöglicht der Datenrahmen die Speicherung unterschiedlicher Datentypen in verschiedenen Spalten, was besonders hilfreich ist, wenn wir mit realen Datensätzen arbeiten.
 
-In einem Datenrahmen repräsentiert eine "Variable" eine einzelne Messgröße oder Eigenschaft. Variablen können verschiedene Datentypen aufweisen (numerische Werte, Texte, logische Werte oder kategoriale Merkmale). Jede Variable wird durch eine Spalte im Datenrahmen dargestellt. Eine "Beobachtung" hingegen entspricht einer einzelnen Einheit, von der wir Daten gesammelt haben. Beobachtungen werden als Zeilen im Datenrahmen angeordnet. Jede Zeile enthält die Datenwerte für jede der zugehörigen Variablen. 
+In einem Datenrahmen repräsentiert eine "Variable" eine einzelne Messgröße oder Eigenschaft. Variablen können verschiedene Datentypen aufweisen (numerische Werte, Texte, logische Werte oder kategoriale Merkmale). Jede Variable wird durch eine Spalte im Datenrahmen dargestellt. Eine "Beobachtung" hingegen entspricht einer einzelnen Einheit, von der wir Daten gesammelt haben. Beobachtungen werden als Zeilen im Datenrahmen angeordnet. Jede Zeile enthält die Datenwerte für jede der zugehörigen Variablen.
 
 Beispielsweise könnte eine Beobachtung in einem Datenrahmen zur Erfassung von Studierendendaten Informationen wie den Namen, das Alter und die erreichte Note für einen bestimmten Kurs enthalten. Zusammen repräsentieren Variablen und Beobachtungen die Informationen, die wir in einem Datensatz haben. Der Datenrahmen organisiert diese Informationen in einer tabellarischen Struktur, die es uns ermöglicht, Muster, Trends und Beziehungen zwischen den Variablen und Beobachtungen zu identifizieren. Dies ist der Grundstein quantitative Datenanalysen. Um in R einen Datenrahmen zu erstellen, bilden Vektoren wieder die Grundlage. Diese dienen als Variablen, d.h. als Spalten, in unserem Datenrahmen und werden mit dem Befehl `data.frame()` zusammengefügt:
 

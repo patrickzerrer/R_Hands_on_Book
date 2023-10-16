@@ -22,6 +22,12 @@ Statistische Verteilungen stellen eine Verbindung her zwischen den empirisch gew
 
 Wir hätten also gerne eine Funktion, die es uns ermöglicht, alle denkbaren Stichproben auf einen Wahrscheinlichkeitswert zwischen 0 und 1 abzubilden. Wenn abzählbar viele Ereignisse eintreten können (z.B. beim Würfeln oder Münzwurf), spricht man von Wahrscheinlichkeitsfunktionen. Bei stetigen Verteilungen (z.B. wenn Zeiträume betrachtet werden) verwendet man den Begriff Dichtefunktion. In beiden Fällen summieren sich alle Funktionswerte zu 1 auf. Eine kumulierte Wahrscheinlichkeits- bzw. Dichtefunktion nennt man Verteilungsfunktion. D.h. bei der Verteilungsfunktion werden die Funktionswerte der Wahrscheinlichkeits summiert bzw. die Dichtefunktion integriert.
 
+::: {.callout-note collapse="true" icon="false"}
+## Video
+
+{{< video https://nc.uni-bremen.de/index.php/s/65GpYm2oHYJazs2/download/%238%20Normalverteilung.mp4 >}}
+:::
+
 Schauen wir uns als Beispiel das Histogramm der Allbus-Einkommensverteilung aus den vorherigen Abschnitten an.
 
 # Data Management
