@@ -386,9 +386,9 @@ emmip(fit2, agef ~ gesund) + #<1>
   scale_color_manual(values = c("darkgreen", "tan4"), name = "Altersgruppe") #<3>
 ```
 
-1.
-2.
-3. 
+1. Innerhalb von `emmip` geben wir zunächst 
+2. Text
+3. Text
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?

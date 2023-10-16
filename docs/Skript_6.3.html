@@ -492,11 +492,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="1">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-1" data-code-lines="2">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="4" data-code-annotation="2">Wir legen allgemein den Hintergrund theme_classic fest.</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-1" data-code-lines="4">Wir legen allgemein den Hintergrund theme_classic fest.</span>
 </dd>
 </dl>
 </div>
@@ -547,11 +547,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-3" data-code-lines="2">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="2">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-3" data-code-lines="3">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
 </dd>
 </dl>
 </div>
@@ -779,6 +779,21 @@ Voraussetzungsprüfung
 </section>
 <section id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest"><span class="header-section-number">2.2</span> Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest</h2>
+<p>Wilcoxon-Rangsummentest</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">pairwise.wilcox.test</span>(daten<span class="sc">$</span>trustges, daten<span class="sc">$</span>gesund,</span>
+<span id="cb13-2"><a href="#cb13-2"></a>                 <span class="at">p.adjust.method =</span> <span class="st">"BH"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pairwise comparisons using 
+
+data:  daten$trustges and daten$gesund 
+
+&lt;0 x 0 matrix&gt;
+
+P value adjustment method: BH </code></pre>
+</div>
+</div>
 </section>
 </section>
 <section id="t-test-für-einstichproben" class="level1" data-number="3">
@@ -1111,11 +1126,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>   
+    <div class="nav-footer-left"><strong>Copyright</strong> 2023, <strong>Design by</strong> Katharina Maubach &amp; Patrick Zerrer, <strong>Autor:innen:</strong> Stephanie Geise, Cornelius Puschmann, Hannah Marie Büttner, Michael Linke, Katharina Maubach, Patrick Zerrer</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right"><img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
+    <div class="nav-footer-right"><img src="Bilder/logo_zemki.png" class="img-fluid" width="120"> <img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
 

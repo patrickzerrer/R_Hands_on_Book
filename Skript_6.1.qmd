@@ -50,8 +50,8 @@ flowchart LR
   J --> M(nicht parametrisch: Wilcoxon-Test)
   K --> N(einfaktorielle Varianzanalyse mit Messwiederholung)
   
-click I "https://patrickzerrer.github.io/R_Hands_on_Book/Skript_6.4.html#exkurs-kruskal-wallis-test"
+click I "https://patrickzerrer.github.io/R_Hands_on_Book/Skript_6.4.html#exkurs-nicht-parametrische-testverfahren"
 click H "https://patrickzerrer.github.io/R_Hands_on_Book/Skript_6.4.html"
-click N "https://patrickzerrer.github.io/R_Hands_on_Book/Skript_6.4.html"
+click N "https://patrickzerrer.github.io/R_Hands_on_Book/Skript_6.4.html#umgang-mit-messwiederholungen"
   
 ```
