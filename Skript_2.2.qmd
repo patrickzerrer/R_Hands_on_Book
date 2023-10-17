@@ -75,7 +75,7 @@ allbus_stata <- read_dta("Datensatz/Allbus_2021.dta")
 Für andere Datenformate gibt es in der Regel spezielle Funktionen, die in den entsprechenden Paketen enthalten sind. Zum Beispiel kann die Funktion `readr::read_tsv()` für das Einlesen von TSV-Dateien (die mit einem Tabulator- oder TAB-Zeichen getrennt sind) verwendet werden. Die meisten Funktionen zum Einlesen von (Text)Daten haben eine Reihe von Optionen, mit denen Sie den Importprozess anpassen können. Zu den häufigsten Optionen gehören:
 
 | **Funktionsargument** | **Beschreibung**                                  |
-|------------------------|------------------------------------------------|
+|-----------------------|---------------------------------------------------|
 | header                | Gibt an, ob die Datendatei eine Kopfzeile enthält |
 | sep                   | Gibt das Trennzeichen zwischen den Werten an      |
 | na                    | Gibt an, wie fehlende Werte codiert werden sollen |

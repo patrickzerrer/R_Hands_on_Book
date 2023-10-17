@@ -127,16 +127,9 @@ summary(allbus_vertrauen)  # <1>
 
 # Prüfung der Vorraussetzungen der Faktorenanalyse
 
-Die Faktorenanalyse bringt, wie jedes statistische Verfahren, eine Reihe von Vorraussetzungen mit. 
+Die Faktorenanalyse bringt, wie jedes statistische Verfahren, eine Reihe von Vorraussetzungen mit.
 
-Diese sind:
-- Varianz
-- Linearität
-- Normalverteilung
-- Level der Messung
-- Fehlende Werte
-- Ausreißer
-- Korrelation der Variablen untereinander
+Diese sind: - Varianz - Linearität - Normalverteilung - Level der Messung - Fehlende Werte - Ausreißer - Korrelation der Variablen untereinander
 
 Diese Vorraussetzungen sollten wir kennen und bei der Anwendung der Faktorenanalyse beachten. Viele der Vorraussetzungen beziehen sich auf Pearson-Korrelationskoeffizienten, welcher die statistsiche Grundlage für die Berechnung der Faktoren bildet.
 

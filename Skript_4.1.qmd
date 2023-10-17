@@ -12,7 +12,6 @@ format:
 execute:
   warning: false
   message: false
-  
 ---
 
 ![Die Skyline als Barplot, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_skyline_as_a_barplot_frequencies_num_142385f5-fa6a-4d6c-95ea-8f847faa681a.png)
@@ -66,10 +65,10 @@ allbus_messniveau_bsp = daten %>%  # <1>
   mutate(sex = haven::as_factor(sex)) # <4>
 ```
 
-1. Wir erstellen ein neues Objekt basierend auf dem Datensatz `allbus_messniveau_bsp`,
-2. Mit `select` wählen wir die Variable `sex`aus
-3. Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
-4. Wir kodieren die Variable `sex` als Faktor und übernehmen die Label.
+1.  Wir erstellen ein neues Objekt basierend auf dem Datensatz `allbus_messniveau_bsp`,
+2.  Mit `select` wählen wir die Variable `sex`aus
+3.  Wir entfernen mit der Funktion `na.omit` fehlende Werte aus dem Datensatz
+4.  Wir kodieren die Variable `sex` als Faktor und übernehmen die Label.
 
 # Berechnung und Visualisierung von Häufigkeiten
 
@@ -81,7 +80,8 @@ stichprobengroesse = length(allbus_messniveau_bsp$sex)
 
 geschlecht_haeufigkeit_abs  # <1>
 ```
-1. Ausgabe der Tabelle
+
+1.  Ausgabe der Tabelle
 
 Insgesamt summieren sie sich (wie erwartet) zu 5322 Merkmalsträgern auf, was auch der Größe des Datensatzes entspricht:
 
@@ -89,8 +89,9 @@ Insgesamt summieren sie sich (wie erwartet) zu 5322 Merkmalsträgern auf, was au
 sum(geschlecht_haeufigkeit_abs)  #<1> 
 stichprobengroesse         # <2> 
 ```
-1. Ausgabe der Summe der absoluten Häufigkeiten
-2. Ausgabe der Gesamtanzahl an Merkmalsträgern im Datensatz
+
+1.  Ausgabe der Summe der absoluten Häufigkeiten
+2.  Ausgabe der Gesamtanzahl an Merkmalsträgern im Datensatz
 
 Die relativen Häufigkeiten können wir uns ausgeben lassen, indem wir den Inhalt der Tabelle durch die Gesamtanzahl der Merkmalsträger teilen:
 
@@ -98,17 +99,19 @@ Die relativen Häufigkeiten können wir uns ausgeben lassen, indem wir den Inhal
 geschlecht_haeufigkeit_rel = geschlecht_haeufigkeit_abs / stichprobengroesse  #<1> 
 geschlecht_haeufigkeit_rel     #<2>   
 ```
-1. Berechnung der relativen Häufigkeiten
-2. Ausgabe der Tabelle mit den relativen Häufigkeiten
+
+1.  Berechnung der relativen Häufigkeiten
+2.  Ausgabe der Tabelle mit den relativen Häufigkeiten
 
 Erwartungsgemäß summieren sich die relativen Häufigkeiten zu 1 auf:
 
 ```{r}
 sum(geschlecht_haeufigkeit_rel) #<1>
 ```
-1. Ausgabe der Summe der relativen Häufigkeiten
 
-Eine Möglichkeit der Darstellung von Häufigkeiten ist das Balkendiagramm: 
+1.  Ausgabe der Summe der relativen Häufigkeiten
+
+Eine Möglichkeit der Darstellung von Häufigkeiten ist das Balkendiagramm:
 
 ```{r}
 ggplot(allbus_messniveau_bsp, aes(x=sex)) +

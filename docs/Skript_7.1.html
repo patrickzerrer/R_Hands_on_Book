@@ -348,12 +348,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Skript_6.2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bestimmen von Unterschieden in der Varianz mit Kreuztabellen und dem Chi-Quadrat Test</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
   </div>
@@ -491,40 +485,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="2"><span class="header-section-number">2</span> Data Management</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">p_load</span>(tidyverse, haven, psych, conflicted, dplyr, lsr, ggplot2, ggpubr) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Paket 'corrplot' erfolgreich ausgepackt und MD5 Summen abgeglichen
-Paket 'ggrepel' erfolgreich ausgepackt und MD5 Summen abgeglichen
-Paket 'ggsci' erfolgreich ausgepackt und MD5 Summen abgeglichen
-Paket 'cowplot' erfolgreich ausgepackt und MD5 Summen abgeglichen
-Paket 'ggsignif' erfolgreich ausgepackt und MD5 Summen abgeglichen
-Paket 'polynom' erfolgreich ausgepackt und MD5 Summen abgeglichen
-Paket 'rstatix' erfolgreich ausgepackt und MD5 Summen abgeglichen
-Paket 'ggpubr' erfolgreich ausgepackt und MD5 Summen abgeglichen
-
-Die heruntergeladenen Binärpakete sind in 
-    C:\Users\Patrick Zerrer\AppData\Local\Temp\RtmponQh9Q\downloaded_packages</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">p_load</span>(tidyverse, haven, psych, conflicted, dplyr, lsr, ggplot2, ggpubr) </span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Die Variable Konfessionszugehörigkeit ist im Allbus-Datensatz mit dem Namen <code>rd01</code> benannt; wie benennen sie in <code>Konfession</code> um; außerdem filtern wir die für uns relevanten Fälle der Variablen heraus (und ignorieren damit die irrelevanten Fälle, z.B. -9=Keine Angabe):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">rename</span>(<span class="at">Konfession =</span> rd01) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Konfession, <span class="dv">1</span>, <span class="dv">6</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(sex, <span class="dv">1</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">rename</span>(<span class="at">Konfession =</span> rd01) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Konfession, <span class="dv">1</span>, <span class="dv">6</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(sex, <span class="dv">1</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="zusammenhänge-bei-zwei-nominalskalierten-bis-ordinalskalierten-variablen" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Zusammenhänge bei zwei nominalskalierten (bis ordinalskalierten) Variablen</h1>
 <p>Nun erstellen wir eine Kreuztabelle (auch Kontingenztafel genannt), um die Häufigkeiten der verschiedenen Kombinationen von Kategorien beider Variablen anzuzeigen. Das gibt uns einen ersten Überblick darüber, wie oft bestimmte Kombinationen vorkommen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>kreuztabelle <span class="ot">&lt;-</span> <span class="fu">table</span>(daten<span class="sc">$</span>sex, daten<span class="sc">$</span>Konfession)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">print</span>(kreuztabelle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>kreuztabelle <span class="ot">&lt;-</span> <span class="fu">table</span>(daten<span class="sc">$</span>sex, daten<span class="sc">$</span>Konfession)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">print</span>(kreuztabelle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   
        1    2    3    4    5    6
@@ -540,16 +521,16 @@ Die heruntergeladenen Binärpakete sind in
 <h2 data-number="3.1" class="anchored" data-anchor-id="visualisieren-des-zusammenhangs"><span class="header-section-number">3.1</span> Visualisieren des Zusammenhangs</h2>
 <p>Ein gestapeltes Balkendiagramm ist ein Diagramm, dass die Verteilung von verschiedenen Kategorien innerhalb einer Gesamtheit farblich (nach Kategorien) differenziert darstellen kann. Dazu werden mehrere Balken für jede Kategorie (nach Farbe sortiert) “aufeinandergestapelt”, wobei die Höhe des gesamten Balkens die Gesamtsumme (je Farbkategorie) repräsentiert. Um das auszuführen, müssen wir die unsere Daten wie Faktoren behandeln, weshalb wir den <code>as.factor</code>-Befehl nutzen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">Konfession =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(Konfession),</span>
-<span id="cb8-3"><a href="#cb8-3"></a>         <span class="at">sex =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(sex))</span>
-<span id="cb8-4"><a href="#cb8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(<span class="at">x =</span> Konfession, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Konfessionszugehörigkeit nach Geschlecht"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8"></a>       <span class="at">x =</span> <span class="st">"Konfession"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkseagreen"</span>,<span class="st">"grey"</span>, <span class="st">"lightblue"</span>)) <span class="sc">+</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a>  <span class="fu">rotate_x_text</span>(<span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(<span class="at">Konfession =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(Konfession),</span>
+<span id="cb6-3"><a href="#cb6-3"></a>         <span class="at">sex =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(sex))</span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">ggplot</span>(daten, <span class="fu">aes</span>(<span class="at">x =</span> Konfession, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Konfessionszugehörigkeit nach Geschlecht"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8"></a>       <span class="at">x =</span> <span class="st">"Konfession"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkseagreen"</span>,<span class="st">"grey"</span>, <span class="st">"lightblue"</span>)) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  <span class="fu">rotate_x_text</span>(<span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_7.1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -560,7 +541,7 @@ Die heruntergeladenen Binärpakete sind in
 <h2 data-number="3.2" class="anchored" data-anchor-id="überprüfen-des-zusammenhangs"><span class="header-section-number">3.2</span> Überprüfen des Zusammenhangs</h2>
 <p>Der Chi-Quadrat Test ist ein statistisches Verfahren, das verwendet wird, um festzustellen, ob es einen signifikanten Unterschied zwischen den beobachteten und erwarteten Häufigkeiten in einer Kreuztabelle gibt. Da wir schon eine Kreuztabelle erstellt haben, können wir die Funktion <code>chisq.test</code> auf unsere Kreuztabelle anwenden - das geht ganz einfach:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">chisq.test</span>(kreuztabelle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">chisq.test</span>(kreuztabelle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -581,8 +562,8 @@ X-squared = 22.946, df = 10, p-value = 0.01095</code></pre>
 <h2 data-number="3.4" class="anchored" data-anchor-id="berechnen-der-effektstärke-cramérs-v"><span class="header-section-number">3.4</span> Berechnen der Effektstärke Cramér’s V</h2>
 <p>Zuerst extrahieren wir den beobachteten Chi-Quadrat-Wert und speichern ihn in einem Datenobjekt <code>chi_square</code> ab. Dann berechnen wir die Effektstärke nach der Formel für Cramér’s V.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>cramers_v <span class="ot">&lt;-</span> <span class="fu">cramersV</span>(kreuztabelle)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">paste0</span>(<span class="st">"Cramér's V: "</span>, cramers_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>cramers_v <span class="ot">&lt;-</span> <span class="fu">cramersV</span>(kreuztabelle)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">paste0</span>(<span class="st">"Cramér's V: "</span>, cramers_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Cramér's V: 0.0471667326679284"</code></pre>
 </div>
@@ -601,19 +582,19 @@ X-squared = 22.946, df = 10, p-value = 0.01095</code></pre>
 <section id="data-management-1" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="data-management-1"><span class="header-section-number">4.1</span> Data Management</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">rename</span>(<span class="at">Einkommensgruppe =</span> di02a)<span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">rename</span>(<span class="at">Bildung =</span> educ)<span class="sc">%&gt;%</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Einkommensgruppe, <span class="dv">1</span>, <span class="dv">25</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Bildung, <span class="dv">1</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">rename</span>(<span class="at">Einkommensgruppe =</span> di02a)<span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">rename</span>(<span class="at">Bildung =</span> educ)<span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Einkommensgruppe, <span class="dv">1</span>, <span class="dv">25</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Bildung, <span class="dv">1</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nun nutzen wir die Funktion <code>cor.test()</code> und spezifizieren bei “method” den Korrelationskoeefizienten, zuerst “spearman”, dann zum Vergleich auch “kendall”:</p>
 </section>
 <section id="berechnung-der-rangkorrelation-nach-spearmans-rho" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="berechnung-der-rangkorrelation-nach-spearmans-rho"><span class="header-section-number">4.2</span> Berechnung der Rangkorrelation nach Spearman’s Rho</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>result_spearman <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(daten<span class="sc">$</span>Einkommensgruppe, daten<span class="sc">$</span>Bildung, <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">print</span>(result_spearman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>result_spearman <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(daten<span class="sc">$</span>Einkommensgruppe, daten<span class="sc">$</span>Bildung, <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">print</span>(result_spearman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Spearman's rank correlation rho
@@ -634,8 +615,8 @@ sample estimates:
 <section id="berechnung-der-rangkorrelation-nach-kendalls-tau" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="berechnung-der-rangkorrelation-nach-kendalls-tau"><span class="header-section-number">4.3</span> Berechnung der Rangkorrelation nach Kendall’s Tau</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>result_kendall <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(daten<span class="sc">$</span>Einkommensgruppe, daten<span class="sc">$</span>Bildung, <span class="at">method =</span> <span class="st">"kendall"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">print</span>(result_kendall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>result_kendall <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(daten<span class="sc">$</span>Einkommensgruppe, daten<span class="sc">$</span>Bildung, <span class="at">method =</span> <span class="st">"kendall"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">print</span>(result_kendall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kendall's rank correlation tau
@@ -660,18 +641,18 @@ sample estimates:
 <section id="data-management-2" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="data-management-2"><span class="header-section-number">5.1</span> Data Management</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>daten_neu <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Einkommensgruppe, <span class="dv">1</span>, <span class="dv">25</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as.numeric</span>(sex)) <span class="sc">%&gt;%</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(sex, <span class="dv">1</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>daten_neu <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(Einkommensgruppe, <span class="dv">1</span>, <span class="dv">25</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as.numeric</span>(sex)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(sex, <span class="dv">1</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nun erstellen wir wieder eine Kreuztabelle, um die Häufigkeiten der verschiedenen Kombinationen von Kategorien beider Variablen anzuzeigen. Damit erhalten wir einen ersten Überblick über die Verteilung der Daten entlang der Vergleichskategorie:</p>
 </section>
 <section id="erstellen-einer-kreuztabelle" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="erstellen-einer-kreuztabelle"><span class="header-section-number">5.2</span> Erstellen einer Kreuztabelle</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>kreuztabelle_2 <span class="ot">&lt;-</span> <span class="fu">table</span>(daten_neu<span class="sc">$</span>sex, daten_neu<span class="sc">$</span>Einkommensgruppe)</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">print</span>(kreuztabelle_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>kreuztabelle_2 <span class="ot">&lt;-</span> <span class="fu">table</span>(daten_neu<span class="sc">$</span>sex, daten_neu<span class="sc">$</span>Einkommensgruppe)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">print</span>(kreuztabelle_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   
       1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19
@@ -690,16 +671,16 @@ sample estimates:
 <h2 data-number="5.3" class="anchored" data-anchor-id="visualisieren-des-zusammenhangs-1"><span class="header-section-number">5.3</span> Visualisieren des Zusammenhangs</h2>
 <p>Ein gestapeltes Balkendiagramm ist ein Diagramm, dass die Verteilung von verschiedenen Kategorien innerhalb einer Gesamtheit farblich (nach Kategorien) differenziert darstellen kann. Dazu werden mehrere Balken für jede Kategorie (nach Farbe sortiert) “aufeinandergestapelt”, wobei die Höhe des gesamten Balkens die Gesamtsumme (je Farbkategorie) repräsentiert. Um das auszuführen, müssen wir die unsere Daten wie Faktoren behandeln, weshalb wir den <code>as.factor</code>-Befehl nutzen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>daten_neu <span class="ot">&lt;-</span> daten_neu <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">mutate</span>(<span class="at">Einkommensgruppe =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(Einkommensgruppe),</span>
-<span id="cb21-3"><a href="#cb21-3"></a>         <span class="at">sex =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(sex))</span>
-<span id="cb21-4"><a href="#cb21-4"></a></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="fu">ggplot</span>(daten_neu, <span class="fu">aes</span>(<span class="at">x =</span> Einkommensgruppe, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Einkommensgruppe nach Geschlecht"</span>,</span>
-<span id="cb21-8"><a href="#cb21-8"></a>       <span class="at">x =</span> <span class="st">"Einkommensgruppe"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkseagreen"</span>,<span class="st">"grey"</span>, <span class="st">"lightblue"</span>)) <span class="sc">+</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a>  <span class="fu">rotate_x_text</span>(<span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>daten_neu <span class="ot">&lt;-</span> daten_neu <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">mutate</span>(<span class="at">Einkommensgruppe =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(Einkommensgruppe),</span>
+<span id="cb19-3"><a href="#cb19-3"></a>         <span class="at">sex =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(sex))</span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="fu">ggplot</span>(daten_neu, <span class="fu">aes</span>(<span class="at">x =</span> Einkommensgruppe, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Verteilung der Einkommensgruppe nach Geschlecht"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8"></a>       <span class="at">x =</span> <span class="st">"Einkommensgruppe"</span>, <span class="at">y =</span> <span class="st">"Anteil"</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkseagreen"</span>,<span class="st">"grey"</span>, <span class="st">"lightblue"</span>)) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a>  <span class="fu">rotate_x_text</span>(<span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Skript_7.1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -710,7 +691,7 @@ sample estimates:
 <section id="überprüfung-des-zusammenhangs-mit-dem-chi-quadrat-test" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="überprüfung-des-zusammenhangs-mit-dem-chi-quadrat-test"><span class="header-section-number">5.4</span> Überprüfung des Zusammenhangs mit dem Chi-Quadrat Test</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">chisq.test</span>(kreuztabelle_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">chisq.test</span>(kreuztabelle_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -724,8 +705,8 @@ X-squared = 299.01, df = 24, p-value &lt; 2.2e-16</code></pre>
 <p>Der <em>p-Wert</em> gibt die Wahrscheinlichkeit an, den beobachteten Chi-Quadrat-Wert zu erhalten, wenn die Nullhypothese wahr ist (d.h. wenn es keinen Zusammenhang zwischen den Variablen gibt). Der hier beobachtete p-Wert (&lt; 2.2e-16) ist extrem klein und damit höchst signifikant. Das deutet darauf hin, dass der beobachtete Effekt überzufällig ist - Geschlecht und Konfessionszugehörigkeit hängen also auch statistisch zusammen.</p>
 <p>Da der Chi-Quadrat-Test empfindlich gegenüber der Stichprobengröße ist, berechnen wir nun noch die Effektstärke mittels Cramér’s V. Hier gilt ein Wert von 0,1 als klein, einer von 0,3 als mittel und ein Wert von 0,5 als groß.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>cramers_v <span class="ot">&lt;-</span> <span class="fu">cramersV</span>(kreuztabelle_2)</span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">paste0</span>(<span class="st">"Cramér's V: "</span>, cramers_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>cramers_v <span class="ot">&lt;-</span> <span class="fu">cramersV</span>(kreuztabelle_2)</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">paste0</span>(<span class="st">"Cramér's V: "</span>, cramers_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Cramér's V: 0.3084421864275"</code></pre>
 </div>
@@ -1038,11 +1019,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Design by Katharina Maubach &amp; Patrick Zerrer</div>   
+    <div class="nav-footer-left"><strong>Copyright</strong> 2023, <strong>Design by</strong> Katharina Maubach &amp; Patrick Zerrer, <strong>Autor:innen:</strong> Katharina Maubach, Patrick Zerrer, Stephanie Geise, Cornelius Puschmann, Hannah Marie Büttner, Michael Linke</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right"><img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
+    <div class="nav-footer-right"><img src="Bilder/logo_zemki.png" class="img-fluid" width="120"> <img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
 

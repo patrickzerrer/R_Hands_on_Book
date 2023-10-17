@@ -511,11 +511,11 @@ Video
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="1" data-code-lines="2">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-1" data-code-lines="2">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-annotation="2" data-code-lines="4">Wir legen allgemein den Hintergrund theme_classic fest.</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-1" data-code-lines="4">Wir legen allgemein den Hintergrund theme_classic fest.</span>
 </dd>
 </dl>
 </div>
@@ -527,9 +527,9 @@ Video
 <p>Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements (für ausführliche Erklärungen siehe <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html">hier</a>). Für unseren t-test für unabhängige Stichproben möchten wir uns anschauen, wie sich der Wohnort der Befragten auf ihr Vertrauen in die Bundesregierung auswirkt. Wir nutzen dazu die folgenden Variablen:</p>
 <table class="table">
 <colgroup>
-<col style="width: 18%">
-<col style="width: 42%">
-<col style="width: 38%">
+<col style="width: 13%">
+<col style="width: 44%">
+<col style="width: 40%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -568,15 +568,15 @@ Video
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="1" data-code-lines="2">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-3" data-code-lines="2">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="2" data-code-lines="3">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-3" data-code-lines="3">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="3" data-code-lines="4,5">Wir bringen unsere Daten in das korrekte Format. Für den t-Test muss die abhängige Variable als Vektor vorliegen und die unabhängige Variable als Faktor.</span>
+<span data-code-annotation="3" data-code-cell="annotated-cell-3" data-code-lines="4,5">Wir bringen unsere Daten in das korrekte Format. Für den t-Test muss die abhängige Variable als Vektor vorliegen und die unabhängige Variable als Faktor.</span>
 </dd>
 </dl>
 </div>
@@ -859,19 +859,19 @@ P value adjustment method: BH </code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-annotation="1" data-code-lines="1">In R nutzen wir das Paket <code>ggplot2</code> von Wickham et al.&nbsp;um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket <code>ggplot2</code> mit dem Befehl <code>ggplot()</code> aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier <code>daten_one</code>) und unter aes unsere Variable (hier <code>einkommen</code>).</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-13" data-code-lines="1">In R nutzen wir das Paket <code>ggplot2</code> von Wickham et al.&nbsp;um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket <code>ggplot2</code> mit dem Befehl <code>ggplot()</code> aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier <code>daten_one</code>) und unter aes unsere Variable (hier <code>einkommen</code>).</span>
 </dd>
 <dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-annotation="2" data-code-lines="2">Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll <code>(aes(y = after_stat(count))</code>, wir die Außenumrandung schwarz <code>color = black</code> und die Füllfarbe grau wünschen (<code>fill = grey</code>). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik.</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-13" data-code-lines="2">Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll <code>(aes(y = after_stat(count))</code>, wir die Außenumrandung schwarz <code>color = black</code> und die Füllfarbe grau wünschen (<code>fill = grey</code>). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik.</span>
 </dd>
 <dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-annotation="3" data-code-lines="4">Mit <code>binwidth = 500</code> verweisen wir hier auf die Breite der Balken unseres Histogramms.</span>
+<span data-code-annotation="3" data-code-cell="annotated-cell-13" data-code-lines="4">Mit <code>binwidth = 500</code> verweisen wir hier auf die Breite der Balken unseres Histogramms.</span>
 </dd>
 <dt data-target-cell="annotated-cell-13" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-annotation="4" data-code-lines="5">Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl <code>labs</code> um zusätzlich die Achsen zu beschriften.</span>
+<span data-code-annotation="4" data-code-cell="annotated-cell-13" data-code-lines="5">Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl <code>labs</code> um zusätzlich die Achsen zu beschriften.</span>
 </dd>
 </dl>
 </div>

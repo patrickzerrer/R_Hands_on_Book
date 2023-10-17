@@ -16,7 +16,7 @@ format:
 
 ![Bild generiert von Midjourney](Bilder/Grafik_ttest.png)
 
-Wir nutzen den t-test um Mittelwertunterschiede zwischen zwei Gruppen zu analysieren. 
+Wir nutzen den t-test um Mittelwertunterschiede zwischen zwei Gruppen zu analysieren.
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
@@ -67,25 +67,25 @@ daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 
 Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements (für ausführliche Erklärungen siehe [hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html)). Für unseren t-test für unabhängige Stichproben möchten wir uns anschauen, wie sich der Wohnort der Befragten auf ihr Vertrauen in die Bundesregierung auswirkt. Wir nutzen dazu die folgenden Variablen:
 
-+--------------+----------------------------------+-------------------------------+
-| Variable     | Beschreibung                     | Ausprägungen                  |
-+:============:+:================================:+:=============================:+
-| eastwest     | Erhebungsgebiet West-Ost         | 1= Alte Bundesländer (Westen) |
-|              |                                  |                               |
-|              |                                  | 2 = Neue Bundesländer (Osten) |
-+--------------+----------------------------------+-------------------------------+
-| pt12         | Vertrauen in die Bundesregierung | -42 = Datenfehler             |
-|              |                                  |                               |
-|              |                                  | -11 = TNZ Split               |
-|              |                                  |                               |
-|              |                                  | -9 = Keine Angabe             |
-|              |                                  |                               |
-|              |                                  | 1 = Gar kein Vertrauen        |
-|              |                                  |                               |
-|              |                                  | ...                           |
-|              |                                  |                               |
-|              |                                  | 7 = Großes Vertrauen          |
-+--------------+----------------------------------+-------------------------------+
++----------+----------------------------------+-------------------------------+
+| Variable | Beschreibung                     | Ausprägungen                  |
++:========:+:================================:+:=============================:+
+| eastwest | Erhebungsgebiet West-Ost         | 1= Alte Bundesländer (Westen) |
+|          |                                  |                               |
+|          |                                  | 2 = Neue Bundesländer (Osten) |
++----------+----------------------------------+-------------------------------+
+| pt12     | Vertrauen in die Bundesregierung | -42 = Datenfehler             |
+|          |                                  |                               |
+|          |                                  | -11 = TNZ Split               |
+|          |                                  |                               |
+|          |                                  | -9 = Keine Angabe             |
+|          |                                  |                               |
+|          |                                  | 1 = Gar kein Vertrauen        |
+|          |                                  |                               |
+|          |                                  | ...                           |
+|          |                                  |                               |
+|          |                                  | 7 = Großes Vertrauen          |
++----------+----------------------------------+-------------------------------+
 
 Innerhalb unseres Datenmanageements schließen wir fehlerhafte und fehlende Werte der Variablen pt12 aus und benennen diese anschließend um:
 
@@ -100,7 +100,7 @@ daten <- daten %>%
 
 1.  Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.
 2.  Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.
-3. Wir bringen unsere Daten in das korrekte Format. Für den t-Test muss die abhängige Variable als Vektor vorliegen und die unabhängige Variable als Faktor. 
+3.  Wir bringen unsere Daten in das korrekte Format. Für den t-Test muss die abhängige Variable als Vektor vorliegen und die unabhängige Variable als Faktor.
 
 ## Deskriptives der abhängigen Variablen
 
@@ -124,7 +124,7 @@ Bei dem t-test handelt es sich um ein statistisches Verfahren. Um die Güte der 
 
 ### Skalierung der UV und AV
 
-Die abhängige Variable muss als numerischer Vektor vorliegen, die unabhängige Variable wiederum als Faktor (mit zwei Ausprägungen). Die korrekte Skalierung der Variablen haben wir bereits innerhalb des Data Managements sichergestellt, können uns aber zusätzlich mit dem Befehl class noch einmal einen Überblick über das Skalenniveau unserer Variablen verschaffen. 
+Die abhängige Variable muss als numerischer Vektor vorliegen, die unabhängige Variable wiederum als Faktor (mit zwei Ausprägungen). Die korrekte Skalierung der Variablen haben wir bereits innerhalb des Data Managements sichergestellt, können uns aber zusätzlich mit dem Befehl class noch einmal einen Überblick über das Skalenniveau unserer Variablen verschaffen.
 
 ```{r}
 daten %>%  
@@ -170,7 +170,6 @@ daten %>%
   cohens_d(trustreg~eastwest, data = .)
 ```
 
-
 ## Interpretation des Outputs
 
 Der Output des t-tests gibt uns die folgenden Informationen aus:
@@ -204,8 +203,7 @@ Das Format ist üblicherweise:
 
 ## Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Rangsummen-Test
 
-Wilcoxon-Rangsummentest
-[Historie der Testverfahren](http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html)
+Wilcoxon-Rangsummentest [Historie der Testverfahren](http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html)
 
 # t-Test für verbundene Stichproben
 
@@ -217,8 +215,6 @@ Wilcoxon-Rangsummentest
 
 ## Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest
 
-
-
 ```{r}
 
 pairwise.wilcox.test(daten$trustges, daten$gesund,
@@ -227,11 +223,11 @@ pairwise.wilcox.test(daten$trustges, daten$gesund,
 
 # t-Test für Einstichproben
 
-Beim t-Test für Einstichproben testen wir, ob die Werte unserer Stichprobe einem vorab festgelegten Wert entsprechen. So können wir beispielsweise mit Blick auf das Einkommen schauen, ob das monatliche Nettoeinkommen aus unserer Stichprobe  dem  Bundesdurchschnitt gemäß dem [statistischen Bundestamt](https://de.statista.com/statistik/daten/studie/261850/umfrage/brutto-und-nettoeinkommen-je-privatem-haushalt-in-deutschland/) von 3813€ entspricht. 
+Beim t-Test für Einstichproben testen wir, ob die Werte unserer Stichprobe einem vorab festgelegten Wert entsprechen. So können wir beispielsweise mit Blick auf das Einkommen schauen, ob das monatliche Nettoeinkommen aus unserer Stichprobe dem Bundesdurchschnitt gemäß dem [statistischen Bundestamt](https://de.statista.com/statistik/daten/studie/261850/umfrage/brutto-und-nettoeinkommen-je-privatem-haushalt-in-deutschland/) von 3813€ entspricht.
 
 ## Data Management
 
-Dazu benennen wir zunächst die entsprechende Variable aus den Allbus-Daten in `einkommen` um und filtern fehlende Werte hinaus. 
+Dazu benennen wir zunächst die entsprechende Variable aus den Allbus-Daten in `einkommen` um und filtern fehlende Werte hinaus.
 
 ```{r}
 daten_one <- daten %>% 
@@ -247,6 +243,7 @@ Der Einstichprobentest setzt ähnlich wie der two-sided und paired test eine Nor
 daten_one  %>%  
   do(tidy(shapiro.test(.$einkommen)))
 ```
+
 Da unser Ergebnis signifikant ausfällt, müssen wir hier leider die Normalverteilung unserer AV ablehnen (wir testen ja auf signifikante Abweichung von der Normalverteilung, daher möchten wir bei diesem Test nicht ein signifikantes Ergebnis haben). Um weitere Gewissheit zu erlangen, prüfen wir die Normalverteilung zusätzlich optisch mit einem Histogramm:
 
 ```{r}
@@ -263,16 +260,16 @@ ggplot(daten_one, aes(einkommen)) + #<1>
 3.  Mit `binwidth = 500` verweisen wir hier auf die Breite der Balken unseres Histogramms.
 4.  Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl `labs` um zusätzlich die Achsen zu beschriften.
 
-Die Grafik verstärkt die Einschätzung des Shapiro-Wilk-Tests, dass keine Normalverteilung vorliegt. In einem solchen Fall würden wir auf den nicht-parametrische one-sample Wilcoxon-Test ausweichen.  
+Die Grafik verstärkt die Einschätzung des Shapiro-Wilk-Tests, dass keine Normalverteilung vorliegt. In einem solchen Fall würden wir auf den nicht-parametrische one-sample Wilcoxon-Test ausweichen.
 
 ## Durchführung des t-tests für Einstichproben
 
 ```{r}
 t.test(daten_one$einkommen , mu = 3813)
 ```
+
 ## Nicht-parametrischer Test: one sample Wilcoxon Test
 
 ```{r}
 wilcox.test(daten_one$einkommen, mu = 3813)
 ```
-

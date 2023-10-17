@@ -44,39 +44,39 @@ daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 
 Um mit dem Datensatz arbeiten zu können benötigen wir einige grundlegende Schritte des Datenmanagements [für ausführliche Erklärungen siehe hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html). Für die Varianzanalyse möchten wir uns anschauen, wie sich der Gesundheitszustand (und das Alter) der Befragten auf ihr Vertrauen in das Gesundheitswesen auswirkt. Wir nutzen dazu die folgenden Variablen:
 
-+---------------+-----------------------------------+-------------------------+
-| Variable      | Beschreibung                      | Ausprägungen            |
-+:=============:+:=================================:+:=======================:+
-| hs01          | Gesundheitszustand der Befragten  | -42 = Datenfehler       |
-|               |                                   |                         |
-|               |                                   | -11 = TNZ Split         |
-|               |                                   |                         |
-|               |                                   | -9 = Keine Angabe       |
-|               |                                   |                         |
-|               |                                   | 1 = Sehr Gut            |
-|               |                                   |                         |
-|               |                                   | 2 = Gut                 |
-|               |                                   |                         |
-|               |                                   | 3 = Zufriedenstellend   |
-|               |                                   |                         |
-|               |                                   | 4 = Weniger Gut         |
-|               |                                   |                         |
-|               |                                   | 5 = Schlecht            |
-+---------------+-----------------------------------+-------------------------+
-| age           | Alter der Befragten               | -32 = Nicht Generierbar |
-+---------------+-----------------------------------+-------------------------+
-| pt01          | Vertrauen in das Gesundheitswesen | -42 = Datenfehler       |
-|               |                                   |                         |
-|               |                                   | -11 = TNZ Split         |
-|               |                                   |                         |
-|               |                                   | -9 = Keine Angabe       |
-|               |                                   |                         |
-|               |                                   | 1 = Gar kein Vertrauen  |
-|               |                                   |                         |
-|               |                                   | ...                     |
-|               |                                   |                         |
-|               |                                   | 7 = Großes Vertrauen    |
-+---------------+-----------------------------------+-------------------------+
++----------+-----------------------------------+-------------------------+
+| Variable | Beschreibung                      | Ausprägungen            |
++:========:+:=================================:+:=======================:+
+| hs01     | Gesundheitszustand der Befragten  | -42 = Datenfehler       |
+|          |                                   |                         |
+|          |                                   | -11 = TNZ Split         |
+|          |                                   |                         |
+|          |                                   | -9 = Keine Angabe       |
+|          |                                   |                         |
+|          |                                   | 1 = Sehr Gut            |
+|          |                                   |                         |
+|          |                                   | 2 = Gut                 |
+|          |                                   |                         |
+|          |                                   | 3 = Zufriedenstellend   |
+|          |                                   |                         |
+|          |                                   | 4 = Weniger Gut         |
+|          |                                   |                         |
+|          |                                   | 5 = Schlecht            |
++----------+-----------------------------------+-------------------------+
+| age      | Alter der Befragten               | -32 = Nicht Generierbar |
++----------+-----------------------------------+-------------------------+
+| pt01     | Vertrauen in das Gesundheitswesen | -42 = Datenfehler       |
+|          |                                   |                         |
+|          |                                   | -11 = TNZ Split         |
+|          |                                   |                         |
+|          |                                   | -9 = Keine Angabe       |
+|          |                                   |                         |
+|          |                                   | 1 = Gar kein Vertrauen  |
+|          |                                   |                         |
+|          |                                   | ...                     |
+|          |                                   |                         |
+|          |                                   | 7 = Großes Vertrauen    |
++----------+-----------------------------------+-------------------------+
 
 Innerhalb unseres Datenmanagements schließen wir fehlerhafte und fehlende Werte der Variablen sex, agef und pt12 aus und benennen falls nötig die Variablen um:
 
@@ -370,9 +370,9 @@ emmeans::emmeans(fit2, specs = c("gesund", "agef")) %>%
 
 Die Tabelle zu den Posthoc-Tests ist erwartungsgemäß sehr lang, da alle unsere einzelnen Gruppen miteinander verglichen werden müssen. Hier zeigt sich bereits, dass die mehrfaktorielle Varianzanalyse nur dann Sinn ergibt, wenn unsere Variablen nicht zu viele Ausprägungen aufweisen.
 
-Erneut konzentrieren wir uns vorrangig auf die Signifikanzwerte. Wenn wir uns nur auf die junge Altersgruppe konzentrieren, erkennen wir die bereits bekannten Gruppenunterschieden aus der einfaktoriellen Varianzanalyse (zwischen Personen die einen sehr guten Gesundheitszustand aufweisen und Personen, mit einem zufriedenstellenden und weniger guten Gesundheitszustand) wieder. Des Weiteren zeigen sich signifikante Gruppenunterschiede zwischen jungen und alten Personen, die einen guten Gesundheitszustand aufweisen, sowie jungen Personen die einen zufriedenstellenen oder weniger guten Gesundheitszustand haben und alten Personen die einen sehr guten, guten, zufriedenstellenden oder weniger guten Gesundheitszustand haben. 
+Erneut konzentrieren wir uns vorrangig auf die Signifikanzwerte. Wenn wir uns nur auf die junge Altersgruppe konzentrieren, erkennen wir die bereits bekannten Gruppenunterschieden aus der einfaktoriellen Varianzanalyse (zwischen Personen die einen sehr guten Gesundheitszustand aufweisen und Personen, mit einem zufriedenstellenden und weniger guten Gesundheitszustand) wieder. Des Weiteren zeigen sich signifikante Gruppenunterschiede zwischen jungen und alten Personen, die einen guten Gesundheitszustand aufweisen, sowie jungen Personen die einen zufriedenstellenen oder weniger guten Gesundheitszustand haben und alten Personen die einen sehr guten, guten, zufriedenstellenden oder weniger guten Gesundheitszustand haben.
 
-Dementsprechend ist das Alter sowie der Gesundheitszustand ein signifikanter Vorhersagefaktor wobei sich eine Vielzahl an Gruppen signifikant unterscheiden. Insbesondere bei solch komplexen Gruppenunterschieden ist es sinnvoll, die Ergebnisse auch einmal zu visualisieren. 
+Dementsprechend ist das Alter sowie der Gesundheitszustand ein signifikanter Vorhersagefaktor wobei sich eine Vielzahl an Gruppen signifikant unterscheiden. Insbesondere bei solch komplexen Gruppenunterschieden ist es sinnvoll, die Ergebnisse auch einmal zu visualisieren.
 
 ## Visualisierung der Interaktionen
 
@@ -393,7 +393,7 @@ emmip(fit2, agef ~ gesund) + #<1>
 3.  Mit `scale_color_manual` legen wir eigene Farben für unseren Plot fest. Mittels `name = "Altersgruppe"` ändern wir den Titel der Plotlegende.\
 4.  Wir drehen unsere Grafikbeschriftung der x-Achse um 45 Grad, damit auch lange Labels lesbar sind.
 
-Anhand der Grafik werden die Interaktionseffekte sowie die Gruppenunterschiede der Posthoc-Tests noch einmal verdeutlicht: Während bei jungen Personen mit einem sehr guten Gesundheitszustand das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, nimmt dieses anschließend steil ab. Bei älteren Menschen wiederum ist das Vertrauen in das Gesundheitswesen bei Personen mit einem sehr guten Gesundheitszustand zwar geringer als bei jüngeren Personen mit einem sehr guten Gesundheitszustand, nimmt anschließend aber zu und im weiteren Verlauf weit weniger drastisch ab. Daher wird auch deutlich, weswegen wir eine solch hohe Anzahl an signifikanten Gruppenunterschieden zwischen den verschiedenen Gesundheitszuständen bei alten und jungen Leuten finden konnten. 
+Anhand der Grafik werden die Interaktionseffekte sowie die Gruppenunterschiede der Posthoc-Tests noch einmal verdeutlicht: Während bei jungen Personen mit einem sehr guten Gesundheitszustand das Vertrauen in das Gesundheitswesen am höchsten ausgeprägt ist, nimmt dieses anschließend steil ab. Bei älteren Menschen wiederum ist das Vertrauen in das Gesundheitswesen bei Personen mit einem sehr guten Gesundheitszustand zwar geringer als bei jüngeren Personen mit einem sehr guten Gesundheitszustand, nimmt anschließend aber zu und im weiteren Verlauf weit weniger drastisch ab. Daher wird auch deutlich, weswegen wir eine solch hohe Anzahl an signifikanten Gruppenunterschieden zwischen den verschiedenen Gesundheitszuständen bei alten und jungen Leuten finden konnten.
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
@@ -414,10 +414,8 @@ Die Ergebnisse der mehrfaktoriellen Varianzanalyse werden zumeist in Textform da
 
 Das Format ist üblicherweise:
 
-> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand. Des Weiteren haben ältere Personen ein höheres Vertrauen in das Gesundheitswesen (M = 5.05;SD=1.36) als jüngere Personen (M = 4.85;SD=1.40). Der Gesundheitszustand (F3465)=7,66,p\<0,001 ηp2 =  und das Alter (F3465)=14,63,p\<0,001 haben jeweils einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen. Post-Hoc Paarvergleiche mit Tukey ergaben, dass sich der Mittelwert für junge Personen mit sehr guten Gesundheitszustand signifikant von jungen Personen mit gutem (p=.045), zufriedenstellendem (p\<0.001) und weniger gutem (p\<0.001) Zustand unterscheidet. Des Weiteren unterscheiden sich junge Personen mit guten Gesundheitszustand von jungen Personen mit zufriedenstellenden Gesundheitszustand (p=.01) sowie von alten Personen mit guten Gesundheitszustand (p=.018). Darüber hinaus unterscheiden sich junge Personen mit einem zufriedenstellenden Gesundheitszustand von alten Personen mit einem sehr guten (p=.03), guten (p\<0.001), zufriedenstellenden (p\<0.001) und weniger guten (p=.01) Gesundheitszustand. Zuletzt unterscheiden sich junge Personen mit einem weniger guten Gesundheitszustand von alten Personen mit einem guten (p\<0.001), zufriedenstellenden (p.005) und weniger guten Gesundheitszustand (p=.0489). Das Ergebnise zeigt zudem eine signifikante Interaktion von Gesundheitszustand und Alter ((F3465)=2,93, p=0,020, ηp2 = .003) auf das Vertrauen in das Gesundheitswesen. Dies weist darauf hin, dass sich der Gesundheitszustand je nach Altersgruppe unterschiedlich auswirkt. Bei einem sehr guten Gesundheitszustand ist das Vertrauen in das Gesundheitswesen bei jungen Menschen (M = 5.15, SD = 1.42) stärker ausgeprägt als bei alten Menschen (M = 5.05, SD = 1.57). Bei allen anderen Gesundheitszuständen ist es genau umgekehrt. Hier haben jeweils ältere Menschen ein höheres Vertrauen in das Gesundheitswesen als jüngere Menschen. 
-
+> ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand. Des Weiteren haben ältere Personen ein höheres Vertrauen in das Gesundheitswesen (M = 5.05;SD=1.36) als jüngere Personen (M = 4.85;SD=1.40). Der Gesundheitszustand (F3465)=7,66,p\<0,001 ηp2 = und das Alter (F3465)=14,63,p\<0,001 haben jeweils einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen. Post-Hoc Paarvergleiche mit Tukey ergaben, dass sich der Mittelwert für junge Personen mit sehr guten Gesundheitszustand signifikant von jungen Personen mit gutem (p=.045), zufriedenstellendem (p\<0.001) und weniger gutem (p\<0.001) Zustand unterscheidet. Des Weiteren unterscheiden sich junge Personen mit guten Gesundheitszustand von jungen Personen mit zufriedenstellenden Gesundheitszustand (p=.01) sowie von alten Personen mit guten Gesundheitszustand (p=.018). Darüber hinaus unterscheiden sich junge Personen mit einem zufriedenstellenden Gesundheitszustand von alten Personen mit einem sehr guten (p=.03), guten (p\<0.001), zufriedenstellenden (p\<0.001) und weniger guten (p=.01) Gesundheitszustand. Zuletzt unterscheiden sich junge Personen mit einem weniger guten Gesundheitszustand von alten Personen mit einem guten (p\<0.001), zufriedenstellenden (p.005) und weniger guten Gesundheitszustand (p=.0489). Das Ergebnise zeigt zudem eine signifikante Interaktion von Gesundheitszustand und Alter ((F3465)=2,93, p=0,020, ηp2 = .003) auf das Vertrauen in das Gesundheitswesen. Dies weist darauf hin, dass sich der Gesundheitszustand je nach Altersgruppe unterschiedlich auswirkt. Bei einem sehr guten Gesundheitszustand ist das Vertrauen in das Gesundheitswesen bei jungen Menschen (M = 5.15, SD = 1.42) stärker ausgeprägt als bei alten Menschen (M = 5.05, SD = 1.57). Bei allen anderen Gesundheitszuständen ist es genau umgekehrt. Hier haben jeweils ältere Menschen ein höheres Vertrauen in das Gesundheitswesen als jüngere Menschen.
 :::
-
 
 ## Literatur
 
