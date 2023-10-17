@@ -419,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#durchführung-des-t-tests" id="toc-durchführung-des-t-tests" class="nav-link" data-scroll-target="#durchführung-des-t-tests"><span class="header-section-number">1.4</span> Durchführung des t-Tests</a></li>
   <li><a href="#interpretation-des-outputs" id="toc-interpretation-des-outputs" class="nav-link" data-scroll-target="#interpretation-des-outputs"><span class="header-section-number">1.5</span> Interpretation des Outputs</a></li>
-  <li><a href="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" id="toc-nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" class="nav-link" data-scroll-target="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-test"><span class="header-section-number">1.6</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Test</a></li>
+  <li><a href="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-rangsummen-test" id="toc-nicht-parametrischer-test-mann-whitney-u-wilcoxon-rangsummen-test" class="nav-link" data-scroll-target="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-rangsummen-test"><span class="header-section-number">1.6</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Rangsummen-Test</a></li>
   </ul></li>
   <li><a href="#t-test-für-verbundene-stichproben" id="toc-t-test-für-verbundene-stichproben" class="nav-link" data-scroll-target="#t-test-für-verbundene-stichproben"><span class="header-section-number">2</span> t-Test für verbundene Stichproben</a>
   <ul class="collapse">
@@ -428,8 +428,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#t-test-für-einstichproben" id="toc-t-test-für-einstichproben" class="nav-link" data-scroll-target="#t-test-für-einstichproben"><span class="header-section-number">3</span> t-Test für Einstichproben</a>
   <ul class="collapse">
-  <li><a href="#durchführung-des-t-tests-für-einstichproben" id="toc-durchführung-des-t-tests-für-einstichproben" class="nav-link" data-scroll-target="#durchführung-des-t-tests-für-einstichproben"><span class="header-section-number">3.1</span> Durchführung des t-tests für Einstichproben</a></li>
-  <li><a href="#nicht-parametrischer-test" id="toc-nicht-parametrischer-test" class="nav-link" data-scroll-target="#nicht-parametrischer-test"><span class="header-section-number">3.2</span> Nicht-parametrischer Test:</a></li>
+  <li><a href="#data-management" id="toc-data-management" class="nav-link" data-scroll-target="#data-management"><span class="header-section-number">3.1</span> Data Management</a></li>
+  <li><a href="#voraussetzungsprüfung-2" id="toc-voraussetzungsprüfung-2" class="nav-link" data-scroll-target="#voraussetzungsprüfung-2"><span class="header-section-number">3.2</span> Voraussetzungsprüfung</a></li>
+  <li><a href="#durchführung-des-t-tests-für-einstichproben" id="toc-durchführung-des-t-tests-für-einstichproben" class="nav-link" data-scroll-target="#durchführung-des-t-tests-für-einstichproben"><span class="header-section-number">3.3</span> Durchführung des t-tests für Einstichproben</a></li>
+  <li><a href="#nicht-parametrischer-test-one-sample-wilcoxon-test" id="toc-nicht-parametrischer-test-one-sample-wilcoxon-test" class="nav-link" data-scroll-target="#nicht-parametrischer-test-one-sample-wilcoxon-test"><span class="header-section-number">3.4</span> Nicht-parametrischer Test: one sample Wilcoxon Test</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -466,11 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Bild generiert von Midjourney</figcaption>
 </figure>
 </div>
-<p>Wir nutzen den t-test um Mittelwertunterschiede zwischen zwei Gruppen zu analysieren. Dabei unterscheiden wir grundsätzlich zwei verschiedene Arten von Test:</p>
-<ul>
-<li>der t-Test für unabhängige Stichproben (two-paired-test) sowie</li>
-<li>der t-Test für verbundene Stichprobene (paired test)</li>
-</ul>
+<p>Wir nutzen den t-test um Mittelwertunterschiede zwischen zwei Gruppen zu analysieren.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -487,6 +485,11 @@ Video
 </div>
 </div>
 </div>
+<p>Wir unterscheiden grundsätzlich in zwei verschiedene Arten von t-Test:</p>
+<ul>
+<li>den t-Test für unabhängige Stichproben (two-paired-test) sowie</li>
+<li>den t-Test für verbundene Stichprobene (paired test)</li>
+</ul>
 <p><strong>t-test für unabhängige Stichproben</strong></p>
 <p>Mit dem t-test für unabhängige Stichproben überprüfen wir, ob sich die Mittelwerte in zwei gemessenen Stichproben unterscheiden. Die Stichproben sind dann unabhängig, wenn sie aus zwei unterschiedlichen Gruppen stammen und daher sich nicht gegenseitig beeinflussen können. Ein solches Beispiel liegt zum Beispiel dann vor, wenn wir schauen ob das Alter (dichotom kodiert in alt vs jung) einen Einfluss auf das Einkommen hat. In diesem Fall kann eine Person zum Untersuchungszeitpunkt nicht gleichzeitig alt und jung sein, sondern fällt in einer der beiden Gruppen. Ein anderes typisches Anwendungsbespiel ist der Vergleich von zwei Gruppen im Rahmen eines Experimentaldesign. Hier kann ein Proband ebenfalls nur einer der Untersuchungsgruppe zugeordnet sein.</p>
 <p><strong>t-test für verbundene Stichproben</strong></p>
@@ -498,7 +501,7 @@ Video
 <p>Wir schauen uns zunächst den t-Test für unabhängige Stichproben an.</p>
 <section id="datenmanagement" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="datenmanagement"><span class="header-section-number">1.1</span> Datenmanagement</h2>
-<p>Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.</p>
+<p>Wir beginnen mit dem Laden der notwendigen Pakete.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, mosaic, knitr,effectsize, car, broom)</span>
@@ -508,11 +511,11 @@ Video
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-cell="annotated-cell-1" data-code-annotation="1">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
+<span data-code-cell="annotated-cell-1" data-code-annotation="1" data-code-lines="2">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="4" data-code-cell="annotated-cell-1" data-code-annotation="2">Wir legen allgemein den Hintergrund theme_classic fest.</span>
+<span data-code-cell="annotated-cell-1" data-code-annotation="2" data-code-lines="4">Wir legen allgemein den Hintergrund theme_classic fest.</span>
 </dd>
 </dl>
 </div>
@@ -558,16 +561,22 @@ Video
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>  <span class="fu">filter</span>(., pt12 <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>  <span class="fu">rename</span>(., <span class="at">trustreg =</span> pt12)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>  <span class="fu">rename</span>(., <span class="at">trustreg =</span> pt12) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a>  <span class="fu">mutate</span>(<span class="at">trustreg =</span> <span class="fu">as.numeric</span>(trustreg),</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a>         <span class="at">eastwest =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(eastwest))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-cell="annotated-cell-3" data-code-annotation="1">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
+<span data-code-cell="annotated-cell-3" data-code-annotation="1" data-code-lines="2">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-cell="annotated-cell-3" data-code-annotation="2">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
+<span data-code-cell="annotated-cell-3" data-code-annotation="2" data-code-lines="3">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-annotation="3" data-code-lines="4,5">Wir bringen unsere Daten in das korrekte Format. Für den t-Test muss die abhängige Variable als Vektor vorliegen und die unabhängige Variable als Faktor.</span>
 </dd>
 </dl>
 </div>
@@ -649,16 +658,17 @@ Video
 </ul>
 <section id="skalierung-der-uv-und-av" class="level3" data-number="1.3.1">
 <h3 data-number="1.3.1" class="anchored" data-anchor-id="skalierung-der-uv-und-av"><span class="header-section-number">1.3.1</span> Skalierung der UV und AV</h3>
+<p>Die abhängige Variable muss als numerischer Vektor vorliegen, die unabhängige Variable wiederum als Faktor (mit zwei Ausprägungen). Die korrekte Skalierung der Variablen haben wir bereits innerhalb des Data Managements sichergestellt, können uns aber zusätzlich mit dem Befehl class noch einmal einen Überblick über das Skalenniveau unserer Variablen verschaffen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>daten <span class="sc">%&gt;%</span>  </span>
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">select</span>(eastwest, trustreg) <span class="sc">%&gt;%</span>  </span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">lapply</span>(class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$eastwest
-[1] "haven_labelled" "vctrs_vctr"     "double"        
+[1] "factor"
 
 $trustreg
-[1] "haven_labelled" "vctrs_vctr"     "double"        </code></pre>
+[1] "numeric"</code></pre>
 </div>
 </div>
 </section>
@@ -671,10 +681,10 @@ $trustreg
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
 # Groups:   eastwest [2]
-  eastwest               statistic  p.value method                     
-  &lt;dbl+lbl&gt;                  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                      
-1 1 [ALTE BUNDESLAENDER]     0.937 2.69e-30 Shapiro-Wilk normality test
-2 2 [NEUE BUNDESLAENDER]     0.930 5.06e-23 Shapiro-Wilk normality test</code></pre>
+  eastwest           statistic  p.value method                     
+  &lt;fct&gt;                  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                      
+1 ALTE BUNDESLAENDER     0.937 2.69e-30 Shapiro-Wilk normality test
+2 NEUE BUNDESLAENDER     0.930 5.06e-23 Shapiro-Wilk normality test</code></pre>
 </div>
 </div>
 </section>
@@ -699,31 +709,32 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="durchführung-des-t-tests" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="durchführung-des-t-tests"><span class="header-section-number">1.4</span> Durchführung des t-Tests</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># t-Test durchführen</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>daten <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">drop_na</span>(eastwest, trustreg) <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">filter</span>(.,trustreg <span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">t.test</span>(trustreg <span class="sc">~</span> eastwest,</span>
-<span id="cb9-6"><a href="#cb9-6"></a>         <span class="at">alternative =</span> <span class="st">"two.sided"</span>, </span>
-<span id="cb9-7"><a href="#cb9-7"></a>         <span class="at">var.equal =</span> T,</span>
-<span id="cb9-8"><a href="#cb9-8"></a>         <span class="at">data =</span> .)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>daten <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">drop_na</span>(eastwest, trustreg) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">filter</span>(.,trustreg <span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">t.test</span>(trustreg <span class="sc">~</span> eastwest,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>         <span class="at">alternative =</span> <span class="st">"two.sided"</span>, </span>
+<span id="cb9-6"><a href="#cb9-6"></a>         <span class="at">var.equal =</span> T,</span>
+<span id="cb9-7"><a href="#cb9-7"></a>         <span class="at">data =</span> .)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Two Sample t-test
 
 data:  trustreg by eastwest
 t = 4.9349, df = 3516, p-value = 8.391e-07
-alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0
+alternative hypothesis: true difference in means between group ALTE BUNDESLAENDER and group NEUE BUNDESLAENDER is not equal to 0
 95 percent confidence interval:
  0.1726028 0.4001616
 sample estimates:
-mean in group 1 mean in group 2 
-       4.147752        3.861369 </code></pre>
+mean in group ALTE BUNDESLAENDER mean in group NEUE BUNDESLAENDER 
+                        4.147752                         3.861369 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Effektstärke cohens d berechnen</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>daten <span class="sc">%&gt;%</span> </span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">drop_na</span>(eastwest, trustreg) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">cohens_d</span>(trustreg<span class="sc">~</span>eastwest, <span class="at">data =</span> .)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Effektstärke cohens d berechnen</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>daten <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">drop_na</span>(eastwest, trustreg) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">cohens_d</span>(trustreg<span class="sc">~</span>eastwest, <span class="at">data =</span> .)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cohen's d |       95% CI
 ------------------------
@@ -767,9 +778,9 @@ Wie gebe ich die Ergebnisse korrekt an?
 </div>
 </div>
 </section>
-<section id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-test" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-test"><span class="header-section-number">1.6</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Test</h2>
-<p><a href="http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html">Historie der Testverfahren</a></p>
+<section id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-rangsummen-test" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-rangsummen-test"><span class="header-section-number">1.6</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Rangsummen-Test</h2>
+<p>Wilcoxon-Rangsummentest <a href="http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html">Historie der Testverfahren</a></p>
 </section>
 </section>
 <section id="t-test-für-verbundene-stichproben" class="level1" data-number="2">
@@ -795,7 +806,6 @@ Voraussetzungsprüfung
 </section>
 <section id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest"><span class="header-section-number">2.2</span> Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest</h2>
-<p>Wilcoxon-Rangsummentest</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">pairwise.wilcox.test</span>(daten<span class="sc">$</span>trustges, daten<span class="sc">$</span>gesund,</span>
 <span id="cb13-2"><a href="#cb13-2"></a>                 <span class="at">p.adjust.method =</span> <span class="st">"BH"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -814,27 +824,95 @@ P value adjustment method: BH </code></pre>
 </section>
 <section id="t-test-für-einstichproben" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> t-Test für Einstichproben</h1>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<p>Beim t-Test für Einstichproben testen wir, ob die Werte unserer Stichprobe einem vorab festgelegten Wert entsprechen. So können wir beispielsweise mit Blick auf das Einkommen schauen, ob das monatliche Nettoeinkommen aus unserer Stichprobe dem Bundesdurchschnitt gemäß dem <a href="https://de.statista.com/statistik/daten/studie/261850/umfrage/brutto-und-nettoeinkommen-je-privatem-haushalt-in-deutschland/">statistischen Bundestamt</a> von 3813€ entspricht.</p>
+<section id="data-management" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="data-management"><span class="header-section-number">3.1</span> Data Management</h2>
+<p>Dazu benennen wir zunächst die entsprechende Variable aus den Allbus-Daten in <code>einkommen</code> um und filtern fehlende Werte hinaus.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>daten_one <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">filter</span>(., di01a <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">rename</span>(., <span class="at">einkommen =</span> di01a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Voraussetzungsprüfung
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-
-</div>
-</div>
-</div>
-<section id="durchführung-des-t-tests-für-einstichproben" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="durchführung-des-t-tests-für-einstichproben"><span class="header-section-number">3.1</span> Durchführung des t-tests für Einstichproben</h2>
 </section>
-<section id="nicht-parametrischer-test" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="nicht-parametrischer-test"><span class="header-section-number">3.2</span> Nicht-parametrischer Test:</h2>
+<section id="voraussetzungsprüfung-2" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="voraussetzungsprüfung-2"><span class="header-section-number">3.2</span> Voraussetzungsprüfung</h2>
+<p>Der Einstichprobentest setzt ähnlich wie der two-sided und paired test eine Normalverteilung der abhängigen Variablen voraus. Diese können wir erneut mit dem Shapiro-Wilk-Test überprüfen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>daten_one  <span class="sc">%&gt;%</span>  </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">do</span>(<span class="fu">tidy</span>(<span class="fu">shapiro.test</span>(.<span class="sc">$</span>einkommen)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  statistic  p.value method                     
+      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                      
+1     0.831 3.73e-28 Shapiro-Wilk normality test</code></pre>
+</div>
+</div>
+<p>Da unser Ergebnis signifikant ausfällt, müssen wir hier leider die Normalverteilung unserer AV ablehnen (wir testen ja auf signifikante Abweichung von der Normalverteilung, daher möchten wir bei diesem Test nicht ein signifikantes Ergebnis haben). Um weitere Gewissheit zu erlangen, prüfen wir die Normalverteilung zusätzlich optisch mit einem Histogramm:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1"></a><span class="fu">ggplot</span>(daten_one, <span class="fu">aes</span>(einkommen)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2">2</button><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count)),</span>
+<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3"></a>                 <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"grey"</span>, </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="3">3</button><span id="annotated-cell-13-4" class="code-annotation-target"><a href="#annotated-cell-13-4"></a>                 <span class="at">binwidth =</span> <span class="dv">500</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="4">4</button><span id="annotated-cell-13-5" class="code-annotation-target"><a href="#annotated-cell-13-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Netto-Monatseinkommen"</span>,</span>
+<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6"></a>         <span class="at">y =</span> <span class="st">""</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-annotation="1" data-code-lines="1">In R nutzen wir das Paket <code>ggplot2</code> von Wickham et al.&nbsp;um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket <code>ggplot2</code> mit dem Befehl <code>ggplot()</code> aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier <code>daten_one</code>) und unter aes unsere Variable (hier <code>einkommen</code>).</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-annotation="2" data-code-lines="2">Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll <code>(aes(y = after_stat(count))</code>, wir die Außenumrandung schwarz <code>color = black</code> und die Füllfarbe grau wünschen (<code>fill = grey</code>). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-annotation="3" data-code-lines="4">Mit <code>binwidth = 500</code> verweisen wir hier auf die Breite der Balken unseres Histogramms.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-annotation="4" data-code-lines="5">Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl <code>labs</code> um zusätzlich die Achsen zu beschriften.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<p><img src="Skript_6.3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Die Grafik verstärkt die Einschätzung des Shapiro-Wilk-Tests, dass keine Normalverteilung vorliegt. In einem solchen Fall würden wir auf den nicht-parametrische one-sample Wilcoxon-Test ausweichen.</p>
+</section>
+<section id="durchführung-des-t-tests-für-einstichproben" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="durchführung-des-t-tests-für-einstichproben"><span class="header-section-number">3.3</span> Durchführung des t-tests für Einstichproben</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">t.test</span>(daten_one<span class="sc">$</span>einkommen , <span class="at">mu =</span> <span class="dv">3813</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  daten_one$einkommen
+t = -23.889, df = 795, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 3813
+95 percent confidence interval:
+ 2343.44 2566.61
+sample estimates:
+mean of x 
+ 2455.025 </code></pre>
+</div>
+</div>
+</section>
+<section id="nicht-parametrischer-test-one-sample-wilcoxon-test" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="nicht-parametrischer-test-one-sample-wilcoxon-test"><span class="header-section-number">3.4</span> Nicht-parametrischer Test: one sample Wilcoxon Test</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">wilcox.test</span>(daten_one<span class="sc">$</span>einkommen, <span class="at">mu =</span> <span class="dv">3813</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  daten_one$einkommen
+V = 30680, p-value &lt; 2.2e-16
+alternative hypothesis: true location is not equal to 3813</code></pre>
+</div>
+</div>
 
 
 </section>

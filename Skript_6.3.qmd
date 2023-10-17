@@ -16,16 +16,18 @@ format:
 
 ![Bild generiert von Midjourney](Bilder/Grafik_ttest.png)
 
-Wir nutzen den t-test um Mittelwertunterschiede zwischen zwei Gruppen zu analysieren. Dabei unterscheiden wir grundsätzlich zwei verschiedene Arten von Test:
-
--   der t-Test für unabhängige Stichproben (two-paired-test) sowie
--   der t-Test für verbundene Stichprobene (paired test)
+Wir nutzen den t-test um Mittelwertunterschiede zwischen zwei Gruppen zu analysieren. 
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
 {{< video https://nc.uni-bremen.de/index.php/s/T7brcJ73tLGpCk7/download/%2311%20t-Test.mp4 width="900" height="500">}}
 :::
+
+Wir unterscheiden grundsätzlich in zwei verschiedene Arten von t-Test:
+
+-   den t-Test für unabhängige Stichproben (two-paired-test) sowie
+-   den t-Test für verbundene Stichprobene (paired test)
 
 **t-test für unabhängige Stichproben**
 
@@ -45,7 +47,7 @@ Wir schauen uns zunächst den t-Test für unabhängige Stichproben an.
 
 ## Datenmanagement
 
-Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.
+Wir beginnen mit dem Laden der notwendigen Pakete.
 
 ```{r Pakete}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
@@ -91,12 +93,14 @@ Innerhalb unseres Datenmanageements schließen wir fehlerhafte und fehlende Wert
 
 daten <- daten %>%
   filter(., pt12 > 0) %>%  #<1>
-  rename(., trustreg = pt12) #<2>
-
+  rename(., trustreg = pt12) %>%  #<2>
+  mutate(trustreg = as.numeric(trustreg), #<3>
+         eastwest = haven::as_factor(eastwest)) #<3>
 ```
 
 1.  Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.
 2.  Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.
+3. Wir bringen unsere Daten in das korrekte Format. Für den t-Test muss die abhängige Variable als Vektor vorliegen und die unabhängige Variable als Faktor. 
 
 ## Deskriptives der abhängigen Variablen
 
@@ -119,6 +123,8 @@ Bei dem t-test handelt es sich um ein statistisches Verfahren. Um die Güte der 
 -   die Varianzhomogenität
 
 ### Skalierung der UV und AV
+
+Die abhängige Variable muss als numerischer Vektor vorliegen, die unabhängige Variable wiederum als Faktor (mit zwei Ausprägungen). Die korrekte Skalierung der Variablen haben wir bereits innerhalb des Data Managements sichergestellt, können uns aber zusätzlich mit dem Befehl class noch einmal einen Überblick über das Skalenniveau unserer Variablen verschaffen. 
 
 ```{r}
 daten %>%  
@@ -146,8 +152,6 @@ daten %>%
 ## Durchführung des t-Tests
 
 ```{r}
-
-# t-Test durchführen
 daten %>% 
   drop_na(eastwest, trustreg) %>%
   filter(.,trustreg >0) %>% 
@@ -155,13 +159,17 @@ daten %>%
          alternative = "two.sided", 
          var.equal = T,
          data = .)
+```
 
-  
-# Effektstärke cohens d berechnen
+Effektstärke cohens d berechnen
+
+```{r}
+
 daten %>% 
   drop_na(eastwest, trustreg) %>% 
   cohens_d(trustreg~eastwest, data = .)
 ```
+
 
 ## Interpretation des Outputs
 
@@ -194,8 +202,9 @@ Das Format ist üblicherweise:
 > ***Beispiel:*** Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand . Der Gesundheitszustand hat dabei einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen (F3470)=5,46,p\<0,001. Die Effektstärke nach Cohen (1992) liegt bei alpha=0,006 und entspricht einem kleinen Effekt. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p\<0.029) und weniger gutem (p\<0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.
 :::
 
-## Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Test
+## Nicht-parametrischer Test: Mann-Whitney-U & Wilcoxon-Rangsummen-Test
 
+Wilcoxon-Rangsummentest
 [Historie der Testverfahren](http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html)
 
 # t-Test für verbundene Stichproben
@@ -208,7 +217,7 @@ Das Format ist üblicherweise:
 
 ## Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest
 
-Wilcoxon-Rangsummentest
+
 
 ```{r}
 
@@ -218,10 +227,52 @@ pairwise.wilcox.test(daten$trustges, daten$gesund,
 
 # t-Test für Einstichproben
 
-::: {.callout-note collapse="true" icon="false"}
+Beim t-Test für Einstichproben testen wir, ob die Werte unserer Stichprobe einem vorab festgelegten Wert entsprechen. So können wir beispielsweise mit Blick auf das Einkommen schauen, ob das monatliche Nettoeinkommen aus unserer Stichprobe  dem  Bundesdurchschnitt gemäß dem [statistischen Bundestamt](https://de.statista.com/statistik/daten/studie/261850/umfrage/brutto-und-nettoeinkommen-je-privatem-haushalt-in-deutschland/) von 3813€ entspricht. 
+
+## Data Management
+
+Dazu benennen wir zunächst die entsprechende Variable aus den Allbus-Daten in `einkommen` um und filtern fehlende Werte hinaus. 
+
+```{r}
+daten_one <- daten %>% 
+  filter(., di01a > 0) %>% 
+  rename(., einkommen = di01a)
+```
+
 ## Voraussetzungsprüfung
-:::
+
+Der Einstichprobentest setzt ähnlich wie der two-sided und paired test eine Normalverteilung der abhängigen Variablen voraus. Diese können wir erneut mit dem Shapiro-Wilk-Test überprüfen:
+
+```{r}
+daten_one  %>%  
+  do(tidy(shapiro.test(.$einkommen)))
+```
+Da unser Ergebnis signifikant ausfällt, müssen wir hier leider die Normalverteilung unserer AV ablehnen (wir testen ja auf signifikante Abweichung von der Normalverteilung, daher möchten wir bei diesem Test nicht ein signifikantes Ergebnis haben). Um weitere Gewissheit zu erlangen, prüfen wir die Normalverteilung zusätzlich optisch mit einem Histogramm:
+
+```{r}
+ggplot(daten_one, aes(einkommen)) + #<1>
+  geom_histogram(aes(y = after_stat(count)), #<2>
+                 color = "black", fill = "grey", 
+                 binwidth = 500) + #<3>
+  labs(x = "Netto-Monatseinkommen", #<4>
+         y = "")
+```
+
+1.  In R nutzen wir das Paket `ggplot2` von Wickham et al. um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket `ggplot2` mit dem Befehl `ggplot()` aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier `daten_one`) und unter aes unsere Variable (hier `einkommen`).
+2.  Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll `(aes(y = after_stat(count))`, wir die Außenumrandung schwarz `color = black` und die Füllfarbe grau wünschen (`fill = grey`). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik.
+3.  Mit `binwidth = 500` verweisen wir hier auf die Breite der Balken unseres Histogramms.
+4.  Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl `labs` um zusätzlich die Achsen zu beschriften.
+
+Die Grafik verstärkt die Einschätzung des Shapiro-Wilk-Tests, dass keine Normalverteilung vorliegt. In einem solchen Fall würden wir auf den nicht-parametrische one-sample Wilcoxon-Test ausweichen.  
 
 ## Durchführung des t-tests für Einstichproben
 
-## Nicht-parametrischer Test:
+```{r}
+t.test(daten_one$einkommen , mu = 3813)
+```
+## Nicht-parametrischer Test: one sample Wilcoxon Test
+
+```{r}
+wilcox.test(daten_one$einkommen, mu = 3813)
+```
+
