@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Katharina Maubach">
+
+<title>Die Bestimmung der Zentrale Tendenz mittels t-Tests</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Bilder/favicon-32x32.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Die Bestimmung der Zentrale Tendenz mittels t-Tests">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/Grafik_ttest.png">
+<meta property="og:image:height" content="454">
+<meta property="og:image:width" content="810">
+<meta name="twitter:title" content="Die Bestimmung der Zentrale Tendenz mittels t-Tests">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/Grafik_ttest.png">
+<meta name="twitter:image-height" content="454">
+<meta name="twitter:image-width" content="810">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./Bilder/logo_ub_2021.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./Home.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./Skript_1.1.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Der Kurs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Hintergrund.html" rel="" target="">
+ <span class="menu-text">Die Grundidee</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Autoren.html" rel="" target="">
+ <span class="menu-text">Die Autor:innen</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/patrickzerrer/R_Hands_on_Book" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_6.1.html">Das Überprüfen von Unterschieden</a></li><li class="breadcrumb-item"><a href="./Skript_6.3.html">Die Bestimmung der Zentrale Tendenz mittels t-Tests</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Data-Bootcamp: Einführung in R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_1.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einführung in R und RStudio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_1.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Logik von Markdown und Quarto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorbereiten der R-Umgebung</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Data-Bootcamp: Datensätze</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_2.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Der Aufbau von Datensätzen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_2.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einlesen von Datensätzen in unterschiedlichen Formaten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_2.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Der ALLBUS Datensatz</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Data-Bootcamp: Der Umgang mit Daten</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_3.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_3.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datentypen und -strukturen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_3.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selektion, Manipulation und Transformation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_3.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tabellen und Grafiken in R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Die ersten Schritte bei der Datenanalyse</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_4.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Häufigkeiten und deren Visualisierung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_4.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lageparameter: Modus, Median, Mittelwert</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Berechnung und Interpretation von Verteilungen</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Von einzelnen Antworten zum Index</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_5.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Messung von latenten Variablen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_5.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Faktorenanalyse</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_5.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reliabilität von Skalen</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Das Überprüfen von Unterschieden</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bivariate Statistik &amp; Mittelwertvergleiche</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Varianzanalyse</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Das Überprüfen von Zusammenhängen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pearson Chi-Quadrat-Test &amp; Rangkorrelation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Korrelation &amp; Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prüfung der Voraussetzungen bei der linearen Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die multiple Regression</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#t-test-für-unabhängige-stichproben" id="toc-t-test-für-unabhängige-stichproben" class="nav-link active" data-scroll-target="#t-test-für-unabhängige-stichproben"><span class="header-section-number">1</span> t-Test für unabhängige Stichproben</a>
+  <ul class="collapse">
+  <li><a href="#datenmanagement" id="toc-datenmanagement" class="nav-link" data-scroll-target="#datenmanagement"><span class="header-section-number">1.1</span> Datenmanagement</a></li>
+  <li><a href="#deskriptives-der-abhängigen-variablen" id="toc-deskriptives-der-abhängigen-variablen" class="nav-link" data-scroll-target="#deskriptives-der-abhängigen-variablen"><span class="header-section-number">1.2</span> Deskriptives der abhängigen Variablen</a></li>
+  <li><a href="#voraussetzungsprüfung" id="toc-voraussetzungsprüfung" class="nav-link" data-scroll-target="#voraussetzungsprüfung"><span class="header-section-number">1.3</span> Voraussetzungsprüfung</a>
+  <ul class="collapse">
+  <li><a href="#skalierung-der-uv-und-av" id="toc-skalierung-der-uv-und-av" class="nav-link" data-scroll-target="#skalierung-der-uv-und-av"><span class="header-section-number">1.3.1</span> Skalierung der UV und AV</a></li>
+  <li><a href="#normalverteilung-der-av" id="toc-normalverteilung-der-av" class="nav-link" data-scroll-target="#normalverteilung-der-av"><span class="header-section-number">1.3.2</span> Normalverteilung der AV</a></li>
+  <li><a href="#varianzhomogenität" id="toc-varianzhomogenität" class="nav-link" data-scroll-target="#varianzhomogenität"><span class="header-section-number">1.3.3</span> Varianzhomogenität</a></li>
+  </ul></li>
+  <li><a href="#durchführung-des-t-tests" id="toc-durchführung-des-t-tests" class="nav-link" data-scroll-target="#durchführung-des-t-tests"><span class="header-section-number">1.4</span> Durchführung des t-Tests</a></li>
+  <li><a href="#interpretation-des-outputs" id="toc-interpretation-des-outputs" class="nav-link" data-scroll-target="#interpretation-des-outputs"><span class="header-section-number">1.5</span> Interpretation des Outputs</a></li>
+  <li><a href="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-rangsummen-test" id="toc-nicht-parametrischer-test-mann-whitney-u-wilcoxon-rangsummen-test" class="nav-link" data-scroll-target="#nicht-parametrischer-test-mann-whitney-u-wilcoxon-rangsummen-test"><span class="header-section-number">1.6</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Rangsummen-Test</a></li>
+  </ul></li>
+  <li><a href="#t-test-für-verbundene-stichproben" id="toc-t-test-für-verbundene-stichproben" class="nav-link" data-scroll-target="#t-test-für-verbundene-stichproben"><span class="header-section-number">2</span> t-Test für verbundene Stichproben</a>
+  <ul class="collapse">
+  <li><a href="#durchführung-des-t-tests-für-verbundene-stichproben" id="toc-durchführung-des-t-tests-für-verbundene-stichproben" class="nav-link" data-scroll-target="#durchführung-des-t-tests-für-verbundene-stichproben"><span class="header-section-number">2.1</span> Durchführung des t-tests für verbundene Stichproben</a></li>
+  <li><a href="#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" id="toc-nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" class="nav-link" data-scroll-target="#nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest"><span class="header-section-number">2.2</span> Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest</a></li>
+  </ul></li>
+  <li><a href="#t-test-für-einstichproben" id="toc-t-test-für-einstichproben" class="nav-link" data-scroll-target="#t-test-für-einstichproben"><span class="header-section-number">3</span> t-Test für Einstichproben</a>
+  <ul class="collapse">
+  <li><a href="#data-management" id="toc-data-management" class="nav-link" data-scroll-target="#data-management"><span class="header-section-number">3.1</span> Data Management</a></li>
+  <li><a href="#voraussetzungsprüfung-2" id="toc-voraussetzungsprüfung-2" class="nav-link" data-scroll-target="#voraussetzungsprüfung-2"><span class="header-section-number">3.2</span> Voraussetzungsprüfung</a></li>
+  <li><a href="#durchführung-des-t-tests-für-einstichproben" id="toc-durchführung-des-t-tests-für-einstichproben" class="nav-link" data-scroll-target="#durchführung-des-t-tests-für-einstichproben"><span class="header-section-number">3.3</span> Durchführung des t-tests für Einstichproben</a></li>
+  <li><a href="#nicht-parametrischer-test-one-sample-wilcoxon-test" id="toc-nicht-parametrischer-test-one-sample-wilcoxon-test" class="nav-link" data-scroll-target="#nicht-parametrischer-test-one-sample-wilcoxon-test"><span class="header-section-number">3.4</span> Nicht-parametrischer Test: one sample Wilcoxon Test</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Die Bestimmung der Zentrale Tendenz mittels t-Tests</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Katharina Maubach </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/Grafik_ttest.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Bild generiert von Midjourney</figcaption>
+</figure>
+</div>
+<p>Wir nutzen den t-test um Mittelwertunterschiede zwischen zwei Gruppen zu analysieren.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="900" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://nc.uni-bremen.de/index.php/s/T7brcJ73tLGpCk7/download/%2311%20t-Test.mp4"></video></div>
+</div>
+</div>
+</div>
+<p>Wir unterscheiden grundsätzlich in zwei verschiedene Arten von t-Test:</p>
+<ul>
+<li>den t-Test für unabhängige Stichproben (two-paired-test) sowie</li>
+<li>den t-Test für verbundene Stichprobene (paired test)</li>
+</ul>
+<p><strong>t-test für unabhängige Stichproben</strong></p>
+<p>Mit dem t-test für unabhängige Stichproben überprüfen wir, ob sich die Mittelwerte in zwei gemessenen Stichproben unterscheiden. Die Stichproben sind dann unabhängig, wenn sie aus zwei unterschiedlichen Gruppen stammen und daher sich nicht gegenseitig beeinflussen können. Ein solches Beispiel liegt zum Beispiel dann vor, wenn wir schauen ob das Alter (dichotom kodiert in alt vs jung) einen Einfluss auf das Einkommen hat. In diesem Fall kann eine Person zum Untersuchungszeitpunkt nicht gleichzeitig alt und jung sein, sondern fällt in einer der beiden Gruppen. Ein anderes typisches Anwendungsbespiel ist der Vergleich von zwei Gruppen im Rahmen eines Experimentaldesign. Hier kann ein Proband ebenfalls nur einer der Untersuchungsgruppe zugeordnet sein.</p>
+<p><strong>t-test für verbundene Stichproben</strong></p>
+<p>Der t-test für verbundene Stichproben wiederum misst, inwiefern sich Mittelwerte bei denselben Personen oder Fällen verändern. Wenn wir bei unserem Beispiel mit dem Einflusses des Alters auf das Einkommen bleiben, so könnten wir dieselben Personen zu zwei Zeitpunkten befragen: einmal wenn sie jung sind und dann zu einem späteren Zeitpunkt noch einmal. In diesem Fall sind unsere Stichproben nicht unabhängig, da die Messwerte von denselben Personen stammen und ggf. der frühere Messzeitpunkt den späteren beeinflussen kann.</p>
+<p><strong>Der Einstichprobentest</strong></p>
+<p>Zusätzlich gibt es noch den Einstichprobentest oder auch one-sample-test. Hier vergleichen wir nicht zwei Gruppenmittelwerte miteinander, sondern den Mittelwert einer Gruppe mit einem bereits bekannten feststehenden Wert. Wir können so beispielsweise überprüfen, ob das Einkommen in einer Stichprobe dem deutschlandweiten Mittelwert entspricht, sofern dieser uns vorab bekannt ist.</p>
+<section id="t-test-für-unabhängige-stichproben" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> t-Test für unabhängige Stichproben</h1>
+<p>Wir schauen uns zunächst den t-Test für unabhängige Stichproben an.</p>
+<section id="datenmanagement" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="datenmanagement"><span class="header-section-number">1.1</span> Datenmanagement</h2>
+<p>Wir beginnen mit dem Laden der notwendigen Pakete.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, mosaic, knitr,effectsize, car, broom)</span>
+<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-4" class="code-annotation-target"><a href="#annotated-cell-1-4"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-annotation="1" data-code-cell="annotated-cell-1" data-code-lines="2">Mittels p_load laden wir alle benötigten Pakete gleichzeitig.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-annotation="2" data-code-cell="annotated-cell-1" data-code-lines="4">Wir legen allgemein den Hintergrund theme_classic fest.</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Anschließend laden wir die Daten aus dem Allbus:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements (für ausführliche Erklärungen siehe <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html">hier</a>). Für unseren t-test für unabhängige Stichproben möchten wir uns anschauen, wie sich der Wohnort der Befragten auf ihr Vertrauen in die Bundesregierung auswirkt. Wir nutzen dazu die folgenden Variablen:</p>
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 44%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Variable</th>
+<th style="text-align: center;">Beschreibung</th>
+<th style="text-align: center;">Ausprägungen</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">eastwest</td>
+<td style="text-align: center;">Erhebungsgebiet West-Ost</td>
+<td style="text-align: center;"><p>1= Alte Bundesländer (Westen)</p>
+<p>2 = Neue Bundesländer (Osten)</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">pt12</td>
+<td style="text-align: center;">Vertrauen in die Bundesregierung</td>
+<td style="text-align: center;"><p>-42 = Datenfehler</p>
+<p>-11 = TNZ Split</p>
+<p>-9 = Keine Angabe</p>
+<p>1 = Gar kein Vertrauen</p>
+<p>…</p>
+<p>7 = Großes Vertrauen</p></td>
+</tr>
+</tbody>
+</table>
+<p>Innerhalb unseres Datenmanageements schließen wir fehlerhafte und fehlende Werte der Variablen pt12 aus und benennen diese anschließend um:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>daten <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>  <span class="fu">filter</span>(., pt12 <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>  <span class="fu">rename</span>(., <span class="at">trustreg =</span> pt12) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a>  <span class="fu">mutate</span>(<span class="at">trustreg =</span> <span class="fu">as.numeric</span>(trustreg),</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a>         <span class="at">eastwest =</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(eastwest))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-annotation="1" data-code-cell="annotated-cell-3" data-code-lines="2">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-annotation="2" data-code-cell="annotated-cell-3" data-code-lines="3">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-annotation="3" data-code-cell="annotated-cell-3" data-code-lines="4,5">Wir bringen unsere Daten in das korrekte Format. Für den t-Test muss die abhängige Variable als Vektor vorliegen und die unabhängige Variable als Faktor.</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="deskriptives-der-abhängigen-variablen" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="deskriptives-der-abhängigen-variablen"><span class="header-section-number">1.2</span> Deskriptives der abhängigen Variablen</h2>
+<p>Als ersten Schritt schauen wir uns die deskriptiven Statistiken unserer abhängigen Variablen Vertrauen in die Regierung für die beiden Faktorstufen unserer unabhängigen Variablen an.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>des_stat <span class="ot">&lt;-</span> (<span class="fu">favstats</span>(trustreg <span class="sc">~</span> eastwest, <span class="at">data =</span> daten))</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">rownames</span>(des_stat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Alte Bundesländer"</span>, <span class="st">"Neue Bundesländer"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">kable</span>(des_stat[,<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 11%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">Q1</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">Q3</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Alte Bundesländer</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">4.15</td>
+<td style="text-align: right;">1.58</td>
+<td style="text-align: right;">2335</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Neue Bundesländer</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">3.86</td>
+<td style="text-align: right;">1.71</td>
+<td style="text-align: right;">1183</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Anhand dieser deskriptiven Daten sehen wir, dass das Vertrauen in die Bundesregierung in den alten Bundesländern im Mittelwert mit <code>4,15</code> stärker ausgeprägt ist als in den neuen Bundesländern (Mittelwert von <code>3,86</code>. Um zu prüfen, ob dieser Unterschied des Mittelwertes statistisch signifikant ist, berechnen wir in einem zweiten Schritt die Teststatistik des t-tests. Zunächst müssen wir jedoch prüfen, ob unsere Daten für die Berechnung geeignet sind. Dazu führen wir eine Voraussetzungsprüfung durch.</p>
+</section>
+<section id="voraussetzungsprüfung" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="voraussetzungsprüfung"><span class="header-section-number">1.3</span> Voraussetzungsprüfung</h2>
+<p>Bei dem t-test handelt es sich um ein statistisches Verfahren. Um die Güte der Ergebnisse sicherzustellen müssen dabei einige Voraussetzungen beachtet werden.Dies sind im Überblick:</p>
+<ul>
+<li>die korrekte Skalierung der UV (=Faktor) und AV (=numerisch)</li>
+<li>die Normalverteilung der abhängigen Variablen</li>
+<li>die Varianzhomogenität</li>
+</ul>
+<section id="skalierung-der-uv-und-av" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="skalierung-der-uv-und-av"><span class="header-section-number">1.3.1</span> Skalierung der UV und AV</h3>
+<p>Die abhängige Variable muss als numerischer Vektor vorliegen, die unabhängige Variable wiederum als Faktor (mit zwei Ausprägungen). Die korrekte Skalierung der Variablen haben wir bereits innerhalb des Data Managements sichergestellt, können uns aber zusätzlich mit dem Befehl class noch einmal einen Überblick über das Skalenniveau unserer Variablen verschaffen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>daten <span class="sc">%&gt;%</span>  </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">select</span>(eastwest, trustreg) <span class="sc">%&gt;%</span>  </span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">lapply</span>(class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$eastwest
+[1] "factor"
+
+$trustreg
+[1] "numeric"</code></pre>
+</div>
+</div>
+</section>
+<section id="normalverteilung-der-av" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="normalverteilung-der-av"><span class="header-section-number">1.3.2</span> Normalverteilung der AV</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>daten  <span class="sc">%&gt;%</span>  </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">group_by</span>(eastwest) <span class="sc">%&gt;%</span>  </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">do</span>(<span class="fu">tidy</span>(<span class="fu">shapiro.test</span>(.<span class="sc">$</span>trustreg)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+# Groups:   eastwest [2]
+  eastwest           statistic  p.value method                     
+  &lt;fct&gt;                  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                      
+1 ALTE BUNDESLAENDER     0.937 2.69e-30 Shapiro-Wilk normality test
+2 NEUE BUNDESLAENDER     0.930 5.06e-23 Shapiro-Wilk normality test</code></pre>
+</div>
+</div>
+</section>
+<section id="varianzhomogenität" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="varianzhomogenität"><span class="header-section-number">1.3.3</span> Varianzhomogenität</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>daten <span class="sc">%&gt;%</span>  </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">drop_na</span>(eastwest, trustreg) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">mutate</span>(<span class="at">eastwest =</span> <span class="fu">as.factor</span>(eastwest)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">leveneTest</span>(trustreg<span class="sc">~</span>eastwest, <span class="at">data =</span> .)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+        Df F value   Pr(&gt;F)   
+group    1  9.5219 0.002046 **
+      3516                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="durchführung-des-t-tests" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="durchführung-des-t-tests"><span class="header-section-number">1.4</span> Durchführung des t-Tests</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>daten <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">drop_na</span>(eastwest, trustreg) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">filter</span>(.,trustreg <span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">t.test</span>(trustreg <span class="sc">~</span> eastwest,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>         <span class="at">alternative =</span> <span class="st">"two.sided"</span>, </span>
+<span id="cb9-6"><a href="#cb9-6"></a>         <span class="at">var.equal =</span> T,</span>
+<span id="cb9-7"><a href="#cb9-7"></a>         <span class="at">data =</span> .)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  trustreg by eastwest
+t = 4.9349, df = 3516, p-value = 8.391e-07
+alternative hypothesis: true difference in means between group ALTE BUNDESLAENDER and group NEUE BUNDESLAENDER is not equal to 0
+95 percent confidence interval:
+ 0.1726028 0.4001616
+sample estimates:
+mean in group ALTE BUNDESLAENDER mean in group NEUE BUNDESLAENDER 
+                        4.147752                         3.861369 </code></pre>
+</div>
+</div>
+<p>Effektstärke cohens d berechnen</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>daten <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">drop_na</span>(eastwest, trustreg) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">cohens_d</span>(trustreg<span class="sc">~</span>eastwest, <span class="at">data =</span> .)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cohen's d |       95% CI
+------------------------
+0.18      | [0.11, 0.25]
+
+- Estimated using pooled SD.</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation-des-outputs" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="interpretation-des-outputs"><span class="header-section-number">1.5</span> Interpretation des Outputs</h2>
+<p>Der Output des t-tests gibt uns die folgenden Informationen aus:</p>
+<ul>
+<li>data</li>
+<li>t</li>
+<li>df</li>
+<li>p-value</li>
+<li>95% confidence intervall</li>
+<li>means in group 1 &amp; 2</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Wie gebe ich die Ergebnisse korrekt an?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Ergebnisse des t-tests werden üblicherweise im Text angegeben. Für diese Angabe werden die folgenden Informationen benötigt:</p>
+<p>✅ die Mittelwerte und Standardabweichung der einzelnen Vergleichsgruppen</p>
+<p>✅ der df-Wert</p>
+<p>✅ der F-Wert</p>
+<p>✅ der p-Wert</p>
+<p>✅ die Effektgröße</p>
+<p>Das Format ist üblicherweise:</p>
+<blockquote class="blockquote">
+<p><strong><em>Beispiel:</em></strong> Personen mit einem sehr guten Gesundheitszustand haben durchschnittlich ein höheres Vertrauen in das Gesundheitswesen (M = 5.13;SD=1.45) als Personen mit einem guten (M = 4.99;SD=1.32), zufriedenstellenden (M = 4.85;SD=1.37), weniger guten (M = 4.82;SD=1.48) oder schlechtem (M = 4.71;SD=1.55) Gesundheitszustand . Der Gesundheitszustand hat dabei einen signifikanten Einfluss auf das Vertrauen in das Gesundheitswesen (F3470)=5,46,p&lt;0,001. Die Effektstärke nach Cohen (1992) liegt bei alpha=0,006 und entspricht einem kleinen Effekt. Post-Hoc Paarvergleiche mit Tamhames ergaben, dass sich der Mittelwert für die Personen mit sehr guten Gesundheitszustand signifikant von den Personen mit zufriedenstellendem (p&lt;0.029) und weniger gutem (p&lt;0.0174) Zustand unterscheidet. Die anderen Gesundheitsgruppen unterscheiden sich hingegen nicht signifikant voneinander.</p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-rangsummen-test" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="nicht-parametrischer-test-mann-whitney-u-wilcoxon-rangsummen-test"><span class="header-section-number">1.6</span> Nicht-parametrischer Test: Mann-Whitney-U &amp; Wilcoxon-Rangsummen-Test</h2>
+<p>Wilcoxon-Rangsummentest <a href="http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html">Historie der Testverfahren</a></p>
+</section>
+</section>
+<section id="t-test-für-verbundene-stichproben" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> t-Test für verbundene Stichproben</h1>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Voraussetzungsprüfung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<section id="durchführung-des-t-tests-für-verbundene-stichproben" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="durchführung-des-t-tests-für-verbundene-stichproben"><span class="header-section-number">2.1</span> Durchführung des t-tests für verbundene Stichproben</h2>
+</section>
+<section id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="nicht-parametrischer-test-wilcoxon-vorzeichen-rangtest"><span class="header-section-number">2.2</span> Nicht-parametrischer Test: Wilcoxon-Vorzeichen-Rangtest</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">pairwise.wilcox.test</span>(daten<span class="sc">$</span>trustges, daten<span class="sc">$</span>gesund,</span>
+<span id="cb13-2"><a href="#cb13-2"></a>                 <span class="at">p.adjust.method =</span> <span class="st">"BH"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pairwise comparisons using 
+
+data:  daten$trustges and daten$gesund 
+
+&lt;0 x 0 matrix&gt;
+
+P value adjustment method: BH </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="t-test-für-einstichproben" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> t-Test für Einstichproben</h1>
+<p>Beim t-Test für Einstichproben testen wir, ob die Werte unserer Stichprobe einem vorab festgelegten Wert entsprechen. So können wir beispielsweise mit Blick auf das Einkommen schauen, ob das monatliche Nettoeinkommen aus unserer Stichprobe dem Bundesdurchschnitt gemäß dem <a href="https://de.statista.com/statistik/daten/studie/261850/umfrage/brutto-und-nettoeinkommen-je-privatem-haushalt-in-deutschland/">statistischen Bundestamt</a> von 3813€ entspricht.</p>
+<section id="data-management" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="data-management"><span class="header-section-number">3.1</span> Data Management</h2>
+<p>Dazu benennen wir zunächst die entsprechende Variable aus den Allbus-Daten in <code>einkommen</code> um und filtern fehlende Werte hinaus.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>daten_one <span class="ot">&lt;-</span> daten <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">filter</span>(., di01a <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">rename</span>(., <span class="at">einkommen =</span> di01a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="voraussetzungsprüfung-2" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="voraussetzungsprüfung-2"><span class="header-section-number">3.2</span> Voraussetzungsprüfung</h2>
+<p>Der Einstichprobentest setzt ähnlich wie der two-sided und paired test eine Normalverteilung der abhängigen Variablen voraus. Diese können wir erneut mit dem Shapiro-Wilk-Test überprüfen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>daten_one  <span class="sc">%&gt;%</span>  </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">do</span>(<span class="fu">tidy</span>(<span class="fu">shapiro.test</span>(.<span class="sc">$</span>einkommen)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  statistic  p.value method                     
+      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                      
+1     0.831 3.73e-28 Shapiro-Wilk normality test</code></pre>
+</div>
+</div>
+<p>Da unser Ergebnis signifikant ausfällt, müssen wir hier leider die Normalverteilung unserer AV ablehnen (wir testen ja auf signifikante Abweichung von der Normalverteilung, daher möchten wir bei diesem Test nicht ein signifikantes Ergebnis haben). Um weitere Gewissheit zu erlangen, prüfen wir die Normalverteilung zusätzlich optisch mit einem Histogramm:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1"></a><span class="fu">ggplot</span>(daten_one, <span class="fu">aes</span>(einkommen)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2">2</button><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count)),</span>
+<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3"></a>                 <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"grey"</span>, </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="3">3</button><span id="annotated-cell-13-4" class="code-annotation-target"><a href="#annotated-cell-13-4"></a>                 <span class="at">binwidth =</span> <span class="dv">500</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="4">4</button><span id="annotated-cell-13-5" class="code-annotation-target"><a href="#annotated-cell-13-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Netto-Monatseinkommen"</span>,</span>
+<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6"></a>         <span class="at">y =</span> <span class="st">""</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-annotation="1" data-code-cell="annotated-cell-13" data-code-lines="1">In R nutzen wir das Paket <code>ggplot2</code> von Wickham et al.&nbsp;um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket <code>ggplot2</code> mit dem Befehl <code>ggplot()</code> aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier <code>daten_one</code>) und unter aes unsere Variable (hier <code>einkommen</code>).</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-annotation="2" data-code-cell="annotated-cell-13" data-code-lines="2">Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll <code>(aes(y = after_stat(count))</code>, wir die Außenumrandung schwarz <code>color = black</code> und die Füllfarbe grau wünschen (<code>fill = grey</code>). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-annotation="3" data-code-cell="annotated-cell-13" data-code-lines="4">Mit <code>binwidth = 500</code> verweisen wir hier auf die Breite der Balken unseres Histogramms.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-annotation="4" data-code-cell="annotated-cell-13" data-code-lines="5">Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl <code>labs</code> um zusätzlich die Achsen zu beschriften.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<p><img src="Skript_6.3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Die Grafik verstärkt die Einschätzung des Shapiro-Wilk-Tests, dass keine Normalverteilung vorliegt. In einem solchen Fall würden wir auf den nicht-parametrische one-sample Wilcoxon-Test ausweichen.</p>
+</section>
+<section id="durchführung-des-t-tests-für-einstichproben" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="durchführung-des-t-tests-für-einstichproben"><span class="header-section-number">3.3</span> Durchführung des t-tests für Einstichproben</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">t.test</span>(daten_one<span class="sc">$</span>einkommen , <span class="at">mu =</span> <span class="dv">3813</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  daten_one$einkommen
+t = -23.889, df = 795, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 3813
+95 percent confidence interval:
+ 2343.44 2566.61
+sample estimates:
+mean of x 
+ 2455.025 </code></pre>
+</div>
+</div>
+</section>
+<section id="nicht-parametrischer-test-one-sample-wilcoxon-test" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="nicht-parametrischer-test-one-sample-wilcoxon-test"><span class="header-section-number">3.4</span> Nicht-parametrischer Test: one sample Wilcoxon Test</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">wilcox.test</span>(daten_one<span class="sc">$</span>einkommen, <span class="at">mu =</span> <span class="dv">3813</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  daten_one$einkommen
+V = 30680, p-value &lt; 2.2e-16
+alternative hypothesis: true location is not equal to 3813</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Handle positioning of the toggle
+      window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
+          }
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><strong>Copyright</strong> 2023, <strong>Design by</strong> Katharina Maubach &amp; Patrick Zerrer, <strong>Autor:innen:</strong> Katharina Maubach, Patrick Zerrer, Stephanie Geise, Cornelius Puschmann, Hannah Marie Büttner, Michael Linke</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="Bilder/logo_zemki.png" class="img-fluid" width="120"> <img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
+  </div>
+</footer>
+<script>videojs(video_shortcode_videojs_video1);</script>
+
+
+
+</body></html>

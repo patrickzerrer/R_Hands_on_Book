@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Patrick Zerrer">
+
+<title>Die Faktorenanalyse</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Bilder/favicon-32x32.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Die Faktorenanalyse">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_walking_down_the_stairs_and_entering_t_191dbce1-eeb0-4ac5-8a31-497d40f45b11.png">
+<meta property="og:image:height" content="597">
+<meta property="og:image:width" content="1065">
+<meta name="twitter:title" content="Die Faktorenanalyse">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://github.com/patrickzerrer/R_Hands_on_Book/Bilder/zemkipatrick_comic_style_walking_down_the_stairs_and_entering_t_191dbce1-eeb0-4ac5-8a31-497d40f45b11.png">
+<meta name="twitter:image-height" content="597">
+<meta name="twitter:image-width" content="1065">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./Bilder/logo_ub_2021.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./Home.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./Skript_1.1.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Der Kurs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Hintergrund.html" rel="" target="">
+ <span class="menu-text">Die Grundidee</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Autoren.html" rel="" target="">
+ <span class="menu-text">Die Autor:innen</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/patrickzerrer/R_Hands_on_Book" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Skript_5.1.html">Von einzelnen Antworten zum Index</a></li><li class="breadcrumb-item"><a href="./Skript_5.2.html">Die Faktorenanalyse</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Data-Bootcamp: Einführung in R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_1.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einführung in R und RStudio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_1.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Logik von Markdown und Quarto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_1.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorbereiten der R-Umgebung</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Data-Bootcamp: Datensätze</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_2.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Der Aufbau von Datensätzen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_2.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einlesen von Datensätzen in unterschiedlichen Formaten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_2.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Der ALLBUS Datensatz</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Data-Bootcamp: Der Umgang mit Daten</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_3.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Kunst vom Umgang mit Daten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_3.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datentypen und -strukturen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_3.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selektion, Manipulation und Transformation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_3.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tabellen und Grafiken in R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Die ersten Schritte bei der Datenanalyse</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_4.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Häufigkeiten und deren Visualisierung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_4.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lageparameter: Modus, Median, Mittelwert</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_4.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Streuungsmaße: Spannweite, Quartilsabstand, Standartabweichung, Varianz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_4.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Berechnung und Interpretation von Verteilungen</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Von einzelnen Antworten zum Index</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_5.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Messung von latenten Variablen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_5.2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Die Faktorenanalyse</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_5.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reliabilität von Skalen</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Das Überprüfen von Unterschieden</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bivariate Statistik &amp; Mittelwertvergleiche</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Bestimmung der Zentrale Tendenz mittels t-Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_6.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die Varianzanalyse</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Das Überprüfen von Zusammenhängen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pearson Chi-Quadrat-Test &amp; Rangkorrelation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Korrelation &amp; Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prüfung der Voraussetzungen bei der linearen Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Skript_7.4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Die multiple Regression</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-management" id="toc-data-management" class="nav-link active" data-scroll-target="#data-management"><span class="header-section-number">1</span> Data Management</a>
+  <ul class="collapse">
+  <li><a href="#auswahl-der-variablen-für-die-faktorenanalyse" id="toc-auswahl-der-variablen-für-die-faktorenanalyse" class="nav-link" data-scroll-target="#auswahl-der-variablen-für-die-faktorenanalyse"><span class="header-section-number">1.1</span> Auswahl der Variablen für die Faktorenanalyse</a></li>
+  </ul></li>
+  <li><a href="#deskriptive-statistik-für-den-teildatensatz" id="toc-deskriptive-statistik-für-den-teildatensatz" class="nav-link" data-scroll-target="#deskriptive-statistik-für-den-teildatensatz"><span class="header-section-number">2</span> Deskriptive Statistik für den Teildatensatz</a></li>
+  <li><a href="#prüfung-der-vorraussetzungen-der-faktorenanalyse" id="toc-prüfung-der-vorraussetzungen-der-faktorenanalyse" class="nav-link" data-scroll-target="#prüfung-der-vorraussetzungen-der-faktorenanalyse"><span class="header-section-number">3</span> Prüfung der Vorraussetzungen der Faktorenanalyse</a>
+  <ul class="collapse">
+  <li><a href="#varianz" id="toc-varianz" class="nav-link" data-scroll-target="#varianz"><span class="header-section-number">3.1</span> Varianz</a></li>
+  <li><a href="#linearität" id="toc-linearität" class="nav-link" data-scroll-target="#linearität"><span class="header-section-number">3.2</span> Linearität</a></li>
+  <li><a href="#normalverteilung" id="toc-normalverteilung" class="nav-link" data-scroll-target="#normalverteilung"><span class="header-section-number">3.3</span> Normalverteilung</a></li>
+  <li><a href="#messniveau-der-variablen" id="toc-messniveau-der-variablen" class="nav-link" data-scroll-target="#messniveau-der-variablen"><span class="header-section-number">3.4</span> Messniveau der Variablen</a></li>
+  <li><a href="#fehlende-werte" id="toc-fehlende-werte" class="nav-link" data-scroll-target="#fehlende-werte"><span class="header-section-number">3.5</span> Fehlende Werte</a></li>
+  <li><a href="#ausreißer" id="toc-ausreißer" class="nav-link" data-scroll-target="#ausreißer"><span class="header-section-number">3.6</span> Ausreißer</a></li>
+  <li><a href="#korrelation-der-variablen-untereinander" id="toc-korrelation-der-variablen-untereinander" class="nav-link" data-scroll-target="#korrelation-der-variablen-untereinander"><span class="header-section-number">3.7</span> Korrelation der Variablen untereinander</a></li>
+  </ul></li>
+  <li><a href="#durchführung-der-faktorenanalyse" id="toc-durchführung-der-faktorenanalyse" class="nav-link" data-scroll-target="#durchführung-der-faktorenanalyse"><span class="header-section-number">4</span> Durchführung der Faktorenanalyse</a>
+  <ul class="collapse">
+  <li><a href="#methode-der-schätzung" id="toc-methode-der-schätzung" class="nav-link" data-scroll-target="#methode-der-schätzung"><span class="header-section-number">4.1</span> Methode der Schätzung</a></li>
+  <li><a href="#anzahl-der-faktoren" id="toc-anzahl-der-faktoren" class="nav-link" data-scroll-target="#anzahl-der-faktoren"><span class="header-section-number">4.2</span> Anzahl der Faktoren</a></li>
+  <li><a href="#rotation-der-faktoren" id="toc-rotation-der-faktoren" class="nav-link" data-scroll-target="#rotation-der-faktoren"><span class="header-section-number">4.3</span> Rotation der Faktoren</a></li>
+  <li><a href="#interpretation-der-ergebnisse" id="toc-interpretation-der-ergebnisse" class="nav-link" data-scroll-target="#interpretation-der-ergebnisse"><span class="header-section-number">4.4</span> Interpretation der Ergebnisse</a></li>
+  </ul></li>
+  <li><a href="#danksagung-und-literatur" id="toc-danksagung-und-literatur" class="nav-link" data-scroll-target="#danksagung-und-literatur"><span class="header-section-number">5</span> Danksagung und Literatur</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Die Faktorenanalyse</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Patrick Zerrer </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Bilder/zemkipatrick_comic_style_walking_down_the_stairs_and_entering_t_191dbce1-eeb0-4ac5-8a31-497d40f45b11.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Das Entdecken der zugrunde liegenden Struktur der Stadt, Bild generiert von Midjourney</figcaption>
+</figure>
+</div>
+<p>Wir möchten - wie bereits in Kaptitel 5.1 angesprochen - ein Index für die von uns angenommene latente Variable <em>Vertrauen in gesellschaftliche Institutionen</em> bilden. An dieser Stelle müssten wir uns zunächst Gedanken über das Konstrukt <em>Vertrauen in gesellschaftliche Institutionen</em> machen und eine theoretische Grundlage entwickeln. Wir kürzen diesen Prozess an dieser Stelle etwas ab und möchten die lesende Person ermutigen einen kurzen Blick in den Aufsatz von <a href="https://link.springer.com/content/pdf/10.1007/978-3-658-27910-3_7.pdf">Nina Steindl</a> aus dem Jahr 2019 zum <em>Vertrauen in gesellschaftliche Institutionen</em> von Journalist:innen zu werfen. Wenn wir eine theoretische Vorstellung entwickelt haben, können wir mit der empirische Überprüfung der latenten Variable mittels explorativer Faktorenanalyse starten.</p>
+<p>Die explorative Faktorenanalyse (EFA) ist eine statistischen Methoden, die dazu dient, die kleinste Anzahl hypothetischer Konstrukte (auch als Faktoren, Dimensionen, latente Variablen bezeichnet) zu ermitteln. Indem die beobachtete Kovarianz zwischen einer Reihe von Messvariablen (auch als beobachtete Variablen oder Indikatoren bezeichnet) erklärt wird. Konkret sollen die gemeinsamen Faktoren ermittelt werden, die die Struktur zwischen den gemessenen Variablen erklären. Wobei wir in den Sozialwissenschaften davon ausgehen, dass es sich bei diesen Faktoren um unbeobachtbare Merkmale - also <em>latente Variablen</em> - handelt.</p>
+<blockquote class="blockquote">
+<p><em>Ein Faktor ist eine unbeobachtbare Variable, die mehr als eine beobachtete Messgröße beeinflusst und für die Korrelationen zwischen diesen beobachteten Messgrößen verantwortlich ist. Mit anderen Worten, die beobachteten Maße stehen in Beziehung zueinander, weil sie eine gemeinsame Ursache haben (d.&nbsp;h. sie werden von demselben zugrunde liegenden Konstrukt beeinflusst); wenn das latente Konstrukt abgetrennt wurde, sind die Interkorrelationen zwischen den beobachteten Maßen gleich Null.</em> <a href="https://journals.sagepub.com/doi/10.1177/0095798418771807">(Brown, 2015: 10)</a></p>
+</blockquote>
+<p>In unserem Fall interessiert uns die latente Variable <em>Vertrauen in gesellschaftliche Institutionen</em>. Wir möchten Wissen, ob wir diese latente Variable bzw. diesen Faktor aus den einzelenen Indikatoren (den Fragen aus dem Allbus-Fragebogen) ableiten können. Konkret müssen wir überprüfen, ob sich die theoretisch angenommene <em>latenten Variable</em> auch in den Daten zu finden ist. Hierfür können wir die Faktorenanalyse oder Principal Component Analysis (PCA) verwenden.</p>
+<section id="data-management" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Data Management</h1>
+<p>Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {<span class="fu">install.packages</span>(<span class="st">"pacman"</span>);<span class="fu">library</span>(pacman)}</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a><span class="fu">p_load</span>(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="2" data-code-cell="annotated-cell-1" data-code-annotation="1">Laden der Pakete mit <code>p_load</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="3" data-code-cell="annotated-cell-1" data-code-annotation="2">Visualisierungshintergrund festlegen</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Danach laden wir die Daten aus dem Allbus.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1"></a>daten <span class="ot">=</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"Datensatz/Allbus_2021.dta"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-2" data-code-annotation="1">Laden des Datensatzes</span>
+</dd>
+</dl>
+</div>
+</div>
+<section id="auswahl-der-variablen-für-die-faktorenanalyse" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="auswahl-der-variablen-für-die-faktorenanalyse"><span class="header-section-number">1.1</span> Auswahl der Variablen für die Faktorenanalyse</h2>
+<p>Die Variablen werden aufgrund ihrer Nützlichkeit als Indikatoren für die zu untersuchende latente Variable ausgewählt. Entsprechend ist es wichtig, dass die Variablen <a href="https://dorsch.hogrefe.com/stichwort/validitaet-inhaltliche#search=59c61a28aad6ded0422fcadcc4bb8963&amp;offset=0">inhaltliche</a>, <a href="https://dorsch.hogrefe.com/stichwort/validitaet-diskriminante#search=bc41d30195bf495e7ff27be31e40a75c&amp;offset=0">diskriminante</a> und <a href="https://dorsch.hogrefe.com/stichwort/validitaet-konvergente">konvergente</a> Validität aufweisen. Etwas vereinfacht ausgedrückt sollten die Indikatoren über eine inhaltliche Passung zur latenten Variable verfügen, möglichst gut von anderen latenten Variablen abgrenzbar und mit mehreren unterschiedlichen Arten der Messung nachweisbar sein.</p>
+<p>In unserem Fall möchten wir das <em>Vertrauen in gesellschaftliche Institutionen</em> untersuchen, entsprechend sollten wir Variablen bzw. Indikatoren auswählen, die die unterschiedlichen Bestandteile der latenten Variable abdecken.</p>
+<p>Ganz konkret wählen wir Variablen aus, die das…</p>
+<ul>
+<li><em>Vertrauen in das Gesundheitswesen</em> (pt01)</li>
+<li><em>Vertrauen in das Bundesverfassungsgericht</em> (pt02)</li>
+<li><em>Vertrauen in den Bundestag</em> (pt03)</li>
+<li><em>Vertrauen in die Stadt- oder Gemeindeverwaltung</em> (pt04)</li>
+<li><em>Vertrauen in die Katholische Kirche</em> (pt06)</li>
+<li><em>Vertrauen in die Evangelische Kirche</em> (pt07)</li>
+<li><em>Vertrauen in die Justiz</em> (pt08)</li>
+<li><em>Vertrauen in das Fernsehen</em> (pt09)</li>
+<li><em>Vertrauen in das Zeitungswesen</em> (pt10)</li>
+<li><em>Vertrauen in die Hochschulen</em> (pt11)</li>
+<li><em>Vertrauen in die Bundesregierung</em> (pt12)</li>
+<li><em>Vertrauen in die Polizei</em> (pt14)</li>
+<li><em>Vertrauen in die Politischen Parteien</em> (pt15)</li>
+<li><em>Vertrauen in die Kommission der EU</em> (pt19)</li>
+<li><em>Vertrauen in das Europäische Parlament</em> (pt20)</li>
+</ul>
+<p>… erfassen.</p>
+<p>Für die statistische Identifizierung einer latenten Variablen bzw. eines Faktors werden mindestens drei gemessene Variablen benötigt, obwohl mehr Indikatoren vorzuziehen sind. Es werden beispielsweise auch vier bis sechs Indikatoren pro Faktor empfohlen. Im Allgemeinen funktioniert die EFA besser, wenn jeder Faktor überdeterminiert ist (d.&nbsp;h. es werden mehrere gemessene Variablen von der zu entdeckenden latenten Variable bzw. Faktor beeinflusst). Unabhängig von der Anzahl sollten Variablen, die voneinander abhängig sind, nicht in eine Faktorenanalyse einbezogen werden.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a>allbus_vertrauen <span class="ot">=</span> daten <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>  <span class="fu">select</span>(pt01<span class="sc">:</span>pt20) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">as.numeric</span>(.))) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4">4</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(pt01<span class="sc">:</span>pt20, <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">42</span>), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5">5</button><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5"></a>  <span class="fu">na.omit</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-3" data-code-annotation="1">Wir erstellen ein neues Objekt basierend auf dem Datensatz <code>daten</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="2" data-code-cell="annotated-cell-3" data-code-annotation="2">Mit dem Doppelpunkt wählen wir alle Variablen zwischen <code>pt01</code> bis <code>pt20</code> aus</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-lines="3" data-code-cell="annotated-cell-3" data-code-annotation="3">Die Kombination aus <code>mutate</code> und <code>across</code> ermöglicht es uns die Funktion <code>as.numeric</code> in einer Zeile auf alle zuvor ausgewählten Variablen anzuwenden. Die <code>~</code> gibt den Start der anzuwenden Funktion (hier <code>as.numeric</code> an), der Punkt innerhalb der Klammer der <code>as.numeric</code> Funktion dient als eine Art Platzhalter für die zuvor ausgewählten Variablen</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-lines="4" data-code-cell="annotated-cell-3" data-code-annotation="4">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter, mit dem Ausdruck <code>%in%</code> prüfen wir, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-lines="5" data-code-cell="annotated-cell-3" data-code-annotation="5">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Wir bennen die ausgewählten Indikatoren um, damit die Bezeichnungen der Indikatoren für uns leichter zu merken sind.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>allbus_vertrauen <span class="ot">=</span> allbus_vertrauen <span class="sc">%&gt;%</span> </span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a>  </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3"></a>  <span class="fu">rename</span>(<span class="at">Ver_Gesundheitswesen =</span> pt01,</span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a>         <span class="at">Ver_BVerfG =</span> pt02,</span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>         <span class="at">Ver_Bundestag =</span> pt03,</span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a>         <span class="at">Ver_Verwaltung =</span> pt04,</span>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a>         <span class="at">Ver_kath_Kirche =</span> pt06,</span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8"></a>         <span class="at">Ver_evan_Kirche =</span> pt07,</span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9"></a>         <span class="at">Ver_Justiz =</span> pt08,</span>
+<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10"></a>         <span class="at">Ver_TV =</span> pt09,</span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11"></a>         <span class="at">Ver_Zeitung =</span> pt10,</span>
+<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12"></a>         <span class="at">Ver_Uni =</span> pt11,</span>
+<span id="annotated-cell-4-13"><a href="#annotated-cell-4-13"></a>         <span class="at">Ver_Regierung =</span> pt12,</span>
+<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14"></a>         <span class="at">Ver_Polizei =</span> pt14,</span>
+<span id="annotated-cell-4-15"><a href="#annotated-cell-4-15"></a>         <span class="at">Ver_Parteien =</span> pt15,</span>
+<span id="annotated-cell-4-16"><a href="#annotated-cell-4-16"></a>         <span class="at">Ver_Kom_EU =</span> pt19,</span>
+<span id="annotated-cell-4-17"><a href="#annotated-cell-4-17"></a>         <span class="at">Ver_EU_Par =</span> pt20)</span>
+<span id="annotated-cell-4-18"><a href="#annotated-cell-4-18"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-19" class="code-annotation-target"><a href="#annotated-cell-4-19"></a><span class="fu">htmlTable</span>(<span class="fu">head</span>(allbus_vertrauen))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="3,4,5,6,7,8,9,10,11,12,13,14,15,16,17" data-code-cell="annotated-cell-4" data-code-annotation="1">Mit dem <code>rename</code> Befehl können wir die Variablen umbennen</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="19" data-code-cell="annotated-cell-4" data-code-annotation="2">Wir überprüfen kurz, ob die Umbenennung geklappt hat und lassen uns die ersten Zeilen des Datensatzes anzeigen. Hierfür nutzen wir <code>htmlTable</code> für eine schönere Darstellung der Tabelle sowie <code>head</code>, um uns die ersten paar Zeilen des Datensatzes <code>allbus_vertrauen</code> anzeigen zu lassen</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<table class="gmisc_table table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; border-bottom: 1px solid grey; border-top: 2px solid grey;"></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Gesundheitswesen</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_BVerfG</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Bundestag</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Verwaltung</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_kath_Kirche</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_evan_Kirche</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Justiz</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_TV</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Zeitung</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Uni</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Regierung</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Polizei</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Parteien</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Kom_EU</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_EU_Par</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; border-bottom: 2px solid grey;">6</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">3</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">3</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">3</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">3</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">1</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">2</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">3</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">3</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">3</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">4</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">4</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">4</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">2</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">2</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Neben der Auswahl der Variablen bzw. Indikatoren müssen auch die Fälle (in unserem Fall die Anzahl der befragten Personen) festgelegt werden. Hier sollten wir uns zunächst fragen, ob die Stichprobe der Teilnehmer:innen in Bezug auf die gemessenen Indikatoren sinnvoll ist? Handelt es sich um eine repräsentative Stichprobe? Bei dem Allbus ist das der Fall und entsprechend können wir davon ausgehen, dass wir eine passende Stichprobe für die Durchführung eine Faktorenanalyse vorliegen haben.</p>
+</section>
+</section>
+<section id="deskriptive-statistik-für-den-teildatensatz" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Deskriptive Statistik für den Teildatensatz</h1>
+<p>Wir werfen einen kurzen Blick in die deskriptive Statistik für unseren Teildatensatz, um ein besseres Verständnis für die Daten zu erhalten.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-1" class="code-annotation-target"><a href="#annotated-cell-5-1"></a><span class="fu">summary</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-5" data-code-annotation="1">Mit dem <code>summary</code> Befehl können wir uns die deskritpive Statistik ausgeben lassen</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Ver_Gesundheitswesen   Ver_BVerfG    Ver_Bundestag   Ver_Verwaltung 
+ Min.   :1.000        Min.   :1.000   Min.   :1.000   Min.   :1.000  
+ 1st Qu.:4.000        1st Qu.:4.000   1st Qu.:3.000   1st Qu.:4.000  
+ Median :5.000        Median :6.000   Median :4.000   Median :5.000  
+ Mean   :4.939        Mean   :5.255   Mean   :4.058   Mean   :4.482  
+ 3rd Qu.:6.000        3rd Qu.:6.000   3rd Qu.:5.000   3rd Qu.:5.000  
+ Max.   :7.000        Max.   :7.000   Max.   :7.000   Max.   :7.000  
+ Ver_kath_Kirche Ver_evan_Kirche   Ver_Justiz        Ver_TV     
+ Min.   :1.000   Min.   :1.00    Min.   :1.000   Min.   :1.000  
+ 1st Qu.:1.000   1st Qu.:1.00    1st Qu.:4.000   1st Qu.:3.000  
+ Median :2.000   Median :3.00    Median :5.000   Median :4.000  
+ Mean   :2.331   Mean   :3.04    Mean   :4.581   Mean   :3.577  
+ 3rd Qu.:3.000   3rd Qu.:4.00    3rd Qu.:6.000   3rd Qu.:4.000  
+ Max.   :7.000   Max.   :7.00    Max.   :7.000   Max.   :7.000  
+  Ver_Zeitung       Ver_Uni      Ver_Regierung    Ver_Polizei     Ver_Parteien 
+ Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.00  
+ 1st Qu.:3.000   1st Qu.:4.000   1st Qu.:3.000   1st Qu.:4.000   1st Qu.:2.00  
+ Median :4.000   Median :5.000   Median :4.000   Median :5.000   Median :3.00  
+ Mean   :4.012   Mean   :5.203   Mean   :4.054   Mean   :4.948   Mean   :3.19  
+ 3rd Qu.:5.000   3rd Qu.:6.000   3rd Qu.:5.000   3rd Qu.:6.000   3rd Qu.:4.00  
+ Max.   :7.000   Max.   :7.000   Max.   :7.000   Max.   :7.000   Max.   :7.00  
+   Ver_Kom_EU      Ver_EU_Par   
+ Min.   :1.000   Min.   :1.000  
+ 1st Qu.:2.000   1st Qu.:2.000  
+ Median :4.000   Median :4.000  
+ Mean   :3.515   Mean   :3.556  
+ 3rd Qu.:5.000   3rd Qu.:5.000  
+ Max.   :7.000   Max.   :7.000  </code></pre>
+</div>
+</div>
+</section>
+<section id="prüfung-der-vorraussetzungen-der-faktorenanalyse" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Prüfung der Vorraussetzungen der Faktorenanalyse</h1>
+<p>Die Faktorenanalyse bringt, wie jedes statistische Verfahren, eine Reihe von Vorraussetzungen mit.</p>
+<p>Diese sind: - Varianz - Linearität - Normalverteilung - Level der Messung - Fehlende Werte - Ausreißer - Korrelation der Variablen untereinander</p>
+<p>Diese Vorraussetzungen sollten wir kennen und bei der Anwendung der Faktorenanalyse beachten. Viele der Vorraussetzungen beziehen sich auf Pearson-Korrelationskoeffizienten, welcher die statistsiche Grundlage für die Berechnung der Faktoren bildet.</p>
+<section id="varianz" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="varianz"><span class="header-section-number">3.1</span> Varianz</h2>
+<p>Wir sollten sichergehen, dass die Daten aus unserer Stichprobe ausreichend varrieren. Wir werfen hierfür ein Blick in die Daten.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1"></a>colors <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"darkgreen"</span>, <span class="dv">1</span>))</span>
+<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2"></a></span>
+<span id="annotated-cell-6-3"><a href="#annotated-cell-6-3"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen)) <span class="sc">+</span></span>
+<span id="annotated-cell-6-4"><a href="#annotated-cell-6-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> colors)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1,3,4" data-code-cell="annotated-cell-6" data-code-annotation="1">Visuelle Überprüfung mit einem Histogram für die erste Variable <code>Ver_Gesundheitswesen</code>. Die restlichen Variablen sollten auch überprüft werden.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<p><img src="Skript_5.2_files/figure-html/Varianz-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="linearität" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="linearität"><span class="header-section-number">3.2</span> Linearität</h2>
+<p>Der Pearson-Korrelationskoeffizient (r) misst die lineare Beziehung zwischen zwei Variablen. Wenn die tatsächliche Beziehung nicht linear ist, dann verringert sich der Wert von r. Wir können auf Linearität u.a. visuell durch das Betrachten der Daten mittel Streudiagramm prüfen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen, <span class="at">y =</span> Ver_BVerfG)) <span class="sc">+</span></span>
+<span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a>  <span class="fu">geom_abline</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkgreen"</span>, <span class="at">size =</span> <span class="dv">1</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1,2,3" data-code-cell="annotated-cell-7" data-code-annotation="1">Visuelle Überprüfung mit einem Streudiagramm für die erste Variable <code>Ver_Gesundheitswesen</code> &amp; <code>Ver_BVerfG</code>. Die restlichen Variablen sollten auch überprüft werden.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<p><img src="Skript_5.2_files/figure-html/Linearität-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="normalverteilung" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="normalverteilung"><span class="header-section-number">3.3</span> Normalverteilung</h2>
+<p>Der Pearson-Korrelationskoeffizient setzt eine Normalverteilung voraus. Allerdings finden sich in der Realität fast nie perfekt normalverteilte Daten. Schiefe und Kurtosis sind besonders einflussreich die Ergebnisse der Faktorenanalyse und können im Extremfall artefaktische Ergenbnisse erzeugen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a>colors <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"darkgreen"</span>, <span class="dv">1</span>))</span>
+<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2"></a></span>
+<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3"></a><span class="fu">ggplot</span>(allbus_vertrauen, <span class="fu">aes</span>(<span class="at">x =</span> Ver_Gesundheitswesen)) <span class="sc">+</span></span>
+<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-9" data-code-annotation="2">Statistische Überprüfung mittels Shapiro Wilk Test für die erste Variable <code>Ver_Gesundheitswesen</code>. Ein p-Wert unter 0.05 = keine Normalverteilung und ein p-Wert über 0.05 = Normalverteilung</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<p><img src="Skript_5.2_files/figure-html/Normalverteilung-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2">2</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a><span class="fu">shapiro.test</span>(allbus_vertrauen<span class="sc">$</span>Ver_Gesundheitswesen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  allbus_vertrauen$Ver_Gesundheitswesen
+W = 0.92081, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="messniveau-der-variablen" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="messniveau-der-variablen"><span class="header-section-number">3.4</span> Messniveau der Variablen</h2>
+<p>Bei Pearson-Korrelationen wird davon ausgegangen, dass normalverteilte Variablen auf Intervall- oder Verhältnisskalen gemessen werden, d.&nbsp;h. es handelt sich um kontinuierliche Daten mit gleichen Intervallen. Diese Eigenschaften treffen nicht auf ordinale (bspw. Kategorien) oder dochotome (bspw. Wahr-Falsch-Items) Variablen zu, was sich negativ auf Pearson-Korrelationskoeffizieten auswirkt und zu verzerrten Ergebnissen führen kann. Allerdings ist ein beträchtlicher Teil der Daten, mit denen wir zu tun haben, ordinal oder dichotom skaliert, um auch mit diesen Daten arbeiten zu können nutzen wir die polychorische Korrelation, welche robuster Nicht-Normalverteilung ist.</p>
+</section>
+<section id="fehlende-werte" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="fehlende-werte"><span class="header-section-number">3.5</span> Fehlende Werte</h2>
+<p>In jeder Studie sollten wir die Anzahl und die Art der fehlenden Werte sowie die Gründe und die Methoden für den Umgang mit diesen Daten angegeben werden.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1"></a>allbus_vertrauen <span class="ot">=</span> allbus_vertrauen <span class="sc">%&gt;%</span>   </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-2" class="code-annotation-target"><a href="#annotated-cell-10-2"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(Ver_Gesundheitswesen<span class="sc">:</span>Ver_EU_Par, <span class="sc">~</span> <span class="fu">ifelse</span>(.<span class="sc">%in%</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">11</span>, <span class="sc">-</span><span class="dv">42</span>), <span class="cn">NA</span>,.))) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-3" class="code-annotation-target"><a href="#annotated-cell-10-3"></a>  <span class="fu">na.omit</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="2" data-code-cell="annotated-cell-10" data-code-annotation="1">Wir codieren die unterschiedlichen fehlenden Werte um (aus der Allbus-Dokumentation entnommen). Hierfür greifen wir auf die Funktion <code>if_else</code>zurück. Dabei handelt es sich um ein Entweder-Oder-Befehl. Konkret wird zunächst eine Bedingung geprüft und dann auf dieser Grundlage entweder Option 1 oder Option 2 ausgeführt. Der Punkt vor <code>%in%</code> dient wiederum als Platzhalter. Während <code>%in%</code> angibt, ob die nachfolgenden Werte (also c(-9, -11, -42)) in der jeweiligen Variable vorkommen. Hierbei handelt es sich um unsere Bedingung für den Entweder-Oder-Befehl. Wenn einer der Werte aus der geprüften Variable einem der spezifizierten Werte entspricht - also unsere Bedingung erfüllt - wird dieser durch <code>NA</code> ersetzt. Ist die Bedingung nicht erfüllt, wird die andere Option ausgeführt und der bereits existierende Wert wird beibehalten.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="3" data-code-cell="annotated-cell-10" data-code-annotation="2">Wir entfernen mit der Funktion <code>na.omit</code> fehlende Werte aus dem Datensatz</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="ausreißer" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="ausreißer"><span class="header-section-number">3.6</span> Ausreißer</h2>
+<p>Wir sollten Ausreißer identifizieren und im Zweifel von der Analyse ausschließen, da diese zu einer Verzerrung der Ergebnisse führen können. Zu den Methoden zur Erkennung von Ausreißern gehören Boxplots und Streudiagramme für einzelne Variablen sowie der Mahalanobis-Abstand für mehrere Variablen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-1" class="code-annotation-target"><a href="#annotated-cell-11-1"></a><span class="fu">boxplot</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-11" data-code-annotation="1">Erstellen des Boxpltos</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<p><img src="Skript_5.2_files/figure-html/Beispiel Boxplot-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="korrelation-der-variablen-untereinander" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="korrelation-der-variablen-untereinander"><span class="header-section-number">3.7</span> Korrelation der Variablen untereinander</h2>
+<p>Wir sollten trotz unserer guten Datengrundlage nochmals prüfen, ob die gemessenen Variablen ausreichend miteinander korreliert sind, um eine Faktorenanalyse zu rechtfertigen. Eine Korrelation zwischen zwei Variablen gibt an, ob und wie stark ein Zusammenhang zwischen den beiden Variablen besteht. An dieser Stelle ist es wichtig, sich zu merken, dass eine Korrelation die Stärke eines Zusammenhangs angibt. Eine genauere Erklärung findet ihr im Kapitel 7. Zunächst können wir einen Blick in die Korrelationsmatrix werfen - eine beträchtliche Anzahl von Korrelationen sollte ±.30 überschreiten. Alternativ können wir ein objektiveren Test der Faktorfähigkeit der Korrelationsmatrix durchführen. Hierfür greifen wir auf den Sphärizitätstest nach Bartlett (1954) zurück.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1"></a><span class="fu">htmlTable</span>(<span class="fu">round</span>(<span class="fu">cor</span>(allbus_vertrauen), <span class="at">digits =</span> <span class="dv">3</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-12" data-code-annotation="1">Die <code>htmlTable</code> Funktion ermöglicht uns eine schönere Darstellung der Tabelle, <code>round</code> rundet die Werte auf die von uns mit <code>digits = 3</code> festgelegten drei Nachkommastellen, während wir mit <code>cor</code> die Korrelationen für die Werte in unserem Datensatz <code>allbus_vertrauen</code> berechnen</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<table class="gmisc_table table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; border-bottom: 1px solid grey; border-top: 2px solid grey;"></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Gesundheitswesen</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_BVerfG</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Bundestag</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Verwaltung</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_kath_Kirche</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_evan_Kirche</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Justiz</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_TV</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Zeitung</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Uni</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Regierung</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Polizei</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Parteien</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_Kom_EU</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">Ver_EU_Par</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ver_Gesundheitswesen</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.435</td>
+<td style="text-align: center;">0.446</td>
+<td style="text-align: center;">0.375</td>
+<td style="text-align: center;">0.184</td>
+<td style="text-align: center;">0.21</td>
+<td style="text-align: center;">0.384</td>
+<td style="text-align: center;">0.337</td>
+<td style="text-align: center;">0.334</td>
+<td style="text-align: center;">0.37</td>
+<td style="text-align: center;">0.43</td>
+<td style="text-align: center;">0.413</td>
+<td style="text-align: center;">0.349</td>
+<td style="text-align: center;">0.359</td>
+<td style="text-align: center;">0.357</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_BVerfG</td>
+<td style="text-align: center;">0.435</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.629</td>
+<td style="text-align: center;">0.397</td>
+<td style="text-align: center;">0.148</td>
+<td style="text-align: center;">0.223</td>
+<td style="text-align: center;">0.635</td>
+<td style="text-align: center;">0.385</td>
+<td style="text-align: center;">0.424</td>
+<td style="text-align: center;">0.474</td>
+<td style="text-align: center;">0.561</td>
+<td style="text-align: center;">0.45</td>
+<td style="text-align: center;">0.429</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.476</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ver_Bundestag</td>
+<td style="text-align: center;">0.446</td>
+<td style="text-align: center;">0.629</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.553</td>
+<td style="text-align: center;">0.267</td>
+<td style="text-align: center;">0.323</td>
+<td style="text-align: center;">0.571</td>
+<td style="text-align: center;">0.483</td>
+<td style="text-align: center;">0.487</td>
+<td style="text-align: center;">0.42</td>
+<td style="text-align: center;">0.816</td>
+<td style="text-align: center;">0.445</td>
+<td style="text-align: center;">0.677</td>
+<td style="text-align: center;">0.656</td>
+<td style="text-align: center;">0.661</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_Verwaltung</td>
+<td style="text-align: center;">0.375</td>
+<td style="text-align: center;">0.397</td>
+<td style="text-align: center;">0.553</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.274</td>
+<td style="text-align: center;">0.306</td>
+<td style="text-align: center;">0.471</td>
+<td style="text-align: center;">0.361</td>
+<td style="text-align: center;">0.377</td>
+<td style="text-align: center;">0.384</td>
+<td style="text-align: center;">0.485</td>
+<td style="text-align: center;">0.422</td>
+<td style="text-align: center;">0.472</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.455</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ver_kath_Kirche</td>
+<td style="text-align: center;">0.184</td>
+<td style="text-align: center;">0.148</td>
+<td style="text-align: center;">0.267</td>
+<td style="text-align: center;">0.274</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.699</td>
+<td style="text-align: center;">0.23</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">0.202</td>
+<td style="text-align: center;">0.138</td>
+<td style="text-align: center;">0.261</td>
+<td style="text-align: center;">0.219</td>
+<td style="text-align: center;">0.301</td>
+<td style="text-align: center;">0.288</td>
+<td style="text-align: center;">0.284</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_evan_Kirche</td>
+<td style="text-align: center;">0.21</td>
+<td style="text-align: center;">0.223</td>
+<td style="text-align: center;">0.323</td>
+<td style="text-align: center;">0.306</td>
+<td style="text-align: center;">0.699</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.271</td>
+<td style="text-align: center;">0.258</td>
+<td style="text-align: center;">0.279</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">0.327</td>
+<td style="text-align: center;">0.27</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;">0.328</td>
+<td style="text-align: center;">0.325</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ver_Justiz</td>
+<td style="text-align: center;">0.384</td>
+<td style="text-align: center;">0.635</td>
+<td style="text-align: center;">0.571</td>
+<td style="text-align: center;">0.471</td>
+<td style="text-align: center;">0.23</td>
+<td style="text-align: center;">0.271</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.356</td>
+<td style="text-align: center;">0.418</td>
+<td style="text-align: center;">0.453</td>
+<td style="text-align: center;">0.56</td>
+<td style="text-align: center;">0.53</td>
+<td style="text-align: center;">0.48</td>
+<td style="text-align: center;">0.534</td>
+<td style="text-align: center;">0.541</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_TV</td>
+<td style="text-align: center;">0.337</td>
+<td style="text-align: center;">0.385</td>
+<td style="text-align: center;">0.483</td>
+<td style="text-align: center;">0.361</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">0.258</td>
+<td style="text-align: center;">0.356</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.714</td>
+<td style="text-align: center;">0.378</td>
+<td style="text-align: center;">0.49</td>
+<td style="text-align: center;">0.351</td>
+<td style="text-align: center;">0.492</td>
+<td style="text-align: center;">0.411</td>
+<td style="text-align: center;">0.415</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ver_Zeitung</td>
+<td style="text-align: center;">0.334</td>
+<td style="text-align: center;">0.424</td>
+<td style="text-align: center;">0.487</td>
+<td style="text-align: center;">0.377</td>
+<td style="text-align: center;">0.202</td>
+<td style="text-align: center;">0.279</td>
+<td style="text-align: center;">0.418</td>
+<td style="text-align: center;">0.714</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.488</td>
+<td style="text-align: center;">0.502</td>
+<td style="text-align: center;">0.365</td>
+<td style="text-align: center;">0.489</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.461</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_Uni</td>
+<td style="text-align: center;">0.37</td>
+<td style="text-align: center;">0.474</td>
+<td style="text-align: center;">0.42</td>
+<td style="text-align: center;">0.384</td>
+<td style="text-align: center;">0.138</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">0.453</td>
+<td style="text-align: center;">0.378</td>
+<td style="text-align: center;">0.488</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.467</td>
+<td style="text-align: center;">0.409</td>
+<td style="text-align: center;">0.368</td>
+<td style="text-align: center;">0.43</td>
+<td style="text-align: center;">0.435</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ver_Regierung</td>
+<td style="text-align: center;">0.43</td>
+<td style="text-align: center;">0.561</td>
+<td style="text-align: center;">0.816</td>
+<td style="text-align: center;">0.485</td>
+<td style="text-align: center;">0.261</td>
+<td style="text-align: center;">0.327</td>
+<td style="text-align: center;">0.56</td>
+<td style="text-align: center;">0.49</td>
+<td style="text-align: center;">0.502</td>
+<td style="text-align: center;">0.467</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.494</td>
+<td style="text-align: center;">0.719</td>
+<td style="text-align: center;">0.699</td>
+<td style="text-align: center;">0.694</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_Polizei</td>
+<td style="text-align: center;">0.413</td>
+<td style="text-align: center;">0.45</td>
+<td style="text-align: center;">0.445</td>
+<td style="text-align: center;">0.422</td>
+<td style="text-align: center;">0.219</td>
+<td style="text-align: center;">0.27</td>
+<td style="text-align: center;">0.53</td>
+<td style="text-align: center;">0.351</td>
+<td style="text-align: center;">0.365</td>
+<td style="text-align: center;">0.409</td>
+<td style="text-align: center;">0.494</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.414</td>
+<td style="text-align: center;">0.374</td>
+<td style="text-align: center;">0.37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ver_Parteien</td>
+<td style="text-align: center;">0.349</td>
+<td style="text-align: center;">0.429</td>
+<td style="text-align: center;">0.677</td>
+<td style="text-align: center;">0.472</td>
+<td style="text-align: center;">0.301</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;">0.48</td>
+<td style="text-align: center;">0.492</td>
+<td style="text-align: center;">0.489</td>
+<td style="text-align: center;">0.368</td>
+<td style="text-align: center;">0.719</td>
+<td style="text-align: center;">0.414</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.707</td>
+<td style="text-align: center;">0.696</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ver_Kom_EU</td>
+<td style="text-align: center;">0.359</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.656</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.288</td>
+<td style="text-align: center;">0.328</td>
+<td style="text-align: center;">0.534</td>
+<td style="text-align: center;">0.411</td>
+<td style="text-align: center;">0.456</td>
+<td style="text-align: center;">0.43</td>
+<td style="text-align: center;">0.699</td>
+<td style="text-align: center;">0.374</td>
+<td style="text-align: center;">0.707</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.957</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; border-bottom: 2px solid grey;">Ver_EU_Par</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.357</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.476</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.661</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.455</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.284</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.325</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.541</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.415</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.461</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.435</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.694</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.37</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.696</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">0.957</td>
+<td style="text-align: center; border-bottom: 2px solid grey;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Noch zu prüfen ist die Korrelation der Items miteinander, hierfür nehmen wir den Bartlett Test.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1"></a><span class="fu">cortest.bartlett</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-13" data-code-annotation="1">Wir führen den Bartlett-Test durch</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$chisq
+[1] 33164.76
+
+$p.value
+[1] 0
+
+$df
+[1] 105</code></pre>
+</div>
+</div>
+<p>Bei großen Stichprobenumfängen, wie in unserem Fall mit dem Allbus, reagiert der Bartlett-Test selbst auf geringfügige Abweichungen vom Zufallsprinzip empfindlich, so dass seine Ergebnisse durch ein Maß für die Stichprobenadäquanz ergänzt werden sollten. Das Kaiser-Meyer-Olkin (KMO; Kaiser, 1974) Maß für die Stichprobenadäquanz ist das Verhältnis von Korrelationen und partiellen Korrelationen, das das Ausmaß widerspiegelt, in dem Korrelationen eine Folge der über alle Variablen geteilten Varianz sind und nicht der von bestimmten Variablenpaaren geteilten Varianz.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1"></a><span class="fu">KMO</span>(allbus_vertrauen)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-14" data-code-annotation="1">Wir lassen uns das KMO berechnen</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Kaiser-Meyer-Olkin factor adequacy
+Call: KMO(r = allbus_vertrauen)
+Overall MSA =  0.89
+MSA for each item = 
+Ver_Gesundheitswesen           Ver_BVerfG        Ver_Bundestag 
+                0.96                 0.91                 0.91 
+      Ver_Verwaltung      Ver_kath_Kirche      Ver_evan_Kirche 
+                0.95                 0.73                 0.78 
+          Ver_Justiz               Ver_TV          Ver_Zeitung 
+                0.94                 0.87                 0.88 
+             Ver_Uni        Ver_Regierung          Ver_Polizei 
+                0.94                 0.92                 0.94 
+        Ver_Parteien           Ver_Kom_EU           Ver_EU_Par 
+                0.97                 0.83                 0.83 </code></pre>
+</div>
+</div>
+<p>KMO-Werte reichen von 0,00 bis 1,00 und können sowohl für die gesamte Korrelationsmatrix als auch für jede gemessene Variable berechnet werden. Insgesamt sind KMO-Werte ≥.70 erwünscht und Werte unter .50 werden im Allgemeinen als inakzeptabel angesehen. In diesem Fall ist die Korrelationsmatrix nicht faktoriell.</p>
+</section>
+</section>
+<section id="durchführung-der-faktorenanalyse" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Durchführung der Faktorenanalyse</h1>
+<p>Wenn wir den Begriff Faktorenanalyse verwenden, meinen wir meistens zwei eigentlich unterschiedliche Verfahren, die sich in Zweck und Berechnung unterscheiden: die Hauptkomponentenanalyse (PCA) und die explorative Faktorenanalyse. Die Hauptkomponentenanalyse analysiert die gesamte Korrelationsmatrix und zielt darauf ab, Daten zu reduzieren und dabei so viele Informationen aus dem ursprünglichen Datensatz wie möglich zu erhalten. Zu diesem Zweck berechnet die Hauptkomponentenanalyse sogenannte Linearkombinationen der ursprünglichen Messvariablen, die so viele Informationen wie möglich erklären. Diese neuen Messvariablen werden als sogenannte Komponenten bezeichnet und sind im engeren Sinn keine latenten Konstrukte.</p>
+<p>Die Faktorenanalyse versucht im Unterschied dazu, die Gesamtvarianz der gemessenen Variablen in <em>gemeinsame</em> Varianz (Kommmunialität oder h2) und die <em>einzigartige</em> Varianzen (u2) zu trennen. Dies geschieht indem eine reduzierte Korrelationsmatrix analysiert wird, bei der eine Schätzung der gemeinsamen Varianz jeder Messvariablen auf der Diagonalen der Korrelationsmatrix platziert wird.</p>
+<p>Zusammenfassend liefern beide Methoden, also sowohl die PCA als auch die Faktorenanalyse eine Schätzungen der Gemeinsamkeit, aber nur die Faktorenanalyse kann die Einzigartigkeit (u2) jeder gemessenen Variable schätzen.</p>
+<p>Die meisten Methodiker:innen empfehlen, dass die explorative Faktorenanalyse für eine Theoriebildung verwendet wird, um latente Konstrukte zu identifizieren. Fabrigar und Wegener (2012) empfahlen zum Beispiel Folgendes:</p>
+<blockquote class="blockquote">
+<p><em>When the goal of research is to identify latent constructs for theory building or to create measurement instruments in which the researcher wishes to make the case that the resulting measurement instrument reflects a meaningful underlying construct, we argue that common factor analysis (EFA) procedures are usually preferable.</em> (Fabrigar und Wegener, 2012: 32)</p>
+</blockquote>
+<p>In unserem Fall wenden wir eine konfirmatorische Faktorenanalyse (PCA) an, da wir uns für die latente Variable <em>Vertrauen in gesellschaftliche Institutionen</em> interessieren und hierfür bereits eine theoretischer Rahmen besteht. Hierfür greifen wir auf das <code>psych</code>-Paket zurück, welches die Funktion <code>principal</code> für eine Faktorenanalyse enthält.</p>
+<section id="methode-der-schätzung" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="methode-der-schätzung"><span class="header-section-number">4.1</span> Methode der Schätzung</h2>
+<p>Nachdem wir die Faktorenanalyse (EFA) als bevorzugtes Modell festgelegt haben, müssen wir noch die Methode zur Schätzung (Extraktion) des Faktorenmodells auswählen. Konkret suchen wir ein mathematischen Verfahren, dass die Beziehungen zwischen den gemessenen Variablen und den Faktoren (d.&nbsp;h. die Regression der gemessenen Variablen auf die gemeinsamen Faktoren) möglichst genau schätzt.</p>
+<p>Wir möchten kurz anmerken, dass der mathematische Hintergrund an dieser Stelle des Kurses noch nicht so wichtig ist, da hier einige Grundlagen erst imd Kapitel 7 erklärt werden. Trotzdem macht es unserer Einschätzung nach Sinn die Begriffe bereits zu kennen und deren Vor- und Nachteile bennen zu können.</p>
+<p>Es existieren eine ganze Reihe von unterschiedlichen Schätzmethoden, von denen zwei Methoden am häufigsten angewendet werden. (1) Die <em>ML-Schätzung</em> (Maximum Liklelihood) beruht auf der Normalverteilung und ist entsprechend empfindlicher multivariater Normalität und erfordert meistens einen größere Stichprobe (mehr Fälle). (2) Die <em>PA</em> (wird auch als Hauptfaktoren, MINRES oder OLS bezeichnet) ist im Gegenzug dazu eine Methode der kleinsten Quadrate, welche keine Annahmen über Verteilungen trifft. PA nutzt hier eine wiederholte Zwischenschätzung, welche eine bessere Schätzung der Gemeinsamkeit ermöglicht und wiederholt diese bis eine zufriedenstellende Lösung erreicht ist.</p>
+<p>Die PA eignet sich als Methode der Schätzung insbesondere dann, wenn der Zusammenhang zwischen den gemessenen Variablen und den Faktoren relativ schwach sind (≤.40), der Stichprobenumfang relativ klein ist (≤300), die multivariate Normalität verletzt ist oder wenn die Anzahl der den gemessenen Variablen zugrunde liegenden Faktoren falsch spezifiziert ist. Im Gegensatz dazu ist eine ML-Schätzung besser geeignet, wenn die Beziehungen zwischen Faktoren und Variablen stark sind (&gt;.40), der Stichprobenumfang groß ist, multivariate Normalität erreicht wird und die Anzahl der Faktoren korrekt angegeben ist.</p>
+<p>Wir können für unser Beispiel weiterhin die Maximum-likelihood Faktorenanalyse aus dem <code>psych</code>-Paket mit der Funktion <code>principal</code> verwenden, da wir in unserem Fall die entsprechenden Voraussetzungen in Bezug auf den Stichprobenumfang, die Stärke der Beziehung, sowie der Anzahl der Faktoren erfüllen. Für dieses Beispiel nutzen wir trotz der nicht perfekten Normalverteilung die ML Methode, alternativ könnten die PA Methode als robustere Variante nehmen.</p>
+</section>
+<section id="anzahl-der-faktoren" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="anzahl-der-faktoren"><span class="header-section-number">4.2</span> Anzahl der Faktoren</h2>
+<p>Wie bereits bei der ML-Schätzung angedeutet, müssen wir die Anzahl der Faktoren festlegen. Hierfür müssen wir die Anzahl der Faktoren für die weitere Analyse festlegen. Wir erreichen das indem wir mehrere Modelle schätzen und somit Rückschlüsse auf ein optimales Modell mit der für uns passenden Anzahl an Faktoren ziehen. Vereinfacht können wir uns das Auswringen eines nassen Handtuchs vorstellen, bei der der erste Faktor die meiste Varianz extrahiert - ergo die größte Mene an Wasser - und die nachfolgenden Faktoren sukzessive kleinere Anteile der Varianz extrahieren. Auf diese Art und Weise können wir eine Schätzung des optimalen Modells vornehmen.</p>
+<p>Wir verwenden hierfür die <code>nfactors</code>-Funktion, welche uns mehere Schätzungen ausgibt.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1">1</button><span id="annotated-cell-15-1" class="code-annotation-target"><a href="#annotated-cell-15-1"></a><span class="fu">nfactors</span>(allbus_vertrauen, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">fm=</span><span class="st">"mle"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-15" data-code-annotation="1">Mit der <code>nfactors</code> Funktion können wir verschiedene Schätzungen durchführen. Hierfür wählen wir ein Rotation mit <code>rotate</code> aus, sowie eine Methode der Schätzung mittels <code>fm</code></span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<p><img src="Skript_5.2_files/figure-html/nfactors-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Number of factors
+Call: vss(x = x, n = n, rotate = rotate, diagonal = diagonal, fm = fm, 
+    n.obs = n.obs, plot = FALSE, title = title, use = use, cor = cor)
+VSS complexity 1 achieves a maximimum of 0.88  with  1  factors
+VSS complexity 2 achieves a maximimum of 0.9  with  3  factors
+The Velicer MAP achieves a minimum of 0.04  with  1  factors 
+Empirical BIC achieves a minimum of  -125.8  with  6  factors
+Sample Size adjusted BIC achieves a minimum of  -26  with  8  factors
+
+Statistics by number of factors 
+   vss1 vss2   map dof   chisq     prob sqresid  fit RMSEA  BIC SABIC complex
+1  0.88 0.00 0.035  90 1.0e+04  0.0e+00     7.0 0.88 0.187 9520  9806     1.0
+2  0.57 0.90 0.040  76 5.0e+03  0.0e+00     5.8 0.90 0.141 4348  4590     1.5
+3  0.62 0.90 0.044  63 3.0e+03  0.0e+00     3.8 0.93 0.120 2514  2714     1.5
+4  0.51 0.85 0.048  51 1.6e+03 1.8e-308     3.0 0.95 0.098 1221  1383     1.7
+5  0.38 0.71 0.061  40 6.0e+02 1.2e-100     2.4 0.96 0.066  275   402     2.0
+6  0.38 0.68 0.076  30 3.0e+02  6.2e-46     2.2 0.96 0.053   56   151     2.1
+7  0.34 0.58 0.101  21 1.5e+02  1.1e-21     2.0 0.97 0.044  -19    48     2.4
+8  0.32 0.57 0.138  13 3.8e+01  3.1e-04     1.3 0.98 0.024  -67   -26     2.5
+9  0.32 0.55 0.164   6 9.6e+00  1.4e-01     1.4 0.98 0.014  -39   -20     2.6
+10 0.31 0.52 0.164   0 6.0e+00       NA     1.6 0.97    NA   NA    NA     2.7
+11 0.29 0.53 0.240  -5 7.4e-02       NA     1.4 0.98    NA   NA    NA     2.7
+12 0.29 0.48 0.412  -9 2.6e-06       NA     1.4 0.98    NA   NA    NA     2.6
+13 0.30 0.52 0.719 -12 1.4e-08       NA     1.5 0.98    NA   NA    NA     2.7
+14 0.29 0.52 1.000 -14 0.0e+00       NA     1.4 0.98    NA   NA    NA     2.7
+15 0.36 0.68    NA -15 9.2e+02       NA     2.5 0.96    NA   NA    NA     2.2
+    eChisq    SRMR  eCRMS eBIC
+1  5.5e+03 9.0e-02 0.0969 4749
+2  3.8e+03 7.4e-02 0.0875 3150
+3  1.5e+03 4.8e-02 0.0614 1029
+4  7.6e+02 3.3e-02 0.0480  347
+5  2.0e+02 1.7e-02 0.0279 -122
+6  1.2e+02 1.3e-02 0.0245 -126
+7  6.4e+01 9.7e-03 0.0217 -106
+8  1.0e+01 3.9e-03 0.0111  -95
+9  2.8e+00 2.0e-03 0.0085  -46
+10 2.5e+00 1.9e-03     NA   NA
+11 1.1e-02 1.2e-04     NA   NA
+12 1.3e-06 1.4e-06     NA   NA
+13 5.4e-09 8.9e-08     NA   NA
+14 1.4e-12 1.4e-09     NA   NA
+15 2.3e+02 1.9e-02     NA   NA</code></pre>
+</div>
+</div>
+<p>In der Ergebnissdarstellung sehen wir verschiedene Metriken, anhand derer wir uns für die Anzahl der Faktoren entscheiden können. Wir schauen uns in diesem Beispiel insbesondere Very Simple Structure (VSS) und den maximalen durchschnittlichen Teilwert (MAP) an.</p>
+<p>Durch VSS werden unter anderem drei Faktoren vorgeschlagen. Entsprechend schauen wir uns diese einmal kurz an, um uns ein Bild zu machen.</p>
+<p>Im Anschluss daran betrachten wir das Ergebnis der minimalen durchschnittlichen Teilwerte (MAP), welche als die genauesten empirischen Schätzungen für die Anzahl der beizubehaltenden Faktoren betrachtet wird. Der MAP Wert schlägt uns einen Faktor vor, entsprechend gehen wir im folgenden von einem Faktor bzw. einer lateten Variable aus.</p>
+</section>
+<section id="rotation-der-faktoren" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="rotation-der-faktoren"><span class="header-section-number">4.3</span> Rotation der Faktoren</h2>
+<p>Bei der Durchführung der Faktorenanalyse werden sogenannte <em>Faktorladungen</em> ermittelt, die anzeigen, wie stark jede Variable mit den extrahierten Faktoren zusammenhängt. Während des Analyseprozesses kann es vorkommen, dass die <em>Faktorladungen</em> rotiert werden, um eine eindeutigere und interpretierbarere Struktur der Faktoren zu erzielen. Die Rotation der <em>Faktorladungen</em> ermöglicht es, die Ausprägung der Faktoren auf weniger, aber stärker ausgeprägte Variablen zu konzentrieren, was die Interpretation und Verständlichkeit der Analyseergebnisse erleichtert. Es gibt verschiedene Rotationsmethoden, wie beispielsweise die Varimax- oder Quartimax-Rotation, die je nach Ziel der Faktorenanalyse angewendet werden können. Es existieren Dutzende von analytischen Rotationsmethoden, wobei Varimax die beliebteste orthogonale Rotationsmethode ist, während Promax und Oblimin die beliebtesten schrägen Rotationsmethoden sind. Sowohl bei Promax als auch bei Oblimin können wir den Grad der Korrelation zwischen den Faktoren kontrollieren (über die Parameter Kappa bzw. Delta).</p>
+<p>Wichtig ist, dass sich die Interpretation der <em>Faktorladungen</em> zwischen orthogonalen und schrägen Rotationen unterscheiden. Bei orthogonalen Lösungen können die <em>Faktorladungen</em> als Korrelationen zwischen gemeinsamen Faktoren und gemessenen Variablen interpretiert werden. Diese Korrelationen reichen von -1,00 bis +1,00, und der Anteil der Varianz in einer gemessenen Variablen, der durch einen gemeinsamen Faktor beigetragen wurde, kann durch Quadrieren der Faktorladung berechnet werden. Im Gegensatz dazu ergeben sich bei schrägen Lösungen zwei verschiedene Arten von <em>Faktorladungen</em>: Struktur- und Musterkoeffizienten. Strukturkoeffizienten können auch als Korrelationen zwischen gemeinsamen Faktoren und den gemessenen Variablen interpretiert werden. Im Gegensatz dazu sind die Musterkoeffizienten keine einfachen Faktor-Variablen-Korrelationen mehr, sondern sie ähneln standardisierten partiellen Regressionskoeffizienten. Das heißt, sie sind Korrelationen zwischen gemeinsamen Faktoren und gemessenen Variablen, nachdem der Einfluss aller anderen gemeinsamen Faktoren kontrolliert (herausgerechnet) wurde. Dementsprechend können Musterkoeffizienten den Wert von 1,00 überschreiten und können nicht quadriert werden, um den Anteil der Varianz zu ermitteln, der eindeutig auf einen gemeinsamen Faktor zurückzuführen ist.</p>
+<p>In unserem Fall greifen wir auf die etablierte Rotationsmethode <code>varimax</code> zurück, welches wir entsprechend im R-Code spezifizieren. Zusätzlich geben wir unsere erwartete Anzahl an Faktoren an, welche wir zuvor bestimmt haben (in unserem Fall: 3 und 1).</p>
+<p>Wir starten mit der durch VSS vorgeschlagenen Anzahl von drei Faktoren.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-1" class="code-annotation-target"><a href="#annotated-cell-16-1"></a>fit3 <span class="ot">=</span>  <span class="fu">principal</span>(allbus_vertrauen, <span class="at">nfactors =</span> <span class="dv">3</span>, <span class="at">method =</span> <span class="st">"ml"</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>)</span>
+<span id="annotated-cell-16-2"><a href="#annotated-cell-16-2"></a>fit3</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-16" data-code-annotation="1">Mit der <code>principal</code> Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit <code>nfactors</code> aus, legen ein Rotation mit <code>rotate</code> sowie eine Methode der Schätzung mittels <code>method</code> fest</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Principal Components Analysis
+Call: principal(r = allbus_vertrauen, nfactors = 3, rotate = "varimax", 
+    method = "ml")
+Standardized loadings (pattern matrix) based upon correlation matrix
+                      RC1  RC3   RC2   h2   u2 com
+Ver_Gesundheitswesen 0.65 0.14  0.11 0.45 0.55 1.2
+Ver_BVerfG           0.69 0.34 -0.01 0.59 0.41 1.5
+Ver_Bundestag        0.51 0.68  0.13 0.73 0.27 1.9
+Ver_Verwaltung       0.51 0.36  0.24 0.45 0.55 2.3
+Ver_kath_Kirche      0.09 0.15  0.90 0.85 0.15 1.1
+Ver_evan_Kirche      0.18 0.18  0.88 0.83 0.17 1.2
+Ver_Justiz           0.63 0.40  0.10 0.57 0.43 1.8
+Ver_TV               0.60 0.28  0.13 0.46 0.54 1.5
+Ver_Zeitung          0.64 0.30  0.13 0.52 0.48 1.5
+Ver_Uni              0.68 0.23  0.01 0.51 0.49 1.2
+Ver_Regierung        0.49 0.71  0.12 0.76 0.24 1.8
+Ver_Polizei          0.69 0.16  0.17 0.53 0.47 1.2
+Ver_Parteien         0.33 0.76  0.20 0.72 0.28 1.5
+Ver_Kom_EU           0.25 0.89  0.14 0.88 0.12 1.2
+Ver_EU_Par           0.26 0.89  0.14 0.88 0.12 1.2
+
+                       RC1  RC3  RC2
+SS loadings           4.04 3.85 1.84
+Proportion Var        0.27 0.26 0.12
+Cumulative Var        0.27 0.53 0.65
+Proportion Explained  0.41 0.40 0.19
+Cumulative Proportion 0.41 0.81 1.00
+
+Mean item complexity =  1.5
+Test of the hypothesis that 3 components are sufficient.
+
+The root mean square of the residuals (RMSR) is  0.06 
+ with the empirical chi square  2705.49  with prob &lt;  0 
+
+Fit based upon off diagonal values = 0.98</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1"></a>fit1 <span class="ot">=</span>  <span class="fu">principal</span>(allbus_vertrauen, <span class="at">nfactors =</span> <span class="dv">1</span>, <span class="at">method =</span> <span class="st">"ml"</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>)</span>
+<span id="annotated-cell-17-2"><a href="#annotated-cell-17-2"></a>fit1</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="1" data-code-cell="annotated-cell-17" data-code-annotation="1">Mit der <code>principal</code> Funktion führen wir eine Faktorenanalyse durch. Hierfür wählen wir die Anzahl an Faktoren mit <code>nfactors</code> aus, legen ein Rotation mit <code>rotate</code> sowie eine Methode der Schätzung mittels <code>method</code> fest</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Principal Components Analysis
+Call: principal(r = allbus_vertrauen, nfactors = 1, rotate = "varimax", 
+    method = "ml")
+Standardized loadings (pattern matrix) based upon correlation matrix
+                      PC1   h2   u2 com
+Ver_Gesundheitswesen 0.57 0.32 0.68   1
+Ver_BVerfG           0.70 0.49 0.51   1
+Ver_Bundestag        0.84 0.71 0.29   1
+Ver_Verwaltung       0.66 0.43 0.57   1
+Ver_kath_Kirche      0.41 0.17 0.83   1
+Ver_evan_Kirche      0.48 0.23 0.77   1
+Ver_Justiz           0.73 0.53 0.47   1
+Ver_TV               0.64 0.41 0.59   1
+Ver_Zeitung          0.68 0.46 0.54   1
+Ver_Uni              0.62 0.39 0.61   1
+Ver_Regierung        0.85 0.72 0.28   1
+Ver_Polizei          0.63 0.39 0.61   1
+Ver_Parteien         0.79 0.63 0.37   1
+Ver_Kom_EU           0.81 0.66 0.34   1
+Ver_EU_Par           0.81 0.66 0.34   1
+
+                PC1
+SS loadings    7.21
+Proportion Var 0.48
+
+Mean item complexity =  1
+Test of the hypothesis that 1 component is sufficient.
+
+The root mean square of the residuals (RMSR) is  0.09 
+ with the empirical chi square  5969.7  with prob &lt;  0 
+
+Fit based upon off diagonal values = 0.96</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation-der-ergebnisse" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="interpretation-der-ergebnisse"><span class="header-section-number">4.4</span> Interpretation der Ergebnisse</h2>
+<p>Bei der Betrachtung des Outputs der Faktorenanalyse beginnen wir mit den <em>Faktorladungen</em>. <em>Faktorladungen</em> geben an, wie stark jede Variable mit den extrahierten Faktoren korreliert. Hohe positive Ladungen zeigen eine starke Beziehung zwischen der Variable und dem Faktor an, während hohe negative Ladungen darauf hindeuten, dass die Variable invers mit dem Faktor zusammenhängt. Variablen mit Ladungen nahe null haben wenig oder keine Beziehung zum jeweiligen Faktor. Durch die Betrachtung dieser Ladungen können wir die die Faktoren interpretieren und auch benennen. Auf diese Art und Weise können wir Rückschlüsse auf die zugrunde liegende latente Variable ziehen.</p>
+<p>Wenn wir die Ergebnisse unserer ersten Faktorenanalyse - mit drei Faktoren - betrachten, sehen wir, dass die <em>Faktorenladungen</em> in den Spalten RC1 bis RC3 unterschiedlich stark ausgeprägt sind. Wenn wir die Indikatoren für die Spalte RC2 näher betrachten fällt uns auf, dass hier vor allem die beiden Indikatoren zu dem Vertrauen in die evangelische und katholische Kirche hohe Werte aufweisen, während alle anderen <em>Faktorladungen</em> niedriger ausfallen. Vor diesem Hintergrund können wir davon ausgehen, dass es sich bei dem Faktor RC2, um das Vertrauen in Kirchen handelt. Wir können dieses Vorgehen für die beiden anderen Faktoren wiederholen und auf diese Weise die Faktoren interpretieren.</p>
+<p>Für den Fall der zweiten Faktorenanalyse - mit einem Faktor - übersteigen für alle Indikatoren die Faktorladungen über den Wert 0.3, was auf einen relativ starken und damit für uns guten Zusammenhang mit dem Faktor bzw. der latenten Variable spricht.</p>
+<p>Welche der beiden Lösungen besser ist hängt von unserer theoretischen Grundlage und unserer Forschungsfrage ab. Entsprechend treffen wir an dieser Stelle keine pauschale Aussage, ob die eine oder andere Lösung grundsätzlich besser ist, sondern plädieren für eine reflektierte Auseinandersetzung und Abwägung zwischen den empirischen Ergebnissen und den theoretischen Annahmen.</p>
+<p>Zusätzlich zur Interpretation der Faktorladungen ist es auch wichtig, die Uniquenes der Faktoren zu berücksichtigen. Diese zeigen an, wie viel Varianz in den Daten von jedem extrahierten Faktor erklärt wird. In anderen Worten sagt sie also aus, wie gut die Information der Variablen in den Faktoren insgesamt erhalten geblieben ist.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">print</span>(fit1<span class="sc">$</span>uniquenesses, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ver_Gesundheitswesen           Ver_BVerfG        Ver_Bundestag 
+                0.68                 0.51                 0.29 
+      Ver_Verwaltung      Ver_kath_Kirche      Ver_evan_Kirche 
+                0.57                 0.83                 0.77 
+          Ver_Justiz               Ver_TV          Ver_Zeitung 
+                0.47                 0.59                 0.54 
+             Ver_Uni        Ver_Regierung          Ver_Polizei 
+                0.61                 0.28                 0.61 
+        Ver_Parteien           Ver_Kom_EU           Ver_EU_Par 
+                0.37                 0.34                 0.34 </code></pre>
+</div>
+</div>
+<p>Wenn wir auf die Uniqueness der einzelnen Indikatoren blicken, wird relativ schnell klar, dass wir eine Reihe von Indikatoren mit hohen Uniqueness-Werten haben, deren Varianz zu großen Teilen von der latenten Variable erklären wird und somit stärker als andere Indikatoren zu der latenten Variable “beitragen”.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Wie gebe ich die Ergebnisse korrekt an?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Ergebnisse von Regressionsanalysen werden meistens in einer Tabelle dargestellt. Für die Angabe im Text wird folgendes gebraucht:</p>
+<p>✅ die Werte des Kaiser-Meyer-Olkin Kritierums (KMO)</p>
+<p>✅ das Ergebnis des Barlett-Tests</p>
+<p>✅ die Faktorladungen</p>
+<p>✅ die Uniqueness</p>
+<p>✅ die gewählte Rotations-Methode</p>
+<p>Das Format ist normalerweise:</p>
+<blockquote class="blockquote">
+<p><strong><em>Beispiel:</em></strong> Zunächst wurde Faktorenanalyse der 15 gemessenen Indikatoren durchgeführt. Das Kaiser-Meyer-Olkin (KMO)-Maß für die Stichprobenadäquanz betrug 0,89. Dies deutet darauf hin, dass die Korrelationsmuster relativ kompakt sind und die Faktorenanalyse eindeutige und zuverlässige Faktoren ergeben sollte. Der Bartlett-Test auf Sphärizität war ebenfalls signifikant (χ2(105) = 33164.76, p &lt; .001). Dies bedeutet, dass es einige Beziehungen zwischen den untersuchten Variablen gibt. Sowohl der KMO-Test als auch der Bartlett-Test bestätigen, dass die Faktorenanalyse angemessen ist.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Die Faktoren werden rotiert, um eine einfache Struktur zu erhalten. In diesem Fall wurde die varimax Rotationsmethode verwendet. Nach sorgfältiger Betrachtung der zusammenhängenden Variablen in der Analyse wurden dann die Faktorbezeichnung vorgeschlagen und in Tabelle 1 dargestellt. Dabei handelt es sich um <em>Vertrauen in gesellschaftliche Institutionen</em>. Für den Faktor wurden Faktorladungen erstellt (siehe Tabelle 1).</p>
+</blockquote>
+</div>
+</div>
+</section>
+</section>
+<section id="danksagung-und-literatur" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Danksagung und Literatur</h1>
+<p>Die Struktur und Inhalt dieser Seite orientiert sich an den folgenden Arbeiten. Ich möchte mich bei den Autor:innen sehr bedanken!</p>
+<ul>
+<li>Daniela Keller <a href="https://www.youtube.com/watch?v=NFPGQcq1fO8">Link</a></li>
+<li>Field, A., Miles, J., &amp; Field, Z. (2012). Discovering statistics using R. 749-811</li>
+<li>Brown T. A. (2015). Confirmatory factor analysis for applied research (2nd ed.). New York, NY: Guilford Press. Watkins, M. W. (2018). Exploratory Factor Analysis: A Guide to Best Practice. Journal of Black Psychology, 44(3), 219–246. <a href="https://doi.org/10.1177/0095798418771807">Link</a></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Literatur und Beispiele aus der Praxis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wir empfehlen euch folgende Lehrbücher, falls ihr weiterführende Informationen braucht.</p>
+<blockquote class="blockquote">
+<p>📖 Field, Z., Miles, J., &amp; Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. <a href="https://suche.suub.uni-bremen.de/peid=B68436977&amp;LAN=DE&amp;CID=7699632&amp;index=L&amp;Hitnr=1&amp;dtyp=D&amp;rtyp=a&amp;Exemplar=1">Link</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>📖 Brown T. A. (2015). Confirmatory factor analysis for applied research (2nd ed.). New York, NY: Guilford Press. Watkins, M. W. (2018). Exploratory Factor Analysis: A Guide to Best Practice. Journal of Black Psychology, 44(3), 219–246. <a href="https://doi.org/10.1177/0095798418771807">Link</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>📖 Fabrigar, L. R., &amp; Wegener, D. T. (2012). Exploratory factor analysis. Oxford University Press.</p>
+</blockquote>
+<p>Hier findet ihr ein Beispiel aus der Forschungspraxis:</p>
+<blockquote class="blockquote">
+<p>🔬 Koirala, B. P., Araghi, Y., Kroesen, M., Ghorbani, A., Hakvoort, R. A., &amp; Herder, P. M. (2018). Trust, awareness, and independence: Insights from a socio-psychological factor analysis of citizen knowledge and participation in community energy systems. Energy research &amp; social science, 38, 33-40. <a href="https://www.sciencedirect.com/science/article/pii/S2214629618300641">Link</a></p>
+</blockquote>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Handle positioning of the toggle
+      window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
+          }
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><strong>Copyright</strong> 2023, <strong>Design by</strong> Katharina Maubach &amp; Patrick Zerrer, <strong>Autor:innen:</strong> Katharina Maubach, Patrick Zerrer, Stephanie Geise, Cornelius Puschmann, Hannah Marie Büttner, Michael Linke</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="Bilder/logo_zemki.png" class="img-fluid" width="120"> <img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
+  </div>
+</footer>
+
+
+
+</body></html>
