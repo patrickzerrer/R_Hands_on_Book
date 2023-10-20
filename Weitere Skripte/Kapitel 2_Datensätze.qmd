@@ -1,0 +1,134 @@
+---
+title: "Einlesen von Datensätzen"
+author: "Cornelius Puschmann"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+execute: 
+  warning: false
+  message: false
+---
+
+
+```{r Laden der Pakete}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(readr, readxl, haven)
+
+options(scipen = 999) 
+```
+
+# CSV-Dateien
+
+```{r Importieren einer CSV-Datei}
+geschlechterverteilung_csv <- read_csv2("geschlechterverteilung.csv")
+```
+
+# Excel-Dateien
+
+```{r}
+geschlechterverteilung_excel <- read_excel("geschlechterverteilung.xlsx")
+```
+
+# SPSS-Dateien
+
+```{r}
+gale3_spss <- read_spss("https://uil.unesco.org/i/doc/adult-education/grale-3/survey-data/grale-3-suquant.sav")
+```
+
+# Stata-Dateien
+
+```{r Laden der ALLBUS-Daten}
+allbus_stata <- read_dta("Datensatz/Allbus_2021.dta")
+```
+
+# Data Management & Einlesen des ALLBUS
+
+```{r Laden der Pakete}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(haven, readr, dplyr)
+
+options(scipen = 999) 
+```
+
+```{r Laden der ALLBUS-Daten}
+daten <- read_dta("Datensatz/Allbus_2021.dta")
+```
+
+#Teilsample einlesen
+
+```{r Laden von drei kleineren Teilsamples}
+sample_klein <- read_rds("Datensatz/ALLBUS_sample_klein.rds")
+sample_mittel <- read_rds("Datensatz/ALLBUS_sample_mittel.rds")
+sample_gross <- read_rds("Datensatz/ALLBUS_sample_gross.rds")
+```
+
+```{r Datensatz anzeigen lassen}
+sample_klein
+```
+
+# Einen Überblick über den ALLBUS gewinnen
+
+```{r}
+str(sample_klein)
+```
+
+```{r}
+sample_gross
+```
+
+```{r}
+colnames(sample_gross)
+```
+
+```{r}
+str(sample_gross)
+```
+
+```{r}
+tibble::glimpse(sample_gross)
+```
+
+```{r}
+summary(sample_gross)
+```
+
+```{r}
+daten
+```
+
+# Die Variablen des ALLBUS
+
+```{r}
+variablen <- read_csv2("Datensatz/ALLBUS_2021_variablen.csv", show_col_types = FALSE)
+variablen_optionen <- read_csv2("Datensatz/ALLBUS_2021_variablen_optionen.csv", show_col_types = FALSE)
+```
+
+# Bildung eines Teilsamples
+
+```{r}
+fernsehkonsum <- daten %>% 
+  select(age, sex, lm02)
+```
+
+```{r}
+fernsehkonsum
+```
+
+```{r}
+fernsehkonsum_bereinigt <- fernsehkonsum %>% 
+  rename(alter = age,
+         geschlecht = sex,
+         fernsehkonsum_minuten = lm02) %>% 
+  naniar::replace_with_na_all(condition = ~.x < 0) %>% 
+  mutate(geschlecht = as_factor(geschlecht)) %>% 
+  labelled::remove_labels() %>%
+  labelled::remove_attributes("format.stata")
+```
+
+```{r}
+fernsehkonsum_bereinigt
+```

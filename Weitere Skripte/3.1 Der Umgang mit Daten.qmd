@@ -1,0 +1,23 @@
+---
+title: "Die Kunst vom Umgang mit Daten"
+author: "Hannah-Marie Büttner"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+---
+
+![Bild von Jae Rue auf Pixabay](Bilder/Skript_3.2_Bild_1.jpg)
+
+In einer Ära, in der Daten in nahezu allen Bereichen unseres Lebens eine immer größere Rolle spielen, ist die Fähigkeit, mit Daten effektiv umzugehen, zu einer entscheidenden Kompetenz geworden. Ob in der Wissenschaft, der Wirtschaft oder im Alltag -- die Kunst der Datenanalyse ermöglicht es uns, aus einer Fülle von Informationen wertvolle Erkenntnisse zu gewinnen und informierte Entscheidungen zu treffen.
+
+In diesem Kapitel werden wir uns eingehend mit den wesentlichen Aspekten des Umgangs mit Daten auseinandersetzen. Wir beginnen mit einer Betrachtung der verschiedenen Datentypen und Strukturen, die uns begegnen. Von numerischen Werten über kategoriale Daten bis hin zu sogenannten logischen Werten -- wir werden verstehen, wie wir Daten in R effizient repräsentieren können.
+
+Die Kunst des Umgangs mit Daten erstreckt sich jedoch weit über das bloße Verständnis von Datentypen hinaus. Wir werden lernen, wie wir Daten auswählen, manipulieren und transformieren können, um sie optimal für unsere Analysezwecke vorzubereiten. Dabei werden wir uns Techniken ansehen, die es ermöglichen, relevante Informationen zu extrahieren und Daten in die gewünschte Form zu bringen.
+
+Eine besonders mächtige Fähigkeit auf unserer Reise ist die Fähigkeit, Daten visuell zu interpretieren. Wir werden in die Welt von 'ggplot2' eintauchen, eines R-Pakets zur Erstellung ansprechender und aussagekräftiger Grafiken. Wir werden entdecken, wie wir Daten effektiv visualisieren können, um Muster, Trends und Abhängigkeiten sichtbar zu machen.
+
+Dieses Kapitel bietet eine umfassende Einführung in die Kunst des Umgangs mit Daten. Wir werden praktische Fertigkeiten erlernen und gleichzeitig die theoretischen Grundlagen hinter diesen Techniken verstehen.

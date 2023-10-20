@@ -1,0 +1,206 @@
+---
+title: "Der ALLBUS Datensatz"
+author: "Cornelius Puschmann"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+execute: 
+  warning: false
+  message: false
+---
+
+![Wir haben unsere Daten, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_truck_leaving_a_warehouse_cyberpunk__4c152b14-f4a7-4a08-8222-ce07ba126eaf.png)
+
+Die Allgemeine Bevölkerungsumfrage der Sozialwissenschaften [(ALLBUS)](https://www.gesis.org/allbus/allbus) ist eine standardisierte Befragung der deutschen Bevölkerung, die seit 1980 regelmäßig durch das GESIS Leibniz Institut für Sozialforschung durchgeführt wird. Im ALLBUS werden in der Regel alle zwei Jahre Daten über Einstellungen, Verhaltensweisen und Sozialstruktur der Bevölkerung in der Bundesrepublik Deutschland gesammelt. Dafür wird in persönlichen Interviews jeweils eine repräsentative Stichprobe aus der Bevölkerung Deutschlands befragt (jeweils ca. 2.800 bis 3.500 Befragte).
+
+Abgefragt werden u.a. Einschätzungen und Einstellungen in den Bereichen:
+
+\- Wirtschaft
+
+\- Umwelt
+
+\- Immigration
+
+\- Politische Einstellungen und Partizipation
+
+\- Mediennutzung
+
+\- Einstellungen zu Ehe, Familie und Partnerschaft
+
+\- Einstellungen zu und Kontakte mit Behörden
+
+\- Freizeitaktivitäten
+
+\- Gesundheit und gesundheitsrelevantes Verhalten
+
+Folgend arbeiten wir im Rahmen dieses Moduls durchgängig mit dem ALLBUS, speziell mit der Erhebnungswelle des Jahres 2021.
+
+# Data Management & Einlesen des ALLBUS
+
+Wir beginnen damit, die notwendigen Pakete zu laden, die wir für die ersten Schritte mit den Daten benötigen. Das sind hier die Pakete haven (für das Einlesen der ALLBUS-Daten im Stata-Format) und das Pakete readr (für das Einlesen einiger Vorab vorbereiteter Samples aus dem Gesamtdatensatz), sowie das Paket dplyr, mit dem wir am Schluss einen Beispielhaften Teildatensatz bilden.
+
+```{r Laden der Pakete}
+if(!require("pacman")) {install.packages("pacman");library(pacman)}
+p_load(haven, readr, dplyr)
+
+options(scipen = 999) 
+```
+
+Nun lesen wir den ALLBUS-Datensatz mittels der Stata-Importfunktion `read_dta` aus dem Paket `haven` ein.
+
+```{r Laden der ALLBUS-Daten}
+daten <- read_dta("Datensatz/Allbus_2021.dta")
+```
+
+Als nächstes laden wir zudem noch drei zuvor erstellte Zufallssamples im Umfang von 20, 200 und 500 Zeilen aus dem Gesamtdatensatz. Diese enthalten weiterhin eine deutlich kleinere Anzahl relevanter Variablen und sind daher etwas übersichtlicher als der sehr große Hauptdatensatz.
+
+```{r Laden von drei kleineren Teilsamples}
+sample_klein <- read_rds("Datensatz/ALLBUS_sample_klein.rds")
+sample_mittel <- read_rds("Datensatz/ALLBUS_sample_mittel.rds")
+sample_gross <- read_rds("Datensatz/ALLBUS_sample_gross.rds")
+```
+
+# Erste Schritte mit dem ALLBUS
+
+Zunächst schauen wir uns die Daten an. Dies geschieht entweder daturch, dass man den Objektnamen verwendet (also im folgende Beispiel einfach sample_klein) oder indem man mit einem Klick in RStudio unter dem Reiter Environment oder mit dem Befehl `View()` aufruft. Bei diesem Vorgehen zeigt RStudio die Daten an, was i.d.R. den praktischsten Zugang darstellt.
+
+```{r Datensatz anzeigen lassen}
+sample_klein
+```
+
+Der kleine Beispieldatensatz illustriert den grundlegeenden Aufbau des ALLBUS. Dieser folgt (beim ALLBUS, aber auch den meisten anderen Befragungen) den folgenden Prinzipien
+
+-   jede Befragungswelle ist ein einzeles Data Frame-Objekt (= eine große Tabelle)
+
+-   die Zeilen der Tabelle sind die Beobachtungen (= RespondentInnen)
+
+-   die Spalten der Tabelle sind die Variablen (= Antworten auf Survey-Fragen, oder bei der Möglichkeit zur Mehrfachnennung, die einzelnen Antwort*optionen*)
+
+-   die Zelleninhalte sind i.d.R. (Dummy)Zahlenwerte (= etwa "1" für wenig Zustimmung und "5" für hohe Zustimmung)
+
+# Einen Überblick über den ALLBUS gewinnen
+
+Im Beispieldatensatz sind die Werte der Variablen *alter*, *geschlecht* und *bildung* recht leicht nachvollziebar, wobei sie etwas unterschiedliche Datentypen aufweisen, wie man mit Hilfe der Funktion `str` ermitteln kann.
+
+```{r}
+str(sample_klein)
+```
+
+Bei der Variable *alter* handelt es sich schlicht um eine Zahl (num), während *geschlecht* und *bildung* sogenannte Faktoren sind. Faktoren nutzt man in R, um wiederholende nicht numerische (typischerweise nominal oder ordinalskalierte) Werte zu speichern. Praktisch jeder Faktor könnte genausogut eine Zeichenkette (chr) sein, aber oftmals sind Faktoren praktischer, weil sie eine festen Reihenfolge haben können ("ranked factors"), die sich bei Bedarf auch in Zahlen umwandel lassen. Im konkreten Beispiel ist das Geschlecht ein ungerankter Faktor, der Bildungsgrad hat hingegen einen Rang. Der Fernsehkonsum ist schließlich eine Likert-skalierte Variable, die wir hier und auch an anderer Stelle als metrische Variable behandeln (und dafür den R-Datentypen numeric verwenden), auch wenn das strikt genommen nicht immer zulässig ist -- zumindest dann nicht, wenn man nur auf Grundlage eines einzelnen Items misst und eine 5- oder 7-Punkt Skala verwendet (vgl etwa [hier](https://doi.org/10.1080/01488376.2017.1329775)).
+
+Wie sehen die anderen Samples aus? Wir sehen uns im nächsten Schritt das große Zufallssample (500 Fälle) an.
+
+```{r}
+sample_gross
+```
+
+Da wir es jetzt mit einer größeren Zahl an Beobachtungen and Variablen zu tun haben kann es nützlich sein, sich einen Überblick zu verschaffen.
+
+Zunächst lassen wir uns die Variablennamen (also die Spalten) ausgeben. Dies geschieht mit der Funktion `colnames`.
+
+```{r}
+colnames(sample_gross)
+```
+
+Eine etwas detailliertere Beschreibung erhalten wir durch die Funktion `str`. Diese liefert uns auch die Dimensionen (Anzahl der Zeilen und Spalten) des Data Frames, sowie die Variablen, deren Datentyp und die ersten zehn Ausprägungen.
+
+```{r}
+str(sample_gross)
+```
+
+Eine alternative (aber etwas ordentlichere) Ansicht erhält man mit dem Befehl `glimpse` aus dem Paket `tibble` (im tidyverse enthalten).
+
+```{r}
+tibble::glimpse(sample_gross)
+```
+
+Die hier verwendete Syntax PAKETNAME::FUNKTION ist vielleicht zunächst etwas irritierend. Mit ihr rufen wir ein Paket auf, welches wir nicht vorher geladen haben. Das ist mitunter nützlich und kommt hier zur Anwendung, weil wir das Paket `tibble` hier ansonsten nicht benutzen.
+
+Schließlich lassen sich mit dem Befehle `summary` auch noch Eckwerte wie die Ausprägung von Faktorenstufen (bei Faktoren) oder Lageparameter (bei metrischen Variable) ermitteln.
+
+```{r}
+summary(sample_gross)
+```
+
+Nun schauen wir uns den ALLBUS selbst -- also den Gesamtdatensatz -- genauer an.
+
+```{r}
+daten
+```
+
+Es wird schnell klar, das weniger die Anzahl der Beobachtungen als vielmehr die Anzahle der Variablen (544) eine Herausforderung darstellt, zumal diese eher kryptische Namen wie `hp06` haben. Wie sich also zurechfinden?
+
+# Die Variablen des ALLBUS
+
+Zum Glück lassen sich die sog. *Labels*, also die sprechenden Beschriftungen die sowohl Fragen and auch Antwortoptionen im ALLBUS-Stata-Datensatz haben, mittels R extrahieren (dies geschieht mit dem Paket `labelled`). Wir haben dies bereits vorbereitend für den ALLBUS gemacht und laden die entsprechenden Tabellen nun nur noch.
+
+```{r}
+variablen <- read_csv2("Datensatz/ALLBUS_2021_variablen.csv", show_col_types = FALSE)
+variablen_optionen <- read_csv2("Datensatz/ALLBUS_2021_variablen_optionen.csv", show_col_types = FALSE)
+```
+
+Es lohnt sich, beide Objekte mittels `View()` oder durch eine Klick ob die beiden Objekte *variablen* und *variablen_optionen* in RStudio anzuschauen. Interessant sind die Felder variable (der Name der Variable im ALLBUS) und label (eine sprechende Beschreibung).
+
+Suchen wir etwa nach `hp06` finden wie die Label-Beschreibung "EPIDEMIE: STAAT DARF KRANKE ISOLIEREN", die schon deutlich besser interpretierbar ist als `hp06`. Eine genaue Dokumentation und (vor allem wichtig) der genaue Fragetext findet sich in den Dokumenten ZA5280_fb_CAWI.pdf (Fragebogen) und ZA5280_cdb.pdf (Variablenreport). Beide sind wie der ALLBUS selbst abgelegt im Ordner Datensatz, werden aber ausserhalb von RStudio geöffnet.
+
+Der Fragebogen reicht normalerweise aus, um sich einen Überblick zu verschaffen, aber der Variablenreport ist dann nützlich, wenn man den Zusammenhang zwischen einem Dummywert (bspw. "4") und dessen Bedeutung in Verbindung mit einer bestimmten Variable herausfinden möchte. Die Fragen lauter bei `hp06`
+
+*Und was denken Sie über folgende Maßnahmen: Sollte in Deutschland in Zeiten schwerer Epidemien der Staat das Recht haben, Folgendes zu tun?*
+
+*Nachweislich infizierte Personen isolieren*
+
+Und der Dummy-Wert "4" steht bei dieser Frage für die Antwort *Auf keinen Fall*.
+
+Wenn man die drei kleinen Zufallssamples mit dem Hauptdatensatz vergleicht, fällt schnell auf, dass die Samples ausschließlich (echte) Zahlenfelder für (vor allem) ordinale Likert-skalierte Variablen enthalten. Bei diesen bedeutet ein höherer Wert i.d.R. mehr Zustimmung oder eine ausgeprägtere Verhaltensausprägung gegenüber geringeren Werten. Es gibt aber auch Fälle in denen diese sog. Polarität der Variablenwerte umgedreht ist und geringe Werte "stärker" sind als hohe, order solche, in denen wir es mit nominalen Skalen zu tun haben, die Zahlen also in keinerlei logischem Zusammenhang stehen.
+
+Was heißt das konkret? Zur Sicherheit sollte man im Rahmen einer eigenen Analyse in den Hauptdatensatz und in die Dokumentatuin schauen um absolut sicher zu sein, dass man keine unzulässigen Umformungen oder Berechnungen vornimmt (und etwa den Mittelwert einer nominalskalierten Variable bestimmt), oder die Ergebnisse misinterpretiert (etwa wenn die Polarität einer Variablen umgedreht codiert wurde). Es gilt immer: *know your data*.
+
+Zunächst ist es aber vollkommen legetim, um die Variablenliste oder das Befragungsdokument nach interessanten Variablen zu durckforsten. Wir können in der `View()`-Ansicht des Objekts variable nach Begriffen suchen, die in den Labels vorkommen. Beispielsweise finden wir mit einer Suche nach dem Begriff 'medien' die Variablen `lm35` (Nutzung von sozialen Medien als Nachrichtenquelle) und `lm39` (Glaubwürdigkeit sozialer Medien mit Blick auf Kriminalität), die uns vielleicht interessieren.
+
+# Bildung eines Teilsamples
+
+Ein Schritt, der praktisch für alle Studienprojekte im Verlauf des Semesters relevant sein wird, ist die Bildung eines Teildatensatzes, welcher die Variablen (und ggf. Fälle) enthält, die für Ihre Analyse relevant sind.
+
+Technisch gesehen ist das gar nicht unbedingt notwendig -- wir können jeder Zeit Berechnungen am Gesamtdatensatz anstellen. Aber oft ist ein Teildatensatz übersichtlicher und ermöglicht ein besseres Verständnis der Daten.
+
+Wie bildet man ein solches Teilsample? Entscheidend ist hier die Funktion `select`.
+
+```{r}
+fernsehkonsum <- daten %>% 
+  select(age, sex, lm02)
+```
+
+Wir extrahieren hier mittels select drei Variablen, nämlich Alter (`age`), Geschlecht (`sex`) und den Fernsehkonsum in Minuten (`lm02`).
+
+Das Ergegnis ist ein Datensatz, der weiterhin alle 5.342 Fälle, aber nur drei (statt 544) Variablen enthält.
+
+```{r}
+fernsehkonsum
+```
+
+Eine gewisse Komplikation ist allerdings die Tatsache, dass in diesem Ausschnitt die Variablen `sex` noch eine Dummy-Zahl ist (1 = männlich, 2 = weiblich, 3 = divers) und zudem die Variable `lm02` negative Werte enthät. Diese zeigen keinen negativen Fernsehkonsum an, sondern werden für Spezialwerte verwendet ("keine Angabe", "durch Filterbedingung weggefallen"). Als Faustregel gilt: [**Negative Werte im ALLBUS sollten praktisch immer durch NAs ersetzt werden**]{.underline}. Das ist unbedingt von "0" als Wert zu unterscheiden. Mit einer "echten" Null kann ebenso wie mit "echten" Negtivwerten gerechnet werden, dies führt aber zu substantiellen Verzerrungen, wenn es sich um Dummy-Werte handelt.
+
+Der folgenden Codeblock bereinigt die Daten zum Fernsehkomsum. Dazu benennte er die drei Variablen znnächst in transparentere Were um. Anschlißend werden negative Werte in NAs umgewandelt (hier mit der Funktion replace_with_na_all aus dem Paket naniar). Dann wird das Geschlecht faktorisiert, was die Zahlen durch das Label (also MANN / FRAU / DIVERS) ersetzt. Und schließlich werden die Labels und Attribute entfernt, die nun nicht mehr benötigt werden.
+
+```{r}
+fernsehkonsum_bereinigt <- fernsehkonsum %>% 
+  rename(alter = age,
+         geschlecht = sex,
+         fernsehkonsum_minuten = lm02) %>% 
+  naniar::replace_with_na_all(condition = ~.x < 0) %>% 
+  mutate(geschlecht = as_factor(geschlecht)) %>% 
+  labelled::remove_labels() %>%
+  labelled::remove_attributes("format.stata")
+```
+
+```{r}
+fernsehkonsum_bereinigt
+```
+
+# Zusammenfassung
+
+Wir sind jetzt in einer guten Position, um mit der praktischen Arbeit am ALLBUS zu beginnnen, also der Analyse und Interpretation konkreter Daten.
