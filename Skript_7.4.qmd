@@ -7,10 +7,10 @@ highlight-style: pygments
 execute: 
   warning: false
 format:
-  html:
-    code-fold: false
-    code-line-numbers: true
-    code-annotations: hover
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
 editor_options: 
   chunk_output_type: inline
 ---

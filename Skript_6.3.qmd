@@ -8,10 +8,10 @@ execute:
   message: false
   warning: false
 format:
-  html:
-    code-fold: false
-    code-line-numbers: true
-    code-annotations: hover
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
 ---
 
 ![Bild generiert von Midjourney](Bilder/Grafik_ttest.png)
@@ -67,25 +67,25 @@ daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 
 Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements (für ausführliche Erklärungen siehe [hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html)). Für unseren t-test für unabhängige Stichproben möchten wir uns anschauen, wie sich der Wohnort der Befragten auf ihr Vertrauen in die Bundesregierung auswirkt. Wir nutzen dazu die folgenden Variablen:
 
-+----------+----------------------------------+-------------------------------+
-| Variable | Beschreibung                     | Ausprägungen                  |
-+:========:+:================================:+:=============================:+
-| eastwest | Erhebungsgebiet West-Ost         | 1= Alte Bundesländer (Westen) |
-|          |                                  |                               |
-|          |                                  | 2 = Neue Bundesländer (Osten) |
-+----------+----------------------------------+-------------------------------+
-| pt12     | Vertrauen in die Bundesregierung | -42 = Datenfehler             |
-|          |                                  |                               |
-|          |                                  | -11 = TNZ Split               |
-|          |                                  |                               |
-|          |                                  | -9 = Keine Angabe             |
-|          |                                  |                               |
-|          |                                  | 1 = Gar kein Vertrauen        |
-|          |                                  |                               |
-|          |                                  | ...                           |
-|          |                                  |                               |
-|          |                                  | 7 = Großes Vertrauen          |
-+----------+----------------------------------+-------------------------------+
++--------------+----------------------------------+-------------------------------+
+| Variable     | Beschreibung                     | Ausprägungen                  |
++:============:+:================================:+:=============================:+
+| eastwest     | Erhebungsgebiet West-Ost         | 1= Alte Bundesländer (Westen) |
+|              |                                  |                               |
+|              |                                  | 2 = Neue Bundesländer (Osten) |
++--------------+----------------------------------+-------------------------------+
+| pt12         | Vertrauen in die Bundesregierung | -42 = Datenfehler             |
+|              |                                  |                               |
+|              |                                  | -11 = TNZ Split               |
+|              |                                  |                               |
+|              |                                  | -9 = Keine Angabe             |
+|              |                                  |                               |
+|              |                                  | 1 = Gar kein Vertrauen        |
+|              |                                  |                               |
+|              |                                  | ...                           |
+|              |                                  |                               |
+|              |                                  | 7 = Großes Vertrauen          |
++--------------+----------------------------------+-------------------------------+
 
 Innerhalb unseres Datenmanageements schließen wir fehlerhafte und fehlende Werte der Variablen pt12 aus und benennen diese anschließend um:
 

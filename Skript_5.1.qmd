@@ -5,9 +5,10 @@ toc: true
 number-sections: true
 highlight-style: pygments
 format:
-  html:
-    code-fold: false
-    code-line-numbers: true
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
 ---
 
 ![Eine überfüllte & scheinbar unstrukturierte Stadt an der Oberfläche, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_crowded_city_Berlin_top_down_view_wi_b1fd8d2c-2a0f-4a76-ab4c-86e98105ee37.png)

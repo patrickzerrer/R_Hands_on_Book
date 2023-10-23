@@ -5,9 +5,10 @@ toc: true
 number-sections: true
 highlight-style: pygments
 format:
-  html:
-    code-fold: false
-    code-line-numbers: true
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
 ---
 
 ![Artwork by @allison_horst](Bilder/Grafik%20R%20Lernen.png)

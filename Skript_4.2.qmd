@@ -5,10 +5,10 @@ toc: true
 number-sections: true
 highlight-style: pygments
 format:
-  html:
-    code-fold: false
-    code-line-numbers: true
-    code-annotations: hover
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
 execute:
   message: false
   warnings: false
@@ -198,14 +198,14 @@ $$
 
 In R gibt es dafür keine eigenständige Funktion, man kann aber die Gleichung umstellen und mit Hilfe einiger anderer eingebauter Funktionen eine simple Alternative erstellen, indem man einen kleinen Trick mit der Exponentialfunktion und dem natürlichen Logarithmus anwendet:
 
-```{=tex}
+$$
 \begin{aligned}
 x_{Geom}  & = (x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}} \\
           & = e^{ln(x_{1} \cdot x_{2} \cdot ... \cdot x_{n})^{\frac{1}{n}}} \\
           & = e^{\frac{1}{n}ln(x_{1} \cdot x_{2} \cdot ... \cdot x_{n})} \\
           & = e^{\frac{1}{n} \sum_{i=1}^{n} ln({x_{i})}  }
 \end{aligned}
-```
+$$
 Auch, wenn die resultierende Formel wenig ansprechend aussieht, kann man bei genauerem Hinsehen das versteckte arithmetische Mittel erkennen und den ganzen Ausdruck in folgenden R-Code umsetzen:
 
 ```{r}

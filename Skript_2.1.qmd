@@ -5,9 +5,10 @@ toc: true
 number-sections: true
 highlight-style: pygments
 format:
-  html:
-    code-fold: false
-    code-line-numbers: true
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
 ---
 
 ![Wie soll ich mich hier nur zurecht finden?, Bild generiert von Midjourney](Bilder/zemkipatrick_comic_style_a_warehouse_full_with_packages_cyberpu_a4bce7b7-70ef-429d-aeb5-f12af768c1bd.png)

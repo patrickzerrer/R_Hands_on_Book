@@ -5,9 +5,10 @@ toc: true
 number-sections: true
 highlight-style: pygments
 format:
-  html:
-    code-fold: false
-    code-line-numbers: true
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
     mermaid: 
       theme: neutral
 ---
@@ -32,7 +33,6 @@ In einem letzten Schritt müssen wir prüfen, ob unsere Daten für die Testverfa
 
 Die folgende Grafik kann als Orientierung dienen, welches Verfahren für eure spezielle Datenlage Sinn ergibt.
 
-![](Bilder/Übersicht_Mittelwerte.png)
 
 ```{mermaid}
 

@@ -7,10 +7,10 @@ highlight-style: pygments
 execute: 
   warning: false
 format:
-  html:
-    code-fold: false
-    code-line-numbers: true
-    code-annotations: hover
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
 editor_options: 
   chunk_output_type: inline
 ---
@@ -26,8 +26,6 @@ Es gibt verschiedene Arten von Zusammenhängen zwischen Variablen, und je nach A
 Im Fokus dieses Kapitels stehen *lineare Zusammenhänge* zwischen Variablen verschiedenen Skalenniveaus. Ein linearer Zusammenhang liegt vor, wenn eine konstante Veränderung einer Variable mit einer konstanten Veränderung einer anderen Variable einhergeht.
 
 Ein Beispiel für einen linearen Zusammenhang im Bereich der Mediennutzung könnte der Zusammenhang zwischen der Anzahl der verbrachten Stunden vor dem Fernseher und der Anzahl der Fernsehwerbespots sein, die eine Person pro Tag sieht. Wenn wir annehmen, dass eine Person pro Stunde kontant 10 Werbestpots sieht, hätte sie nach 2 Stunden 20 Werbespots rezipiert, nach 3 Stunden 30 Spots usw. Einen solchen linearen Zusammenhang kann man auch grafisch darstellen: Wenn man Punkte auf einem Streudiagramm zeichnet, dann könnte man eine gerade Linie durch die Punkte legen, und diese Linie würde den Zusammenhang zwischen den Variablen am besten beschreiben.
-
-![Grafik einfacher linearer Zusammenhang zwischen Fernsehnutzung und Anzahl der rezipierten Werbespots](Bilder/Einfaches%20Beispiel%20linearer%20Zusammenhang%20SG.png)
 
 Im diesem Werbespot-Beispiel vermuten wir einen Zusammenhang zwischen zwei kontinuierlichen bzw. metrischen Variablen. Lineare Zusammenhänge zwischen kontinuierlichen bzw. metrischen Variablen werden oft durch *Korrelationskoeffizienten* und *lineare Regression* untersucht.
 

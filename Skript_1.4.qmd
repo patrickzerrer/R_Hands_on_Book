@@ -7,10 +7,10 @@ highlight-style: pygments
 execute: 
   warning: false
 format:
-  html:
-    code-fold: false
-    code-line-numbers: true
-    code-annotations: hover
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
 ---
 
 ![Unser Schreibtisch, Bild generiert von Midjourney](Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png)

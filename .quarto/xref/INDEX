@@ -54,67 +54,87 @@
     "Skript_1.2.html": "0659e415"
   },
   "Skript_2.1.qmd": {
-    "Skript_2.1.html": "20374990"
+    "Skript_2.1.html": "20374990",
+    "Skript_2.1.tex": "7e2a6504"
   },
   "Skript_2.2.qmd": {
-    "Skript_2.2.html": "052f46c9"
+    "Skript_2.2.html": "052f46c9",
+    "Skript_2.2.tex": "4ff8d428"
   },
   "Skript_2.3.qmd": {
-    "Skript_2.3.html": "78c8a046"
+    "Skript_2.3.html": "78c8a046",
+    "Skript_2.3.tex": "90c8cf9a"
   },
   "Skript_3.1.qmd": {
-    "Skript_3.1.html": "82751abd"
+    "Skript_3.1.html": "82751abd",
+    "Skript_3.1.tex": "28ccc2f4"
   },
   "Skript_3.2.qmd": {
-    "Skript_3.2.html": "376d6769"
+    "Skript_3.2.html": "376d6769",
+    "Skript_3.2.tex": "bebe04f1"
   },
   "Skript_3.3.qmd": {
-    "Skript_3.3.html": "1343b736"
+    "Skript_3.3.html": "1343b736",
+    "Skript_3.3.tex": "f65acec3"
   },
   "Skript_3.4.qmd": {
-    "Skript_3.4.html": "3cba1c2f"
+    "Skript_3.4.html": "3cba1c2f",
+    "Skript_3.4.tex": "06a142c1"
   },
   "Skript_4.1.qmd": {
-    "Skript_4.1.html": "1ba53d01"
+    "Skript_4.1.html": "1ba53d01",
+    "Skript_4.1.tex": "ce24ecea"
   },
   "Skript_4.2.qmd": {
-    "Skript_4.2.html": "179209d4"
+    "Skript_4.2.html": "179209d4",
+    "Skript_4.2.tex": "034d34de"
   },
   "Skript_4.3.qmd": {
-    "Skript_4.3.html": "8e248935"
+    "Skript_4.3.html": "8e248935",
+    "Skript_4.3.tex": "6578f935"
   },
   "Skript_4.4.qmd": {
-    "Skript_4.4.html": "3fffb6fe"
+    "Skript_4.4.html": "3fffb6fe",
+    "Skript_4.4.tex": "1a8ea77f"
   },
   "Skript_5.1.qmd": {
-    "Skript_5.1.html": "e5b7e630"
+    "Skript_5.1.html": "e5b7e630",
+    "Skript_5.1.tex": "3b45ea35"
   },
   "Skript_5.2.qmd": {
-    "Skript_5.2.html": "161e0128"
+    "Skript_5.2.html": "161e0128",
+    "Skript_5.2.tex": "7741a4a0"
   },
   "Skript_5.3.qmd": {
-    "Skript_5.3.html": "e6faaa9c"
+    "Skript_5.3.html": "e6faaa9c",
+    "Skript_5.3.tex": "1d94b2b4"
   },
   "Skript_6.1.qmd": {
-    "Skript_6.1.html": "c16c2186"
+    "Skript_6.1.html": "c16c2186",
+    "Skript_6.1.tex": "a2e8f2a0"
   },
   "Skript_6.2.qmd": {
     "Skript_6.2.html": "8684e3eb"
   },
   "Skript_6.3.qmd": {
-    "Skript_6.3.html": "d3274f64"
+    "Skript_6.3.html": "d3274f64",
+    "Skript_6.3.tex": "a4a62e5e"
   },
   "Skript_6.4.qmd": {
-    "Skript_6.4.html": "e01126fe"
+    "Skript_6.4.html": "e01126fe",
+    "Skript_6.4.tex": "973f0873"
   },
   "Skript_7.1.qmd": {
-    "Skript_7.1.html": "ac5d86c7"
+    "Skript_7.1.html": "ac5d86c7",
+    "Skript_7.1.tex": "cd5d786f"
   },
   "Skript_7.2.qmd": {
-    "Skript_7.2.html": "4a364833"
+    "Skript_7.2.html": "4a364833",
+    "Skript_7.2.tex": "3f51b67b"
   },
   "Skript_7.3.qmd": {
-    "Skript_7.3.html": "2b9ed8a9"
+    "Skript_7.3.html": "2b9ed8a9",
+    "Skript_7.3.tex": "58b3fc5a"
   },
   "Skritp_1.1.qmd": {
     "Skritp_1.1.html": "cfd72ace"
@@ -123,10 +143,12 @@
     "Skritp_1.3.html": "4caeac75"
   },
   "Skript_1.1.qmd": {
-    "Skript_1.1.html": "b0b060ab"
+    "Skript_1.1.html": "b0b060ab",
+    "Skript_1.1.tex": "bdc76a30"
   },
   "Skript_1.3.qmd": {
-    "Skript_1.3.html": "7901f19e"
+    "Skript_1.3.html": "7901f19e",
+    "Skript_1.3.tex": "013975de"
   },
   "Home.qmd": {
     "Home.html": "d4954e12"
@@ -138,9 +160,11 @@
     "Hintergrund.html": "17c61d26"
   },
   "Skript_1.4.qmd": {
-    "Skript_1.4.html": "0ea7e430"
+    "Skript_1.4.html": "0ea7e430",
+    "Skript_1.4.tex": "2a3f245e"
   },
   "Skript_7.4.qmd": {
-    "Skript_7.4.html": "24e4b4bb"
+    "Skript_7.4.html": "24e4b4bb",
+    "Skript_7.4.tex": "3263d1c5"
   }
 }
