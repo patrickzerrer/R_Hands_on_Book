@@ -26,7 +26,6 @@ Patrick Zerrer ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommu
 -   (mobile) Mediennutzungsforschung
 -   Klimaprotestforschung
 
-
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
 
@@ -53,7 +52,6 @@ Katharina Maubach ist seit Dezember 2022 als wissenschaftliche Mitarbeiterin am 
 -   Rezeptions- und Wirkungsforschung
 -   Klimakommunikation
 -   Statistische Methoden
-
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
@@ -83,7 +81,6 @@ Forschungsschwerpunkte
 
 -   Methoden der automatisierten Inhaltsanalyse
 
-
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
 
@@ -108,7 +105,6 @@ Prof. Dr. habil. Stephanie Geise ist Professorin für Kommunikations- und Medien
 -   Rezeptions- und Wirkungsforschung
 -   Visuelle und multimodale Kommunikation
 -   Innovative Methoden & Methodenkombinationen
-
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
@@ -136,7 +132,6 @@ Michael Linke ist wissenschaftlicher Mitarbeiter am Zentrum für Medien-, Kommun
 -   Protest Event Analysis
 -   Politische Kommunikation
 
-
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
 
@@ -162,7 +157,6 @@ Hannah-Marie Büttner ist als wissenschaftliche Mitarbeiterin der Universität B
 -   Soziale Netzwerkanalyse
 -   Computerbasierte Methoden
 
-
 ::: {.callout-note collapse="true" icon="false"}
 ## Kontakt
 
@@ -172,3 +166,16 @@ Hannah-Marie Büttner ist als wissenschaftliche Mitarbeiterin der Universität B
 
 ✉️ [E-Mail](habu@uni-bremen.de)
 :::
+
+## Lena Otto
+
+**Vita**
+
+::: column-margin
+![Lena Otto](Bilder/Lena_Otto.jpeg)
+:::
+
+Lena Otto ist Studentin im Master of Education der Universität Bremen mit den Fächern Spanisch und Englisch. Neben einzelnen Tätigkeiten als studentische Hilfskraft im Bereich der Fremdsprachendidaktik am Fachbereich 10 arbeitet sie seit August 2022 als studentische Hilfskraft im Universitätsprojekt "SKILL-UB". Im Rahmen dieses Projektes hat sie den Lehr-Lern-Videos ihre Stimme geliehen. 
+
+
+

@@ -2595,5 +2595,12 @@
     "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
     "section": "3.4 Nicht-parametrischer Test: one sample Wilcoxon Test",
     "text": "3.4 Nicht-parametrischer Test: one sample Wilcoxon Test\n\nwilcox.test(daten_one$einkommen, mu = 3813)\n\n\n    Wilcoxon signed rank test with continuity correction\n\ndata:  daten_one$einkommen\nV = 30680, p-value &lt; 2.2e-16\nalternative hypothesis: true location is not equal to 3813"
+  },
+  {
+    "objectID": "Autoren.html#lena-otto",
+    "href": "Autoren.html#lena-otto",
+    "title": "Das Team stellt sich vor",
+    "section": "Lena Otto",
+    "text": "Lena Otto\nVita\n\n\n\n\n\nLena Otto\n\n\nLena Otto ist Studentin im Master of Education der Universität Bremen mit den Fächern Spanisch und Englisch. Neben einzelnen Tätigkeiten als studentische Hilfskraft im Bereich der Fremdsprachendidaktik am Fachbereich 10 arbeitet sie seit August 2022 als studentische Hilfskraft im Universitätsprojekt “SKILL-UB”. Im Rahmen dieses Projektes hat sie den Lehr-Lern-Videos ihre Stimme geliehen."
   }
 ]
