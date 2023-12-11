@@ -69,25 +69,25 @@ daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 
 Um mit dem Datensatz zu arbeiten benötigen wir einige grundlegende Schritte des Datenmanagements (ausführliche Erklärungen finden sich [hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html)). Für unseren t-test für unabhängige Stichproben möchten wir uns anschauen, wie sich der Wohnort der Befragten auf ihr Vertrauen in die Bundesregierung auswirkt. Wir nutzen dazu die folgenden Variablen:
 
-+---------------+----------------------------------+-------------------------------+
-| Variable      | Beschreibung                     | Ausprägungen                  |
-+:=============:+:================================:+:=============================:+
-| eastwest      | Erhebungsgebiet West-Ost         | 1= Alte Bundesländer (Westen) |
-|               |                                  |                               |
-|               |                                  | 2 = Neue Bundesländer (Osten) |
-+---------------+----------------------------------+-------------------------------+
-| pt12          | Vertrauen in die Bundesregierung | -42 = Datenfehler             |
-|               |                                  |                               |
-|               |                                  | -11 = TNZ Split               |
-|               |                                  |                               |
-|               |                                  | -9 = Keine Angabe             |
-|               |                                  |                               |
-|               |                                  | 1 = Gar kein Vertrauen        |
-|               |                                  |                               |
-|               |                                  | ...                           |
-|               |                                  |                               |
-|               |                                  | 7 = Großes Vertrauen          |
-+---------------+----------------------------------+-------------------------------+
++----------+----------------------------------+-------------------------------+
+| Variable | Beschreibung                     | Ausprägungen                  |
++:========:+:================================:+:=============================:+
+| eastwest | Erhebungsgebiet West-Ost         | 1= Alte Bundesländer (Westen) |
+|          |                                  |                               |
+|          |                                  | 2 = Neue Bundesländer (Osten) |
++----------+----------------------------------+-------------------------------+
+| pt12     | Vertrauen in die Bundesregierung | -42 = Datenfehler             |
+|          |                                  |                               |
+|          |                                  | -11 = TNZ Split               |
+|          |                                  |                               |
+|          |                                  | -9 = Keine Angabe             |
+|          |                                  |                               |
+|          |                                  | 1 = Gar kein Vertrauen        |
+|          |                                  |                               |
+|          |                                  | ...                           |
+|          |                                  |                               |
+|          |                                  | 7 = Großes Vertrauen          |
++----------+----------------------------------+-------------------------------+
 
 Innerhalb unseres Datenmanageements schließen wir fehlerhafte und fehlende Werte der Variablen pt12 aus und benennen diese anschließend um:
 
@@ -215,12 +215,12 @@ daten %>%
          data = .)
 ```
 
-1. Ausschließen von fehlenden Daten. 
-2. Durchführung des t-Tests mittels der Funktion `t.test` aus dem `mosaic`-Package.
-3. Als Alternative verwenden wir hier `two.sided`, da wir zweiseitig testen. Wenn wir innerhalb unserer Hypothese eine klare Aussage bezüglich der Richtung des t-Testes machen, können wir auch einseitig testen. In diesem Fall würden wir `"less"` oder `"greater"` verwenden.  
-4. Wenn wir Varianzhomogenität annehmen (siehe Levene-Test der Voraussetzungsprüfung), verwenden wir hier var.equal = T. Alternativ können wir den nicht-parametrischen Welch-Test rechnen (siehe nicht-parametrische Testverfahren), welche in R die default-Einstellung darstellt.    
+1.  Ausschließen von fehlenden Daten.
+2.  Durchführung des t-Tests mittels der Funktion `t.test` aus dem `mosaic`-Package.
+3.  Als Alternative verwenden wir hier `two.sided`, da wir zweiseitig testen. Wenn wir innerhalb unserer Hypothese eine klare Aussage bezüglich der Richtung des t-Testes machen, können wir auch einseitig testen. In diesem Fall würden wir `"less"` oder `"greater"` verwenden.\
+4.  Wenn wir Varianzhomogenität annehmen (siehe Levene-Test der Voraussetzungsprüfung), verwenden wir hier var.equal = T. Alternativ können wir den nicht-parametrischen Welch-Test rechnen (siehe nicht-parametrische Testverfahren), welche in R die default-Einstellung darstellt.
 
-In einem zweiten Schritt müssen wir zusätzlich die Effektstärke *cohens' d* (Cohen, 1992) berechnen. Der t-Test selbst gibt uns eine Aussage über die Signifikanz der Ergebnisse, also wie wahrscheinlich es ist, dass der von uns gefundene Effekt nicht zufällig ist. Cohen's d wiederum macht eine Aussage zur Effektsträrke, also wie stark ein signifikanter Mittelwertunterschied ist. Dazu nutzen wir die Funktion `cohens_d` aus dem Paket `effectsize`. 
+In einem zweiten Schritt müssen wir zusätzlich die Effektstärke *cohens' d* (Cohen, 1992) berechnen. Der t-Test selbst gibt uns eine Aussage über die Signifikanz der Ergebnisse, also wie wahrscheinlich es ist, dass der von uns gefundene Effekt nicht zufällig ist. Cohen's d wiederum macht eine Aussage zur Effektsträrke, also wie stark ein signifikanter Mittelwertunterschied ist. Dazu nutzen wir die Funktion `cohens_d` aus dem Paket `effectsize`.
 
 ```{r}
 daten %>% 
@@ -228,12 +228,12 @@ daten %>%
   cohens_d(trustreg~eastwest, data = .) # <2>
 ```
 
-1. Ausschließen von fehlenden Daten. 
-2. Ausgeben der Effektstärke nach Cohen (1992)
+1.  Ausschließen von fehlenden Daten.
+2.  Ausgeben der Effektstärke nach Cohen (1992)
 
 ## Interpretation des Outputs
 
-Innerhalb des Outputs des t-tests erhalten wir die Teststatistik (`t`), die Freiheitsgrade (`df`), das Signifikanzniveau (`p-value`), das 95% Konfidenzintervall, sowie die Mittelwerte unserer beiden Vergleichsgruppen. Insbesondere interessiert uns in diesem Fall der Signifikanzwert (`p-Value`). Wenn dieser, wie in unserem Fall unter 0.05 liegt, ist der t-Test signifikant, dass bedeutet, dass die gefunden Mittelwertunterschiede mit 95% Wahrscheinlichkeit nicht zufällig sind. 
+Innerhalb des Outputs des t-tests erhalten wir die Teststatistik (`t`), die Freiheitsgrade (`df`), das Signifikanzniveau (`p-value`), das 95% Konfidenzintervall, sowie die Mittelwerte unserer beiden Vergleichsgruppen. Insbesondere interessiert uns in diesem Fall der Signifikanzwert (`p-Value`). Wenn dieser, wie in unserem Fall unter 0.05 liegt, ist der t-Test signifikant, dass bedeutet, dass die gefunden Mittelwertunterschiede mit 95% Wahrscheinlichkeit nicht zufällig sind.
 
 Bezüglich der Interpretation der Effektstärke gilt nach Cohen (1992):
 
@@ -244,7 +244,7 @@ Bezüglich der Interpretation der Effektstärke gilt nach Cohen (1992):
 | 0.5 - 0.79 | mittlerer Effekt                |
 | größer 0.8 | starker Effekt                  |
 
-In unserem Fall haben wir eine Effektstärke von 0.18. Demnach ist der gefundene Effekt zwar signifikant, aber weist keine bzw. nur eine sehr geringe Effektstärke auf. 
+In unserem Fall haben wir eine Effektstärke von 0.18. Demnach ist der gefundene Effekt zwar signifikant, aber weist keine bzw. nur eine sehr geringe Effektstärke auf.
 
 ::: callout-tip
 ## Wie gebe ich die Ergebnisse korrekt an?
@@ -255,7 +255,7 @@ Die Ergebnisse des t-tests werden üblicherweise im Text angegeben. Für diese A
 
 ✅ der df-Wert
 
-✅ der  t-Wert
+✅ der t-Wert
 
 ✅ der p-Wert
 
@@ -264,12 +264,11 @@ Die Ergebnisse des t-tests werden üblicherweise im Text angegeben. Für diese A
 Das Format ist üblicherweise:
 
 > ***Beispiel:*** Personen mit Lebenswohnsitz in den alten Bundesländern (*M = 4.15;SD=1.58*) besitzen ein höheres Vertrauen in die Bundesregierung als Personen mit Lebenswohnsitz in den neuen Bundesländern (*M = 3.86;SD=1.71*). Ein Student's T-Test zeigt, dass der Lebenwohnsitz einen signifikanten Einfluss auf das Vertrauen in Bundesregierung hat *t(3516)= 4.9349, p\<0,001*. Die Effektstärke nach Cohen (1992) weist jedoch mit *d = 0,18* auf einen nicht vorhanden, bzw. nur sehr geringen Effekt hin.
-
 :::
 
-## Nicht-parametrische Testverfahren 
+## Nicht-parametrische Testverfahren
 
-Wenn einzelne Voraussetzungen verletzt wurden (siehe oben), können statt dem normalen t-test nicht-parametrische Testverfahren verwendet werden. 
+Wenn einzelne Voraussetzungen verletzt wurden (siehe oben), können statt dem normalen t-test nicht-parametrische Testverfahren verwendet werden.
 
 Das geläufigste Testverfahren ist der Welch-Test, welcher in R das standardmäßige Testverfahren darstellt. Der Welch-Test ist robust gegenüber Verletzungen der Varianzhomogenität sowie der Normalverteilung (Rasch et al., 2011), sodass dieser Test auch bei nicht-idealen Daten gerechnet werden kann. Verschiedene [Autoren](https://statistikguru.de/r/ungepaarter-t-test-r/t-test-oder-welch-test.html) empfehlen den Test sogar standardmäßig immer zu berechnen, da der Test auch bei homogenen Varianzen der Daten eingesetzt werden kann. Den Welch-Test können wir in R über die bereits bekannte Funktion t.test aufrufen. Wir müssen lediglich bei dem Zusatz `var.equal = T` zu `var.equal = F` ändern. Alternativ können wir den Zusatz auch einfach weglassen, da innerhalb des mosaic-Packages standardmäßig der Welch-Test gerechnet wird.
 
@@ -281,7 +280,8 @@ daten %>%
          var.equal = F, #<1>
          data = .)
 ```
-1. Für den Welch-Test müssen wir lediglich den Zusatz `var.equal` auf `F` oder `FALSE` setzen. 
+
+1.  Für den Welch-Test müssen wir lediglich den Zusatz `var.equal` auf `F` oder `FALSE` setzen.
 
 Anschließend müssen wir erneut die Effektstärke berechnen, wobei wir hier ebenfalls durch den Zusatz `var.equal= F` angeben, dass unsere Fehlervarianzen nicht homogen sind:
 
@@ -290,10 +290,10 @@ daten %>%
   drop_na(eastwest, trustreg) %>%  #<1>
   effectsize::cohens_d(trustreg~eastwest, data = ., var.equal = F) # <2>
 ```
-Die Ergebnisse zeigen, dass unser Test weiterhin signifikant ist, allerdings die Effektstärke noch ein wenig schlechter geworden ist. Die Ergebnisse geben wir genauso wie die Ergebnisse des normalen Student's T-Test an (siehe oben), wobei wir im Text darauf verweisen, dass wir aufgrund der Verletzungen der Voraussetzungen einen nicht-parametrischen Welch-Test gerechnet haben. Zudem ist es sinnvoll, bei Verletzungen der Normalverteilung statt dem Mittelwert den Median anzugeben. 
 
-Alternativ zum Welch-Test gibt es noch den Mann-Whitney-U Test bzw. den Wilcoxon-Rangsummentest. Beide Verfahren testen fast dasselbe  (zur Historie der Testverfahren siehe [hier](http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html)) und können angewandt werden, wenn die Voraussetzung der Normalverteilung verletzt wurde. Da die Testverfahren jedoch von etwas anderen Hypothesen ausgehen und der Welch-Test ebenfalls robust gegenüber der Verletzung der Normalverteilung (bei Gruppen ab ca. n=30) ist, empfiehlt sich hier der Welch-Test.  
+Die Ergebnisse zeigen, dass unser Test weiterhin signifikant ist, allerdings die Effektstärke noch ein wenig schlechter geworden ist. Die Ergebnisse geben wir genauso wie die Ergebnisse des normalen Student's T-Test an (siehe oben), wobei wir im Text darauf verweisen, dass wir aufgrund der Verletzungen der Voraussetzungen einen nicht-parametrischen Welch-Test gerechnet haben. Zudem ist es sinnvoll, bei Verletzungen der Normalverteilung statt dem Mittelwert den Median anzugeben.
 
+Alternativ zum Welch-Test gibt es noch den Mann-Whitney-U Test bzw. den Wilcoxon-Rangsummentest. Beide Verfahren testen fast dasselbe (zur Historie der Testverfahren siehe [hier](http://www.regorz-statistik.de/inhalte/tutorial_wilcoxon_mann_whitney_u_test.html)) und können angewandt werden, wenn die Voraussetzung der Normalverteilung verletzt wurde. Da die Testverfahren jedoch von etwas anderen Hypothesen ausgehen und der Welch-Test ebenfalls robust gegenüber der Verletzung der Normalverteilung (bei Gruppen ab ca. n=30) ist, empfiehlt sich hier der Welch-Test.
 
 # t-Test für unabhängige Stichproben
 
