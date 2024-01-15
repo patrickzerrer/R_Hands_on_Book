@@ -18,6 +18,12 @@ format:
 
 Die Varianzanalyse weitet den Grundgedanken des t-Tests aus, indem sie den simultanen Vergleich von Gruppenmittelwerten über mehr als zwei Gruppen erlaubt. Die einfaktorielle Varianzanalyse definiert die Gruppen dabei anhand eines Faktors (einer unabhängigen Variable), die mehrfaktorielle Varianzanalyse erlaubt mehrere unabhängige kategoriale Variablen im Modell, ist aber nicht mit der multivariaten Varianzanalyse (MANOVA) zu verwechseln, die auch mehrere metrische abhängige Variablen gleichzeitig zulässt. Wenn die Gruppierungsvariable (also die unabhängige Faktor-Variable) mehr als zwei Gruppen unterscheidet, müssen nach der Anova Post-Hoc Tests durchgeführt werden. Denn sollte die Varianzanalyse insgesamt signifikante Werte liefern, wurde zwar festgestellt, dass es überzufällige Unterschiede zwischen den durch die Faktorstufen definierten Gruppen gibt, bei drei und mehr Faktorstufen bleibt aber noch unklar, auf welchen Gruppenunterschieden dieses Ergebnis beruht. Post hoc-Tests liefern spezifischere Informationen dazu, welche Gruppenmittelwerte signifikant voneinander abweichen.
 
+::: {.callout-note collapse="true" icon="false"}
+## Video
+
+{{< video https://nc.uni-bremen.de/index.php/s/C9ooxoBnGbZkceP/download/%2312%20Varianzanalyse.mp4 width="900" height="500">}}
+:::
+
 # Datenmanagement
 
 Wir laden zunächst die für dieses Skript benötigten Pakete und legen unseren Grafikhintegrund sowie die Formatierung von Zahlen fest.
@@ -44,39 +50,39 @@ daten = haven::read_dta("Datensatz/Allbus_2021.dta")
 
 Um mit dem Datensatz arbeiten zu können benötigen wir einige grundlegende Schritte des Datenmanagements [für ausführliche Erklärungen siehe hier](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html). Für die Varianzanalyse möchten wir uns anschauen, wie sich der Gesundheitszustand (und das Alter) der Befragten auf ihr Vertrauen in das Gesundheitswesen auswirkt. Wir nutzen dazu die folgenden Variablen:
 
-+----------+-----------------------------------+-------------------------+
-| Variable | Beschreibung                      | Ausprägungen            |
-+:========:+:=================================:+:=======================:+
-| hs01     | Gesundheitszustand der Befragten  | -42 = Datenfehler       |
-|          |                                   |                         |
-|          |                                   | -11 = TNZ Split         |
-|          |                                   |                         |
-|          |                                   | -9 = Keine Angabe       |
-|          |                                   |                         |
-|          |                                   | 1 = Sehr Gut            |
-|          |                                   |                         |
-|          |                                   | 2 = Gut                 |
-|          |                                   |                         |
-|          |                                   | 3 = Zufriedenstellend   |
-|          |                                   |                         |
-|          |                                   | 4 = Weniger Gut         |
-|          |                                   |                         |
-|          |                                   | 5 = Schlecht            |
-+----------+-----------------------------------+-------------------------+
-| age      | Alter der Befragten               | -32 = Nicht Generierbar |
-+----------+-----------------------------------+-------------------------+
-| pt01     | Vertrauen in das Gesundheitswesen | -42 = Datenfehler       |
-|          |                                   |                         |
-|          |                                   | -11 = TNZ Split         |
-|          |                                   |                         |
-|          |                                   | -9 = Keine Angabe       |
-|          |                                   |                         |
-|          |                                   | 1 = Gar kein Vertrauen  |
-|          |                                   |                         |
-|          |                                   | ...                     |
-|          |                                   |                         |
-|          |                                   | 7 = Großes Vertrauen    |
-+----------+-----------------------------------+-------------------------+
++--------------+-----------------------------------+-------------------------+
+| Variable     | Beschreibung                      | Ausprägungen            |
++:============:+:=================================:+:=======================:+
+| hs01         | Gesundheitszustand der Befragten  | -42 = Datenfehler       |
+|              |                                   |                         |
+|              |                                   | -11 = TNZ Split         |
+|              |                                   |                         |
+|              |                                   | -9 = Keine Angabe       |
+|              |                                   |                         |
+|              |                                   | 1 = Sehr Gut            |
+|              |                                   |                         |
+|              |                                   | 2 = Gut                 |
+|              |                                   |                         |
+|              |                                   | 3 = Zufriedenstellend   |
+|              |                                   |                         |
+|              |                                   | 4 = Weniger Gut         |
+|              |                                   |                         |
+|              |                                   | 5 = Schlecht            |
++--------------+-----------------------------------+-------------------------+
+| age          | Alter der Befragten               | -32 = Nicht Generierbar |
++--------------+-----------------------------------+-------------------------+
+| pt01         | Vertrauen in das Gesundheitswesen | -42 = Datenfehler       |
+|              |                                   |                         |
+|              |                                   | -11 = TNZ Split         |
+|              |                                   |                         |
+|              |                                   | -9 = Keine Angabe       |
+|              |                                   |                         |
+|              |                                   | 1 = Gar kein Vertrauen  |
+|              |                                   |                         |
+|              |                                   | ...                     |
+|              |                                   |                         |
+|              |                                   | 7 = Großes Vertrauen    |
++--------------+-----------------------------------+-------------------------+
 
 Innerhalb unseres Datenmanagements schließen wir fehlerhafte und fehlende Werte der Variablen sex, agef und pt12 aus und benennen falls nötig die Variablen um:
 

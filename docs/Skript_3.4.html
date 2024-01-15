@@ -75,6 +75,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -459,6 +461,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <p>Dieses Notebook illustriert verschiedene Möglichkeiten dafür, wie auf Grundlage der ALLBUS-Daten informative Tabellen und Plots erstellt werden können. Tabellen und Datenvisualisierungen (“Plots”) stellen zwei sehr effektive Möglichkeiten dar, sich schnell einen Überblick über komplexe Daten zu verschaffen. Dabei lassen sich oftmals Zusammenhänge zwischen zwei oder mehr Variablen erahnen, die dann später inferenzstatistisch auf die Solidität ihres Zusammenhangs hin überprpüft werden können.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="900" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://nc.uni-bremen.de/index.php/s/Zp5Anxst7Ep53a5/download/%235%20Grammar%20Of%20Graphics.mp4"></video></div>
+</div>
+</div>
+</div>
 <section id="data-management" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Data Management</h1>
 <p>Zunächst laden wir die Pakete des tidyverse. Das Paket ggplot2 ist das zentrale Werkzeug, um informative Plots zu produzieren. Die Einstellung theme_set hat einen Einfluss auf die Grafiken, die wir später erstellen werden.</p>
@@ -777,16 +795,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 80 × 4
    alter     geschlecht bildung            einkommen
    &lt;dbl+lbl&gt; &lt;fct&gt;      &lt;fct&gt;              &lt;dbl+lbl&gt;
- 1 41        FRAU       MITTLERE REIFE     2120     
- 2 27        MANN       HOCHSCHULREIFE     1920     
- 3 61        FRAU       VOLKS-,HAUPTSCHULE  650     
- 4 26        FRAU       HOCHSCHULREIFE     1800     
- 5 35        FRAU       VOLKS-,HAUPTSCHULE  900     
- 6 38        MANN       MITTLERE REIFE     2600     
- 7 58        MANN       HOCHSCHULREIFE     2700     
- 8 39        FRAU       HOCHSCHULREIFE     2300     
- 9 34        FRAU       HOCHSCHULREIFE     1500     
-10 56        FRAU       MITTLERE REIFE     1000     
+ 1 47        MANN       HOCHSCHULREIFE     9000     
+ 2 30        MANN       HOCHSCHULREIFE     3300     
+ 3 52        MANN       OHNE ABSCHLUSS     3000     
+ 4 34        FRAU       HOCHSCHULREIFE     3100     
+ 5 49        MANN       MITTLERE REIFE     2100     
+ 6 34        FRAU       HOCHSCHULREIFE     1800     
+ 7 52        MANN       VOLKS-,HAUPTSCHULE 4500     
+ 8 69        MANN       MITTLERE REIFE     5000     
+ 9 56        MANN       HOCHSCHULREIFE     4700     
+10 58        MANN       HOCHSCHULREIFE     5000     
 # ℹ 70 more rows</code></pre>
 </div>
 </div>
@@ -1147,6 +1165,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-right"><img src="Bilder/logo_zemki.png" class="img-fluid" width="120"> <img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
+<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 

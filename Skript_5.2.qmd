@@ -23,6 +23,12 @@ Die explorative Faktorenanalyse (EFA) ist eine statistischen Methoden, die dazu 
 
 In unserem Fall interessiert uns die latente Variable *Vertrauen in gesellschaftliche Institutionen*. Wir möchten Wissen, ob wir diese latente Variable bzw. diesen Faktor aus den einzelenen Indikatoren (den Fragen aus dem Allbus-Fragebogen) ableiten können. Konkret müssen wir überprüfen, ob sich die theoretisch angenommene *latenten Variable* auch in den Daten zu finden ist. Hierfür können wir die Faktorenanalyse oder Principal Component Analysis (PCA) verwenden.
 
+::: {.callout-note collapse="true" icon="false"}
+## Video
+
+{{< video https://nc.uni-bremen.de/index.php/s/ybGYyGiQoAgnAD9/download/%2310%20Faktorenanalyse.mp4 width="900" height="500">}}
+:::
+
 # Data Management
 
 Wir beginnen zunächst mit der Vorbereitung und Laden die notwendigen Pakete.

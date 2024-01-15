@@ -75,6 +75,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -465,6 +467,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Der Zusammenhang zwischen den untersuchten Variablen wird dabei analysiert, <em>ohne</em> dass eine Richtung spezifiziert wird - es muss also nicht die eine Variable als unabhängig, und die andere als abhängige Variable festgelegt werden. Die Korrelationsanalyse kann vielfältig eingesetzt werden. Sie ist allerdings etwas empfindlich gegenüber Ausreißern und setzt einen linearen Zusammenhang voraus.</p>
 <p>Vorsicht! Lasst euch nicht verwirren: Der <em>Pearson-Korrelationskoeffizient</em> und die <em>Rangkorrelation nach Pearson</em> sind unterschiedliche Kennwerte, die nur ähnlich klingen. Der <em>Pearson-Korrelationskoeffizient</em> misst den linearen Zusammenhang zwischen den tatsächlichen Messwerten, während die <em>Rangkorrelation nach Pearson</em> (auch als <em>Spearman-Korrelationskoeffizient</em> bezeichnet) den monotonen Zusammenhang zwischen den Rängen der Daten untersucht. Daher ist die Rangkorrelation besser geeignet, wenn der Zusammenhang <em>nicht-linear</em> ist oder wenn <em>Ausreißer in den Daten</em> vorhanden sind. Nun soll es aber um die Analyse eines <em>linearen Zusammenhangs</em> zwischen zwei metrischen Variablen gehen. Dazu widmen wir uns nun der Korrelationsanalyse mittels Pearson-Korrelationskoeffizient.</p>
 <p>Mit dieser Methode wollen wir untersuchen, ob es einen Zusammenhang zwischen der metrischen Variable tägliche Fernsehnutzung in Minuten (<code>lm02</code>) sowie der quasi-metrischen Variable Vertrauen ins Fernsehen (<code>pt09</code>) gibt. Wir vermuten, dass es einen positiven Zusammenhang gibt: Wer ein höheres Vertrauen in das Fernsehen hat, schaut auch mehr fern.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="900" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://nc.uni-bremen.de/index.php/s/62SnWt5ng8jF5Bc/download/%2313%20Korrelation.mp4"></video></div>
+</div>
+</div>
+</div>
 <section id="data-management" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="data-management"><span class="header-section-number">1.1</span> Data Management</h2>
 <p>Um das zu prüfen, müssen wir zunächst wieder unsere Pakete und Allbus-Daten laden und aufbereiten. Los geht’s!</p>
@@ -515,7 +533,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Hier können wir den oben bereits ermittelten Befund noch einmal grafisch inspizieren. Der leichte positive Zusammenhang zwischen dem Vertrauen in die Insitution Fernsehen und der täglichen Fernsehnutzung zeigt sich ganz schön.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -524,7 +542,7 @@ Exkurs: Übungsaufgabe Korrelationsanalyse
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Ihr könnt zur Übung noch eine Korrelationsanalyse durchführen, um den Zusammenhang zwischen der täglichen Fernsehnutzung in Minuten (umbenannt in “TV_Konsum”) und der quasi-metrisch gemessenen Einschätzung, ob die Entwicklung der Kriminalität in Deutschland zu- oder abgenommen hat (<code>cf03</code>; 1=hat stark zugenommen; 5=hat stark abgenommen). Wenn wir der <a href="https://dorsch.hogrefe.com/stichwort/kultivierungshypothese">Kultivierungsthese</a> folgen, vermuten wir, dass ein erhöhter Fernsehkonsum zu einer stärkeren Wahrnehmung der Kriminalität führt. Entsprechend hätten wir ins unserem Fall (wegen der gegenläufigen Kodierung der Variablen) einen negativen linearen Zusammenhang. Dazu müsst ihr zuerst wieder einen Teildatensatz mit den benötigten Variablen erzeugen, diese ggf. umbenennen und filtern. Dann ermittelt ihr die Korrelation beider Variablen.</p>
 <section id="data-management-1" class="level2" data-number="1.4">
@@ -575,16 +593,32 @@ Exkurs: Übungsaufgabe Korrelationsanalyse
 </section>
 <section id="die-lineare-regressionsanalyse" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Die lineare Regressionsanalyse</h1>
-<p>Die <em>lineare Regression</em> untersucht den Zusammenhang zwischen einer <em>abhängigen Variable</em> und mindestens einer <em>unabhängigen Variable</em>. Sie versucht, eine mathematische Beziehung zwischen den Variablen zu modellieren, die durch eine Linie (in einfachen linearen Regressionen) oder eine Ebene (in multiplen linearen Regressionen) repräsentiert wird. Die dahinterliegende “mathematische Idee” der linearen Regression besteht darin, die bestmögliche Anpassung der Daten an das Modell zu erreichen, um die Vorhersage der abhängigen Variable basierend auf den unabhängigen Variablen zu ermöglichen. Dazu wird ein <em>Regressionskoeffizient</em> für jede unabhängige Variable geschätzt, um ihren Einfluss auf die abhängige Variable zu quantifizieren.</p>
-<p>Ziel der Regressionsanalyse ist es also, die Beziehung zwischen einer <em>abhängigen Variable</em> (auch erklärte Variable, Regressand oder Prognosevariable genannt) und einer oder mehreren <em>unabhängigen Variablen</em> (oft auch erklärende Variable, Regressor oder Prädiktorvariable) zu analysieren, um Zusammenhänge quantitativ zu beschreiben und zu erklären und/oder Werte der abhängigen Variable mit Hilfe der unabhängige Variable (des Prädiktors) zu prognostizieren. Mit Hilfe der Regressionsanalyse können drei Arten von Fragestellungen untersucht werden: 1) Ursachenanalyse: Gibt es einen Zusammenhang zwischen der unabhängigen und der abhängigen Variable? Wie stark ist dieser? 2) Wirkungsanalyse: Wie verändert sich die abhängige Variable bei einer Änderung der unabhängigen Variablen? 3) Prognose: Können die Messwerte der abhängigen Variable durch die Werte der unabhängigen Variable vorhergesagt werden?</p>
-<p>Die <em>einfache lineare Regression</em> wird angewandt, wenn geprüft werden soll, ob ein (als linear vermuteter) Zusammenhang zwischen einer abhängigen metrischen Variable und einer unabhängigen metrischen Variable besteht. Da sie zwei metrische Variablen integriert, wird sie auch als <em>bivariate Regression</em> bezeichnet. In diesem Teilkapitel lernen wir die <em>einfache lineare Regression</em> auf Grundlage der Allbus-Daten kennen. In der nächsten Sitzung gehen wir dann näher auf die notwendige Prüfung der <em>Voraussetzungen einer Regressionsanalyse</em> ein und lernen auch noch die <em>multiple lineare Regression</em> kennen.</p>
-<p>Um die Durchführung der linearen Regression an einem Beispiel nachzuvollziehen, stellen wir zunächst eine gerichtete Hypothese auf, die den Einfluss einer unabhängigen metrischen Variable auf eine abhängige metrische Variable spezifiziert. Hierzu schauen wir uns den Zusammenhang zwischen dem Alter (<code>age</code>) sowie der täglichen Fernsehnutzung in Minuten (<code>lm02</code>) an. Dazu vermuten wir: Das Alter erklärt die Intensität der täglichen Fernsehnutzung in Minuten.</p>
-<p>Mit Hilfe der Regression wollen wir nun die oben formulierte Annahme prüfen, dass das Alter die täglichen Fernsehnutzung in Minuten (umbenannt in TV_Konsum) erklären kann. Beides sind metrische Variablen und erfüllen damit die Voraussetzung, dass eine Regression gerechnet werden kann. (Achtung: auch kategorische Variablen können bei der Regressionsanalyse grundsätzlich eingesetzt werden, sie müssen dann aber durch <em>Dummy-Coding</em> passend gemacht werden, dazu aber später mehr).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Bilder/zemkipatrick_comic_style_young_and_old_people_watching_tv_widef_92db5ce1-7d64-4c5b-b05c-8257c92de958.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Grafik: Kann das Alter die Fernsehnutzung erklären? (Picture generated by midjourney)</figcaption>
 </figure>
+</div>
+<p>Die <em>lineare Regression</em> untersucht den Zusammenhang zwischen einer <em>abhängigen Variable</em> und mindestens einer <em>unabhängigen Variable</em>. Sie versucht, eine mathematische Beziehung zwischen den Variablen zu modellieren, die durch eine Linie (in einfachen linearen Regressionen) oder eine Ebene (in multiplen linearen Regressionen) repräsentiert wird. Die dahinterliegende “mathematische Idee” der linearen Regression besteht darin, die bestmögliche Anpassung der Daten an das Modell zu erreichen, um die Vorhersage der abhängigen Variable basierend auf den unabhängigen Variablen zu ermöglichen. Dazu wird ein <em>Regressionskoeffizient</em> für jede unabhängige Variable geschätzt, um ihren Einfluss auf die abhängige Variable zu quantifizieren.</p>
+<p>Ziel der Regressionsanalyse ist es also, die Beziehung zwischen einer <em>abhängigen Variable</em> (auch erklärte Variable, Regressand oder Prognosevariable genannt) und einer oder mehreren <em>unabhängigen Variablen</em> (oft auch erklärende Variable, Regressor oder Prädiktorvariable) zu analysieren, um Zusammenhänge quantitativ zu beschreiben und zu erklären und/oder Werte der abhängigen Variable mit Hilfe der unabhängige Variable (des Prädiktors) zu prognostizieren. Mit Hilfe der Regressionsanalyse können drei Arten von Fragestellungen untersucht werden: 1) Ursachenanalyse: Gibt es einen Zusammenhang zwischen der unabhängigen und der abhängigen Variable? Wie stark ist dieser? 2) Wirkungsanalyse: Wie verändert sich die abhängige Variable bei einer Änderung der unabhängigen Variablen? 3) Prognose: Können die Messwerte der abhängigen Variable durch die Werte der unabhängigen Variable vorhergesagt werden?</p>
+<p>Die <em>einfache lineare Regression</em> wird angewandt, wenn geprüft werden soll, ob ein (als linear vermuteter) Zusammenhang zwischen einer abhängigen metrischen Variable und einer unabhängigen metrischen Variable besteht. Da sie zwei metrische Variablen integriert, wird sie auch als <em>bivariate Regression</em> bezeichnet. In diesem Teilkapitel lernen wir die <em>einfache lineare Regression</em> auf Grundlage der Allbus-Daten kennen. In der nächsten Sitzung gehen wir dann näher auf die notwendige Prüfung der <em>Voraussetzungen einer Regressionsanalyse</em> ein und lernen auch noch die <em>multiple lineare Regression</em> kennen.</p>
+<p>Um die Durchführung der linearen Regression an einem Beispiel nachzuvollziehen, stellen wir zunächst eine gerichtete Hypothese auf, die den Einfluss einer unabhängigen metrischen Variable auf eine abhängige metrische Variable spezifiziert. Hierzu schauen wir uns den Zusammenhang zwischen dem Alter (<code>age</code>) sowie der täglichen Fernsehnutzung in Minuten (<code>lm02</code>) an. Dazu vermuten wir: Das Alter erklärt die Intensität der täglichen Fernsehnutzung in Minuten.</p>
+<p>Mit Hilfe der Regression wollen wir nun die oben formulierte Annahme prüfen, dass das Alter die täglichen Fernsehnutzung in Minuten (umbenannt in TV_Konsum) erklären kann. Beides sind metrische Variablen und erfüllen damit die Voraussetzung, dass eine Regression gerechnet werden kann. (Achtung: auch kategorische Variablen können bei der Regressionsanalyse grundsätzlich eingesetzt werden, sie müssen dann aber durch <em>Dummy-Coding</em> passend gemacht werden, dazu aber später mehr).</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" width="900" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://nc.uni-bremen.de/index.php/s/y3r865jq5WHKGtE/download/%2314%20Regression.mp4"></video></div>
+</div>
+</div>
 </div>
 <section id="data-management-2" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="data-management-2"><span class="header-section-number">2.1</span> Data Management</h2>
@@ -599,11 +633,11 @@ Exkurs: Übungsaufgabe Korrelationsanalyse
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="4" data-code-cell="annotated-cell-6" data-code-annotation="1">Visualisierungshintergrund der Grafiken in ggplot festlegen</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-6" data-code-lines="4">Visualisierungshintergrund der Grafiken in ggplot festlegen</span>
 </dd>
 <dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="5" data-code-cell="annotated-cell-6" data-code-annotation="2">Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-6" data-code-lines="5">Anzeige der p-Werte als Zahlen mit Nachkommastellen einstellen</span>
 </dd>
 </dl>
 </div>
@@ -860,35 +894,35 @@ Labels:
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-19" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-cell="annotated-cell-19" data-code-annotation="1">Festlegung der Farbmarkierung für die Residuen (Punkte sind tatsächliche Werte, Linien die Residuen, Farbe gibt Größe der Abweichung an)</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-19" data-code-lines="2">Festlegung der Farbmarkierung für die Residuen (Punkte sind tatsächliche Werte, Linien die Residuen, Farbe gibt Größe der Abweichung an)</span>
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-cell="annotated-cell-19" data-code-annotation="2">Festlegung der Farbe für die Residuen</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-19" data-code-lines="3">Festlegung der Farbe für die Residuen</span>
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="4" data-code-cell="annotated-cell-19" data-code-annotation="3">Unterdrückt eine Legende an der Seite (ist obligatorisch)</span>
+<span data-code-annotation="3" data-code-cell="annotated-cell-19" data-code-lines="4">Unterdrückt eine Legende an der Seite (ist obligatorisch)</span>
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="5" data-code-cell="annotated-cell-19" data-code-annotation="4">gibt die vorhergesagten Punkte auf der Regressionsgeraden aus</span>
+<span data-code-annotation="4" data-code-cell="annotated-cell-19" data-code-lines="5">gibt die vorhergesagten Punkte auf der Regressionsgeraden aus</span>
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-lines="6" data-code-cell="annotated-cell-19" data-code-annotation="5">gibt die Regressionsgerade als Linie aus</span>
+<span data-code-annotation="5" data-code-cell="annotated-cell-19" data-code-lines="6">gibt die Regressionsgerade als Linie aus</span>
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-lines="7" data-code-cell="annotated-cell-19" data-code-annotation="6">zeichnet die Linie vom Punkt zur Regressionsgeraden transparent ein</span>
+<span data-code-annotation="6" data-code-cell="annotated-cell-19" data-code-lines="7">zeichnet die Linie vom Punkt zur Regressionsgeraden transparent ein</span>
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="7">7</dt>
 <dd>
-<span data-code-lines="8" data-code-cell="annotated-cell-19" data-code-annotation="7">Titel</span>
+<span data-code-annotation="7" data-code-cell="annotated-cell-19" data-code-lines="8">Titel</span>
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-lines="9" data-code-cell="annotated-cell-19" data-code-annotation="8">Achsen-Beschriftung</span>
+<span data-code-annotation="8" data-code-cell="annotated-cell-19" data-code-lines="9">Achsen-Beschriftung</span>
 </dd>
 </dl>
 </div>
@@ -926,7 +960,7 @@ F-statistic: 474.1 on 1 and 4927 DF,  p-value: &lt; 0.00000000000000022</code></
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -935,7 +969,7 @@ Exkurs: Zusatzfunktionen zur schöneren Ergebnisdarstellung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Funktion zur Modellzusammenfassung als data frame</p>
 <div class="cell">
@@ -1319,6 +1353,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-right"><img src="Bilder/logo_zemki.png" class="img-fluid" width="120"> <img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
+<script>videojs(video_shortcode_videojs_video1);</script>
+<script>videojs(video_shortcode_videojs_video2);</script>
 
 
 

@@ -75,6 +75,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -467,6 +469,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <p>Die Varianzanalyse weitet den Grundgedanken des t-Tests aus, indem sie den simultanen Vergleich von Gruppenmittelwerten über mehr als zwei Gruppen erlaubt. Die einfaktorielle Varianzanalyse definiert die Gruppen dabei anhand eines Faktors (einer unabhängigen Variable), die mehrfaktorielle Varianzanalyse erlaubt mehrere unabhängige kategoriale Variablen im Modell, ist aber nicht mit der multivariaten Varianzanalyse (MANOVA) zu verwechseln, die auch mehrere metrische abhängige Variablen gleichzeitig zulässt. Wenn die Gruppierungsvariable (also die unabhängige Faktor-Variable) mehr als zwei Gruppen unterscheidet, müssen nach der Anova Post-Hoc Tests durchgeführt werden. Denn sollte die Varianzanalyse insgesamt signifikante Werte liefern, wurde zwar festgestellt, dass es überzufällige Unterschiede zwischen den durch die Faktorstufen definierten Gruppen gibt, bei drei und mehr Faktorstufen bleibt aber noch unklar, auf welchen Gruppenunterschieden dieses Ergebnis beruht. Post hoc-Tests liefern spezifischere Informationen dazu, welche Gruppenmittelwerte signifikant voneinander abweichen.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="900" height="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://nc.uni-bremen.de/index.php/s/C9ooxoBnGbZkceP/download/%2312%20Varianzanalyse.mp4"></video></div>
+</div>
+</div>
+</div>
 <section id="datenmanagement" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Datenmanagement</h1>
 <p>Wir laden zunächst die für dieses Skript benötigten Pakete und legen unseren Grafikhintegrund sowie die Formatierung von Zahlen fest.</p>
@@ -481,19 +499,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-annotation="1" data-code-cell="annotated-cell-1">Lädt alle benötigten Pakete mit dem Befehl <code>p_load()</code></span>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="1">Lädt alle benötigten Pakete mit dem Befehl <code>p_load()</code></span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="4" data-code-annotation="2" data-code-cell="annotated-cell-1">Setzt einen universalen Hintergund (<code>theme_classic</code>) für unsere Datenvisualisierungen mit ggplot2 fest.</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="4" data-code-annotation="2">Setzt einen universalen Hintergund (<code>theme_classic</code>) für unsere Datenvisualisierungen mit ggplot2 fest.</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="5" data-code-annotation="3" data-code-cell="annotated-cell-1">Sorgt dafür, dass sehr kleine Zahlen ausgeschrieben werden.</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="5" data-code-annotation="3">Sorgt dafür, dass sehr kleine Zahlen ausgeschrieben werden.</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="6" data-code-annotation="4" data-code-cell="annotated-cell-1">Sorgt dafür, dass Symbole im Output gedruckt werden.</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="4">Sorgt dafür, dass Symbole im Output gedruckt werden.</span>
 </dd>
 </dl>
 </div>
@@ -505,9 +523,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Um mit dem Datensatz arbeiten zu können benötigen wir einige grundlegende Schritte des Datenmanagements <a href="https://patrickzerrer.github.io/R_Hands_on_Book/Skript_3.3.html">für ausführliche Erklärungen siehe hier</a>. Für die Varianzanalyse möchten wir uns anschauen, wie sich der Gesundheitszustand (und das Alter) der Befragten auf ihr Vertrauen in das Gesundheitswesen auswirkt. Wir nutzen dazu die folgenden Variablen:</p>
 <table class="table">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 48%">
-<col style="width: 35%">
+<col style="width: 19%">
+<col style="width: 46%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -559,19 +577,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-annotation="1" data-code-cell="annotated-cell-3">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">Wir schließend fehlende Werte (siehe Tabelle oben aus). Da diese alle negativ sind, können wir einfach alle Werte kleiner als 0 ausschließen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-annotation="2" data-code-cell="annotated-cell-3">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="2">Hier benennen wir die Variablen anders um unsere weitere Arbeit zu vereinfachen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="5" data-code-annotation="3" data-code-cell="annotated-cell-3">Wir speichern die Variablen als Faktoren. Wir nutzen dabei die Funktion as_factor aus dem haven Paket um die Bezeichnungen der Faktorstufen direkt zu übernehmen.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="3">Wir speichern die Variablen als Faktoren. Wir nutzen dabei die Funktion as_factor aus dem haven Paket um die Bezeichnungen der Faktorstufen direkt zu übernehmen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="7" data-code-annotation="4" data-code-cell="annotated-cell-3">Wir kodieren die Variable Alter in eine dichotome Variable (jung und alt) um. Die Aufteilung geschieht anhand des Medians der Verteilung.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="7" data-code-annotation="4">Wir kodieren die Variable Alter in eine dichotome Variable (jung und alt) um. Die Aufteilung geschieht anhand des Medians der Verteilung.</span>
 </dd>
 </dl>
 </div>
@@ -601,19 +619,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-annotation="1" data-code-cell="annotated-cell-4">In R nutzen wir das Paket <code>ggplot2</code> von Wickham et al.&nbsp;um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket <code>ggplot2</code> mit dem Befehl <code>ggplot()</code> aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier <code>daten</code>) und unter aes unsere Variable (hier <code>trustges</code>).</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="1">In R nutzen wir das Paket <code>ggplot2</code> von Wickham et al.&nbsp;um ein Histogramm auszugeben. Zunächst müssen wir hier das Paket <code>ggplot2</code> mit dem Befehl <code>ggplot()</code> aufrufen. Anschließend spezifizieren wir innerhalb der Klammer unseren Datensatz (hier <code>daten</code>) und unter aes unsere Variable (hier <code>trustges</code>).</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-annotation="2" data-code-cell="annotated-cell-4">Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll <code>(aes(y = after_stat(count))</code>, wir die Außenumrandung schwarz <code>color = black</code> und die Füllfarbe grau wünschen (<code>fill = grey</code>). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="2">Die Spezifizierungen innerhalb der Klammern unseres Histogramms geben an, dass dieses auf den Zahlen unseres Datensatzes beruhen soll <code>(aes(y = after_stat(count))</code>, wir die Außenumrandung schwarz <code>color = black</code> und die Füllfarbe grau wünschen (<code>fill = grey</code>). Diese Spezifikationen sind optional, sorgen jedoch für ein schöneres Aussehen unserer Grafik.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="5" data-code-annotation="3" data-code-cell="annotated-cell-4">Mit <code>binwidth = 1</code> verweisen wir hier auf die Breite der Balken unseres Histogramms.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="3">Mit <code>binwidth = 1</code> verweisen wir hier auf die Breite der Balken unseres Histogramms.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="6" data-code-annotation="4" data-code-cell="annotated-cell-4">Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl <code>labs</code> um zusätzlich die Achsen zu beschriften.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="6" data-code-annotation="4">Für ein verschönertes Aussehen unseres Graphen nutzen wir den Befehl <code>labs</code> um zusätzlich die Achsen zu beschriften.</span>
 </dd>
 </dl>
 </div>
@@ -658,11 +676,11 @@ W = 0.92102, p-value &lt; 0.00000000000000022</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="3" data-code-annotation="1" data-code-cell="annotated-cell-7">Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird. Haben wir nur eine abhängige Variable, so geben wir diese an.</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="1">Innerhalb der Klammer müssen wir zunächst unsere abhängige Variable angeben. Danach folgt eine Tilde (~). Im Anschluss müssen wir unsere unabhängige(n) Variablen angeben. Die Tilde sagt quasi, dass unsere abhängige Variable durch unsere unabhängigen Variablen bestimmt wird. Haben wir nur eine abhängige Variable, so geben wir diese an.</span>
 </dd>
 <dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="7" data-code-annotation="2" data-code-cell="annotated-cell-7">Haben wir mehrere unabhängige Variablen so können wir diese mit einem * verbinden. Anschließend wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="7" data-code-annotation="2">Haben wir mehrere unabhängige Variablen so können wir diese mit einem * verbinden. Anschließend wird der Test für beide Variablen sowie den Interaktionsterm ausgeben.</span>
 </dd>
 </dl>
 </div>
@@ -700,11 +718,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2,3" data-code-annotation="1" data-code-cell="annotated-cell-8">Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die <code>group_by</code>-Funktion in Kombination mit der <code>summarise</code>-Funktion.</span>
+<span data-code-cell="annotated-cell-8" data-code-lines="2,3" data-code-annotation="1">Zunächst möchten wir uns anhand von deskriptiven Statistiken einen Überblick über unsere Daten verschaffen. Dafür nutzen wir die <code>group_by</code>-Funktion in Kombination mit der <code>summarise</code>-Funktion.</span>
 </dd>
 <dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="5" data-code-annotation="2" data-code-cell="annotated-cell-8">Im nachfolgenden Schritt haben wir mit Hilfe des Befehls <code>kable()</code> aus dem Paket <code>knitr</code> das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.</span>
+<span data-code-cell="annotated-cell-8" data-code-lines="5" data-code-annotation="2">Im nachfolgenden Schritt haben wir mit Hilfe des Befehls <code>kable()</code> aus dem Paket <code>knitr</code> das Aussehen unserer Tabelle verschönert. Dieser Schritt ist optional.</span>
 </dd>
 </dl>
 </div>
@@ -765,11 +783,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="3" data-code-annotation="1" data-code-cell="annotated-cell-9">Innerhalb der Funktion aov_car müssen wir zunächst die abhängige Variable (<code>trustges</code>) angeben und nach einer Tilde die unabhängige Variabel (<code>gesund</code>). Zudem müssen wir den Zusatz <code>+ Error()</code> nutzen un in der Klammer die Fallid (hier <code>respid</code>) angeben. Alles speichern wir als Objekt <code>fit</code> welches wir anschließend mit <code>print</code> aufrufen.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="3" data-code-annotation="1">Innerhalb der Funktion aov_car müssen wir zunächst die abhängige Variable (<code>trustges</code>) angeben und nach einer Tilde die unabhängige Variabel (<code>gesund</code>). Zudem müssen wir den Zusatz <code>+ Error()</code> nutzen un in der Klammer die Fallid (hier <code>respid</code>) angeben. Alles speichern wir als Objekt <code>fit</code> welches wir anschließend mit <code>print</code> aufrufen.</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="7" data-code-annotation="2" data-code-cell="annotated-cell-9">Mit <code>eta_squared</code> können wir zusätzlich die Effektstärke angeben. Diese findet sich für die einfaktorielle Anova auch in der Spalte pes, aber hier erhalten wir zusätzlich ein Konfidenzintervall für den Effekt.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="7" data-code-annotation="2">Mit <code>eta_squared</code> können wir zusätzlich die Effektstärke angeben. Diese findet sich für die einfaktorielle Anova auch in der Spalte pes, aber hier erhalten wir zusätzlich ein Konfidenzintervall für den Effekt.</span>
 </dd>
 </dl>
 </div>
@@ -809,7 +827,7 @@ gesund    | 6.25e-03 | [0.00, 1.00]
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-annotation="1" data-code-cell="annotated-cell-10">Innerhalb von emmeans können wir einfach auf unser zuvor spezifiziertes Modell fit verweisen, müssen allerdings noch mit <code>specs=</code> angeben, auf Basis welcher Variablen der Gruppenvergleich durchgeführt werden soll.</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="1" data-code-annotation="1">Innerhalb von emmeans können wir einfach auf unser zuvor spezifiziertes Modell fit verweisen, müssen allerdings noch mit <code>specs=</code> angeben, auf Basis welcher Variablen der Gruppenvergleich durchgeführt werden soll.</span>
 </dd>
 </dl>
 </div>
@@ -864,19 +882,19 @@ SCHLECHT          0.1230   0.5471 0.9923            0.9996     </code></pre>
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2,3" data-code-annotation="1" data-code-cell="annotated-cell-12">Wir wählen auf der x-Achse die Variable <code>gesund</code> aus und auf der y-Achse die Variable <code>trustges</code>.</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="2,3" data-code-annotation="1">Wir wählen auf der x-Achse die Variable <code>gesund</code> aus und auf der y-Achse die Variable <code>trustges</code>.</span>
 </dd>
 <dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="4" data-code-annotation="2" data-code-cell="annotated-cell-12">Wir fügen für die jeweiligen Faktorstufen der Variablen <code>gesund</code> die Mittelwerte sowie Konfidenzintervalle hinzu.</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="4" data-code-annotation="2">Wir fügen für die jeweiligen Faktorstufen der Variablen <code>gesund</code> die Mittelwerte sowie Konfidenzintervalle hinzu.</span>
 </dd>
 <dt data-target-cell="annotated-cell-12" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="5,6,7" data-code-annotation="3" data-code-cell="annotated-cell-12">Wir bennenen unsere Grafik um.</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="5,6,7" data-code-annotation="3">Wir bennenen unsere Grafik um.</span>
 </dd>
 <dt data-target-cell="annotated-cell-12" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="8" data-code-annotation="4" data-code-cell="annotated-cell-12">Da die Labels unserer Faktorstufen sehr lang sind, drehen wir diese um 45 Grad. Dies geschieht mit der Funktion <code>rotate_x_text()</code> aus dem Paket <code>ggpubr</code>.</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="8" data-code-annotation="4">Da die Labels unserer Faktorstufen sehr lang sind, drehen wir diese um 45 Grad. Dies geschieht mit der Funktion <code>rotate_x_text()</code> aus dem Paket <code>ggpubr</code>.</span>
 </dd>
 </dl>
 </div>
@@ -948,7 +966,7 @@ Wie gebe ich die Ergebnisse korrekt an?
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -957,7 +975,7 @@ Exkurs: Einfaktorielle Varianzanalyse mit Messwiederholung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <section id="umgang-mit-messwiederholungen" class="level2 callout-body-container callout-body" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="umgang-mit-messwiederholungen"><span class="header-section-number">3.8</span> Umgang mit Messwiederholungen</h2>
 <p>Haben wir mehr als zwei Testzeitpunkte vorliegen, so können wir die ANOVA mit Messwiederholung rechnen. Die ANOVA mit Messwiederholung weitet dabei den Gedanken der t-Test für abhängige Stichproben weiter aus. Solltet ihr euch für dieses Verfahren interessieren, findet ihr <a href="https://bjoernwalther.com/anova-mit-messwiederholung-in-r/">hier</a> weitere Infos dazu.</p>
@@ -1232,20 +1250,20 @@ P value adjustment: tukey method for comparing a family of 10 estimates </code><
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-annotation="1" data-code-cell="annotated-cell-18">Innerhalb von <code>emmip</code> geben wir zunächst unser Modell der Varianzanalyse an und spezifizieren anschließend durch eine Tilde getrennt unsere Variablen. Die Reihenfolge der Variablen kann hier gerne variiert werden um anschließend zu schauen, wierum man die Grafik besser interpretieren kann.</span>
+<span data-code-cell="annotated-cell-18" data-code-lines="2" data-code-annotation="1">Innerhalb von <code>emmip</code> geben wir zunächst unser Modell der Varianzanalyse an und spezifizieren anschließend durch eine Tilde getrennt unsere Variablen. Die Reihenfolge der Variablen kann hier gerne variiert werden um anschließend zu schauen, wierum man die Grafik besser interpretieren kann.</span>
 </dd>
 <dt data-target-cell="annotated-cell-18" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-annotation="2" data-code-cell="annotated-cell-18">Mit <code>labs</code> geben die Bezeichnung für den Titel sowie die Achsen der Grafik an.</span>
+<span data-code-cell="annotated-cell-18" data-code-lines="3" data-code-annotation="2">Mit <code>labs</code> geben die Bezeichnung für den Titel sowie die Achsen der Grafik an.</span>
 </dd>
 <dt data-target-cell="annotated-cell-18" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="6" data-code-annotation="3" data-code-cell="annotated-cell-18">Mit <code>scale_color_manual</code> legen wir eigene Farben für unseren Plot fest. Mittels <code>name = "Altersgruppe"</code> ändern wir den Titel der Plotlegende.<br>
+<span data-code-cell="annotated-cell-18" data-code-lines="6" data-code-annotation="3">Mit <code>scale_color_manual</code> legen wir eigene Farben für unseren Plot fest. Mittels <code>name = "Altersgruppe"</code> ändern wir den Titel der Plotlegende.<br>
 </span>
 </dd>
 <dt data-target-cell="annotated-cell-18" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="7" data-code-annotation="4" data-code-cell="annotated-cell-18">Wir drehen unsere Grafikbeschriftung der x-Achse um 45 Grad, damit auch lange Labels lesbar sind.</span>
+<span data-code-cell="annotated-cell-18" data-code-lines="7" data-code-annotation="4">Wir drehen unsere Grafikbeschriftung der x-Achse um 45 Grad, damit auch lange Labels lesbar sind.</span>
 </dd>
 </dl>
 </div>
@@ -1613,6 +1631,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-right"><img src="Bilder/logo_zemki.png" class="img-fluid" width="120"> <img src="Bilder/Logo_Stiftung_Hochschullehre_pos.jpg" class="img-fluid" width="120"> <img src="Bilder/Skill_UB_Icons_1_quer__blau.jpeg" class="img-fluid" width="120"></div>
   </div>
 </footer>
+<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 

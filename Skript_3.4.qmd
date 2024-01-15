@@ -17,6 +17,12 @@ execute:
 
 Dieses Notebook illustriert verschiedene Möglichkeiten dafür, wie auf Grundlage der ALLBUS-Daten informative Tabellen und Plots erstellt werden können. Tabellen und Datenvisualisierungen ("Plots") stellen zwei sehr effektive Möglichkeiten dar, sich schnell einen Überblick über komplexe Daten zu verschaffen. Dabei lassen sich oftmals Zusammenhänge zwischen zwei oder mehr Variablen erahnen, die dann später inferenzstatistisch auf die Solidität ihres Zusammenhangs hin überprpüft werden können.
 
+::: {.callout-note collapse="true" icon="false"}
+## Video
+
+{{< video https://nc.uni-bremen.de/index.php/s/Zp5Anxst7Ep53a5/download/%235%20Grammar%20Of%20Graphics.mp4 width="900" height="500">}}
+:::
+
 # Data Management
 
 Zunächst laden wir die Pakete des tidyverse. Das Paket ggplot2 ist das zentrale Werkzeug, um informative Plots zu produzieren. Die Einstellung theme_set hat einen Einfluss auf die Grafiken, die wir später erstellen werden.
