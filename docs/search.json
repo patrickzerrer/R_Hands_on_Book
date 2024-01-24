@@ -2630,5 +2630,12 @@
     "title": "Die Bestimmung der Zentrale Tendenz mittels t-Tests",
     "section": "3.6 Literatur",
     "text": "3.6 Literatur\n\n\n\n\n\n\nLiteratur und Beispiele aus der Praxis\n\n\n\nCohen, J. (1992). A power primer. Psychological bulletin, 112(1), 155-159.\nRasch, D., Kubinger, K. D., & Moder, K. (2011). The two-sample t test: pre-testing its assumptions does not pay off. Statistical papers, 52, 219-231\nWir empfehlen euch folgende Lehrbücher und Online-Materialien, falls ihr weiterführende Informationen braucht.\n\n📖 Gehrau, V., Maubach, K., & Fujarski, S. (2022). Einfache Datenauswertung mit R. Link\n\n\n📖 StatistikGuru (2023). Gepaarter t-Test in R Link\n\n\n📖 Walther, B. (2022). t-Test für abhängige Stichproben in R rechnen und interpretieren Link\n\n\n📖 Masch, L., Kieslich, K., Huseljić, K., Wähner, M., & Neef, J.-S. (2021). R - Ein Einführungsskript Link\n\n\n📖 Field, Z., Miles, J., & Field, A. (2012). Discovering statistics using R. Discovering statistics using r, 1-992. Link"
+  },
+  {
+    "objectID": "Autoren.html#thomas-leleko",
+    "href": "Autoren.html#thomas-leleko",
+    "title": "Das Team stellt sich vor",
+    "section": "Thomas Leleko",
+    "text": "Thomas Leleko\nVita\n\n\n\n\n\nThomas Leleko\n\n\nIch studiere Jura mit dem Schwerpunkt internationales und europäisches Wirtschaftsrecht an der Universität Bremen und habe meine praktischen Stationen bei CMS Hasche Sigle im Bereich des Kartellrechts und beim Bundeskartellamt absolviert. Als studentische Hilfskraft am Lehrstuhl für empirische Wirtschaftsforschung hatte ich die Gelegenheit, mich näher mit dem Feld der Statistik zu befassen und bin am ZeMKI unter anderem für die Umsetzung der Lehrvideos für R-Studio zuständig."
   }
 ]

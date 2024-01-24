@@ -73,7 +73,7 @@ Katharina Maubach ist seit Dezember 2022 als wissenschaftliche Mitarbeiterin am 
 
 Cornelius Puschmann ist Professor für Kommunikations- und Medienwissenschaft mit dem Schwerpunkt Digitale Kommunikation am ZeMKI, Zentrum für Medien-, Kommunikations- und Informationsforschung. Nach Stationen an der Humboldt Universität zu Berlin, der Zeppelin Universität Friedrichshafen und dem Leibniz-Institut für Medienforschug \| Hans Bredow Institut wurde er 2019 nach Bremen berufen. Gastwissenschaftler war Cornelius Puschmann u.a. am Oxford Internet Institute der University of Oxford und am Berkman Klein Center for Internet and Society der Harvard University, sowie am Department of Media Studies der Universität Amsterdam.
 
-Forschungsschwerpunkte
+**Forschungsschwerpunkte**
 
 -   Digitale Mediennutzungsforschung
 
@@ -175,7 +175,28 @@ Hannah-Marie Büttner ist als wissenschaftliche Mitarbeiterin der Universität B
 ![Lena Otto](Bilder/Lena_Otto.jpeg)
 :::
 
-Lena Otto ist Studentin im Master of Education der Universität Bremen mit den Fächern Spanisch und Englisch. Neben einzelnen Tätigkeiten als studentische Hilfskraft im Bereich der Fremdsprachendidaktik am Fachbereich 10 arbeitet sie seit August 2022 als studentische Hilfskraft im Universitätsprojekt "SKILL-UB". Im Rahmen dieses Projektes hat sie den Lehr-Lern-Videos ihre Stimme geliehen. 
+Lena Otto ist Studentin im Master of Education der Universität Bremen mit den Fächern Spanisch und Englisch. Neben einzelnen Tätigkeiten als studentische Hilfskraft im Bereich der Fremdsprachendidaktik am Fachbereich 10 arbeitet sie seit August 2022 als studentische Hilfskraft im Universitätsprojekt "SKILL-UB". Im Rahmen dieses Projektes hat sie den Lehr-Lern-Videos ihre Stimme geliehen.
 
+\
+\
+\
+\
+\
+\
 
+## Thomas Leleko
 
+**Vita**
+
+::: column-margin
+![Thomas Leleko](Bilder/Thomas_Leleko.png)
+:::
+
+Ich studiere Jura mit dem Schwerpunkt internationales und europäisches Wirtschaftsrecht an der Universität Bremen und habe meine praktischen Stationen bei CMS Hasche Sigle im Bereich des Kartellrechts und beim Bundeskartellamt absolviert. Als studentische Hilfskraft am Lehrstuhl für empirische Wirtschaftsforschung hatte ich die Gelegenheit, mich näher mit dem Feld der Statistik zu befassen und bin am ZeMKI unter anderem für die Umsetzung der Lehrvideos für R-Studio zuständig.
+
+\
+\
+\
+\
+\
+\
