@@ -1,6 +1,10 @@
 project:
   type: website
-  output-dir: docs
+  output-dir: public
+  resources:
+    - "css/"
+    - "js/"
+    - "*.html"`
 
 website:
   favicon: Bilder/favicon-32x32.png
