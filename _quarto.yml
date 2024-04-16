@@ -9,7 +9,7 @@ project:
 website:
   favicon: Bilder/favicon-32x32.png
   twitter-card: true
-  site-url: https://github.com/patrickzerrer/R_Hands_on_Book
+  site-url: https://git.zmml.uni-bremen.de/pzerrer/einfuerhung_r_datenanalyse 
   open-graph: true
   
   navbar: 
