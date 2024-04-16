@@ -106,6 +106,21 @@ Wahlweise können wir diese Optionen auch für das Gesamtdokument im YAML-Header
 
 *Achtung*: wir nutzen hier `:` statt `=` und schreiben `true` und `false` statt `TRUE`/`T` und `FALSE`/`F`.
 
+## Globale Optionen
+
+Zusätzlich können wir für das Gesamtdokument innerhalb eines Codechunks sogenannte `options` festlegen. Dies sind Einstellungen für unser gesamtes Dokument, die die Art und Weise beeinflussen, wie R seine Ergebnisse berechnet und anzeigt. Es gibt in R eine ganze Vielzahl solcher Einstellungen, welche man sich über die Eingabe von `?option` in der Konsole anzeigen lassen kann. Die wichtigsten, mit welchen wir auch im Verlauf des Kurses arbeiten, sind `scipen`, `digits` und `max.print`.
+
+-   **scipen**: Gibt an, ob bei sehr kleinen Zahlen (unterhalb von 0) die Nachkommastellen ausgeschrieben werden oder stattdessen die mathematische exponentionelle (e hoch minus, z.B. 1.234568e-06) verwendet werden soll. `Options(scipen = 0)` ist die Grundeinstellung. Hier wird die exponentielle Schreibweise verwendet. Möchten wir zu besseren Lesbarkeit und Verständlichkeit stattdessen die ausgeschriebenen Nachkommastellen, so verwenden wir `options(scipen = 999)`.\
+-   **digits**: Über digits können wir die Anzahl der angezeigten Nachkommastellen festlegen. In der Grundeinstellung (*default*) zeigt R sieben Nachkommastellen an. Über `options(digits = x)` können wir die Zahl der angezeigten Nachkommastellen dementsprechend anpassen.\
+-   **max.print**: Mit max.print können wir einstellen, wie viele Zeilen eines Ergebnisses (oder Datensatzes uns R anzeigt). Üblicherweise in R werden alle Zeilen (beziehungsweise bis zu 99999) Zeilen eines Datensatzes angezeigt. Wenn man aus Übersichtlichkeitsgründen, bspw. bei sehr großen Datensätzen sich nur weniger Zeilen anzeigen lassen möchte, kann man mit options(max.print = x) die Zeilenzahl dementsprechend anpassen.
+
+```{r}
+options(scipen = 0) # exponentielle Schreibweise
+options(scipen = 999) #ausgeschriebene Nachkommastallen
+options(digits = 2) #gibt jeweils 2 Nachkommastellen aus
+options(max.print = 100) #R zeigt nur die ersten 100 Zeilen eines Ergebnisses oder Datensatzes an
+```
+
 # Literatur
 
 ::: callout-note

@@ -37,11 +37,13 @@ Abgefragt werden u.a. Einschätzungen und Einstellungen in den Bereichen:
 
 \- Gesundheit und gesundheitsrelevantes Verhalten
 
-Folgend arbeiten wir im Rahmen dieses Moduls durchgängig mit dem ALLBUS, speziell mit der Erhebnungswelle des Jahres 2021.
+\- Vertrauen in Institutionen
+
+Folgend arbeiten wir im Rahmen dieses Moduls durchgängig mit dem ALLBUS, speziell mit der Erhebnungswelle des Jahres 2021. Auf dieser [Website](https://search.gesis.org/research_data/ZA5280) findet ihr Informationen zu der Erhebung. Dort könnt ihr euch zudem die [Fragebögen](https://access.gesis.org/dbk/72851) der Erhebung herunterladen. Wir werden innerhalb des Seminars viel mit Variablen zum Vertrauen in Institutionen arbeiten. Informationen hierzu finden sich ab Seite 42. Grundsätzlich könnt ihr innerhalb des Dokumentes mit Strg + F nach für euch relevanten Variablen suchen. Zudem gibt es auf der [Website](https://search.gesis.org/research_data/ZA5280) den Reiter Variablen, wo ihr ebenfalls nach Variablen suchen könnt.
 
 # Data Management & Einlesen des ALLBUS
 
-Wir beginnen damit, die notwendigen Pakete zu laden, die wir für die ersten Schritte mit den Daten benötigen. Das sind hier die Pakete haven (für das Einlesen der ALLBUS-Daten im Stata-Format) und das Pakete readr (für das Einlesen einiger Vorab vorbereiteter Samples aus dem Gesamtdatensatz), sowie das Paket dplyr, mit dem wir am Schluss einen Beispielhaften Teildatensatz bilden.
+Wir beginnen damit, die notwendigen Pakete zu laden, die wir für die ersten Schritte mit den Daten benötigen. Das sind hier die Pakete `haven` (für das Einlesen der ALLBUS-Daten im Stata-Format) und das Pakete `readr` (für das Einlesen einiger Vorab vorbereiteter Samples aus dem Gesamtdatensatz), sowie das Paket `dplyr`, mit dem wir am Schluss einen Beispielhaften Teildatensatz bilden.
 
 ```{r Laden der Pakete}
 if(!require("pacman")) {install.packages("pacman");library(pacman)}
@@ -66,7 +68,7 @@ sample_gross <- read_rds("Datensatz/ALLBUS_sample_gross.rds")
 
 # Erste Schritte mit dem ALLBUS
 
-Zunächst schauen wir uns die Daten an. Dies geschieht entweder daturch, dass man den Objektnamen verwendet (also im folgende Beispiel einfach sample_klein) oder indem man mit einem Klick in RStudio unter dem Reiter Environment oder mit dem Befehl `View()` aufruft. Bei diesem Vorgehen zeigt RStudio die Daten an, was i.d.R. den praktischsten Zugang darstellt.
+Zunächst schauen wir uns die Daten an. Dies geschieht entweder daturch, dass man den Objektnamen verwendet (also im folgende Beispiel einfach *sample_klein*) oder indem man mit einem Klick in RStudio unter dem Reiter Environment oder mit dem Befehl `View()` aufruft. Bei diesem Vorgehen zeigt RStudio die Daten an, was i.d.R. den praktischsten Zugang darstellt.
 
 ```{r Datensatz anzeigen lassen}
 sample_klein
@@ -118,7 +120,7 @@ Eine alternative (aber etwas ordentlichere) Ansicht erhält man mit dem Befehl `
 tibble::glimpse(sample_gross)
 ```
 
-Die hier verwendete Syntax PAKETNAME::FUNKTION ist vielleicht zunächst etwas irritierend. Mit ihr rufen wir ein Paket auf, welches wir nicht vorher geladen haben. Das ist mitunter nützlich und kommt hier zur Anwendung, weil wir das Paket `tibble` hier ansonsten nicht benutzen.
+Die hier verwendete Syntax `PAKETNAME::FUNKTION` ist vielleicht zunächst etwas irritierend. Mit ihr rufen wir ein Paket auf, welches wir nicht vorher geladen haben. Das ist mitunter nützlich und kommt hier zur Anwendung, weil wir das Paket `tibble` hier ansonsten nicht benutzen.
 
 Schließlich lassen sich mit dem Befehle `summary` auch noch Eckwerte wie die Ausprägung von Faktorenstufen (bei Faktoren) oder Lageparameter (bei metrischen Variable) ermitteln.
 
@@ -143,7 +145,7 @@ variablen <- read_csv2("Datensatz/ALLBUS_2021_variablen.csv", show_col_types = F
 variablen_optionen <- read_csv2("Datensatz/ALLBUS_2021_variablen_optionen.csv", show_col_types = FALSE)
 ```
 
-Es lohnt sich, beide Objekte mittels `View()` oder durch eine Klick ob die beiden Objekte *variablen* und *variablen_optionen* in RStudio anzuschauen. Interessant sind die Felder variable (der Name der Variable im ALLBUS) und label (eine sprechende Beschreibung).
+Es lohnt sich, beide Objekte mittels `View()` oder durch eine Klick ob die beiden Objekte *variablen* und *variablen_optionen* in RStudio anzuschauen. Interessant sind die Felder `variable` (der Name der Variable im ALLBUS) und `label` (eine sprechende Beschreibung).
 
 Suchen wir etwa nach `hp06` finden wie die Label-Beschreibung "EPIDEMIE: STAAT DARF KRANKE ISOLIEREN", die schon deutlich besser interpretierbar ist als `hp06`. Eine genaue Dokumentation und (vor allem wichtig) der genaue Fragetext findet sich in den Dokumenten ZA5280_fb_CAWI.pdf (Fragebogen) und ZA5280_cdb.pdf (Variablenreport). Beide sind wie der ALLBUS selbst abgelegt im Ordner Datensatz, werden aber ausserhalb von RStudio geöffnet.
 

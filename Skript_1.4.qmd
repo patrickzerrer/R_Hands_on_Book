@@ -13,14 +13,14 @@ format:
     code-annotations: hover
 ---
 
-![Unser Schreibtisch, Bild generiert von Midjourney](Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png)
+![Bild generiert von Midjourney](Bilder/zemkipatrick_The_image_portrays_the_theme_of_Social_Data_Scienc_15dff295-e21e-4b2b-bbac-568f9997cdcc.png)
 
 Bevor wir uns näher mit Datensätzen und deren Analyse beschäftigen, sollten wir uns zunächst einige Grundlagen widmen. Wir beschäftigen uns im Folgenden mit einigen fundamentalen Begriffen, deren Funktionsweisen wir kennen sollten - das erleichtert uns zumindest die Arbeit deutlich und vermeidet wahrscheinlich den ein oder anderen Fehler samt dazugehörigen frustrierten Verfluchen des Kurses und R.
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Video
 
-{{< video https://nc.uni-bremen.de/index.php/s/DJGAeBcNing9dQZ/download/%231%20Einf%C3%BChrung%20R.mp4 width="900" height="500">}}
+{{< video https://www.youtube.com/watch?v=mDj__dc71yo >}}
 :::
 
 Lasst uns Beginnen und Schritt für Schritt die wichtigsten Punkte durchgehen, die ihr zur Vorbereitung eures Analyse-Projekts machen solltet.
@@ -39,9 +39,7 @@ Mit dem Klick gelangt ihr in R-Studio.
 
 Starten wir zunächst mit dem Anlegen eines sogenannten R-Projekts. RStudio-Projekte ermöglichen es uns alle mit einem Projekt verbundenen Dateien an einem Ort zu speichern. Das umfasst Datensätze, R-Skripte, Ergebnisse, Abbildungen, Berichte usw. Projekte sind bereits in RStudio integriert.
 
-![Screenshot RStudio](Bilder/Skript_1_4_Screenshot1.png)
-
-Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button `New Project` ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot1.png) Das gerade aktive RProjekt sehen wir in der rechts oberen Ecke des Nutzer:innen Interfaces von RStudio. Hier können wir durch durch den Button `New Project` ein neues Projekt anlegen, hierfür folgen wir einfach dem Menüverlauf. Für einen guten, reproduzierbaren Arbeitsablauf sollten alle Analyse Projekte mit der Erstellung eines Projekts beginnen.
 
 In eurem Fall könnt ihr euch direkt alle notwendigen Materialen und Skripte für das erfolgreiche Bearbeiten dieses Kurses in R-Studio laden. Hierfür geht ihr in der rechts oberen Ecke des Nutzer:innen Interfaces auf den Button `New Project` und wählt dann `Version Control` aus.
 
@@ -81,6 +79,12 @@ Bevor wir allerdings auf Dateien und Datensätze zugreifen können, müssen wir 
 
 Sobald ihr durch das Klicken von OK bestätigt habt, wird die Datei hochgeladen und erscheint in dem unteren rechten Fenster im `Files`-Reiter.
 
+# Der Export von Dateien
+
+Wir möchten neu geschriebenen Skripte natürlich auch verschicken oder an anderen Orten abspeichern, dafür müssen wir unser Skript aus R-Studio exportieren (bzw. downloaden). Hierfür wählen wir in der rechten unteren Ecke des Interface den Reiter `Files` aus und setzen einen Haken vor dem Skript. Danach klicken wir auf das Zahnrad mit der Bezeichnung `More` und wählen `Export`. In dem sich öffnenden Fenster bestätigen wir den Download. Jetzt haben wir das Skript aus R-Studio exportiert.
+
+![Screenshot RStudio](Bilder/Skript_1_4_Screenshot11.png)
+
 # Die Session
 
 Die sogenannte *Session* wurde bereits mehrmals kurz erwähnt. Bei der *Session* handelt es sich um eine laufende Instanz des R-Programms, die ihr beenden und neustarten könnt. Das macht insbesondere dann Sinn, wenn ihr die falsche Version eines Pakets installiert habt oder ihr einen sauberen Start für euren R Code haben möchtet. Durch einen Neustart der *Session* könnt ihr euch sicher sein, dass ihr nicht ausversehen irgendwelche zuvor verwendeten Pakete oder Berechnungen mitnehmt.
@@ -101,14 +105,12 @@ Ihr werdet im Laufe des Kurses immer wieder mit Fehlermeldungen zu tun haben. Hi
 
 3.  *Code überprüfen*: Schaue nach, ob sich ein Warnzeichen am Rand deines R Codes befindet. Dieses Warnzeichen weist dich auf einen Syntaxfehler (bspw. eine vergessene Klammer oder Komma) hin.
 
-4.  *Variablen überprüfen*: Überprüfe kurz, ob du die richtigen Variablen verwendest oder sich ein Tippfehler eingeschlichen hat. Achtet auch auf Groß- und Kleinschreibung.
+4.  *Variablen überprüfen*: Überprüfe kurz, ob du die richtigen Variablen verwendest oder sich ein Tippfehler eingeschlichen hat.
 
-5.  *Informationen suchen*: Rufe eine Vignette (mit dem Befehl `vignette`) oder rufe die Hilfeseite mit einem der Funktion vorgelagerten Fragezeichen auf (mit bspw. `?dpylr()`) auf und lies sie dir durch.
+5.  *Informationen suchen*: Rufe eine Vignette (mit dem Befehl `vignette`) oder rufe die Hilfeseite mit einem der Funktion vorgelagerten Fragezeichen auf (mit bspw. `?dpylr()`) auf und lies sie dir durch. In der Programmiersprache R bezeichnet eine "Vignette" ein Dokument, das ausführliche Informationen zu einem spezifischen R-Paket oder einer bestimmten Funktion bietet. Eine Vignette ist im Wesentlichen eine Art Anleitung oder Handbuch, das dir hilft, das Paket oder die Funktion besser zu verstehen und anzuwenden. Eine Vignette kann viele nützliche Informationen enthalten, wie z.B. Beispiele, grafische Darstellungen, theoretische Hintergründe, Anwendungsfälle und vieles mehr. Sie ist oft eine großartige Ressource, um sich schnell in ein neues R-Paket einzuarbeiten oder um spezifische Aufgaben in R zu erledigen.
 
 6.  *Sich im Netz Hilfe suchen*: Suche auf [Stack Overflow](https://stackoverflow.com/questions/tagged/r) nach deinem Problem, meistens hat jemand auf der Welt das oder ein ähnliches Problem schon einmal gelöst.
 
-7.  *Frag deine Kommilitonen*: Tauscht euch aus, gemeinsam findet ihr eine Lösung!
+7.  *Die KI fragen*: Nutze ein KI Chatbot, um dir die Fehlermeldung erklären zu lassen und Lösungsvorschläge zu unterbreiten. Beachte hierbei bitte, dass die Antworten nicht immer korrekt sind und meist Kontextwissen von dir benötigt wird, um die Korrektheit der Antworten zu prüfen [Link](https://www.r-bloggers.com/2023/04/tips-for-using-chatgpt-to-learn-r/).
 
-8.  *Die KI fragen*: Nutze ein KI Chatbot, um dir die Fehlermeldung erklären zu lassen und Lösungsvorschläge zu unterbreiten. Beachte hierbei bitte, dass die Antworten nicht immer korrekt sind und meist Kontextwissen von dir benötigt wird, um die Korrektheit der Antworten zu prüfen [Link](https://www.r-bloggers.com/2023/04/tips-for-using-chatgpt-to-learn-r/).
-
-9.  *Frag uns*: Frag dein:e Dozent:in :)
+8.  *Frag uns*: Frag dein:e Dozent:in :)

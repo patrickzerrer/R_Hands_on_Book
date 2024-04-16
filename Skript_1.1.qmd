@@ -42,7 +42,7 @@ Innerhalb von RStudio unterscheiden wir 4 Schaltflächen welche sich beliebig vi
 
 ![Bild Programmoberfläche](Bilder/RStudio_Programmoberfläche.jpg)
 
-**1** Ist der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können (siehe auch Markdown und Quarto)
+**1** Ist der Bereich in welchen wir Skripte, Markdown und Quarto-Dokumente bearbeiten und ausführen können. **Hinweis**: Beim ersten Start ist standardmäßig kein Dokument geöffnet und die Schaltfläche ist entsprechend leer, hier muss zunächst ein [Dokument angelegt werden](https://patrickzerrer.github.io/R_Hands_on_Book/Skript_1.3.html#neue-dokumente-anlegen).
 
 **2** Ist die Konsole. Dies ist der Bereich in welchem wir weiterhin oldschool R angezeigt bekommen. Dieser Bereich kann sehr hilfreich sein, wenn man kurz Befehle benötigt, welche nicht im Skript auftauchen sollen (beispielsweise eine kurze Hilfe zu Funktionen mittels `?`)
 
@@ -136,6 +136,20 @@ p_load(tidyverse, ggplot2, haven, psych, psy, nFactors, htmlTable)
 Ansonsten habt ihr noch die Möglichkeit die Pakete händisch über das R Studio Interface zu aktiveren, was ich persönlich ab einer gewissen Anzahl von benötigten Paketen eher nervig finde. Nichtsdestotrotz könnt ihr hierfür in der rechten unteren Ecke des Interfaces auf den Reiter `Packages` gehen und in der unteren Liste das gewünschte Paket durch das Setzen eines Hakens auswählen.
 
 ![Screenshot RStudio](Bilder/Skript_1_4_Screenshot5.png)
+
+::: callout-tip
+## Grundregeln des Programmierens in R
+
+Wir haben oben im Text schon einige Regeln für das Programmieren in R kennengelernt. Hier findet ihr einen Überblick dieser und weiterer Regeln für den Umgang mit R:
+
+1.  R **denkt nicht mit**, sondern muss alles klar gesagt bekommen. Wenn ihr auf eine Variable zugreifen wollt, müsst ihr immer auch den Datensatz angeben, aus welchem diese stammt.
+2.  R **vergisst" schnell**. Dies bedeutet, dass ihr jedes Mal, wenn ihr R startet erneut den Datensatz und die benötigten Pakete laden müsst. Wenn ihr einmal den Datensatz geladen habt, müsst ihr jedes Mal, wenn ihr mit dem Datensatz arbeitet diesen erneut angeben.
+3.  R ist **englisch**. Dies bedeutet, dass ihr statt Kommata Punkte verwendet müsst, wenn ihr Zahlen mit Dezimalstellen angebt (also '1.5' statt '1,5')
+4.  R braucht **Symmetrie**. Wenn ihr eine Klammer aufmacht, muss diese zwangsläufig auch wieder irgendwo geschlossen werden. Wenn ihr mit eurem Cursor auf eine Klammer geht, seht ihr übrigens wo diese geschlossen wird, da dieser Bereich dann leicht dunkler markiert wird.
+5.  R braucht **perfekte "Rechtschreibung**. R versteht Dinge nicht, wenn diese leicht anders geschrieben sind. Zudem ist R case-sensitive, das bedeutet, dass hier auch die Groß- und Kleinschreibung wichtig ist.
+6.  R braucht **Klarheit**. Wenn Dinge gleich heißen, sind sie für R auch dasselbe. Daher müssen alle Datensätze und Objekte eine eigene und einzigartige Bezeichnung bekommen.
+7.  Für R ist **Chronologie** wichtig. Wenn ihr verschiedene Steps in einem Skript habt (etwa Pakete laden, Datenmanagement, Auswertung) ist es wichtig, diese immer in der logischen Abfolge auszuführen. Denn was noch nicht ausgeführt wurde (siehe Regeln 1 und 2) ist für R nicht vorhanden.
+:::
 
 ::: callout-note
 ## Weiterführende Literatur
